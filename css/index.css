@@ -1,0 +1,85 @@
+.navbarTop {
+	height: 10%;
+}
+
+.navbarTop h3 {
+	display: inline-block;
+}
+
+.navbarTop ul {
+	display: inline-block;
+}
+
+.characterDiv {
+	position: absolute;
+	right: 0px;
+	height: 100%;
+	width: 33%;
+}
+.charImage {
+	position: absolute;
+	left: 5px;
+	bottom: 0px;
+	width: 100%;
+	height: 90%;
+}
+
+.characterNameDiv {
+	margin-left: 0px;
+	font-size: 9vh;
+	background-color: yellow;
+	padding: 2%;
+	padding-left: 10%;
+}
+
+.characterTextResponse {
+	position: absolute;
+	border-radius: 10px;
+	background-color: lightgreen;
+	min-width: 60%;
+	max-width: 70%;
+	min-height: 20%;
+	left: 10%;
+	top: 15%;
+	padding: 3%;
+	font-size: 9vh;
+	text-align: center;
+}
+
+.sceneWrapper {
+	height: 90%;
+	background-image: url("../images/shanghaiAirport.jpg");
+	background-size: cover;
+	padding: 0px;
+}
+
+.icon-mic {
+	font-size: 9vh;
+}
+
+/*----------------------------------
+CSS Related to Task List 
+----------------------------------*/
+
+.taskList {
+	height: 90%;
+	background-color: white;
+	padding-left: 15px;
+}
+
+.inactiveLink {
+   cursor: default;
+}
+
+.inactiveLink a {
+	background-color: lightgray;
+	color :black;
+}
+
+.correctTask {
+}
+
+.correctTask a {
+	color: white;
+	background-color: green;
+}
