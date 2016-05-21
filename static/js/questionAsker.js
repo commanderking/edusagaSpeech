@@ -266,7 +266,7 @@ var charTaskData =
 					"correct" : false,
 					"response" : "Soy de España",
 					"soundID" : "nationality",
-					"soundPath" : SOUND_BASE_PATH + "luciana/hola.ogg",
+					"soundPath" : SOUND_BASE_PATH + "luciana/nationality.ogg",
 					"emotion" : "default"
 				}, 
 				{
