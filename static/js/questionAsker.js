@@ -204,6 +204,12 @@ var charTaskData =
 		{
 			"name" : "Luciana",
 			"language" : "es-es",
+			"location" : 
+			{
+				"name" : "Madrid Airport",
+				"bg" : bgIMAGE_BASE_PATH + "shanghaiAirport.jpg"
+
+			},
 			"emotions" : 
 			{
 				"default": IMAGE_BASE_PATH + "lucianaDefault.png",
@@ -211,7 +217,29 @@ var charTaskData =
 				"sass" : IMAGE_BASE_PATH + "lucianaSass.png",
 				"laughing" : IMAGE_BASE_PATH + "lucianaLaughing.png"
 			},
-			"confusedPhrases" : ["什么?", "我听不懂.", "不好意思, 我没听懂."],
+			"confusedPhrases" : 			
+			[
+				{ 
+					"response": "¿Qué?",
+					"soundID" : "que",
+					"soundPath" : SOUND_BASE_PATH + "luciana/que.ogg"
+				}, 
+				{ 
+					"response": "¿Qué dijiste?",
+					"soundID" : "quedijiste",
+					"soundPath" : SOUND_BASE_PATH + "luciana/quedijiste.ogg"
+				}, 
+				{ 
+					"response": "No entiendo.",
+					"soundID" : "noentiendo",
+					"soundPath" : SOUND_BASE_PATH + "luciana/noentiendo.ogg"
+				},
+				{ 
+					"response": "Lo siento. No te entiendo.",
+					"soundID" : "losiento",
+					"soundPath" : SOUND_BASE_PATH + "luciana/losiento.ogg"
+				},			
+			],
 			"tasks" : 
 			[
 				{
@@ -219,6 +247,8 @@ var charTaskData =
 					"possibilities" : ["Hola"],
 					"correct" : false,
 					"response" : "Hola!",
+					"soundID" : "hola",
+					"soundPath" : SOUND_BASE_PATH + "luciana/hola.ogg",
 					"emotion" : "laughing"
 				},
 				{
@@ -226,6 +256,8 @@ var charTaskData =
 					"possibilities" : ["Cuál es tu nombre", "Cómo te llamas", "Cuál es su nombre"],
 					"correct" : false,
 					"response" : "Me llamo Luciana",
+					"soundID" : "name",
+					"soundPath" : SOUND_BASE_PATH + "luciana/name.ogg",
 					"emotion" : "default"
 				},
 				{
@@ -233,6 +265,8 @@ var charTaskData =
 					"possibilities" : ["cuál es tu nacionalidad", "de dónde eres"],
 					"correct" : false,
 					"response" : "Soy de España",
+					"soundID" : "nationality",
+					"soundPath" : SOUND_BASE_PATH + "luciana/hola.ogg",
 					"emotion" : "default"
 				}, 
 				{
@@ -240,13 +274,17 @@ var charTaskData =
 					"possibilities" : ["cuántos años tienes", "cuántos años tiene", "Qué edad tienes"],
 					"correct" : false,
 					"response" : "Tengo 26 años.",
+					"soundID" : "age",
+					"soundPath" : SOUND_BASE_PATH + "luciana/age.ogg",
 					"emotion" : "default"
 				},
 				{
-					"task" : "Ask what he likes to eat",
+					"task" : "Ask what she likes to eat",
 					"possibilities" : ["Qué te gusta comer", "Qué le gusta comer"],
 					"correct" : "false",
 					"response" : "Me gusta comer ensalada y pollo frito.",
+					"soundID" : "foodLikes",
+					"soundPath" : SOUND_BASE_PATH + "luciana/foodLikes.ogg",
 					"emotion" : "laughing"
 				}
 			]
@@ -396,10 +434,14 @@ var viewCharList = {
 			// Reset currenEmotion to default
 			octopusCharacter.changeCurrentEmotion("default");
 
+			// Render new character, tasklist, and preload sounds
 			var index = $(this).attr("data-index");
 			octopusCharacter.changeCharacter(index);
 			viewCharacter.render();
 			viewTaskList.render();
+
+			// Initiates the sound for the current character
+			soundPlayer.init();
 		})
 	}
 }
@@ -494,6 +536,7 @@ var soundPlayer = {
 		soundArray.forEach(function(soundFile, i) {
 			createjs.Sound.registerSound(soundFile.soundPath, soundFile.soundID);
 		});
+		console.log(soundArray);
 	},
 
 	// Called to play the Current Sound stored in the data
