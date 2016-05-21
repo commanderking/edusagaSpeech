@@ -21,7 +21,6 @@ var charTaskData =
 			{
 				"name" : "Shanghai Airport",
 				"bg" : bgIMAGE_BASE_PATH + "shanghaiAirport.jpg"
-
 			},
 			"emotions" : 
 			{
@@ -124,8 +123,8 @@ var charTaskData =
 			"emotions" : 
 			{
 				"default": IMAGE_BASE_PATH + "tinaDefault.png",
-				"ordering" : IMAGE_BASE_PATH + "./images/tinaOrdering.png",
-				"confused" : IMAGE_BASE_PATH + "./images/tinaConfused.png"
+				"ordering" : IMAGE_BASE_PATH + "tinaOrdering.png",
+				"confused" : IMAGE_BASE_PATH + "tinaConfused.png"
 			},
 			"confusedPhrases" : 
 			[
@@ -293,18 +292,10 @@ var charTaskData =
 
 }
 
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-
+// Controller for functions related to tasks and task data
 var octopusTasks = {
 	getTasks: function() {
 		return charTaskData.characterProfiles[charTaskData.currentCharacter].tasks;
-	},
-
-	// Returns all task data for a specific character
-	getCharacterTasks: function() {
-		return charTaskData.characterProfiles.tasks;
 	},
 	// Checks question to see if the question is in the list of possible questions and returns appropriate response
 	checkTask: function(userInput) {
@@ -328,7 +319,9 @@ var octopusTasks = {
 		if (correctQuestion == true) {
 			// render updated task list
 			return response; 
-		} else {
+		} 
+		// In case of wrong response, store data accordingly
+		else {
 			charTaskData.currentEmotion = octopusCharacter.changeCurrentEmotion("confused");
 			// Grab random confused phrase
 			var confusedPhrasesArray = charTaskData.characterProfiles[charTaskData.currentCharacter].confusedPhrases;
@@ -340,14 +333,16 @@ var octopusTasks = {
 			return response;
 		}
 	}
-
-
 }
 
+// Controller that connects Character Views with Character Model
+
 var octopusCharacter = {
+	// returns current language based on Web Speech API language name
 	getCurrentLanguage : function() {
 		return charTaskData.currentLanguage;
 	},
+
 	setCurrentLanguage : function() {
 		charTaskData.currentLanguage = charTaskData.characterProfiles[charTaskData.currentCharacter].language;
 		return charTaskData.currentLanguage;
@@ -372,8 +367,8 @@ var octopusCharacter = {
 		return emotion
 	},
 
+	// Returns the background path
 	getCurrentSceneBackground: function() {
-		console.log(charTaskData.characterProfiles[charTaskData.currentCharacter].location.bg);
 		return charTaskData.characterProfiles[charTaskData.currentCharacter].location.bg;
 	}
 }
@@ -414,6 +409,7 @@ var octopusSound = {
 	}
 }
 
+// Renders the number of characters on the task list
 var viewCharList = {
 	init: function() {
 		this.charList = $(".charList");
@@ -506,7 +502,6 @@ var viewCharacterResponse = {
 
 	destroy: function() {
 		this.textResponse.hide();
-		console.log(this.textResponse);
 	}
 }
 
@@ -514,7 +509,6 @@ var viewSpeakButton = {
 	init: function() {
 		this.respondButton = $(".respondButton");
 		this.micIcon = $(".icon-mic");
-		console.log(this.micIcon);
 	},
 	render: function() {
 		// Add Even Listener to respondButton
@@ -536,7 +530,6 @@ var soundPlayer = {
 		soundArray.forEach(function(soundFile, i) {
 			createjs.Sound.registerSound(soundFile.soundPath, soundFile.soundID);
 		});
-		console.log(soundArray);
 	},
 
 	// Called to play the Current Sound stored in the data
@@ -546,17 +539,13 @@ var soundPlayer = {
 }
 
 function testSpeech() {
-	var tasks = [];
-	//octopusTasks.getTasks();
-	
+	var tasks = [];	
 	octopusTasks.getTasks().forEach(function(task, i){
 		for (j = 0; j < task.possibilities.length; j++) {
 			tasks.push(task.possibilities[j]);
 		}
 		
 	});
-
-	console.log(tasks);
 
 	var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + /*+ task +*/';';
 	var recognition = new SpeechRecognition();
@@ -579,7 +568,6 @@ function testSpeech() {
 		// The second [0] returns the SpeechRecognitionAlternative at position 0.
 		// We then return the transcript property of the SpeechRecognitionAlternative object 
 		var speechResult = event.results[0][0].transcript;
-		// diagnosticPara.textContent = 'Speech received: ' + speechResult + '.';
 
 		// Check whether Task is correct and return appropriate response based on right or wrong
 		// Logic of check is in the octopusTasks Controller
@@ -589,30 +577,39 @@ function testSpeech() {
 		viewTaskList.render();
 		viewCharacter.render();
 		soundPlayer.playCurrentSound();
-		console.log('Confidence: ' + event.results[0][0].confidence);
+		// console.log('Confidence: ' + event.results[0][0].confidence);
 	}
 
 	recognition.onspeechend = function() {
 		recognition.stop();
 		console.log("Stopped");
 		viewSpeakButton.removeRedMic();
-
-		// testBtn.disabled = false;
-		// testBtn.textContent = 'Start new test';
 	}
 
 	recognition.onerror = function(event) {
 		console.log("Error" + event.error);
 		viewSpeakButton.removeRedMic();
-
-		// testBtn.disabled = false;
-		// testBtn.textContent = 'Start new test';
-		// diagnosticPara.textContent = 'Error occurred in recognition: ' + event.error;
 	}
-
-
 }
 
+try {
+	var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+	var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+	var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+} catch(err) {
+	alert("Sorry, the browser does not support Web Speech. Please use Google Chrome for Speech Access.");
+}
+ /*
+ $testDOMItem = $(".respondButton")
+ $testDOMItem.background-color = "red";
+    createjs.Tween.get($testDOMItem)
+         .wait(500)
+         .to({background-color:"blue", visible:true}, 1000)
+         .call(handleComplete);
+    function handleComplete() {
+        console.log($testDOMItem);
+    }
+*/
 
 viewTaskList.init();
 viewTaskList.render();
@@ -624,10 +621,4 @@ viewSpeakButton.render();
 viewCharList.init();
 viewCharList.render();
 soundPlayer.init();
-
-/*
-var audio = new Audio(SOUND_BASE_PATH + 'david/davidNihao.ogg');
-audio.play();
-*/
-
 
