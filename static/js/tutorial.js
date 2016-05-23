@@ -26,7 +26,7 @@ tutorialData =
 		},
 		{
 			"title" : "Completed Tasks",
-			"text" : "Great work! You'll hear and see a response if you're correct, and the tasks will highlight in greend become checked as you complete them.",
+			"text" : "Great work! You'll hear and see a response if you're correct, and the tasks will highlight in green and become checked as you complete them.",
 			"highlightUI" : ["taskList", "characterTextResponse"],
 			"tutorialWindowPosition" : 
 			{
@@ -61,6 +61,9 @@ octopusTutorial =
 	},
 	nextStep : function() {
 		tutorialData.currentStep++;
+	},
+	resetSteps : function() {
+		tutorialData.currentStep = 0;
 	}
 }
 
@@ -91,6 +94,8 @@ viewTutorial = {
 		})
 		// remove previous event listeners
 		that.tutorialWindow.children(".btn-confirm").unbind();
+
+		//remove any highlighting
 		this.sceneWrapper.children().removeClass("faded").removeClass("borderHighlight");
 		that.navbarTop.children(".charList").children().removeClass("borderHighlight");
 	},
@@ -99,7 +104,7 @@ viewTutorial = {
 	step1: function() {
 		this.resetTutorialScene();
 		// that = this to save reference to viewTutorial for when using "click functions"
-		that = this;
+		var that = this;
 		// get current tutorial step
 		step = octopusTutorial.getCurrentStepInstructions();
 
@@ -138,13 +143,7 @@ viewTutorial = {
 			}		
 		})
 
-
-		/*
-		this.sceneWrapper.addClass("faded");
-		this.navbarTop.addClass("faded");
-		this.taskList.addClass("borderHighlight");
-		*/
-
+		// Add Event Listener for Next Step Button
 		this.tutorialWindow.children(".btn-confirm").click(function(){
 			console.log(octopusTutorial.getCurrentStepIndex());
 			console.log(octopusTutorial.getAllStepData().length - 1);
@@ -153,33 +152,21 @@ viewTutorial = {
 				that.step1();
 				console.log("Next Step");
 			} else {
-				console.log("over");
+				octopusTutorial.resetSteps();
+				console.log("Tutorial over");
 				that.resetTutorialScene();
-				that.tutorialWindow.hide();
+				that.tutorialWindow.addClass("hidden");
 			}
 		});
+
+		// Add Event Listener for End Tutorial Button
 		this.tutorialWindow.children(".btn-endTutorial").click(function(){
 			that.resetTutorialScene();
 			that.tutorialWindow.hide();
 		})
 
-	}, 
-	// Make microphone button stand out
-	step2: function() {
-		that = this;
-		this.nonTutorialUI.forEach(function(element){
-			element.addClass("faded");
-		})
-		this.sceneWrapper.removeClass("faded");
-		this.sceneWrapper.children().addClass("faded");
-		this.sceneWrapper.children(".respondButton").removeClass("faded").addClass("borderHighlight");
-
-		this.renderTitleText();
 	}
 
 }
 
-/*
 viewTutorial.init();
-viewTutorial.step1();
-*/

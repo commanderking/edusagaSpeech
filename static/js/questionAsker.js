@@ -6,6 +6,11 @@ var SOUND_BASE_PATH = "./static/audio/"
 var IMAGE_BASE_PATH = "./static/images/"
 var bgIMAGE_BASE_PATH = "./static/images/bg/"
 
+var learner = 
+{
+
+}
+
 var charTaskData = 
 {
 	"currentCharacter" : 0,
@@ -17,6 +22,11 @@ var charTaskData =
 		{
 			"name" : "David",
 			"language" : "zh-CN",
+			"scenario" : 
+			{
+				"title" : "Meeting David", 
+				"text" : "After landing at Shanghai airport, you meet David, the driver who your family has sent to pick you up. On your walk to the car, you decide to chat with him and learn more about him."
+			},
 			"location" : 
 			{
 				"name" : "Shanghai Airport",
@@ -114,6 +124,11 @@ var charTaskData =
 		{
 			"name" : "Tina",
 			"language" : "zh-CN",
+			"scenario" : 
+			{
+				"title" : "Ordering Fast Food",  
+				"text" : "You decide to eat at a fast food restaurant and are really craving a burger and some fried rice. You're not sure if they even serve fried rice, but it doesn't hurt to ask!"
+			},
 			"location" : 
 			{
 				"name" : "Fast Food Restaurant",
@@ -203,6 +218,11 @@ var charTaskData =
 		{
 			"name" : "Luciana",
 			"language" : "es-es",
+			"scenario" : 
+			{
+				"title" : "Meeting Luciana", 
+				"text" : "You're meeting Luciana for the first time. You meet up at a restaurant and want to learn a little bit more about her. "
+			},
 			"location" : 
 			{
 				"name" : "Madrid Airport",
@@ -290,6 +310,13 @@ var charTaskData =
 		},
 	]
 
+}
+
+var octopusScene = {
+	// return the object which contains all scenario info
+	getScenarioInfo: function() {
+		return charTaskData.characterProfiles[charTaskData.currentCharacter].scenario;
+	}
 }
 
 // Controller for functions related to tasks and task data
@@ -422,6 +449,7 @@ var viewCharList = {
 			htmlCharList += "</li>";
 		});
 		this.charList.html(htmlCharList);
+
 		// Add button functionality to load this character's character and tasks when clicked
 		$(".charItem").click(function() {
 			// Destroy any character text Speech present
@@ -435,6 +463,9 @@ var viewCharList = {
 			octopusCharacter.changeCharacter(index);
 			viewCharacter.render();
 			viewTaskList.render();
+
+			// Render Scenario Text
+			viewSceneIntro.render();
 
 			// Initiates the sound for the current character
 			soundPlayer.init();
@@ -485,7 +516,35 @@ var viewCharacter = {
 
 		// Render new background
 		this.bg.attr("src", octopusCharacter.getCurrentSceneBackground());
-		// this.bg.css("background-image", "url(" + octopusCharacter.getCurrentSceneBackground() +  ")")
+	}
+}
+
+// Load Scene Introduction. Happens only once when page first loads
+var viewSceneIntro = {
+	init: function() {
+		this.scenarioWindow = $(".scenarioWindow");
+	},
+
+	render: function() {
+		var that = this;
+		// Render Scene Explanation Window
+		this.scenarioWindow.removeClass("hidden");
+		this.scenarioWindow.children(".scenarioHeader").html(octopusScene.getScenarioInfo().title);
+		this.scenarioWindow.children(".scenarioText").html(octopusScene.getScenarioInfo().text);
+		this.scenarioWindow.children(".btn-confirm").click(function() {
+			that.scenarioWindow.addClass("hidden");
+			viewFadeAll.resetFade();
+		})
+
+		this.scenarioWindow.children(".btn-tutorial").click(function() {
+			viewFadeAll.resetFade();
+			viewTutorial.step1();
+			that.scenarioWindow.addClass("hidden");
+		})
+
+		// Fade all other elements to highlight scene explanation window
+		viewFadeAll.render();
+
 	}
 }
 
@@ -512,7 +571,7 @@ var viewSpeakButton = {
 		this.micIcon = $(".icon-mic");
 	},
 	render: function() {
-		that = this;
+		var that = this;
 		// Add Event Listener to respondButton
 		this.respondButton.click(function(){
 			that.micIcon.attr("style", "color: red");
@@ -522,7 +581,6 @@ var viewSpeakButton = {
 	},
 	restoreMic: function() {
 		this.micIcon.attr("style", "color: white");
-		console.log("Mic restored");
 		this.respondButton.prop("disabled", false);
 	}
 }
@@ -625,4 +683,6 @@ viewSpeakButton.render();
 viewCharList.init();
 viewCharList.render();
 soundPlayer.init();
+viewSceneIntro.init();
+viewSceneIntro.render();
 
