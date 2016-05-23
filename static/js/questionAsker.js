@@ -69,7 +69,7 @@ var charTaskData =
 				},
 				{
 					"task" : "Ask for nationality", 
-					"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?"],
+					"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的"],
 					"correct" : false,
 					"response" : "我是中国人.",
 					"soundID" : "nationality",
@@ -162,7 +162,7 @@ var charTaskData =
 				},
 				{
 					"task" : "Ask whether they have Fried Rice",
-					"possibilities" : ["你有没有炒饭", "请问你有没有炒饭", "你们卖炒饭吗", "你有炒饭吗?"],
+					"possibilities" : ["你有没有炒饭", "请问你有没有炒饭", "你们有没有炒饭", "你们卖炒饭吗", "你有炒饭吗", "你门有炒饭吗?" ],
 					"correct" : false,
 					"response" : "不好意思, 我们没有炒饭.",
 					"emotion" : "default"
@@ -470,7 +470,7 @@ var viewCharacter = {
 		this.characterDiv = $(".characterDiv");
 		this.characterNameDiv = $(".characterNameDiv");
 		this.characterImageDiv = $(".characterImageDiv");
-		this.bg = $(".sceneWrapper");
+		this.bg = $(".sceneBG");
 	},
 
 	render: function() {
@@ -484,7 +484,8 @@ var viewCharacter = {
 		this.characterNameDiv.html(currentChar.name);
 
 		// Render new background
-		this.bg.css("background-image", "url(" + octopusCharacter.getCurrentSceneBackground() +  ")")
+		this.bg.attr("src", octopusCharacter.getCurrentSceneBackground());
+		// this.bg.css("background-image", "url(" + octopusCharacter.getCurrentSceneBackground() +  ")")
 	}
 }
 
@@ -511,15 +512,18 @@ var viewSpeakButton = {
 		this.micIcon = $(".icon-mic");
 	},
 	render: function() {
-		// Add Even Listener to respondButton
+		that = this;
+		// Add Event Listener to respondButton
 		this.respondButton.click(function(){
-			viewSpeakButton.micIcon.attr("style", "color: red");
+			that.micIcon.attr("style", "color: red");
 			testSpeech();
+			that.respondButton.prop("disabled", true);
 		});
 	},
-
-	removeRedMic: function() {
+	restoreMic: function() {
 		this.micIcon.attr("style", "color: white");
+		console.log("Mic restored");
+		this.respondButton.prop("disabled", false);
 	}
 }
 
@@ -578,17 +582,17 @@ function testSpeech() {
 		viewCharacter.render();
 		soundPlayer.playCurrentSound();
 		// console.log('Confidence: ' + event.results[0][0].confidence);
-	}
+	},
 
 	recognition.onspeechend = function() {
 		recognition.stop();
 		console.log("Stopped");
-		viewSpeakButton.removeRedMic();
-	}
+		viewSpeakButton.restoreMic();
+	},
 
 	recognition.onerror = function(event) {
 		console.log("Error" + event.error);
-		viewSpeakButton.removeRedMic();
+		viewSpeakButton.restoreMic();
 	}
 }
 

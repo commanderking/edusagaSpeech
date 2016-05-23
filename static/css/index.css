@@ -48,13 +48,27 @@
 
 .sceneWrapper {
 	height: 90%;
-	background-image: url("../images/shanghaiAirport.jpg");
+	/*background-image: url("../images/shanghaiAirport.jpg");*/
 	background-size: cover;
 	padding: 0px;
 }
 
+.sceneWrapper .sceneBG {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
+
 .icon-mic {
 	font-size: 9vh;
+}
+
+.button.disabled {
+	opacity: 0.65;
+	cursor: not-allowed;
 }
 
 /*----------------------------------

@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="static/css/icons.css">
 	<link rel="stylesheet" href="static/css/index.css">
+	<link rel="stylesheet" href="static/css/tutorial.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
@@ -20,6 +21,7 @@
 		<ul class="taskList col-md-3 col-sm-3 col-xs-3 nav nav-pills nav-stacked">
 		</ul>
 	<div class="sceneWrapper col-md-9 col-sm-9 col-xs-9">
+		<img class="sceneBG" src="../static/images/bg/shanghaiAirport.jpg">
 		<div class="characterDiv col-md-4">
 			<div class="characterImageDiv"></div>
 			<div class="characterNameDiv">???</div>
@@ -28,8 +30,16 @@
 		<div class="characterDialogue"></div>
 		<div class="characterTextResponse"></div>
 		<button class="btn btn-info respondButton"><span class="icon-mic"><br></span>Speak</button>
-		<script src="static/js/questionAsker.js"></script>
 	</div>
+
+	<div class="tutorialWindow hidden">
+		<h3 class="tutorialHeader"></h3>
+		<p class="tutorialText"></p>
+		<button class="btn btn-success btn-confirm">Next</button>
+		<button class="btn btn-danger btn-endTutorial">End Tutorial</button>
+	</div>
+		<script src="static/js/questionAsker.js"></script>
+		<script src="static/js/tutorial.js"></script>
 
 </body>
 
