@@ -36,8 +36,7 @@
 	position: absolute;
 	border-radius: 10px;
 	background-color: lightgreen;
-	min-width: 60%;
-	max-width: 70%;
+	width: 60%;
 	min-height: 20%;
 	left: 10%;
 	top: 15%;
@@ -87,10 +86,19 @@
 CSS Related to Task List 
 ----------------------------------*/
 
-.taskList {
+.combinedTaskList {
 	height: 90%;
+}
+
+.taskList {
 	background-color: white;
 	padding-left: 15px;
+	padding-bottom: 2%;
+}
+
+.completedTaskList {
+	padding-left: 15px;
+	padding-bottom: 2%;
 }
 
 .inactiveLink {

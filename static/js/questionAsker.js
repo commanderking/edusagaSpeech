@@ -6,310 +6,35 @@ var SOUND_BASE_PATH = "./static/audio/"
 var IMAGE_BASE_PATH = "./static/images/"
 var bgIMAGE_BASE_PATH = "./static/images/bg/"
 
-var learner = 
+var charTaskData = [];
+
+// Demo Language should be set in web.py on routing
+startDemo = 
 {
-
-}
-
-var charTaskData = 
-{
-	"currentCharacter" : 0,
-	"currentEmotion" : "default",
-	"currentLanguage" : "zh-CN",
-	"currentSoundID" : "",
-	"characterProfiles" : 
-	[
+	init: function() {
+		if (!demoLanguage) {
+			console.log("No Demo Language Loaded");
+		} 
+		else 
 		{
-			"name" : "David",
-			"language" : "zh-CN",
-			"scenario" : 
-			{
-				"title" : "Meeting David", 
-				"text" : "After landing at Shanghai airport, you meet David, the driver who your family has sent to pick you up. On your walk to the car, you decide to chat with him and learn more about him."
-			},
-			"location" : 
-			{
-				"name" : "Shanghai Airport",
-				"bg" : bgIMAGE_BASE_PATH + "shanghaiAirport.jpg"
-			},
-			"emotions" : 
-			{
-				"default": IMAGE_BASE_PATH + "davidDefault.png",
-				"uncertain" : IMAGE_BASE_PATH + "davidUncertain.png",
-				"laughing" : IMAGE_BASE_PATH + "davidLaughing.png",
-				"confused" : IMAGE_BASE_PATH + "davidConfused.png"
-			},
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : SOUND_BASE_PATH + "david/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : SOUND_BASE_PATH + "david/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : SOUND_BASE_PATH + "david/buhaoyisi.ogg"
-				}
-			],
-			"tasks" : 
-			[
-				{
-					"task" : "Greet",
-					"possibilities" : ["你好"],
-					"correct" : false,
-					"response" : "你好!",
-					"soundID" : "nihao",
-					"soundPath" : SOUND_BASE_PATH + "david/nihao.ogg",
-					"emotion" : "laughing"
-				},
-				{
-					"task" : "Ask for name",
-					"possibilities" : ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁"],
-					"correct" : false,
-					"response" : "我叫张大伟.",
-					"soundID" : "wojiao",
-					"soundPath" : SOUND_BASE_PATH + "david/wojiao.ogg",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask for nationality", 
-					"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的"],
-					"correct" : false,
-					"response" : "我是中国人.",
-					"soundID" : "nationality",
-					"soundPath" : SOUND_BASE_PATH + "david/nationality.ogg",
-					"emotion" : "default"
-				}, 
-				{
-					"task" : "Ask for age", 
-					"possibilities" : ["你几岁", "你多大"],
-					"correct" : false,
-					"response" : "我二十六岁.",
-					"soundID" : "age",
-					"soundPath" : SOUND_BASE_PATH + "david/age.ogg",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask what he likes to eat",
-					"possibilities" : ["你喜欢吃什么", "你爱吃什么"],
-					"correct" : "false",
-					"response" : "我喜欢吃牛肉面和汤圆.",
-					"soundID" : "foodLikes",
-					"soundPath" : SOUND_BASE_PATH + "david/foodLikes.ogg",
-					"emotion" : "laughing"
-				}
-			], 
-			"soundArray" : 
-			[
-				{
-					"soundID" : "buhaoyisi",
-					"soundPath" : SOUND_BASE_PATH + "david/buhaoyisi.ogg"
-				},
-				{
-					"soundID" : "shenme", 
-					"soundPath" : SOUND_BASE_PATH + "david/shenme.ogg"
-				},
-				{
-					"soundID" : "tingbudong",
-					"soundPath" : SOUND_BASE_PATH + "david/tingbudong.ogg"
-				}
-			]
-		},
-		{
-			"name" : "Tina",
-			"language" : "zh-CN",
-			"scenario" : 
-			{
-				"title" : "Ordering Fast Food",  
-				"text" : "You decide to eat at a fast food restaurant and are really craving a burger and some fried rice. You're not sure if they even serve fried rice, but it doesn't hurt to ask!"
-			},
-			"location" : 
-			{
-				"name" : "Fast Food Restaurant",
-				"bg" : bgIMAGE_BASE_PATH + "fastfoodRestaurant.jpg"
-
-			},
-			"emotions" : 
-			{
-				"default": IMAGE_BASE_PATH + "tinaDefault.png",
-				"ordering" : IMAGE_BASE_PATH + "tinaOrdering.png",
-				"confused" : IMAGE_BASE_PATH + "tinaConfused.png"
-			},
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : SOUND_BASE_PATH + "david/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : SOUND_BASE_PATH + "david/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : SOUND_BASE_PATH + "david/buhaoyisi.ogg"
-				}
-			],
-			"tasks" : 
-			[
-				{
-					"task" : "Greet the cashier",
-					"possibilities" : ["你好"],
-					"correct" : false,
-					"response" : "你好!",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Order a hamburger",
-					"possibilities" : ["我要一个汉堡", "来一个汉堡", "来个汉堡"],
-					"correct" : false,
-					"response" : "好, 一个汉堡!", 
-					"emotion" : "ordering"
-				},
-				{
-					"task" : "Ask whether they have Fried Rice",
-					"possibilities" : ["你有没有炒饭", "请问你有没有炒饭", "你们有没有炒饭", "你们卖炒饭吗", "你有炒饭吗", "你门有炒饭吗?" ],
-					"correct" : false,
-					"response" : "不好意思, 我们没有炒饭.",
-					"emotion" : "default"
-				}
-
-				/*
-				{
-					"task" : "Ask for name",
-					"possibilities" : ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁"],
-					"correct" : false,
-					"response" : "我叫张大伟.",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask for nationality", 
-					"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?"],
-					"correct" : false,
-					"response" : "我是中国人.",
-					"emotion" : "default"
-				}, 
-				{
-					"task" : "Ask for age", 
-					"possibilities" : ["你几岁", "你多大"],
-					"correct" : false,
-					"response" : "我二十六岁.",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask what he likes to eat",
-					"possibilities" : ["你喜欢吃什么", "你爱吃什么"],
-					"correct" : false,
-					"response" : "我喜欢吃牛肉面和汤圆.",
-					"emotion" : "laughing"
-				}
-				*/
-			]
-		},
-		{
-			"name" : "Luciana",
-			"language" : "es-es",
-			"scenario" : 
-			{
-				"title" : "Meeting Luciana", 
-				"text" : "You're meeting Luciana for the first time. You meet up at a restaurant and want to learn a little bit more about her. "
-			},
-			"location" : 
-			{
-				"name" : "Madrid Airport",
-				"bg" : bgIMAGE_BASE_PATH + "shanghaiAirport.jpg"
-
-			},
-			"emotions" : 
-			{
-				"default": IMAGE_BASE_PATH + "lucianaDefault.png",
-				"confused" : IMAGE_BASE_PATH + "lucianaConfused.png",
-				"sass" : IMAGE_BASE_PATH + "lucianaSass.png",
-				"laughing" : IMAGE_BASE_PATH + "lucianaLaughing.png"
-			},
-			"confusedPhrases" : 			
-			[
-				{ 
-					"response": "¿Qué?",
-					"soundID" : "que",
-					"soundPath" : SOUND_BASE_PATH + "luciana/que.ogg"
-				}, 
-				{ 
-					"response": "¿Qué dijiste?",
-					"soundID" : "quedijiste",
-					"soundPath" : SOUND_BASE_PATH + "luciana/quedijiste.ogg"
-				}, 
-				{ 
-					"response": "No entiendo.",
-					"soundID" : "noentiendo",
-					"soundPath" : SOUND_BASE_PATH + "luciana/noentiendo.ogg"
-				},
-				{ 
-					"response": "Lo siento. No te entiendo.",
-					"soundID" : "losiento",
-					"soundPath" : SOUND_BASE_PATH + "luciana/losiento.ogg"
-				},			
-			],
-			"tasks" : 
-			[
-				{
-					"task" : "Greet her",
-					"possibilities" : ["Hola"],
-					"correct" : false,
-					"response" : "Hola!",
-					"soundID" : "hola",
-					"soundPath" : SOUND_BASE_PATH + "luciana/hola.ogg",
-					"emotion" : "laughing"
-				},
-				{
-					"task" : "Ask for name",
-					"possibilities" : ["Cuál es tu nombre", "Cómo te llamas", "Cuál es su nombre"],
-					"correct" : false,
-					"response" : "Me llamo Luciana",
-					"soundID" : "name",
-					"soundPath" : SOUND_BASE_PATH + "luciana/name.ogg",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask for nationality", 
-					"possibilities" : ["cuál es tu nacionalidad", "de dónde eres"],
-					"correct" : false,
-					"response" : "Soy de España",
-					"soundID" : "nationality",
-					"soundPath" : SOUND_BASE_PATH + "luciana/nationality.ogg",
-					"emotion" : "default"
-				}, 
-				{
-					"task" : "Ask for age", 
-					"possibilities" : ["cuántos años tienes", "cuántos años tiene", "Qué edad tienes"],
-					"correct" : false,
-					"response" : "Tengo 26 años.",
-					"soundID" : "age",
-					"soundPath" : SOUND_BASE_PATH + "luciana/age.ogg",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask what she likes to eat",
-					"possibilities" : ["Qué te gusta comer", "Qué le gusta comer"],
-					"correct" : "false",
-					"response" : "Me gusta comer ensalada y pollo frito.",
-					"soundID" : "foodLikes",
-					"soundPath" : SOUND_BASE_PATH + "luciana/foodLikes.ogg",
-					"emotion" : "laughing"
-				}
-			]
-		},
-	]
-
+			$.getJSON("./static/data/demo" + demoLanguage + ".json", function(data) {
+				// Calls in here to make sure that the data is loaded before any other functions are run
+				charTaskData = data;
+				viewTaskList.init();
+				viewTaskList.render();
+				viewCharacter.init();
+				viewCharacterResponse.init();
+				viewCharacter.render();
+				viewSpeakButton.init();
+				viewSpeakButton.render();
+				viewCharList.init();
+				viewCharList.render();
+				soundPlayer.init();
+				viewSceneIntro.init();
+				viewSceneIntro.render();
+			});
+		}
+	}
 }
 
 var octopusScene = {
@@ -323,6 +48,34 @@ var octopusScene = {
 var octopusTasks = {
 	getTasks: function() {
 		return charTaskData.characterProfiles[charTaskData.currentCharacter].tasks;
+	},
+
+	// Checks whether all tasks have been completed
+	allTasksCompletedBool: function() {
+		if (charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.length == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	},
+
+	// Pop the current task off the charTaskData tasks array and into completed array
+	// Takes the index of the task to pop off
+	completeTask: function(index) {
+		var completedTask = octopusTasks.getTasks()[index];
+		charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.splice(index, 1);
+		charTaskData.characterProfiles[charTaskData.currentCharacter].completedTasks.push(completedTask);
+	},
+	getCompletedTasks: function() {
+		return charTaskData.characterProfiles[charTaskData.currentCharacter].completedTasks
+	},
+	// Checks whether there are any completed tasks
+	completedTasksBool: function() {
+		if (charTaskData.characterProfiles[charTaskData.currentCharacter].completedTasks.length > 0) {
+			return true; 
+		} else {
+			return false;
+		}
 	},
 	// Checks question to see if the question is in the list of possible questions and returns appropriate response
 	checkTask: function(userInput) {
@@ -339,8 +92,20 @@ var octopusTasks = {
 					task.correct = true;
 					charTaskData.currentEmotion = task.emotion;
 					charTaskData.currentSoundID = task.soundID;
+
+					// Move task to the compelted task list
+					octopusTasks.completeTask(i);
+
+					// If task has an extension task, add that new task to the Task List
+					if (task.extensionTasks == null) {
+
+					} else if (task.extensionTasks.length > 0) {
+						task.extensionTasks.forEach(function(extensionTask, j) {
+							charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.push(task.extensionTasks[j]);
+						})
+					}
 				}
-			}			
+			}		
 		})
 
 		if (correctQuestion == true) {
@@ -363,7 +128,6 @@ var octopusTasks = {
 }
 
 // Controller that connects Character Views with Character Model
-
 var octopusCharacter = {
 	// returns current language based on Web Speech API language name
 	getCurrentLanguage : function() {
@@ -393,15 +157,15 @@ var octopusCharacter = {
 		charTaskData.currentEmotion = emotion;
 		return emotion
 	},
-
 	// Returns the background path
 	getCurrentSceneBackground: function() {
-		return charTaskData.characterProfiles[charTaskData.currentCharacter].location.bg;
+		return bgIMAGE_BASE_PATH + charTaskData.characterProfiles[charTaskData.currentCharacter].location.bg;
 	}
 }
 
 var octopusSound = {
 	// Returns an array of sound object, which contains sound file and soundID
+	// Used to preload all sounds in soundPlayer object (below)
 	// soundArray = {"soundID" : "", "soundPath" : ""}
 	getCurrentCharacterSounds: function() {
 
@@ -411,7 +175,7 @@ var octopusSound = {
 		tasks.forEach(function(task, i) {
 			var soundObject = {
 				"soundID" : task.soundID,
-				"soundPath" : task.soundPath
+				"soundPath" : SOUND_BASE_PATH + task.soundPath
 			}
 			soundArray.push(soundObject);
 		})
@@ -421,7 +185,7 @@ var octopusSound = {
 		confusedPhrases.forEach(function(phrase, i){
 			var soundObject = {
 				"soundID" : phrase.soundID,
-				"soundPath" : phrase.soundPath
+				"soundPath" : SOUND_BASE_PATH + phrase.soundPath
 			}
 			soundArray.push(soundObject);
 		});
@@ -476,23 +240,42 @@ var viewCharList = {
 var viewTaskList = {
 	init: function() {
 		this.taskList = $(".taskList");
+		this.completedTaskList = $(".completedTaskList");
 	},
 
 	render: function() {
-		var htmlTaskList = "<h3>Tasks</h3>";
-		// taskComplete determines whether task background should be green
-		octopusTasks.getTasks().forEach(function(task, i) {
-			if (task.correct == true) {
-				var htmlTaskClass = "correctTask";
-				var glyphicon = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>'
-			} else {
-				var htmlTaskClass = "task";
-				var glyphicon = "";
-			}
-			htmlTaskList += "<li class='" + htmlTaskClass + " inactiveLink' role='presentation' data-index='" + i +"'>";
-			htmlTaskList += "<a href='#'>" + glyphicon + " " + task["task"] + "</a></li>";
-		});
-		this.taskList.html(htmlTaskList);
+		if (octopusTasks.allTasksCompletedBool() == false) {
+			var htmlTaskList = "<h3>Tasks</h3>";
+			// taskComplete determines whether task background should be green
+			octopusTasks.getTasks().forEach(function(task, i) {
+				htmlTaskList += "<li class='inactiveLink' role='presentation' data-index='" + i +"'>";
+				htmlTaskList += "<a href='#'>" + task["task"] + "</a></li>";
+			});
+			this.taskList.html(htmlTaskList);
+		} else {
+			this.taskList.html("");
+		}
+
+		// If completed tasks exist, render them
+		if (octopusTasks.completedTasksBool()) {
+			var htmlTaskList = "<h3>Completed Tasks</h3>";
+			octopusTasks.getCompletedTasks().forEach(function(task, i) {
+				if (task.correct == true) {
+					var htmlTaskClass = "correctTask";
+					var glyphicon = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>'
+				} else {
+					var htmlTaskClass = "task";
+					var glyphicon = "";
+				}
+				htmlTaskList += "<li class='" + htmlTaskClass + " inactiveLink' role='presentation' data-index='" + i +"'>";
+				htmlTaskList += "<a href='#'>" + glyphicon + " " + task["task"] + "</a></li>";
+			});
+			this.completedTaskList.html(htmlTaskList);
+			this.completedTaskList.removeClass("hidden");
+		}
+		else {
+			this.completedTaskList.addClass("hidden");
+		}
 	}
 }
 
@@ -510,7 +293,7 @@ var viewCharacter = {
 
 		// Set the language based on currentChar
 		octopusCharacter.setCurrentLanguage();
-		this.characterImageDiv.html("<img class='charImage' src='" + currentChar.emotions[currentEmotion] + "'>");
+		this.characterImageDiv.html("<img class='charImage' src='" + IMAGE_BASE_PATH + currentChar.emotions[currentEmotion] + "'>");
 		// Render Character's name if the name has been asked
 		this.characterNameDiv.html(currentChar.name);
 
@@ -661,28 +444,6 @@ try {
 } catch(err) {
 	alert("Sorry, the browser does not support Web Speech. Please use Google Chrome for Speech Access.");
 }
- /*
- $testDOMItem = $(".respondButton")
- $testDOMItem.background-color = "red";
-    createjs.Tween.get($testDOMItem)
-         .wait(500)
-         .to({background-color:"blue", visible:true}, 1000)
-         .call(handleComplete);
-    function handleComplete() {
-        console.log($testDOMItem);
-    }
-*/
 
-viewTaskList.init();
-viewTaskList.render();
-viewCharacter.init();
-viewCharacterResponse.init();
-viewCharacter.render();
-viewSpeakButton.init();
-viewSpeakButton.render();
-viewCharList.init();
-viewCharList.render();
-soundPlayer.init();
-viewSceneIntro.init();
-viewSceneIntro.render();
+startDemo.init();
 

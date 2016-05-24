@@ -27,7 +27,7 @@ tutorialData =
 		{
 			"title" : "Completed Tasks",
 			"text" : "Great work! You'll hear and see a response if you're correct, and the tasks will highlight in green and become checked as you complete them.",
-			"highlightUI" : ["taskList", "characterTextResponse"],
+			"highlightUI" : ["completedTaskList", "taskList", "characterTextResponse"],
 			"tutorialWindowPosition" : 
 			{
 				"x": "20%",
@@ -69,7 +69,7 @@ octopusTutorial =
 
 viewTutorial = {
 	init: function() {
-		this.taskList = $(".taskList");
+		this.taskList = $(".combinedTaskList");
 		this.sceneWrapper = $(".sceneWrapper");
 		this.respondButton = $(".respondButton");
 		this.navbarTop = $(".navbarTop");
@@ -78,7 +78,7 @@ viewTutorial = {
 		this.tutorialWindow = $(".tutorialWindow");
 
 		// Reference to all non-Tutorial related UI
-		this.nonTutorialUI = [this.taskList, this.sceneWrapper, this.navbarTop];
+		this.nonTutorialUI = [this.taskList, this.sceneWrapper, this.navbarTop, this.taskList.children(".completedTaskList")];
 	},
 
 	renderTitleText: function() {
@@ -125,6 +125,9 @@ viewTutorial = {
 				case "taskList" : 
 					that.taskList.removeClass("faded").addClass("borderHighlight");
 					break;
+				case "completedTaskList" : 
+
+					that.taskList.children(".completedTaskList").removeClass("faded").addClass("borderHighlight");
 				case "respondButton" : 
 					that.sceneWrapper.removeClass("faded");
 					that.sceneWrapper.children().addClass("faded");

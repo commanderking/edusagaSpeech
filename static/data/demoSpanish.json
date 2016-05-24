@@ -1,0 +1,102 @@
+{
+	"currentCharacter" : 0,
+	"currentEmotion" : "default",
+	"currentLanguage" : "es-es",
+	"currentSoundID" : "",
+	"characterProfiles" : 
+	[
+		{
+			"name" : "Luciana",
+			"language" : "es-es",
+			"scenario" : 
+			{
+				"title" : "Meeting Luciana", 
+				"text" : "You're meeting Luciana for the first time. You meet up at a restaurant and want to learn a little bit more about her. "
+			},
+			"location" : 
+			{
+				"name" : "Madrid Airport",
+				"bg" : "spanishCafe.jpg"
+
+			},
+			"emotions" : 
+			{
+				"default": "lucianaDefault.png",
+				"confused" : "lucianaConfused.png",
+				"sass" : "lucianaSass.png",
+				"laughing" : "lucianaLaughing.png"
+			},
+			"confusedPhrases" : 			
+			[
+				{ 
+					"response": "¿Qué?",
+					"soundID" : "que",
+					"soundPath" : "luciana/que.ogg"
+				}, 
+				{ 
+					"response": "¿Qué dijiste?",
+					"soundID" : "quedijiste",
+					"soundPath" : "luciana/quedijiste.ogg"
+				}, 
+				{ 
+					"response": "No entiendo.",
+					"soundID" : "noentiendo",
+					"soundPath" : "luciana/noentiendo.ogg"
+				},
+				{ 
+					"response": "Lo siento. No te entiendo.",
+					"soundID" : "losiento",
+					"soundPath" : "luciana/losiento.ogg"
+				}		
+			],
+			"tasks" : 
+			[
+				{
+					"task" : "Greet her",
+					"possibilities" : ["Hola"],
+					"correct" : false,
+					"response" : "Hola!",
+					"soundID" : "hola",
+					"soundPath" : "luciana/hola.ogg",
+					"emotion" : "laughing"
+				},
+				{
+					"task" : "Ask for name",
+					"possibilities" : ["Cuál es tu nombre", "Cómo te llamas", "Cuál es su nombre"],
+					"correct" : false,
+					"response" : "Me llamo Luciana",
+					"soundID" : "name",
+					"soundPath" : "luciana/name.ogg",
+					"emotion" : "default"
+				},
+				{
+					"task" : "Ask for nationality", 
+					"possibilities" : ["cuál es tu nacionalidad", "de dónde eres"],
+					"correct" : false,
+					"response" : "Soy de España",
+					"soundID" : "nationality",
+					"soundPath" : "luciana/nationality.ogg",
+					"emotion" : "default"
+				}, 
+				{
+					"task" : "Ask for age", 
+					"possibilities" : ["cuántos años tienes", "cuántos años tiene", "Qué edad tienes"],
+					"correct" : false,
+					"response" : "Tengo 26 años.",
+					"soundID" : "age",
+					"soundPath" : "luciana/age.ogg",
+					"emotion" : "default"
+				},
+				{
+					"task" : "Ask what she likes to eat",
+					"possibilities" : ["Qué te gusta comer", "Qué le gusta comer"],
+					"correct" : "false",
+					"response" : "Me gusta comer ensalada y pollo frito.",
+					"soundID" : "foodLikes",
+					"soundPath" : "luciana/foodLikes.ogg",
+					"emotion" : "laughing"
+				}
+			]
+		}
+	]
+}

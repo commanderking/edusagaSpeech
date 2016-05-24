@@ -14,12 +14,16 @@
 
 </head>
 <body>
-	<div class="navbarTop col-md-12"><h3>Characters {{ name }}</h3>
+	<div class="navbarTop col-md-12"><h3>Characters</h3>
 		<ul class="charList nav nav-pills">
 		</ul>
 	</div>
-		<ul class="taskList col-md-3 col-sm-3 col-xs-3 nav nav-pills nav-stacked">
+	<div class="combinedTaskList col-md-3 col-sm-3 col-xs-3">
+		<ul class="taskList col-md-12 col-sm-12 col-xs-12 nav nav-pills nav-stacked">
 		</ul>
+		<ul class="completedTaskList col-md-12 col-sm-12 col-xs-12 hidden nav nav-pills nav-stacked">
+		</ul>
+	</div>
 	<div class="sceneWrapper col-md-9 col-sm-9 col-xs-9">
 		<img class="sceneBG" src="../static/images/bg/shanghaiAirport.jpg">
 		<div class="characterDiv col-md-4">
@@ -53,8 +57,6 @@
 		<script src="static/js/viewHelper.js"></script>
 		<script src="static/js/tutorial.js"></script>
 		<script src="static/js/questionAsker.js"></script>
-
-
 </body>
 
 </html>
