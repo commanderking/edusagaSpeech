@@ -85,20 +85,33 @@
 					"task" : "Ask what he likes to eat",
 					"possibilities" : ["你喜欢吃什么", "你爱吃什么"],
 					"correct" : "false",
-					"response" : "我喜欢吃牛肉面和汤圆.",
+					"response" : "我喜欢吃牛肉面.",
 					"soundID" : "foodLikes",
 					"soundPath" : "david/foodLikes.ogg",
 					"emotion" : "laughing",
 					"extensionTasks" : 
 					[
 						{
-							"task" : "Respond that you also like beef noodle soup",
+							"task" : "Share that I like beef noodle soup",
+							"taskType" : "choice",
+							"taskLink" : "choiceLikeDislike",
 							"possibilities" : ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我爱吃牛肉面"],
 							"correct" : "false",
-							"response" : "哦! 真棒!",
+							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
 							"soundID" : "zhenbang",
 							"soundPath" : "david/zhenbang.ogg",
 							"emotion" : "laughing"
+						},
+						{
+							"task" : "Share that I don't like beef noodle soup",
+							"taskType" : "choice",
+							"taskLink" : "choiceLikeDislike",
+							"possibilities" : ["我不喜欢吃牛肉面", "我不喜欢牛肉面", "牛肉面不好吃", "牛肉面很难吃"],
+							"correct" : "false",
+							"response" : "真的吗? 牛肉面非常好吃!",
+							"soundID" : "zhenbang",
+							"soundPath" : "david/zhende.ogg",
+							"emotion" : "laughing"		
 						}
 					]
 				}

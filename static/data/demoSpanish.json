@@ -94,9 +94,22 @@
 					"response" : "Me gusta comer ensalada y pollo frito.",
 					"soundID" : "foodLikes",
 					"soundPath" : "luciana/foodLikes.ogg",
-					"emotion" : "laughing"
+					"emotion" : "laughing",
+					"extensionTasks" : 
+					[
+						{
+							"task" : "Respond that you also like fried chicken",
+							"possibilities" : ["Me gusta comer pollo frito", "Me encanta comer pollo frito", "Me gusta pollo frito", "También me gusta comer pollo frito", "me gusta comer pollo frito tambien"],
+							"correct" : "false",
+							"response" : "¡Qué tan bueno!",
+							"soundID" : "tanbueno",
+							"soundPath" : "luciana/tanbueno.ogg",
+							"emotion" : "laughing"
+						}	
+					]
 				}
-			]
+			],
+			"completedTasks" : []
 		}
 	]
 }

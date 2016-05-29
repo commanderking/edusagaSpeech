@@ -9,7 +9,7 @@ var bgIMAGE_BASE_PATH = "./static/images/bg/"
 var charTaskData = [];
 
 // Demo Language should be set in web.py on routing
-startDemo = 
+var startDemo = 
 {
 	init: function() {
 		if (!demoLanguage) {
@@ -63,8 +63,13 @@ var octopusTasks = {
 	// Takes the index of the task to pop off
 	completeTask: function(index) {
 		var completedTask = octopusTasks.getTasks()[index];
+		// TODO: Replace following line with deleteTask once this works
 		charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.splice(index, 1);
 		charTaskData.characterProfiles[charTaskData.currentCharacter].completedTasks.push(completedTask);
+	},
+	// Removes the tasks completely from tasks, and it does not add it to the completed list
+	deleteTask: function(index) {
+		charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.splice(index, 1);
 	},
 	getCompletedTasks: function() {
 		return charTaskData.characterProfiles[charTaskData.currentCharacter].completedTasks
@@ -75,6 +80,14 @@ var octopusTasks = {
 			return true; 
 		} else {
 			return false;
+		}
+	},
+	// Checks whether there are any linked tasks for a task at an index and returns it
+	getTaskLink: function(index) {
+		if (this.getTasks()[index].taskLink != null) {
+			return this.getTasks()[index].taskLink;
+		} else {
+			return null;
 		}
 	},
 	// Checks question to see if the question is in the list of possible questions and returns appropriate response
@@ -93,8 +106,28 @@ var octopusTasks = {
 					charTaskData.currentEmotion = task.emotion;
 					charTaskData.currentSoundID = task.soundID;
 
-					// Move task to the compelted task list
+					// Grab the taskLink if it exists
+					if (task.taskLink != null) {
+						var taskLink = octopusTasks.getTaskLink(i);
+					}
+
+					// Complete current task
 					octopusTasks.completeTask(i);
+
+					// If it's a choice task, search the array for other choices that are linked and remove them
+					if (task.taskType != null) {
+						console.log(task.taskType);
+						if (task.taskType == "choice") {
+							// Get taskLink if it exists
+							console.log(taskLink);
+							// Search tasks to see if there's another task with the current link
+							octopusTasks.getTasks().forEach(function(task, k) {
+								if (task.taskLink == taskLink) {
+									octopusTasks.deleteTask(k);
+								}
+							})
+						}
+					}
 
 					// If task has an extension task, add that new task to the Task List
 					if (task.extensionTasks == null) {
@@ -319,11 +352,16 @@ var viewSceneIntro = {
 			viewFadeAll.resetFade();
 		})
 
-		this.scenarioWindow.children(".btn-tutorial").click(function() {
-			viewFadeAll.resetFade();
-			viewTutorial.step1();
-			that.scenarioWindow.addClass("hidden");
-		})
+		// Hide button if tutorial button not present, otherwise add functionality
+		if (octopusTutorial.checkTutorialOn() == false) {
+			this.scenarioWindow.children(".btn-tutorial").addClass("hidden");
+		} else {
+			this.scenarioWindow.children(".btn-tutorial").click(function() {
+				viewFadeAll.resetFade();
+				viewTutorial.render();
+				that.scenarioWindow.addClass("hidden");
+			})
+		}
 
 		// Fade all other elements to highlight scene explanation window
 		viewFadeAll.render();
