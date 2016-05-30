@@ -52,66 +52,79 @@
 					"response" : "你好!",
 					"soundID" : "nihao",
 					"soundPath" : "david/nihao.ogg",
-					"emotion" : "laughing"
+					"emotion" : "laughing",
+					"extensionTasks" : []
 				},
 				{
-					"task" : "Ask for name",
-					"possibilities" : ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁"],
+				"task" : "Ask how he's doing",
+					"possibilities" : ["你好吗", "你怎么样", "吃饭了吗"],
 					"correct" : false,
-					"response" : "我叫张大伟.",
-					"soundID" : "wojiao",
-					"soundPath" : "david/wojiao.ogg",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask for nationality", 
-					"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的"],
-					"correct" : false,
-					"response" : "我是中国人.",
-					"soundID" : "nationality",
-					"soundPath" : "david/nationality.ogg",
-					"emotion" : "default"
-				}, 
-				{
-					"task" : "Ask for age", 
-					"possibilities" : ["你几岁", "你多大", "你年纪多大"],
-					"correct" : false,
-					"response" : "我二十六岁.",
-					"soundID" : "age",
-					"soundPath" : "david/age.ogg",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask what he likes to eat",
-					"possibilities" : ["你喜欢吃什么", "你爱吃什么"],
-					"correct" : "false",
-					"response" : "我喜欢吃牛肉面.",
-					"soundID" : "foodLikes",
-					"soundPath" : "david/foodLikes.ogg",
+					"response" : "非常好!",
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg",
 					"emotion" : "laughing",
 					"extensionTasks" : 
 					[
 						{
-							"task" : "Share that I like beef noodle soup",
-							"taskType" : "choice",
-							"taskLink" : "choiceLikeDislike",
-							"possibilities" : ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我爱吃牛肉面"],
-							"correct" : "false",
-							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
-							"soundID" : "zhenbang",
-							"soundPath" : "david/zhenbang.ogg",
-							"emotion" : "laughing"
+							"task" : "Ask for name",
+							"possibilities" : ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁"],
+							"correct" : false,
+							"response" : "我叫张大伟.",
+							"soundID" : "wojiao",
+							"soundPath" : "david/wojiao.ogg",
+							"emotion" : "default"
 						},
 						{
-							"task" : "Share that I don't like beef noodle soup",
-							"taskType" : "choice",
-							"taskLink" : "choiceLikeDislike",
-							"possibilities" : ["我不喜欢吃牛肉面", "我不喜欢牛肉面", "牛肉面不好吃", "牛肉面很难吃"],
+							"task" : "Ask for nationality", 
+							"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的"],
+							"correct" : false,
+							"response" : "我是中国人.",
+							"soundID" : "nationality",
+							"soundPath" : "david/nationality.ogg",
+							"emotion" : "default"
+						}, 
+						{
+							"task" : "Ask for age", 
+							"possibilities" : ["你几岁", "你多大", "你年纪多大"],
+							"correct" : false,
+							"response" : "我二十六岁.",
+							"soundID" : "age",
+							"soundPath" : "david/age.ogg",
+							"emotion" : "default"
+						},
+						{
+							"task" : "Ask what he likes to eat",
+							"possibilities" : ["你喜欢吃什么", "你爱吃什么"],
 							"correct" : "false",
-							"response" : "真的吗? 牛肉面非常好吃!",
-							"soundID" : "zhenbang",
-							"soundPath" : "david/zhende.ogg",
-							"emotion" : "laughing"		
+							"response" : "我喜欢吃牛肉面.",
+							"soundID" : "foodLikes",
+							"soundPath" : "david/foodLikes.ogg",
+							"emotion" : "laughing",
+							"extensionTasks" : 
+							[
+								{
+									"task" : "Share that I like beef noodle soup",
+									"taskType" : "choice",
+									"taskLink" : "choiceLikeDislike",
+									"possibilities" : ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我爱吃牛肉面"],
+									"correct" : "false",
+									"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
+									"soundID" : "zhenbang",
+									"soundPath" : "david/zhenbang.ogg",
+									"emotion" : "laughing"
+								},
+								{
+									"task" : "Share that I don't like beef noodle soup",
+									"taskType" : "choice",
+									"taskLink" : "choiceLikeDislike",
+									"possibilities" : ["我不喜欢吃牛肉面", "我不喜欢牛肉面", "牛肉面不好吃", "牛肉面很难吃"],
+									"correct" : "false",
+									"response" : "真的吗? 牛肉面非常好吃!",
+									"soundID" : "zhenbang",
+									"soundPath" : "david/zhende.ogg",
+									"emotion" : "laughing"		
+								}
+							]
 						}
 					]
 				}

@@ -15,7 +15,7 @@
 			},
 			"location" : 
 			{
-				"name" : "Madrid Airport",
+				"name" : "Spanish Cafe",
 				"bg" : "spanishCafe.jpg"
 
 			},
@@ -90,8 +90,8 @@
 				{
 					"task" : "Ask what she likes to eat",
 					"possibilities" : ["Qué te gusta comer", "Qué le gusta comer"],
-					"correct" : "false",
-					"response" : "Me gusta comer ensalada y pollo frito.",
+					"correct" : false,
+					"response" : "Me gusta comer pollo frito.",
 					"soundID" : "foodLikes",
 					"soundPath" : "luciana/foodLikes.ogg",
 					"emotion" : "laughing",
@@ -99,13 +99,37 @@
 					[
 						{
 							"task" : "Respond that you also like fried chicken",
-							"possibilities" : ["Me gusta comer pollo frito", "Me encanta comer pollo frito", "Me gusta pollo frito", "También me gusta comer pollo frito", "me gusta comer pollo frito tambien"],
-							"correct" : "false",
+							"possibilities" : ["Me gusta comer pollo frito", "Me encanta comer pollo frito", "Me gusta pollo frito", "También me gusta comer pollo frito", "me gusta comer pollo frito también"],
+							"correct" : false,
+							"taskType" : "choice",
+							"taskLink" : "choiceLikeDislike",
 							"response" : "¡Qué tan bueno!",
 							"soundID" : "tanbueno",
 							"soundPath" : "luciana/tanbueno.ogg",
 							"emotion" : "laughing"
-						}	
+						}, 
+						{
+							"task" : "Respond that you also like fried chicken",
+							"possibilities" : ["No me gusta comer pollo frito", "Pollo frito no es delicioso"],
+							"taskType" : "choice",
+							"taskLink" : "choiceLikeDislike",
+							"correct" : false,
+							"response" : "¡Qué tan bueno!",
+							"soundID" : "tanbueno",
+							"soundPath" : "luciana/tanbueno.ogg",
+							"emotion" : "confused"
+						}, 
+						{
+							"task" : "Ask why she likes fried chicken",
+							"possibilities" : ["por qué te gusta el pollo frito", "por qué te gusta pollo frito"],
+							"taskType" : "choice",
+							"taskLink" : "choiceLikeDislike",
+							"correct" : false,
+							"response" : "¡Porque es delicioso y sabroso!",
+							"soundID" : "delicioso",
+							"soundPath" : "luciana/delicioso.ogg",
+							"emotion" : "laughing"
+						}
 					]
 				}
 			],
