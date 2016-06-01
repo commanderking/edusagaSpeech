@@ -1,30 +1,28 @@
 var tutorialData = [];
 
-var startTutorial = 
+var startTutorial =
 {
 	init: function() {
 		if (!demoLanguage) {
 			console.log("No Demo Language Loaded for Tutorial");
-		} 
-		else 
+		}
+		else
 		{
 			$.getJSON("./static/data/tutorial" + demoLanguage + ".json", function(data) {
 				// Calls in here to make sure that the data is loaded before any other functions are run
-				console.log(data);
 				tutorialData = data;
-				console.log(tutorialData);
 				viewTutorial.init();
 			});
 		}
 	}
-}
+};
 
-octopusTutorial = 
+octopusTutorial =
 {
 	// Returns object about current Step's title, text etc...
 	getCurrentStepInstructions : function() {
 		return tutorialData.steps[tutorialData.currentStep];
-	}, 
+	},
 	getAllStepData : function() {
 		return tutorialData.steps;
 	},
@@ -36,14 +34,14 @@ octopusTutorial =
 	},
 	resetSteps : function() {
 		tutorialData.currentStep = 0;
-	}, 
+	},
 	disableTutorial: function() {
 		tutorialData.tutorialOn = false;
 	},
 	checkTutorialOn: function() {
 		return tutorialData.tutorialOn;
 	}
-}
+};
 
 viewTutorial = {
 	init: function() {
@@ -69,7 +67,7 @@ viewTutorial = {
 		this.nonTutorialUI.forEach(function(element){
 			element.removeClass("faded");
 			element.removeClass("borderHighlight");
-		})
+		});
 		// remove previous event listeners
 		that.tutorialWindow.children(".btn-confirm").unbind();
 
@@ -90,7 +88,7 @@ viewTutorial = {
 			// Fade all relevant UI elements
 			this.nonTutorialUI.forEach(function(element){
 				element.addClass("faded");
-			})
+			});
 			// Render Title and Text
 			this.tutorialWindow.removeClass("hidden");
 			var currentStep = octopusTutorial.getCurrentStepInstructions();
@@ -101,13 +99,13 @@ viewTutorial = {
 			// Highlight the appropriate UI elements
 			step.highlightUI.forEach(function(stepUI) {
 				switch(stepUI) {
-					case "taskList" : 
+					case "taskList" :
 						that.taskList.removeClass("faded").addClass("borderHighlight");
 						break;
-					case "completedTaskList" : 
-
+					case "completedTaskList" :
 						that.taskList.children(".completedTaskList").removeClass("faded").addClass("borderHighlight");
-					case "respondButton" : 
+						break;
+					case "respondButton" :
 						that.sceneWrapper.removeClass("faded");
 						that.sceneWrapper.children().addClass("faded");
 						that.sceneWrapper.children(".respondButton").removeClass("faded").addClass("borderHighlight");
@@ -121,9 +119,9 @@ viewTutorial = {
 						that.navbarTop.removeClass("faded");
 						that.navbarTop.children(".charList").children().addClass("borderHighlight");
 						break;
-					default : 
-				}		
-			})
+					default :
+				}
+			});
 
 			// Add Event Listener for Next Step Button
 			this.tutorialWindow.children(".btn-confirm").click(function(){
@@ -146,9 +144,9 @@ viewTutorial = {
 			this.tutorialWindow.children(".btn-endTutorial").click(function(){
 				that.resetTutorialScene();
 				that.tutorialWindow.hide();
-			})
+			});
 		}
 	}
-}
+};
 
 startTutorial.init();

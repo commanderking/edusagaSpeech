@@ -2,20 +2,18 @@
 TODO: Preload background and character images
 */
 
-var SOUND_BASE_PATH = "./static/audio/"
-var IMAGE_BASE_PATH = "./static/images/"
-var bgIMAGE_BASE_PATH = "./static/images/bg/"
+var SOUND_BASE_PATH = './static/audio/';
+var IMAGE_BASE_PATH = "./static/images/";
+var bgIMAGE_BASE_PATH = "./static/images/bg/";
 
 var charTaskData = [];
 
 // Demo Language should be set in web.py on routing
-var startDemo = 
-{
+var startDemo = {
 	init: function() {
 		if (!demoLanguage) {
 			console.log("No Demo Language Loaded");
-		} 
-		else 
+		} else
 		{
 			$.getJSON("./static/data/demo" + demoLanguage + ".json", function(data) {
 				// Calls in here to make sure that the data is loaded before any other functions are run
@@ -35,14 +33,14 @@ var startDemo =
 			});
 		}
 	}
-}
+};
 
 var octopusScene = {
 	// return the object which contains all scenario info
 	getScenarioInfo: function() {
 		return charTaskData.characterProfiles[charTaskData.currentCharacter].scenario;
 	}
-}
+};
 
 // Controller for functions related to tasks and task data
 var octopusTasks = {
@@ -52,7 +50,7 @@ var octopusTasks = {
 
 	// Checks whether all tasks have been completed
 	allTasksCompletedBool: function() {
-		if (charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.length == 0) {
+		if (charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.length === 0) {
 			return true;
 		} else {
 			return false;
@@ -72,7 +70,7 @@ var octopusTasks = {
 		charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.splice(index, 1);
 	},
 	getCompletedTasks: function() {
-		return charTaskData.characterProfiles[charTaskData.currentCharacter].completedTasks
+		return charTaskData.characterProfiles[charTaskData.currentCharacter].completedTasks;
 	},
 	// Checks whether there are any completed tasks
 	completedTasksBool: function() {
@@ -84,7 +82,7 @@ var octopusTasks = {
 	},
 	// Checks whether there are any linked tasks for a task at an index and returns it
 	getTaskLink: function(index) {
-		if (this.getTasks()[index].taskLink != null) {
+		if (this.getTasks()[index].taskLink !== null) {
 			return this.getTasks()[index].taskLink;
 		} else {
 			return null;
@@ -107,7 +105,7 @@ var octopusTasks = {
 					charTaskData.currentSoundID = task.soundID;
 
 					// Grab the taskLink if it exists
-					if (task.taskLink != null) {
+					if (task.taskLink !== null) {
 						var taskLink = octopusTasks.getTaskLink(i);
 					}
 
@@ -115,17 +113,16 @@ var octopusTasks = {
 					octopusTasks.completeTask(i);
 
 					// If it's a choice task, search the array for other choices that are linked and remove them
-					if (task.taskType != null) {
+					if (task.taskType !== null) {
 						console.log(task.taskType);
 						if (task.taskType == "choice") {
 							// Get taskLink if it exists
-							console.log(taskLink);
 							// Search tasks to see if there's another task with the current link
 							octopusTasks.getTasks().forEach(function(task, k) {
 								if (task.taskLink == taskLink) {
 									octopusTasks.deleteTask(k);
 								}
-							})
+							});
 						}
 					}
 
@@ -138,13 +135,13 @@ var octopusTasks = {
 						})
 					}
 				}
-			}		
-		})
+			}
+		});
 
-		if (correctQuestion == true) {
+		if (correctQuestion === true) {
 			// render updated task list
-			return response; 
-		} 
+			return response;
+		}
 		// In case of wrong response, store data accordingly
 		else {
 			charTaskData.currentEmotion = octopusCharacter.changeCurrentEmotion("confused");
@@ -158,7 +155,7 @@ var octopusTasks = {
 			return response;
 		}
 	}
-}
+};
 
 // Controller that connects Character Views with Character Model
 var octopusCharacter = {
@@ -188,13 +185,13 @@ var octopusCharacter = {
 	// Changes emotions of character and returns it
 	changeCurrentEmotion: function(emotion) {
 		charTaskData.currentEmotion = emotion;
-		return emotion
+		return emotion;
 	},
 	// Returns the background path
 	getCurrentSceneBackground: function() {
 		return bgIMAGE_BASE_PATH + charTaskData.characterProfiles[charTaskData.currentCharacter].location.bg;
 	}
-}
+};
 
 var octopusSound = {
 	// Returns an array of sound object, which contains sound file and soundID
@@ -202,16 +199,18 @@ var octopusSound = {
 	// soundArray = {"soundID" : "", "soundPath" : ""}
 	getCurrentCharacterSounds: function() {
 
-		// Push sounds related to tasks
 		var soundArray = [];
-		var tasks = charTaskData.characterProfiles[charTaskData.currentCharacter].tasks;
-		tasks.forEach(function(task, i) {
+		var sounds = charTaskData.characterProfiles[charTaskData.currentCharacter].sounds;
+		// octopusSound.getSoundsArrayFromTasks(tasks, soundArray);
+		
+		sounds.forEach(function(task, i) {
 			var soundObject = {
 				"soundID" : task.soundID,
 				"soundPath" : SOUND_BASE_PATH + task.soundPath
-			}
+			};
+			// Dig through extension tasks
 			soundArray.push(soundObject);
-		})
+		});
 
 		// Push sounds related to confused responses
 		var confusedPhrases = charTaskData.characterProfiles[charTaskData.currentCharacter].confusedPhrases;
@@ -219,19 +218,18 @@ var octopusSound = {
 			var soundObject = {
 				"soundID" : phrase.soundID,
 				"soundPath" : SOUND_BASE_PATH + phrase.soundPath
-			}
+			};
 			soundArray.push(soundObject);
 		});
 		return soundArray;
 	},
-
 	getCurrentSoundID: function() {
 		return charTaskData.currentSoundID;
 	},
 	setCurrentSoundID: function(soundID) {
 		charTaskData.currentSoundID = soundID;
 	}
-}
+};
 
 // Renders the number of characters on the task list
 var viewCharList = {
@@ -266,9 +264,9 @@ var viewCharList = {
 
 			// Initiates the sound for the current character
 			soundPlayer.init();
-		})
+		});
 	}
-}
+};
 
 var viewTaskList = {
 	init: function() {
@@ -277,7 +275,7 @@ var viewTaskList = {
 	},
 
 	render: function() {
-		if (octopusTasks.allTasksCompletedBool() == false) {
+		if (octopusTasks.allTasksCompletedBool() === false) {
 			var htmlTaskList = "<h3>Tasks</h3>";
 			// taskComplete determines whether task background should be green
 			octopusTasks.getTasks().forEach(function(task, i) {
@@ -293,9 +291,9 @@ var viewTaskList = {
 		if (octopusTasks.completedTasksBool()) {
 			var htmlTaskList = "<h3>Completed Tasks</h3>";
 			octopusTasks.getCompletedTasks().forEach(function(task, i) {
-				if (task.correct == true) {
+				if (task.correct === true) {
 					var htmlTaskClass = "correctTask";
-					var glyphicon = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>'
+					var glyphicon = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
 				} else {
 					var htmlTaskClass = "task";
 					var glyphicon = "";
@@ -310,7 +308,7 @@ var viewTaskList = {
 			this.completedTaskList.addClass("hidden");
 		}
 	}
-}
+};
 
 var viewCharacter = {
 	init: function() {
@@ -333,7 +331,7 @@ var viewCharacter = {
 		// Render new background
 		this.bg.attr("src", octopusCharacter.getCurrentSceneBackground());
 	}
-}
+};
 
 // Load Scene Introduction. Happens only once when page first loads
 var viewSceneIntro = {
@@ -350,24 +348,24 @@ var viewSceneIntro = {
 		this.scenarioWindow.children(".btn-confirm").click(function() {
 			that.scenarioWindow.addClass("hidden");
 			viewFadeAll.resetFade();
-		})
+		});
 
 		// Hide button if tutorial button not present, otherwise add functionality
-		if (octopusTutorial.checkTutorialOn() == false) {
+		if (octopusTutorial.checkTutorialOn() === false) {
 			this.scenarioWindow.children(".btn-tutorial").addClass("hidden");
 		} else {
 			this.scenarioWindow.children(".btn-tutorial").click(function() {
 				viewFadeAll.resetFade();
 				viewTutorial.render();
 				that.scenarioWindow.addClass("hidden");
-			})
+			});
 		}
 
 		// Fade all other elements to highlight scene explanation window
 		viewFadeAll.render();
 
 	}
-}
+};
 
 var viewCharacterResponse = {
 	init: function() {
@@ -384,7 +382,7 @@ var viewCharacterResponse = {
 	destroy: function() {
 		this.textResponse.hide();
 	}
-}
+};
 
 var viewSpeakButton = {
 	init: function() {
@@ -404,7 +402,7 @@ var viewSpeakButton = {
 		this.micIcon.attr("style", "color: white");
 		this.respondButton.prop("disabled", false);
 	}
-}
+};
 
 var soundPlayer = {
 	// Get all the character sounds and initialize them into a createjs array
@@ -418,11 +416,12 @@ var soundPlayer = {
 	// Called to play the Current Sound stored in the data
 	playCurrentSound: function() {
 		createjs.Sound.play(octopusSound.getCurrentSoundID());
+		console.log(octopusSound.getCurrentSoundID());
 	}
-}
+};
 
 function testSpeech() {
-	var tasks = [];	
+	var tasks = [];
 	octopusTasks.getTasks().forEach(function(task, i){
 		for (j = 0; j < task.possibilities.length; j++) {
 			tasks.push(task.possibilities[j]);

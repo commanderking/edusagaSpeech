@@ -25,6 +25,61 @@
 				"laughing" : "davidLaughing.png",
 				"confused" : "davidConfused.png"
 			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "david/feichanghao.ogg"
+				},
+				{
+					"soundID" : "wojiao",
+					"soundPath" : "david/wojiao.ogg"
+				},
+				{
+					"soundID" : "nationality",
+					"soundPath" : "david/nationality.ogg"
+				},
+				{
+					"soundID" : "age",
+					"soundPath" : "david/age.ogg"
+				},
+				{
+					"soundID" : "foodLikes",
+					"soundPath" : "david/foodLikes.ogg"
+				},
+				{
+					"soundID" : "zhenbang",
+					"soundPath" : "david/zhenbang.ogg"
+				},
+				{
+					"soundID" : "zhende",
+					"soundPath" : "david/zhende.ogg"		
+				},
+				{
+					"soundID" : "favoriteDrink",
+					"soundPath" : "david/favoriteDrink.ogg"
+				},
+				{
+					"soundID" : "sportsLikes",
+					"soundPath" : "david/sportsLikes.ogg"			
+				},
+				{
+					"soundID" : "seasonLikes",
+					"soundPath" : "david/seasonLikes.ogg"
+				},
+				{
+					"soundID" : "gotoSchool",
+					"soundPath" : "david/gotoSchool.ogg"
+				},
+				{
+					"soundID" : "zodiac",
+					"soundPath" : "david/zodiac.ogg"
+				}
+			],
 			"confusedPhrases" : 
 			[
 				{ 
@@ -60,13 +115,12 @@
 					"possibilities" : ["你好吗", "你怎么样", "吃饭了吗"],
 					"correct" : false,
 					"response" : "非常好!",
-					"soundID" : "nihao",
-					"soundPath" : "david/nihao.ogg",
+					"soundID" : "feichanghao",
 					"emotion" : "laughing",
 					"extensionTasks" : 
 					[
 						{
-							"task" : "Ask for name",
+							"task" : "Ask for name", 
 							"possibilities" : ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁"],
 							"correct" : false,
 							"response" : "我叫张大伟.",
@@ -87,10 +141,31 @@
 							"task" : "Ask for age", 
 							"possibilities" : ["你几岁", "你多大", "你年纪多大"],
 							"correct" : false,
-							"response" : "我二十六岁.",
+							"response" : "我十六岁.",
 							"soundID" : "age",
 							"soundPath" : "david/age.ogg",
-							"emotion" : "default"
+							"emotion" : "default",
+							"extensionTasks" : 
+							[
+								{
+									"task" : "Ask how he gets to school",
+									"possibilities" : ["你怎么去上学", "你怎么上学"],
+									"correct" : "false",
+									"response" : "我平常走路去上学.",
+									"soundID" : "gotoSchool",
+									"soundPath" : "david/gotoSchool.ogg",
+									"emotion" : "default"
+								},
+								{
+									"task" : "Ask for his Zodiac",
+									"possibilities" : ["你属什么", "你属什么生肖"],
+									"correct" : false,
+									"response" : "我属龙.",
+									"soundID" : "zodiac",
+									"soundPath" : "david/zodiac.ogg",
+									"emotion" : "default"
+								}
+							]
 						},
 						{
 							"task" : "Ask what he likes to eat",
@@ -111,7 +186,8 @@
 									"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
 									"soundID" : "zhenbang",
 									"soundPath" : "david/zhenbang.ogg",
-									"emotion" : "laughing"
+									"emotion" : "laughing", 
+									"extensionTasks" : []
 								},
 								{
 									"task" : "Share that I don't like beef noodle soup",
@@ -120,9 +196,41 @@
 									"possibilities" : ["我不喜欢吃牛肉面", "我不喜欢牛肉面", "牛肉面不好吃", "牛肉面很难吃"],
 									"correct" : "false",
 									"response" : "真的吗? 牛肉面非常好吃!",
-									"soundID" : "zhenbang",
+									"soundID" : "zhende",
 									"soundPath" : "david/zhende.ogg",
 									"emotion" : "laughing"		
+								}, 
+								{
+									"task" : "Ask what he likes to drink the best",
+									"possibilities" : ["你最喜欢喝什么"],
+									"correct" : "false",
+									"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
+									"soundID" : "favoriteDrink",
+									"soundPath" : "david/favoriteDrink.ogg",
+									"emotion" : "laughing",
+									"extensionTasks" : 	
+									[
+										{
+											"task" : "Ask what his favorite sport is",
+											"possibilities" : ["你最喜欢什么运动", "你最喜欢做什么"],
+											"correct" : "false",
+											"response" : "我最喜欢打篮球和打乒乓球!",
+											"soundID" : "sportsLikes",
+											"soundPath" : "david/sportsLikes.ogg",
+											"emotion" : "laughing",
+											"extensionTasks" : []						
+										},
+										{
+											"task" : "Ask what season he likes",
+											"possibilities" : ["你最喜欢什么季节", "你喜欢什么季节"],
+											"correct" : "false",
+											"response" : "我最喜欢春天， 可是我不喜欢冬天",
+											"soundID" : "seasonLikes",
+											"soundPath" : "david/seasonLikes.ogg",
+											"emotion" : "default",
+											"extensionTasks" : 	[]		
+										}
+									]
 								}
 							]
 						}
@@ -151,22 +259,53 @@
 				"ordering" : "tinaOrdering.png",
 				"confused" : "tinaConfused.png"
 			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "tina/nihao.ogg"
+				},
+				{
+					"soundID" : "noFriedRice",
+					"soundPath" : "tina/noFriedRice.ogg"
+				},
+				{
+					"soundID" : "onlyBurgersAndFries",
+					"soundPath" : "tina/onlyBurgersAndFries.ogg"
+				},
+				{
+					"soundID" : "hamburgerOrder",
+					"soundPath" : "tina/hamburgerOrder.ogg"
+				},
+				{
+					"soundID" : "frenchFriesOrder",
+					"soundPath" : "tina/frenchFriesOrder.ogg"
+				},
+				{
+					"soundID" : "welcome",
+					"soundPath" : "tina/welcome.ogg"
+				},
+				{
+					"soundID" : "bye",
+					"soundPath" : "tina/bye.ogg"
+				}
+			],
 			"confusedPhrases" : 
 			[
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
+					"soundPath" : "tina/shenme.ogg"
 				}, 
 				{ 
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
+					"soundPath" : "tina/tingbudong.ogg"
 				}, 
 				{ 
 					"response": "不好意思, 我没听懂.",
 					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
+					"soundPath" : "tina/buhaoyisi.ogg"
 				}
 			],
 			"tasks" : 
@@ -176,42 +315,16 @@
 					"possibilities" : ["你好"],
 					"correct" : false,
 					"response" : "你好!",
+					"soundID" : "nihao",
 					"emotion" : "default",
 					"extensionTasks" : 
 					[
-						{
-							"task" : "Order a hamburger",
-							"possibilities" : ["我要一个汉堡", "来一个汉堡", "来个汉堡", "给我一个汉堡"],
-							"correct" : false,
-							"response" : "好, 一个汉堡!", 
-							"emotion" : "ordering",
-							"extensionTasks" : 
-							[
-								{
-									"task" : "Order french fries",
-									"possibilities" : ["我要一个薯条", "来一个薯条", "来个薯条"], 
-									"correct" : false,
-									"response" : "好的, 再来一个薯条!",
-									"emotion" : "ordering",
-									"extensionTasks" : 							
-									[
-										{
-											"task" : "Thank the cashier",
-											"possibilities" : ["谢谢", "谢谢您", "谢谢你", "感谢"], 
-											"correct" : false,
-											"response" : "不谢!",
-											"emotion" : "default",
-											"extensionTasks" : []
-										}
-									]
-								}
-							]
-						},
 						{
 							"task" : "Ask whether they have fried rice",
 							"possibilities" : ["你有没有炒饭", "请问你有没有炒饭", "你们有没有炒饭", "你们卖炒饭吗", "你有炒饭吗", "你门有炒饭吗?" ],
 							"correct" : false,
 							"response" : "不好意思, 我们没有炒饭.",
+							"soundID" : "noFriedRice",
 							"emotion" : "default",
 							"extensionTasks" : 
 							[
@@ -220,10 +333,53 @@
 									"possibilities" : ["你有没有春卷", "你门有没有春卷", "我们买春卷吗", "你有炒饭吗", "你们有炒饭吗"],
 									"correct" : "false",
 									"response" : "不好意思, 我们只有汉堡和薯条.",
-									"soundID" : "zhenbang",
+									"soundID" : "onlyBurgersAndFries",
 									"soundPath" : "tina/zhenbang.ogg",
 									"emotion" : "default",
-									"extensionTasks" : []
+									"extensionTasks" : 
+									[
+										{
+											"task" : "Order a hamburger",
+											"possibilities" : ["我要一个汉堡", "来一个汉堡", "来个汉堡", "给我一个汉堡"],
+											"correct" : false,
+											"response" : "好, 来一个汉堡!", 
+											"soundID" : "hamburgerOrder",
+											"emotion" : "ordering",
+											"extensionTasks" : 
+											[]
+										},
+										{
+											"task" : "Order french fries",
+											"possibilities" : ["我要一个薯条", "我要薯条", "给我一个薯条", "给我薯条", "来一个薯条", "来个薯条"], 
+											"correct" : false,
+											"response" : "好的, 来一个薯条!",
+											"soundID" : "frenchFriesOrder",
+											"emotion" : "ordering",
+											"extensionTasks" : 							
+											[
+												{
+													"task" : "Thank the cashier",
+													"possibilities" : ["谢谢", "谢谢您", "谢谢你", "感谢"], 
+													"correct" : false,
+													"response" : "不谢!",
+													"soundID" : "welcome",
+													"emotion" : "default",
+													"extensionTasks" : 
+													[
+														{
+															"task" : "Say Goodbye",
+															"possibilities" : ["再见", "再见了", "拜拜"], 
+															"correct" : false,
+															"response" : "再见!",
+															"soundID": "bye",
+															"emotion" : "default",
+															"extensionTasks" : []	
+														}
+													]
+												}
+											]
+										}
+									]
 								}
 							]
 						}

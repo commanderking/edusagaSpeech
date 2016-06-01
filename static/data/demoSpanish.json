@@ -17,7 +17,6 @@
 			{
 				"name" : "Spanish Cafe",
 				"bg" : "spanishCafe.jpg"
-
 			},
 			"emotions" : 
 			{
@@ -26,6 +25,41 @@
 				"sass" : "lucianaSass.png",
 				"laughing" : "lucianaLaughing.png"
 			},
+			"sounds": 
+			[
+				{
+					"soundID" : "name",
+					"soundPath" : "luciana/name.ogg"
+				},
+				{
+					"soundID" : "hola",
+					"soundPath" : "luciana/hola.ogg"
+				},
+				{
+					"soundID" : "nationality",
+					"soundPath" : "luciana/nationality.ogg"
+				},
+				{
+					"soundID" : "age",
+					"soundPath" : "luciana/age.ogg"
+				},
+				{
+					"soundID" : "foodLikes",
+					"soundPath" : "luciana/foodLikes.ogg"
+				},
+				{
+					"soundID" : "tanbueno",
+					"soundPath" : "luciana/tanbueno.ogg"
+				},
+				{
+					"soundID" : "deverdad",
+					"soundPath" : "luciana/deverdad.ogg"
+				},
+				{
+					"soundID" : "delicioso",
+					"soundPath" : "luciana/delicioso.ogg"	
+				}
+			],
 			"confusedPhrases" : 			
 			[
 				{ 
@@ -47,9 +81,9 @@
 					"response": "Lo siento. No te entiendo.",
 					"soundID" : "losiento",
 					"soundPath" : "luciana/losiento.ogg"
-				}		
+				}
 			],
-			"tasks" : 
+			"tasks" :
 			[
 				{
 					"task" : "Greet her",
@@ -61,77 +95,90 @@
 					"emotion" : "laughing"
 				},
 				{
-					"task" : "Ask for name",
-					"possibilities" : ["Cuál es tu nombre", "Cómo te llamas", "Cuál es su nombre"],
+					"task" : "Ask how she's doing",
+					"possibilities" : ["Hola", "Buenos días", "Buenas noches", "Buenas tardes", "Oye"],
 					"correct" : false,
-					"response" : "Me llamo Luciana",
-					"soundID" : "name",
-					"soundPath" : "luciana/name.ogg",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask for nationality", 
-					"possibilities" : ["cuál es tu nacionalidad", "de dónde eres"],
-					"correct" : false,
-					"response" : "Soy de España",
-					"soundID" : "nationality",
-					"soundPath" : "luciana/nationality.ogg",
-					"emotion" : "default"
-				}, 
-				{
-					"task" : "Ask for age", 
-					"possibilities" : ["cuántos años tienes", "cuántos años tiene", "Qué edad tienes"],
-					"correct" : false,
-					"response" : "Tengo 26 años.",
-					"soundID" : "age",
-					"soundPath" : "luciana/age.ogg",
-					"emotion" : "default"
-				},
-				{
-					"task" : "Ask what she likes to eat",
-					"possibilities" : ["Qué te gusta comer", "Qué le gusta comer"],
-					"correct" : false,
-					"response" : "Me gusta comer pollo frito.",
-					"soundID" : "foodLikes",
-					"soundPath" : "luciana/foodLikes.ogg",
+					"response" : "Hola!",
+					"soundID" : "hola",
+					"soundPath" : "luciana/hola.ogg",
 					"emotion" : "laughing",
-					"extensionTasks" : 
+					"extensionTasks" : 		
 					[
 						{
-							"task" : "Respond that you also like fried chicken",
-							"possibilities" : ["Me gusta comer pollo frito", "Me encanta comer pollo frito", "Me gusta pollo frito", "También me gusta comer pollo frito", "me gusta comer pollo frito también"],
+							"task" : "Ask for name",
+							"possibilities" : ["Cuál es tu nombre", "Cómo te llamas", "Cuál es su nombre"],
 							"correct" : false,
-							"taskType" : "choice",
-							"taskLink" : "choiceLikeDislike",
-							"response" : "¡Qué tan bueno!",
-							"soundID" : "tanbueno",
-							"soundPath" : "luciana/tanbueno.ogg",
-							"emotion" : "laughing"
+							"response" : "Me llamo Luciana",
+							"soundID" : "name",
+							"soundPath" : "luciana/name.ogg",
+							"emotion" : "default"
+						},
+						{
+							"task" : "Ask for nationality", 
+							"possibilities" : ["cuál es tu nacionalidad", "de dónde eres"],
+							"correct" : false,
+							"response" : "Soy de España",
+							"soundID" : "nationality",
+							"soundPath" : "luciana/nationality.ogg",
+							"emotion" : "default"
 						}, 
 						{
-							"task" : "Respond that you also like fried chicken",
-							"possibilities" : ["No me gusta comer pollo frito", "Pollo frito no es delicioso"],
-							"taskType" : "choice",
-							"taskLink" : "choiceLikeDislike",
+							"task" : "Ask for age", 
+							"possibilities" : ["cuántos años tienes", "cuántos años tiene", "Qué edad tienes"],
 							"correct" : false,
-							"response" : "¡Qué tan bueno!",
-							"soundID" : "tanbueno",
-							"soundPath" : "luciana/tanbueno.ogg",
-							"emotion" : "confused"
-						}, 
+							"response" : "Tengo 26 años.",
+							"soundID" : "age",
+							"soundPath" : "luciana/age.ogg",
+							"emotion" : "default"
+						},
 						{
-							"task" : "Ask why she likes fried chicken",
-							"possibilities" : ["por qué te gusta el pollo frito", "por qué te gusta pollo frito"],
-							"taskType" : "choice",
-							"taskLink" : "choiceLikeDislike",
+							"task" : "Ask what she likes to eat",
+							"possibilities" : ["Qué te gusta comer", "Qué le gusta comer"],
 							"correct" : false,
-							"response" : "¡Porque es delicioso y sabroso!",
-							"soundID" : "delicioso",
-							"soundPath" : "luciana/delicioso.ogg",
-							"emotion" : "laughing"
+							"response" : "Me gusta comer pollo frito.",
+							"soundID" : "foodLikes",
+							"soundPath" : "luciana/foodLikes.ogg",
+							"emotion" : "laughing",
+							"extensionTasks" : 
+							[
+								{
+									"task" : "Respond that you also like fried chicken",
+									"possibilities" : ["Me gusta comer pollo frito", "Me encanta comer pollo frito", "Me gusta pollo frito", "También me gusta comer pollo frito", "me gusta comer pollo frito también"],
+									"correct" : false,
+									"taskType" : "choice",
+									"taskLink" : "choiceLikeDislike",
+									"response" : "¡Qué tan bueno!",
+									"soundID" : "tanbueno",
+									"soundPath" : "luciana/tanbueno.ogg",
+									"emotion" : "laughing"
+								}, 
+								{
+									"task" : "Respond that you don't like fried chicken",
+									"possibilities" : ["No me gusta comer pollo frito", "Pollo frito no es delicioso"],
+									"taskType" : "choice",
+									"taskLink" : "choiceLikeDislike",
+									"correct" : false,
+									"response" : "¿De Verdad? ¿Quién no le gusta el pollo frito?",
+									"soundID" : "deverdad",
+									"soundPath" : "luciana/deverdad.ogg",
+									"emotion" : "confused"
+								}, 
+								{
+									"task" : "Ask why she likes fried chicken",
+									"possibilities" : ["por qué te gusta el pollo frito", "por qué te gusta pollo frito"],
+									"taskType" : "choice",
+									"taskLink" : "choiceLikeDislike",
+									"correct" : false,
+									"response" : "¡Porque es delicioso y sabroso!",
+									"soundID" : "delicioso",
+									"soundPath" : "luciana/delicioso.ogg",
+									"emotion" : "laughing"
+								}
+							]
 						}
-					]
+					]		
 				}
+
 			],
 			"completedTasks" : []
 		}
