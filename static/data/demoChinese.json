@@ -112,7 +112,7 @@
 				},
 				{
 				"task" : "Ask how he's doing",
-					"possibilities" : ["你好吗", "你怎么样", "吃饭了吗"],
+					"possibilities" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗"],
 					"correct" : false,
 					"response" : "非常好!",
 					"soundID" : "feichanghao",
@@ -130,7 +130,7 @@
 						},
 						{
 							"task" : "Ask for nationality", 
-							"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的"],
+							"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你从哪里来", "你从哪里来的"],
 							"correct" : false,
 							"response" : "我是中国人.",
 							"soundID" : "nationality",
@@ -139,7 +139,7 @@
 						}, 
 						{
 							"task" : "Ask for age", 
-							"possibilities" : ["你几岁", "你多大", "你年纪多大"],
+							"possibilities" : ["你几岁", "你多大", "你多大了", "你年纪多大"],
 							"correct" : false,
 							"response" : "我十六岁.",
 							"soundID" : "age",
@@ -181,7 +181,7 @@
 									"task" : "Share that I like beef noodle soup",
 									"taskType" : "choice",
 									"taskLink" : "choiceLikeDislike",
-									"possibilities" : ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我爱吃牛肉面"],
+									"possibilities" : ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我喜欢牛肉面", "我也喜欢牛肉面" ,"我爱吃牛肉面"],
 									"correct" : "false",
 									"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
 									"soundID" : "zhenbang",
@@ -201,7 +201,7 @@
 									"emotion" : "laughing"		
 								}, 
 								{
-									"task" : "Ask what he likes to drink the best",
+									"task" : "Ask what is his favorite drink",
 									"possibilities" : ["你最喜欢喝什么"],
 									"correct" : "false",
 									"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
@@ -211,7 +211,7 @@
 									"extensionTasks" : 	
 									[
 										{
-											"task" : "Ask what his favorite sport is",
+											"task" : "Ask what is his favorite sport",
 											"possibilities" : ["你最喜欢什么运动", "你最喜欢做什么"],
 											"correct" : "false",
 											"response" : "我最喜欢打篮球和打乒乓球!",
@@ -330,7 +330,7 @@
 							[
 								{
 									"task" : "Ask whether they have spring rolls",
-									"possibilities" : ["你有没有春卷", "你门有没有春卷", "我们买春卷吗", "你有炒饭吗", "你们有炒饭吗"],
+									"possibilities" : ["你有没有春卷", "你门有没有春卷", "我们买春卷吗", "你有春卷吗", "你们有春卷吗"],
 									"correct" : "false",
 									"response" : "不好意思, 我们只有汉堡和薯条.",
 									"soundID" : "onlyBurgersAndFries",
