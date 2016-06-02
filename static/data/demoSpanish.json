@@ -36,6 +36,10 @@
 					"soundPath" : "luciana/hola.ogg"
 				},
 				{
+					"soundID" : "estoybien",
+					"soundPath" : "luciana/estoybien.ogg"
+				},
+				{
 					"soundID" : "nationality",
 					"soundPath" : "luciana/nationality.ogg"
 				},
@@ -111,8 +115,8 @@
 					"possibilities" : ["Cómo estás", "Como estas", "Cómo está usted"],
 					"correct" : false,
 					"response" : "Estoy bien!",
-					"soundID" : "bien",
-					"soundPath" : "luciana/bien.ogg",
+					"soundID" : "estoybien",
+					"soundPath" : "luciana/estoybien.ogg",
 					"emotion" : "laughing",
 					"extensionTasks" : 		
 					[
@@ -199,7 +203,7 @@
 											"task" : "Ask her what her favorite color is",
 											"possibilities" : ["Cuál es tu color favorito", "Cuál es su color favorito", "qué es tu color favorito", "qué es su color favorito"],
 											"correct" : false,
-											"response" : "Mi color favorito is rojo.",
+											"response" : "Mi color favorito es el rojo.",
 											"soundID" : "colorLikes",
 											"emotion" : "default"
 										}, 
@@ -207,7 +211,7 @@
 											"task" : "Ask her what her favorite sport is", 
 											"possibilities" : ["cuál es su deporte favorito", "cuál es tu deporte favorito?", "qué es tu deporte favorito", "qué es su deporte favorito"],
 											"correct" : false,
-											"response" : "Mi deporte favorito es béisbol!", 
+											"response" : "Mi deporte favorito es el béisbol!", 
 											"soundID" : "sportsLikes",
 											"emotion" : "default"
 										}
