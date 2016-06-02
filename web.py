@@ -15,5 +15,9 @@ def demoChinese(name="Chinese"):
 def demoSpanish(name="Spanish"):
 	return render_template('demo.html', name=name)
 
+@app.route('/demoChinese2')
+def demoChinese2(name="Chinese2"):
+	return render_template("demo.html", name=name)
+
 if __name__ == '__main__':
 	app.run(debug=True)

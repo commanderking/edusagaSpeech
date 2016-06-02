@@ -58,6 +58,18 @@
 				{
 					"soundID" : "delicioso",
 					"soundPath" : "luciana/delicioso.ogg"	
+				},
+				{
+					"soundID" : "drinkLikes",
+					"soundPath" : "luciana/drinkLikes.ogg"
+				},
+				{
+					"soundID" : "sportsLikes",
+					"soundPath" : "luciana/sportsLikes.ogg"
+				},
+				{
+					"soundID" : "colorLikes",
+					"soundPath" : "luciana/colorLikes.ogg"
 				}
 			],
 			"confusedPhrases" : 			
@@ -87,7 +99,7 @@
 			[
 				{
 					"task" : "Greet her",
-					"possibilities" : ["Hola"],
+					"possibilities" : ["Hola", "Buenos días", "Buenas noches", "Buenas tardes", "Oye"],
 					"correct" : false,
 					"response" : "Hola!",
 					"soundID" : "hola",
@@ -96,11 +108,11 @@
 				},
 				{
 					"task" : "Ask how she's doing",
-					"possibilities" : ["Hola", "Buenos días", "Buenas noches", "Buenas tardes", "Oye"],
+					"possibilities" : ["Cómo estás", "Como estas", "Cómo está usted"],
 					"correct" : false,
-					"response" : "Hola!",
-					"soundID" : "hola",
-					"soundPath" : "luciana/hola.ogg",
+					"response" : "Estoy bien!",
+					"soundID" : "bien",
+					"soundPath" : "luciana/bien.ogg",
 					"emotion" : "laughing",
 					"extensionTasks" : 		
 					[
@@ -108,7 +120,7 @@
 							"task" : "Ask for name",
 							"possibilities" : ["Cuál es tu nombre", "Cómo te llamas", "Cuál es su nombre"],
 							"correct" : false,
-							"response" : "Me llamo Luciana",
+							"response" : "Me llamo Luciana.",
 							"soundID" : "name",
 							"soundPath" : "luciana/name.ogg",
 							"emotion" : "default"
@@ -165,7 +177,7 @@
 								}, 
 								{
 									"task" : "Ask why she likes fried chicken",
-									"possibilities" : ["por qué te gusta el pollo frito", "por qué te gusta pollo frito"],
+									"possibilities" : ["por qué te gusta el pollo frito", "por qué te gusta pollo frito", "porque te gusta pollo frito", "porque te gusta comer pollo frito"],
 									"taskType" : "choice",
 									"taskLink" : "choiceLikeDislike",
 									"correct" : false,
@@ -173,6 +185,33 @@
 									"soundID" : "delicioso",
 									"soundPath" : "luciana/delicioso.ogg",
 									"emotion" : "laughing"
+								}, 
+								{
+									"task" : "Ask what she likes to drink",
+									"possibilities" : ["qué te gusta beber", "qué le gusta beber"],
+									"correct" : false,
+									"response" : "Me gusta beber té y agua.",
+									"soundID" : "drinkLikes",
+									"emotion" : "default",
+									"extensionTasks" : 
+									[
+										{
+											"task" : "Ask her what her favorite color is",
+											"possibilities" : ["Cuál es tu color favorito", "Cuál es su color favorito", "qué es tu color favorito", "qué es su color favorito"],
+											"correct" : false,
+											"response" : "Mi color favorito is rojo.",
+											"soundID" : "colorLikes",
+											"emotion" : "default"
+										}, 
+										{
+											"task" : "Ask her what her favorite sport is", 
+											"possibilities" : ["cuál es su deporte favorito", "cuál es tu deporte favorito?", "qué es tu deporte favorito", "qué es su deporte favorito"],
+											"correct" : false,
+											"response" : "Mi deporte favorito es béisbol!", 
+											"soundID" : "sportsLikes",
+											"emotion" : "default"
+										}
+									]
 								}
 							]
 						}

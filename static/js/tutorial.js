@@ -5,16 +5,21 @@ var startTutorial =
 	init: function() {
 		if (!demoLanguage) {
 			console.log("No Demo Language Loaded for Tutorial");
+		} else
+			{
+				try {
+					$.getJSON("./static/data/tutorial" + demoLanguage + ".json", function(data) {
+						// Calls in here to make sure that the data is loaded before any other functions are run
+						tutorialData = data;
+						viewTutorial.init();
+					});
+				} catch(e) {
+					console.log("no tutorial");
+					console.log(e);
+				}
+
+			}
 		}
-		else
-		{
-			$.getJSON("./static/data/tutorial" + demoLanguage + ".json", function(data) {
-				// Calls in here to make sure that the data is loaded before any other functions are run
-				tutorialData = data;
-				viewTutorial.init();
-			});
-		}
-	}
 };
 
 octopusTutorial =

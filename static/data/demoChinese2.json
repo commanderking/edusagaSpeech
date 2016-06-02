@@ -1,0 +1,115 @@
+{
+	"currentCharacter" : 0,
+	"currentEmotion" : "default",
+	"currentLanguage" : "cmn-Hant-TW",
+	"currentSoundID" : "",
+	"characterProfiles" : 
+	[
+		{
+			"name" : "Linda",
+			"language" : "cmn-Hant-TW",
+			"scenario" : 
+			{
+				"title" : "Meeting Luciana", 
+				"text" : "You're meeting Luciana for the first time. You meet up at a restaurant and want to learn a little bit more about her. "
+			},
+			"location" : 
+			{
+				"name" : "Spanish Cafe",
+				"bg" : "spanishCafe.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "lucianaDefault.png",
+				"confused" : "lucianaConfused.png",
+				"sass" : "lucianaSass.png",
+				"laughing" : "lucianaLaughing.png"
+			},
+			"sounds": 
+			[
+				{
+					"soundID" : "name",
+					"soundPath" : "luciana/name.ogg"
+				},
+				{
+					"soundID" : "hola",
+					"soundPath" : "luciana/hola.ogg"
+				},
+				{
+					"soundID" : "nationality",
+					"soundPath" : "luciana/nationality.ogg"
+				},
+				{
+					"soundID" : "age",
+					"soundPath" : "luciana/age.ogg"
+				},
+				{
+					"soundID" : "foodLikes",
+					"soundPath" : "luciana/foodLikes.ogg"
+				},
+				{
+					"soundID" : "tanbueno",
+					"soundPath" : "luciana/tanbueno.ogg"
+				},
+				{
+					"soundID" : "deverdad",
+					"soundPath" : "luciana/deverdad.ogg"
+				},
+				{
+					"soundID" : "delicioso",
+					"soundPath" : "luciana/delicioso.ogg"	
+				}
+			],
+			"confusedPhrases" : 			
+			[
+				{ 
+					"response": "¿Qué?",
+					"soundID" : "que",
+					"soundPath" : "luciana/que.ogg"
+				}, 
+				{ 
+					"response": "¿Qué dijiste?",
+					"soundID" : "quedijiste",
+					"soundPath" : "luciana/quedijiste.ogg"
+				}, 
+				{ 
+					"response": "No entiendo.",
+					"soundID" : "noentiendo",
+					"soundPath" : "luciana/noentiendo.ogg"
+				},
+				{ 
+					"response": "Lo siento. No te entiendo.",
+					"soundID" : "losiento",
+					"soundPath" : "luciana/losiento.ogg"
+				}
+			],
+			"tasks" :
+			[
+				{
+					"task" : "Greet her",
+					"possibilities" : ["你好"],
+					"correct" : false,
+					"response" : "你好!",
+					"soundID" : "hola",
+					"soundPath" : "luciana/hola.ogg",
+					"emotion" : "laughing"
+				},
+				{
+					"task" : "Ask her how she's doing",
+					"possibilities" : ["你好嗎"],
+					"correct" : false,
+					"response" : "很好!",
+					"soundID" : "hola",
+					"soundPath" : "luciana/hola.ogg",
+					"emotion" : "laughing"
+				}, 
+				{
+
+				}
+			],
+			"completedTasks" : []
+		}
+	]
+}
+
+
