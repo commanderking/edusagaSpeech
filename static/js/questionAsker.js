@@ -482,5 +482,27 @@ try {
 	alert("Sorry, the browser does not support Web Speech. Please use Google Chrome for Speech Access.");
 }
 
+//Wrap the getUserMedia function from the different browsers
+navigator.getUserMedia = navigator.getUserMedia ||
+                         navigator.webkitGetUserMedia ||
+                         navigator.mozGetUserMedia;
+ 
+//Our success callback where we get the media stream object and assign it to a video tag on the page
+function onSuccess(mediaObj){
+    window.stream = mediaObj;
+    var video = document.querySelector("video");
+}
+ 
+//Our error callback where we will handle any issues
+function onError(errorObj){
+    console.log("There was an error: " + errorObj);
+}
+ 
+//We can select to request audio and video or just one of them
+var mediaConstraints = {audio: true };
+ 
+//Call our method to request the media object - this will trigger the browser to prompt a request.
+navigator.getUserMedia(mediaConstraints, onSuccess, onError);
+
 startDemo.init();
 

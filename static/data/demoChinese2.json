@@ -28,59 +28,74 @@
 			"sounds": 
 			[
 				{
+					"soundID" : "hi",
+					"soundPath" : "linda/hi.ogg"
+				},
+				{
+					"soundID" : "henhao",
+					"soundPath" : "linda/henhao.ogg"
+				},
+				{
+					"soundID" : "surname",
+					"soundPath" : "linda/surname.ogg"
+				},
+				{
 					"soundID" : "name",
 					"soundPath" : "linda/name.ogg"
 				},
 				{
-					"soundID" : "hola",
-					"soundPath" : "linda/hola.ogg"
+					"soundID" : "student",
+					"soundPath" : "linda/student.ogg"
 				},
 				{
 					"soundID" : "nationality",
 					"soundPath" : "linda/nationality.ogg"
 				},
 				{
-					"soundID" : "age",
-					"soundPath" : "linda/age.ogg"
+					"soundID" : "birthday",
+					"soundPath" : "linda/birthday.ogg"
 				},
 				{
-					"soundID" : "foodLikes",
-					"soundPath" : "linda/foodLikes.ogg"
+					"soundID" : "familyCount",
+					"soundPath" : "linda/familyCount.ogg"
 				},
 				{
-					"soundID" : "tanbueno",
-					"soundPath" : "linda/tanbueno.ogg"
+					"soundID" : "siblings",
+					"soundPath" : "linda/siblings.ogg"
 				},
 				{
-					"soundID" : "deverdad",
-					"soundPath" : "linda/deverdad.ogg"
+					"soundID" : "dadName",
+					"soundPath" : "linda/dadName.ogg"
 				},
 				{
-					"soundID" : "delicioso",
-					"soundPath" : "linda/delicioso.ogg"	
+					"soundID" : "dadNationality",
+					"soundPath" : "linda/dadNationality.ogg"	
+				},
+				{
+					"soundID" : "momName",
+					"soundPath" : "linda/momName.ogg"
+				},
+				{
+					"soundID" : "momNationality",
+					"soundPath" : "linda/momNationality.ogg"
 				}
 			],
 			"confusedPhrases" : 			
 			[
 				{ 
-					"response": "¿Qué?",
-					"soundID" : "que",
-					"soundPath" : "linda/que.ogg"
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
 				}, 
 				{ 
-					"response": "¿Qué dijiste?",
-					"soundID" : "quedijiste",
-					"soundPath" : "linda/quedijiste.ogg"
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
 				}, 
 				{ 
-					"response": "No entiendo.",
-					"soundID" : "noentiendo",
-					"soundPath" : "linda/noentiendo.ogg"
-				},
-				{ 
-					"response": "Lo siento. No te entiendo.",
-					"soundID" : "losiento",
-					"soundPath" : "linda/losiento.ogg"
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
 				}
 			],
 			"tasks" :
@@ -99,7 +114,7 @@
 					"possibilities" : ["你好嗎", "你怎麼樣", "怎麼樣", "您好嗎"],
 					"correct" : false,
 					"response" : "很好!",
-					"soundID" : "howareyou",
+					"soundID" : "henhao",
 					"emotion" : "default",
 					"extensionTasks" : 
 					[
@@ -151,7 +166,7 @@
 								},
 								{
 									"task" : "Ask how many family members she has",
-									"possibilities" : ["你的家有幾口人", "您的家有藉口人"],
+									"possibilities" : ["你的家有幾口人", "您的家有藉口人", "你家有藉口人"],
 									"correct" : false,
 									"response" : "我家有五口人.",
 									"soundID" : "familyCount",
