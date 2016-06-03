@@ -489,8 +489,7 @@ navigator.getUserMedia = navigator.getUserMedia ||
  
 //Our success callback where we get the media stream object and assign it to a video tag on the page
 function onSuccess(mediaObj){
-    window.stream = mediaObj;
-    var video = document.querySelector("video");
+    console.log ("Audio enabled");
 }
  
 //Our error callback where we will handle any issues

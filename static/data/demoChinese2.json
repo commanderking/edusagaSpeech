@@ -10,8 +10,8 @@
 			"language" : "cmn-Hant-TW",
 			"scenario" : 
 			{
-				"title" : "Meeting linda", 
-				"text" : "You're meeting linda for the first time. You meet up at a restaurant and want to learn a little bit more about her. "
+				"title" : "First Day at College", 
+				"text" : "You're moving into Shanghai Fudan University on the first day and see that your roommate has already arrived. You decide to learn more about her and her family."
 			},
 			"location" : 
 			{
@@ -85,17 +85,17 @@
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
+					"soundPath" : "linda/shenme.ogg"
 				}, 
 				{ 
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
+					"soundPath" : "linda/tingbudong.ogg"
 				}, 
 				{ 
 					"response": "不好意思, 我没听懂.",
 					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
+					"soundPath" : "linda/buhaoyisi.ogg"
 				}
 			],
 			"tasks" :
