@@ -96,6 +96,11 @@
 					"response": "不好意思, 我没听懂.",
 					"soundID" : "buhaoyisi",
 					"soundPath" : "linda/buhaoyisi.ogg"
+				},
+				{
+					"response" : "不好意思, 请再说一次.",
+					"soundID" : "repeat",
+					"soundPath" : "linda/repeat.ogg"
 				}
 			],
 			"tasks" :

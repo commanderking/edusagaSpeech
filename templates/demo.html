@@ -10,6 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
 	<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script></head>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 
 </head>
@@ -23,8 +24,11 @@
 		</ul>
 		<ul class="completedTaskList col-md-12 col-sm-12 col-xs-12 hidden nav nav-pills nav-stacked">
 		</ul>
+		<button type="button" class="btn-skip btn btn-danger">Skip Current Questions</button>
 		<h4><a class="feedbackForm" target="_blank" href="http://goo.gl/forms/B7DG9Zjlnu45m56j1" style="margin-top: 5px"><h4>Feedback Survey</a></h4>
 	</div>
+
+	<!-- Main Scene !-->
 	<div class="sceneWrapper col-md-9 col-sm-9 col-xs-9">
 		<img class="sceneBG" src="../static/images/bg/shanghaiAirport.jpg">
 		<div class="characterDiv col-md-4">
@@ -35,6 +39,9 @@
 		<div class="characterDialogue"></div>
 		<div class="characterTextResponse"></div>
 		<button class="btn btn-info respondButton"><span class="icon-mic"><br></span>Speak</button>
+	
+		<!-- Feedback !-->
+		<div class="feedback hidden"></div>
 	</div>
 
 	<!-- Tutorial related HTML !-->
@@ -51,6 +58,28 @@
 		<p class="scenarioText"></p>
 		<button class="btn btn-success btn-confirm">Got it!</button>
 		<button class="btn btn-info btn-tutorial">Tutorial</button>
+	</div>
+
+	<!-- Help Related Modal Window !-->
+
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog contact">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Robot Helper</h4>
+	      </div>
+	      <div class="modal-body">
+
+   		  </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
 	</div>
 
 	<!-- Scripts !-->

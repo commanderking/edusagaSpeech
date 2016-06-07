@@ -3,7 +3,7 @@
 
 viewFadeAll = {
 	init: function() {
-		this.taskList = $(".taskList");
+		this.taskList = $(".combinedTaskList");
 		this.sceneWrapper = $(".sceneWrapper");
 		this.respondButton = $(".respondButton");
 		this.navbarTop = $(".navbarTop");

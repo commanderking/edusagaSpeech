@@ -82,6 +82,15 @@
 	border: 3px solid green;
 }
 
+.feedback {
+	position: absolute;
+	bottom: 0;
+	padding : 1%;
+	font-size: 5vh;
+	background-color: lightgray;
+	border-radius: 10px;
+}
+
 /*----------------------------------
 CSS Related to Task List 
 ----------------------------------*/
@@ -117,4 +126,12 @@ CSS Related to Task List
 .feedbackForm {
 	padding: 5px;
 	padding-left: 15px;
+}
+
+.taskHelpIcon {
+	float: right;
+}
+
+.btn-skip {
+	margin: 15px;
 }

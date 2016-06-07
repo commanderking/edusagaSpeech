@@ -7,6 +7,13 @@ var IMAGE_BASE_PATH = "./static/images/";
 var bgIMAGE_BASE_PATH = "./static/images/bg/";
 
 var charTaskData = [];
+var speechSynthData =
+{
+	"rate" : "",
+	"pitch" : "",
+	"voice" : "",
+	"name" : ""
+};
 
 // Demo Language should be set in web.py on routing
 var startDemo = {
@@ -30,6 +37,16 @@ var startDemo = {
 				soundPlayer.init();
 				viewSceneIntro.init();
 				viewSceneIntro.render();
+				viewFeedback.init();
+
+				// voice list loaded asynchornously, so can't be grabbed on page load
+				// http://stackoverflow.com/questions/21513706/getting-the-list-of-voices-in-speechsynthesis-of-chrome-web-speech-api
+				// Wait until the voiceslist changes and then initialize speechSynth
+				window.speechSynthesis.onvoiceschanged = function() {
+					// window.speechSynthesis.getVoices();
+					speechSynth.init();
+					// synth.speak(utterThis);
+				};
 			});
 		}
 	}
@@ -80,6 +97,12 @@ var octopusTasks = {
 			return false;
 		}
 	},
+	// Prints Help Text when the help button is clicked on the task
+	taskHelp: function(taskIndex) {
+		console.log(taskIndex);
+		var helperText = octopusTasks.getTasks()[taskIndex].possibilities[0];
+		return helperText;
+	},
 	// Checks whether there are any linked tasks for a task at an index and returns it
 	getTaskLink: function(index) {
 		if (this.getTasks()[index].taskLink !== null) {
@@ -91,7 +114,11 @@ var octopusTasks = {
 	// Checks question to see if the question is in the list of possible questions and returns appropriate response
 	checkTask: function(userInput) {
 		var correctQuestion = false;
-		var response = "";
+		var returnedObject =
+		{
+			"response" : "",
+			"feedback" : ""
+		};
 
 		// If spoken phrase matches tasks, restructure data to reflect current emotion, sound, 
 		octopusTasks.getTasks().forEach(function(task, i){
@@ -99,7 +126,8 @@ var octopusTasks = {
 				// If there's a match, set appropriate variables to render
 				if (task.possibilities[j].toLowerCase() == userInput) {
 					correctQuestion = true;
-					response = task.response;
+					returnedObject.response = task.response;
+					returnedObject.feedback = null;
 					task.correct = true;
 					charTaskData.currentEmotion = task.emotion;
 					charTaskData.currentSoundID = task.soundID;
@@ -137,10 +165,9 @@ var octopusTasks = {
 				}
 			}
 		});
-
 		if (correctQuestion === true) {
 			// render updated task list
-			return response;
+			return returnedObject;
 		}
 		// In case of wrong response, store data accordingly
 		else {
@@ -150,10 +177,39 @@ var octopusTasks = {
 			
 			// Randomly pick a confused response, store soundID as currentSoundID
 			var randomVar = Math.random();
-			response = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
+			returnedObject.response = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
 			charTaskData.currentSoundID = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID;
-			return response;
+			
+			// Store the incorrect answer they said for feedback
+			returnedObject.feedback = userInput;
+			console.log(returnedObject.feedback);
+			return returnedObject;
 		}
+	},
+	// Loop through current tasks and look for any extension tasks and populate those into the current tasks
+	skipTasks: function() {
+		// Collect all the extension tasks that will need to be pushed to the task list after looping to delete
+		var tempTaskArray = [];
+		console.log(octopusTasks.getTasks().length);
+		octopusTasks.getTasks().forEach(function(task, i) {
+			console.log(task);
+			// Prevent case where extensionTasks is not defined in JSON
+			if (task.extensionTasks === undefined) {
+
+			}
+			else if (task.extensionTasks.length > 0) {
+				task.extensionTasks.forEach(function(extensionTask, j) {
+					tempTaskArray.push(task.extensionTasks[j]);
+				});
+			}
+			console.log(tempTaskArray);
+		});
+		// Replace previous tasks with current tasks
+		charTaskData.characterProfiles[charTaskData.currentCharacter].tasks = tempTaskArray;
+		// charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.push(tempTaskArray);
+		viewTaskList.render();
+		// charTaskData.characterProfiles[charTaskData.currentCharacter].tasks.splice(index, 1);
+
 	}
 };
 
@@ -231,6 +287,17 @@ var octopusSound = {
 	}
 };
 
+var octopusSpeechSynth = {
+
+	// Takes string of the name of the speechSynth Voice (i.e Ting-Ting)
+	setVoice: function(compVoice) {
+		speechSynthData.voice = compVoice;
+	},
+	getVoice: function() {
+		return speechSynthData.voice;
+	}
+};
+
 // Renders the number of characters on the task list
 var viewCharList = {
 	init: function() {
@@ -272,17 +339,43 @@ var viewTaskList = {
 	init: function() {
 		this.taskList = $(".taskList");
 		this.completedTaskList = $(".completedTaskList");
+
+		// Grab Modal Window 
+		this.modalWindowBody = $(".modal-body");
+
+		// Grab skip question button
+		this.btnSkip = $(".btn-skip");
 	},
 
 	render: function() {
+		that = this;
 		if (octopusTasks.allTasksCompletedBool() === false) {
 			var htmlTaskList = "<h3>Tasks</h3>";
 			// taskComplete determines whether task background should be green
 			octopusTasks.getTasks().forEach(function(task, i) {
 				htmlTaskList += "<li class='inactiveLink' role='presentation' data-index='" + i +"'>";
-				htmlTaskList += "<a href='#'>" + task["task"] + "</a></li>";
+				htmlTaskList += "<a href='#'>" + task["task"];
+				htmlTaskList += "<span class='taskHelpIcon glyphicon glyphicon-question-sign' data-index='" + i +"' data-toggle='modal' data-target='#myModal' aria-haspopup='true' aria-expanded='true'></span></a>";
+				htmlTaskList += "</li>";
 			});
 			this.taskList.html(htmlTaskList);
+
+			/* Populate Hint Modal Window with proper text when clicked */
+			$(".taskHelpIcon").click(function() {
+				var dataIndex = $(this).attr('data-index');
+				var taskHelpHTML = "<div class='helpFillerText'> Maybe You Could Say: <span class='taskHelpSpeech'>" + octopusTasks.taskHelp(dataIndex) + "</span>";
+				taskHelpHTML += ' <span class="taskHelpSoundIcon glyphicon glyphicon glyphicon-volume-up" aria-hidden="true"></span>';
+				console.log(octopusTasks.taskHelp(dataIndex));
+				that.modalWindowBody.html(taskHelpHTML);
+
+				// When taskHelpSound icon clicked, the sound should play
+				$(".taskHelpSpeech, .taskHelpSoundIcon").click(function() {
+					var textToSay = $(".taskHelpSpeech").html();
+					console.log(textToSay);
+					speechSynth.play(textToSay);
+				});
+			});
+
 		} else {
 			this.taskList.html("");
 		}
@@ -307,6 +400,17 @@ var viewTaskList = {
 		else {
 			this.completedTaskList.addClass("hidden");
 		}
+
+		// Skip button - remove any previous listeners and add new one
+		this.btnSkip.unbind('click');
+		this.btnSkip.click(function() {
+			octopusTasks.skipTasks();
+		});
+
+		// If there are no more tasks, remove the skip task button
+		if (octopusTasks.getTasks().length === 0) {
+			this.btnSkip.addClass('hidden');
+		}
 	}
 };
 
@@ -324,6 +428,7 @@ var viewCharacter = {
 
 		// Set the language based on currentChar
 		octopusCharacter.setCurrentLanguage();
+		speechSynth.init();
 		this.characterImageDiv.html("<img class='charImage' src='" + IMAGE_BASE_PATH + currentChar.emotions[currentEmotion] + "'>");
 		// Render Character's name if the name has been asked
 		this.characterNameDiv.html(currentChar.name);
@@ -363,7 +468,6 @@ var viewSceneIntro = {
 
 		// Fade all other elements to highlight scene explanation window
 		viewFadeAll.render();
-
 	}
 };
 
@@ -404,6 +508,21 @@ var viewSpeakButton = {
 	}
 };
 
+var viewFeedback = {
+	init: function() {
+		this.feedback = $(".feedback");
+	},
+	render: function(feedbackText) {
+		that = this;
+		this.feedback.removeClass("hidden");
+		this.feedback.html("You said: <span class='feedbackText'>" + feedbackText + "</span>");
+		this.feedback.click(function() {
+			console.log(that.feedback.children(".feedbackText").html());
+			speechSynth.play(that.feedback.children(".feedbackText").html());
+		});
+	}
+};
+
 var soundPlayer = {
 	// Get all the character sounds and initialize them into a createjs array
 	init: function() {
@@ -417,6 +536,47 @@ var soundPlayer = {
 	playCurrentSound: function() {
 		createjs.Sound.play(octopusSound.getCurrentSoundID());
 		console.log(octopusSound.getCurrentSoundID());
+	}
+};
+
+var speechSynth = {
+	// Initialize with proper language
+	init : function() {
+		var synth = window.speechSynthesis;
+		// Temporarily stores 
+		var voices = [];
+
+		// Get current language
+		var lang = octopusCharacter.getCurrentLanguage();
+		console.log(lang);
+		var synthLang = "";
+
+		if (lang == "cmn-Hant-TW" || "zh-zh") {
+			// Ting-Ting is a specific Chinese voice in the voice array
+			synthLang = "Google 普通话（中国大陆）";
+		} else if (lang == "es-es") {
+			synthLang = "Monica";
+		}
+		console.log(synthLang);
+
+		var setVoice = function() {
+			voices = synth.getVoices();
+			for(i = 0; i < voices.length ; i++) {
+				if(voices[i].name === synthLang) {
+					octopusSpeechSynth.setVoice(voices[i]);
+				}
+			}
+		};
+		setVoice();
+	},
+	play : function(textToSay) {
+		var utterThis = new SpeechSynthesisUtterance(textToSay);
+		console.log(octopusSpeechSynth.getVoice().name);
+		utterThis.voice = octopusSpeechSynth.getVoice();
+		utterThis.rate = 0.8;
+		console.log(utterThis.voice);
+		window.speechSynthesis.speak(utterThis);
+
 	}
 };
 
@@ -453,12 +613,18 @@ function testSpeech() {
 
 		// Check whether Task is correct and return appropriate response based on right or wrong
 		// Logic of check is in the octopusTasks Controller
-		var response = octopusTasks.checkTask(speechResult.toLowerCase());
+		var responseObject = octopusTasks.checkTask(speechResult.toLowerCase());
 		console.log(speechResult);
-		viewCharacterResponse.renderTextResponse(response);
+		viewCharacterResponse.renderTextResponse(responseObject.response);
 		viewTaskList.render();
 		viewCharacter.render();
 		soundPlayer.playCurrentSound();
+		if (responseObject.feedback == null) {
+			// User is correct
+		} else {
+			viewFeedback.render(responseObject.feedback);
+
+		}
 		// console.log('Confidence: ' + event.results[0][0].confidence);
 	},
 
@@ -497,8 +663,8 @@ function onError(errorObj){
     console.log("There was an error: " + errorObj);
 }
  
-//We can select to request audio and video or just one of them
-var mediaConstraints = {audio: true };
+//We can select to request audio 
+var mediaConstraints = { audio: true };
  
 //Call our method to request the media object - this will trigger the browser to prompt a request.
 navigator.getUserMedia(mediaConstraints, onSuccess, onError);
