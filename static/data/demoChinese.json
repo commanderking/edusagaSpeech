@@ -1,5 +1,6 @@
 {
 	"currentCharacter" : 0,
+	"score" : 0,
 	"currentEmotion" : "default",
 	"currentLanguage" : "zh-CN",
 	"currentSoundID" : "",
@@ -386,6 +387,252 @@
 					]
 				}
 				
+			],
+			"completedTasks" : []
+		},
+		{
+			"name" : "Linda",
+			"language" : "zh-CN",
+			"scenario" : 
+			{
+				"title" : "First Day at College", 
+				"text" : "You're moving into Shanghai Fudan University on the first day and see that your roommate has already arrived. You decide to learn more about her and her family."
+			},
+			"location" : 
+			{
+				"name" : "Fudan University",
+				"bg" : "fudanUniversity.jpg"
+			},
+			"emotions" :
+			{
+				"default": "lucianaDefault.png",
+				"confused" : "lucianaConfused.png",
+				"sass" : "lucianaSass.png",
+				"laughing" : "lucianaLaughing.png"
+			},
+			"sounds": 
+			[
+				{
+					"soundID" : "hi",
+					"soundPath" : "linda/hi.ogg"
+				},
+				{
+					"soundID" : "henhao",
+					"soundPath" : "linda/henhao.ogg"
+				},
+				{
+					"soundID" : "surname",
+					"soundPath" : "linda/surname.ogg"
+				},
+				{
+					"soundID" : "name",
+					"soundPath" : "linda/name.ogg"
+				},
+				{
+					"soundID" : "student",
+					"soundPath" : "linda/student.ogg"
+				},
+				{
+					"soundID" : "nationality",
+					"soundPath" : "linda/nationality.ogg"
+				},
+				{
+					"soundID" : "birthday",
+					"soundPath" : "linda/birthday.ogg"
+				},
+				{
+					"soundID" : "familyCount",
+					"soundPath" : "linda/familyCount.ogg"
+				},
+				{
+					"soundID" : "siblings",
+					"soundPath" : "linda/siblings.ogg"
+				},
+				{
+					"soundID" : "dadName",
+					"soundPath" : "linda/dadName.ogg"
+				},
+				{
+					"soundID" : "dadNationality",
+					"soundPath" : "linda/dadNationality.ogg"	
+				},
+				{
+					"soundID" : "momName",
+					"soundPath" : "linda/momName.ogg"
+				},
+				{
+					"soundID" : "momNationality",
+					"soundPath" : "linda/momNationality.ogg"
+				}
+			],
+			"confusedPhrases" : 			
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "linda/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "linda/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "linda/buhaoyisi.ogg"
+				},
+				{
+					"response" : "不好意思, 请再说一次.",
+					"soundID" : "repeat",
+					"soundPath" : "linda/repeat.ogg"
+				}
+			],
+			"tasks" :
+			[
+				{
+					"task" : "Greet her",
+					"possibilities" : ["你好"],
+					"correct" : false,
+					"response" : "你好!",
+					"soundID" : "hi",
+					"soundPath" : "linda/hi.ogg",
+					"emotion" : "default"
+				},
+				{
+					"task" : "Ask her how she's doing",
+					"possibilities" : ["你好吗", "你怎么样", "怎么样", "您好吗"],
+					"correct" : false,
+					"response" : "很好!",
+					"soundID" : "henhao",
+					"emotion" : "default",
+					"extensionTasks" : 
+					[
+						{
+							"task" : "Ask for her surname",
+							"possibilities" : ["请问您贵姓", "请问你贵姓", "您贵姓", "你贵姓", "你的贵姓是什么", "你姓什么"],
+							"correct" : false,
+							"response" : "我姓王.",
+							"soundID" : "surname",
+							"emotion" : "default", 
+							"extensionTasks" : 
+							[
+								{
+									"task" : "Ask for her first name / name",
+									"possibilities" : ["你叫什么", "你叫什么名字"],
+									"correct" : false,
+									"response" : "我叫琳娜.",
+									"soundID" : "name",
+									"emotion" : "default",	
+									"extensionTasks" : 
+									[]			
+								},
+								{
+									"task" : "Ask if she's a student", 
+									"possibilities" : ["你是学生吗", "你是不是学生", "请问你是不是学生"],
+									"correct" : false,
+									"response" : "我是学生.",
+									"soundID" : "student",
+									"emotion" : "default",
+									"extensionTasks": []
+								},
+								{
+									"task" : "Ask for her nationality",
+									"possibilities" : ["你是哪国人", "你是哪里人"],
+									"correct" : false,
+									"response" : "我是台湾人",
+									"soundID" : "nationality",
+									"emotion" : "default",
+									"extensionTasks" : []
+								},
+								{
+									"task" : "Ask for her birthday",
+									"possibilities" : ["你的生日几月几号", "你的生日几月几日", "你生日几月几号", "你生日几月几日"],
+									"correct" : false,
+									"response" : "我生日八月二十七号",
+									"soundID" : "birthday",
+									"emotion" : "default",
+									"extensionTasks" : []
+								},
+								{
+									"task" : "Ask how many family members she has",
+									"possibilities" : ["你的家有几口人", "您的家有几口人", "你家有几口人"],
+									"correct" : false,
+									"response" : "我家有五口人.",
+									"soundID" : "familyCount",
+									"emotion" : "default",
+									"extensionTasks" : 
+									[
+										{
+											"task" : "Ask if she has an older brother",
+											"possibilities" : ["你有哥哥吗", "你有没有哥哥"],
+											"taskType" : "choice",
+											"taskLink" : "siblingChoice",
+											"correct" : false,
+											"response" : "我有一个哥哥和一个妹妹", 
+											"soundID" : "siblings",
+											"emotion" : "default",
+											"extensionTasks" : []										
+										},
+										{
+											"task" : "Ask whether she has a younger sister",
+											"possibilities" : ["你有没有妹妹", "你有妹妹吗"],
+											"taskType" : "choice",
+											"taskLink" : "siblingChoice",
+											"correct" : false,
+											"response" : "我有一个哥哥和一个妹妹",
+											"soundID" : "siblings",
+											"emotion" : "default",
+											"extensionTasks" : []
+										},
+										{
+											"task" : "Ask her for her dad's name",
+											"possibilities" : ["你的爸爸叫什么名字", "你爸叫什么名字", "你的爸爸叫什么", "你的爸叫什么"],
+											"correct" : false,
+											"response" : "我的爸爸叫王大偉",
+											"soundID" : "dadName",
+											"emotion" : "default",
+											"extensionTasks" : 
+											[
+												{
+													"task" : "Ask for her dad's nationality",
+													"possibilities" : ["你的爸爸是哪国人",	 "你的爸爸是哪里人", "你爸是哪国人", "你爸是哪里人"],
+													"correct" : false,
+													"response" : "我的爸爸也是台湾人.",
+													"soundID" : "dadNationality",
+													"emotion" : "default",
+													"extensionTasks" : []
+												}
+
+
+											]
+										},
+										{
+											"task" : "Ask her for her mom's name",
+											"possibilities" : ["你的妈妈叫什么名字", "你妈叫什么名字", "你的妈妈叫什么", "你的妈叫什么"],
+											"correct" : false,
+											"response" : "我的妈妈叫王安娜",
+											"soundID" : "momName",
+											"emotion" : "default",
+											"extensionTasks" : 
+											[
+												{
+													"task" : "Ask for her mom's nationality",
+													"possibilities" : ["你的妈妈是哪国人",	 "你的妈妈是哪里人", "你妈是哪国人", "你妈是哪里人"],
+													"correct" : false,
+													"response" : "我的妈妈是新加坡人.",
+													"soundID" : "momNationality",
+													"emotion" : "default",
+													"extensionTasks" : []
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
 			],
 			"completedTasks" : []
 		}

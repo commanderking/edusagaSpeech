@@ -99,7 +99,6 @@ var octopusTasks = {
 	},
 	// Prints Help Text when the help button is clicked on the task
 	taskHelp: function(taskIndex) {
-		console.log(taskIndex);
 		var helperText = octopusTasks.getTasks()[taskIndex].possibilities[0];
 		return helperText;
 	},
@@ -348,7 +347,7 @@ var viewTaskList = {
 	},
 
 	render: function() {
-		that = this;
+		var that = this;
 		if (octopusTasks.allTasksCompletedBool() === false) {
 			var htmlTaskList = "<h3>Tasks</h3>";
 			// taskComplete determines whether task background should be green
@@ -365,7 +364,6 @@ var viewTaskList = {
 				var dataIndex = $(this).attr('data-index');
 				var taskHelpHTML = "<div class='helpFillerText'> Maybe You Could Say: <span class='taskHelpSpeech'>" + octopusTasks.taskHelp(dataIndex) + "</span>";
 				taskHelpHTML += ' <span class="taskHelpSoundIcon glyphicon glyphicon glyphicon-volume-up" aria-hidden="true"></span>';
-				console.log(octopusTasks.taskHelp(dataIndex));
 				that.modalWindowBody.html(taskHelpHTML);
 
 				// When taskHelpSound icon clicked, the sound should play
@@ -513,13 +511,24 @@ var viewFeedback = {
 		this.feedback = $(".feedback");
 	},
 	render: function(feedbackText) {
-		that = this;
+		var that = this;
 		this.feedback.removeClass("hidden");
-		this.feedback.html("You said: <span class='feedbackText'>" + feedbackText + "</span>");
+		this.feedback.html("I heard you say: <span class='feedbackText'>" + feedbackText + "</span>");
+
+		// Remove any previous event handlers
+		this.feedback.unbind('click');
+
 		this.feedback.click(function() {
-			console.log(that.feedback.children(".feedbackText").html());
-			speechSynth.play(that.feedback.children(".feedbackText").html());
+			console.log($(this).children(".feedbackText").html());
+			speechSynth.play($(this).children(".feedbackText").html());
 		});
+	},
+	// Hides feedback Div;  Called in testSpeech if correct answer is made after wrong answer
+	hideFeedbackDiv: function() {
+		if (!this.feedback.hasClass("hidden")) {
+			console.log("Hidden");
+			this.feedback.addClass("hidden");
+		}
 	}
 };
 
@@ -621,9 +630,9 @@ function testSpeech() {
 		soundPlayer.playCurrentSound();
 		if (responseObject.feedback == null) {
 			// User is correct
+			viewFeedback.hideFeedbackDiv();
 		} else {
 			viewFeedback.render(responseObject.feedback);
-
 		}
 		// console.log('Confidence: ' + event.results[0][0].confidence);
 	},
