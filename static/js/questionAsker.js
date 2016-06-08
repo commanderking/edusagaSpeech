@@ -408,7 +408,9 @@ var viewTaskList = {
 		// If there are no more tasks, remove the skip task button
 		if (octopusTasks.getTasks().length === 0) {
 			this.btnSkip.addClass('hidden');
-		}
+		} 
+
+		// TODO: When character changes, the skip button should reset to not hidden
 	}
 };
 

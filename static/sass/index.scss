@@ -13,7 +13,7 @@
 .characterDiv {
 	position: absolute;
 	padding: 0px;
-	right: 0px;
+	left: 0px;
 	height: 100%;
 	width: 33%;
 }
@@ -89,6 +89,12 @@
 	font-size: 5vh;
 	background-color: lightgray;
 	border-radius: 10px;
+}
+
+.respondButton {
+	bottom: 0;
+	right: 0;
+	position: absolute;
 }
 
 /*----------------------------------
