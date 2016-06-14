@@ -209,7 +209,7 @@
 										}, 
 										{
 											"task" : "Ask her what her favorite sport is", 
-											"possibilities" : ["cuál es su deporte favorito", "cuál es tu deporte favorito?", "qué es tu deporte favorito", "qué es su deporte favorito"],
+											"possibilities" : ["cuál es su deporte favorito", "cuál es tu deporte favorito", "qué es tu deporte favorito", "qué es su deporte favorito"],
 											"correct" : false,
 											"response" : "Mi deporte favorito es el béisbol!", 
 											"soundID" : "sportsLikes",

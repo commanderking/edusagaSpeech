@@ -1,3 +1,14 @@
+$darkBlue : #098ED0;
+$darkerBlue: #205BA0;
+$lightBlue : #38C6F3;
+$yellow : #F3EC29;
+
+.verticalCenter {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+}
+
 .navbarTop {
 	height: 10%;
 
@@ -15,50 +26,89 @@
 	padding: 0px;
 	left: 0px;
 	height: 100%;
-	width: 33%;
+	width: 40%;
+	img {
+		pointer-events: none;
+	}
 }
 .charImage {
 	position: absolute;
 	bottom: 0px;
 	width: 100%;
-	height: 90%;
+	height: 96%;
 }
 
-.characterNameDiv {
-	margin-left: 0px;
-	font-size: 9vh;
-	background-color: yellow;
-	padding: 2%;
-	padding-left: 10%;
-}
-
-.characterTextResponse {
+.characterDialogueDiv {
+	padding: 0;
+	pointer-events: none;
+	background-color: #0975B6;
+	background: linear-gradient(to right, #39C7F4, #057FC5 50%);
+	width: 100%;
+	height: 25%;
 	position: absolute;
-	border-radius: 10px;
-	background-color: lightgreen;
-	width: 60%;
-	min-height: 20%;
-	left: 10%;
-	top: 15%;
-	padding: 3%;
-	font-size: 9vh;
+	.friendBanner {
+		  width: 30%; 
+		  position: absolute;
+		  border-top: 25.1vh solid #205BA0; 
+		  border-right: 10vw solid transparent;
+
+	}
+}
+
+.playerMenuWrapper {
+	position: absolute;
+	height: 100%;
+	width: 4%;
 	text-align: center;
+	box-shadow: 2px 0px 5px black;
+	background: linear-gradient(#39C7F4, #057FC5 50%);
+	span {
+		padding: 2px;
+		font-size: 1.5em;
+		color: $yellow;
+	}
+}
+
+.responseNameWrapper {
+	left: 31%;
+	width: 60%;
+
+	.characterNameDiv {
+		margin-left: 0px;
+		font-size: 6vh;
+		padding: 0px 5px;
+		font-weight: bold;
+		color: #F3EC29;
+	}
+
+	.characterTextResponse {
+		position: absolute;
+		border-radius: 10px;
+		width: 100%;
+		min-height: 20%;
+		font-size: 6vh;
+		color: white;
+	}
+
 }
 
 .sceneWrapper {
-	height: 90%;
+	height: 100%;
 	/*background-image: url("../images/shanghaiAirport.jpg");*/
 	background-size: cover;
 	padding: 0px;
 }
 
-.sceneWrapper .sceneBG {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	z-index: -1;
+.gameWrapper {
+	padding: 0px;
+	.sceneBG {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
 }
 
 .icon-mic {
@@ -102,26 +152,66 @@ CSS Related to Task List
 ----------------------------------*/
 
 .combinedTaskList {
-	height: 90%;
+	top: 25%;
+	height: 55%;
+	position: absolute;
+	right: 10%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.combinedTaskList::-webkit-scrollbar {
+	// width: 1em;
+	// background-color: darkgrey;
+	// outline: 1px solid slategrey;
 }
 
 .taskList {
-	background-color: white;
 	padding-left: 15px;
 	padding-bottom: 2%;
+	h3 {
+		color: white;
+		text-shadow: 2px 2px 2px black;
+		text-align: right;
+	}
+}
+
+.taskDiv {
+	position: relative;
+	display: block;
+	margin: 20px 0px;
+	background-color: #047FC5;
+	background: linear-gradient(82deg, #38C6F3, #057FC5 80%, #098ED0);
+	border-radius: 15px;
+	box-shadow: 5px 5px 10px black;
+	.icon-mic {
+		color: #000098;
+		position: absolute;
+		bottom: 7px;
+		left: 3px;
+		font-size: 3.5vw;
+		pointer-events: none;
+	}
+	.taskText {
+		padding: 12px;
+		padding-left: 15%;
+		color: #F3EC29;
+		font-weight: bold;
+		font-size: 2vw;
+	}
 }
 
 .completedTaskList {
 	padding-left: 15px;
 	padding-bottom: 2%;
+	h3 {
+		color: white;
+		text-align: right;
+	}
 }
 
 .inactiveLink {
-    cursor: default;
-	a {
-	background-color: lightgray;
-	color :black;
-	}
+    cursor: pointer;
 }
 
 .correctTask a {
@@ -135,9 +225,76 @@ CSS Related to Task List
 }
 
 .taskHelpIcon {
-	float: right;
+	position: absolute;
+	font-size: 2.5vw;
+	right: -10%;
+	top: 25%;
+	border-radius: 50%;
+	background-color: #38C6F3;
+	color: #057FC5;
+	a {
+	color :#F3EC29;
+	}
 }
 
 .btn-skip {
-	margin: 15px;
+	margin-left: 15px;
+	font-size: 1.5vw;
+	font-weight: bold;
+	border-radius: 15px;
+	padding: 12px;
 }
+
+.popover {
+	.arrow {
+		display: none;
+	}
+}
+
+// Bottom NavBar Related CSS
+
+.bottomNavBar {
+	position: absolute;
+	width: 100%;
+	height: 15%;
+	bottom: 0;
+	display:table;
+	padding: 0;
+	.row-fluid {
+		background-color: none;
+		height: 100%; 
+		display:table-cell; 
+		vertical-align: middle;
+		position: relative;
+
+		.buttonLine {
+			background-color: rgba(9, 142, 208, 0.5);
+			height: 40%;
+
+			&::before {
+				z-index: -1;
+				opacity: 0.5;
+				position: absolute;	
+			}
+
+			button {
+				position: absolute;
+				bottom: 2vh;
+				height: 11vh;
+				width: 11vh;
+				border-radius: 50%;
+				left: 1%;
+				span {
+
+				}
+			}
+
+			.locationText {
+				margin-left: 20vh;
+				color: white;
+				font-size: 4vh;
+			}
+		}
+	}
+}
+

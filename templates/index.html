@@ -2,57 +2,139 @@
 <head>
 	<title>EduSaga - Speech</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="static/css/icons.css">
-	<link rel="stylesheet" href="static/css/index.css">
+	<link rel="stylesheet" href="static/css/landingpage.css">
 	<link rel="stylesheet" href="static/css/tutorial.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="static/js/smooth-scroll.min.js"></script>
+	<script src="static/js/jquery-3.0.0.min.js"></script>
+	<!--
 	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
 	<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script></head>
+	!-->
 
 
 </head>
 <body>
-	<div class="navbarTop col-md-12"><h3>Characters {{ name }}</h3>
-		<ul class="charList nav nav-pills">
-		</ul>
-	</div>
-		<ul class="taskList col-md-3 col-sm-3 col-xs-3 nav nav-pills nav-stacked">
-		</ul>
-	<div class="sceneWrapper col-md-9 col-sm-9 col-xs-9">
-		<img class="sceneBG" src="../static/images/bg/shanghaiAirport.jpg">
-		<div class="characterDiv col-md-4">
-			<div class="characterImageDiv"></div>
-			<div class="characterNameDiv">???</div>
+	<div class="landingScreen verticalCenter col-xs-12 col-sm-12 col-lg-12">
+		<button class="btn btn-login">LOGIN</button>
+		<div class="tryDemo">
+			<p>Try Demo</p>
+			<span class="glyphicon glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+
 		</div>
-
-		<div class="characterDialogue"></div>
-		<div class="characterTextResponse"></div>
-		<button class="btn btn-info respondButton"><span class="icon-mic"><br></span>Speak</button>
+		<div class="landingScreenContainer">
+			<h2>EDUSAGA</h2>
+			<p>Create and Share Interactive and Immersive Speaking Activities</p>
+			<a data-scroll href="#signup"><button class="btn btn-signup">SIGN UP</button></a>
+		</div>
 	</div>
 
-	<!-- Tutorial related HTML !-->
-	<div class="tutorialWindow hidden">
-		<h3 class="tutorialHeader"></h3>
-		<p class="tutorialText"></p>
-		<button class="btn btn-success btn-confirm">Next</button>
-		<button class="btn btn-danger btn-endTutorial">End Tutorial</button>
+	<!-- Demo Div !-->
+	<div class="demoScreen verticalCenter col-xs-12 col-sm-12 col-lg-12">
+		<div class="demoContainer">
+			<div class="demoHeader">
+				<h3>DAVID</h3>
+				<p>Hello there!</p>
+			</div>
+			<div class="demoCharContainer">
+				<img src="./static/images/davidDefault.png">
+			</div>
+			<div class="micWrapper">
+				<div id="mic" class="micTextPair"><span class='icon-mic'></span></div>
+				<div id="text" class="micTextPair">Press the mic button and say "Hi"</div>
+
+			</div>
+		</div>
+		<div class="nextArrow">
+			<span class="glyphicon glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+		</div>
 	</div>
 
-	<!-- Scenario Intro Related Div !-->
-	<div class="scenarioWindow hidden">
-		<h3 class="scenarioHeader"></h3>
-		<p class="scenarioText"></p>
-		<button class="btn btn-success btn-confirm">Got it!</button>
-		<button class="btn btn-info btn-tutorial">Tutorial</button>
+	<!-- Features Div !-->
+	<div class="featuresScreen col-xs-12 col-sm-12 col-lg-12">
+		<div class ="feature">
+			<div class="featureImage">
+				<img src="static/images/davidConfused.png">
+			</div>
+			<div class="featureText">
+				<h3>Feature Title</h3>
+				<p>Generic Text</h3>
+			</diV>
+		</div>
+		<div class ="feature">
+			<div class="featureImage">
+				<img src="static/images/davidConfused.png">
+			</div>
+			<div class="featureText">
+				<h3>Feature Title</h3>
+				<p>Generic Text</h3>
+			</diV>
+		</div>
+		<a data-scroll href="#signup"><button class="btn btn-signup-lg">SIGN UP</button></a>
+		<div class="nextArrow">
+			<span class="glyphicon glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+		</div>	
+	</div>
+
+	<!-- Activities Div linking to specific demo examples !-->
+	<div class="activityScreen col-xs-12 col-sm-12 col-lg-12">
+		<div class="activityWrapper">
+			<h2>Activity Header</h2>
+			<div class="activityContent">
+				<div class="textButtonWrapper">
+					<p>Text that describes what the demo is about</p>
+					<button class="btn btn-info">Click to Open</button>
+				</div>
+			</div>
+			<div class="activityImageWrapper">
+				<img src="static/images/davidDefault.png">
+			</div>
+		</div>
+	</div>
+
+	<!-- Testimonials !-->
+	<div class="testimonyScreen verticalCenter col-xs-12 col-sm-12 col-lg-12">
+		<div class="testimonyWrapper">
+			<h2>Teacher Testimonials</h2>
+			<div class="testimony testimonyLeft">
+				<div class="portrait"></div>
+				<p class="comment">EduSaga is so much better than sliced bread that I don't even buy sliced bread anyomre. Now I only eat bagels</p>
+				<div class="author">
+					<p class="name">Who knows</p>
+					<p class="location">Cherry Hill High School East</p>
+				</div>
+			</div>
+			<div class="testimony testimonyRight">
+				<div class="portrait"></div>
+				<p class="comment">I'm too lazy to wrap this text around the ellipse headshot right now btu that is what should happen in CSS</p>
+				<p class="author">Cool Teacher 123</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Sign up Page !-->
+	<div class="signupScreen verticalCenter col-xs-12 col-sm-12 col-lg-12">
+		<div class="signupWrapper">
+			<h3>SIGN UP <span> TO HEAR MORE. </span></h3>
+			<div class="signupText">
+				<p>We'll be launching in September 2016. If you're interested in staying in the loop or becoming an early beta tester of the product, please subscribe below and you'll be the first to know when stuff happens</p>
+			</div>
+				<form class="form-inline">
+				  <div class="form-group">
+				    <input type="email" class="form-control" id="signup" placeholder="learnlanguages@example.com">
+				  </div>
+				  <button type="submit" class="btn btn-default">Enter</button>
+				</form>	
+		</div>
 	</div>
 
 	<!-- Scripts !-->
-		<script>var demoLanguage = "{{ name }}"</script>	
-		<script src="static/js/viewHelper.js"></script>
-		<script src="static/js/tutorial.js"></script>
-		<script src="static/js/questionAsker.js"></script>
+	<script>
+		smoothScroll.init();
+	</script>
+
 
 
 </body>

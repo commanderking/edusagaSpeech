@@ -1,0 +1,391 @@
+$bgColorDefault: #61B3DB;
+$themeLightBlue: #C4DBEF;
+$themeYellow: #FDD870;
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
+.verticalCenter {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+}
+
+.nextArrow {
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	bottom: 2%;
+}
+
+// Top Landing Screen View
+
+.landingScreen {
+	background-color: $bgColorDefault;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	color: white;
+
+	.landingScreenContainer {
+		text-align: center;
+		width: 100%;
+		h2 {
+			margin: 0px;
+			font-size: 9vw;
+		}
+		p {
+			color: #C1E6FE;
+			font-size: 1.2em;
+			width: 30%;
+			margin: auto;
+		}
+	}
+	.btn-login {
+		position: absolute;
+		top: 1%;
+		right: 1%;
+		background-color: transparent;
+		color: white;
+		border: 1px solid white;
+		padding: 6px 18px;
+	}
+	.tryDemo {
+		text-align: center;
+		width: 100%;
+		position: absolute;
+		bottom: 2%;
+	}
+}
+
+.btn-signup {
+	border: 2px solid #F6D66E;
+	font-weight: bold;
+	font-size: 1.5em;
+	background-color: $bgColorDefault;
+	margin: 1%;
+	color: white;
+
+}
+
+// Demo Section CSS
+
+.demoScreen	 {
+	height: 100%;
+	padding: 0;
+	.demoContainer {
+		margin: auto;
+		width: 80%;
+		height: 80%;
+		background-image: url("http://i.huffpost.com/gen/2159432/images/o-EMPTY-CLASSROOM-facebook.jpg");
+		background-size: cover;
+	}
+}
+
+.demoHeader {
+	padding: 2%;
+	margin: 0px;
+	min-height: 75px;
+	height:25%;
+	position: absolute;
+	width: 80%;
+	background-color: $bgColorDefault;
+	opacity: 0.9;
+	h3 {
+		padding: 0;
+		margin: 0;
+		color: $themeYellow;
+	}
+	p {
+		color: white;
+		font-size: 2vw;
+	}
+	.demoContainer {
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.demoCharContainer {
+	position: absolute;
+	right: 10%;
+	width: 40%;
+	height: 80%;
+	img {
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.micWrapper {
+	position: absolute;
+	left: 12%;
+	top: 40%;
+	width: 60%;
+}
+
+.micTextPair {
+    border: 1px solid black;
+    display: inline-block;    
+    position: relative;    
+    height: 6vw;
+    text-align: center;
+    line-height: 6vw;
+    vertical-align: middle;
+}
+
+#mic {
+    min-width: 8vw;
+    min-height: 8vw;
+    border-radius: 50%;
+    background: $bgColorDefault;
+    z-index: 1;
+    border: 7px solid $themeLightBlue;
+    padding: 1.5% 0%;
+    span {
+    	font-size: 5vw;
+    	width: 100%;
+    	height: 100%;
+    }
+}
+#text {
+	font-size: 4vh;
+	font-weight: bold;
+	color: white;
+    width: 80%;
+    /* need to play with margin/padding adjustment
+       based on your desired "gap" */
+    padding-left: 40px;
+    margin-left: -40px;
+    /* real borders */
+    border: none;
+    border-radius: 5px;
+
+    /* the inverse circle "cut" */
+    background-image: -moz-radial-gradient(
+        -23px 50%, /* the -23px left position varies by your "gap" */
+        circle closest-corner, /* keep radius to half height */
+        transparent 0, /* transparent at center */
+        transparent 55px, /*transparent at edge of gap */
+        black 56px, /* start circle "border" */
+        grey 57px /* end circle border and begin color of rest of background */
+    );
+    background-color: $bgColorDefault;
+    opacity: 0.9;
+
+}
+
+
+// Features Section CSS
+
+.featuresScreen {
+	min-height: 100%;
+	background-color: $themeLightBlue;
+	text-align: center;
+
+	.feature {
+		margin-top: 2%;
+		margin-bottom: 2%;
+		width: 80%;
+		min-height: 150px;
+		height: 20%;
+		margin-left:10%;
+
+		.featureImage {
+			width: 30%;
+			display: inline-block;
+			margin-right: 5px;
+
+			img {
+				height: 100%;
+				width: 100%;
+			}
+		}
+
+		.featureText {
+			vertical-align: top;
+			width: 65%;
+			height: 100%;
+			display: inline-block;
+			background-color: $bgColorDefault;
+
+			h3 {
+				padding-left: 3%;
+				color: $themeYellow;
+			}
+
+			p {
+				color: white;
+				padding-left: 3%;
+			}
+		}
+	}
+
+	.btn-signup-lg {
+		border: 5px solid $themeYellow;
+		padding : 1%;
+		font-size: 3vw;
+		background-color: $bgColorDefault;
+		color: $themeYellow;
+		margin: 1%;
+	}
+}
+
+// CSS for link to activities demo 
+
+.activityScreen {
+	min-height: 100%;
+	background-color: white;
+	padding: 10px;
+
+	.activityWrapper {
+		width: 60%;
+		margin: auto;
+		padding: 10px;
+		position: relative;
+
+		h2 {
+			margin-left: 25%;
+		}
+
+		.activityContent {
+			min-height:150px;
+			height: 33%;
+			border: 5px solid $themeYellow;
+			width: 100%;
+			.textButtonWrapper {
+				width: 70%;
+				margin-left:30%;
+				padding: 3%;
+			}
+		}
+
+		.activityImageWrapper {
+			position: absolute;
+			top: 0px;
+			width: 25%;
+			height: 100%;
+			padding-bottom: 15px;
+			img {
+				height: 100%;
+				width: 100%;
+			}
+		}
+	}
+}
+
+
+
+// Testimony Screen
+
+
+.testimonyScreen {
+	min-height: 60%;
+	background-color: $bgColorDefault;
+
+	h2 {
+		color: white;
+	}
+	.testimonyWrapper {
+		text-align: center;
+		width: 70%;
+		margin-left: 15%;
+
+		.testimony {
+			vertical-align: top;
+			width: 35%;
+			min-height: 30%;
+			border: 2px solid white;
+			display: inline-block;
+			padding: 1%;
+			margin: 3%;
+
+			.comment {
+				color: white;
+				font-size: 1.1em;
+				padding: 10%;
+			}
+
+			.author {
+				color: $themeYellow;
+				text-align: right;
+				padding-right: 10%;
+				p {
+					text-align: right;
+					padding: 0px;
+					margin: 0px;
+					margin-left: 50%;
+					width: 50%;
+				}
+			}
+		}
+
+	}
+}
+
+
+// Signup Screen
+
+.signupScreen {
+	min-height: 100%;
+	text-align: center;
+
+	.signupWrapper {
+		width: 70%;
+		margin: auto;
+
+		h3 {
+			color: $bgColorDefault;
+			span {
+				color: $themeLightBlue;
+			}
+		}
+		.signupText { 
+			background-color: $bgColorDefault;
+			color: white;
+			width: 60%;
+			margin: auto;
+			padding: 20px;
+			border-radius: 5px;
+
+			p {
+				margin: auto;
+			}
+		}
+
+		.form-inline {
+			width: 60%;
+			margin: auto;
+			margin-top: 10px;
+			margin-bottom: 10px;
+
+			.form-group {
+				width: 73%;
+				display: inline-block;
+				input {
+					width: 100%;
+					border: 3px solid $themeYellow;
+					height: 40px;
+					
+					::placeholder {
+					color: $themeLightBlue;
+					}
+				}
+			}
+			button {
+				display: inline-block;
+				width: 25%;
+				height: 40px;
+				background-color: $themeYellow;
+				color: white;
+				font-weight: bold;
+			}
+		}
+
+	}
+}

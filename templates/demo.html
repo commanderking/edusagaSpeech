@@ -15,33 +15,51 @@
 
 </head>
 <body>
+	<!--
 	<div class="navbarTop col-md-12"><h3>Characters</h3>
 		<ul class="charList nav nav-pills">
 		</ul>
 	</div>
-	<div class="combinedTaskList col-md-3 col-sm-3 col-xs-3">
-		<ul class="taskList col-md-12 col-sm-12 col-xs-12 nav nav-pills nav-stacked">
+	!-->
+
+<div class="gameWrapper col-md-12 col-sm-12 col-xs-12">
+	<img class="sceneBG" src="../static/images/bg/shanghaiAirport.jpg">
+	<!-- Main Scene !-->
+	<div class="characterDialogueDiv col-md-12 col-sm-12 col-xs-12">
+		<div class="friendBanner">
+		</div>
+		<div class="playerMenuWrapper">
+			<span class="glyphicon glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+			<span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
+
+		</div>
+		<div class="responseNameWrapper col-md-8 col-sm-8 col-xs-8">
+			<div class="characterNameDiv">???
+			</div>
+			<div class="characterTextResponse">
+			</div>
+		</div>
+	</div>
+	<div class="sceneWrapper col-md-12 col-sm-12 col-xs-12">
+		<div class="characterDiv col-md-4">
+			<div class="characterImageDiv"></div>
+		</div>
+		<!--
+		<div class="characterDialogue"></div>
+		<button class="btn btn-info respondButton"><span class="icon-mic"><br></span>Speak</button>
+		!-->
+		<!-- Feedback !-->
+		<div class="feedback hidden"></div>
+	</div>
+
+	<!-- Task List !-->
+	<div class="combinedTaskList col-md-6 col-sm-6 col-xs-6">
+		<ul class="taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked">
 		</ul>
 		<ul class="completedTaskList col-md-12 col-sm-12 col-xs-12 hidden nav nav-pills nav-stacked">
 		</ul>
 		<button type="button" class="btn-skip btn btn-danger">Skip Current Questions</button>
 		<h4><a class="feedbackForm" target="_blank" href="http://goo.gl/forms/B7DG9Zjlnu45m56j1" style="margin-top: 5px"><h4>Feedback Survey</a></h4>
-	</div>
-
-	<!-- Main Scene !-->
-	<div class="sceneWrapper col-md-9 col-sm-9 col-xs-9">
-		<img class="sceneBG" src="../static/images/bg/shanghaiAirport.jpg">
-		<div class="characterDiv col-md-4">
-			<div class="characterImageDiv"></div>
-			<div class="characterNameDiv">???</div>
-		</div>
-
-		<div class="characterDialogue"></div>
-		<div class="characterTextResponse"></div>
-		<button class="btn btn-info respondButton"><span class="icon-mic"><br></span>Speak</button>
-	
-		<!-- Feedback !-->
-		<div class="feedback hidden"></div>
 	</div>
 
 	<!-- Tutorial related HTML !-->
@@ -52,12 +70,22 @@
 		<button class="btn btn-danger btn-endTutorial">End Tutorial</button>
 	</div>
 
-	<!-- Scenario Intro Related Div !-->
+	<!-- Scenario Intro Related Div. Pops up at beginning of scene !-->
 	<div class="scenarioWindow hidden">
 		<h3 class="scenarioHeader"></h3>
 		<p class="scenarioText"></p>
 		<button class="btn btn-success btn-confirm">Got it!</button>
 		<button class="btn btn-info btn-tutorial">Tutorial</button>
+	</div>
+
+	<!-- Bottom navigation Bar. !-->
+	<div class ="bottomNavBar">
+		<div class="row-fluid">
+			<div class="buttonLine">
+				<button class="btn btn-info">30%</button>
+				<p class="locationText">Airport 飞机场</p>
+			</div>
+		</div>
 	</div>
 
 	<!-- Help Related Modal Window !-->
@@ -81,6 +109,8 @@
 
 	  </div>
 	</div>
+
+</div>
 
 	<!-- Scripts !-->
 		<script>var demoLanguage = "{{ name }}"</script>

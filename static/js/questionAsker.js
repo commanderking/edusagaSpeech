@@ -349,24 +349,35 @@ var viewTaskList = {
 	render: function() {
 		var that = this;
 		if (octopusTasks.allTasksCompletedBool() === false) {
-			var htmlTaskList = "<h3>Tasks</h3>";
-			// taskComplete determines whether task background should be green
+			var htmlTaskList = "";
 			octopusTasks.getTasks().forEach(function(task, i) {
 				htmlTaskList += "<li class='inactiveLink' role='presentation' data-index='" + i +"'>";
-				htmlTaskList += "<a href='#'>" + task["task"];
-				htmlTaskList += "<span class='taskHelpIcon glyphicon glyphicon-question-sign' data-index='" + i +"' data-toggle='modal' data-target='#myModal' aria-haspopup='true' aria-expanded='true'></span></a>";
+				htmlTaskList += "<div class='taskDiv'><span class='icon-mic'></span>";
+				htmlTaskList += "<div class='taskText'>" +  task["task"] + "</div>";
+				htmlTaskList += "<a class='taskHelpIcon glyphicon glyphicon-question-sign' tabindex='0' role='button' data-trigger='click' data-toggle='popover' data-container='body' data-placement='bottom' data-content=' ' data-index='" + i + "'></a>";
 				htmlTaskList += "</li>";
 			});
 			this.taskList.html(htmlTaskList);
 
+			/* Activate speech mode when mic button is clicked
+			*/
+			$(".taskText").click(function() {
+				$(this).parent().children(".icon-mic").attr("style", "color: red");
+				testSpeech();
+				$(this).prop("disabled", true);
+			});
+
 			/* Populate Hint Modal Window with proper text when clicked */
-			$(".taskHelpIcon").click(function() {
+			$(".taskHelpIcon").popover(
+				{
+				});
+
+			$(".taskHelpIcon").on('shown.bs.popover', function() {
 				var dataIndex = $(this).attr('data-index');
 				var taskHelpHTML = "<div class='helpFillerText'> Maybe You Could Say: <span class='taskHelpSpeech'>" + octopusTasks.taskHelp(dataIndex) + "</span>";
 				taskHelpHTML += ' <span class="taskHelpSoundIcon glyphicon glyphicon glyphicon-volume-up" aria-hidden="true"></span>';
-				that.modalWindowBody.html(taskHelpHTML);
+				$(".popover-content").html(taskHelpHTML);
 
-				// When taskHelpSound icon clicked, the sound should play
 				$(".taskHelpSpeech, .taskHelpSoundIcon").click(function() {
 					var textToSay = $(".taskHelpSpeech").html();
 					console.log(textToSay);
@@ -380,7 +391,7 @@ var viewTaskList = {
 
 		// If completed tasks exist, render them
 		if (octopusTasks.completedTasksBool()) {
-			var htmlTaskList = "<h3>Completed Tasks</h3>";
+			var htmlTaskList = "<h3>Completed Tasks (已完成任务)</h3>";
 			octopusTasks.getCompletedTasks().forEach(function(task, i) {
 				if (task.correct === true) {
 					var htmlTaskClass = "correctTask";
@@ -503,7 +514,7 @@ var viewSpeakButton = {
 		});
 	},
 	restoreMic: function() {
-		this.micIcon.attr("style", "color: white");
+		this.micIcon.attr("style", "color: #000098");
 		this.respondButton.prop("disabled", false);
 	}
 };
@@ -559,15 +570,24 @@ var speechSynth = {
 
 		// Get current language
 		var lang = octopusCharacter.getCurrentLanguage();
-		console.log(lang);
 		var synthLang = "";
 
-		if (lang == "cmn-Hant-TW" || "zh-zh") {
+		if (lang == "es-es") {
+			synthLang = "Monica";
+		} else if (lang === "cmn-Hant-TW" || "zh-zh") {
 			// Ting-Ting is a specific Chinese voice in the voice array
 			synthLang = "Google 普通话（中国大陆）";
+			console.log(lang);
+		}
+		/*
+		if (lang === "cmn-Hant-TW" || "zh-zh") {
+			// Ting-Ting is a specific Chinese voice in the voice array
+			synthLang = "Google 普通话（中国大陆）";
+			console.log(lang);
 		} else if (lang == "es-es") {
 			synthLang = "Monica";
 		}
+		*/
 		console.log(synthLang);
 
 		var setVoice = function() {
@@ -681,4 +701,9 @@ var mediaConstraints = { audio: true };
 navigator.getUserMedia(mediaConstraints, onSuccess, onError);
 
 startDemo.init();
+
+// Enable Bootstrap Popovers
+$(function () {
+  $('[data-toggle="popover"]').popover();
+});
 
