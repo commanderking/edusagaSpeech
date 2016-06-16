@@ -154,4 +154,4 @@ viewTutorial = {
 	}
 };
 
-startTutorial.init();
+// startTutorial.init();

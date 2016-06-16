@@ -1,0 +1,271 @@
+$bgColorDefault: #61B3DB;
+$themeLightBlue: #C4DBEF;
+$themeYellow: #FDD870;
+
+.header {
+	width: 100%;
+	height: 15vh;
+	min-height: 15vh;
+	background-color: $bgColorDefault;
+	padding: 0px;
+	margin: 0px;
+	.titleDiv {
+		height: 100%;
+		width: 100%;
+		line-height: 15vh;
+		.title {
+			margin-left: 2%;
+			margin-right: 1%;
+			display: inline-block;
+			vertical-align: middle;
+			color: white;
+			font-size: 8vh;
+		}
+		.type {
+			font-size: 7vh;
+			display: inline-block;
+			vertical-align: middle;
+			color: $themeYellow;
+		}	
+	}
+}
+
+.foodWrapper {
+	width: 60%;
+	margin: auto;
+	height: 50%;
+	padding: 1%;
+	.arrow {
+		text-align: center;
+		width: 15%;
+		line-height: 50vh;
+		display: inline-block;
+		span {
+			background-color: $themeYellow;
+			color: white;
+			padding-top : 5px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			border-radius: 5px;
+			display: inline-block;
+			font-size: 8vh;
+			padding: 10px;
+		}
+	}
+	.imageWrapper {
+		width: 66%;
+		height: 100%;
+		display: inline-block;
+		img {
+			height: 100%;
+			width: 100%;
+		}
+	}
+}
+
+.inputWrapper {
+	height: 35%;
+	.micDiv {
+		width: 30%;
+		height: 100%;
+		text-align: center;
+		display: inline-block;
+		#mic {
+			margin: auto;
+		    min-width: 30vh;
+		    min-height: 30vh;
+		    border-radius: 50%;
+		    background: $bgColorDefault;
+		    z-index: 1;
+		    border: 10px solid $themeLightBlue;
+		    padding: 1%;
+		    span {
+		    	font-size: 15vh;
+		    	color: $themeYellow;
+		    	width: 100%;
+		    	height: 100%;
+		    }
+		}
+		.micWrap {
+			width: 10vw;
+			height: 10vw;
+			padding: 3%;
+		}
+	}
+
+	.inputDiv {
+		width: 50%;
+		height: 100%;
+		display: inline-block;
+		vertical-align: top;
+		h3 {
+			font-size: 6vh;
+			font-weight: bold;
+			color: $themeYellow;
+		}
+		.wrapper {
+			width: 100%;
+			.answerSlot {
+				border: 3px solid $themeYellow;
+				width: 75%;
+				height: 30%;
+				display: inline-block;
+				span {
+					font-size: 6vh;
+				}
+			}
+			.rightWrongSlot {
+				vertical-align: top;
+				text-align: center;
+				width: 23%;
+				height: 30%;
+				font-size: 10vh;
+				display: inline-block;
+				.glyphicon-ok {
+					color: green;
+				}
+				.glyphicon-remove {
+					color: red;
+				}
+			}
+		}
+		.triesGiveUp {
+			position: relative;
+			height: 30%;
+			width: 100%;
+			.tries {
+				position: absolute;
+				left: 0;
+				font-size:4vh;
+				color: $bgColorDefault;
+			}
+			.giveUp {
+				position: absolute;
+				right: 25%;
+				font-size: 3.5vh;
+				color: $themeLightBlue;
+			}
+		}
+	}
+	.scoreboard {
+		width: 18%;
+		margin-top: 3%;
+		display: inline-block;
+		vertical-align: top;
+		text-align:center;
+		h3 {
+			font-size: 5vh;
+			color: $bgColorDefault;
+			margin-bottom: 0px;
+		}
+		p {
+			font-size: 12vh;
+			color: $bgColorDefault;
+			.denominator {
+				font-size: 10vh;
+				color: $themeLightBlue;
+			}
+		}
+	}
+}
+
+
+// CSS for the Second Vocab Version
+
+.foodWrapper2 {
+	width: 80%;
+	margin: auto;
+	height: 60%;
+	padding: 1%;
+	.imageWrapper {
+		width: 25%;
+		height: 49%;
+		padding: 0.5%;
+		display: inline-block;
+		img {
+			height: 100%;
+			width: 100%;
+		}
+	}
+}
+
+.inputWrapper2 {
+	height: 25%;
+	width: 80%;
+	margin: auto;
+	.micDiv {
+		width: 20%;
+		height: 100%;
+		text-align: center;
+		display: inline-block;
+		#mic {
+			margin: auto;
+		    min-width: 20vh;
+		    min-height: 20vh;
+		    border-radius: 50%;
+		    background: $bgColorDefault;
+		    z-index: 1;
+		    border: 8px solid $themeLightBlue;
+		    padding: 1%;
+		    span {
+		    	font-size: 13vh;
+		    	color: $themeYellow;
+		    	width: 100%;
+		    	height: 100%;
+		    }
+		}
+		.micWrap {
+			width: 10vw;
+			height: 10vw;
+			padding: 3%;
+		}
+	}
+
+	.inputDiv {
+		width: 77%;
+		height: 100%;
+		display: inline-block;
+		vertical-align: top;
+		h3 {
+			font-size: 4vh;
+			font-weight: bold;
+			color: $themeYellow;
+			margin-top: 0px;
+		}
+		.wrapper {
+			width: 100%;
+			display: inline;
+			.answerSlot {
+				border: 3px solid $themeYellow;
+				width: 75%;
+				height: 50%;
+				display: inline-block;
+				span {
+					font-size: 6vh;
+				}
+			}
+		}
+		.scoreboard {
+			width: 18%;
+			display: inline-block;
+			vertical-align: top;
+			text-align:center;
+			h3 {
+				font-size: 5vh;
+				color: $bgColorDefault;
+				margin-bottom: 0px;
+			}
+			p {
+				margin: 10%;
+				font-size: 8vh;
+				color: $bgColorDefault;
+				line-height: 80%;
+				.denominator {
+					font-size: 6vh;
+					color: $themeLightBlue;
+				}
+			
+			}	
+		}
+	}
+}
