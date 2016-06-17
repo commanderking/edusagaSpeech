@@ -157,11 +157,11 @@ CSS Related to Task List
 	height: 55%;
 	position: absolute;
 	right: 10%;
-	overflow-y: hidden;
-	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 .combinedTaskList::-webkit-scrollbar {
+	display: none;
 	// width: 1em;
 	// background-color: darkgrey;
 	// outline: 1px solid slategrey;
