@@ -1,3 +1,5 @@
+SOUND_CONFIRM_PATH = "./static/audio/confirm/";
+
 var vocabData = {
 	'currentWordIndex' : 0,
 	'score' : 0,
@@ -43,6 +45,34 @@ var vocabData = {
 	]
 };
 
+var soundsData = {
+	'currentSoundIndex' : 0,
+	'sounds' :
+	[
+		{
+			'name' : 'confirm1.ogg'
+		},
+		{
+			'name' : 'confirm2.ogg'
+		},
+		{
+			'name' : 'confirm3.ogg'
+		},
+		{
+			'name' : 'confirm4.ogg'
+		},
+		{
+			'name' : 'confirm5.ogg'
+		},
+		{
+			'name' : 'confirm6.ogg'
+		},
+		{
+			'name' : 'confirm7.ogg'
+		}
+	]
+};
+
 var vocabController = {
 	// Returns array of all the vocab list objects
 	getAllVocabData: function() {
@@ -57,45 +87,25 @@ var vocabController = {
 	},
 	// Takes input from user and checks to see if they're correct; Updates view accordingly
 	checkWord: function(wordToCheck) {
+		var wordCorrect = false;
 		vocabController.getAllVocabData().forEach(function(vocab, i) {
 			if (wordToCheck == vocab.name) {
 				// Find corresponding div and check it off
+				viewVocab.renderCorrect(i);
+				vocabData.list[i].correct = true;
+				vocabData.score++;
+				viewScore.renderCorrect();
+				wordCorrect = true;
+			} else {
+				console.log("Word is checked ");
+				vocabData.list[vocabData.currentWordIndex].tries++;
 			}
-		})
-		if (wordToCheck == vocabController.getCurrentWord().name) {
-			// Change 'correct' in list to true
-			vocabData.list[vocabData.currentWordIndex].correct = true;
-			vocabData.score++;
-			return true;
-		} else {
-			vocabData.list[vocabData.currentWordIndex].tries++;
-			return false;
-		}
+		});
+		return wordCorrect;
 	},
 	getNumberQuestions: function() {
 		return vocabData.list.length;
 	},
-	nextVocab: function() {
-		// If at end of Vocab list, loop back, otherwise move to next one
-		if (vocabData.currentWordIndex >= vocabData.list.length - 1) {
-			vocabData.currentWordIndex = 0;
-		} else {
-			vocabData.currentWordIndex++;
-		}
-		viewVocab.render();
-		viewScore.renderOnNext();
-	},
-	// Returns true or false depending on whether user has already gotten the current word correct
-	previousVocab: function() {
-		if (vocabData.currentWordIndex <= 0 ) {
-			vocabData.currentWordIndex = vocabData.list.length - 1;
-		} else {
-			vocabData.currentWordIndex--;
-		}
-		viewVocab.render();
-		viewScore.renderOnNext();
-	},
-
 	// Checks if the current vocab is correct or not
 	currentVocabCorrect: function() {
 		console.log("currentVocabCorrect " + vocabData.list[vocabData.currentWordIndex].correct);
@@ -106,6 +116,16 @@ var vocabController = {
 	},
 	getTries: function() {
 		return vocabData.list[vocabData.currentWordIndex].tries;
+	}
+};
+
+var soundController = {
+	// returns array of all sounds
+	getAllSounds: function() {
+		return soundsData.sounds;
+	},
+	getCurrentSound: function() {
+		return soundsData.sounds[soundsData.currentSoundIndex];
 	}
 };
 
@@ -126,13 +146,19 @@ var viewVocab = {
 		var imagesHTML = '';
 		vocabController.getAllVocabData().forEach(function(vocabObject, i) {
 			imagesHTML += '<div class="imageWrapper" data-index="' + i + '">';
-			imagesHTML += '<img src="' + vocabObject.imgURL + '">';
+			imagesHTML += '<img class="foodImage" src="' + vocabObject.imgURL + '">';
 			imagesHTML += '</div>';
 		});
 		this.foodWrapper.html(imagesHTML);
 	},
 	// Renders fade when image is already correct
-	
+	renderCorrect: function(vocabIndex) {
+		console.log(vocabIndex);
+		// Get all the image array divs
+		var imageWrapperArray =  this.foodWrapper.children(".imageWrapper")[vocabIndex];
+		$(imageWrapperArray).children('.foodImage').addClass('faded');
+		$(imageWrapperArray).append('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>');
+	}
 };
 
 var viewScore = {
@@ -157,8 +183,11 @@ var viewScore = {
 		this.tries.html("Correctly Answered");
 	},
 	renderIncorrect: function() {
-		this.rightWrongSlot.html('<span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>');
-		this.tries.html("Tries: " + vocabController.getTries());
+		this.answerSlot.css("border", "5px solid red");
+		this.answerSlot.css("color", "red");
+	},
+	resetAnswerSlot: function() {
+		this.answerSlot.removeAttr('style');
 	},
 	// Renders when the player hits previous or next button
 	renderOnNext: function() {
@@ -181,6 +210,7 @@ var viewMic = {
 		this.mic = $(".micWrap");
 		this.mic.click(function() {
 			viewMic.activeMic();
+			viewScore.resetAnswerSlot();
 			testSpeech();
 		});
 	},
@@ -194,9 +224,23 @@ var viewMic = {
 	},
 	hideMic: function() {
 		this.mic.addClass("hidden");
+	}
+};
+
+var soundPlayer = {
+	// Get all the character sounds and initialize them into a createjs array
+	init: function() {
+		soundController.getAllSounds().forEach(function(soundName) {
+			createjs.Sound.registerSound(SOUND_CONFIRM_PATH + soundName.name, soundName.name);
+			console.log(soundName);
+			console.log(SOUND_CONFIRM_PATH + soundName.name);
+		});
 	},
-	revealMic: function() {
-		this.mic.removeClass("hidden");
+
+	// Called to play the Current Sound stored in the data
+	playCurrentSound: function() {
+		createjs.Sound.play(soundController.getCurrentSound().name);
+		console.log(soundController.getCurrentSound().name);
 	}
 };
 
@@ -226,7 +270,6 @@ function testSpeech() {
 		// The second [0] returns the SpeechRecognitionAlternative at position 0.
 		// We then return the transcript property of the SpeechRecognitionAlternative object 
 		var speechResult = event.results[0][0].transcript;
-		console.log(event.results[0][0].transcript);
 		viewScore.renderInterimText(event.results[0][0].transcript);
 
 		// Check task only when the speech input has been finalized
@@ -234,9 +277,11 @@ function testSpeech() {
 		// Logic of check is in the octopusTasks Controller
 		if (event.results[0].isFinal) {
 			if (vocabController.checkWord(speechResult)) {
-				viewMic.hideMic();
+				console.log("correct");
 				viewScore.renderCorrect();
+				soundPlayer.playCurrentSound();
 			} else {
+				console.log("incorrect");
 				viewScore.renderIncorrect();
 
 			}
@@ -266,3 +311,4 @@ viewVocab.init();
 viewScore.init();
 viewMic.init();
 viewVocab.render();
+soundPlayer.init();

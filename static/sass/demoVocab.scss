@@ -2,6 +2,15 @@ $bgColorDefault: #61B3DB;
 $themeLightBlue: #C4DBEF;
 $themeYellow: #FDD870;
 
+.faded {
+	opacity: 0.5;
+}
+
+.wrongAnswer {
+	border: 5px solid red;
+	font-color: red;
+}
+
 .header {
 	width: 100%;
 	height: 15vh;
@@ -148,7 +157,7 @@ $themeYellow: #FDD870;
 		}
 	}
 	.scoreboard {
-		width: 18%;
+		width: 23%;
 		margin-top: 3%;
 		display: inline-block;
 		vertical-align: top;
@@ -178,6 +187,7 @@ $themeYellow: #FDD870;
 	height: 60%;
 	padding: 1%;
 	.imageWrapper {
+		position: relative;
 		width: 25%;
 		height: 49%;
 		padding: 0.5%;
@@ -185,6 +195,13 @@ $themeYellow: #FDD870;
 		img {
 			height: 100%;
 			width: 100%;
+		}
+		span {
+			position: absolute;
+			font-size: 10vh;
+			top: 8vh;
+			left : 8vw;
+			color: green;
 		}
 	}
 }

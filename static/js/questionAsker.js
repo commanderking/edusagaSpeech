@@ -579,15 +579,6 @@ var speechSynth = {
 			synthLang = "Google 普通话（中国大陆）";
 			console.log(lang);
 		}
-		/*
-		if (lang === "cmn-Hant-TW" || "zh-zh") {
-			// Ting-Ting is a specific Chinese voice in the voice array
-			synthLang = "Google 普通话（中国大陆）";
-			console.log(lang);
-		} else if (lang == "es-es") {
-			synthLang = "Monica";
-		}
-		*/
 		console.log(synthLang);
 
 		var setVoice = function() {

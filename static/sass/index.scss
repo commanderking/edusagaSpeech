@@ -1,6 +1,7 @@
 $darkBlue : #098ED0;
 $darkerBlue: #205BA0;
 $lightBlue : #38C6F3;
+$borderBlue: #174D9E;
 $yellow : #F3EC29;
 
 .verticalCenter {
@@ -156,7 +157,7 @@ CSS Related to Task List
 	height: 55%;
 	position: absolute;
 	right: 10%;
-	overflow-y: scroll;
+	overflow-y: hidden;
 	overflow-x: hidden;
 }
 
@@ -182,8 +183,13 @@ CSS Related to Task List
 	margin: 20px 0px;
 	background-color: #047FC5;
 	background: linear-gradient(82deg, #38C6F3, #057FC5 80%, #098ED0);
-	border-radius: 15px;
+	border-radius: 25px;
 	box-shadow: 5px 5px 10px black;
+	border-style: outset;
+	border-bottom: 3px solid $borderBlue;
+	border-top: 3px solid $lightBlue;
+	border-left: 1px solid $borderBlue;
+	border-right: 1px solid $borderBlue;
 	.icon-mic {
 		color: #000098;
 		position: absolute;

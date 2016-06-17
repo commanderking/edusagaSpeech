@@ -3,12 +3,16 @@
 
 viewFadeAll = {
 	init: function() {
+		this.characterDialogueDiv = $(".characterDialogueDiv");
+		this.sceneBG = $(".sceneBG");
+		this.characterDiv = $(".characterDiv");
 		this.taskList = $(".combinedTaskList");
 		this.sceneWrapper = $(".sceneWrapper");
 		this.respondButton = $(".respondButton");
 		this.navbarTop = $(".navbarTop");
+		this.bottomNavbar = $(".bottomNavbar");
 
-		this.nonTutorialUI = [this.taskList, this.sceneWrapper, this.navbarTop];
+		this.nonTutorialUI = [this.characterDialogueDiv, this.sceneBG, this.taskList, this.sceneWrapper, this.navbarTop, this.bottomNavbar];
 
 	},
 	render: function() {
@@ -23,6 +27,10 @@ viewFadeAll = {
 		this.nonTutorialUI.forEach(function(element){
 			element.removeClass("faded").removeClass("disabled");
 		})
+
+		this.characterDialogueDiv.removeClass("hidden");
+		this.characterDiv.removeClass("hidden");
+		this.taskList.removeClass("hidden");
 	}
 }
 
