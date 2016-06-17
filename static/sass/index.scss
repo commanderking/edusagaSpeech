@@ -65,7 +65,7 @@ $yellow : #F3EC29;
 	background: linear-gradient(#39C7F4, #057FC5 50%);
 	span {
 		padding: 2px;
-		font-size: 1.5em;
+		font-size: 1.6vw;
 		color: $yellow;
 	}
 }
@@ -249,6 +249,7 @@ CSS Related to Task List
 	font-weight: bold;
 	border-radius: 15px;
 	padding: 12px;
+	box-shadow: 5px 5px 10px rgba(1,1,1,.5);
 }
 
 .popover {
