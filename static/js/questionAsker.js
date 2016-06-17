@@ -467,6 +467,7 @@ var viewSceneIntro = {
 		});
 
 		// Hide button if tutorial button not present, otherwise add functionality
+		/*
 		if (octopusTutorial.checkTutorialOn() === false) {
 			this.scenarioWindow.children(".btn-tutorial").addClass("hidden");
 		} else {
@@ -475,7 +476,7 @@ var viewSceneIntro = {
 				viewTutorial.render();
 				that.scenarioWindow.addClass("hidden");
 			});
-		}
+		}*/
 
 		// Fade all other elements to highlight scene explanation window
 		viewFadeAll.render();
