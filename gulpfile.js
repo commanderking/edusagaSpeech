@@ -9,7 +9,8 @@ gulp.task('default', ['styles', 'lint'], function() {
 	gulp.watch('./static/sass/**/*.scss', ['styles']);
 	gulp.watch('./static/js/**/*.scss', ['lint']);
 	browserSync.init({
-		proxy: '127.0.0.1:5000'
+		proxy: '127.0.0.1:5000',
+		online: true
 	});
 	console.log("hello gulp!");
 });
