@@ -2,11 +2,39 @@
 TODO: Preload background and character images
 */
 
+// Generate GUID
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
+
+
 var SOUND_BASE_PATH = './static/audio/';
 var IMAGE_BASE_PATH = "./static/images/";
 var bgIMAGE_BASE_PATH = "./static/images/bg/";
 
 var charTaskData = [];
+
+// Template for Log Data
+var logDataTemplate = {
+	'userID' : '',
+	'dialogID' : '',
+	'nodeID' : '',
+	'timeStamp' : '',
+	'eventType' : '',
+	'response' : ''
+};
+
+// Should be removed when userID and dialogID are generated
+logDataTemplate.userID = guid();
+logDataTemplate.dialogID = 0;
+
 var speechSynthData =
 {
 	"rate" : "",
@@ -92,7 +120,7 @@ var octopusTasks = {
 	// Checks whether there are any completed tasks
 	completedTasksBool: function() {
 		if (charTaskData.characterProfiles[charTaskData.currentCharacter].completedTasks.length > 0) {
-			return true; 
+			return true;
 		} else {
 			return false;
 		}
@@ -113,6 +141,8 @@ var octopusTasks = {
 	// Checks question to see if the question is in the list of possible questions and returns appropriate response
 	checkTask: function(userInput) {
 		var correctQuestion = false;
+		// nodeID of task needed for log data
+		var nodeID = 0;
 		var returnedObject =
 		{
 			"response" : "",
@@ -125,6 +155,7 @@ var octopusTasks = {
 				// If there's a match, set appropriate variables to render
 				if (task.possibilities[j].toLowerCase() == userInput) {
 					correctQuestion = true;
+					nodeID = task.dialogNodeID;
 					returnedObject.response = task.response;
 					returnedObject.feedback = null;
 					task.correct = true;
@@ -164,8 +195,23 @@ var octopusTasks = {
 				}
 			}
 		});
+
+		// Post Log Event Data
+		var logEvent = logDataTemplate;
+		logEvent.timeStamp = new Date();
+		logEvent.nodeID = nodeID;
+		logEvent.response = userInput;
+		logEvent.eventType = "click";
+		console.log(logEvent);
+		logEvent = JSON.stringify(logEvent);
+		$.ajax({
+			url: "/log",
+			type: "POST",
+			data: logEvent, 
+			dataType: "json"
+		});
+
 		if (correctQuestion === true) {
-			// render updated task list
 			return returnedObject;
 		}
 		// In case of wrong response, store data accordingly
@@ -389,6 +435,8 @@ var viewTaskList = {
 			this.taskList.html("");
 		}
 
+		//TODO: Currently don't render completd task list
+		/*
 		// If completed tasks exist, render them
 		if (octopusTasks.completedTasksBool()) {
 			var htmlTaskList = "<h3>Completed Tasks (已完成任务)</h3>";
@@ -408,7 +456,7 @@ var viewTaskList = {
 		}
 		else {
 			this.completedTaskList.addClass("hidden");
-		}
+		}*/
 
 		// Skip button - remove any previous listeners and add new one
 		this.btnSkip.unbind('click');

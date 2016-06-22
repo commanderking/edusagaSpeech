@@ -109,6 +109,7 @@
 					"soundID" : "nihao",
 					"soundPath" : "david/nihao.ogg",
 					"emotion" : "laughing",
+					"dialogNodeID" : 1,
 					"extensionTasks" : []
 				},
 				{
@@ -118,6 +119,7 @@
 					"response" : "非常好!",
 					"soundID" : "feichanghao",
 					"emotion" : "laughing",
+					"dialogNodeID" : 2,
 					"extensionTasks" : 
 					[
 						{
@@ -127,6 +129,7 @@
 							"response" : "我叫张大伟.",
 							"soundID" : "wojiao",
 							"soundPath" : "david/wojiao.ogg",
+							"dialogNodeID" : 3,
 							"emotion" : "default"
 						},
 						{
@@ -136,6 +139,7 @@
 							"response" : "我是中国人.",
 							"soundID" : "nationality",
 							"soundPath" : "david/nationality.ogg",
+							"dialogNodeID" : 4,
 							"emotion" : "default"
 						}, 
 						{
@@ -146,6 +150,7 @@
 							"soundID" : "age",
 							"soundPath" : "david/age.ogg",
 							"emotion" : "default",
+							"dialogNodeID" : 5,
 							"extensionTasks" : 
 							[
 								{
@@ -155,6 +160,7 @@
 									"response" : "我平常走路去上学.",
 									"soundID" : "gotoSchool",
 									"soundPath" : "david/gotoSchool.ogg",
+									"dialogNodeID" : 6,
 									"emotion" : "default"
 								},
 								{
@@ -164,6 +170,7 @@
 									"response" : "我属龙.",
 									"soundID" : "zodiac",
 									"soundPath" : "david/zodiac.ogg",
+									"dialogNodeID" : 7,
 									"emotion" : "default"
 								}
 							]
@@ -176,6 +183,7 @@
 							"soundID" : "foodLikes",
 							"soundPath" : "david/foodLikes.ogg",
 							"emotion" : "laughing",
+							"dialogNodeID" : 8,
 							"extensionTasks" : 
 							[
 								{
@@ -188,6 +196,7 @@
 									"soundID" : "zhenbang",
 									"soundPath" : "david/zhenbang.ogg",
 									"emotion" : "laughing", 
+									"dialogNodeID" : 9,
 									"extensionTasks" : []
 								},
 								{
@@ -199,6 +208,7 @@
 									"response" : "真的吗? 牛肉面非常好吃!",
 									"soundID" : "zhende",
 									"soundPath" : "david/zhende.ogg",
+									"dialogNodeID" : 10,
 									"emotion" : "laughing"		
 								}, 
 								{
@@ -209,6 +219,7 @@
 									"soundID" : "favoriteDrink",
 									"soundPath" : "david/favoriteDrink.ogg",
 									"emotion" : "laughing",
+									"dialogNodeID" : 11,
 									"extensionTasks" : 	
 									[
 										{
@@ -219,6 +230,7 @@
 											"soundID" : "sportsLikes",
 											"soundPath" : "david/sportsLikes.ogg",
 											"emotion" : "laughing",
+											"dialogNodeID" : 12,
 											"extensionTasks" : []						
 										},
 										{
@@ -229,6 +241,7 @@
 											"soundID" : "seasonLikes",
 											"soundPath" : "david/seasonLikes.ogg",
 											"emotion" : "default",
+											"dialogNodeID" : 13,
 											"extensionTasks" : 	[]		
 										}
 									]

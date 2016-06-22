@@ -171,7 +171,7 @@
 								},
 								{
 									"task" : "Ask how many family members she has",
-									"possibilities" : ["你的家有幾口人", "您的家有藉口人", "你家有藉口人"],
+									"possibilities" : ["你的家有幾口人", "您的家有幾口人", "你家有幾口人"],
 									"correct" : false,
 									"response" : "我家有五口人.",
 									"soundID" : "familyCount",
