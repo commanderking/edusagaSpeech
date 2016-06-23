@@ -535,7 +535,6 @@ var viewCharacterResponse = {
 	init: function() {
 		//textResponse starts off hidden until rendered
 		this.textResponse = $(".characterTextResponse");
-		$(".characterTextResponse").hide();
 	},
 
 	renderTextResponse: function(textToRender) {

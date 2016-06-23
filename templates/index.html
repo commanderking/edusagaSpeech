@@ -7,13 +7,13 @@
 	<link rel="stylesheet" href="static/css/icons.css">
 	<link rel="stylesheet" href="static/css/landingPage.css">
 	<link rel="stylesheet" href="static/css/tutorial.css">
+	<link rel="stylesheet" href="static/css/index.css">
 
 	<script src="static/js/smooth-scroll.min.js"></script>
-	<script src="static/js/jquery-3.0.0.min.js"></script>
-	<!--
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-	<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script></head>
-	!-->
+	<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
 
 
 </head>
@@ -27,12 +27,104 @@
 		</div>
 		<div class="landingScreenContainer">
 			<h2>EDUSAGA</h2>
-			<p>Enbaling world language educators to create and share interactive speaking activities</p>
+			<p>Enabling world language educators to create and share interactive speaking activities</p>
 			<a data-scroll href="#signup"><button class="btn btn-signup">SIGN UP</button></a>
 		</div>
 	</div>
 
 	<!-- Demo Div !-->
+	<div class="demoScreen verticalCenter col-xs-12 col-sm-12 col-lg-12">
+		<div class="demoContainer gameWrapper col-md-12 col-sm-12 col-xs-12">
+			<!-- Main Scene !-->
+			<div class="characterDialogueDiv hidden col-md-12 col-sm-12 col-xs-12">
+				<div class="friendBanner">
+				</div>
+				<!--
+				<div class="playerMenuWrapper">
+					<span class="glyphicon glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
+
+				</div>
+				!-->
+				<div class="responseNameWrapper col-md-8 col-sm-8 col-xs-8">
+					<div class="characterNameDiv">???
+					</div>
+					<div class="characterTextResponse" style="font-size: 1.7vw">
+						Click the mic and say "Nǐ hǎo"! Or click the question mark for a hint on how to pronounce it.
+					</div>
+				</div>
+			</div>
+			<div class="sceneWrapper col-md-12 col-sm-12 col-xs-12">
+				<div class="characterDiv hidden col-md-4">
+					<div class="characterImageDiv"></div>
+				</div>
+				<!--
+				<div class="characterDialogue"></div>
+				<button class="btn btn-info respondButton"><span class="icon-mic"><br></span>Speak</button>
+				!-->
+				<!-- Feedback !-->
+				<div class="feedback hidden"></div>
+			</div>
+
+			<!-- Task List !-->
+			<div class="combinedTaskList hidden col-md-6 col-sm-6 col-xs-6">
+				<ul class="taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked">
+				</ul>
+				<ul class="completedTaskList col-md-12 col-sm-12 col-xs-12 hidden nav nav-pills nav-stacked">
+				</ul>
+			</div>
+
+			<!-- Tutorial related HTML !-->
+			<div class="tutorialWindow hidden">
+				<h3 class="tutorialHeader"></h3>
+				<p class="tutorialText"></p>
+				<button class="btn btn-success btn-confirm">Next</button>
+				<button class="btn btn-danger btn-endTutorial">End Tutorial</button>
+			</div>
+
+			<!-- Scenario Intro Related Div. Pops up at beginning of scene !-->
+			<div class="scenarioWindow hidden">
+				<h3 class="scenarioHeader"></h3>
+				<p class="scenarioText"></p>
+				<button class="btn btn-success btn-confirm">Got it!</button>
+				<!--<button class="btn btn-info btn-tutorial">Tutorial</button>!-->
+			</div>
+
+			<!-- Bottom navigation Bar. !-->
+			<div class ="bottomNavBar">
+				<div class="row-fluid">
+					<div class="buttonLine">
+						<button class="btn btn-info"></button>
+						<p class="locationText">Classroom 教室</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Help Related Modal Window !-->
+
+			<div id="myModal" class="modal fade" role="dialog">
+			  <div class="modal-dialog contact">
+
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Robot Helper</h4>
+			      </div>
+			      <div class="modal-body">
+
+		   		  </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+
+			  </div>
+			</div>
+
+		</div>
+	</div>
+	<!--
 	<div class="demoScreen verticalCenter col-xs-12 col-sm-12 col-lg-12">
 		<div class="demoContainer">
 			<div class="demoHeader">
@@ -51,6 +143,7 @@
 			<span class="glyphicon glyphicon glyphicon-menu-down" aria-hidden="true"></span>
 		</div>
 	</div>
+	!-->
 
 	<!-- Features Div !-->
 
@@ -58,32 +151,37 @@
 		<h3>Try Interactive Activities Created by EduSaga</h3>
 		<div class ="feature">
 			<div class="featureImage">
-				<img src="static/images/index/demoTina.png">
+				<a href="demoChinese3"><img src="static/images/index/demoTina.png"></a>
 			</div>
 			<div class="featureText">
 				<h4>Ordering at a Fast Food Restaurant</h4>
-				<p>Ask about what the restaurant has, the price of different foods, and finally order something at this fast food restaurant scenario.</p>
+				<p>Scenario: Ask about what the restaurant has, the price of different foods, and finally order something at this fast food restaurant scenario.</p>
 				<p>Key Phrases: 你有没有...? 几块钱?, 来一个／我要一个</p> 
+				<a href="demoChinese3"><button class="btn btn-tryDemo">Start Speaking!</button></a>
 			</div>
 		</div>
 		<div class ="feature">
 			<div class="featureText">
 				<h4>Meeting a New Friend</h4>
-				<p>In this scene, you meet David, someone who you met at the airport and who will be attending a Chinese langauge program with you. You want to learn as much about him as possible.</p>
+				<p>Scenario: In this scene, you meet David, someone who you met at the airport and who will be attending a Chinese langauge program with you. You want to learn as much about him as possible.</p>
 				<p>Key Phrases: 你是哪里人, 你几岁, 你属什么, 你喜欢...? </p>
+				<a href="demoChinese"><button class="btn btn-tryDemo">Start Speaking!</button></a>
 			</diV>
 			<div class="featureImage">
-				<img src="static/images/index/demoDavid.png">
+				<a href="demoChinese"><img src="static/images/index/demoDavid.png"></a>
 			</div>
 		</div>
 		<div class ="feature">
 			<div class="featureImage">
-				<img src="static/images/index/demoLinda.png">
+				<a href="demoChinese2"><img src="static/images/index/demoLinda.png"></a>
 			</div>
 			<div class="featureText">
 				<h4>Asking about Family Members</h4>
-				<p>You and Linda have just met</h3>
-			</diV>
+				<p>Scenario: You and Linda have just met and you're curious to learn more about her family.</p>
+				<p>Key Phrases: 你家有几口人?, 你的妈妈是哪里人?, 你的爸爸几岁?</p>
+				<a href="demoChinese2"><button class="btn btn-tryDemo">Start Speaking!</button></a>
+
+			</div>
 		</div>
 		<!--
 		<a data-scroll href="#signup"><button class="btn btn-signup-lg">SIGN UP</button></a>
@@ -154,8 +252,11 @@
 	<script>
 		smoothScroll.init();
 	</script>
-	<script src="./static/js/index.js"></script>
+	<script>var demoLanguage = "{{ name }}"</script>
 
+	<script src="static/js/viewHelper.js"></script>
+	<!--<script src="static/js/tutorial.js"></script>!-->
+	<script src="static/js/questionAsker.js"></script>
 
 
 </body>

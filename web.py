@@ -12,7 +12,7 @@ app = Flask (__name__)
 
 
 @app.route('/')
-def index(name=None):
+def index(name="Index"):
 	return render_template('index.html', name=name)
 
 @app.route('/demoChinese')

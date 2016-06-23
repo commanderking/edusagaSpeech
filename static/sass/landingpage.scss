@@ -197,7 +197,7 @@ html, body {
 		margin-top: 2%;
 		margin-bottom: 2%;
 		width: 70%;
-		min-height: 170px;
+		min-height: 200px;
 		height: 20%;
 		margin-left:15%;
 
@@ -219,6 +219,7 @@ html, body {
 			display: inline-block;
 			text-align: left;
 			background-color: $bgColorDefault;
+			overflow: scroll;
 
 			h4 {
 				padding-left: 3%;
@@ -228,6 +229,14 @@ html, body {
 			p {
 				color: white;
 				padding-left: 3%;
+			}
+
+			button {
+				color: $themeYellow;
+				background-color: $bgColorDefault;
+				border: 2px solid $themeYellow;
+				width: 60%;
+				margin-left: 20%;
 			}
 		}
 	}
