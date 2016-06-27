@@ -1,0 +1,133 @@
+<html>
+<head>
+	<title>EduSaga - Speech</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="static/css/icons.css">
+	<link rel="stylesheet" href="static/css/index.css">
+	<link rel="stylesheet" href="static/css/tutorial.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+	<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script></head>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+	<!--
+	<div class="navbarTop col-md-12"><h3>Characters</h3>
+		<ul class="charList nav nav-pills">
+		</ul>
+	</div>
+	!-->
+
+<div class="gameWrapper col-md-12 col-sm-12 col-xs-12">
+	<img class="sceneBG" src="../static/images/bg/shanghaiAirport.jpg">
+	<!-- Main Scene !-->
+	<div class="characterDialogueDiv hidden col-md-12 col-sm-12 col-xs-12">
+		<div class="friendBanner">
+		</div>
+		<div class="playerMenuWrapper">
+			<span class="glyphicon glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+			<span class="glyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span>
+
+		</div>
+		<div class="responseNameWrapper col-md-8 col-sm-8 col-xs-8">
+			<div class="characterNameDiv">???
+			</div>
+			<div class="characterTextResponse">
+			</div>
+		</div>
+	</div>
+	<div class="sceneWrapper col-md-12 col-sm-12 col-xs-12">
+		<div class="characterDiv hidden col-md-4">
+			<div class="characterImageDiv"></div>
+		</div>
+		<!--
+		<div class="characterDialogue"></div>
+		<button class="btn btn-info respondButton"><span class="icon-mic"><br></span>Speak</button>
+		!-->
+		<!-- Feedback !-->
+		<div class="feedback hidden"></div>
+	</div>
+
+	<!-- Task List !-->
+	<div class="combinedTaskList hidden col-md-6 col-sm-6 col-xs-6">
+		<ul class="taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked">
+		</ul>
+		<ul class="completedTaskList col-md-12 col-sm-12 col-xs-12 hidden nav nav-pills nav-stacked">
+		</ul>
+		<button type="button" class="btn-skip btn btn-danger">Skip Current Questions</button>
+		<h4><a class="feedbackForm" target="_blank" href="http://goo.gl/forms/B7DG9Zjlnu45m56j1" style="margin-top: 5px"><h4>Feedback Survey</a></h4>
+	</div>
+
+	<!-- Tutorial related HTML !-->
+	<div class="tutorialWindow hidden">
+		<h3 class="tutorialHeader"></h3>
+		<p class="tutorialText"></p>
+		<button class="btn btn-success btn-confirm">Next</button>
+		<button class="btn btn-danger btn-endTutorial">End Tutorial</button>
+	</div>
+
+	<!-- Scenario Intro Related Div. Pops up at beginning of scene !-->
+	<div class="scenarioWindow hidden">
+		<h3 class="scenarioHeader"></h3>
+		<p class="scenarioText"></p>
+		<button class="btn btn-success btn-confirm">Got it!</button>
+		<!--<button class="btn btn-info btn-tutorial">Tutorial</button>!-->
+	</div>
+
+	<!-- Bottom navigation Bar. !-->
+	<div class ="bottomNavBar">
+		<div class="row-fluid">
+			<div class="buttonLine">
+				<button class="btn btn-info">30%</button>
+				<p class="locationText">Airport 飞机场</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Help Related Modal Window !-->
+
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog contact">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Robot Helper</h4>
+	      </div>
+	      <div class="modal-body">
+
+   		  </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+
+</div>
+
+	<!-- Scripts !-->
+		<script>var demoLanguage = "{{ name }}"</script>
+		<script src="static/js/viewHelper.js"></script>
+		<!--<script src="static/js/tutorial.js"></script>!-->
+		<script src="static/js/questionAsker.js"></script>
+	<!-- Google Analytics !-->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-78617015-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+</body>
+
+</html>

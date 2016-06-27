@@ -3,6 +3,21 @@ $themeLightBlue: #C4DBEF;
 $themeYellow: #FDD870;
 $themeDarkBlue: #205BA0;
 
+$mobile: "(max-width: 480px)";
+$mobileLandscape: "(min-width : 481px) and (max-width: 768px)";
+$tablet: "(min-width: 768px) and (max-width: 1023px)";
+
+$mobileWidth: 480px;
+$tabletWidth: 768px;
+$desktopWidth: 1024px;
+
+@mixin mobile {
+	@media (max-width: #{$mobileWidth}) {
+		@content;
+	}
+}
+
+
 html, body {
     width: 100%;
     height: 100%;
@@ -46,7 +61,7 @@ html, body {
 		p {
 			color: white;
 			text-shadow: 0.5px 0.5px black;
-			font-size: 2.2vw;
+			font-size: 3.5vmin;
 			width: 45%;
 			margin: auto;
 		}
@@ -85,6 +100,7 @@ html, body {
 
 .demoScreen	 {
 	height: 100%;
+	min-height: 500px;
 	padding: 0;
 	.demoContainer {
 		margin: auto;
@@ -197,6 +213,13 @@ html, body {
 	text-align: center;
 	padding: 0px;
 
+	@media #{$mobile} {
+		background-color: black;
+	}
+	@media #{$tablet} {
+		font-size: 18px;
+	}
+
 	.feature {
 		margin-top: 2%;
 		margin-bottom: 2%;
@@ -204,22 +227,23 @@ html, body {
 		min-height: 200px;
 		height: 20%;
 		margin-left:12.5%;
+		background-color: $bgColorDefault;
 
 		.featureImage {
 			width: 35%;
 			display: inline-block;
-			margin-right: 5px;
 
 			img {
 				height: 100%;
 				width: 100%;
+				border: 10px solid $bgColorDefault;
 			}
 		}
 
 		.featureText {
 			position: relative;
 			vertical-align: top;
-			width: 60%;
+			width: 63%;
 			height: 100%;
 			display: inline-block;
 			text-align: left;
@@ -229,16 +253,17 @@ html, body {
 			.textWrapper {
 				height: 80%;
 				overflow: scroll;
+				padding-left: 2%;
+				padding-right: 2%;
 			}
 
-			h4 {
-				padding-left: 3%;
+			h3 {
 				color: $themeDarkBlue;
 			}
 
 			p {
 				color: white;
-				padding-left: 3%;
+				font-size: 1.1em;
 				margin: 0 0 5px;
 				span {
 					font-weight: bold;
@@ -324,7 +349,6 @@ html, body {
 		}
 	}
 }
-
 
 
 // Testimony Screen
