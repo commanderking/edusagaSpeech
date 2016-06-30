@@ -96,8 +96,8 @@
 							"extensionTasks" : 
 							[
 								{
-									"task" : "Ask whether they have spring rolls",
-									"possibilities" : ["你有没有春卷", "你门有没有春卷", "我们买春卷吗", "你有春卷吗", "你们有春卷吗"],
+									"task" : "Ask whether they have beef noodles",
+									"possibilities" : ["你有没有牛肉面", "你门有没有牛肉面", "我们买牛肉面吗", "你有牛肉面吗", "你们有牛肉面吗"],
 									"correct" : "false",
 									"response" : "不好意思, 我们只有汉堡和薯条.",
 									"soundID" : "onlyBurgersAndFries",

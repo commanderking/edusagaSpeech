@@ -213,7 +213,7 @@
 								}, 
 								{
 									"task" : "Ask what is his favorite drink",
-									"possibilities" : ["你最喜欢喝什么"],
+									"possibilities" : ["你最喜欢喝什么", "你最喜欢喝什么饮料", "你喜欢喝什么"],
 									"correct" : "false",
 									"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
 									"soundID" : "favoriteDrink",

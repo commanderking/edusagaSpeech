@@ -102,6 +102,7 @@ $yellow : #F3EC29;
 
 .gameWrapper {
 	padding: 0px;
+	background: rgba(1,1,1,0.1);
 	.sceneBG {
 		position: absolute;
 		left: 0;
@@ -109,6 +110,8 @@ $yellow : #F3EC29;
 		width: 100%;
 		height: 100%;
 		z-index: -1;
+		-webkit-filter: blur(3px);
+		filter: blur (3px);
 	}
 }
 
@@ -136,10 +139,19 @@ $yellow : #F3EC29;
 .feedback {
 	position: absolute;
 	bottom: 0;
+	right: 0;
 	padding : 1%;
-	font-size: 5vh;
+	font-size: 4vw;
 	background-color: lightgray;
 	border-radius: 10px;
+	z-index: 100;
+	span {
+		font-weight: bold;
+		color: $darkBlue;
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }
 
 .respondButton {

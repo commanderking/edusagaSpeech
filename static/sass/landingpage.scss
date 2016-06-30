@@ -87,13 +87,12 @@ html, body {
 	border: 2px solid #F6D66E;
 	font-weight: bold;
 	font-size: 1.5em;
-	background-color: transparent;
+	background-color: $themeYellow;
 	margin: 1%;
 	color: white;
-}
-
-.btn-signup:hover {
-	color: $themeLightBlue;
+	&:hover {
+		color: $themeDarkBlue;
+	}
 }
 
 // Demo Section CSS
@@ -280,9 +279,8 @@ html, body {
 			}
 
 			a {
-				color: $themeYellow;
-				background-color: $bgColorDefault;
-				border: 2px solid $themeYellow;
+				color: $themeDarkBlue;
+				background-color: $themeYellow;
 				width: 20%;
 				min-width: 4em;
 				display: block;
