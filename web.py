@@ -4,6 +4,7 @@ from flask import render_template
 import boto3
 import json
 import urlparse
+#import sys
 
 REGION = 'us-east-1'
 TOPIC  = ''
@@ -23,7 +24,6 @@ def demoChinese(name="Chinese"):
 	# If it's a tracked address, send notification via SMS
 	try: 
 		userID = str(urlparse.parse_qs(parsed.query)['p'][0])
-
 		client = boto3.client('sns')
 		response = client.publish( 
 			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
@@ -33,6 +33,7 @@ def demoChinese(name="Chinese"):
 		print userID
 	except:
 		print current_url
+		print parsed
 	return render_template('demo.html', name=name)
 
 @app.route('/demoSpanish')
