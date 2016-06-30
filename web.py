@@ -38,7 +38,7 @@ def demoChinese(name="Chinese"):
 	# If it's a tracked address, send notification via SMS
 	try: 
 		userID = str(urlparse.parse_qs(parsed.query)['p'][0])
-		client = boto3.client('sns')
+		client = boto3.client('sns', region_name ='us-east-1')
 		response = client.publish( 
 			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
 			Message= userID,
