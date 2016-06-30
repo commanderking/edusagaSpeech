@@ -28,7 +28,7 @@ def demoChinese(name="Chinese"):
 	parsed = urlparse.urlparse(current_url)
 
 	userID = "Hey"
-	client = boto3.client('sns')
+	client = boto3.client('sns', region_name ='us-east-1')
 	response = client.publish( 
 		TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
 		Message= userID,
