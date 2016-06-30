@@ -25,14 +25,12 @@ def demoChinese(name="Chinese"):
 	try: 
 
 		userID = str(urlparse.parse_qs(parsed.query)['p'][0])
-		'''
 		client = boto3.client('sns')
 		response = client.publish( 
 			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
 			Message= userID,
 			MessageStructure='string'
 		)
-		'''
 		print userID
 
 	except:
