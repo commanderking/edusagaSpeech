@@ -5,6 +5,9 @@ import boto3
 import json
 import urlparse
 
+#For Heroku Logging
+import sys
+import logging
 
 REGION = 'us-east-1'
 TOPIC  = ''
@@ -12,6 +15,8 @@ TOPIC  = ''
 app = Flask (__name__)
 #app.config.from_envvar('GOOGLE_APPLICATION_CREDENTIALS')
 
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 @app.route('/')
 def index(name="Index"):
