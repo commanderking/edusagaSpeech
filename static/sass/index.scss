@@ -145,6 +145,22 @@ $yellow : #F3EC29;
 	background-color: lightgray;
 	border-radius: 10px;
 	z-index: 100;
+	max-width: 50%;
+
+	.feedbackImageWrapper {
+		width: 20%;
+		display: inline-block;
+		vertical-align: top;
+
+		img {
+			width: 100%;
+		}
+	}
+
+	.feedbackDiv {
+		width: 70%;
+		display: inline-block;
+	}
 	span {
 		font-weight: bold;
 		color: $darkBlue;

@@ -97,7 +97,7 @@
 							[
 								{
 									"task" : "Ask whether they have beef noodles",
-									"possibilities" : ["你有没有牛肉面", "你门有没有牛肉面", "我们买牛肉面吗", "你有牛肉面吗", "你们有牛肉面吗"],
+									"possibilities" : ["你有没有牛肉面", "你们有没有牛肉面", "我们买牛肉面吗", "你有牛肉面吗", "你们有牛肉面吗"],
 									"correct" : "false",
 									"response" : "不好意思, 我们只有汉堡和薯条.",
 									"soundID" : "onlyBurgersAndFries",

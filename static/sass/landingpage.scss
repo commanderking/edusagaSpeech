@@ -12,7 +12,19 @@ $tabletWidth: 768px;
 $desktopWidth: 1024px;
 
 @mixin mobile {
-	@media (max-width: #{$mobileWidth}) {
+	@media (max-width: #{$tabletWidth}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: #{$tabletWidth}) and (max-width: #{$desktopWidth}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{$desktopWidth}) {
 		@content;
 	}
 }
@@ -47,6 +59,7 @@ html, body {
 	background-size: 100% 100%;
 	height: 100%;
 	min-height: 400px;
+	max-height: 600px;
 	padding: 0px;
 	margin: 0px;
 	color: white;
@@ -56,14 +69,18 @@ html, body {
 		width: 100%;
 		h2 {
 			margin: 0px;
-			font-size: 9vw;
+			font-size: 75px;
 		}
 		p {
 			color: white;
 			text-shadow: 0.5px 0.5px black;
-			font-size: 3.5vmin;
-			width: 45%;
+			font-size: 20px;
+			width: 55%;
 			margin: auto;
+			@include mobile {
+				font-size: 20px;
+				width: 70%;
+			}
 		}
 	}
 	.btn-login {
@@ -84,14 +101,15 @@ html, body {
 }
 
 .btn-signup {
-	border: 2px solid #F6D66E;
+	border: 2px solid white;
 	font-weight: bold;
 	font-size: 1.5em;
-	background-color: $themeYellow;
+	background-color: transparent;
 	margin: 1%;
 	color: white;
 	&:hover {
-		color: $themeDarkBlue;
+		color: $themeYellow;
+		border: 2px solid $themeYellow;
 	}
 }
 
@@ -212,13 +230,6 @@ html, body {
 	text-align: center;
 	padding: 0px;
 
-	@media #{$mobile} {
-		background-color: black;
-	}
-	@media #{$tablet} {
-		font-size: 18px;
-	}
-
 	.feature {
 		margin-top: 2%;
 		margin-bottom: 2%;
@@ -228,9 +239,20 @@ html, body {
 		margin-left:12.5%;
 		background-color: $bgColorDefault;
 
+		@include mobile {
+			width: 95%;
+			margin-left :2.5%;
+			height: auto;
+		}
+
 		.featureImage {
 			width: 35%;
 			display: inline-block;
+
+			@include mobile {
+				width: 80%;
+				height: 200px;
+			}
 
 			img {
 				height: 100%;
@@ -247,6 +269,11 @@ html, body {
 			display: inline-block;
 			text-align: left;
 			background-color: $bgColorDefault;
+
+			@include mobile {
+				width: 80%;
+				height: auto;
+			}
 			overflow: scroll;
 
 			.textWrapper {
@@ -254,20 +281,35 @@ html, body {
 				overflow: scroll;
 				padding-left: 2%;
 				padding-right: 2%;
+
+				@include mobile {
+					height: auto;
+				}
 			}
 
 			h3 {
 				color: $themeDarkBlue;
+				@include mobile {
+					font-size: 1.3em;
+					margin-top: 5px;
+				}
 			}
 
 			p {
 				color: white;
-				font-size: 1.1em;
 				margin: 0 0 5px;
 				span {
 					font-weight: bold;
 					color: $themeDarkBlue;
 				}
+				@media #{$mobile} {
+					font-size: 12px;
+				}
+				@media #{$tablet} {
+					font-size: 12px;
+				}
+
+
 			}
 
 			.buttonWrapper {
@@ -275,6 +317,11 @@ html, body {
 				height: 20%;
 				width: 100%;
 				bottom: 0;
+				@include mobile {
+					position: static;
+					height: auto;
+					padding: 5px;
+				}
 
 			}
 
