@@ -58,18 +58,20 @@ def demoChinese3(name="Chinese3"):
 
 @app.route('/demoVocab1')
 def demoVocab1(name="Vocab1"):
-	return render_template("demoVocab1.html", name=name);
+	return render_template("demoVocab1.html", name=name)
 
 @app.route('/demoVocab2')
 def demoVocab2(name="Vocab2"):
-	return render_template("demoVocab2.html", name=name);
+	return render_template("demoVocab2.html", name=name)
+
+
 
 @app.route('/log', methods=['Post'])
 def log():
 	content = request.get_data()
 	#content = request.data
 
-	sqs = boto3.resource('sqs')
+	sqs = boto3.resource('sqs', region_name = 'us-east-1')
 	queue = sqs.get_queue_by_name(QueueName='svc-edusaga-events-queue')
 	response = queue.send_message(MessageBody=content)
 
