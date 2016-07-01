@@ -3,10 +3,6 @@ $themeLightBlue: #C4DBEF;
 $themeYellow: #FDD870;
 $themeDarkBlue: #205BA0;
 
-$mobile: "(max-width: 480px)";
-$mobileLandscape: "(min-width : 481px) and (max-width: 768px)";
-$tablet: "(min-width: 768px) and (max-width: 1023px)";
-
 $mobileWidth: 480px;
 $tabletWidth: 768px;
 $desktopWidth: 1024px;
@@ -118,6 +114,7 @@ html, body {
 .demoScreen	 {
 	height: 100%;
 	min-height: 500px;
+	max-height: 600px;
 	padding: 0;
 	.demoContainer {
 		margin: auto;
@@ -271,7 +268,7 @@ html, body {
 			background-color: $bgColorDefault;
 
 			@include mobile {
-				width: 80%;
+				width: 85%;
 				height: auto;
 			}
 			overflow: scroll;
@@ -289,6 +286,7 @@ html, body {
 
 			h3 {
 				color: $themeDarkBlue;
+				font-size: 1.5em;
 				@include mobile {
 					font-size: 1.3em;
 					margin-top: 5px;
@@ -298,18 +296,14 @@ html, body {
 			p {
 				color: white;
 				margin: 0 0 5px;
+				font-size: 14px;
 				span {
 					font-weight: bold;
 					color: $themeDarkBlue;
 				}
-				@media #{$mobile} {
-					font-size: 12px;
+				@include mobile {
+					font-size: 14px;
 				}
-				@media #{$tablet} {
-					font-size: 12px;
-				}
-
-
 			}
 
 			.buttonWrapper {
@@ -338,8 +332,7 @@ html, body {
 
 	.btn-signup-lg {
 		border: 5px solid $themeYellow;
-		padding : 1%;
-		font-size: 1.5vw;
+		padding : 10px;
 		background-color: $bgColorDefault;
 		color: $themeYellow;
 		margin: 1%;
@@ -447,12 +440,18 @@ html, body {
 // Signup Screen
 
 .signupScreen {
-	min-height: 100%;
+	height: 100%;
+	max-height :600px;
 	text-align: center;
+	display: flex;
+	align-items: center;
 
 	.signupWrapper {
 		width: 70%;
 		margin: auto;
+		@include mobile {
+			width: 85%;
+		}
 
 		h3 {
 			color: $bgColorDefault;
@@ -463,7 +462,7 @@ html, body {
 		.signupText { 
 			background-color: $bgColorDefault;
 			color: white;
-			width: 60%;
+			width: 90%;
 			margin: auto;
 			padding: 20px;
 			border-radius: 5px;
@@ -474,14 +473,23 @@ html, body {
 		}
 
 		.form-inline {
-			width: 60%;
+			width: 70%;
 			margin: auto;
 			margin-top: 10px;
 			margin-bottom: 10px;
 
+			@include mobile {
+				width: 90%;
+			}
+
 			.form-group {
 				width: 73%;
 				display: inline-block;
+				
+				@include mobile {
+					width: 60%;
+				}
+
 				input {
 					width: 100%;
 					border: 3px solid $themeYellow;
@@ -499,6 +507,10 @@ html, body {
 				background-color: $themeYellow;
 				color: white;
 				font-weight: bold;
+
+				@include mobile {
+					width: 35%;
+				}
 			}
 		}
 
