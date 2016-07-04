@@ -155,7 +155,7 @@
 							[
 								{
 									"task" : "Ask how he gets to school",
-									"possibilities" : ["你怎么去上学", "你怎么上学"],
+									"possibilities" : ["你怎么去上学", "你怎么上学", "你怎么去学校", "你么天怎么去上学"],
 									"correct" : "false",
 									"response" : "我平常走路去上学.",
 									"soundID" : "gotoSchool",

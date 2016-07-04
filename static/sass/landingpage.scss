@@ -7,6 +7,12 @@ $mobileWidth: 480px;
 $tabletWidth: 768px;
 $desktopWidth: 1024px;
 
+@mixin mobilePortrait {
+	@media (max-width: #{$mobileWidth}) {
+		@content;
+	}
+}
+
 @mixin mobile {
 	@media (max-width: #{$tabletWidth}) {
 		@content;
@@ -239,6 +245,7 @@ html, body {
 		@include mobile {
 			width: 95%;
 			margin-left :2.5%;
+			margin-bottom: 20px;
 			height: auto;
 		}
 
@@ -287,6 +294,7 @@ html, body {
 			h3 {
 				color: $themeDarkBlue;
 				font-size: 1.5em;
+				margin-top: 10px;
 				@include mobile {
 					font-size: 1.3em;
 					margin-top: 5px;
