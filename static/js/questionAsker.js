@@ -84,6 +84,7 @@ var startDemo = {
 				soundPlayer.init();
 				viewSceneIntro.init();
 				viewSceneIntro.render();
+				viewScene.init();
 				viewFeedback.init();
 
 				// voice list loaded asynchornously, so can't be grabbed on page load
@@ -103,6 +104,10 @@ var octopusScene = {
 	// return the object which contains all scenario info
 	getScenarioInfo: function() {
 		return charTaskData.characterProfiles[charTaskData.currentCharacter].scenario;
+	},
+	// Get the name of the location
+	getLocation: function() {
+		return charTaskData.characterProfiles[charTaskData.currentCharacter].location.name;
 	}
 };
 
@@ -359,6 +364,14 @@ var octopusSpeechSynth = {
 	},
 	getVoice: function() {
 		return speechSynthData.voice;
+	}
+};
+
+// Set up UI that's relevant to the scene
+var viewScene = {
+	init: function() {
+		this.locationText = $(".locationText");
+		this.locationText.html(octopusScene.getLocation());
 	}
 };
 
