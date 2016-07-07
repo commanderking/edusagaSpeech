@@ -533,15 +533,18 @@ var viewCharacter = {
 var viewSceneIntro = {
 	init: function() {
 		this.scenarioWindow = $(".scenarioWindow");
+		this.roboWrapper = $(".roboWrapper");
+		this.scenarioTextWrapper = $(".scenarioTextWrapper");
 	},
 
 	render: function() {
 		var that = this;
 		// Render Scene Explanation Window
 		this.scenarioWindow.removeClass("hidden");
-		this.scenarioWindow.children(".scenarioHeader").html(octopusScene.getScenarioInfo().title);
-		this.scenarioWindow.children(".scenarioText").html(octopusScene.getScenarioInfo().text);
-		this.scenarioWindow.children(".btn-confirm").click(function() {
+		this.roboWrapper.html('<img src="' + IMAGE_BASE_PATH + 'robo/roboDefault.png">')
+		this.scenarioTextWrapper.children(".scenarioHeader").html(octopusScene.getScenarioInfo().title);
+		this.scenarioTextWrapper.children(".scenarioText").html(octopusScene.getScenarioInfo().text);
+		this.scenarioTextWrapper.children(".btn-confirm").click(function() {
 			that.scenarioWindow.addClass("hidden");
 			viewFadeAll.resetFade();
 		});
@@ -644,6 +647,7 @@ var soundPlayer = {
 	}
 };
 
+// Methods related to playing text to speech with speechsynth
 var speechSynth = {
 	// Initialize with proper language
 	init : function() {
@@ -655,15 +659,14 @@ var speechSynth = {
 		var lang = octopusCharacter.getCurrentLanguage();
 		var synthLang = "";
 
+		// Find the correct language of the activity
 		if (lang == "es-es") {
 			synthLang = "Monica";
 		} else if (lang === "cmn-Hant-TW" || "zh-zh") {
-			// Ting-Ting is a specific Chinese voice in the voice array
 			synthLang = "Google 普通话（中国大陆）";
-			console.log(lang);
 		}
-		console.log(synthLang);
 
+		// Set the voice of the robot to be the correct language from browser
 		var setVoice = function() {
 			voices = synth.getVoices();
 			for(i = 0; i < voices.length ; i++) {
@@ -750,7 +753,7 @@ try {
 	var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 	var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 } catch(err) {
-	alert("Sorry, the browser does not support Web Speech. Please use Google Chrome for Speech Access.");
+	alert("Sorry, the browser does not support Web Speech. Please use Google Chrome on a desktop/laptop (no mobile) for Speech Access.");
 }
 
 //Wrap the getUserMedia function from the different browsers
