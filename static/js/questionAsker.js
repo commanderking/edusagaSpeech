@@ -541,10 +541,19 @@ var viewSceneIntro = {
 		var that = this;
 		// Render Scene Explanation Window
 		this.scenarioWindow.removeClass("hidden");
-		this.roboWrapper.html('<img src="' + IMAGE_BASE_PATH + 'robo/roboDefault.png">')
+		this.roboWrapper.html('<img src="' + IMAGE_BASE_PATH + 'robo/roboDefault.png">');
 		this.scenarioTextWrapper.children(".scenarioHeader").html(octopusScene.getScenarioInfo().title);
 		this.scenarioTextWrapper.children(".scenarioText").html(octopusScene.getScenarioInfo().text);
 		this.scenarioTextWrapper.children(".btn-confirm").click(function() {
+
+			// Check if browser is comptaible 
+			try {
+				var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+				var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+				var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+			} catch(err) {
+				alert("Sorry, EduSaga currently only supports Google Chrome on desktop or laptops (no mobile). Please switch over to Google Chrome for speech recognition access.");
+			}
 			that.scenarioWindow.addClass("hidden");
 			viewFadeAll.resetFade();
 		});
@@ -699,6 +708,7 @@ function testSpeech() {
 
 	var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + /*+ task +*/';';
 	var recognition = new SpeechRecognition();
+
 	var speechRecognitionList = new SpeechGrammarList();
 	speechRecognitionList.addFromString(grammar, 1);
 	recognition.grammars = speechRecognitionList;
@@ -747,15 +757,6 @@ function testSpeech() {
 		viewSpeakButton.restoreMic();
 	}
 }
-
-try {
-	var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-	var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-	var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-} catch(err) {
-	alert("Sorry, the browser does not support Web Speech. Please use Google Chrome on a desktop/laptop (no mobile) for Speech Access.");
-}
-
 //Wrap the getUserMedia function from the different browsers
 navigator.getUserMedia = navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
@@ -775,7 +776,7 @@ function onError(errorObj){
 var mediaConstraints = { audio: true };
  
 //Call our method to request the media object - this will trigger the browser to prompt a request.
-navigator.getUserMedia(mediaConstraints, onSuccess, onError);
+// navigator.getUserMedia(mediaConstraints, onSuccess, onError);
 
 startDemo.init();
 

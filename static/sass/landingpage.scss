@@ -273,16 +273,16 @@ html, body {
 			display: inline-block;
 			text-align: left;
 			background-color: $bgColorDefault;
+			overflow: hidden;
 
 			@include mobile {
 				width: 85%;
 				height: auto;
 			}
-			overflow: scroll;
 
 			.textWrapper {
 				height: 80%;
-				overflow: scroll;
+				overflow: hidden;
 				padding-left: 2%;
 				padding-right: 2%;
 

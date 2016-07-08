@@ -88,7 +88,7 @@
 					[
 						{
 							"task" : "Ask whether they have fried rice",
-							"possibilities" : ["你有没有炒饭", "请问你有没有炒饭", "你们有没有炒饭", "你们卖炒饭吗", "你有炒饭吗", "你门有炒饭吗?" ],
+							"possibilities" : ["你有没有炒饭", "请问你有没有炒饭", "你们有没有炒饭", "你们卖炒饭吗", "你有炒饭吗", "你们有炒饭吗?" ],
 							"correct" : false,
 							"response" : "不好意思, 我们没有炒饭.",
 							"soundID" : "noFriedRice",
