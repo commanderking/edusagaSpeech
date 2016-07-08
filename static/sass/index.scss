@@ -40,6 +40,11 @@ $desktopWidth: 1024px;
 	align-items: center;
 }
 
+// Currently only used in viewHelper.js to "fade" elements
+.black {
+	background: black;
+}
+
 .navbarTop {
 	height: 10%;
 
@@ -57,6 +62,7 @@ $desktopWidth: 1024px;
 	padding: 0px;
 	left: 0px;
 	height: 100%;
+	min-height: 550px;
 	width: 40%;
 	img {
 		pointer-events: none;
@@ -138,6 +144,7 @@ $desktopWidth: 1024px;
 .gameWrapper {
 	padding: 0px;
 	background: rgba(1,1,1,0.1);
+	min-height: 550px;
 	.sceneBG {
 		position: absolute;
 		left: 0;
@@ -320,6 +327,15 @@ CSS Related to Task List
 		color: #F3EC29;
 		font-weight: bold;
 		font-size: 2vw;
+		&:hover {
+			background: linear-gradient(82deg, #38C6F3, #057FC5 20%);
+			border-radius: 25px;
+
+		}
+		&:active {
+			box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+			border-radius: 25px;
+		}
 	}
 }
 
@@ -355,7 +371,11 @@ CSS Related to Task List
 	background-color: #38C6F3;
 	color: #057FC5;
 	a {
-	color :#F3EC29;
+		color :#F3EC29;
+	}
+	&:hover {
+		text-decoration: none;
+
 	}
 }
 
@@ -419,5 +439,114 @@ CSS Related to Task List
 			}
 		}
 	}
+}
+
+/*----------------------------------------
+Robo Help Window 
+----------------------------------------*/
+
+.helpWindow {
+	position: absolute;
+	width: 40%;
+	height: 90%;
+	left: 0;
+	.roboImageWrapper {
+		position: absolute;
+		top: 35%;
+		right: 0;
+		width: 220px;
+		height: 300px;
+		.roboImage {
+			height: 100%;
+			width: 100%;
+		}
+		.roboSpeakIcon {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			margin-left: -50px;
+			margin-bottom: -50px;
+			width: 100px;
+			height: 100px;
+			opacity: 0.8;
+			&:hover {
+				opacity: 0.9;
+			},
+			&:active {
+				opacity: 1.0;
+			}
+		}
+	}
+
+	.roboHelpTextWrapper {
+		top: 5%;
+		height: 35%;
+		min-height: 150px;
+		min-width: 80%;
+		position: absolute;
+		margin-left:20%;
+		border: 5px solid $darkBlue;
+		text-align: center;
+		.header {
+			width: 100%;
+			background-color: $darkBlue;
+			h3 {
+				margin: 0;
+				color: $yellow;
+				padding: 5px;
+			}
+
+			.glyphicon {
+				position: absolute;
+				right: 0;
+				color: $borderBlue;
+				font-size: 15px;
+				line-height: 25px;
+				padding: 5px;
+			}
+		}
+		p {
+			padding: 15px;
+			color: $darkBlue;
+		}
+		.helpText {
+			font-size: 20px;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+}
+
+// CSS from http://nicolasgallagher.com/pure-css-speech-bubbles/demo/default.css
+// Demo: http://nicolasgallagher.com/pure-css-speech-bubbles/demo/
+
+.example-right {
+  position:relative;
+  margin:0;
+  color:blue;
+  background:#5a8f00; /* default background for browsers without gradient support */
+  /* css3 */
+  background-color: white;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  border: 1px solid black;
+}
+
+/* display of quote author (alternatively use a class on the element following the blockquote) */
+.example-right + p {margin:15px 0 2em 85px; font-style:italic;}
+
+/* creates the triangle */
+.example-right:after {
+  content:"";
+  position:absolute;
+  bottom:-30px;
+  left:70%;
+  border-width:0 30px 30px 0px;
+  border-style:solid;
+  border-color:transparent white;
+  /* reduce the damage in FF3.0 */
+  display:block;
+  width:0;
 }
 

@@ -2,8 +2,7 @@
 TODO: Preload background and character images
 */
 
-// Generate GUID
-
+// Generate fake GUID
 function guid() {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
@@ -19,6 +18,7 @@ var SOUND_BASE_PATH = './static/audio/';
 var IMAGE_BASE_PATH = "./static/images/";
 var bgIMAGE_BASE_PATH = "./static/images/bg/";
 
+// Will store the scene data (characters, tasks) that's called for from $getJson request
 var charTaskData = [];
 
 
@@ -99,6 +99,10 @@ var startDemo = {
 		}
 	}
 };
+
+/*-----------------------------------
+Controller Related Functions
+-------------------------------------*/
 
 var octopusScene = {
 	// return the object which contains all scenario info
@@ -220,7 +224,7 @@ var octopusTasks = {
 			}
 		});
 
-		// Post Log Event Data
+		// POST Log Event Data 
 		var logEvent = logDataTemplate;
 		logEvent.timeStamp = new Date();
 		logEvent.nodeID = nodeID;
@@ -367,6 +371,21 @@ var octopusSpeechSynth = {
 	}
 };
 
+
+
+
+
+
+
+
+
+
+
+
+/*-------------------------------------------------------
+View related Functions 
+-------------------------------------------------------*/
+
 // Set up UI that's relevant to the scene
 var viewScene = {
 	init: function() {
@@ -417,11 +436,22 @@ var viewTaskList = {
 		this.taskList = $(".taskList");
 		this.completedTaskList = $(".completedTaskList");
 
+		// Grab gameWrapper to fade
+		this.gameWrapper = $(".gameWrapper");
+
 		// Grab Modal Window 
 		this.modalWindowBody = $(".modal-body");
 
 		// Grab skip question button
 		this.btnSkip = $(".btn-skip");
+
+		// Grab help related DOM elements
+		this.helpWindow = $(".helpWindow");
+		this.roboImageWrapper = $(".roboImageWrapper");
+		this.roboHelpTextWrapper = $(".roboHelpTextWrapper");
+		this.roboSpeakIcon = $(".roboSpeakIcon");
+		this.helpText = $(".helpText");
+		this.closeHelp = $(".closeHelp");
 	},
 
 	render: function() {
@@ -446,28 +476,33 @@ var viewTaskList = {
 			});
 
 			/* Populate Hint Modal Window with proper text when clicked */
-			$(".taskHelpIcon").popover(
-				{
-				});
+			$(".taskHelpIcon").click(function() {
+				// Fade background
+				viewFadeAll.render();
+				// Overlay black over the elements 
+				that.gameWrapper.css("background", "black");
 
-			$(".taskHelpIcon").on('shown.bs.popover', function() {
+				that.helpWindow.removeClass("hidden");
 				var dataIndex = $(this).attr('data-index');
-				var taskHelpHTML = "<div class='helpFillerText'> Maybe You Could Say: <span class='taskHelpSpeech'>" + octopusTasks.taskHelp(dataIndex) + "</span>";
-				taskHelpHTML += ' <span class="taskHelpSoundIcon glyphicon glyphicon glyphicon-volume-up" aria-hidden="true"></span>';
-				$(".popover-content").html(taskHelpHTML);
-
-				$(".taskHelpSpeech, .taskHelpSoundIcon").click(function() {
+				that.helpText.html('<span class="taskHelpSpeech">' + octopusTasks.taskHelp(dataIndex) + '</span>');
+				$(".taskHelpSpeech, .taskHelpSoundIcon, .roboSpeakIcon").click(function() {
 					var textToSay = $(".taskHelpSpeech").html();
-					console.log(textToSay);
 					speechSynth.play(textToSay);
 				});
-			});
+
+				/* Enable hint window to be closed */
+				that.closeHelp.click(function() {
+					that.helpWindow.addClass("hidden");
+					viewFadeAll.resetFade();
+					that.gameWrapper.css("background", "rgba(1,1,1,0.1)");
+				})
+			})
 
 		} else {
 			this.taskList.html("");
 		}
 
-		//TODO: Currently don't render completd task list
+		//TODO: Currently don't render completed task list
 		/*
 		// If completed tasks exist, render them
 		if (octopusTasks.completedTasksBool()) {
@@ -535,6 +570,14 @@ var viewSceneIntro = {
 		this.scenarioWindow = $(".scenarioWindow");
 		this.roboWrapper = $(".roboWrapper");
 		this.scenarioTextWrapper = $(".scenarioTextWrapper");
+		// Grab Speech Recognition tools from Chrome Browser;
+		try {
+			var SpeechRecognition = webkitSpeechRecognition;
+			var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+			var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+		} catch(err) {
+			alert("Sorry, EduSaga currently only supports Google Chrome on desktop or laptops (no mobile). Please switch over to Google Chrome for speech recognition access.");
+		}
 	},
 
 	render: function() {
@@ -546,14 +589,7 @@ var viewSceneIntro = {
 		this.scenarioTextWrapper.children(".scenarioText").html(octopusScene.getScenarioInfo().text);
 		this.scenarioTextWrapper.children(".btn-confirm").click(function() {
 
-			// Check if browser is comptaible 
-			try {
-				var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-				var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-				var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-			} catch(err) {
-				alert("Sorry, EduSaga currently only supports Google Chrome on desktop or laptops (no mobile). Please switch over to Google Chrome for speech recognition access.");
-			}
+
 			that.scenarioWindow.addClass("hidden");
 			viewFadeAll.resetFade();
 		});
@@ -761,7 +797,12 @@ function testSpeech() {
 navigator.getUserMedia = navigator.getUserMedia ||
                          navigator.webkitGetUserMedia ||
                          navigator.mozGetUserMedia;
- 
+
+// Get reference to SpeechRecognition in Browser
+var SpeechRecognition = webkitSpeechRecognition;
+var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+
 //Our success callback where we get the media stream object and assign it to a video tag on the page
 function onSuccess(mediaObj){
     console.log ("Audio enabled");

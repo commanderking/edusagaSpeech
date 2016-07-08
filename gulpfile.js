@@ -9,7 +9,7 @@ var imagemin = require('gulp-imagemin');
 gulp.task('default', ['styles', 'lint'], function() {
   // place code for your default task here
 	gulp.watch('./static/sass/**/*.scss', ['styles']);
-	gulp.watch('./static/js/**/*.scss', ['lint']);
+	// gulp.watch('./static/js/**/*.scss', ['lint']);
 	browserSync.init({
 		proxy: '127.0.0.1:5000',
 		online: true

@@ -11,6 +11,7 @@ viewFadeAll = {
 		this.respondButton = $(".respondButton");
 		this.navbarTop = $(".navbarTop");
 		this.bottomNavbar = $(".bottomNavbar");
+		this.gameWrapper = $(".gameWrapper");
 
 		this.nonTutorialUI = [this.characterDialogueDiv, this.sceneBG, this.taskList, this.sceneWrapper, this.navbarTop, this.bottomNavbar];
 
@@ -26,11 +27,12 @@ viewFadeAll = {
 		// Return fade to original
 		this.nonTutorialUI.forEach(function(element){
 			element.removeClass("faded").removeClass("disabled");
-		})
+		});
 
 		this.characterDialogueDiv.removeClass("hidden");
 		this.characterDiv.removeClass("hidden");
 		this.taskList.removeClass("hidden");
+		this.gameWrapper.css("background", "rgba(1,1,1,0.1");
 	}
 }
 
