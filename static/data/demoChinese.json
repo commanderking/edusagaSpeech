@@ -114,7 +114,7 @@
 				},
 				{
 				"task" : "Ask how he's doing",
-					"possibilities" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗"],
+					"possibilities" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
 					"correct" : false,
 					"response" : "非常好!",
 					"soundID" : "feichanghao",
@@ -124,7 +124,7 @@
 					[
 						{
 							"task" : "Ask for name", 
-							"possibilities" : ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁"],
+							"possibilities" : ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁", "你的中文名字叫什么"],
 							"correct" : false,
 							"response" : "我叫张大伟.",
 							"soundID" : "wojiao",
@@ -144,7 +144,7 @@
 						}, 
 						{
 							"task" : "Ask for age", 
-							"possibilities" : ["你几岁", "你多大", "你多大了", "你年纪多大"],
+							"possibilities" : ["你几岁", "你多大", "你多大了", "你年纪多大", "你今年多大了"],
 							"correct" : false,
 							"response" : "我十六岁.",
 							"soundID" : "age",
@@ -224,7 +224,7 @@
 									[
 										{
 											"task" : "Ask what is his favorite sport",
-											"possibilities" : ["你最喜欢什么运动", "你最喜欢做什么"],
+											"possibilities" : ["你喜欢什么运动", "你最喜欢什么运动", "你最喜欢做什么运动", "你最喜欢做什么", "你最喜欢什么体育运动"],
 											"correct" : "false",
 											"response" : "我最喜欢打篮球和打乒乓球!",
 											"soundID" : "sportsLikes",
@@ -235,7 +235,7 @@
 										},
 										{
 											"task" : "Ask what season he likes",
-											"possibilities" : ["你最喜欢什么季节", "你喜欢什么季节"],
+											"possibilities" : ["你最喜欢什么季节", "你喜欢什么季节", "你喜欢哪个季节", "你最喜欢哪个季节"],
 											"correct" : "false",
 											"response" : "我最喜欢春天， 可是我不喜欢冬天",
 											"soundID" : "seasonLikes",

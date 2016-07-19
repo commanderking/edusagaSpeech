@@ -11,12 +11,12 @@
 			"scenario" : 
 			{
 				"title" : "First Day at College", 
-				"text" : "You're moving into Shanghai Fudan University on the first day and see that your roommate has already arrived. You decide to learn more about her and her family."
+				"text" : "You're moving into National Taiwan University on the first day and see that your roommate has already arrived. You decide to learn more about her and her family."
 			},
 			"location" : 
 			{
-				"name" : "Fudan University 复旦大学",
-				"bg" : "fudanUniversity.jpg"
+				"name" : "National Taiwan University 台大 （國立台灣大學)",
+				"bg" : "NTUniversity.jpg"
 			},
 			"emotions" :
 			{
@@ -125,7 +125,7 @@
 					[
 						{
 							"task" : "Ask for her surname",
-							"possibilities" : ["請問您貴姓", "請問你貴姓", "您貴姓", "你貴姓", "你的貴姓是什麼"],
+							"possibilities" : ["請問您貴姓", "請問你貴姓", "您貴姓", "你貴姓", "你的貴姓是什麼", "你姓什么", "你的贵姓是什么"],
 							"correct" : false,
 							"response" : "我姓王.",
 							"soundID" : "surname",
@@ -171,7 +171,7 @@
 								},
 								{
 									"task" : "Ask how many family members she has",
-									"possibilities" : ["你的家有幾口人", "您的家有幾口人", "你家有幾口人"],
+									"possibilities" : ["你的家有幾口人", "您的家有幾口人", "你家有幾口人", "你家有几个人", "你的家有幾個人", "你家裏有幾個人", "你家裏有幾口人"],
 									"correct" : false,
 									"response" : "我家有五口人.",
 									"soundID" : "familyCount",
@@ -180,7 +180,7 @@
 									[
 										{
 											"task" : "Ask if she has an older brother",
-											"possibilities" : ["你有哥哥嗎", "你有沒有哥哥"],
+											"possibilities" : ["你有哥哥嗎", "你有沒有哥哥", "你有沒有一個哥哥"],
 											"taskType" : "choice",
 											"taskLink" : "siblingChoice",
 											"correct" : false,
@@ -191,7 +191,7 @@
 										},
 										{
 											"task" : "Ask whether she has a younger sister",
-											"possibilities" : ["你有沒有妹妹", "你有妹妹嗎"],
+											"possibilities" : ["你有沒有妹妹", "你有妹妹嗎", "你有沒有一個妹妹"],
 											"taskType" : "choice",
 											"taskLink" : "siblingChoice",
 											"correct" : false,

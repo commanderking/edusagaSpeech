@@ -17,7 +17,7 @@
 			"location" : 
 			{
 				"name" : "Shanghai Airport",
-				"bg" : "shanghaiAirport.jpg"
+				"bg" : "classroom.jpg"
 			},
 			"emotions" : 
 			{
@@ -114,7 +114,7 @@
 					[
 						{
 							"task" : "Ask how he's doing",
-							"possibilities" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗"],
+							"possibilities" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
 							"correct" : false,
 							"response" : "非常好! Great start! Try the other demos below for even more interactive Chinese speech activities!",
 							"soundID" : "feichanghao",
