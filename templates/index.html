@@ -36,7 +36,7 @@
 	<!-- Demo Div !-->
 	<div class="demoScreen verticalCenterIndex col-xs-12 col-sm-12 col-lg-12">
 		<div class="demoContainer gameWrapper col-md-12 col-sm-12 col-xs-12">
-			<img class="sceneBG" src="../static/images/bg/http://i.huffpost.com/gen/2159432/images/o-EMPTY-CLASSROOM-facebook.jpg">
+			<img class="sceneBG" src="http://i.huffpost.com/gen/2159432/images/o-EMPTY-CLASSROOM-facebook.jpg">
 			<!-- Main Scene !-->
 			<div class="characterDialogueDiv hidden col-md-12 col-sm-12 col-xs-12">
 				<div class="friendBanner">
@@ -255,6 +255,24 @@
 	<script src="static/js/viewHelper.js"></script>
 	<!--<script src="static/js/tutorial.js"></script>!-->
 	<script src="static/js/questionAsker.js"></script>
+
+	<!-- What to do if opened in safari or firefox !-->
+	<script>
+		try {
+			var SpeechRecognition = webkitSpeechRecognition;
+			var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+			var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+		} catch(err) {
+			var scenarioWindow = $(".scenarioWindow");
+			var roboWrapper = $(".roboWrapper");
+			scenarioTextWrapper = $(".scenarioTextWrapper");
+			scenarioWindow.removeClass("hidden");
+			// roboWrapper.html('<img src="' + IMAGE_BASE_PATH + 'robo/roboDefault.png">');
+			scenarioTextWrapper.children(".scenarioHeader").html("Sorry!");
+			scenarioTextWrapper.children(".scenarioText").html("Sorry, EduSaga currently only supports Google Chrome on desktop or laptops (no mobile). Please switch over to Google Chrome for speech recognition access.");
+			scenarioTextWrapper.children(".btn-confirm").hide();
+		}
+	</script>
 
 
 </body>

@@ -136,6 +136,23 @@
 	  ga('send', 'pageview');
 
 	</script>
+
+	<script>
+		try {
+			var SpeechRecognition = webkitSpeechRecognition;
+			var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+			var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+		} catch(err) {
+			var scenarioWindow = $(".scenarioWindow");
+			var roboWrapper = $(".roboWrapper");
+			scenarioTextWrapper = $(".scenarioTextWrapper");
+			scenarioWindow.removeClass("hidden");
+			// roboWrapper.html('<img src="' + IMAGE_BASE_PATH + 'robo/roboDefault.png">');
+			scenarioTextWrapper.children(".scenarioHeader").html("Sorry!");
+			scenarioTextWrapper.children(".scenarioText").html("Sorry, EduSaga currently only supports Google Chrome on desktop or laptops (no mobile). Please switch over to Google Chrome for speech recognition access.");
+			scenarioTextWrapper.children(".btn-confirm").hide();
+		}
+	</script>
 </body>
 
 </html>
