@@ -75,7 +75,7 @@ $themeYellow: #FDD870;
 .inputWrapper {
 	height: 35%;
 	.micDiv {
-		width: 30%;
+		width: 25%;
 		height: 100%;
 		text-align: center;
 		display: inline-block;
@@ -86,11 +86,9 @@ $themeYellow: #FDD870;
 		    border-radius: 50%;
 		    background: $bgColorDefault;
 		    z-index: 1;
-		    border: 10px solid $themeLightBlue;
 		    padding: 1%;
 		    span {
 		    	font-size: 15vh;
-		    	color: $themeYellow;
 		    	width: 100%;
 		    	height: 100%;
 		    }
@@ -99,6 +97,18 @@ $themeYellow: #FDD870;
 			width: 10vw;
 			height: 10vw;
 			padding: 3%;
+		}
+		.micActive-true {
+			border: 7px solid red;
+			span {
+				color: red
+			}
+		}
+		.micActive-false {
+		    border: 10px solid $themeLightBlue;
+		    span {
+		    	color: $themeYellow;
+		    }
 		}
 	}
 
@@ -158,7 +168,7 @@ $themeYellow: #FDD870;
 	}
 	.scoreboard {
 		width: 23%;
-		margin-top: 3%;
+		margin-top: 0.5%;
 		display: inline-block;
 		vertical-align: top;
 		text-align:center;

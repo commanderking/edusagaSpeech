@@ -1,7 +1,6 @@
 {
   "name": "edusagaspeech",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "dependencies": {
     "browser-sync": "^2.12.10",
@@ -15,13 +14,19 @@
   },
   "devDependencies": {
     "babel": "^6.5.2",
+    "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
+    "gulp": "^3.9.1",
+    "node-sass": "^3.8.0",
     "react": "^15.2.1",
+    "sass-loader": "^4.0.0",
     "webpack": "^1.13.1",
     "webpack-bundle-tracker": "0.0.93"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp",
+    "start" : "./node_modules/.bin/webpack -d --watch"
   },
   "repository": {
     "type": "git",
@@ -32,5 +37,6 @@
   "bugs": {
     "url": "https://github.com/commanderking/edusagaSpeech/issues"
   },
-  "homepage": "https://github.com/commanderking/edusagaSpeech#readme"
+  "homepage": "https://github.com/commanderking/edusagaSpeech#readme",
+  "description": ""
 }
