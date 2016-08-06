@@ -61,7 +61,7 @@ module.exports = React.createClass({
 		if (newVocabData.list[newIndex].correct) {
 			newVocabData.lastAnswer = newVocabData.list[newIndex].name;
 		} else {
-			newVocabData. lastAnswer = ""
+			newVocabData.lastAnswer = ""
 		}
 
 		this.setState (

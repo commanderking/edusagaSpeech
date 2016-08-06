@@ -73,8 +73,9 @@ var InputContainer = React.createClass({
 	},
 	handleUserAnswer: function() {
 		var that = this;
+		var possibleAnswers = this.props.vocabList[this.props.currentWordIndex].name;
 
-		SpeechRecognition.promiseTestSpeech(this.props.currentWordIndex, this.props.vocabList, this.props.lang)
+		SpeechRecognition.activateSpeech(possibleAnswers, this.props.lang)
 			.then(function(userAnswer) {
 				// Need to set var here, otherwise loses it in setState
 				console.log(userAnswer);
