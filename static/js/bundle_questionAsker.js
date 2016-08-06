@@ -22261,7 +22261,16 @@
 					React.createElement(
 						'div',
 						{ className: 'buttonLine' },
-						React.createElement('div', { className: 'coinDiv' }),
+						React.createElement(
+							'div',
+							{ className: 'coinDiv' },
+							React.createElement('img', { className: 'coinIcon', src: '/static/images/UI/Icon_coins-01.png' }),
+							React.createElement(
+								'div',
+								{ className: 'coinCount' },
+								'200'
+							)
+						),
 						React.createElement(
 							'p',
 							{ className: 'locationText' },
@@ -22270,6 +22279,15 @@
 						React.createElement(
 							'div',
 							{ className: hintDivClass },
+							React.createElement(
+								'div',
+								{ className: 'payHintContainer' },
+								React.createElement('img', { className: 'hintIconImage payHintBg', src: 'static/images/UI/ICON_payforhelp_bg-01.png' }),
+								React.createElement('img', { className: 'hintIconImage', src: 'static/images/UI/ICON_payforhelp_qmark-01.png' }),
+								React.createElement('img', { className: 'hintIconImage', src: 'static/images/UI/ICON_payforhelp_Big_sparkle-01.png' }),
+								React.createElement('img', { className: 'hintIconImage', src: 'static/images/UI/ICON_payforhelp_L_spark-01.png' }),
+								React.createElement('img', { className: 'hintIconImage', src: 'static/images/UI/ICON_payforhelp_R_sparkle-01.png' })
+							),
 							React.createElement(
 								'p',
 								{ className: 'hintText' },

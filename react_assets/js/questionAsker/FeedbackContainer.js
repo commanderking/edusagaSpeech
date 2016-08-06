@@ -41,9 +41,18 @@ var FeedbackContainer = React.createClass({
 				<div className="row-fluid">
 					<div className="buttonLine">
 						<div className="coinDiv">
+							<img className="coinIcon" src="/static/images/UI/Icon_coins-01.png" />
+							<div className="coinCount">200</div>
 						</div>
 						<p className="locationText">Classroom 教室</p>
 						<div className={hintDivClass}>
+							<div className="payHintContainer">
+								<img className="hintIconImage payHintBg" src="static/images/UI/ICON_payforhelp_bg-01.png" />
+								<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_qmark-01.png" />
+								<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_Big_sparkle-01.png" />
+								<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_L_spark-01.png" />
+								<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_R_sparkle-01.png" />
+							</div>
 							<p className="hintText">Maybe you could say... 
 								<SpeechableSpan 
 									clickFunction={spanClickFunction}

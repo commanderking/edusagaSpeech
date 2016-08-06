@@ -496,15 +496,32 @@ CSS Related to Task List
 				position: absolute;
 				left: 0;
 				top: 25%;
-				width: 15%;
+				width: 200px;
 				height: 50%;
 				border-top-right-radius: 25px;
 				border-bottom-right-radius: 25px;
 				background-color: #194CA6;
+				.coinIcon {
+					height: 100px;
+					width: 100px;
+					top: -25px;
+					position: absolute;
+				}
+			}
+
+			.coinCount {
+				position: absolute;
+				line-height: 50px;
+				color: white;
+				font-weight: bold;
+				margin-left: 100px;
+				width: 50%;
+				text-align: center;
+				font-size: 25px;				
 			}
 
 			.locationText {
-				margin-left: 17%;
+				margin-left: 22%;
 				color: white;
 				font-size: 4vh;
 			}
@@ -527,12 +544,25 @@ CSS Related to Task List
 				border-top-left-radius: 25px;
 				border-bottom-left-radius: 25px;
 				z-index: 5;
+				
+				.payHintContainer {
+					height:50px;
+					width: 50px;
+					position: relative;
+					display: inline-block;
 
-				p {
-					margin-left:25px;
+					img {
+						position: absolute;
+						height: 200%;
+						width: 200%;
+						top: -75%;
+					}
 				}
 
 				.hintText {
+					margin-left: 50px;
+					vertical-align: top;
+					display: inline-block;
 					line-height: 50px;
 					font-size: 20px;
 					color: $darkerBlue;
