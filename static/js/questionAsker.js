@@ -726,7 +726,7 @@ var speechSynth = {
 		var utterThis = new SpeechSynthesisUtterance(textToSay);
 		console.log(octopusSpeechSynth.getVoice().name);
 		utterThis.voice = octopusSpeechSynth.getVoice();
-		utterThis.rate = 0.8;
+		utterThis.rate = 0.6;
 		console.log(utterThis.voice);
 		window.speechSynthesis.speak(utterThis);
 

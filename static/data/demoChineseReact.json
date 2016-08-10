@@ -1,0 +1,268 @@
+{
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "/static/images/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"scenarioOn": false,
+	"scenarioIndex": 0,
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "/static/images/miri/MIRI_body_constant-01.png",
+			"imageLayer" : "/static/images/miri/faces/Miri_Default-01.png",
+			"text" : "Welcome to Shanghai Airport! Looks like your taxi driver is over there waiting to pick you up. Why don't you head over and chat with him?",
+			"next" : "end"
+		}
+	],
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"silhouette" : "/static/images/david/davidSilhouette.png",
+			"location" : 
+			{
+				"nameEnglish" : "Shanghai Airport",
+				"nameChinese" : "上海机场", 
+				"bg" : "/static/images/bg/shanghaiAirport.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "davidDefault.png",
+				"uncertain" : "davidUncertain.png",
+				"laughing" : "davidLaughing.png",
+				"confused" : "davidConfused.png"
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "david/feichanghao.ogg"
+				},
+				{
+					"soundID" : "wojiao",
+					"soundPath" : "david/wojiao.ogg"
+				},
+				{
+					"soundID" : "nationality",
+					"soundPath" : "david/nationality.ogg"
+				},
+				{
+					"soundID" : "age",
+					"soundPath" : "david/age.ogg"
+				},
+				{
+					"soundID" : "foodLikes",
+					"soundPath" : "david/foodLikes.ogg"
+				},
+				{
+					"soundID" : "zhenbang",
+					"soundPath" : "david/zhenbang.ogg"
+				},
+				{
+					"soundID" : "zhende",
+					"soundPath" : "david/zhende.ogg"		
+				},
+				{
+					"soundID" : "favoriteDrink",
+					"soundPath" : "david/favoriteDrink.ogg"
+				},
+				{
+					"soundID" : "sportsLikes",
+					"soundPath" : "david/sportsLikes.ogg"			
+				},
+				{
+					"soundID" : "seasonLikes",
+					"soundPath" : "david/seasonLikes.ogg"
+				},
+				{
+					"soundID" : "gotoSchool",
+					"soundPath" : "david/gotoSchool.ogg"
+				},
+				{
+					"soundID" : "zodiac",
+					"soundPath" : "david/zodiac.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"tasks" : 
+			[
+				{
+					"task" : "Greet him",
+					"possibilities" : ["你好"],
+					"completeMatchOnly" : true,
+					"taskLink": "greeting",
+					"correct" : false,
+					"response" : "你好!",
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg",
+					"emotion" : "davidLaughing.png",
+					"dialogNodeID" : 1,
+					"extensionTasks" : []
+				},
+				{
+					"task" : "Ask how he's doing",
+					"taskType" : "choice",
+					"taskLink" : "greeting",
+					"possibilities" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+					"correct" : false,
+					"response" : "非常好!",
+					"soundID" : "feichanghao",
+					"emotion" : "davidLaughing.png",
+					"dialogNodeID" : 2,
+					"extensionTasks" : 
+					[
+						{
+							"task" : "Ask for name", 
+							"possibilities" : ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁", "你的中文名字叫什么"],
+							"correct" : false,
+							"response" : "我叫张大伟.",
+							"soundID" : "wojiao",
+							"soundPath" : "david/wojiao.ogg",
+							"dialogNodeID" : 3,
+							"emotion" : "davidDefault.png"
+						},
+						{
+							"task" : "Ask for nationality", 
+							"possibilities" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你从哪里来", "你从哪里来的"],
+							"correct" : false,
+							"response" : "我是中国人.",
+							"soundID" : "nationality",
+							"soundPath" : "david/nationality.ogg",
+							"dialogNodeID" : 4,
+							"emotion" : "davidDefault.png"
+						}, 
+						{
+							"task" : "Ask for age", 
+							"possibilities" : ["你几岁", "你多大", "你多大了", "你年纪多大", "你今年多大了"],
+							"correct" : false,
+							"response" : "我十六岁.",
+							"soundID" : "age",
+							"soundPath" : "david/age.ogg",
+							"emotion" : "davidDefault.png",
+							"dialogNodeID" : 5,
+							"extensionTasks" : 
+							[
+								{
+									"task" : "Ask how he gets to school",
+									"possibilities" : ["你怎么去上学", "你怎么上学", "你怎么去学校", "你么天怎么去上学"],
+									"correct" : "false",
+									"response" : "我平常走路去上学.",
+									"soundID" : "gotoSchool",
+									"soundPath" : "david/gotoSchool.ogg",
+									"dialogNodeID" : 6,
+									"emotion" : "davidDefault.png"
+								},
+								{
+									"task" : "Ask for his Zodiac",
+									"possibilities" : ["你属什么", "你属什么生肖"],
+									"correct" : false,
+									"response" : "我属龙.",
+									"soundID" : "zodiac",
+									"soundPath" : "david/zodiac.ogg",
+									"dialogNodeID" : 7,
+									"emotion" : "davidDefault.png"
+								}
+							]
+						},
+						{
+							"task" : "Ask what he likes to eat",
+							"possibilities" : ["你喜欢吃什么", "你爱吃什么"],
+							"correct" : "false",
+							"response" : "我喜欢吃牛肉面.",
+							"soundID" : "foodLikes",
+							"soundPath" : "david/foodLikes.ogg",
+							"emotion" : "davidLaughing.png",
+							"dialogNodeID" : 8,
+							"extensionTasks" : 
+							[
+								{
+									"task" : "Share that I like beef noodle soup",
+									"taskType" : "choice",
+									"taskLink" : "choiceLikeDislike",
+									"possibilities" : ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我喜欢牛肉面", "我也喜欢牛肉面" ,"我爱吃牛肉面"],
+									"correct" : "false",
+									"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
+									"soundID" : "zhenbang",
+									"soundPath" : "david/zhenbang.ogg",
+									"emotion" : "davidLaughing.png", 
+									"dialogNodeID" : 9,
+									"extensionTasks" : []
+								},
+								{
+									"task" : "Share that I don't like beef noodle soup",
+									"taskType" : "choice",
+									"taskLink" : "choiceLikeDislike",
+									"possibilities" : ["我不喜欢吃牛肉面", "我不喜欢牛肉面", "牛肉面不好吃", "牛肉面很难吃"],
+									"correct" : "false",
+									"response" : "真的吗? 牛肉面非常好吃!",
+									"soundID" : "zhende",
+									"soundPath" : "david/zhende.ogg",
+									"dialogNodeID" : 10,
+									"emotion" : "davidLaughing.png"		
+								}, 
+								{
+									"task" : "Ask what is his favorite drink",
+									"possibilities" : ["你最喜欢喝什么", "你最喜欢喝什么饮料", "你喜欢喝什么"],
+									"correct" : "false",
+									"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
+									"soundID" : "favoriteDrink",
+									"soundPath" : "david/favoriteDrink.ogg",
+									"emotion" : "davidLaughing.png",
+									"dialogNodeID" : 11,
+									"extensionTasks" : 	
+									[
+										{
+											"task" : "Ask what is his favorite sport",
+											"possibilities" : ["你喜欢什么运动", "你最喜欢什么运动", "你最喜欢做什么运动", "你最喜欢做什么", "你最喜欢什么体育运动"],
+											"correct" : "false",
+											"response" : "我最喜欢打篮球和打乒乓球!",
+											"soundID" : "sportsLikes",
+											"soundPath" : "david/sportsLikes.ogg",
+											"emotion" : "davidLaughing.png",
+											"dialogNodeID" : 12,
+											"extensionTasks" : []						
+										},
+										{
+											"task" : "Ask what season he likes",
+											"possibilities" : ["你最喜欢什么季节", "你喜欢什么季节", "你喜欢哪个季节", "你最喜欢哪个季节"],
+											"correct" : "false",
+											"response" : "我最喜欢春天， 可是我不喜欢冬天",
+											"soundID" : "seasonLikes",
+											"soundPath" : "david/seasonLikes.ogg",
+											"emotion" : "davdiDefault.png",
+											"dialogNodeID" : 13,
+											"extensionTasks" : 	[]		
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			],
+			"completedTasks" : []
+		}
+}

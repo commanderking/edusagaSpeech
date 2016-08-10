@@ -81,7 +81,15 @@ def demoVocab1(name="Vocab1"):
 def demoVocab2(name="Vocab2"):
 	return render_template("demoVocab2.html", name=name)
 
+# Test for React
+@app.route('/reactTest')
+def reactTest(name="React"):
+	return render_template("reactTest.html", name=name)
 
+# Test for React Version of Question Asker (demoChinese)
+@app.route('/questionAsker')
+def demo(name="ChineseReact"):
+	return render_template("questionAsker.html", name=name)
 
 @app.route('/log', methods=['Post'])
 def log():

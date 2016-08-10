@@ -3,7 +3,9 @@
 	"score" : 0,
 	"currentEmotion" : "default",
 	"currentLanguage" : "zh-CN",
+	"voiceData" : "",
 	"currentSoundID" : "",
+	"scenarioOn": true,
 	"characterProfiles" : 
 	[
 		{

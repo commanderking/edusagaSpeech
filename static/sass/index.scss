@@ -1,10 +1,11 @@
 $darkBlue : #098ED0;
 $darkerBlue: #205BA0;
 $lightBlue : #38C6F3;
+$invertedBlue: #9FDFF7;
 $borderBlue: #174D9E;
 $yellow : #F3EC29;
-
-
+$disabledTextColor: #7DBEE4;
+$disabledDivBGColor: #90D3F3;
 
 $mobileWidth: 480px;
 $tabletWidth: 768px;
@@ -32,6 +33,12 @@ $desktopWidth: 1024px;
 	@media (min-width: #{$desktopWidth}) {
 		@content;
 	}
+}
+
+@-webkit-keyframes pulse {
+  0% { box-shadow:0 0 8px #ea4c89, inset 0 0 8px #ea4c89; }
+  50% { box-shadow:0 0 16px #ea4c89, inset 0 0 14px #ea4c89; }
+  100% { box-shadow:0 0 8px #ea4c89, inset 0 0 8px #ea4c89; }
 }
 
 .verticalCenter {
@@ -88,13 +95,15 @@ $desktopWidth: 1024px;
 	height: 25%;
 	position: absolute;
 	
-	.friendBanner {
-		  width: 30%; 
-		  position: absolute;
-		  border-top: 25.1vh solid #205BA0; 
-		  border-right: 10vw solid transparent;
-
+	.dialogSlantPiece {
+	  position: absolute;
+	  height: 100%;
 	}
+}
+
+.dialogDivInverted {
+	background-image: none;
+	background-color: $lightBlue;
 }
 
 .playerMenuWrapper {
@@ -123,6 +132,10 @@ $desktopWidth: 1024px;
 		color: #F3EC29;
 	}
 
+	.characterNameDivDisabled {
+		color: $disabledTextColor;
+	}
+
 	.characterTextResponse {
 		position: absolute;
 		border-radius: 10px;
@@ -130,30 +143,39 @@ $desktopWidth: 1024px;
 		min-height: 20%;
 		font-size: 6vh;
 		color: white;
+		.scenarioText {
+			font-size: 20px;
+		}
 	}
 
-}
+	.characterTextResponseDisabled {
+		color: $disabledTextColor;
+	}
 
-.sceneWrapper {
-	height: 100%;
-	/*background-image: url("../images/shanghaiAirport.jpg");*/
-	background-size: cover;
-	padding: 0px;
 }
 
 .gameWrapper {
 	padding: 0px;
 	background: rgba(1,1,1,0.1);
 	min-height: 550px;
+	height: 100%;
+	min-width: 500px;
 	.sceneBG {
 		position: absolute;
 		left: 0;
 		top: 0;
 		width: 100%;
 		height: 100%;
-		z-index: -1;
+		z-index: -10;
 		-webkit-filter: blur(3px);
 		filter: blur (3px);
+	}
+	.bgFadeOverlay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: black;
+		opacity: 0.2;
 	}
 }
 
@@ -304,6 +326,7 @@ CSS Related to Task List
 }
 
 .taskDiv {
+	color: #F3EC29;
 	position: relative;
 	display: block;
 	margin: 20px 0px;
@@ -327,7 +350,6 @@ CSS Related to Task List
 	.taskText {
 		padding: 12px;
 		padding-left: 15%;
-		color: #F3EC29;
 		font-weight: bold;
 		font-size: 2vw;
 		&:hover {
@@ -339,6 +361,25 @@ CSS Related to Task List
 			box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
 			border-radius: 25px;
 		}
+	}
+}
+
+.taskDivActive {
+	color: $darkerBlue;
+	background-color: #38C6F3;
+	background-image: none;
+	.taskText {
+
+	}
+}
+
+.taskDivDisabled {
+	background: #214f79;
+	color: #316086;
+	border: none;
+	&:hover {
+		background: #214f79;
+		color: #316086;
 	}
 }
 
@@ -371,15 +412,29 @@ CSS Related to Task List
 	right: -10%;
 	top: 25%;
 	border-radius: 50%;
-	background-color: #38C6F3;
-	color: #057FC5;
-	a {
-		color :#F3EC29;
-	}
 	&:hover {
 		text-decoration: none;
-
 	}
+}
+
+.taskHelpInactive{
+	background-color: #38C6F3;
+	color: #057FC5;
+
+}
+
+.taskHelpActive {
+	background-color: $darkBlue;
+	color: $yellow;
+	&:hover {
+		background-color: $darkBlue;
+		color: $yellow;
+	}
+}
+
+.taskHelpDisabled {
+	background: #214f79;
+	color: #316086;
 }
 
 .btn-skip {
@@ -403,6 +458,7 @@ CSS Related to Task List
 	position: absolute;
 	width: 100%;
 	height: 15%;
+	min-height: 100px;
 	bottom: 0;
 	display:table;
 	padding: 0;
@@ -414,6 +470,7 @@ CSS Related to Task List
 		position: relative;
 
 		.buttonLine {
+			position: relative;
 			background-color: rgba(9, 142, 208, 0.5);
 			height: 40%;
 
@@ -425,9 +482,10 @@ CSS Related to Task List
 
 			button {
 				position: absolute;
-				bottom: 2vh;
-				height: 11vh;
-				width: 11vh;
+				top: 0;
+				height: 50%;
+				min-height: 100px;
+				min-width: 100px;
 				border-radius: 50%;
 				left: 1%;
 				span {
@@ -435,10 +493,91 @@ CSS Related to Task List
 				}
 			}
 
-			.locationText {
-				margin-left: 20vh;
+			.coinDiv {
+				position: absolute;
+				left: 0;
+				width: 175px;
+				height: 100%;
+				border-top-right-radius: 25px;
+				border-bottom-right-radius: 25px;
+				background-color: #194CA6;
+				.coinIcon {
+					height: 100px;
+					width: 100px;
+					top: -30px;
+					position: absolute;
+				}
+			}
+
+			.coinCount {
+				position: absolute;
+				line-height: 40px;
 				color: white;
-				font-size: 4vh;
+				font-weight: bold;
+				margin-left: 80px;
+				width: 50%;
+				text-align: center;
+				font-size: 25px;				
+			}
+
+			.locationText {
+				margin-left: 200px;
+				overflow: none;
+				color: white;
+				line-height: 40px;
+				font-size: 20px;
+				font-weight: bold;
+			}
+
+			.miriIcon {
+				position: absolute;
+				top: -30px;
+				right: 5%;
+				height: 100%;
+				min-height: 100px;
+				z-index: 6;
+			}
+			.miriGlow {
+				box-shadow: 0 0 20px $yellow, inset 0 0 100px $yellow;
+				-webkit-animation: pulse 2s linear 1s infinite;
+				border-radius: 50px 
+			}
+			.hintDiv {
+				position: absolute;
+				top: 0%;
+				height: 100%;
+				right: 12%;
+				width: 40%;
+				background-color: $invertedBlue;
+				border-top-left-radius: 25px;
+				border-bottom-left-radius: 25px;
+				z-index: 5;
+
+				.payHintContainer {
+					height:50px;
+					width: 50px;
+					position: relative;
+					display: inline-block;
+
+					img {
+						position: absolute;
+						height: 200%;
+						width: 200%;
+						top: -75%;
+					}
+				}
+
+				.hintText {
+					margin-left: 50px;
+					margin-bottom: 0px;
+					vertical-align: top;
+					display: inline-block;
+					line-height: 40px;
+					font-size: 20px;
+					color: $darkerBlue;
+					font-weight: bold;
+
+				}
 			}
 		}
 	}
