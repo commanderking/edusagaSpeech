@@ -1,12 +1,11 @@
 $darkBlue : #098ED0;
 $darkerBlue: #205BA0;
 $lightBlue : #38C6F3;
+$invertedBlue: #9FDFF7;
 $borderBlue: #174D9E;
 $yellow : #F3EC29;
 $disabledTextColor: #7DBEE4;
 $disabledDivBGColor: #90D3F3;
-
-
 
 $mobileWidth: 480px;
 $tabletWidth: 768px;
@@ -34,6 +33,12 @@ $desktopWidth: 1024px;
 	@media (min-width: #{$desktopWidth}) {
 		@content;
 	}
+}
+
+@-webkit-keyframes pulse {
+  0% { box-shadow:0 0 8px #ea4c89, inset 0 0 8px #ea4c89; }
+  50% { box-shadow:0 0 16px #ea4c89, inset 0 0 14px #ea4c89; }
+  100% { box-shadow:0 0 8px #ea4c89, inset 0 0 8px #ea4c89; }
 }
 
 .verticalCenter {
@@ -149,17 +154,12 @@ $desktopWidth: 1024px;
 
 }
 
-.sceneWrapper {
-	height: 100%;
-	/*background-image: url("../images/shanghaiAirport.jpg");*/
-	background-size: cover;
-	padding: 0px;
-}
-
 .gameWrapper {
 	padding: 0px;
 	background: rgba(1,1,1,0.1);
 	min-height: 550px;
+	height: 100%;
+	min-width: 500px;
 	.sceneBG {
 		position: absolute;
 		left: 0;
@@ -470,6 +470,7 @@ CSS Related to Task List
 		position: relative;
 
 		.buttonLine {
+			position: relative;
 			background-color: rgba(9, 142, 208, 0.5);
 			height: 40%;
 
@@ -495,56 +496,63 @@ CSS Related to Task List
 			.coinDiv {
 				position: absolute;
 				left: 0;
-				top: 25%;
-				width: 200px;
-				height: 50%;
+				width: 175px;
+				height: 100%;
 				border-top-right-radius: 25px;
 				border-bottom-right-radius: 25px;
 				background-color: #194CA6;
 				.coinIcon {
 					height: 100px;
 					width: 100px;
-					top: -25px;
+					top: -30px;
 					position: absolute;
 				}
 			}
 
 			.coinCount {
 				position: absolute;
-				line-height: 50px;
+				line-height: 40px;
 				color: white;
 				font-weight: bold;
-				margin-left: 100px;
+				margin-left: 80px;
 				width: 50%;
 				text-align: center;
 				font-size: 25px;				
 			}
 
 			.locationText {
-				margin-left: 22%;
+				margin-left: 200px;
+				overflow: none;
 				color: white;
-				font-size: 4vh;
+				line-height: 40px;
+				font-size: 20px;
+				font-weight: bold;
 			}
 
 			.miriIcon {
 				position: absolute;
-				top: 0px;
+				top: -30px;
 				right: 5%;
 				height: 100%;
 				min-height: 100px;
 				z-index: 6;
 			}
+			.miriGlow {
+				box-shadow: 0 0 20px $yellow, inset 0 0 100px $yellow;
+				-webkit-animation: pulse 2s linear 1s infinite;
+				border-radius: 50px 
+			}
 			.hintDiv {
 				position: absolute;
-				top: 22.5%;
-				height: 55%;
+				top: 0%;
+				height: 100%;
 				right: 12%;
 				width: 35%;
-				background-color: #A2E1F8;
+				background-color: $invertedBlue;
 				border-top-left-radius: 25px;
 				border-bottom-left-radius: 25px;
 				z-index: 5;
-				
+
 				.payHintContainer {
 					height:50px;
 					width: 50px;
@@ -561,9 +569,10 @@ CSS Related to Task List
 
 				.hintText {
 					margin-left: 50px;
+					margin-bottom: 0px;
 					vertical-align: top;
 					display: inline-block;
-					line-height: 50px;
+					line-height: 40px;
 					font-size: 20px;
 					color: $darkerBlue;
 					font-weight: bold;

@@ -6,6 +6,7 @@ var Task = React.createClass({
 	render: function() {
 		var hintClassName;
 		var taskDivClass;
+		// Handling how to display each hint when hint is active or inactive
 		if (this.props.hintActive === true && this.props.index === this.props.currentHintIndex) {
 			hintDiv = <a 
 						className='taskHelpIcon taskHelpActive glyphicon glyphicon-question-sign'

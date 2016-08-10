@@ -54,18 +54,22 @@
 	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 179);
 	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 181);
 	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 182);
-	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 184);
+	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 187);
 	const IMAGE_BASE_PATH = './static/images/';
 	
 	var QuestionAsker = React.createClass({
 		displayName: 'QuestionAsker',
 	
+		// feedbackText can be hintText from clicking hint or feedback on what user said
 		getInitialState: function () {
 			return {
 				sceneData: undefined,
 				hintActive: false,
 				currentHintIndex: null,
-				voicePack: {}
+				voicePack: {},
+				coins: 0,
+				answerFeedbackActive: false,
+				feedbackText: ""
 			};
 		},
 		loadSceneData: function () {
@@ -78,7 +82,7 @@
 				// Load all the sounds that are in the scene
 				that.initializeSounds();
 				// Load voice pack
-				// voice list loaded asynchornously, so can't be grabbed on page load
+				// voice list in browser loaded asynchornously, so can't be grabbed on page load
 				// http://stackoverflow.com/questions/21513706/getting-the-list-of-voices-in-speechsynthesis-of-chrome-web-speech-api
 				// Wait until the voiceslist changes and then initialize speechSynth
 				// CARE: Will not work correctly if called on "render"
@@ -97,13 +101,13 @@
 			this.loadSceneData();
 		},
 		checkAnswer: function (userAnswer, taskIndex) {
+	
 			var correctAnswer = false;
 			var newSceneData = this.state.sceneData;
 			var allCurrentTasks = this.state.sceneData.character.tasks;
 			var currentTaskData = allCurrentTasks[taskIndex];
 			var possibleCorrectAnswers = currentTaskData.possibilities;
 	
-			console.log(currentTaskData);
 			// Check is userAnswer matches any possible answer
 			possibleCorrectAnswers.forEach(function (possibleWord) {
 				if (userAnswer === possibleWord) {
@@ -145,6 +149,9 @@
 					newSceneData.character.tasks.splice(taskIndex, 1);
 				}
 	
+				// Add coins 
+				this.addCoins(10);
+	
 				// If task has an extension task, add that new task to the Task List
 				if (currentTaskData.extensionTasks == null) {
 					// Do nothing
@@ -153,6 +160,10 @@
 						newSceneData.character.tasks.push(currentTaskData.extensionTasks[j]);
 					});
 				}
+	
+				/*--------------------------------------------
+	   When user answers incorrectly
+	   --------------------------------------------*/
 			} else {
 				newSceneData.currentImage = IMAGE_BASE_PATH + this.state.sceneData.character.emotions.confused;
 				// Grab random confused phrase
@@ -167,9 +178,18 @@
 	
 				// Play confused sound
 				this.playSound(confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].soundID);
+	
+				// Activate Feedback Mode
+				var feedback = userAnswer;
+				this.setState({
+					feedbackText: userAnswer
+				});
+	
+				// Turns on feedback mode to reveal what user said
+				this.activateFeedbackMode();
 			}
 	
-			// Refresh state with adjusted sceneData
+			// Refresh the sceneData with newSceneDAta
 			this.setState({ sceneData: newSceneData });
 		},
 		initializeSounds: function () {
@@ -204,9 +224,13 @@
 			createjs.Sound.play(soundID);
 		},
 		handleHintClick: function (hintIndex) {
+			console.log("Hint Clicked");
+			var hintText = this.state.sceneData.character.tasks[hintIndex].possibilities[0];
 			this.setState({
+				answerFeedbackActive: false,
 				hintActive: true,
-				currentHintIndex: hintIndex
+				currentHintIndex: hintIndex,
+				feedbackText: hintText
 			});
 		},
 		handleDisableHint: function () {
@@ -218,14 +242,24 @@
 		handleHintAudio: function (hintAudioToPlay) {
 			SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 		},
+		activateFeedbackMode: function () {
+			this.setState({
+				hintActive: false,
+				currentHintIndex: null,
+				answerFeedbackActive: true
+			});
+		},
+		deactivateFeedbackMode: function () {
+			this.setState({
+				answerFeedbackActive: false
+			});
+		},
+		addCoins: function (numberCoinsToAdd) {
+			newCoins = this.state.coins + numberCoinsToAdd;
+			this.setState({ coins: newCoins });
+		},
 		render: function () {
 			var sceneData = this.state.sceneData;
-	
-			// Store Hint Text if Hint state is active to pass to componenets
-			var hintText = undefined;
-			if (this.state.hintActive) {
-				hintText = sceneData.character.tasks[this.state.currentHintIndex].possibilities[0];
-			}
 	
 			if (!this.state.sceneData) {
 				return React.createElement(
@@ -251,7 +285,9 @@
 						scenarioOn: this.state.sceneData.scenarioOn,
 						scenarioData: this.state.sceneData.scenario,
 						scenarioIndex: this.state.sceneData.scenarioIndex,
-						charImage: sceneData.currentImage }),
+						charImage: sceneData.currentImage,
+						silhouette: sceneData.character.silhouette,
+						hintActive: this.state.hintActive }),
 					React.createElement(TaskContainer, {
 						scenarioOn: sceneData.scenarioOn,
 						tasks: this.state.sceneData.character.tasks,
@@ -260,11 +296,15 @@
 						hintActive: this.state.hintActive,
 						currentHintIndex: this.state.currentHintIndex,
 						onHintClick: this.handleHintClick,
-						onDisableHint: this.handleDisableHint }),
+						onDisableHint: this.handleDisableHint,
+						answerFeedbackActive: this.state.answerFeedbackActive }),
 					React.createElement(FeedbackContainer, {
+						locationText: this.state.sceneData.character.location.name,
 						hintActive: this.state.hintActive,
-						hintText: hintText,
-						onHintAudio: this.handleHintAudio })
+						onHintAudio: this.handleHintAudio,
+						coins: this.state.coins,
+						answerFeedbackActive: this.state.answerFeedbackActive,
+						feedbackText: this.state.feedbackText })
 				);
 			}
 		}
@@ -21922,6 +21962,12 @@
 					React.createElement("img", { className: "charImage", src: scenarioData[scenarioIndex].image }),
 					React.createElement("img", { className: "charImage", src: scenarioData[scenarioIndex].imageLayer })
 				);
+			} else if (this.props.hintActive === true) {
+				charImageDiv = React.createElement(
+					"div",
+					{ className: "characterImageDiv" },
+					React.createElement("img", { className: "charImage", src: this.props.silhouette })
+				);
 			} else {
 				charImageDiv = React.createElement(
 					"div",
@@ -21932,12 +21978,8 @@
 	
 			return React.createElement(
 				"div",
-				{ className: "sceneWrapper col-md-12 col-sm-12 col-xs-12" },
-				React.createElement(
-					"div",
-					{ className: "characterDiv col-md-4" },
-					charImageDiv
-				)
+				{ className: "characterDiv col-md-4" },
+				charImageDiv
 			);
 		}
 	});
@@ -22061,14 +22103,14 @@
 		},
 		// Task Index should be grabbed from the Task's index
 		handleSpeechInput: function (taskIndex) {
-			console.log("done");
+			// Turns off any active hints
+			this.props.onDisableHint();
 			var that = this;
 			SpeechRecognition.activateSpeech(this.props.tasks[taskIndex].possibilities, this.props.taskLang).then(function (userAnswer) {
 				// Need to set var here, otherwise loses it in setState
 				var answer = userAnswer;
 				if (userAnswer !== null) {
-					console.log("This is user's answer " + answer);
-					that.setState({}, that.props.checkAnswer(userAnswer, taskIndex));
+					that.props.checkAnswer(userAnswer, taskIndex);
 				}
 			});
 		},
@@ -22135,6 +22177,7 @@
 		render: function () {
 			var hintClassName;
 			var taskDivClass;
+			// Handling how to display each hint when hint is active or inactive
 			if (this.props.hintActive === true && this.props.index === this.props.currentHintIndex) {
 				hintDiv = React.createElement('a', {
 					className: 'taskHelpIcon taskHelpActive glyphicon glyphicon-question-sign',
@@ -22214,12 +22257,18 @@
 
 	var React = __webpack_require__(/*! react */ 1);
 	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 183);
+	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 184);
+	var MiriIcon = __webpack_require__(/*! ./components/MiriIcon */ 185);
+	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 186);
 	
 	var FeedbackContainer = React.createClass({
 		displayName: 'FeedbackContainer',
 	
 		getInitialState: function () {
-			return { hintClickDisable: false };
+			return {
+				hintClickDisable: false,
+				miriGlow: false
+			};
 		},
 		handleHintAudioClick: function () {
 			that = this;
@@ -22228,7 +22277,7 @@
 			this.setState({ hintClickDisable: true });
 	
 			// PLay audio from hint
-			this.props.onHintAudio(this.props.hintText);
+			this.props.onHintAudio(this.props.feedbackText);
 	
 			// Disable clicking on hint for some time before re-enabling
 			setTimeout(function () {
@@ -22242,15 +22291,24 @@
 			// Change Miri's icon depending on type of hint/feedback
 			var hintDivClass;
 			var miriIconSrc;
+			var hintTemplateText;
+			var miriIconClass = "miriIcon";
 			if (this.props.hintActive === true) {
 				hintDivClass = "hintDiv";
+				miriIconSrc = "/static/images/miri/icons/Miri_Icon_Yay.png";
+				hintTemplateText = "Maybe you could say: ";
+				miriIconClass += " miriGlow";
+			} else if (this.props.answerFeedbackActive === true) {
+				hintDivClass = "hintDiv";
 				miriIconSrc = "/static/images/miri/icons/Miri_Icon_Oh.png";
+				hintTemplateText = "I heard you say: ";
+				miriIconClass += " miriGlow";
 			} else {
 				hintDivClass = "hintDiv hidden";
 				miriIconSrc = "/static/images/miri/icons/Miri_Icon_default.png";
 			}
 	
-			// Assign function to play span's words with speechsynth
+			// If hintClick disabled, span should do nothing, otherwise, it should play audio
 			var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
 			return React.createElement(
 				'div',
@@ -22261,43 +22319,26 @@
 					React.createElement(
 						'div',
 						{ className: 'buttonLine' },
-						React.createElement(
-							'div',
-							{ className: 'coinDiv' },
-							React.createElement('img', { className: 'coinIcon', src: '/static/images/UI/Icon_coins-01.png' }),
-							React.createElement(
-								'div',
-								{ className: 'coinCount' },
-								'200'
-							)
-						),
+						React.createElement(CoinMeter, { coins: this.props.coins }),
 						React.createElement(
 							'p',
 							{ className: 'locationText' },
-							'Classroom 教室'
+							this.props.locationText
 						),
 						React.createElement(
 							'div',
 							{ className: hintDivClass },
-							React.createElement(
-								'div',
-								{ className: 'payHintContainer' },
-								React.createElement('img', { className: 'hintIconImage payHintBg', src: 'static/images/UI/ICON_payforhelp_bg-01.png' }),
-								React.createElement('img', { className: 'hintIconImage', src: 'static/images/UI/ICON_payforhelp_qmark-01.png' }),
-								React.createElement('img', { className: 'hintIconImage', src: 'static/images/UI/ICON_payforhelp_Big_sparkle-01.png' }),
-								React.createElement('img', { className: 'hintIconImage', src: 'static/images/UI/ICON_payforhelp_L_spark-01.png' }),
-								React.createElement('img', { className: 'hintIconImage', src: 'static/images/UI/ICON_payforhelp_R_sparkle-01.png' })
-							),
+							React.createElement(HintIcon, null),
 							React.createElement(
 								'p',
 								{ className: 'hintText' },
-								'Maybe you could say...',
+								hintTemplateText,
 								React.createElement(SpeechableSpan, {
 									clickFunction: spanClickFunction,
-									hintText: this.props.hintText })
+									feedbackText: this.props.feedbackText })
 							)
 						),
-						React.createElement('img', { className: 'miriIcon', src: miriIconSrc })
+						React.createElement(MiriIcon, { miriClass: miriIconClass, miriIconSrc: miriIconSrc })
 					)
 				)
 			);
@@ -22321,7 +22362,7 @@
 			"span",
 			{ className: "speechableSpan",
 				onClick: props.clickFunction },
-			props.hintText
+			props.feedbackText
 		);
 	}
 	
@@ -22329,6 +22370,75 @@
 
 /***/ },
 /* 184 */
+/*!***************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/CoinMeter.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function CoinMeter(props) {
+		return React.createElement(
+			"div",
+			{ className: "coinDiv" },
+			React.createElement("img", { className: "coinIcon", src: "/static/images/UI/Icon_coins-01.png" }),
+			React.createElement(
+				"div",
+				{ className: "coinCount" },
+				props.coins
+			)
+		);
+	}
+	
+	module.exports = CoinMeter;
+
+/***/ },
+/* 185 */
+/*!**************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function MiriIcon(props) {
+		return React.createElement(
+			'div',
+			null,
+			React.createElement('img', { className: props.miriClass, src: props.miriIconSrc })
+		);
+	}
+	
+	module.exports = MiriIcon;
+
+/***/ },
+/* 186 */
+/*!**************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/HintIcon.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function HintIcon(props) {
+		return React.createElement(
+			"div",
+			{ className: "payHintContainer" },
+			React.createElement("img", { className: "hintIconImage payHintBg", src: "static/images/UI/ICON_payforhelp_bg-01.png" }),
+			React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_qmark-01.png" }),
+			React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_Big_sparkle-01.png" }),
+			React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_L_spark-01.png" }),
+			React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_R_sparkle-01.png" })
+		);
+	}
+	
+	module.exports = HintIcon;
+
+/***/ },
+/* 187 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/SpeechSynth.js ***!
   \************************************************/

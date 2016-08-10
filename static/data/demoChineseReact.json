@@ -20,9 +20,10 @@
 		{
 			"name" : "David",
 			"language" : "zh-CN",
+			"silhouette" : "/static/images/david/davidSilhouette.png",
 			"location" : 
 			{
-				"name" : "Shanghai Airport",
+				"name" : "Shanghai Airport (上海机场)",
 				"bg" : "/static/images/bg/shanghaiAirport.jpg"
 			},
 			"emotions" : 

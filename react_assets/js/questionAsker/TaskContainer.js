@@ -10,19 +10,15 @@ var TaskContainer = React.createClass({
 	},
 	// Task Index should be grabbed from the Task's index
 	handleSpeechInput: function(taskIndex) {
-		console.log("done");
+		// Turns off any active hints
+		this.props.onDisableHint();
 		var that = this;
 		SpeechRecognition.activateSpeech(this.props.tasks[taskIndex].possibilities, this.props.taskLang)
 			.then(function(userAnswer) {
 				// Need to set var here, otherwise loses it in setState
 				var answer = userAnswer;
 				if (userAnswer !== null) {
-					console.log("This is user's answer " + answer);
-					that.setState(
-						{
-						},
-						that.props.checkAnswer(userAnswer, taskIndex)	
-					)
+					that.props.checkAnswer(userAnswer, taskIndex);
 				}
 			}
 		);

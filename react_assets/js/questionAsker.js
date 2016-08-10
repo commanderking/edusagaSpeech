@@ -6,15 +6,19 @@ var TaskContainer = require('./questionAsker/TaskContainer');
 var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer');
 var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
-const IMAGE_BASE_PATH = './static/images/'
+const IMAGE_BASE_PATH = './static/images/';
 
 var QuestionAsker = React.createClass({
+	// feedbackText can be hintText from clicking hint or feedback on what user said
 	getInitialState: function() {
 		return {
 			sceneData: undefined,
 			hintActive: false,
 			currentHintIndex: null,
-			voicePack: {}
+			voicePack: {},
+			coins: 0,
+			answerFeedbackActive: false,
+			feedbackText: ""
 		}
 	},
 	loadSceneData: function() {
@@ -28,7 +32,7 @@ var QuestionAsker = React.createClass({
 			// Load all the sounds that are in the scene
 			that.initializeSounds();
 			// Load voice pack
-			// voice list loaded asynchornously, so can't be grabbed on page load
+			// voice list in browser loaded asynchornously, so can't be grabbed on page load
 			// http://stackoverflow.com/questions/21513706/getting-the-list-of-voices-in-speechsynthesis-of-chrome-web-speech-api
 			// Wait until the voiceslist changes and then initialize speechSynth
 			// CARE: Will not work correctly if called on "render"
@@ -47,13 +51,13 @@ var QuestionAsker = React.createClass({
 		this.loadSceneData();
 	},
 	checkAnswer: function(userAnswer, taskIndex) {
+
 		var correctAnswer = false;
 		var newSceneData = this.state.sceneData;
 		var allCurrentTasks = this.state.sceneData.character.tasks;
 		var currentTaskData = allCurrentTasks[taskIndex];
 		var possibleCorrectAnswers = currentTaskData.possibilities;
 
-		console.log(currentTaskData);
 		// Check is userAnswer matches any possible answer
 		possibleCorrectAnswers.forEach(function(possibleWord) {
 			if (userAnswer === possibleWord) {
@@ -95,7 +99,8 @@ var QuestionAsker = React.createClass({
 				newSceneData.character.tasks.splice(taskIndex, 1);
 			}
 
-
+			// Add coins 
+			this.addCoins(10);
 
 			// If task has an extension task, add that new task to the Task List
 			if (currentTaskData.extensionTasks == null) {
@@ -105,6 +110,10 @@ var QuestionAsker = React.createClass({
 					newSceneData.character.tasks.push(currentTaskData.extensionTasks[j]);
 				})
 			}
+
+		/*--------------------------------------------
+		When user answers incorrectly
+		--------------------------------------------*/
 
 		} else {
 			newSceneData.currentImage = IMAGE_BASE_PATH + this.state.sceneData.character.emotions.confused;
@@ -121,9 +130,17 @@ var QuestionAsker = React.createClass({
 			// Play confused sound
 			this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
 
+			// Activate Feedback Mode
+			var feedback = userAnswer; 
+			this.setState({
+				feedbackText: userAnswer
+			})
+
+			// Turns on feedback mode to reveal what user said
+			this.activateFeedbackMode();
 		}
 
-		// Refresh state with adjusted sceneData
+		// Refresh the sceneData with newSceneDAta
 		this.setState({sceneData: newSceneData})
 
 	},
@@ -159,9 +176,13 @@ var QuestionAsker = React.createClass({
 		createjs.Sound.play(soundID);
 	},
 	handleHintClick: function(hintIndex) {
+		console.log("Hint Clicked");
+		var hintText = this.state.sceneData.character.tasks[hintIndex].possibilities[0]
 		this.setState({
+			answerFeedbackActive: false,
 			hintActive: true,
-			currentHintIndex: hintIndex
+			currentHintIndex: hintIndex,
+			feedbackText: hintText
 		})
 	},
 	handleDisableHint: function() {
@@ -173,14 +194,24 @@ var QuestionAsker = React.createClass({
 	handleHintAudio: function(hintAudioToPlay) {
 		SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 	},
+	activateFeedbackMode: function() {
+		this.setState({
+			hintActive: false,
+			currentHintIndex: null,
+			answerFeedbackActive: true
+		})
+	},
+	deactivateFeedbackMode: function() {
+		this.setState({
+			answerFeedbackActive: false
+		})		
+	},
+	addCoins: function(numberCoinsToAdd) {
+		newCoins = this.state.coins + numberCoinsToAdd;
+		this.setState({ coins: newCoins });
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
-
-		// Store Hint Text if Hint state is active to pass to componenets
-		var hintText = undefined;
-		if (this.state.hintActive) {
-			hintText = sceneData.character.tasks[this.state.currentHintIndex].possibilities[0];
-		}
 
 		if (!this.state.sceneData) {
 			return <div>Loading Scene</div>
@@ -201,7 +232,9 @@ var QuestionAsker = React.createClass({
 						scenarioOn = {this.state.sceneData.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
 						scenarioIndex = {this.state.sceneData.scenarioIndex} 
-						charImage = {sceneData.currentImage}/>
+						charImage = {sceneData.currentImage} 
+						silhouette = {sceneData.character.silhouette}
+						hintActive = {this.state.hintActive} />
 					<TaskContainer 
 						scenarioOn = {sceneData.scenarioOn}
 						tasks = {this.state.sceneData.character.tasks}
@@ -210,11 +243,15 @@ var QuestionAsker = React.createClass({
 						hintActive = {this.state.hintActive}
 						currentHintIndex = {this.state.currentHintIndex}
 						onHintClick = {this.handleHintClick}
-						onDisableHint = {this.handleDisableHint} />
+						onDisableHint = {this.handleDisableHint}
+						answerFeedbackActive = {this.state.answerFeedbackActive} />
 					<FeedbackContainer 
+						locationText = {this.state.sceneData.character.location.name}
 						hintActive = {this.state.hintActive} 
-						hintText = {hintText}
-						onHintAudio = {this.handleHintAudio} />
+						onHintAudio = {this.handleHintAudio}
+						coins = {this.state.coins} 
+						answerFeedbackActive = {this.state.answerFeedbackActive}
+						feedbackText = {this.state.feedbackText} />
 				</div>
 			)
 		}

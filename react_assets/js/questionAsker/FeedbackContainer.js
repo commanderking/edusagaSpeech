@@ -1,9 +1,15 @@
 var React = require('react');
 var SpeechableSpan = require('./components/SpeechableSpan');
+var CoinMeter = require('./components/CoinMeter');
+var MiriIcon = require('./components/MiriIcon');
+var HintIcon = require('./components/HintIcon');
 
 var FeedbackContainer = React.createClass({
 	getInitialState: function() {
-		return { hintClickDisable: false }
+		return { 
+			hintClickDisable: false,
+			miriGlow: false,
+		}
 	},
 	handleHintAudioClick: function() {
 		that = this;
@@ -12,7 +18,7 @@ var FeedbackContainer = React.createClass({
 		this.setState({ hintClickDisable: true })
 
 		// PLay audio from hint
-		this.props.onHintAudio(this.props.hintText);
+		this.props.onHintAudio(this.props.feedbackText);
 
 		// Disable clicking on hint for some time before re-enabling
 		setTimeout(function(){
@@ -26,40 +32,41 @@ var FeedbackContainer = React.createClass({
 		// Change Miri's icon depending on type of hint/feedback
 		var hintDivClass;
 		var miriIconSrc;
+		var hintTemplateText;
+		var miriIconClass = "miriIcon";
 		if (this.props.hintActive === true) {
-			hintDivClass = "hintDiv"
-			miriIconSrc ="/static/images/miri/icons/Miri_Icon_Oh.png"
+			hintDivClass = "hintDiv";
+			miriIconSrc ="/static/images/miri/icons/Miri_Icon_Yay.png";
+			hintTemplateText = "Maybe you could say: ";
+			miriIconClass += " miriGlow";
+		} else if (this.props.answerFeedbackActive === true) {
+			hintDivClass = "hintDiv";
+			miriIconSrc = "/static/images/miri/icons/Miri_Icon_Oh.png";
+			hintTemplateText = "I heard you say: "; 
+			miriIconClass += " miriGlow";
 		} else {
 			hintDivClass = "hintDiv hidden"
 			miriIconSrc = "/static/images/miri/icons/Miri_Icon_default.png"
 		}
 
-		// Assign function to play span's words with speechsynth
+		// If hintClick disabled, span should do nothing, otherwise, it should play audio
 		var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
 		return (
 			<div className ="bottomNavBar">
 				<div className="row-fluid">
 					<div className="buttonLine">
-						<div className="coinDiv">
-							<img className="coinIcon" src="/static/images/UI/Icon_coins-01.png" />
-							<div className="coinCount">200</div>
-						</div>
-						<p className="locationText">Classroom 教室</p>
+						<CoinMeter coins={this.props.coins} />
+						<p className="locationText">{this.props.locationText}</p>
 						<div className={hintDivClass}>
-							<div className="payHintContainer">
-								<img className="hintIconImage payHintBg" src="static/images/UI/ICON_payforhelp_bg-01.png" />
-								<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_qmark-01.png" />
-								<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_Big_sparkle-01.png" />
-								<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_L_spark-01.png" />
-								<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_R_sparkle-01.png" />
-							</div>
-							<p className="hintText">Maybe you could say... 
+							<HintIcon />
+							<p className="hintText">
+								{hintTemplateText}
 								<SpeechableSpan 
 									clickFunction={spanClickFunction}
-									hintText={this.props.hintText}/>
+									feedbackText={this.props.feedbackText} />
 							</p>
 						</div>
-						<img className="miriIcon" src={miriIconSrc} />
+						<MiriIcon miriClass={miriIconClass} miriIconSrc={miriIconSrc} />
 					</div>
 				</div>
 			</div>

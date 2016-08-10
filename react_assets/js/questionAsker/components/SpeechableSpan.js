@@ -5,7 +5,7 @@ function SpeechableSpan (props) {
 	return (
 		<span className="speechableSpan"
 			onClick={ props.clickFunction }>
-			{props.hintText}
+			{props.feedbackText}
 		</span>
 	)
 }

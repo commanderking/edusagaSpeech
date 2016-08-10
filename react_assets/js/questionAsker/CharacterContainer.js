@@ -14,7 +14,15 @@ var CharacterContainer = React.createClass({
 					<img className="charImage" src={scenarioData[scenarioIndex].imageLayer} />
 				</div>
 			)
-		} else {
+		} else if (this.props.hintActive === true) {
+			charImageDiv = 
+			(
+				<div className="characterImageDiv">
+					<img className="charImage" src={this.props.silhouette} />
+				</div>				
+			)
+		}
+			else {
 			charImageDiv = 
 			(
 				<div className="characterImageDiv">
@@ -24,10 +32,8 @@ var CharacterContainer = React.createClass({
 		}
 
 		return (
-			<div className="sceneWrapper col-md-12 col-sm-12 col-xs-12">
-				<div className="characterDiv col-md-4">
-					{charImageDiv}
-				</div>
+			<div className="characterDiv col-md-4">
+				{charImageDiv}
 			</div>
 		)
 	}
