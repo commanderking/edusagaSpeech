@@ -8,7 +8,6 @@ var FeedbackContainer = React.createClass({
 	getInitialState: function() {
 		return { 
 			hintClickDisable: false,
-			miriGlow: false,
 		}
 	},
 	handleHintAudioClick: function() {
@@ -31,22 +30,18 @@ var FeedbackContainer = React.createClass({
 		// Show Hint when hints are active
 		// Change Miri's icon depending on type of hint/feedback
 		var hintDivClass;
-		var miriIconSrc;
 		var hintTemplateText;
 		var miriIconClass = "miriIcon";
 		if (this.props.hintActive === true) {
 			hintDivClass = "hintDiv";
-			miriIconSrc ="/static/images/miri/icons/Miri_Icon_Yay.png";
 			hintTemplateText = "Maybe you could say: ";
 			miriIconClass += " miriGlow";
 		} else if (this.props.answerFeedbackActive === true) {
 			hintDivClass = "hintDiv";
-			miriIconSrc = "/static/images/miri/icons/Miri_Icon_Oh.png";
-			hintTemplateText = "I heard you say: "; 
+			hintTemplateText = "I heard you say:"; 
 			miriIconClass += " miriGlow";
 		} else {
 			hintDivClass = "hintDiv hidden"
-			miriIconSrc = "/static/images/miri/icons/Miri_Icon_default.png"
 		}
 
 		// If hintClick disabled, span should do nothing, otherwise, it should play audio
@@ -56,7 +51,10 @@ var FeedbackContainer = React.createClass({
 				<div className="row-fluid">
 					<div className="buttonLine">
 						<CoinMeter coins={this.props.coins} />
-						<p className="locationText">{this.props.locationText}</p>
+						<p className="locationText">
+							<i>{this.props.locationTextEnglish} </i>
+							({this.props.locationTextChinese})
+						</p>
 						<div className={hintDivClass}>
 							<HintIcon />
 							<p className="hintText">
@@ -66,7 +64,7 @@ var FeedbackContainer = React.createClass({
 									feedbackText={this.props.feedbackText} />
 							</p>
 						</div>
-						<MiriIcon miriClass={miriIconClass} miriIconSrc={miriIconSrc} />
+						<MiriIcon miriClass={miriIconClass} miriIconSrc={this.props.miriIconSrc} />
 					</div>
 				</div>
 			</div>

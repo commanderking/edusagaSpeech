@@ -69,7 +69,8 @@
 				voicePack: {},
 				coins: 0,
 				answerFeedbackActive: false,
-				feedbackText: ""
+				feedbackText: "",
+				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 			};
 		},
 		loadSceneData: function () {
@@ -108,12 +109,20 @@
 			var currentTaskData = allCurrentTasks[taskIndex];
 			var possibleCorrectAnswers = currentTaskData.possibilities;
 	
-			// Check is userAnswer matches any possible answer
-			possibleCorrectAnswers.forEach(function (possibleWord) {
-				if (userAnswer === possibleWord) {
-					correctAnswer = true;
-				}
-			});
+			// Check if user's answers contains any of the possible answers
+			if (currentTaskData.completeMatchOnly === true) {
+				possibleCorrectAnswers.forEach(function (possibleWord) {
+					if (userAnswer === possibleWord) {
+						correctAnswer = true;
+					}
+				});
+			} else {
+				possibleCorrectAnswers.forEach(function (possibleWord) {
+					if (userAnswer.indexOf(possibleWord) >= 0) {
+						correctAnswer = true;
+					}
+				});
+			}
 			if (correctAnswer) {
 				// Play response voice
 				this.playSound(newSceneData.character.tasks[taskIndex].soundID);
@@ -136,7 +145,6 @@
 						allCurrentTasks.forEach(function (task, k) {
 							if (task.taskLink == currentTaskData.taskLink) {
 								indexesToRemove.push(k);
-								console.log(task.task + task.taskLink);
 							}
 						});
 						for (var i = indexesToRemove.length - 1; i >= 0; i--) {
@@ -224,34 +232,51 @@
 			createjs.Sound.play(soundID);
 		},
 		handleHintClick: function (hintIndex) {
-			console.log("Hint Clicked");
+			var that = this;
 			var hintText = this.state.sceneData.character.tasks[hintIndex].possibilities[0];
 			this.setState({
 				answerFeedbackActive: false,
 				hintActive: true,
 				currentHintIndex: hintIndex,
-				feedbackText: hintText
+				feedbackText: hintText,
+				miriIconSrc: "/static/images/miri/icons/Miri_Icon_Yay.png"
 			});
+	
+			// return Miri Icon to default after 3s
+			setTimeout(function () {
+				that.setState({
+					miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+				});
+			}, 3000);
 		},
 		handleDisableHint: function () {
 			this.setState({
 				hintActive: false,
-				currentHintIndex: null
+				currentHintIndex: null,
+				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 			});
 		},
 		handleHintAudio: function (hintAudioToPlay) {
 			SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 		},
 		activateFeedbackMode: function () {
+			var that = this;
 			this.setState({
 				hintActive: false,
 				currentHintIndex: null,
-				answerFeedbackActive: true
+				answerFeedbackActive: true,
+				miriIconSrc: "/static/images/miri/icons/Miri_Icon_Oh.png"
 			});
+			setTimeout(function () {
+				that.setState({
+					miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+				});
+			}, 3000);
 		},
 		deactivateFeedbackMode: function () {
 			this.setState({
-				answerFeedbackActive: false
+				answerFeedbackActive: false,
+				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 			});
 		},
 		addCoins: function (numberCoinsToAdd) {
@@ -297,14 +322,17 @@
 						currentHintIndex: this.state.currentHintIndex,
 						onHintClick: this.handleHintClick,
 						onDisableHint: this.handleDisableHint,
-						answerFeedbackActive: this.state.answerFeedbackActive }),
+						answerFeedbackActive: this.state.answerFeedbackActive,
+						deactivateFeedbackMode: this.deactivateFeedbackMode }),
 					React.createElement(FeedbackContainer, {
-						locationText: this.state.sceneData.character.location.name,
+						locationTextEnglish: this.state.sceneData.character.location.nameEnglish,
+						locationTextChinese: this.state.sceneData.character.location.nameChinese,
 						hintActive: this.state.hintActive,
 						onHintAudio: this.handleHintAudio,
 						coins: this.state.coins,
 						answerFeedbackActive: this.state.answerFeedbackActive,
-						feedbackText: this.state.feedbackText })
+						feedbackText: this.state.feedbackText,
+						miriIconSrc: this.state.miriIconSrc })
 				);
 			}
 		}
@@ -22103,8 +22131,9 @@
 		},
 		// Task Index should be grabbed from the Task's index
 		handleSpeechInput: function (taskIndex) {
-			// Turns off any active hints
+			// Turns off any active hints or feedback
 			this.props.onDisableHint();
+			this.props.deactivateFeedbackMode();
 			var that = this;
 			SpeechRecognition.activateSpeech(this.props.tasks[taskIndex].possibilities, this.props.taskLang).then(function (userAnswer) {
 				// Need to set var here, otherwise loses it in setState
@@ -22266,8 +22295,7 @@
 	
 		getInitialState: function () {
 			return {
-				hintClickDisable: false,
-				miriGlow: false
+				hintClickDisable: false
 			};
 		},
 		handleHintAudioClick: function () {
@@ -22290,22 +22318,18 @@
 			// Show Hint when hints are active
 			// Change Miri's icon depending on type of hint/feedback
 			var hintDivClass;
-			var miriIconSrc;
 			var hintTemplateText;
 			var miriIconClass = "miriIcon";
 			if (this.props.hintActive === true) {
 				hintDivClass = "hintDiv";
-				miriIconSrc = "/static/images/miri/icons/Miri_Icon_Yay.png";
 				hintTemplateText = "Maybe you could say: ";
 				miriIconClass += " miriGlow";
 			} else if (this.props.answerFeedbackActive === true) {
 				hintDivClass = "hintDiv";
-				miriIconSrc = "/static/images/miri/icons/Miri_Icon_Oh.png";
-				hintTemplateText = "I heard you say: ";
+				hintTemplateText = "I heard you say:";
 				miriIconClass += " miriGlow";
 			} else {
 				hintDivClass = "hintDiv hidden";
-				miriIconSrc = "/static/images/miri/icons/Miri_Icon_default.png";
 			}
 	
 			// If hintClick disabled, span should do nothing, otherwise, it should play audio
@@ -22323,7 +22347,15 @@
 						React.createElement(
 							'p',
 							{ className: 'locationText' },
-							this.props.locationText
+							React.createElement(
+								'i',
+								null,
+								this.props.locationTextEnglish,
+								' '
+							),
+							'(',
+							this.props.locationTextChinese,
+							')'
 						),
 						React.createElement(
 							'div',
@@ -22338,7 +22370,7 @@
 									feedbackText: this.props.feedbackText })
 							)
 						),
-						React.createElement(MiriIcon, { miriClass: miriIconClass, miriIconSrc: miriIconSrc })
+						React.createElement(MiriIcon, { miriClass: miriIconClass, miriIconSrc: this.props.miriIconSrc })
 					)
 				)
 			);

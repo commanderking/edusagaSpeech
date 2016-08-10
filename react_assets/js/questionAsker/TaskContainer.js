@@ -10,8 +10,9 @@ var TaskContainer = React.createClass({
 	},
 	// Task Index should be grabbed from the Task's index
 	handleSpeechInput: function(taskIndex) {
-		// Turns off any active hints
+		// Turns off any active hints or feedback
 		this.props.onDisableHint();
+		this.props.deactivateFeedbackMode();
 		var that = this;
 		SpeechRecognition.activateSpeech(this.props.tasks[taskIndex].possibilities, this.props.taskLang)
 			.then(function(userAnswer) {

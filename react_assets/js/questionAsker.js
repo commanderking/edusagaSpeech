@@ -18,7 +18,8 @@ var QuestionAsker = React.createClass({
 			voicePack: {},
 			coins: 0,
 			answerFeedbackActive: false,
-			feedbackText: ""
+			feedbackText: "",
+			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 		}
 	},
 	loadSceneData: function() {
@@ -58,12 +59,20 @@ var QuestionAsker = React.createClass({
 		var currentTaskData = allCurrentTasks[taskIndex];
 		var possibleCorrectAnswers = currentTaskData.possibilities;
 
-		// Check is userAnswer matches any possible answer
-		possibleCorrectAnswers.forEach(function(possibleWord) {
-			if (userAnswer === possibleWord) {
-				correctAnswer = true;
-			}
-		})
+		// Check if user's answers contains any of the possible answers
+		if (currentTaskData.completeMatchOnly === true) {
+			possibleCorrectAnswers.forEach(function(possibleWord) {
+				if (userAnswer === possibleWord) {
+					correctAnswer = true;
+				}
+			});
+		} else {
+			possibleCorrectAnswers.forEach(function(possibleWord) {
+				if (userAnswer.indexOf(possibleWord) >= 0) {
+					correctAnswer = true;
+				}
+			})
+		}
 		if (correctAnswer) {
 			// Play response voice
 			this.playSound(newSceneData.character.tasks[taskIndex].soundID);
@@ -86,7 +95,6 @@ var QuestionAsker = React.createClass({
 					allCurrentTasks.forEach(function(task, k) {
 						if (task.taskLink == currentTaskData.taskLink) {
 							indexesToRemove.push(k);
-							console.log(task.task + task.taskLink);			
 						}
 					});
 					for (var i = indexesToRemove.length -1; i >= 0; i--) {
@@ -176,35 +184,53 @@ var QuestionAsker = React.createClass({
 		createjs.Sound.play(soundID);
 	},
 	handleHintClick: function(hintIndex) {
-		console.log("Hint Clicked");
+		var that = this;
 		var hintText = this.state.sceneData.character.tasks[hintIndex].possibilities[0]
 		this.setState({
 			answerFeedbackActive: false,
 			hintActive: true,
 			currentHintIndex: hintIndex,
-			feedbackText: hintText
+			feedbackText: hintText,
+			miriIconSrc: "/static/images/miri/icons/Miri_Icon_Yay.png"
 		})
+
+		// return Miri Icon to default after 3s
+		setTimeout(function(){
+			that.setState({
+				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+			})
+		}, 3000)
+
 	},
 	handleDisableHint: function() {
 		this.setState({
 			hintActive: false,
-			currentHintIndex: null
+			currentHintIndex: null,
+			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 		})
 	},
 	handleHintAudio: function(hintAudioToPlay) {
 		SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 	},
 	activateFeedbackMode: function() {
+		var that = this;
 		this.setState({
 			hintActive: false,
 			currentHintIndex: null,
-			answerFeedbackActive: true
+			answerFeedbackActive: true,
+			miriIconSrc: "/static/images/miri/icons/Miri_Icon_Oh.png"
 		})
+		setTimeout(function(){
+			that.setState({
+				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+			})
+		}, 3000)
 	},
 	deactivateFeedbackMode: function() {
 		this.setState({
-			answerFeedbackActive: false
-		})		
+			answerFeedbackActive: false,
+			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+		})
 	},
 	addCoins: function(numberCoinsToAdd) {
 		newCoins = this.state.coins + numberCoinsToAdd;
@@ -244,14 +270,17 @@ var QuestionAsker = React.createClass({
 						currentHintIndex = {this.state.currentHintIndex}
 						onHintClick = {this.handleHintClick}
 						onDisableHint = {this.handleDisableHint}
-						answerFeedbackActive = {this.state.answerFeedbackActive} />
+						answerFeedbackActive = {this.state.answerFeedbackActive}
+						deactivateFeedbackMode = {this.deactivateFeedbackMode} />
 					<FeedbackContainer 
-						locationText = {this.state.sceneData.character.location.name}
+						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
+						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
 						hintActive = {this.state.hintActive} 
 						onHintAudio = {this.handleHintAudio}
 						coins = {this.state.coins} 
 						answerFeedbackActive = {this.state.answerFeedbackActive}
-						feedbackText = {this.state.feedbackText} />
+						feedbackText = {this.state.feedbackText} 
+						miriIconSrc = {this.state.miriIconSrc} />
 				</div>
 			)
 		}

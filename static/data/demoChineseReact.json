@@ -23,7 +23,8 @@
 			"silhouette" : "/static/images/david/davidSilhouette.png",
 			"location" : 
 			{
-				"name" : "Shanghai Airport (上海机场)",
+				"nameEnglish" : "Shanghai Airport",
+				"nameChinese" : "上海机场", 
 				"bg" : "/static/images/bg/shanghaiAirport.jpg"
 			},
 			"emotions" : 
@@ -111,6 +112,7 @@
 				{
 					"task" : "Greet him",
 					"possibilities" : ["你好"],
+					"completeMatchOnly" : true,
 					"taskLink": "greeting",
 					"correct" : false,
 					"response" : "你好!",
