@@ -52,9 +52,10 @@
 	var CharacterContainer = __webpack_require__(/*! ./questionAsker/CharacterContainer */ 177);
 	var DialogContainer = __webpack_require__(/*! ./questionAsker/DialogContainer */ 178);
 	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 179);
-	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 181);
-	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 182);
-	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 187);
+	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 195);
+	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 196);
+	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 201);
+	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 202);
 	const IMAGE_BASE_PATH = './static/images/';
 	
 	var QuestionAsker = React.createClass({
@@ -70,7 +71,10 @@
 				coins: 0,
 				answerFeedbackActive: false,
 				feedbackText: "",
-				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png",
+				micActive: false,
+				correctAnswerState: false,
+				wrongAnswerState: false
 			};
 		},
 		loadSceneData: function () {
@@ -102,9 +106,11 @@
 			this.loadSceneData();
 		},
 		checkAnswer: function (userAnswer, taskIndex) {
-	
+			var that = this;
 			var correctAnswer = false;
-			var newSceneData = this.state.sceneData;
+	
+			// Trick to get new instance of sceneData, to not alter the origial state
+			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 			var allCurrentTasks = this.state.sceneData.character.tasks;
 			var currentTaskData = allCurrentTasks[taskIndex];
 			var possibleCorrectAnswers = currentTaskData.possibilities;
@@ -124,6 +130,11 @@
 				});
 			}
 			if (correctAnswer) {
+	
+				/*----------------------------------------------
+	   These actions immediately happen
+	   ----------------------------------------------*/
+	
 				// Play response voice
 				this.playSound(newSceneData.character.tasks[taskIndex].soundID);
 	
@@ -133,46 +144,70 @@
 				// Show response text
 				newSceneData.currentDialog = newSceneData.character.tasks[taskIndex].response;
 	
-				// Push this task into the completedTasks
-				newSceneData.character.completedTasks.push(currentTaskData);
-	
-				// Remove the task from the tasks array
-				// If it's a choice task, search the array for other choices that are linked and remove them
-				if (currentTaskData.taskType !== undefined) {
-					if (currentTaskData.taskType == "choice") {
-						// Search tasks to see if there's another task with the current link
-						var indexesToRemove = [];
-						allCurrentTasks.forEach(function (task, k) {
-							if (task.taskLink == currentTaskData.taskLink) {
-								indexesToRemove.push(k);
-							}
-						});
-						for (var i = indexesToRemove.length - 1; i >= 0; i--) {
-							allCurrentTasks.splice(indexesToRemove[i], 1);
-						}
-						newSceneData.character.tasks = allCurrentTasks;
-					}
-				} else {
-					// Add task to completed tasks and then delete it from currentTasks
-					newSceneData.character.tasks.splice(taskIndex, 1);
-				}
-	
 				// Add coins 
 				this.addCoins(10);
 	
-				// If task has an extension task, add that new task to the Task List
-				if (currentTaskData.extensionTasks == null) {
-					// Do nothing
-				} else if (currentTaskData.extensionTasks.length > 0) {
-					currentTaskData.extensionTasks.forEach(function (extensionTask, j) {
-						newSceneData.character.tasks.push(currentTaskData.extensionTasks[j]);
-					});
-				}
+				this.setState({ sceneData: newSceneData });
+	
+				this.setState({ correctAnswerState: true });
+				this.turnMicStateOff();
+	
+				/*----------------------------------------------
+	   These actions happen on delay of 1s
+	   ----------------------------------------------*/
+	
+				var newerSceneData = JSON.parse(JSON.stringify(newSceneData));
+	
+				setTimeout(function () {
+	
+					// Turn off correct answer state
+					that.setState({ correctAnswerState: false });
+					// Push this task into the completedTasks
+					newSceneData.character.completedTasks.push(currentTaskData);
+	
+					// Remove the task from the tasks array
+					// If it's a choice task, search the array for other choices that are linked and remove them
+					if (currentTaskData.taskType !== undefined) {
+						if (currentTaskData.taskType == "choice") {
+							// Search tasks to see if there's another task with the current link
+							var indexesToRemove = [];
+							allCurrentTasks.forEach(function (task, k) {
+								if (task.taskLink == currentTaskData.taskLink) {
+									indexesToRemove.push(k);
+								}
+							});
+	
+							// Remove from the end of array all tasks that have matching link
+							for (var i = indexesToRemove.length - 1; i >= 0; i--) {
+								allCurrentTasks.splice(indexesToRemove[i], 1);
+							}
+							newSceneData.character.tasks = allCurrentTasks;
+						}
+					} else {
+						// Add task to completed tasks and then delete it from currentTasks
+						newSceneData.character.tasks.splice(taskIndex, 1);
+					}
+	
+					// If task has an extension task, add that new task to the Task List
+					if (currentTaskData.extensionTasks == null) {
+						// Do nothing
+					} else if (currentTaskData.extensionTasks.length > 0) {
+						currentTaskData.extensionTasks.forEach(function (extensionTask, j) {
+							newSceneData.character.tasks.push(currentTaskData.extensionTasks[j]);
+						});
+					}
+	
+					that.setState({ sceneData: newSceneData });
+				}, 2000);
 	
 				/*--------------------------------------------
 	   When user answers incorrectly
 	   --------------------------------------------*/
 			} else {
+				// Turn off Mic recording state
+				this.turnMicStateOff();
+	
+				// set image to confused
 				newSceneData.currentImage = IMAGE_BASE_PATH + this.state.sceneData.character.emotions.confused;
 				// Grab random confused phrase
 	
@@ -195,10 +230,27 @@
 	
 				// Turns on feedback mode to reveal what user said
 				this.activateFeedbackMode();
+	
+				// Set new variables in sceneData
+				this.setState({ sceneData: newSceneData });
+	
+				this.setState({ wrongAnswerState: true });
+	
+				setTimeout(function () {
+					// Reset character image to default 
+					newSceneData.currentImage = IMAGE_BASE_PATH + that.state.sceneData.character.emotions.default;
+					that.setState({ wrongAnswerState: false });
+					that.setState({ sceneData: newSceneData });
+				}, 3000);
 			}
 	
-			// Refresh the sceneData with newSceneDAta
-			this.setState({ sceneData: newSceneData });
+			/*---------------------------------------------
+	  For both correct and incorrect answers 
+	  ---------------------------------------------*/
+	
+			// Refresh the sceneData with newSceneData after 3 seconds
+			// return Miri Icon to default after 3s
+			// this.setState({sceneData: newSceneData});
 		},
 		initializeSounds: function () {
 			var SOUND_BASE_PATH = './static/audio/';
@@ -279,6 +331,12 @@
 				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 			});
 		},
+		turnMicStateOn: function () {
+			this.setState({ micActive: true });
+		},
+		turnMicStateOff: function () {
+			this.setState({ micActive: false });
+		},
 		addCoins: function (numberCoinsToAdd) {
 			newCoins = this.state.coins + numberCoinsToAdd;
 			this.setState({ coins: newCoins });
@@ -323,7 +381,12 @@
 						onHintClick: this.handleHintClick,
 						onDisableHint: this.handleDisableHint,
 						answerFeedbackActive: this.state.answerFeedbackActive,
-						deactivateFeedbackMode: this.deactivateFeedbackMode }),
+						deactivateFeedbackMode: this.deactivateFeedbackMode,
+						turnMicStateOn: this.turnMicStateOn,
+						turnMicStateOff: this.turnMicStateOff,
+						micActive: this.state.micActive,
+						correctAnswerState: this.state.correctAnswerState,
+						wrongAnswerState: this.state.wrongAnswerState }),
 					React.createElement(FeedbackContainer, {
 						locationTextEnglish: this.state.sceneData.character.location.nameEnglish,
 						locationTextChinese: this.state.sceneData.character.location.nameChinese,
@@ -332,7 +395,8 @@
 						coins: this.state.coins,
 						answerFeedbackActive: this.state.answerFeedbackActive,
 						feedbackText: this.state.feedbackText,
-						miriIconSrc: this.state.miriIconSrc })
+						miriIconSrc: this.state.miriIconSrc }),
+					React.createElement(TransitionContainer, null)
 				);
 			}
 		}
@@ -22031,73 +22095,59 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	
+	//TODO: The dialog's name and text should be their own component
+	
 	var DialogContainer = React.createClass({
 		displayName: "DialogContainer",
 	
 		render: function () {
 			var textNameWrapper;
-			if (this.props.scenarioOn === true) {
-				textNameWrapper = React.createElement(
-					"div",
-					{ className: "responseNameWrapper col-md-8 col-sm-8 col-xs-8" },
-					React.createElement(
-						"div",
-						{ className: "characterNameDiv" },
-						this.props.scenarioData[this.props.scenarioIndex].name
-					),
-					React.createElement(
-						"div",
-						{ className: "characterTextResponse" },
-						React.createElement(
-							"p",
-							{ className: "scenarioText" },
-							this.props.scenarioData[this.props.scenarioIndex].text
-						)
-					)
-				);
-			} else if (this.props.hintActive === true) {
-				textNameWrapper = React.createElement(
-					"div",
-					{ className: "responseNameWrapper col-md-8 col-sm-8 col-xs-8" },
-					React.createElement(
-						"div",
-						{ className: "characterNameDiv characterNameDivDisabled" },
-						this.props.charName
-					),
-					React.createElement(
-						"div",
-						{ className: "characterTextResponse characterTextResponseDisabled" },
-						this.props.currentDialog
-					)
-				);
-			} else {
-				textNameWrapper = React.createElement(
-					"div",
-					{ className: "responseNameWrapper col-md-8 col-sm-8 col-xs-8" },
-					React.createElement(
-						"div",
-						{ className: "characterNameDiv" },
-						this.props.charName
-					),
-					React.createElement(
-						"div",
-						{ className: "characterTextResponse" },
-						this.props.currentDialog
-					)
-				);
-			}
+			var characterName;
+			var characterNameClass = "characterNameDiv";
+			var characterTextResponse;
+			var characterTextClass = "characterTextResponse";
+			var dialogDivClass = "characterDialogueDiv col-md-12 col-sm-12 col-xs-12";
 	
-			var dialogDivClass;
-			if (this.props.hintActive === true) {
+			// Case 1: There's a scenario that's played; Change font size of text and get name from scenario
+			if (this.props.scenarioOn === true) {
+				characterName = this.props.scenarioData[this.props.scenarioIndex].name;
+				characterTextResponse = React.createElement(
+					"p",
+					{ className: "scenarioText" },
+					this.props.scenarioData[this.props.scenarioIndex].text
+				);
+				// Case 2: Hint's active; Name, Text should fade color and the div should invert colors
+			} else if (this.props.hintActive === true) {
 				dialogDivClass = "characterDialogueDiv dialogDivInverted col-md-12 col-sm-12 col-xs-12";
-			} else {
-				dialogDivClass = "characterDialogueDiv col-md-12 col-sm-12 col-xs-12";
+				characterName = this.props.charName;
+				characterTextResponse = this.props.currentDialog;
+				characterNameClass += " characterNameDivDisabled";
+				characterTextClass += " characterTextResponseDisabled";
 			}
+			// Case 3: Default case - show the text given the current task
+			else {
+					characterName = this.props.charName;
+					characterTextResponse = this.props.currentDialog;
+				}
+	
 			return React.createElement(
 				"div",
 				{ className: dialogDivClass },
 				React.createElement("img", { className: "dialogSlantPiece", src: "static/images/UI/dialogbox_slant.png" }),
-				textNameWrapper
+				React.createElement(
+					"div",
+					{ className: "responseNameWrapper col-md-8 col-sm-8 col-xs-8" },
+					React.createElement(
+						"div",
+						{ className: characterNameClass },
+						characterName
+					),
+					React.createElement(
+						"div",
+						{ className: characterTextClass },
+						characterTextResponse
+					)
+				)
 			);
 		}
 	});
@@ -22122,18 +22172,32 @@
 	var Task = __webpack_require__(/*! ./components/Task */ 180);
 	var PropTypes = React.PropTypes;
 	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 36);
+	var ReactCSSTransitionGroup = __webpack_require__(/*! react-addons-css-transition-group */ 190);
+	var TransitionsCSS = __webpack_require__(/*! ../../../static/css/transitions.css */ 183);
 	
 	var TaskContainer = React.createClass({
 		displayName: 'TaskContainer',
 	
 		getInitialState: function () {
-			return {};
+			return {
+				currentTaskIndex: 0
+			};
 		},
 		// Task Index should be grabbed from the Task's index
 		handleSpeechInput: function (taskIndex) {
 			// Turns off any active hints or feedback
 			this.props.onDisableHint();
 			this.props.deactivateFeedbackMode();
+	
+			// If mic active, turn it off
+			if (this.props.micActive) {
+				this.props.turnMicStateOff();
+				return;
+			}
+			// Activate MicActive State
+			this.props.turnMicStateOn();
+			this.setState({ currentTaskIndex: taskIndex });
+	
 			var that = this;
 			SpeechRecognition.activateSpeech(this.props.tasks[taskIndex].possibilities, this.props.taskLang).then(function (userAnswer) {
 				// Need to set var here, otherwise loses it in setState
@@ -22148,14 +22212,18 @@
 			var taskObject = this.props.tasks;
 			var tasks = taskObject.map(function (task, i) {
 				return React.createElement(Task, {
-					key: i,
+					key: taskObject[i].task,
 					index: i,
 					taskName: taskObject[i].task,
 					onSpeechInput: that.handleSpeechInput,
 					hintActive: that.props.hintActive,
 					currentHintIndex: that.props.currentHintIndex,
 					onHintClick: that.props.onHintClick,
-					onDisableHint: that.props.onDisableHint });
+					onDisableHint: that.props.onDisableHint,
+					micActive: that.props.micActive,
+					currentTaskIndex: that.state.currentTaskIndex,
+					correctAnswerState: that.props.correctAnswerState,
+					wrongAnswerState: that.props.wrongAnswerState });
 			});
 	
 			if (this.props.scenarioOn === true) {
@@ -22175,7 +22243,16 @@
 					React.createElement(
 						'ul',
 						{ className: 'taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked' },
-						tasks
+						React.createElement(
+							ReactCSSTransitionGroup,
+							{
+								transitionName: 'example',
+								transitionAppear: true,
+								transitionAppearTimeout: 500,
+								transitionEnterTimeout: 500,
+								transitionLeaveTimeout: 500 },
+							tasks
+						)
 					)
 				);
 			}
@@ -22198,31 +22275,45 @@
 
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var TaskIcon = __webpack_require__(/*! ./TaskIcon */ 181);
 	
 	var Task = React.createClass({
 		displayName: 'Task',
 	
-	
+		componentDidMount: function () {
+			console.log(this.props.index);
+		},
 		render: function () {
 			var hintClassName;
 			var taskDivClass;
 			// Handling how to display each hint when hint is active or inactive
-			if (this.props.hintActive === true && this.props.index === this.props.currentHintIndex) {
-				hintDiv = React.createElement('a', {
-					className: 'taskHelpIcon taskHelpActive glyphicon glyphicon-question-sign',
-					onClick: this.props.onDisableHint });
-				taskDivClass = 'taskDiv taskDivActive';
-			} else if (this.props.hintActive === true && this.props.index !== this.props.currentHintIndex) {
-				hintDiv = React.createElement('a', {
-					className: 'taskHelpIcon taskHelpDisabled glyphicon glyphicon-question-sign',
-					onClick: this.props.onDisableHint });
-				taskDivClass = 'taskDiv taskDivDisabled';
-			} else {
-				hintDiv = React.createElement('a', {
-					className: 'taskHelpIcon taskHelpInactive glyphicon glyphicon-question-sign',
-					onClick: () => this.props.onHintClick(this.props.index) });
-				taskDivClass = 'taskDiv';
+			if (this.props.hintActive) {
+				if (this.props.index === this.props.currentHintIndex) {
+					hintDiv = React.createElement('a', {
+						className: 'taskHelpIcon taskHelpActive glyphicon glyphicon-question-sign',
+						onClick: this.props.onDisableHint });
+					taskDivClass = 'taskDiv taskDivActive';
+				}
+				// If hint's active, but this is not the task for which a hint is requested, disable it
+				else {
+						hintDiv = React.createElement('a', {
+							className: 'taskHelpIcon taskHelpDisabled glyphicon glyphicon-question-sign',
+							onClick: this.props.onDisableHint });
+						taskDivClass = 'taskDiv taskDivDisabled';
+					}
 			}
+			// Display the normal taskDiv
+			else {
+					hintDiv = React.createElement('a', {
+						className: 'taskHelpIcon taskHelpInactive glyphicon glyphicon-question-sign',
+						onClick: () => this.props.onHintClick(this.props.index) });
+					taskDivClass = 'taskDiv';
+	
+					// If user clicks a task, change UI of the active task to be higlhighted
+					if ((this.props.micActive || this.props.correctAnswerState || this.props.wrongAnswerState) && this.props.index === this.props.currentTaskIndex) {
+						taskDivClass = 'taskDivMicActive';
+					}
+				}
 	
 			return React.createElement(
 				'li',
@@ -22230,7 +22321,12 @@
 				React.createElement(
 					'div',
 					{ className: taskDivClass, 'data-index': this.props.index },
-					React.createElement('span', { className: 'icon-mic' }),
+					React.createElement(TaskIcon, {
+						correctAnswerState: this.props.correctAnswerState,
+						wrongAnswerState: this.props.wrongAnswerState,
+						micActive: this.props.micActive,
+						index: this.props.index,
+						currentTaskIndex: this.props.currentTaskIndex }),
 					React.createElement(
 						'div',
 						{
@@ -22249,6 +22345,1352 @@
 
 /***/ },
 /* 181 */
+/*!**************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/TaskIcon.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 182);
+	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 183);
+	var TransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 187);
+	
+	var TaskIcon = React.createClass({
+		displayName: 'TaskIcon',
+	
+		imageTransition: function (DOMnode, thisContext) {
+			TweenMax.fromTo(DOMnode, 2, { width: 0, height: 0, scale: 0.2, opacity: 0, rotation: -180, left: -50 }, { width: 50, height: 50, scale: 1, opacity: 1, rotation: 0, left: -25,
+				ease: Expo.easeInOut, onCompleteScope: thisContext });
+		},
+		render: function () {
+	
+			// Default TaskIcon image when nothing is being recorded or answered
+			var taskIconImage = React.createElement(TaskIconImage, { imageSrc: '/static/images/UI/Icon_Mic-01.png' });
+	
+			// Sets to true if this task is the active task
+			if (this.props.index === this.props.currentTaskIndex) {
+				if (this.props.micActive) {
+					taskIconImage = React.createElement(
+						'div',
+						null,
+						React.createElement(TaskIconImage, {
+							keyToAttach: 'iconStar',
+							imageSrc: '/static/images/UI/Icon_Star-01.png',
+							imageTransition: this.imageTransition }),
+						React.createElement(TaskIconImage, {
+							keyToAttach: 'iconMic',
+							imageSrc: '/static/images/UI/Icon_Mic-01.png',
+							imageTransition: this.imageTransition })
+					);
+				} else if (this.props.correctAnswerState) {
+					taskIconImage = React.createElement(
+						'div',
+						null,
+						React.createElement(TaskIconImage, { imageSrc: '/static/images/UI/Icon_Star-01.png' }),
+						React.createElement(TaskIconImage, { imageSrc: '/static/images/UI/Icon_10coins_flat_nostar-01.png' })
+					);
+				} else if (this.props.wrongAnswerState) {
+					taskIconImage = React.createElement(
+						'div',
+						null,
+						React.createElement(TaskIconImage, { keyToAttach: 'iconStar2', imageSrc: '/static/images/UI/Icon_Star-01.png' }),
+						React.createElement(TaskIconImage, { keyToAttach: 'questionMark', imageSrc: '/static/images/UI/Icon_Questionmark-01.png' })
+					);
+				}
+			}
+			return React.createElement(
+				'div',
+				{ className: 'taskIconDiv' },
+				taskIconImage
+			);
+		}
+	});
+	
+	module.exports = TaskIcon;
+
+/***/ },
+/* 182 */
+/*!*******************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/TaskIconImage.js ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
+	var PropTypes = React.PropTypes;
+	//var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+	
+	
+	/*
+			<ReactCSSTransitionGroup 
+		    	transitionName="taskIconImage" 
+		    	transitionAppear = {true}
+		    	transitionAppearTimeout = {500}
+		    	transitionEnterTimeout={500} 
+		    	transitionLeaveTimeout={500}>
+				<img key={props.keyToAttach} className="" src={props.imageSrc} />
+			</ReactCSSTransitionGroup>
+	*/
+	
+	var TaskIconImage = React.createClass({
+		displayName: 'TaskIconImage',
+	
+		show: function (callback) {
+			var node = ReactDOM.findDOMNode(this);
+			console.log(callback);
+		},
+		componentWillEnter: function (callback) {
+			console.log("Component Entered");
+			callback();
+		},
+		componentWillLeave: function (callback) {
+			callback();
+		},
+		componentDidMount: function () {
+			console.log("Component Mounted");
+			var node = ReactDOM.findDOMNode(this);
+			this.props.imageTransition(node, this);
+			console.log(node);
+		},
+		componentWillUnmount: function () {
+			console.log("Component unmounted");
+		},
+		render: function () {
+			return React.createElement('img', { key: this.props.keyToAttach, className: '', src: this.props.imageSrc });
+		}
+	
+	});
+	
+	module.exports = TaskIconImage;
+
+/***/ },
+/* 183 */
+/*!************************************!*\
+  !*** ./static/css/transitions.css ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../~/css-loader!./transitions.css */ 184);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 186)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./transitions.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./transitions.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 184 */
+/*!***************************************************!*\
+  !*** ./~/css-loader!./static/css/transitions.css ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 185)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".example-enter{opacity:0.01}.example-enter.example-enter-active{opacity:1;transition:opacity 500ms ease-in}.example-leave{opacity:1}.example-leave.example-leave-active{opacity:0.01;transition:opacity 500ms ease-in}.example-appear.example-appear-active{opacity:1;transition:opacity .5s ease-in}.taskIconImage-enter{opacity:0.01}.taskIconImage-enter.taskIconImage-enter-active{opacity:1;transition:opacity 1000ms linear}.taskIconImage-leave{opacity:1}.taskIconImage-leave.taskIconImage-leave-active{opacity:0.01;transition:opacity 1000ms linear}.taskIconImage-appear.taskIconImage-appear-active{opacity:1;transition:opacity .5s ease-in}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 185 */
+/*!**************************************!*\
+  !*** ./~/css-loader/lib/css-base.js ***!
+  \**************************************/
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+	
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+	
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 186 */
+/*!*************************************!*\
+  !*** ./~/style-loader/addStyles.js ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+	
+	module.exports = function(list, options) {
+		if(true) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+	
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+	
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+	
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+	
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+	
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+	
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+	
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+	
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+	
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+	
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+	
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+	
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+	
+		update(obj);
+	
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+	
+	var replaceText = (function () {
+		var textStore = [];
+	
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+	
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+	
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+	
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+	
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+	
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+	
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+	
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+	
+		var blob = new Blob([css], { type: "text/css" });
+	
+		var oldSrc = linkElement.href;
+	
+		linkElement.href = URL.createObjectURL(blob);
+	
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 187 */
+/*!**************************************************!*\
+  !*** ./~/react-addons-transition-group/index.js ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(/*! react/lib/ReactTransitionGroup */ 188);
+
+/***/ },
+/* 188 */
+/*!*********************************************!*\
+  !*** ./~/react/lib/ReactTransitionGroup.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionGroup
+	 */
+	
+	'use strict';
+	
+	var _assign = __webpack_require__(/*! object-assign */ 4);
+	
+	var React = __webpack_require__(/*! ./React */ 2);
+	var ReactInstanceMap = __webpack_require__(/*! ./ReactInstanceMap */ 126);
+	var ReactTransitionChildMapping = __webpack_require__(/*! ./ReactTransitionChildMapping */ 189);
+	
+	var emptyFunction = __webpack_require__(/*! fbjs/lib/emptyFunction */ 12);
+	
+	/**
+	 * A basis for animations. When children are declaratively added or removed,
+	 * special lifecycle hooks are called.
+	 * See https://facebook.github.io/react/docs/animation.html#low-level-api-reacttransitiongroup
+	 */
+	var ReactTransitionGroup = React.createClass({
+	  displayName: 'ReactTransitionGroup',
+	
+	  propTypes: {
+	    component: React.PropTypes.any,
+	    childFactory: React.PropTypes.func
+	  },
+	
+	  getDefaultProps: function () {
+	    return {
+	      component: 'span',
+	      childFactory: emptyFunction.thatReturnsArgument
+	    };
+	  },
+	
+	  getInitialState: function () {
+	    return {
+	      // TODO: can we get useful debug information to show at this point?
+	      children: ReactTransitionChildMapping.getChildMapping(this.props.children)
+	    };
+	  },
+	
+	  componentWillMount: function () {
+	    this.currentlyTransitioningKeys = {};
+	    this.keysToEnter = [];
+	    this.keysToLeave = [];
+	  },
+	
+	  componentDidMount: function () {
+	    var initialChildMapping = this.state.children;
+	    for (var key in initialChildMapping) {
+	      if (initialChildMapping[key]) {
+	        this.performAppear(key);
+	      }
+	    }
+	  },
+	
+	  componentWillReceiveProps: function (nextProps) {
+	    var nextChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      nextChildMapping = ReactTransitionChildMapping.getChildMapping(nextProps.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      nextChildMapping = ReactTransitionChildMapping.getChildMapping(nextProps.children);
+	    }
+	    var prevChildMapping = this.state.children;
+	
+	    this.setState({
+	      children: ReactTransitionChildMapping.mergeChildMappings(prevChildMapping, nextChildMapping)
+	    });
+	
+	    var key;
+	
+	    for (key in nextChildMapping) {
+	      var hasPrev = prevChildMapping && prevChildMapping.hasOwnProperty(key);
+	      if (nextChildMapping[key] && !hasPrev && !this.currentlyTransitioningKeys[key]) {
+	        this.keysToEnter.push(key);
+	      }
+	    }
+	
+	    for (key in prevChildMapping) {
+	      var hasNext = nextChildMapping && nextChildMapping.hasOwnProperty(key);
+	      if (prevChildMapping[key] && !hasNext && !this.currentlyTransitioningKeys[key]) {
+	        this.keysToLeave.push(key);
+	      }
+	    }
+	
+	    // If we want to someday check for reordering, we could do it here.
+	  },
+	
+	  componentDidUpdate: function () {
+	    var keysToEnter = this.keysToEnter;
+	    this.keysToEnter = [];
+	    keysToEnter.forEach(this.performEnter);
+	
+	    var keysToLeave = this.keysToLeave;
+	    this.keysToLeave = [];
+	    keysToLeave.forEach(this.performLeave);
+	  },
+	
+	  performAppear: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+	
+	    var component = this.refs[key];
+	
+	    if (component.componentWillAppear) {
+	      component.componentWillAppear(this._handleDoneAppearing.bind(this, key));
+	    } else {
+	      this._handleDoneAppearing(key);
+	    }
+	  },
+	
+	  _handleDoneAppearing: function (key) {
+	    var component = this.refs[key];
+	    if (component.componentDidAppear) {
+	      component.componentDidAppear();
+	    }
+	
+	    delete this.currentlyTransitioningKeys[key];
+	
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+	
+	    if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
+	      // This was removed before it had fully appeared. Remove it.
+	      this.performLeave(key);
+	    }
+	  },
+	
+	  performEnter: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+	
+	    var component = this.refs[key];
+	
+	    if (component.componentWillEnter) {
+	      component.componentWillEnter(this._handleDoneEntering.bind(this, key));
+	    } else {
+	      this._handleDoneEntering(key);
+	    }
+	  },
+	
+	  _handleDoneEntering: function (key) {
+	    var component = this.refs[key];
+	    if (component.componentDidEnter) {
+	      component.componentDidEnter();
+	    }
+	
+	    delete this.currentlyTransitioningKeys[key];
+	
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+	
+	    if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
+	      // This was removed before it had fully entered. Remove it.
+	      this.performLeave(key);
+	    }
+	  },
+	
+	  performLeave: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+	
+	    var component = this.refs[key];
+	    if (component.componentWillLeave) {
+	      component.componentWillLeave(this._handleDoneLeaving.bind(this, key));
+	    } else {
+	      // Note that this is somewhat dangerous b/c it calls setState()
+	      // again, effectively mutating the component before all the work
+	      // is done.
+	      this._handleDoneLeaving(key);
+	    }
+	  },
+	
+	  _handleDoneLeaving: function (key) {
+	    var component = this.refs[key];
+	
+	    if (component.componentDidLeave) {
+	      component.componentDidLeave();
+	    }
+	
+	    delete this.currentlyTransitioningKeys[key];
+	
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+	
+	    if (currentChildMapping && currentChildMapping.hasOwnProperty(key)) {
+	      // This entered again before it fully left. Add it again.
+	      this.performEnter(key);
+	    } else {
+	      this.setState(function (state) {
+	        var newChildren = _assign({}, state.children);
+	        delete newChildren[key];
+	        return { children: newChildren };
+	      });
+	    }
+	  },
+	
+	  render: function () {
+	    // TODO: we could get rid of the need for the wrapper node
+	    // by cloning a single child
+	    var childrenToRender = [];
+	    for (var key in this.state.children) {
+	      var child = this.state.children[key];
+	      if (child) {
+	        // You may need to apply reactive updates to a child as it is leaving.
+	        // The normal React way to do it won't work since the child will have
+	        // already been removed. In case you need this behavior you can provide
+	        // a childFactory function to wrap every child, even the ones that are
+	        // leaving.
+	        childrenToRender.push(React.cloneElement(this.props.childFactory(child), { ref: key, key: key }));
+	      }
+	    }
+	
+	    // Do not forward ReactTransitionGroup props to primitive DOM nodes
+	    var props = _assign({}, this.props);
+	    delete props.transitionLeave;
+	    delete props.transitionName;
+	    delete props.transitionAppear;
+	    delete props.transitionEnter;
+	    delete props.childFactory;
+	    delete props.transitionLeaveTimeout;
+	    delete props.transitionEnterTimeout;
+	    delete props.transitionAppearTimeout;
+	    delete props.component;
+	
+	    return React.createElement(this.props.component, props, childrenToRender);
+	  }
+	});
+	
+	module.exports = ReactTransitionGroup;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
+
+/***/ },
+/* 189 */
+/*!****************************************************!*\
+  !*** ./~/react/lib/ReactTransitionChildMapping.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionChildMapping
+	 */
+	
+	'use strict';
+	
+	var flattenChildren = __webpack_require__(/*! ./flattenChildren */ 134);
+	
+	var ReactTransitionChildMapping = {
+	  /**
+	   * Given `this.props.children`, return an object mapping key to child. Just
+	   * simple syntactic sugar around flattenChildren().
+	   *
+	   * @param {*} children `this.props.children`
+	   * @param {number=} selfDebugID Optional debugID of the current internal instance.
+	   * @return {object} Mapping of key to child
+	   */
+	  getChildMapping: function (children, selfDebugID) {
+	    if (!children) {
+	      return children;
+	    }
+	
+	    if (process.env.NODE_ENV !== 'production') {
+	      return flattenChildren(children, selfDebugID);
+	    }
+	
+	    return flattenChildren(children);
+	  },
+	
+	  /**
+	   * When you're adding or removing children some may be added or removed in the
+	   * same render pass. We want to show *both* since we want to simultaneously
+	   * animate elements in and out. This function takes a previous set of keys
+	   * and a new set of keys and merges them with its best guess of the correct
+	   * ordering. In the future we may expose some of the utilities in
+	   * ReactMultiChild to make this easy, but for now React itself does not
+	   * directly have this concept of the union of prevChildren and nextChildren
+	   * so we implement it here.
+	   *
+	   * @param {object} prev prev children as returned from
+	   * `ReactTransitionChildMapping.getChildMapping()`.
+	   * @param {object} next next children as returned from
+	   * `ReactTransitionChildMapping.getChildMapping()`.
+	   * @return {object} a key set that contains all keys in `prev` and all keys
+	   * in `next` in a reasonable order.
+	   */
+	  mergeChildMappings: function (prev, next) {
+	    prev = prev || {};
+	    next = next || {};
+	
+	    function getValueForKey(key) {
+	      if (next.hasOwnProperty(key)) {
+	        return next[key];
+	      } else {
+	        return prev[key];
+	      }
+	    }
+	
+	    // For each key of `next`, the list of keys to insert before that key in
+	    // the combined list
+	    var nextKeysPending = {};
+	
+	    var pendingKeys = [];
+	    for (var prevKey in prev) {
+	      if (next.hasOwnProperty(prevKey)) {
+	        if (pendingKeys.length) {
+	          nextKeysPending[prevKey] = pendingKeys;
+	          pendingKeys = [];
+	        }
+	      } else {
+	        pendingKeys.push(prevKey);
+	      }
+	    }
+	
+	    var i;
+	    var childMapping = {};
+	    for (var nextKey in next) {
+	      if (nextKeysPending.hasOwnProperty(nextKey)) {
+	        for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+	          var pendingNextKey = nextKeysPending[nextKey][i];
+	          childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+	        }
+	      }
+	      childMapping[nextKey] = getValueForKey(nextKey);
+	    }
+	
+	    // Finally, add the keys which didn't appear before any key in `next`
+	    for (i = 0; i < pendingKeys.length; i++) {
+	      childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+	    }
+	
+	    return childMapping;
+	  }
+	};
+	
+	module.exports = ReactTransitionChildMapping;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
+
+/***/ },
+/* 190 */
+/*!******************************************************!*\
+  !*** ./~/react-addons-css-transition-group/index.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(/*! react/lib/ReactCSSTransitionGroup */ 191);
+
+/***/ },
+/* 191 */
+/*!************************************************!*\
+  !*** ./~/react/lib/ReactCSSTransitionGroup.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCSSTransitionGroup
+	 */
+	
+	'use strict';
+	
+	var _assign = __webpack_require__(/*! object-assign */ 4);
+	
+	var React = __webpack_require__(/*! ./React */ 2);
+	
+	var ReactTransitionGroup = __webpack_require__(/*! ./ReactTransitionGroup */ 188);
+	var ReactCSSTransitionGroupChild = __webpack_require__(/*! ./ReactCSSTransitionGroupChild */ 192);
+	
+	function createTransitionTimeoutPropValidator(transitionType) {
+	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
+	  var enabledPropName = 'transition' + transitionType;
+	
+	  return function (props) {
+	    // If the transition is enabled
+	    if (props[enabledPropName]) {
+	      // If no timeout duration is provided
+	      if (props[timeoutPropName] == null) {
+	        return new Error(timeoutPropName + ' wasn\'t supplied to ReactCSSTransitionGroup: ' + 'this can cause unreliable animations and won\'t be supported in ' + 'a future version of React. See ' + 'https://fb.me/react-animation-transition-group-timeout for more ' + 'information.');
+	
+	        // If the duration isn't a number
+	      } else if (typeof props[timeoutPropName] !== 'number') {
+	          return new Error(timeoutPropName + ' must be a number (in milliseconds)');
+	        }
+	    }
+	  };
+	}
+	
+	/**
+	 * An easy way to perform CSS transitions and animations when a React component
+	 * enters or leaves the DOM.
+	 * See https://facebook.github.io/react/docs/animation.html#high-level-api-reactcsstransitiongroup
+	 */
+	var ReactCSSTransitionGroup = React.createClass({
+	  displayName: 'ReactCSSTransitionGroup',
+	
+	  propTypes: {
+	    transitionName: ReactCSSTransitionGroupChild.propTypes.name,
+	
+	    transitionAppear: React.PropTypes.bool,
+	    transitionEnter: React.PropTypes.bool,
+	    transitionLeave: React.PropTypes.bool,
+	    transitionAppearTimeout: createTransitionTimeoutPropValidator('Appear'),
+	    transitionEnterTimeout: createTransitionTimeoutPropValidator('Enter'),
+	    transitionLeaveTimeout: createTransitionTimeoutPropValidator('Leave')
+	  },
+	
+	  getDefaultProps: function () {
+	    return {
+	      transitionAppear: false,
+	      transitionEnter: true,
+	      transitionLeave: true
+	    };
+	  },
+	
+	  _wrapChild: function (child) {
+	    // We need to provide this childFactory so that
+	    // ReactCSSTransitionGroupChild can receive updates to name, enter, and
+	    // leave while it is leaving.
+	    return React.createElement(ReactCSSTransitionGroupChild, {
+	      name: this.props.transitionName,
+	      appear: this.props.transitionAppear,
+	      enter: this.props.transitionEnter,
+	      leave: this.props.transitionLeave,
+	      appearTimeout: this.props.transitionAppearTimeout,
+	      enterTimeout: this.props.transitionEnterTimeout,
+	      leaveTimeout: this.props.transitionLeaveTimeout
+	    }, child);
+	  },
+	
+	  render: function () {
+	    return React.createElement(ReactTransitionGroup, _assign({}, this.props, { childFactory: this._wrapChild }));
+	  }
+	});
+	
+	module.exports = ReactCSSTransitionGroup;
+
+/***/ },
+/* 192 */
+/*!*****************************************************!*\
+  !*** ./~/react/lib/ReactCSSTransitionGroupChild.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCSSTransitionGroupChild
+	 */
+	
+	'use strict';
+	
+	var React = __webpack_require__(/*! ./React */ 2);
+	var ReactDOM = __webpack_require__(/*! ./ReactDOM */ 39);
+	
+	var CSSCore = __webpack_require__(/*! fbjs/lib/CSSCore */ 193);
+	var ReactTransitionEvents = __webpack_require__(/*! ./ReactTransitionEvents */ 194);
+	
+	var onlyChild = __webpack_require__(/*! ./onlyChild */ 32);
+	
+	var TICK = 17;
+	
+	var ReactCSSTransitionGroupChild = React.createClass({
+	  displayName: 'ReactCSSTransitionGroupChild',
+	
+	  propTypes: {
+	    name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.shape({
+	      enter: React.PropTypes.string,
+	      leave: React.PropTypes.string,
+	      active: React.PropTypes.string
+	    }), React.PropTypes.shape({
+	      enter: React.PropTypes.string,
+	      enterActive: React.PropTypes.string,
+	      leave: React.PropTypes.string,
+	      leaveActive: React.PropTypes.string,
+	      appear: React.PropTypes.string,
+	      appearActive: React.PropTypes.string
+	    })]).isRequired,
+	
+	    // Once we require timeouts to be specified, we can remove the
+	    // boolean flags (appear etc.) and just accept a number
+	    // or a bool for the timeout flags (appearTimeout etc.)
+	    appear: React.PropTypes.bool,
+	    enter: React.PropTypes.bool,
+	    leave: React.PropTypes.bool,
+	    appearTimeout: React.PropTypes.number,
+	    enterTimeout: React.PropTypes.number,
+	    leaveTimeout: React.PropTypes.number
+	  },
+	
+	  transition: function (animationType, finishCallback, userSpecifiedDelay) {
+	    var node = ReactDOM.findDOMNode(this);
+	
+	    if (!node) {
+	      if (finishCallback) {
+	        finishCallback();
+	      }
+	      return;
+	    }
+	
+	    var className = this.props.name[animationType] || this.props.name + '-' + animationType;
+	    var activeClassName = this.props.name[animationType + 'Active'] || className + '-active';
+	    var timeout = null;
+	
+	    var endListener = function (e) {
+	      if (e && e.target !== node) {
+	        return;
+	      }
+	
+	      clearTimeout(timeout);
+	
+	      CSSCore.removeClass(node, className);
+	      CSSCore.removeClass(node, activeClassName);
+	
+	      ReactTransitionEvents.removeEndEventListener(node, endListener);
+	
+	      // Usually this optional callback is used for informing an owner of
+	      // a leave animation and telling it to remove the child.
+	      if (finishCallback) {
+	        finishCallback();
+	      }
+	    };
+	
+	    CSSCore.addClass(node, className);
+	
+	    // Need to do this to actually trigger a transition.
+	    this.queueClassAndNode(activeClassName, node);
+	
+	    // If the user specified a timeout delay.
+	    if (userSpecifiedDelay) {
+	      // Clean-up the animation after the specified delay
+	      timeout = setTimeout(endListener, userSpecifiedDelay);
+	      this.transitionTimeouts.push(timeout);
+	    } else {
+	      // DEPRECATED: this listener will be removed in a future version of react
+	      ReactTransitionEvents.addEndEventListener(node, endListener);
+	    }
+	  },
+	
+	  queueClassAndNode: function (className, node) {
+	    this.classNameAndNodeQueue.push({
+	      className: className,
+	      node: node
+	    });
+	
+	    if (!this.timeout) {
+	      this.timeout = setTimeout(this.flushClassNameAndNodeQueue, TICK);
+	    }
+	  },
+	
+	  flushClassNameAndNodeQueue: function () {
+	    if (this.isMounted()) {
+	      this.classNameAndNodeQueue.forEach(function (obj) {
+	        CSSCore.addClass(obj.node, obj.className);
+	      });
+	    }
+	    this.classNameAndNodeQueue.length = 0;
+	    this.timeout = null;
+	  },
+	
+	  componentWillMount: function () {
+	    this.classNameAndNodeQueue = [];
+	    this.transitionTimeouts = [];
+	  },
+	
+	  componentWillUnmount: function () {
+	    if (this.timeout) {
+	      clearTimeout(this.timeout);
+	    }
+	    this.transitionTimeouts.forEach(function (timeout) {
+	      clearTimeout(timeout);
+	    });
+	
+	    this.classNameAndNodeQueue.length = 0;
+	  },
+	
+	  componentWillAppear: function (done) {
+	    if (this.props.appear) {
+	      this.transition('appear', done, this.props.appearTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+	
+	  componentWillEnter: function (done) {
+	    if (this.props.enter) {
+	      this.transition('enter', done, this.props.enterTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+	
+	  componentWillLeave: function (done) {
+	    if (this.props.leave) {
+	      this.transition('leave', done, this.props.leaveTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+	
+	  render: function () {
+	    return onlyChild(this.props.children);
+	  }
+	});
+	
+	module.exports = ReactCSSTransitionGroupChild;
+
+/***/ },
+/* 193 */
+/*!*******************************!*\
+  !*** ./~/fbjs/lib/CSSCore.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @typechecks
+	 */
+	
+	var invariant = __webpack_require__(/*! ./invariant */ 8);
+	
+	/**
+	 * The CSSCore module specifies the API (and implements most of the methods)
+	 * that should be used when dealing with the display of elements (via their
+	 * CSS classes and visibility on screen. It is an API focused on mutating the
+	 * display and not reading it as no logical state should be encoded in the
+	 * display of elements.
+	 */
+	
+	/* Slow implementation for browsers that don't natively support .matches() */
+	function matchesSelector_SLOW(element, selector) {
+	  var root = element;
+	  while (root.parentNode) {
+	    root = root.parentNode;
+	  }
+	
+	  var all = root.querySelectorAll(selector);
+	  return Array.prototype.indexOf.call(all, element) !== -1;
+	}
+	
+	var CSSCore = {
+	
+	  /**
+	   * Adds the class passed in to the element if it doesn't already have it.
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @return {DOMElement} the element passed in
+	   */
+	  addClass: function addClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSSCore.addClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(false) : void 0;
+	
+	    if (className) {
+	      if (element.classList) {
+	        element.classList.add(className);
+	      } else if (!CSSCore.hasClass(element, className)) {
+	        element.className = element.className + ' ' + className;
+	      }
+	    }
+	    return element;
+	  },
+	
+	  /**
+	   * Removes the class passed in from the element
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @return {DOMElement} the element passed in
+	   */
+	  removeClass: function removeClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSSCore.removeClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(false) : void 0;
+	
+	    if (className) {
+	      if (element.classList) {
+	        element.classList.remove(className);
+	      } else if (CSSCore.hasClass(element, className)) {
+	        element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ') // multiple spaces to one
+	        .replace(/^\s*|\s*$/g, ''); // trim the ends
+	      }
+	    }
+	    return element;
+	  },
+	
+	  /**
+	   * Helper to add or remove a class from an element based on a condition.
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @param {*} bool condition to whether to add or remove the class
+	   * @return {DOMElement} the element passed in
+	   */
+	  conditionClass: function conditionClass(element, className, bool) {
+	    return (bool ? CSSCore.addClass : CSSCore.removeClass)(element, className);
+	  },
+	
+	  /**
+	   * Tests whether the element has the class specified.
+	   *
+	   * @param {DOMNode|DOMWindow} element the element to check the class on
+	   * @param {string} className the CSS className
+	   * @return {boolean} true if the element has the class, false if not
+	   */
+	  hasClass: function hasClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSS.hasClass takes only a single class name.') : invariant(false) : void 0;
+	    if (element.classList) {
+	      return !!className && element.classList.contains(className);
+	    }
+	    return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
+	  },
+	
+	  /**
+	   * Tests whether the element matches the selector specified
+	   *
+	   * @param {DOMNode|DOMWindow} element the element that we are querying
+	   * @param {string} selector the CSS selector
+	   * @return {boolean} true if the element matches the selector, false if not
+	   */
+	  matchesSelector: function matchesSelector(element, selector) {
+	    var matchesImpl = element.matches || element.webkitMatchesSelector || element.mozMatchesSelector || element.msMatchesSelector || function (s) {
+	      return matchesSelector_SLOW(element, s);
+	    };
+	    return matchesImpl.call(element, selector);
+	  }
+	
+	};
+	
+	module.exports = CSSCore;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
+
+/***/ },
+/* 194 */
+/*!**********************************************!*\
+  !*** ./~/react/lib/ReactTransitionEvents.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionEvents
+	 */
+	
+	'use strict';
+	
+	var ExecutionEnvironment = __webpack_require__(/*! fbjs/lib/ExecutionEnvironment */ 53);
+	
+	var getVendorPrefixedEventName = __webpack_require__(/*! ./getVendorPrefixedEventName */ 116);
+	
+	var endEvents = [];
+	
+	function detectEvents() {
+	  var animEnd = getVendorPrefixedEventName('animationend');
+	  var transEnd = getVendorPrefixedEventName('transitionend');
+	
+	  if (animEnd) {
+	    endEvents.push(animEnd);
+	  }
+	
+	  if (transEnd) {
+	    endEvents.push(transEnd);
+	  }
+	}
+	
+	if (ExecutionEnvironment.canUseDOM) {
+	  detectEvents();
+	}
+	
+	// We use the raw {add|remove}EventListener() call because EventListener
+	// does not know how to remove event listeners and we really should
+	// clean up. Also, these events are not triggered in older browsers
+	// so we should be A-OK here.
+	
+	function addEventListener(node, eventName, eventListener) {
+	  node.addEventListener(eventName, eventListener, false);
+	}
+	
+	function removeEventListener(node, eventName, eventListener) {
+	  node.removeEventListener(eventName, eventListener, false);
+	}
+	
+	var ReactTransitionEvents = {
+	  addEndEventListener: function (node, eventListener) {
+	    if (endEvents.length === 0) {
+	      // If CSS transitions are not supported, trigger an "end animation"
+	      // event immediately.
+	      window.setTimeout(eventListener, 0);
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      addEventListener(node, endEvent, eventListener);
+	    });
+	  },
+	
+	  removeEndEventListener: function (node, eventListener) {
+	    if (endEvents.length === 0) {
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      removeEventListener(node, endEvent, eventListener);
+	    });
+	  }
+	};
+	
+	module.exports = ReactTransitionEvents;
+
+/***/ },
+/* 195 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/BackgroundImageContainer.js ***!
   \*******************************************************************/
@@ -22278,17 +23720,17 @@
 	module.exports = BackgroundImageContainer;
 
 /***/ },
-/* 182 */
+/* 196 */
 /*!************************************************************!*\
   !*** ./react_assets/js/questionAsker/FeedbackContainer.js ***!
   \************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 1);
-	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 183);
-	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 184);
-	var MiriIcon = __webpack_require__(/*! ./components/MiriIcon */ 185);
-	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 186);
+	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 197);
+	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 198);
+	var MiriIcon = __webpack_require__(/*! ./components/MiriIcon */ 199);
+	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 200);
 	
 	var FeedbackContainer = React.createClass({
 		displayName: 'FeedbackContainer',
@@ -22360,7 +23802,9 @@
 						React.createElement(
 							'div',
 							{ className: hintDivClass },
-							React.createElement(HintIcon, null),
+							React.createElement(HintIcon, {
+								hintActive: this.props.hintActive,
+								answerFeedbackActive: this.props.answerFeedbackActive }),
 							React.createElement(
 								'p',
 								{ className: 'hintText' },
@@ -22380,7 +23824,7 @@
 	module.exports = FeedbackContainer;
 
 /***/ },
-/* 183 */
+/* 197 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/SpeechableSpan.js ***!
   \********************************************************************/
@@ -22401,7 +23845,7 @@
 	module.exports = SpeechableSpan;
 
 /***/ },
-/* 184 */
+/* 198 */
 /*!***************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/CoinMeter.js ***!
   \***************************************************************/
@@ -22426,7 +23870,7 @@
 	module.exports = CoinMeter;
 
 /***/ },
-/* 185 */
+/* 199 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
   \**************************************************************/
@@ -22446,31 +23890,59 @@
 	module.exports = MiriIcon;
 
 /***/ },
-/* 186 */
+/* 200 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/HintIcon.js ***!
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
 	
-	function HintIcon(props) {
-		return React.createElement(
-			"div",
-			{ className: "payHintContainer" },
-			React.createElement("img", { className: "hintIconImage payHintBg", src: "static/images/UI/ICON_payforhelp_bg-01.png" }),
-			React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_qmark-01.png" }),
-			React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_Big_sparkle-01.png" }),
-			React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_L_spark-01.png" }),
-			React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_R_sparkle-01.png" })
-		);
-	}
+	var HintIcon = React.createClass({
+		displayName: "HintIcon",
+	
+	
+		render: function () {
+			var hintIconDiv;
+			if (this.props.hintActive) {
+				hintIconDiv = React.createElement(
+					"div",
+					null,
+					React.createElement("img", { className: "hintIconImage payHintBg", src: "static/images/UI/ICON_payforhelp_bg-01.png" }),
+					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_qmark-01.png" }),
+					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_Big_sparkle-01.png" }),
+					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_L_spark-01.png" }),
+					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_R_sparkle-01.png" })
+				);
+			} else if (this.props.answerFeedbackActive) {
+				hintIconDiv = React.createElement(
+					"div",
+					null,
+					React.createElement(
+						"div",
+						{ className: "addSuggestionDiv" },
+						React.createElement(
+							"span",
+							null,
+							"+"
+						)
+					),
+					React.createElement("img", { className: "hintIconImage payHintBg", src: "static/images/UI/Icon_Star-01.png" })
+				);
+			}
+	
+			return React.createElement(
+				"div",
+				{ className: "hintIcon" },
+				hintIconDiv
+			);
+		}
+	});
 	
 	module.exports = HintIcon;
 
 /***/ },
-/* 187 */
+/* 201 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/SpeechSynth.js ***!
   \************************************************/
@@ -22516,6 +23988,99 @@
 	};
 	
 	module.exports = speechSynth;
+
+/***/ },
+/* 202 */
+/*!**************************************************************!*\
+  !*** ./react_assets/js/questionAsker/TransitionContainer.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
+	var ReactTransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 187);
+	var MyBox = React.createClass({
+	    displayName: 'MyBox',
+	
+	    show: function (callback) {
+	        var node = ReactDOM.findDOMNode(this);
+	        TweenMax.fromTo(node, 2, { width: 100, height: 100, backgroundColor: '#0cc', scale: 0.2, opacity: 0, rotation: -180 }, { width: 100, height: 100, backgroundColor: '#0cc', scale: 1, opacity: 1, rotation: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
+	    },
+	    hide: function (callback) {
+	        var node = ReactDOM.findDOMNode(this);
+	        TweenMax.to(node, 2, { width: 100, height: 100, backgroundColor: '#cc0', scale: 0.2, opacity: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
+	    },
+	    componentWillAppear: function (didAppearCallback) {
+	        console.log('MyBox.componentWillAppear');
+	        this.show(didAppearCallback);
+	    },
+	    componentDidAppear: function () {
+	        console.log('MyBox.componentDidAppear');
+	    },
+	    componentWillEnter: function (didEnterCallback) {
+	        console.log('MyBox.componentWillEnter');
+	        this.show(didEnterCallback);
+	    },
+	    componentDidEnter: function () {
+	        console.log('MyBox.componentDidEnter');
+	    },
+	    componentWillLeave: function (didLeaveCallback) {
+	        console.log('MyBox.componentWillLeave');
+	        this.hide(didLeaveCallback);
+	    },
+	    componentDidLeave: function () {
+	        console.log('MyBox.componentDidLeave');
+	    },
+	    componentDidMount: function () {
+	        console.log('MyBox.componentDidMount');
+	    },
+	    componentWillUnmount: function () {
+	        console.log('MyBox.componentWillUnmount');
+	    },
+	    render: function () {
+	        return React.createElement(
+	            'div',
+	            null,
+	            ' '
+	        );
+	    }
+	});
+	var TransitionContainer = React.createClass({
+	    displayName: 'TransitionContainer',
+	
+	    getInitialState: function () {
+	        return { isShowing: false };
+	    },
+	    onButtonClicked: function () {
+	        this.setState({ isShowing: !this.state.isShowing });
+	    },
+	    render: function () {
+	        var myBox = this.state.isShowing ? React.createElement(MyBox, { key: 'myBox' }) : '';
+	        return React.createElement(
+	            'div',
+	            { id: 'container' },
+	            React.createElement(MyButton, { onButtonClicked: this.onButtonClicked }),
+	            React.createElement(
+	                ReactTransitionGroup,
+	                { transitionName: 'hellotransition' },
+	                myBox
+	            )
+	        );
+	    }
+	});
+	var MyButton = React.createClass({
+	    displayName: 'MyButton',
+	
+	    render: function () {
+	        return React.createElement(
+	            'button',
+	            { onClick: this.props.onButtonClicked },
+	            'Click Me'
+	        );
+	    }
+	});
+	
+	module.exports = TransitionContainer;
 
 /***/ }
 /******/ ]);

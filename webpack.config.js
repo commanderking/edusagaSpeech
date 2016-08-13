@@ -21,7 +21,8 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js?$/, exclude: /node_modules/, loader: 'babel-loader'}, // to transform JSX into JS
-      { test: /\.scss$/, loaders: ["style", "css", "sass"] }
+      { test: /\.scss$/, loaders: ["style", "css", "sass"] },
+      { test: /\.css$/, loader: "style-loader!css-loader" }
     ],
   },
 

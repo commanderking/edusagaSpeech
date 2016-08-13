@@ -16,17 +16,22 @@
     "babel": "^6.5.2",
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
+    "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
     "gulp": "^3.9.1",
+    "mocha": "^3.0.2",
     "node-sass": "^3.8.0",
     "react": "^15.2.1",
+    "react-addons-transition-group": "^15.3.0",
     "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-bundle-tracker": "0.0.93"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "gulp",
-    "bundle" : "./node_modules/.bin/webpack -d --watch"
+    "bundle": "./node_modules/.bin/webpack -d --watch"
   },
   "repository": {
     "type": "git",

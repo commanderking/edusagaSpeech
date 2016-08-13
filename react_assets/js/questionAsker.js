@@ -6,6 +6,7 @@ var TaskContainer = require('./questionAsker/TaskContainer');
 var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer');
 var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
+var TransitionContainer = require('./questionAsker/TransitionContainer')
 const IMAGE_BASE_PATH = './static/images/';
 
 var QuestionAsker = React.createClass({
@@ -19,7 +20,10 @@ var QuestionAsker = React.createClass({
 			coins: 0,
 			answerFeedbackActive: false,
 			feedbackText: "",
-			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png",
+			micActive: false,
+			correctAnswerState: false,
+			wrongAnswerState: false
 		}
 	},
 	loadSceneData: function() {
@@ -52,9 +56,11 @@ var QuestionAsker = React.createClass({
 		this.loadSceneData();
 	},
 	checkAnswer: function(userAnswer, taskIndex) {
-
+		var that = this;
 		var correctAnswer = false;
-		var newSceneData = this.state.sceneData;
+
+		// Trick to get new instance of sceneData, to not alter the origial state
+		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 		var allCurrentTasks = this.state.sceneData.character.tasks;
 		var currentTaskData = allCurrentTasks[taskIndex];
 		var possibleCorrectAnswers = currentTaskData.possibilities;
@@ -74,6 +80,11 @@ var QuestionAsker = React.createClass({
 			})
 		}
 		if (correctAnswer) {
+
+			/*----------------------------------------------
+			These actions immediately happen
+			----------------------------------------------*/
+
 			// Play response voice
 			this.playSound(newSceneData.character.tasks[taskIndex].soundID);
 
@@ -83,47 +94,71 @@ var QuestionAsker = React.createClass({
 			// Show response text
 			newSceneData.currentDialog = newSceneData.character.tasks[taskIndex].response;
 
-			// Push this task into the completedTasks
-			newSceneData.character.completedTasks.push(currentTaskData);
-
-			// Remove the task from the tasks array
-			// If it's a choice task, search the array for other choices that are linked and remove them
-			if (currentTaskData.taskType !== undefined) {
-				if (currentTaskData.taskType == "choice") {
-					// Search tasks to see if there's another task with the current link
-					var indexesToRemove = [];
-					allCurrentTasks.forEach(function(task, k) {
-						if (task.taskLink == currentTaskData.taskLink) {
-							indexesToRemove.push(k);
-						}
-					});
-					for (var i = indexesToRemove.length -1; i >= 0; i--) {
-   						allCurrentTasks.splice(indexesToRemove[i],1);
-					}
-					newSceneData.character.tasks = allCurrentTasks;
-				}
-			} else {
-				// Add task to completed tasks and then delete it from currentTasks
-				newSceneData.character.tasks.splice(taskIndex, 1);
-			}
-
 			// Add coins 
 			this.addCoins(10);
 
-			// If task has an extension task, add that new task to the Task List
-			if (currentTaskData.extensionTasks == null) {
-				// Do nothing
-			} else if (currentTaskData.extensionTasks.length > 0) {
-				currentTaskData.extensionTasks.forEach(function(extensionTask, j) {
-					newSceneData.character.tasks.push(currentTaskData.extensionTasks[j]);
-				})
-			}
+			this.setState({sceneData: newSceneData});
 
+			this.setState({correctAnswerState: true});
+			this.turnMicStateOff();
+
+			/*----------------------------------------------
+			These actions happen on delay of 1s
+			----------------------------------------------*/
+
+			var newerSceneData = JSON.parse(JSON.stringify(newSceneData));
+
+			setTimeout(function(){
+
+				// Turn off correct answer state
+				that.setState({correctAnswerState: false});
+				// Push this task into the completedTasks
+				newSceneData.character.completedTasks.push(currentTaskData);
+
+				// Remove the task from the tasks array
+				// If it's a choice task, search the array for other choices that are linked and remove them
+				if (currentTaskData.taskType !== undefined) {
+					if (currentTaskData.taskType == "choice") {
+						// Search tasks to see if there's another task with the current link
+						var indexesToRemove = [];
+						allCurrentTasks.forEach(function(task, k) {
+							if (task.taskLink == currentTaskData.taskLink) {
+								indexesToRemove.push(k);
+							}
+						});
+
+						// Remove from the end of array all tasks that have matching link
+						for (var i = indexesToRemove.length -1; i >= 0; i--) {
+	   						allCurrentTasks.splice(indexesToRemove[i],1);
+						}
+						newSceneData.character.tasks = allCurrentTasks;
+					}
+				} else {
+					// Add task to completed tasks and then delete it from currentTasks
+					newSceneData.character.tasks.splice(taskIndex, 1);
+				}
+
+				// If task has an extension task, add that new task to the Task List
+				if (currentTaskData.extensionTasks == null) {
+					// Do nothing
+				} else if (currentTaskData.extensionTasks.length > 0) {
+					currentTaskData.extensionTasks.forEach(function(extensionTask, j) {
+						newSceneData.character.tasks.push(currentTaskData.extensionTasks[j]);
+					})
+				}
+
+				that.setState({sceneData: newSceneData})
+			}, 2000)
+			
 		/*--------------------------------------------
 		When user answers incorrectly
 		--------------------------------------------*/
 
 		} else {
+			// Turn off Mic recording state
+			this.turnMicStateOff();
+
+			// set image to confused
 			newSceneData.currentImage = IMAGE_BASE_PATH + this.state.sceneData.character.emotions.confused;
 			// Grab random confused phrase
 		
@@ -146,10 +181,29 @@ var QuestionAsker = React.createClass({
 
 			// Turns on feedback mode to reveal what user said
 			this.activateFeedbackMode();
+
+			// Set new variables in sceneData
+			this.setState({sceneData: newSceneData});
+
+			this.setState({wrongAnswerState: true});
+
+			setTimeout(function() {
+				// Reset character image to default 
+				newSceneData.currentImage = IMAGE_BASE_PATH + that.state.sceneData.character.emotions.default;
+				that.setState({wrongAnswerState: false});
+				that.setState({sceneData: newSceneData});
+			}, 3000);
+
 		}
 
-		// Refresh the sceneData with newSceneDAta
-		this.setState({sceneData: newSceneData})
+		/*---------------------------------------------
+		For both correct and incorrect answers 
+		---------------------------------------------*/
+
+
+		// Refresh the sceneData with newSceneData after 3 seconds
+		// return Miri Icon to default after 3s
+		// this.setState({sceneData: newSceneData});
 
 	},
 	initializeSounds: function() {
@@ -232,6 +286,12 @@ var QuestionAsker = React.createClass({
 			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 		})
 	},
+	turnMicStateOn: function() {
+		this.setState({micActive: true})
+	},
+	turnMicStateOff: function() {
+		this.setState({micActive: false})
+	},
 	addCoins: function(numberCoinsToAdd) {
 		newCoins = this.state.coins + numberCoinsToAdd;
 		this.setState({ coins: newCoins });
@@ -271,7 +331,12 @@ var QuestionAsker = React.createClass({
 						onHintClick = {this.handleHintClick}
 						onDisableHint = {this.handleDisableHint}
 						answerFeedbackActive = {this.state.answerFeedbackActive}
-						deactivateFeedbackMode = {this.deactivateFeedbackMode} />
+						deactivateFeedbackMode = {this.deactivateFeedbackMode}
+						turnMicStateOn = {this.turnMicStateOn}
+						turnMicStateOff = {this.turnMicStateOff}
+						micActive = {this.state.micActive} 
+						correctAnswerState = {this.state.correctAnswerState}
+						wrongAnswerState = {this.state.wrongAnswerState} />
 					<FeedbackContainer 
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
@@ -281,6 +346,7 @@ var QuestionAsker = React.createClass({
 						answerFeedbackActive = {this.state.answerFeedbackActive}
 						feedbackText = {this.state.feedbackText} 
 						miriIconSrc = {this.state.miriIconSrc} />
+					<TransitionContainer />
 				</div>
 			)
 		}

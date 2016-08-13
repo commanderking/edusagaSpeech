@@ -56,7 +56,9 @@ var FeedbackContainer = React.createClass({
 							({this.props.locationTextChinese})
 						</p>
 						<div className={hintDivClass}>
-							<HintIcon />
+							<HintIcon 
+								hintActive = {this.props.hintActive}
+								answerFeedbackActive = {this.props.answerFeedbackActive} />
 							<p className="hintText">
 								{hintTemplateText}
 								<SpeechableSpan 

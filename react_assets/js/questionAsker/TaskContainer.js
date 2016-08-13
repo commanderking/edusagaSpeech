@@ -2,10 +2,13 @@ var React = require('react');
 var Task = require('./components/Task');
 var PropTypes = React.PropTypes;
 var SpeechRecognition = require('../helpers/SpeechRecognition');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var TransitionsCSS = require('../../../static/css/transitions.css');
 
 var TaskContainer = React.createClass({
 	getInitialState: function() {
-		return { 
+		return {
+			currentTaskIndex: 0
 		}
 	},
 	// Task Index should be grabbed from the Task's index
@@ -13,6 +16,16 @@ var TaskContainer = React.createClass({
 		// Turns off any active hints or feedback
 		this.props.onDisableHint();
 		this.props.deactivateFeedbackMode();
+
+		// If mic active, turn it off
+		if (this.props.micActive) {
+			this.props.turnMicStateOff();
+			return;
+		}
+		// Activate MicActive State
+		this.props.turnMicStateOn();
+		this.setState ({currentTaskIndex: taskIndex});
+
 		var that = this;
 		SpeechRecognition.activateSpeech(this.props.tasks[taskIndex].possibilities, this.props.taskLang)
 			.then(function(userAnswer) {
@@ -30,14 +43,18 @@ var TaskContainer = React.createClass({
 		var tasks = taskObject.map(function(task, i){
 			return (
 				<Task 
-					key={i} 
-					index={i} 
+					key={taskObject[i].task} 
+					index={i}
 					taskName={taskObject[i].task}
 					onSpeechInput = {that.handleSpeechInput} 
 					hintActive = {that.props.hintActive}
 					currentHintIndex = {that.props.currentHintIndex}
 					onHintClick = {that.props.onHintClick} 
-					onDisableHint = {that.props.onDisableHint} />
+					onDisableHint = {that.props.onDisableHint} 
+					micActive = {that.props.micActive} 
+					currentTaskIndex = {that.state.currentTaskIndex} 
+					correctAnswerState = {that.props.correctAnswerState} 
+					wrongAnswerState = {that.props.wrongAnswerState} />
 			)
 		})
 
@@ -51,7 +68,14 @@ var TaskContainer = React.createClass({
 			return (
 				<div className="combinedTaskList col-md-6 col-sm-6 col-xs-6">
 					<ul className="taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked">
-						{tasks}
+				        <ReactCSSTransitionGroup 
+				        	transitionName="example" 
+				        	transitionAppear = {true}
+				        	transitionAppearTimeout = {500}
+				        	transitionEnterTimeout={500} 
+				        	transitionLeaveTimeout={500}>
+				          {tasks}
+				        </ReactCSSTransitionGroup>
 					</ul>
 				</div>
 			)
