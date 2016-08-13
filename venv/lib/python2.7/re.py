@@ -1,1 +1,1 @@
-//anaconda/lib/python2.7/re.py
+/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/re.py

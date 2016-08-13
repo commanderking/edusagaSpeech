@@ -30,7 +30,7 @@ var TaskIconImage = React.createClass({
 	componentDidMount: function() {
 		console.log("Component Mounted");
 		var node = ReactDOM.findDOMNode(this);
-		this.props.imageTransition(node, this);
+		// this.props.imageTransition(node, this);
 		console.log(node);
 
 	},
