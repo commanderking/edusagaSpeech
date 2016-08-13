@@ -1,19 +1,23 @@
-from flask import Flask, request, jsonify
-from flask import render_template
+from flask import Flask, request, jsonify, render_template
+from flask.ext.sqlalchemy import SQLAlchemy
+import os
 
-import boto3
-import json
-import urlparse
+import boto3, json, urlparse
 
 #For Heroku Logging
-import sys
-import logging
+import sys, logging
 
 REGION = 'us-east-1'
 TOPIC  = ''
 
 app = Flask (__name__)
-#app.config.from_envvar('GOOGLE_APPLICATION_CREDENTIALS')
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+#TODO: Should be from models import Teacher, but there's a circular reference
+#SEE: http://flask.pocoo.org/docs/0.10/patterns/packages/
+from models import *
 
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
@@ -112,6 +116,28 @@ def log():
 	)
 	'''
 	return 'Success'
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup(name="Sign Up Page"):
+	errors = []
+	results = {}
+	test = ""
+	if request.method == "POST":
+		# get name and email that user has entered
+		try:
+			firstName = request.form['firstName']
+			lastName = request.form['lastName']
+			email = request.form['email']
+			test = firstName + " " + lastName + " " + email
+			newTeacher = Teacher(firstName, lastName, email)
+			db.session.add(newTeacher)
+			db.session.commit()
+		except: 
+			errors.append(
+				"Unable to get URL."
+			)
+			test = "failed"
+	return render_template("signup.html", name=name, errors=errors, results=results, email=test)
 
 if __name__ == '__main__':
 	app.run(debug=True)
