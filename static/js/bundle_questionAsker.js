@@ -22354,6 +22354,7 @@
 	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 182);
 	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 183);
 	var TransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 187);
+	var Transitions = __webpack_require__(/*! ../../helpers/transitions.js */ 203);
 	
 	var TaskIcon = React.createClass({
 		displayName: 'TaskIcon',
@@ -22363,20 +22364,24 @@
 				ease: Expo.easeInOut, onCompleteScope: thisContext });
 		},
 		render: function () {
-	
 			// Default TaskIcon image when nothing is being recorded or answered
-			var taskIconImage = React.createElement(TaskIconImage, { imageSrc: '/static/images/UI/Icon_Mic-01.png' });
-	
+			var taskIconImage = React.createElement(
+				'div',
+				{ className: 'taskIconDiv' },
+				React.createElement(TaskIconImage, {
+					imageSrc: '/static/images/UI/Icon_Mic-01.png',
+					imageTransition: this.imageTransition })
+			);
 			// Sets to true if this task is the active task
 			if (this.props.index === this.props.currentTaskIndex) {
 				if (this.props.micActive) {
 					taskIconImage = React.createElement(
 						'div',
-						null,
+						{ className: 'taskIconDiv' },
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'iconStar',
-							imageSrc: '/static/images/UI/Icon_Star-01.png',
-							imageTransition: this.imageTransition }),
+							imageTransition: this.imageTransition,
+							imageSrc: '/static/images/UI/Icon_Star-01.png' }),
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'iconMic',
 							imageSrc: '/static/images/UI/Icon_Mic-01.png',
@@ -22385,22 +22390,29 @@
 				} else if (this.props.correctAnswerState) {
 					taskIconImage = React.createElement(
 						'div',
-						null,
-						React.createElement(TaskIconImage, { imageSrc: '/static/images/UI/Icon_Star-01.png' }),
-						React.createElement(TaskIconImage, { imageSrc: '/static/images/UI/Icon_10coins_flat_nostar-01.png' })
+						{ className: 'taskIconDiv' },
+						React.createElement(TaskIconImage, {
+							imageSrc: '/static/images/UI/Icon_Star-01.png',
+							imageTransition: this.imageTransition }),
+						React.createElement(TaskIconImage, {
+							imageSrc: '/static/images/UI/Icon_10coins_flat_nostar-01.png',
+							imageTransition: this.imageTransition })
 					);
 				} else if (this.props.wrongAnswerState) {
 					taskIconImage = React.createElement(
 						'div',
-						null,
-						React.createElement(TaskIconImage, { keyToAttach: 'iconStar2', imageSrc: '/static/images/UI/Icon_Star-01.png' }),
+						{ className: 'taskIconDiv' },
+						React.createElement(TaskIconImage, {
+							keyToAttach: 'iconStar2',
+							imageSrc: '/static/images/UI/Icon_Star-01.png',
+							imageTransition: this.imageTransition }),
 						React.createElement(TaskIconImage, { keyToAttach: 'questionMark', imageSrc: '/static/images/UI/Icon_Questionmark-01.png' })
 					);
 				}
 			}
 			return React.createElement(
-				'div',
-				{ className: 'taskIconDiv' },
+				'span',
+				null,
 				taskIconImage
 			);
 		}
@@ -22418,19 +22430,6 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
 	var PropTypes = React.PropTypes;
-	//var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-	
-	
-	/*
-			<ReactCSSTransitionGroup 
-		    	transitionName="taskIconImage" 
-		    	transitionAppear = {true}
-		    	transitionAppearTimeout = {500}
-		    	transitionEnterTimeout={500} 
-		    	transitionLeaveTimeout={500}>
-				<img key={props.keyToAttach} className="" src={props.imageSrc} />
-			</ReactCSSTransitionGroup>
-	*/
 	
 	var TaskIconImage = React.createClass({
 		displayName: 'TaskIconImage',
@@ -24081,6 +24080,15 @@
 	});
 	
 	module.exports = TransitionContainer;
+
+/***/ },
+/* 203 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/transitions.js ***!
+  \************************************************/
+/***/ function(module, exports) {
+
+
 
 /***/ }
 /******/ ]);
