@@ -55,7 +55,7 @@ var TaskIcon = React.createClass({
 		}
 		return (
 			<span>
-				{taskIconImage}
+			{taskIconImage}
 			</span>
 		)
 	}
