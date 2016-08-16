@@ -52,10 +52,10 @@
 	var CharacterContainer = __webpack_require__(/*! ./questionAsker/CharacterContainer */ 177);
 	var DialogContainer = __webpack_require__(/*! ./questionAsker/DialogContainer */ 178);
 	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 179);
-	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 195);
-	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 196);
-	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 201);
-	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 202);
+	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 196);
+	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 197);
+	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 202);
+	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 203);
 	const IMAGE_BASE_PATH = './static/images/';
 	
 	var QuestionAsker = React.createClass({
@@ -198,7 +198,7 @@
 					}
 	
 					that.setState({ sceneData: newSceneData });
-				}, 2000);
+				}, 4000);
 	
 				/*--------------------------------------------
 	   When user answers incorrectly
@@ -22172,15 +22172,15 @@
 	var Task = __webpack_require__(/*! ./components/Task */ 180);
 	var PropTypes = React.PropTypes;
 	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 36);
-	var ReactCSSTransitionGroup = __webpack_require__(/*! react-addons-css-transition-group */ 190);
-	var TransitionsCSS = __webpack_require__(/*! ../../../static/css/transitions.css */ 183);
+	var ReactCSSTransitionGroup = __webpack_require__(/*! react-addons-css-transition-group */ 191);
+	var TransitionsCSS = __webpack_require__(/*! ../../../static/css/transitions.css */ 184);
 	
 	var TaskContainer = React.createClass({
 		displayName: 'TaskContainer',
 	
 		getInitialState: function () {
 			return {
-				currentTaskIndex: 0
+				currentTaskIndex: null
 			};
 		},
 		// Task Index should be grabbed from the Task's index
@@ -22243,16 +22243,7 @@
 					React.createElement(
 						'ul',
 						{ className: 'taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked' },
-						React.createElement(
-							ReactCSSTransitionGroup,
-							{
-								transitionName: 'example',
-								transitionAppear: true,
-								transitionAppearTimeout: 500,
-								transitionEnterTimeout: 500,
-								transitionLeaveTimeout: 500 },
-							tasks
-						)
+						tasks
 					)
 				);
 			}
@@ -22352,25 +22343,20 @@
 
 	var React = __webpack_require__(/*! react */ 1);
 	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 182);
-	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 183);
-	var TransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 187);
-	var Transitions = __webpack_require__(/*! ../../helpers/transitions.js */ 203);
+	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 184);
+	var TransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 188);
 	
 	var TaskIcon = React.createClass({
 		displayName: 'TaskIcon',
 	
-		imageTransition: function (DOMnode, thisContext) {
-			TweenMax.fromTo(DOMnode, 2, { width: 0, height: 0, scale: 0.2, opacity: 0, rotation: -180, left: -50 }, { width: 50, height: 50, scale: 1, opacity: 1, rotation: 0, left: -25,
-				ease: Expo.easeInOut, onCompleteScope: thisContext });
-		},
 		render: function () {
 			// Default TaskIcon image when nothing is being recorded or answered
 			var taskIconImage = React.createElement(
 				'div',
 				{ className: 'taskIconDiv' },
 				React.createElement(TaskIconImage, {
-					imageSrc: '/static/images/UI/Icon_Mic-01.png',
-					imageTransition: this.imageTransition })
+					keyToAttach: 'firstMic',
+					imageSrc: '/static/images/UI/Icon_Mic-01.png' })
 			);
 			// Sets to true if this task is the active task
 			if (this.props.index === this.props.currentTaskIndex) {
@@ -22380,33 +22366,36 @@
 						{ className: 'taskIconDiv' },
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'iconStar',
-							imageTransition: this.imageTransition,
-							imageSrc: '/static/images/UI/Icon_Star-01.png' }),
+							imageSrc: '/static/images/UI/Icon_Star-01.png',
+							transition: 'activateTaskStar' }),
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'iconMic',
 							imageSrc: '/static/images/UI/Icon_Mic-01.png',
-							imageTransition: this.imageTransition })
+							transition: 'activateTaskMic' })
 					);
 				} else if (this.props.correctAnswerState) {
 					taskIconImage = React.createElement(
 						'div',
 						{ className: 'taskIconDiv' },
 						React.createElement(TaskIconImage, {
+							keyToAttach: 'iconStar2',
 							imageSrc: '/static/images/UI/Icon_Star-01.png',
-							imageTransition: this.imageTransition }),
+							transition: 'taskCorrectStar' }),
 						React.createElement(TaskIconImage, {
+							keyToAttach: 'coins',
 							imageSrc: '/static/images/UI/Icon_10coins_flat_nostar-01.png',
-							imageTransition: this.imageTransition })
+							transition: 'taskCorrectCoins' })
 					);
 				} else if (this.props.wrongAnswerState) {
 					taskIconImage = React.createElement(
 						'div',
 						{ className: 'taskIconDiv' },
 						React.createElement(TaskIconImage, {
-							keyToAttach: 'iconStar2',
-							imageSrc: '/static/images/UI/Icon_Star-01.png',
-							imageTransition: this.imageTransition }),
-						React.createElement(TaskIconImage, { keyToAttach: 'questionMark', imageSrc: '/static/images/UI/Icon_Questionmark-01.png' })
+							keyToAttach: 'iconStar3',
+							imageSrc: '/static/images/UI/Icon_Star-01.png' }),
+						React.createElement(TaskIconImage, {
+							keyToAttach: 'questionMark',
+							imageSrc: '/static/images/UI/Icon_Questionmark-01.png' })
 					);
 				}
 			}
@@ -22430,29 +22419,49 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
 	var PropTypes = React.PropTypes;
+	var Transitions = __webpack_require__(/*! ../../helpers/Transitions.js */ 183);
 	
 	var TaskIconImage = React.createClass({
 		displayName: 'TaskIconImage',
 	
-		show: function (callback) {
-			var node = ReactDOM.findDOMNode(this);
-			console.log(callback);
-		},
-		componentWillEnter: function (callback) {
-			console.log("Component Entered");
-			callback();
-		},
-		componentWillLeave: function (callback) {
-			callback();
-		},
 		componentDidMount: function () {
-			console.log("Component Mounted");
 			var node = ReactDOM.findDOMNode(this);
-			this.props.imageTransition(node, this);
-			console.log(node);
+			if (this.props.transition === "activateTaskMic") {
+				Transitions.activateTask.mic(node);
+			}
 		},
 		componentWillUnmount: function () {
-			console.log("Component unmounted");
+			console.log("Unmount");
+			var node = ReactDOM.findDOMNode(this);
+			console.log(node);
+			if (this.props.transition === "taskCorrectMicFade") {
+				Transitions.activateTask.mic(node);
+			}
+		},
+		componentDidUpdate: function () {
+			var node = ReactDOM.findDOMNode(this);
+			console.log("Component Mounted");
+			console.log(node);
+	
+			switch (this.props.transition) {
+				case "activateTaskMic":
+					Transitions.activateTask.mic(node);
+					break;
+				case "activateTaskStar":
+					Transitions.activateTask.star(node);
+					break;
+				case "taskCorrectMic":
+					Transitions.taskCorrect.mic(node);
+					break;
+				case "taskCorrectStar":
+					Transitions.taskCorrect.star(node);
+					break;
+				case "taskCorrectCoins":
+					Transitions.taskCorrect.coins(node);
+					break;
+				default:
+					break;
+			}
 		},
 		render: function () {
 			return React.createElement('img', { key: this.props.keyToAttach, className: '', src: this.props.imageSrc });
@@ -22464,6 +22473,53 @@
 
 /***/ },
 /* 183 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/Transitions.js ***!
+  \************************************************/
+/***/ function(module, exports) {
+
+	// Transitions related to clicking a task to enter 
+	
+	var activateTask = {
+		mic: function (DOMnode) {
+			var tl = new TimelineMax();
+			tl.to(DOMnode, 1, { scale: 0 }).to(DOMnode, 1, { scale: 1.5 });
+		},
+		star: function (DOMnode) {
+			var tl = new TimelineMax({ delay: 1 });
+			tl.to(DOMnode, 0.25, { scale: 2 }).to(DOMnode, 0.25, { scale: 1.5 }).to(DOMnode, 2, { rotation: "360", ease: Linear.easeNone, repeat: -1 });
+		}
+	};
+	
+	var taskCorrect = {
+		star: function (DOMnode) {
+			var tl = new TimelineMax();
+			tl.to(DOMnode, 1, { scale: 0.5 }).to(DOMnode, 1, { scale: 1.5 }).to(DOMnode, 1, { scale: 1 }).to(DOMnode, 1, { rotation: "360", scale: 0 });
+		},
+		mic: function (DOMnode) {
+			var tl = new TimelineMax({ delay: 1 });
+			tl.to(DOMnode, 1, { opacity: 0 });
+		},
+		coins: function (DOMnode) {
+			var tl = new TimelineMax({ delay: 1 });
+			tl.to(DOMnode, 0, { autoAlpha: 0 }).to(DOMnode, 1, { y: '-=50', autoAlpha: 1 }).to(DOMnode, 1, { autoAlpha: 0 });
+		}
+	};
+	
+	var Transitions = {
+		imageTransition: function (DOMnode, thisContext) {
+			TweenMax.fromTo(DOMnode, 2, { width: 0, height: 0, scale: 0.2, opacity: 0, rotation: -180, left: -50 }, { width: 50, height: 50, scale: 1, opacity: 1, rotation: 0, left: -25,
+				ease: Expo.easeInOut, onCompleteScope: thisContext });
+		}
+	};
+	
+	module.exports = {
+		activateTask: activateTask,
+		taskCorrect: taskCorrect
+	};
+
+/***/ },
+/* 184 */
 /*!************************************!*\
   !*** ./static/css/transitions.css ***!
   \************************************/
@@ -22472,10 +22528,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./transitions.css */ 184);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./transitions.css */ 185);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 186)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 187)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22492,13 +22548,13 @@
 	}
 
 /***/ },
-/* 184 */
+/* 185 */
 /*!***************************************************!*\
   !*** ./~/css-loader!./static/css/transitions.css ***!
   \***************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 185)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 186)();
 	// imports
 	
 	
@@ -22509,7 +22565,7 @@
 
 
 /***/ },
-/* 185 */
+/* 186 */
 /*!**************************************!*\
   !*** ./~/css-loader/lib/css-base.js ***!
   \**************************************/
@@ -22568,7 +22624,7 @@
 
 
 /***/ },
-/* 186 */
+/* 187 */
 /*!*************************************!*\
   !*** ./~/style-loader/addStyles.js ***!
   \*************************************/
@@ -22823,16 +22879,16 @@
 
 
 /***/ },
-/* 187 */
+/* 188 */
 /*!**************************************************!*\
   !*** ./~/react-addons-transition-group/index.js ***!
   \**************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! react/lib/ReactTransitionGroup */ 188);
+	module.exports = __webpack_require__(/*! react/lib/ReactTransitionGroup */ 189);
 
 /***/ },
-/* 188 */
+/* 189 */
 /*!*********************************************!*\
   !*** ./~/react/lib/ReactTransitionGroup.js ***!
   \*********************************************/
@@ -22855,7 +22911,7 @@
 	
 	var React = __webpack_require__(/*! ./React */ 2);
 	var ReactInstanceMap = __webpack_require__(/*! ./ReactInstanceMap */ 126);
-	var ReactTransitionChildMapping = __webpack_require__(/*! ./ReactTransitionChildMapping */ 189);
+	var ReactTransitionChildMapping = __webpack_require__(/*! ./ReactTransitionChildMapping */ 190);
 	
 	var emptyFunction = __webpack_require__(/*! fbjs/lib/emptyFunction */ 12);
 	
@@ -23087,7 +23143,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 189 */
+/* 190 */
 /*!****************************************************!*\
   !*** ./~/react/lib/ReactTransitionChildMapping.js ***!
   \****************************************************/
@@ -23199,16 +23255,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 190 */
+/* 191 */
 /*!******************************************************!*\
   !*** ./~/react-addons-css-transition-group/index.js ***!
   \******************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(/*! react/lib/ReactCSSTransitionGroup */ 191);
+	module.exports = __webpack_require__(/*! react/lib/ReactCSSTransitionGroup */ 192);
 
 /***/ },
-/* 191 */
+/* 192 */
 /*!************************************************!*\
   !*** ./~/react/lib/ReactCSSTransitionGroup.js ***!
   \************************************************/
@@ -23231,8 +23287,8 @@
 	
 	var React = __webpack_require__(/*! ./React */ 2);
 	
-	var ReactTransitionGroup = __webpack_require__(/*! ./ReactTransitionGroup */ 188);
-	var ReactCSSTransitionGroupChild = __webpack_require__(/*! ./ReactCSSTransitionGroupChild */ 192);
+	var ReactTransitionGroup = __webpack_require__(/*! ./ReactTransitionGroup */ 189);
+	var ReactCSSTransitionGroupChild = __webpack_require__(/*! ./ReactCSSTransitionGroupChild */ 193);
 	
 	function createTransitionTimeoutPropValidator(transitionType) {
 	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
@@ -23303,7 +23359,7 @@
 	module.exports = ReactCSSTransitionGroup;
 
 /***/ },
-/* 192 */
+/* 193 */
 /*!*****************************************************!*\
   !*** ./~/react/lib/ReactCSSTransitionGroupChild.js ***!
   \*****************************************************/
@@ -23325,8 +23381,8 @@
 	var React = __webpack_require__(/*! ./React */ 2);
 	var ReactDOM = __webpack_require__(/*! ./ReactDOM */ 39);
 	
-	var CSSCore = __webpack_require__(/*! fbjs/lib/CSSCore */ 193);
-	var ReactTransitionEvents = __webpack_require__(/*! ./ReactTransitionEvents */ 194);
+	var CSSCore = __webpack_require__(/*! fbjs/lib/CSSCore */ 194);
+	var ReactTransitionEvents = __webpack_require__(/*! ./ReactTransitionEvents */ 195);
 	
 	var onlyChild = __webpack_require__(/*! ./onlyChild */ 32);
 	
@@ -23478,7 +23534,7 @@
 	module.exports = ReactCSSTransitionGroupChild;
 
 /***/ },
-/* 193 */
+/* 194 */
 /*!*******************************!*\
   !*** ./~/fbjs/lib/CSSCore.js ***!
   \*******************************/
@@ -23608,7 +23664,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 194 */
+/* 195 */
 /*!**********************************************!*\
   !*** ./~/react/lib/ReactTransitionEvents.js ***!
   \**********************************************/
@@ -23689,7 +23745,7 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 195 */
+/* 196 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/BackgroundImageContainer.js ***!
   \*******************************************************************/
@@ -23719,25 +23775,41 @@
 	module.exports = BackgroundImageContainer;
 
 /***/ },
-/* 196 */
+/* 197 */
 /*!************************************************************!*\
   !*** ./react_assets/js/questionAsker/FeedbackContainer.js ***!
   \************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 1);
-	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 197);
-	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 198);
-	var MiriIcon = __webpack_require__(/*! ./components/MiriIcon */ 199);
-	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 200);
+	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 198);
+	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 199);
+	var MiriIcon = __webpack_require__(/*! ./components/MiriIcon */ 200);
+	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 201);
 	
 	var FeedbackContainer = React.createClass({
 		displayName: 'FeedbackContainer',
 	
 		getInitialState: function () {
 			return {
-				hintClickDisable: false
+				hintClickDisable: false,
+				suggestionMode: false,
+				suggestionSubmitted: false
 			};
+		},
+		// Suggestions are activated when users want to add their answer to database
+		activateSuggestionMode: function () {
+			console.log("Suggestion Mode Activated");
+			this.setState({ suggestionMode: true });
+		},
+		submitSuggestion: function () {
+			var that = this;
+			console.log("Suggestion submitted");
+			this.setState({ suggestionMode: false });
+			this.setState({ suggestionSubmitted: true });
+			setTimeout(function () {
+				that.setState({ suggestionSubmitted: false });
+			}, 3000);
 		},
 		handleHintAudioClick: function () {
 			that = this;
@@ -23761,20 +23833,75 @@
 			var hintDivClass;
 			var hintTemplateText;
 			var miriIconClass = "miriIcon";
+			var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
+			var hintDivClass = "hintDiv";
+	
+			// Case of hint being given
 			if (this.props.hintActive === true) {
-				hintDivClass = "hintDiv";
-				hintTemplateText = "Maybe you could say: ";
+				hintTemplateText = React.createElement(
+					'p',
+					{ className: 'hintText' },
+					React.createElement(
+						'span',
+						null,
+						'Maybe you can say: '
+					),
+					React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText })
+				);
 				miriIconClass += " miriGlow";
-			} else if (this.props.answerFeedbackActive === true) {
-				hintDivClass = "hintDiv";
-				hintTemplateText = "I heard you say:";
-				miriIconClass += " miriGlow";
-			} else {
-				hintDivClass = "hintDiv hidden";
 			}
 	
+			// User answers wrong, provide feedback
+			else if (this.props.answerFeedbackActive === true) {
+					// They comfirmed a suggestion...
+					if (this.state.suggestionSubmitted) {
+						hintTemplateText = React.createElement(
+							'p',
+							{ className: 'hintText' },
+							React.createElement(
+								'span',
+								null,
+								'I will add a request to add it to acceptable answers!'
+							)
+						);
+					}
+					// They pressed first suggestion submit and want to confirm a suggestion
+					else if (this.state.suggestionMode) {
+							hintTemplateText = React.createElement(
+								'p',
+								{ className: 'hintText' },
+								React.createElement(
+									'span',
+									null,
+									'Suggest '
+								),
+								React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText }),
+								React.createElement(
+									'span',
+									null,
+									' as a good answer?'
+								)
+							);
+							hintDivClass += " hintDivGold";
+						}
+						// All other cases
+						else {
+								hintTemplateText = React.createElement(
+									'p',
+									{ className: 'hintText' },
+									React.createElement(
+										'span',
+										null,
+										'I heard you say: '
+									),
+									React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText })
+								);
+							}
+					miriIconClass += " miriGlow";
+				} else {
+					hintDivClass = "hintDiv hidden";
+				}
 			// If hintClick disabled, span should do nothing, otherwise, it should play audio
-			var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
 			return React.createElement(
 				'div',
 				{ className: 'bottomNavBar' },
@@ -23803,15 +23930,12 @@
 							{ className: hintDivClass },
 							React.createElement(HintIcon, {
 								hintActive: this.props.hintActive,
-								answerFeedbackActive: this.props.answerFeedbackActive }),
-							React.createElement(
-								'p',
-								{ className: 'hintText' },
-								hintTemplateText,
-								React.createElement(SpeechableSpan, {
-									clickFunction: spanClickFunction,
-									feedbackText: this.props.feedbackText })
-							)
+								answerFeedbackActive: this.props.answerFeedbackActive,
+								suggestionMode: this.state.suggestionMode,
+								suggestionSubmitted: this.state.suggestionSubmitted,
+								activateSuggestionMode: this.activateSuggestionMode,
+								submitSuggestion: this.submitSuggestion }),
+							hintTemplateText
 						),
 						React.createElement(MiriIcon, { miriClass: miriIconClass, miriIconSrc: this.props.miriIconSrc })
 					)
@@ -23823,7 +23947,7 @@
 	module.exports = FeedbackContainer;
 
 /***/ },
-/* 197 */
+/* 198 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/SpeechableSpan.js ***!
   \********************************************************************/
@@ -23844,7 +23968,7 @@
 	module.exports = SpeechableSpan;
 
 /***/ },
-/* 198 */
+/* 199 */
 /*!***************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/CoinMeter.js ***!
   \***************************************************************/
@@ -23869,7 +23993,7 @@
 	module.exports = CoinMeter;
 
 /***/ },
-/* 199 */
+/* 200 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
   \**************************************************************/
@@ -23889,7 +24013,7 @@
 	module.exports = MiriIcon;
 
 /***/ },
-/* 200 */
+/* 201 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/HintIcon.js ***!
   \**************************************************************/
@@ -23899,7 +24023,6 @@
 	
 	var HintIcon = React.createClass({
 		displayName: "HintIcon",
-	
 	
 		render: function () {
 			var hintIconDiv;
@@ -23913,22 +24036,37 @@
 					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_L_spark-01.png" }),
 					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_R_sparkle-01.png" })
 				);
-			} else if (this.props.answerFeedbackActive) {
-				hintIconDiv = React.createElement(
-					"div",
-					null,
-					React.createElement(
-						"div",
-						{ className: "addSuggestionDiv" },
-						React.createElement(
-							"span",
-							null,
-							"+"
-						)
-					),
-					React.createElement("img", { className: "hintIconImage payHintBg", src: "static/images/UI/Icon_Star-01.png" })
-				);
 			}
+			// User has confirmed a suggestion
+			else if (this.props.suggestionSubmitted) {
+					hintIconDiv = React.createElement("div", null);
+				}
+				// User has answered, but not clicked to add a suggestion
+				else if (this.props.answerFeedbackActive && !this.props.suggestionMode) {
+						hintIconDiv = React.createElement(
+							"div",
+							null,
+							React.createElement(
+								"div",
+								{ className: "suggestNewPhraseButton promptSuggestNewPhraseButton",
+									onClick: this.props.activateSuggestionMode },
+								React.createElement("span", { className: "glyphicon glyphicon-plus", "aria-hidden": "true" })
+							)
+						);
+					}
+					// User answered and wants to add suggestion, prompt confirm suggestion
+					else if (this.props.answerFeedbackActive && this.props.suggestionMode) {
+							hintIconDiv = React.createElement(
+								"div",
+								null,
+								React.createElement(
+									"div",
+									{ className: "suggestNewPhraseButton confirmSuggestNewPhraseButton",
+										onClick: this.props.submitSuggestion },
+									React.createElement("span", { className: "glyphicon glyphicon-plus", "aria-hidden": "true" })
+								)
+							);
+						}
 	
 			return React.createElement(
 				"div",
@@ -23941,7 +24079,7 @@
 	module.exports = HintIcon;
 
 /***/ },
-/* 201 */
+/* 202 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/SpeechSynth.js ***!
   \************************************************/
@@ -23989,7 +24127,7 @@
 	module.exports = speechSynth;
 
 /***/ },
-/* 202 */
+/* 203 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/TransitionContainer.js ***!
   \**************************************************************/
@@ -23997,7 +24135,7 @@
 
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
-	var ReactTransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 187);
+	var ReactTransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 188);
 	var MyBox = React.createClass({
 	    displayName: 'MyBox',
 	
@@ -24080,15 +24218,6 @@
 	});
 	
 	module.exports = TransitionContainer;
-
-/***/ },
-/* 203 */
-/*!************************************************!*\
-  !*** ./react_assets/js/helpers/transitions.js ***!
-  \************************************************/
-/***/ function(module, exports) {
-
-
 
 /***/ }
 /******/ ]);

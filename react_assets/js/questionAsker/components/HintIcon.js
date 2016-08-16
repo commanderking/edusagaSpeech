@@ -1,7 +1,6 @@
 var React = require('react');
 
 var HintIcon = React.createClass({
-
 	render: function() {
 		var hintIconDiv;
 		if (this.props.hintActive) {
@@ -14,15 +13,29 @@ var HintIcon = React.createClass({
 					<img className="hintIconImage" src="static/images/UI/ICON_payforhelp_R_sparkle-01.png" />
 				</div>
 			)
-		} else if (this.props.answerFeedbackActive) {
-			hintIconDiv = (<div>
-				<div className="addSuggestionDiv">
-					<span>+</span>
-				</div>
-				<img className="hintIconImage payHintBg" src="static/images/UI/Icon_Star-01.png" />
-			</div>)	
+		} 
+		// User has confirmed a suggestion
+		else if (this.props.suggestionSubmitted) {
+			hintIconDiv = <div></div>
 		}
-
+		// User has answered, but not clicked to add a suggestion
+		else if (this.props.answerFeedbackActive && !this.props.suggestionMode) {
+			hintIconDiv = (<div>
+				<div className="suggestNewPhraseButton promptSuggestNewPhraseButton" 
+					onClick={this.props.activateSuggestionMode}> 
+					<span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</div>
+			</div>)
+		} 
+		// User answered and wants to add suggestion, prompt confirm suggestion
+		else if (this.props.answerFeedbackActive && this.props.suggestionMode) {
+			hintIconDiv = (<div>
+				<div className="suggestNewPhraseButton confirmSuggestNewPhraseButton"
+					onClick={this.props.submitSuggestion}>
+					<span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</div>
+			</div>)	
+		} 
 
 		return (
 			<div className="hintIcon">

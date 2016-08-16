@@ -8,7 +8,7 @@ var TransitionsCSS = require('../../../static/css/transitions.css');
 var TaskContainer = React.createClass({
 	getInitialState: function() {
 		return {
-			currentTaskIndex: 0
+			currentTaskIndex: null
 		}
 	},
 	// Task Index should be grabbed from the Task's index
@@ -68,14 +68,7 @@ var TaskContainer = React.createClass({
 			return (
 				<div className="combinedTaskList col-md-6 col-sm-6 col-xs-6">
 					<ul className="taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked">
-				        <ReactCSSTransitionGroup 
-				        	transitionName="example" 
-				        	transitionAppear = {true}
-				        	transitionAppearTimeout = {500}
-				        	transitionEnterTimeout={500} 
-				        	transitionLeaveTimeout={500}>
 				          {tasks}
-				        </ReactCSSTransitionGroup>
 					</ul>
 				</div>
 			)

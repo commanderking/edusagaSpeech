@@ -148,7 +148,7 @@ var QuestionAsker = React.createClass({
 				}
 
 				that.setState({sceneData: newSceneData})
-			}, 2000)
+			}, 4000)
 			
 		/*--------------------------------------------
 		When user answers incorrectly

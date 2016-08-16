@@ -8,7 +8,23 @@ var FeedbackContainer = React.createClass({
 	getInitialState: function() {
 		return { 
 			hintClickDisable: false,
+			suggestionMode: false,
+			suggestionSubmitted: false,
 		}
+	},
+	// Suggestions are activated when users want to add their answer to database
+	activateSuggestionMode: function() {
+		console.log("Suggestion Mode Activated");
+		this.setState({ suggestionMode: true});
+	},
+	submitSuggestion: function() {
+		var that = this;
+		console.log("Suggestion submitted");
+		this.setState({ suggestionMode: false});
+		this.setState({ suggestionSubmitted: true});
+		setTimeout(function(){
+			that.setState({ suggestionSubmitted: false});
+		}, 3000);
 	},
 	handleHintAudioClick: function() {
 		that = this;
@@ -32,20 +48,51 @@ var FeedbackContainer = React.createClass({
 		var hintDivClass;
 		var hintTemplateText;
 		var miriIconClass = "miriIcon";
+		var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
+		var hintDivClass = "hintDiv";
+
+		// Case of hint being given
 		if (this.props.hintActive === true) {
-			hintDivClass = "hintDiv";
-			hintTemplateText = "Maybe you could say: ";
+			hintTemplateText = 
+			(	<p className="hintText">
+					<span>Maybe you can say: </span>
+					<SpeechableSpan clickFunction={spanClickFunction} feedbackText={this.props.feedbackText} />
+				</p>) 
 			miriIconClass += " miriGlow";
-		} else if (this.props.answerFeedbackActive === true) {
-			hintDivClass = "hintDiv";
-			hintTemplateText = "I heard you say:"; 
+		} 
+
+		// User answers wrong, provide feedback
+		else if (this.props.answerFeedbackActive === true) {
+			// They comfirmed a suggestion...
+			if (this.state.suggestionSubmitted) {
+				hintTemplateText = 
+				(<p className="hintText">
+						<span>I will add a request to add it to acceptable answers!</span>
+				</p>) 
+			} 
+			// They pressed first suggestion submit and want to confirm a suggestion
+			else if (this.state.suggestionMode) {
+				hintTemplateText = 
+				(<p className="hintText">
+					<span>Suggest </span>
+					<SpeechableSpan clickFunction={spanClickFunction} feedbackText={this.props.feedbackText} />
+					<span> as a good answer?</span>
+				</p>)
+				hintDivClass += " hintDivGold";
+			} 
+			// All other cases
+			else {
+				hintTemplateText = 
+				(<p className="hintText">
+						<span>I heard you say: </span>
+						<SpeechableSpan clickFunction={spanClickFunction} feedbackText={this.props.feedbackText} />
+				</p>) 
+			}
 			miriIconClass += " miriGlow";
 		} else {
 			hintDivClass = "hintDiv hidden"
 		}
-
 		// If hintClick disabled, span should do nothing, otherwise, it should play audio
-		var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
 		return (
 			<div className ="bottomNavBar">
 				<div className="row-fluid">
@@ -58,13 +105,12 @@ var FeedbackContainer = React.createClass({
 						<div className={hintDivClass}>
 							<HintIcon 
 								hintActive = {this.props.hintActive}
-								answerFeedbackActive = {this.props.answerFeedbackActive} />
-							<p className="hintText">
-								{hintTemplateText}
-								<SpeechableSpan 
-									clickFunction={spanClickFunction}
-									feedbackText={this.props.feedbackText} />
-							</p>
+								answerFeedbackActive = {this.props.answerFeedbackActive} 
+								suggestionMode = {this.state.suggestionMode} 
+								suggestionSubmitted = {this.state.suggestionSubmitted} 
+								activateSuggestionMode = {this.activateSuggestionMode} 
+								submitSuggestion = {this.submitSuggestion} />
+							{hintTemplateText}
 						</div>
 						<MiriIcon miriClass={miriIconClass} miriIconSrc={this.props.miriIconSrc} />
 					</div>
