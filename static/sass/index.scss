@@ -327,19 +327,11 @@ CSS Related to Task List
 }
 
 .taskDiv {
-	color: #F3EC29;
 	position: relative;
 	display: block;
 	margin: 20px 0px;
-	background-color: #047FC5;
-	background: linear-gradient(82deg, #38C6F3, #057FC5 80%, #098ED0);
 	border-radius: 25px;
-	box-shadow: 5px 5px 10px black;
 	border-style: outset;
-	border-bottom: 3px solid $borderBlue;
-	border-top: 3px solid $lightBlue;
-	border-left: 1px solid $borderBlue;
-	border-right: 1px solid $borderBlue;
 	height: 60px;
 
 	.taskIconDiv {
@@ -359,10 +351,22 @@ CSS Related to Task List
 		font-weight: bold;
 		font-size: 20px;
 		line-height: 54px;
+	}
+}
+
+.taskDivNormalState {
+	color: #F3EC29;
+	background-color: #047FC5;
+	background: linear-gradient(82deg, #38C6F3, #057FC5 80%, #098ED0);
+	box-shadow: 5px 5px 10px black;
+	border-bottom: 3px solid $borderBlue;
+	border-top: 3px solid $lightBlue;
+	border-left: 1px solid $borderBlue;
+	border-right: 1px solid $borderBlue;
+	.taskText {
 		&:hover {
 			background: linear-gradient(82deg, #38C6F3, #057FC5 20%);
 			border-radius: 25px;
-
 		}
 		&:active {
 			box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
@@ -376,7 +380,6 @@ CSS Related to Task List
 	background-color: #38C6F3;
 	background-image: none;
 	.taskText {
-
 	}
 }
 
@@ -392,36 +395,13 @@ CSS Related to Task List
 /* When user clicks task and is recording */
 .taskDivMicActive {
 	color: $darkerBlue;
-	position: relative;
-	display: block;
-	margin: 20px 0px;
 	background-color: yellow;
 	background-image: none;
-	border-radius: 25px;
 	box-shadow: 5px 5px 10px yellow;
-	border-style: outset;
 	border-bottom: 1px solid $borderBlue;
 	border-top: 1px solid $lightBlue;
 	border-left: 1px solid $borderBlue;
 	border-right: 1px solid $borderBlue;
-	.taskIconDiv {
-		position: absolute;
-		height: 130%;
-		top: -15%;
-		width: auto;
-		pointer-events: none;
-		img {
-			width: auto;
-			height: 100%;
-			position: absolute;
-		}
-	}
-	.taskText {
-		padding: 12px;
-		text-align: center;
-		font-weight: bold;
-		font-size: 2vw;
-	}
 }
 
 .completedTaskList {
