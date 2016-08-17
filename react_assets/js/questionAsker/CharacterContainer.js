@@ -1,6 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var Constants = require('../helpers/Constants.js');
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var CharacterImage = require('./components/CharacterImage');
 
 var CharacterContainer = React.createClass({
 	render: function() {
@@ -28,7 +30,10 @@ var CharacterContainer = React.createClass({
 			charImageDiv = 
 			(
 				<div className="characterImageDiv">
-					<img className="charImage" src={charImgSrc} />
+					<CharacterImage 
+						src={charImgSrc}
+						correctAnswerState={this.props.correctAnswerState} 
+						wrongAnswerState = {this.props.wrongAnswerState} />
 				</div>
 			)
 		}
@@ -45,7 +50,9 @@ CharacterContainer.propTypes = {
 	scenarioOn: PropTypes.bool.isRequired,
 	scenarioData: PropTypes.array.isRequired,
 	scenarioIndex: PropTypes.number.isRequired,
-	charImage: PropTypes.string.isRequired
+	charImage: PropTypes.string.isRequired,
+	correctAnswerState: PropTypes.bool.isRequired,
+	wrongAnswerState: PropTypes.bool.isRequired
 }
 
 

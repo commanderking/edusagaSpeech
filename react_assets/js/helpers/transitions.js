@@ -32,6 +32,12 @@ var taskCorrect = {
 		tl.to(DOMnode, 0, {autoAlpha: 0})
 			.to(DOMnode, 1, {y: '-=50', autoAlpha: 1})
 			.to(DOMnode, 1, {autoAlpha:0});
+	},
+	character: function(DOMnode) {
+		var tl = new TimelineMax();
+		tl.to(DOMnode, 0.5, { x: -500, opacity: 0})
+			.to(DOMnode, 0.1, { x: 0})
+			.to(DOMnode, 0.5, { opacity: 1})	
 	}
 }
 
@@ -50,6 +56,12 @@ var taskWrong = {
 		var tl = new TimelineMax();
 		tl.fromTo(DOMnode, 1, {scale: 1.5}, {scale: 2.1})
 			.to(DOMnode, 1, {scale: 1.5});
+	},
+	character: function(DOMnode) {
+		var tl = new TimelineMax();
+		tl.to(DOMnode, 0.5, { x: -500, opacity: 0})
+			.to(DOMnode, 0.1, { x: 0})
+			.to(DOMnode, 0.5, { opacity: 1})	
 	}
 }
 

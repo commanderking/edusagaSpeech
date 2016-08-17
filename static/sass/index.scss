@@ -72,6 +72,7 @@ $desktopWidth: 1024px;
 	height: 100%;
 	min-height: 550px;
 	width: 40%;
+	pointer-events: none;
 	img {
 		pointer-events: none;
 	}
@@ -89,7 +90,6 @@ $desktopWidth: 1024px;
 
 .characterDialogueDiv {
 	padding: 0;
-	pointer-events: none;
 	background-color: #0975B6;
 	background: linear-gradient(to right, #39C7F4, #057FC5 50%);
 	width: 100%;
@@ -713,37 +713,3 @@ Robo Help Window
 		}
 	}
 }
-
-// CSS from http://nicolasgallagher.com/pure-css-speech-bubbles/demo/default.css
-// Demo: http://nicolasgallagher.com/pure-css-speech-bubbles/demo/
-
-.example-right {
-  position:relative;
-  margin:0;
-  color:blue;
-  background:#5a8f00; /* default background for browsers without gradient support */
-  /* css3 */
-  background-color: white;
-  -webkit-border-radius:10px;
-  -moz-border-radius:10px;
-  border-radius:10px;
-  border: 1px solid black;
-}
-
-/* display of quote author (alternatively use a class on the element following the blockquote) */
-.example-right + p {margin:15px 0 2em 85px; font-style:italic;}
-
-/* creates the triangle */
-.example-right:after {
-  content:"";
-  position:absolute;
-  bottom:-30px;
-  left:70%;
-  border-width:0 30px 30px 0px;
-  border-style:solid;
-  border-color:transparent white;
-  /* reduce the damage in FF3.0 */
-  display:block;
-  width:0;
-}
-

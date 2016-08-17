@@ -7,8 +7,6 @@ var Transitions = require('../../helpers/Transitions.js');
 var TaskIconImage = React.createClass({
 	componentDidMount: function() {
 		var node = ReactDOM.findDOMNode(this);
-		console.log("Component mounted");
-		console.log(node);
 
 		switch(this.props.transition) {
 			case "activateTaskMic":
@@ -50,7 +48,6 @@ var TaskIconImage = React.createClass({
 			default: 
 				break;
 		}
-
 	},
 	render: function() {
 		return <img key={this.props.keyToAttach} className="" src={this.props.imageSrc} />

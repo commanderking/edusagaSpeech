@@ -4,6 +4,7 @@
 	"currentImage" : "characters/david/davidDefault.png",
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
+	"currentSoundID": "",
 	"scenarioOn": false,
 	"scenarioIndex": 0,
 	"scenario" :

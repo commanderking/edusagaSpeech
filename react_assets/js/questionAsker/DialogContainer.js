@@ -42,7 +42,8 @@ var DialogContainer = React.createClass({
 					<div className={characterNameClass}>
 						{characterName}
 					</div>
-					<div className={characterTextClass}>
+					<div className={characterTextClass}
+						onClick={this.props.onRepeat}>
 						{characterTextResponse}
 					</div>
 				</div>
@@ -55,7 +56,9 @@ DialogContainer.propTypes = {
 	scenarioOn: PropTypes.bool.isRequired,
 	scenarioData: PropTypes.array.isRequired,
 	scenarioIndex: PropTypes.number.isRequired,
-	charName: PropTypes.string.isRequired
+	charName: PropTypes.string.isRequired,
+	hintActive: PropTypes.bool.isRequired,
+	onRepeat: PropTypes.func.isRequired
 }
 
 module.exports = DialogContainer;	

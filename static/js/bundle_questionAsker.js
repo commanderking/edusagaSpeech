@@ -57,7 +57,6 @@
 	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 189);
 	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 190);
 	const Constants = __webpack_require__(/*! ./helpers/Constants.js */ 178);
-	// const IMAGE_BASE_PATH = './static/images/';
 	
 	var QuestionAsker = React.createClass({
 		displayName: 'QuestionAsker',
@@ -138,6 +137,10 @@
 	
 				// Play response voice
 				this.playSound(newSceneData.character.tasks[taskIndex].soundID);
+	
+				// Store sound ID in current Sound ID if player wnats to repeat
+				newSceneData.currentSoundID = newSceneData.character.tasks[taskIndex].soundID;
+				console.log(newSceneData.currentSoundID);
 	
 				// Adjust character image
 				newSceneData.currentImage = newSceneData.character.tasks[taskIndex].emotion;
@@ -342,6 +345,9 @@
 			newCoins = this.state.coins + numberCoinsToAdd;
 			this.setState({ coins: newCoins });
 		},
+		handleRepeat: function () {
+			this.playSound(this.state.sceneData.currentSoundID);
+		},
 		render: function () {
 			var sceneData = this.state.sceneData;
 	
@@ -364,14 +370,17 @@
 						scenarioIndex: sceneData.scenarioIndex,
 						charName: this.state.sceneData.character.name,
 						currentDialog: sceneData.currentDialog,
-						hintActive: this.state.hintActive }),
+						hintActive: this.state.hintActive,
+						onRepeat: this.handleRepeat }),
 					React.createElement(CharacterContainer, {
 						scenarioOn: this.state.sceneData.scenarioOn,
 						scenarioData: this.state.sceneData.scenario,
 						scenarioIndex: this.state.sceneData.scenarioIndex,
 						charImage: sceneData.currentImage,
 						silhouette: sceneData.character.silhouette,
-						hintActive: this.state.hintActive }),
+						hintActive: this.state.hintActive,
+						correctAnswerState: this.state.correctAnswerState,
+						wrongAnswerState: this.state.wrongAnswerState }),
 					React.createElement(TaskContainer, {
 						scenarioOn: sceneData.scenarioOn,
 						tasks: this.state.sceneData.character.tasks,
@@ -396,8 +405,7 @@
 						coins: this.state.coins,
 						answerFeedbackActive: this.state.answerFeedbackActive,
 						feedbackText: this.state.feedbackText,
-						miriIconSrc: this.state.miriIconSrc }),
-					React.createElement(TransitionContainer, null)
+						miriIconSrc: this.state.miriIconSrc })
 				);
 			}
 		}
@@ -22041,6 +22049,8 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../helpers/Constants.js */ 178);
+	var ReactCSSTransitionGroup = __webpack_require__(/*! react-addons-css-transition-group */ 201);
+	var CharacterImage = __webpack_require__(/*! ./components/CharacterImage */ 206);
 	
 	var CharacterContainer = React.createClass({
 		displayName: 'CharacterContainer',
@@ -22067,7 +22077,10 @@
 				charImageDiv = React.createElement(
 					'div',
 					{ className: 'characterImageDiv' },
-					React.createElement('img', { className: 'charImage', src: charImgSrc })
+					React.createElement(CharacterImage, {
+						src: charImgSrc,
+						correctAnswerState: this.props.correctAnswerState,
+						wrongAnswerState: this.props.wrongAnswerState })
 				);
 			}
 	
@@ -22083,7 +22096,9 @@
 		scenarioOn: PropTypes.bool.isRequired,
 		scenarioData: PropTypes.array.isRequired,
 		scenarioIndex: PropTypes.number.isRequired,
-		charImage: PropTypes.string.isRequired
+		charImage: PropTypes.string.isRequired,
+		correctAnswerState: PropTypes.bool.isRequired,
+		wrongAnswerState: PropTypes.bool.isRequired
 	};
 	
 	module.exports = CharacterContainer;
@@ -22160,7 +22175,8 @@
 					),
 					React.createElement(
 						"div",
-						{ className: characterTextClass },
+						{ className: characterTextClass,
+							onClick: this.props.onRepeat },
 						characterTextResponse
 					)
 				)
@@ -22172,7 +22188,9 @@
 		scenarioOn: PropTypes.bool.isRequired,
 		scenarioData: PropTypes.array.isRequired,
 		scenarioIndex: PropTypes.number.isRequired,
-		charName: PropTypes.string.isRequired
+		charName: PropTypes.string.isRequired,
+		hintActive: PropTypes.bool.isRequired,
+		onRepeat: PropTypes.func.isRequired
 	};
 	
 	module.exports = DialogContainer;
@@ -23301,8 +23319,6 @@
 	
 		componentDidMount: function () {
 			var node = ReactDOM.findDOMNode(this);
-			console.log("Component mounted");
-			console.log(node);
 	
 			switch (this.props.transition) {
 				case "activateTaskMic":
@@ -23385,6 +23401,10 @@
 		coins: function (DOMnode) {
 			var tl = new TimelineMax({ delay: 1 });
 			tl.to(DOMnode, 0, { autoAlpha: 0 }).to(DOMnode, 1, { y: '-=50', autoAlpha: 1 }).to(DOMnode, 1, { autoAlpha: 0 });
+		},
+		character: function (DOMnode) {
+			var tl = new TimelineMax();
+			tl.to(DOMnode, 0.5, { x: -500, opacity: 0 }).to(DOMnode, 0.1, { x: 0 }).to(DOMnode, 0.5, { opacity: 1 });
 		}
 	};
 	
@@ -23401,6 +23421,10 @@
 		questionMark: function (DOMnode) {
 			var tl = new TimelineMax();
 			tl.fromTo(DOMnode, 1, { scale: 1.5 }, { scale: 2.1 }).to(DOMnode, 1, { scale: 1.5 });
+		},
+		character: function (DOMnode) {
+			var tl = new TimelineMax();
+			tl.to(DOMnode, 0.5, { x: -500, opacity: 0 }).to(DOMnode, 0.1, { x: 0 }).to(DOMnode, 0.5, { opacity: 1 });
 		}
 	};
 	
@@ -23808,6 +23832,533 @@
 	});
 	
 	module.exports = TaskText;
+
+/***/ },
+/* 201 */
+/*!******************************************************!*\
+  !*** ./~/react-addons-css-transition-group/index.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(/*! react/lib/ReactCSSTransitionGroup */ 202);
+
+/***/ },
+/* 202 */
+/*!************************************************!*\
+  !*** ./~/react/lib/ReactCSSTransitionGroup.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCSSTransitionGroup
+	 */
+	
+	'use strict';
+	
+	var _assign = __webpack_require__(/*! object-assign */ 4);
+	
+	var React = __webpack_require__(/*! ./React */ 2);
+	
+	var ReactTransitionGroup = __webpack_require__(/*! ./ReactTransitionGroup */ 192);
+	var ReactCSSTransitionGroupChild = __webpack_require__(/*! ./ReactCSSTransitionGroupChild */ 203);
+	
+	function createTransitionTimeoutPropValidator(transitionType) {
+	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
+	  var enabledPropName = 'transition' + transitionType;
+	
+	  return function (props) {
+	    // If the transition is enabled
+	    if (props[enabledPropName]) {
+	      // If no timeout duration is provided
+	      if (props[timeoutPropName] == null) {
+	        return new Error(timeoutPropName + ' wasn\'t supplied to ReactCSSTransitionGroup: ' + 'this can cause unreliable animations and won\'t be supported in ' + 'a future version of React. See ' + 'https://fb.me/react-animation-transition-group-timeout for more ' + 'information.');
+	
+	        // If the duration isn't a number
+	      } else if (typeof props[timeoutPropName] !== 'number') {
+	          return new Error(timeoutPropName + ' must be a number (in milliseconds)');
+	        }
+	    }
+	  };
+	}
+	
+	/**
+	 * An easy way to perform CSS transitions and animations when a React component
+	 * enters or leaves the DOM.
+	 * See https://facebook.github.io/react/docs/animation.html#high-level-api-reactcsstransitiongroup
+	 */
+	var ReactCSSTransitionGroup = React.createClass({
+	  displayName: 'ReactCSSTransitionGroup',
+	
+	  propTypes: {
+	    transitionName: ReactCSSTransitionGroupChild.propTypes.name,
+	
+	    transitionAppear: React.PropTypes.bool,
+	    transitionEnter: React.PropTypes.bool,
+	    transitionLeave: React.PropTypes.bool,
+	    transitionAppearTimeout: createTransitionTimeoutPropValidator('Appear'),
+	    transitionEnterTimeout: createTransitionTimeoutPropValidator('Enter'),
+	    transitionLeaveTimeout: createTransitionTimeoutPropValidator('Leave')
+	  },
+	
+	  getDefaultProps: function () {
+	    return {
+	      transitionAppear: false,
+	      transitionEnter: true,
+	      transitionLeave: true
+	    };
+	  },
+	
+	  _wrapChild: function (child) {
+	    // We need to provide this childFactory so that
+	    // ReactCSSTransitionGroupChild can receive updates to name, enter, and
+	    // leave while it is leaving.
+	    return React.createElement(ReactCSSTransitionGroupChild, {
+	      name: this.props.transitionName,
+	      appear: this.props.transitionAppear,
+	      enter: this.props.transitionEnter,
+	      leave: this.props.transitionLeave,
+	      appearTimeout: this.props.transitionAppearTimeout,
+	      enterTimeout: this.props.transitionEnterTimeout,
+	      leaveTimeout: this.props.transitionLeaveTimeout
+	    }, child);
+	  },
+	
+	  render: function () {
+	    return React.createElement(ReactTransitionGroup, _assign({}, this.props, { childFactory: this._wrapChild }));
+	  }
+	});
+	
+	module.exports = ReactCSSTransitionGroup;
+
+/***/ },
+/* 203 */
+/*!*****************************************************!*\
+  !*** ./~/react/lib/ReactCSSTransitionGroupChild.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactCSSTransitionGroupChild
+	 */
+	
+	'use strict';
+	
+	var React = __webpack_require__(/*! ./React */ 2);
+	var ReactDOM = __webpack_require__(/*! ./ReactDOM */ 39);
+	
+	var CSSCore = __webpack_require__(/*! fbjs/lib/CSSCore */ 204);
+	var ReactTransitionEvents = __webpack_require__(/*! ./ReactTransitionEvents */ 205);
+	
+	var onlyChild = __webpack_require__(/*! ./onlyChild */ 32);
+	
+	var TICK = 17;
+	
+	var ReactCSSTransitionGroupChild = React.createClass({
+	  displayName: 'ReactCSSTransitionGroupChild',
+	
+	  propTypes: {
+	    name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.shape({
+	      enter: React.PropTypes.string,
+	      leave: React.PropTypes.string,
+	      active: React.PropTypes.string
+	    }), React.PropTypes.shape({
+	      enter: React.PropTypes.string,
+	      enterActive: React.PropTypes.string,
+	      leave: React.PropTypes.string,
+	      leaveActive: React.PropTypes.string,
+	      appear: React.PropTypes.string,
+	      appearActive: React.PropTypes.string
+	    })]).isRequired,
+	
+	    // Once we require timeouts to be specified, we can remove the
+	    // boolean flags (appear etc.) and just accept a number
+	    // or a bool for the timeout flags (appearTimeout etc.)
+	    appear: React.PropTypes.bool,
+	    enter: React.PropTypes.bool,
+	    leave: React.PropTypes.bool,
+	    appearTimeout: React.PropTypes.number,
+	    enterTimeout: React.PropTypes.number,
+	    leaveTimeout: React.PropTypes.number
+	  },
+	
+	  transition: function (animationType, finishCallback, userSpecifiedDelay) {
+	    var node = ReactDOM.findDOMNode(this);
+	
+	    if (!node) {
+	      if (finishCallback) {
+	        finishCallback();
+	      }
+	      return;
+	    }
+	
+	    var className = this.props.name[animationType] || this.props.name + '-' + animationType;
+	    var activeClassName = this.props.name[animationType + 'Active'] || className + '-active';
+	    var timeout = null;
+	
+	    var endListener = function (e) {
+	      if (e && e.target !== node) {
+	        return;
+	      }
+	
+	      clearTimeout(timeout);
+	
+	      CSSCore.removeClass(node, className);
+	      CSSCore.removeClass(node, activeClassName);
+	
+	      ReactTransitionEvents.removeEndEventListener(node, endListener);
+	
+	      // Usually this optional callback is used for informing an owner of
+	      // a leave animation and telling it to remove the child.
+	      if (finishCallback) {
+	        finishCallback();
+	      }
+	    };
+	
+	    CSSCore.addClass(node, className);
+	
+	    // Need to do this to actually trigger a transition.
+	    this.queueClassAndNode(activeClassName, node);
+	
+	    // If the user specified a timeout delay.
+	    if (userSpecifiedDelay) {
+	      // Clean-up the animation after the specified delay
+	      timeout = setTimeout(endListener, userSpecifiedDelay);
+	      this.transitionTimeouts.push(timeout);
+	    } else {
+	      // DEPRECATED: this listener will be removed in a future version of react
+	      ReactTransitionEvents.addEndEventListener(node, endListener);
+	    }
+	  },
+	
+	  queueClassAndNode: function (className, node) {
+	    this.classNameAndNodeQueue.push({
+	      className: className,
+	      node: node
+	    });
+	
+	    if (!this.timeout) {
+	      this.timeout = setTimeout(this.flushClassNameAndNodeQueue, TICK);
+	    }
+	  },
+	
+	  flushClassNameAndNodeQueue: function () {
+	    if (this.isMounted()) {
+	      this.classNameAndNodeQueue.forEach(function (obj) {
+	        CSSCore.addClass(obj.node, obj.className);
+	      });
+	    }
+	    this.classNameAndNodeQueue.length = 0;
+	    this.timeout = null;
+	  },
+	
+	  componentWillMount: function () {
+	    this.classNameAndNodeQueue = [];
+	    this.transitionTimeouts = [];
+	  },
+	
+	  componentWillUnmount: function () {
+	    if (this.timeout) {
+	      clearTimeout(this.timeout);
+	    }
+	    this.transitionTimeouts.forEach(function (timeout) {
+	      clearTimeout(timeout);
+	    });
+	
+	    this.classNameAndNodeQueue.length = 0;
+	  },
+	
+	  componentWillAppear: function (done) {
+	    if (this.props.appear) {
+	      this.transition('appear', done, this.props.appearTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+	
+	  componentWillEnter: function (done) {
+	    if (this.props.enter) {
+	      this.transition('enter', done, this.props.enterTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+	
+	  componentWillLeave: function (done) {
+	    if (this.props.leave) {
+	      this.transition('leave', done, this.props.leaveTimeout);
+	    } else {
+	      done();
+	    }
+	  },
+	
+	  render: function () {
+	    return onlyChild(this.props.children);
+	  }
+	});
+	
+	module.exports = ReactCSSTransitionGroupChild;
+
+/***/ },
+/* 204 */
+/*!*******************************!*\
+  !*** ./~/fbjs/lib/CSSCore.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @typechecks
+	 */
+	
+	var invariant = __webpack_require__(/*! ./invariant */ 8);
+	
+	/**
+	 * The CSSCore module specifies the API (and implements most of the methods)
+	 * that should be used when dealing with the display of elements (via their
+	 * CSS classes and visibility on screen. It is an API focused on mutating the
+	 * display and not reading it as no logical state should be encoded in the
+	 * display of elements.
+	 */
+	
+	/* Slow implementation for browsers that don't natively support .matches() */
+	function matchesSelector_SLOW(element, selector) {
+	  var root = element;
+	  while (root.parentNode) {
+	    root = root.parentNode;
+	  }
+	
+	  var all = root.querySelectorAll(selector);
+	  return Array.prototype.indexOf.call(all, element) !== -1;
+	}
+	
+	var CSSCore = {
+	
+	  /**
+	   * Adds the class passed in to the element if it doesn't already have it.
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @return {DOMElement} the element passed in
+	   */
+	  addClass: function addClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSSCore.addClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(false) : void 0;
+	
+	    if (className) {
+	      if (element.classList) {
+	        element.classList.add(className);
+	      } else if (!CSSCore.hasClass(element, className)) {
+	        element.className = element.className + ' ' + className;
+	      }
+	    }
+	    return element;
+	  },
+	
+	  /**
+	   * Removes the class passed in from the element
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @return {DOMElement} the element passed in
+	   */
+	  removeClass: function removeClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSSCore.removeClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(false) : void 0;
+	
+	    if (className) {
+	      if (element.classList) {
+	        element.classList.remove(className);
+	      } else if (CSSCore.hasClass(element, className)) {
+	        element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ') // multiple spaces to one
+	        .replace(/^\s*|\s*$/g, ''); // trim the ends
+	      }
+	    }
+	    return element;
+	  },
+	
+	  /**
+	   * Helper to add or remove a class from an element based on a condition.
+	   *
+	   * @param {DOMElement} element the element to set the class on
+	   * @param {string} className the CSS className
+	   * @param {*} bool condition to whether to add or remove the class
+	   * @return {DOMElement} the element passed in
+	   */
+	  conditionClass: function conditionClass(element, className, bool) {
+	    return (bool ? CSSCore.addClass : CSSCore.removeClass)(element, className);
+	  },
+	
+	  /**
+	   * Tests whether the element has the class specified.
+	   *
+	   * @param {DOMNode|DOMWindow} element the element to check the class on
+	   * @param {string} className the CSS className
+	   * @return {boolean} true if the element has the class, false if not
+	   */
+	  hasClass: function hasClass(element, className) {
+	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSS.hasClass takes only a single class name.') : invariant(false) : void 0;
+	    if (element.classList) {
+	      return !!className && element.classList.contains(className);
+	    }
+	    return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
+	  },
+	
+	  /**
+	   * Tests whether the element matches the selector specified
+	   *
+	   * @param {DOMNode|DOMWindow} element the element that we are querying
+	   * @param {string} selector the CSS selector
+	   * @return {boolean} true if the element matches the selector, false if not
+	   */
+	  matchesSelector: function matchesSelector(element, selector) {
+	    var matchesImpl = element.matches || element.webkitMatchesSelector || element.mozMatchesSelector || element.msMatchesSelector || function (s) {
+	      return matchesSelector_SLOW(element, s);
+	    };
+	    return matchesImpl.call(element, selector);
+	  }
+	
+	};
+	
+	module.exports = CSSCore;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
+
+/***/ },
+/* 205 */
+/*!**********************************************!*\
+  !*** ./~/react/lib/ReactTransitionEvents.js ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionEvents
+	 */
+	
+	'use strict';
+	
+	var ExecutionEnvironment = __webpack_require__(/*! fbjs/lib/ExecutionEnvironment */ 53);
+	
+	var getVendorPrefixedEventName = __webpack_require__(/*! ./getVendorPrefixedEventName */ 116);
+	
+	var endEvents = [];
+	
+	function detectEvents() {
+	  var animEnd = getVendorPrefixedEventName('animationend');
+	  var transEnd = getVendorPrefixedEventName('transitionend');
+	
+	  if (animEnd) {
+	    endEvents.push(animEnd);
+	  }
+	
+	  if (transEnd) {
+	    endEvents.push(transEnd);
+	  }
+	}
+	
+	if (ExecutionEnvironment.canUseDOM) {
+	  detectEvents();
+	}
+	
+	// We use the raw {add|remove}EventListener() call because EventListener
+	// does not know how to remove event listeners and we really should
+	// clean up. Also, these events are not triggered in older browsers
+	// so we should be A-OK here.
+	
+	function addEventListener(node, eventName, eventListener) {
+	  node.addEventListener(eventName, eventListener, false);
+	}
+	
+	function removeEventListener(node, eventName, eventListener) {
+	  node.removeEventListener(eventName, eventListener, false);
+	}
+	
+	var ReactTransitionEvents = {
+	  addEndEventListener: function (node, eventListener) {
+	    if (endEvents.length === 0) {
+	      // If CSS transitions are not supported, trigger an "end animation"
+	      // event immediately.
+	      window.setTimeout(eventListener, 0);
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      addEventListener(node, endEvent, eventListener);
+	    });
+	  },
+	
+	  removeEndEventListener: function (node, eventListener) {
+	    if (endEvents.length === 0) {
+	      return;
+	    }
+	    endEvents.forEach(function (endEvent) {
+	      removeEventListener(node, endEvent, eventListener);
+	    });
+	  }
+	};
+	
+	module.exports = ReactTransitionEvents;
+
+/***/ },
+/* 206 */
+/*!********************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/CharacterImage.js ***!
+  \********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
+	var Transitions = __webpack_require__(/*! ../../helpers/Transitions.js */ 195);
+	
+	var CharacterImage = React.createClass({
+		displayName: 'CharacterImage',
+	
+		componentDidUpdate: function () {
+			// If correct or wrong answer, character has special transition entrance
+			var node = ReactDOM.findDOMNode(this);
+			if (this.props.correctAnswerState) {
+				Transitions.taskCorrect.character(node);
+			} else if (this.props.wrongAnswerState) {
+				Transitions.taskWrong.character(node);
+			}
+		},
+		render: function () {
+			return React.createElement('img', { className: 'charImage', src: this.props.src });
+		}
+	});
+	
+	CharacterImage.propTypes = {
+		correctAnswerState: PropTypes.bool.isRequired,
+		wrongAnswerState: PropTypes.bool.isRequired,
+		src: PropTypes.string.isRequired
+	};
+	
+	module.exports = CharacterImage;
 
 /***/ }
 /******/ ]);

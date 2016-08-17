@@ -8,7 +8,6 @@ var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TransitionContainer = require('./questionAsker/TransitionContainer');
 const Constants = require('./helpers/Constants.js');
-// const IMAGE_BASE_PATH = './static/images/';
 
 var QuestionAsker = React.createClass({
 	// feedbackText can be hintText from clicking hint or feedback on what user said
@@ -88,6 +87,10 @@ var QuestionAsker = React.createClass({
 
 			// Play response voice
 			this.playSound(newSceneData.character.tasks[taskIndex].soundID);
+
+			// Store sound ID in current Sound ID if player wnats to repeat
+			newSceneData.currentSoundID = newSceneData.character.tasks[taskIndex].soundID;
+			console.log(newSceneData.currentSoundID);
 
 			// Adjust character image
 			newSceneData.currentImage = newSceneData.character.tasks[taskIndex].emotion;
@@ -297,6 +300,9 @@ var QuestionAsker = React.createClass({
 		newCoins = this.state.coins + numberCoinsToAdd;
 		this.setState({ coins: newCoins });
 	},
+	handleRepeat: function() {
+		this.playSound(this.state.sceneData.currentSoundID);
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
 
@@ -314,14 +320,17 @@ var QuestionAsker = React.createClass({
 						scenarioIndex = {sceneData.scenarioIndex}
 						charName={this.state.sceneData.character.name}
 						currentDialog = {sceneData.currentDialog} 
-						hintActive = {this.state.hintActive} />
+						hintActive = {this.state.hintActive} 
+						onRepeat = {this.handleRepeat} />
 					<CharacterContainer 
 						scenarioOn = {this.state.sceneData.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
 						scenarioIndex = {this.state.sceneData.scenarioIndex} 
 						charImage = {sceneData.currentImage} 
 						silhouette = {sceneData.character.silhouette}
-						hintActive = {this.state.hintActive} />
+						hintActive = {this.state.hintActive} 
+						correctAnswerState = {this.state.correctAnswerState} 
+						wrongAnswerState = {this.state.wrongAnswerState} />
 					<TaskContainer 
 						scenarioOn = {sceneData.scenarioOn}
 						tasks = {this.state.sceneData.character.tasks}
@@ -347,7 +356,6 @@ var QuestionAsker = React.createClass({
 						answerFeedbackActive = {this.state.answerFeedbackActive}
 						feedbackText = {this.state.feedbackText} 
 						miriIconSrc = {this.state.miriIconSrc} />
-					<TransitionContainer />
 				</div>
 			)
 		}
