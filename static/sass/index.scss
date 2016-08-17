@@ -100,6 +100,11 @@ $desktopWidth: 1024px;
 	  position: absolute;
 	  height: 100%;
 	}
+	.nextButton {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
 }
 
 .dialogDivInverted {
@@ -152,7 +157,6 @@ $desktopWidth: 1024px;
 	.characterTextResponseDisabled {
 		color: $disabledTextColor;
 	}
-
 }
 
 .gameWrapper {

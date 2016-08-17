@@ -14,6 +14,7 @@ var QuestionAsker = React.createClass({
 	getInitialState: function() {
 		return {
 			sceneData: undefined,
+			scenarioOn: true,
 			hintActive: false,
 			currentHintIndex: null,
 			voicePack: {},
@@ -270,6 +271,10 @@ var QuestionAsker = React.createClass({
 	handleHintAudio: function(hintAudioToPlay) {
 		SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 	},
+	changeScenarioMode: function() {
+		var newScenarioState = !this.state.scenarioOn;
+		this.setState({ scenarioOn: newScenarioState });
+	},
 	activateFeedbackMode: function() {
 		var that = this;
 		this.setState({
@@ -315,15 +320,16 @@ var QuestionAsker = React.createClass({
 						bgImage={this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
 					<DialogContainer
-						scenarioOn = {sceneData.scenarioOn}
+						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {sceneData.scenario}
 						scenarioIndex = {sceneData.scenarioIndex}
 						charName={this.state.sceneData.character.name}
 						currentDialog = {sceneData.currentDialog} 
 						hintActive = {this.state.hintActive} 
-						onRepeat = {this.handleRepeat} />
+						onRepeat = {this.handleRepeat} 
+						changeScenarioMode = {this.changeScenarioMode}/>
 					<CharacterContainer 
-						scenarioOn = {this.state.sceneData.scenarioOn}
+						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
 						scenarioIndex = {this.state.sceneData.scenarioIndex} 
 						charImage = {sceneData.currentImage} 
@@ -332,7 +338,7 @@ var QuestionAsker = React.createClass({
 						correctAnswerState = {this.state.correctAnswerState} 
 						wrongAnswerState = {this.state.wrongAnswerState} />
 					<TaskContainer 
-						scenarioOn = {sceneData.scenarioOn}
+						scenarioOn = {this.state.scenarioOn}
 						tasks = {this.state.sceneData.character.tasks}
 						taskLang = {sceneData.currentLanguage} 
 						checkAnswer = {this.checkAnswer} 

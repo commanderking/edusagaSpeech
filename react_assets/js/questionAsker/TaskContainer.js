@@ -57,11 +57,7 @@ var TaskContainer = React.createClass({
 		})
 
 		if (this.props.scenarioOn === true) {
-			return (
-				<div className="combinedTaskList col-md-6 col-sm-6 col-xs-6">
-					<button className="btn btn-lg btn-success">Start</button>
-				</div>
-			)
+			return null;
 		} else {
 			return (
 				<div className="combinedTaskList col-md-6 col-sm-6 col-xs-6">

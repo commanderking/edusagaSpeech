@@ -65,6 +65,7 @@
 		getInitialState: function () {
 			return {
 				sceneData: undefined,
+				scenarioOn: true,
 				hintActive: false,
 				currentHintIndex: null,
 				voicePack: {},
@@ -315,6 +316,10 @@
 		handleHintAudio: function (hintAudioToPlay) {
 			SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 		},
+		changeScenarioMode: function () {
+			var newScenarioState = !this.state.scenarioOn;
+			this.setState({ scenarioOn: newScenarioState });
+		},
 		activateFeedbackMode: function () {
 			var that = this;
 			this.setState({
@@ -365,15 +370,16 @@
 						bgImage: this.state.sceneData.character.location.bg,
 						hintActive: this.state.hintActive }),
 					React.createElement(DialogContainer, {
-						scenarioOn: sceneData.scenarioOn,
+						scenarioOn: this.state.scenarioOn,
 						scenarioData: sceneData.scenario,
 						scenarioIndex: sceneData.scenarioIndex,
 						charName: this.state.sceneData.character.name,
 						currentDialog: sceneData.currentDialog,
 						hintActive: this.state.hintActive,
-						onRepeat: this.handleRepeat }),
+						onRepeat: this.handleRepeat,
+						changeScenarioMode: this.changeScenarioMode }),
 					React.createElement(CharacterContainer, {
-						scenarioOn: this.state.sceneData.scenarioOn,
+						scenarioOn: this.state.scenarioOn,
 						scenarioData: this.state.sceneData.scenario,
 						scenarioIndex: this.state.sceneData.scenarioIndex,
 						charImage: sceneData.currentImage,
@@ -382,7 +388,7 @@
 						correctAnswerState: this.state.correctAnswerState,
 						wrongAnswerState: this.state.wrongAnswerState }),
 					React.createElement(TaskContainer, {
-						scenarioOn: sceneData.scenarioOn,
+						scenarioOn: this.state.scenarioOn,
 						tasks: this.state.sceneData.character.tasks,
 						taskLang: sceneData.currentLanguage,
 						checkAnswer: this.checkAnswer,
@@ -22138,6 +22144,7 @@
 			var characterTextResponse;
 			var characterTextClass = "characterTextResponse";
 			var dialogDivClass = "characterDialogueDiv col-md-12 col-sm-12 col-xs-12";
+			var button = null;
 	
 			// Case 1: There's a scenario that's played; Change font size of text and get name from scenario
 			if (this.props.scenarioOn === true) {
@@ -22146,6 +22153,13 @@
 					"p",
 					{ className: "scenarioText" },
 					this.props.scenarioData[this.props.scenarioIndex].text
+				);
+				button = React.createElement(
+					"button",
+					{
+						className: "nextButton btn btn-lg btn-success",
+						onClick: this.props.changeScenarioMode },
+					"Start"
 				);
 				// Case 2: Hint's active; Name, Text should fade color and the div should invert colors
 			} else if (this.props.hintActive === true) {
@@ -22179,7 +22193,8 @@
 							onClick: this.props.onRepeat },
 						characterTextResponse
 					)
-				)
+				),
+				button
 			);
 		}
 	});
@@ -22190,7 +22205,8 @@
 		scenarioIndex: PropTypes.number.isRequired,
 		charName: PropTypes.string.isRequired,
 		hintActive: PropTypes.bool.isRequired,
-		onRepeat: PropTypes.func.isRequired
+		onRepeat: PropTypes.func.isRequired,
+		changeScenarioMode: PropTypes.func.isRequired
 	};
 	
 	module.exports = DialogContainer;
@@ -22259,15 +22275,7 @@
 			});
 	
 			if (this.props.scenarioOn === true) {
-				return React.createElement(
-					'div',
-					{ className: 'combinedTaskList col-md-6 col-sm-6 col-xs-6' },
-					React.createElement(
-						'button',
-						{ className: 'btn btn-lg btn-success' },
-						'Start'
-					)
-				);
+				return null;
 			} else {
 				return React.createElement(
 					'div',
