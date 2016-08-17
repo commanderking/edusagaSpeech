@@ -22212,7 +22212,7 @@
 	
 		getInitialState: function () {
 			return {
-				currentTaskIndex: null
+				currentTaskIndex: -1
 			};
 		},
 		// Task Index should be grabbed from the Task's index
@@ -23404,7 +23404,11 @@
 		},
 		character: function (DOMnode) {
 			var tl = new TimelineMax();
-			tl.to(DOMnode, 0.5, { x: -500, opacity: 0 }).to(DOMnode, 0.1, { x: 0 }).to(DOMnode, 0.5, { opacity: 1 });
+			tl.to(DOMnode, 0.8, { x: -300, opacity: 0 }).to(DOMnode, 0.1, { x: 0 }).to(DOMnode, 0.5, { opacity: 1 });
+		},
+		taskText: function (DOMnode) {
+			var tl = new TimelineMax();
+			tl.to(DOMnode, 0.5, { y: -30, opacity: 0 }).to(DOMnode, 0.5, { y: 0, opacity: 1 });
 		}
 	};
 	
@@ -23809,10 +23813,22 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 1);
+	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
+	var PropTypes = React.PropTypes;
+	var Transitions = __webpack_require__(/*! ../../helpers/Transitions.js */ 195);
 	
 	var TaskText = React.createClass({
-		displayName: "TaskText",
+		displayName: 'TaskText',
 	
+		componentDidUpdate: function () {
+			var node = ReactDOM.findDOMNode(this);
+			if (this.props.correctAnswerState && this.props.currentTaskIndex === this.props.index) {
+				Transitions.taskCorrect.taskText(node);
+			}
+		},
+		componentWillUnmount: function () {
+			console.log("unmounting");
+		},
 		render: function () {
 			var displayText;
 			if (this.props.correctAnswerState && this.props.currentTaskIndex === this.props.index) {
@@ -23821,15 +23837,22 @@
 				displayText = this.props.taskTextToDisplay;
 			}
 			return React.createElement(
-				"div",
+				'div',
 				{
-					className: "taskText",
-					"data-index": this.props.index,
+					className: 'taskText',
+					'data-index': this.props.index,
 					onClick: () => this.props.onSpeechInput(this.props.index) },
 				displayText
 			);
 		}
 	});
+	
+	TaskText.propTypes = {
+		correctAnswerState: PropTypes.bool.isRequired,
+		currentTaskIndex: PropTypes.number.isRequired,
+		index: PropTypes.number.isRequired,
+		onSpeechInput: PropTypes.func.isRequired
+	};
 	
 	module.exports = TaskText;
 

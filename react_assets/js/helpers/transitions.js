@@ -35,9 +35,14 @@ var taskCorrect = {
 	},
 	character: function(DOMnode) {
 		var tl = new TimelineMax();
-		tl.to(DOMnode, 0.5, { x: -500, opacity: 0})
+		tl.to(DOMnode, 0.8, { x: -300, opacity: 0})
 			.to(DOMnode, 0.1, { x: 0})
 			.to(DOMnode, 0.5, { opacity: 1})	
+	},
+	taskText: function(DOMnode) {
+		var tl = new TimelineMax();
+		tl.to(DOMnode, 0.5, { y: -30, opacity: 0})
+			.to(DOMnode, 0.5, { y: 0, opacity: 1})		
 	}
 }
 

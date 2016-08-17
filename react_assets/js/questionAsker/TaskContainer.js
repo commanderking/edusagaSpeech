@@ -6,7 +6,7 @@ var SpeechRecognition = require('../helpers/SpeechRecognition');
 var TaskContainer = React.createClass({
 	getInitialState: function() {
 		return {
-			currentTaskIndex: null
+			currentTaskIndex: -1
 		}
 	},
 	// Task Index should be grabbed from the Task's index
