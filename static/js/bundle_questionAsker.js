@@ -50,13 +50,14 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
 	var CharacterContainer = __webpack_require__(/*! ./questionAsker/CharacterContainer */ 177);
-	var DialogContainer = __webpack_require__(/*! ./questionAsker/DialogContainer */ 178);
-	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 179);
-	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 196);
-	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 197);
-	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 202);
-	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 203);
-	const IMAGE_BASE_PATH = './static/images/';
+	var DialogContainer = __webpack_require__(/*! ./questionAsker/DialogContainer */ 179);
+	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 180);
+	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 183);
+	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 184);
+	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 189);
+	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 190);
+	const Constants = __webpack_require__(/*! ./helpers/Constants.js */ 178);
+	// const IMAGE_BASE_PATH = './static/images/';
 	
 	var QuestionAsker = React.createClass({
 		displayName: 'QuestionAsker',
@@ -139,7 +140,7 @@
 				this.playSound(newSceneData.character.tasks[taskIndex].soundID);
 	
 				// Adjust character image
-				newSceneData.currentImage = IMAGE_BASE_PATH + newSceneData.character.tasks[taskIndex].emotion;
+				newSceneData.currentImage = newSceneData.character.tasks[taskIndex].emotion;
 	
 				// Show response text
 				newSceneData.currentDialog = newSceneData.character.tasks[taskIndex].response;
@@ -208,7 +209,7 @@
 				this.turnMicStateOff();
 	
 				// set image to confused
-				newSceneData.currentImage = IMAGE_BASE_PATH + this.state.sceneData.character.emotions.confused;
+				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
 				// Grab random confused phrase
 	
 				var confusedPhrasesArray = newSceneData.character.confusedPhrases;
@@ -238,7 +239,7 @@
 	
 				setTimeout(function () {
 					// Reset character image to default 
-					newSceneData.currentImage = IMAGE_BASE_PATH + that.state.sceneData.character.emotions.default;
+					newSceneData.currentImage = that.state.sceneData.character.emotions.default;
 					that.setState({ wrongAnswerState: false });
 					that.setState({ sceneData: newSceneData });
 				}, 3000);
@@ -22039,38 +22040,40 @@
 
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../helpers/Constants.js */ 178);
 	
 	var CharacterContainer = React.createClass({
-		displayName: "CharacterContainer",
+		displayName: 'CharacterContainer',
 	
 		render: function () {
 			var scenarioData = this.props.scenarioData;
 			var scenarioIndex = this.props.scenarioIndex;
 			var charImageDiv;
+			var charImgSrc = Constants.IMAGE_PATH + this.props.charImage;
 			if (this.props.scenarioOn === true) {
 				charImageDiv = React.createElement(
-					"div",
-					{ className: "characterImageDiv" },
-					React.createElement("img", { className: "charImage", src: scenarioData[scenarioIndex].image }),
-					React.createElement("img", { className: "charImage", src: scenarioData[scenarioIndex].imageLayer })
+					'div',
+					{ className: 'characterImageDiv' },
+					React.createElement('img', { className: 'charImage', src: scenarioData[scenarioIndex].image }),
+					React.createElement('img', { className: 'charImage', src: scenarioData[scenarioIndex].imageLayer })
 				);
 			} else if (this.props.hintActive === true) {
 				charImageDiv = React.createElement(
-					"div",
-					{ className: "characterImageDiv" },
-					React.createElement("img", { className: "charImage", src: this.props.silhouette })
+					'div',
+					{ className: 'characterImageDiv' },
+					React.createElement('img', { className: 'charImage', src: this.props.silhouette })
 				);
 			} else {
 				charImageDiv = React.createElement(
-					"div",
-					{ className: "characterImageDiv" },
-					React.createElement("img", { className: "charImage", src: this.props.charImage })
+					'div',
+					{ className: 'characterImageDiv' },
+					React.createElement('img', { className: 'charImage', src: charImgSrc })
 				);
 			}
 	
 			return React.createElement(
-				"div",
-				{ className: "characterDiv col-md-4" },
+				'div',
+				{ className: 'characterDiv col-md-4' },
 				charImageDiv
 			);
 		}
@@ -22087,6 +22090,19 @@
 
 /***/ },
 /* 178 */
+/*!**********************************************!*\
+  !*** ./react_assets/js/helpers/Constants.js ***!
+  \**********************************************/
+/***/ function(module, exports) {
+
+	const IMAGE_PATH = "https://s3.amazonaws.com/edusaga/assets/images/";
+	
+	module.exports = {
+		IMAGE_PATH: IMAGE_PATH
+	};
+
+/***/ },
+/* 179 */
 /*!**********************************************************!*\
   !*** ./react_assets/js/questionAsker/DialogContainer.js ***!
   \**********************************************************/
@@ -22162,18 +22178,16 @@
 	module.exports = DialogContainer;
 
 /***/ },
-/* 179 */
+/* 180 */
 /*!********************************************************!*\
   !*** ./react_assets/js/questionAsker/TaskContainer.js ***!
   \********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 1);
-	var Task = __webpack_require__(/*! ./components/Task */ 180);
+	var Task = __webpack_require__(/*! ./components/Task */ 181);
 	var PropTypes = React.PropTypes;
 	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 36);
-	var ReactCSSTransitionGroup = __webpack_require__(/*! react-addons-css-transition-group */ 191);
-	var TransitionsCSS = __webpack_require__(/*! ../../../static/css/transitions.css */ 184);
 	
 	var TaskContainer = React.createClass({
 		displayName: 'TaskContainer',
@@ -22258,7 +22272,7 @@
 	module.exports = TaskContainer;
 
 /***/ },
-/* 180 */
+/* 181 */
 /*!**********************************************************!*\
   !*** ./react_assets/js/questionAsker/components/Task.js ***!
   \**********************************************************/
@@ -22266,14 +22280,12 @@
 
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var TaskIcon = __webpack_require__(/*! ./TaskIcon */ 181);
+	var TaskIcon = __webpack_require__(/*! ./TaskIcon */ 182);
+	var TaskText = __webpack_require__(/*! ./TaskText */ 200);
 	
 	var Task = React.createClass({
 		displayName: 'Task',
 	
-		componentDidMount: function () {
-			console.log(this.props.index);
-		},
 		render: function () {
 			var hintClassName;
 			var taskDivClass;
@@ -22318,14 +22330,13 @@
 						micActive: this.props.micActive,
 						index: this.props.index,
 						currentTaskIndex: this.props.currentTaskIndex }),
-					React.createElement(
-						'div',
-						{
-							className: 'taskText',
-							'data-index': this.props.index,
-							onClick: () => this.props.onSpeechInput(this.props.index) },
-						this.props.taskName
-					),
+					React.createElement(TaskText, {
+						className: 'taskText',
+						index: this.props.index,
+						currentTaskIndex: this.props.currentTaskIndex,
+						onSpeechInput: this.props.onSpeechInput,
+						taskTextToDisplay: this.props.taskName,
+						correctAnswerState: this.props.correctAnswerState }),
 					hintDiv
 				)
 			);
@@ -22335,67 +22346,80 @@
 	module.exports = Task;
 
 /***/ },
-/* 181 */
+/* 182 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/TaskIcon.js ***!
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 1);
-	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 182);
-	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 184);
-	var TransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 188);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 194);
+	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 196);
+	var TransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 191);
+	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 178);
 	
 	var TaskIcon = React.createClass({
 		displayName: 'TaskIcon',
 	
 		render: function () {
 			// Default TaskIcon image when nothing is being recorded or answered
+			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
+			var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
+			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
+			var imgCoins = Constants.IMAGE_PATH + "UI/Icon_10coins_flat_nostar-01.png";
+			var imgQuestion = Constants.IMAGE_PATH + "UI/Icon_Questionmark-01.png";
 			var taskIconImage = React.createElement(
 				'div',
 				{ className: 'taskIconDiv' },
 				React.createElement(TaskIconImage, {
+					ref: ref => this.mic = ref,
 					keyToAttach: 'firstMic',
-					imageSrc: '/static/images/UI/Icon_Mic-01.png' })
+					imageSrc: imgMic })
 			);
 			// Sets to true if this task is the active task
 			if (this.props.index === this.props.currentTaskIndex) {
 				if (this.props.micActive) {
-					taskIconImage = React.createElement(
+					return React.createElement(
 						'div',
 						{ className: 'taskIconDiv' },
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'iconStar',
-							imageSrc: '/static/images/UI/Icon_Star-01.png',
+							imageSrc: imgStar,
 							transition: 'activateTaskStar' }),
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'iconMic',
-							imageSrc: '/static/images/UI/Icon_Mic-01.png',
+							imageSrc: imgMic,
 							transition: 'activateTaskMic' })
 					);
 				} else if (this.props.correctAnswerState) {
-					taskIconImage = React.createElement(
+					return React.createElement(
 						'div',
 						{ className: 'taskIconDiv' },
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'iconStar2',
-							imageSrc: '/static/images/UI/Icon_Star-01.png',
+							imageSrc: imgStar,
 							transition: 'taskCorrectStar' }),
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'coins',
-							imageSrc: '/static/images/UI/Icon_10coins_flat_nostar-01.png',
-							transition: 'taskCorrectCoins' })
+							imageSrc: imgCoins,
+							transition: 'taskCorrectCoins' }),
+						React.createElement(TaskIconImage, {
+							keyToAttach: 'iconMic',
+							imageSrc: imgMic,
+							transition: 'taskCorrectMic' })
 					);
 				} else if (this.props.wrongAnswerState) {
-					taskIconImage = React.createElement(
+					return React.createElement(
 						'div',
 						{ className: 'taskIconDiv' },
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'iconStar3',
-							imageSrc: '/static/images/UI/Icon_Star-01.png' }),
+							imageSrc: imgStar,
+							transition: 'taskWrongStar' }),
 						React.createElement(TaskIconImage, {
 							keyToAttach: 'questionMark',
-							imageSrc: '/static/images/UI/Icon_Questionmark-01.png' })
+							imageSrc: imgQuestion,
+							transition: 'taskWrongQuestionMark' })
 					);
 				}
 			}
@@ -22410,7 +22434,858 @@
 	module.exports = TaskIcon;
 
 /***/ },
-/* 182 */
+/* 183 */
+/*!*******************************************************************!*\
+  !*** ./react_assets/js/questionAsker/BackgroundImageContainer.js ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	
+	var BackgroundImageContainer = React.createClass({
+		displayName: "BackgroundImageContainer",
+	
+		render: function () {
+			var fadedDiv;
+			if (this.props.hintActive) {
+				fadedDiv = React.createElement("div", { className: "bgFadeOverlay" });
+			} else {
+				fadedDiv = React.createElement("div", null);
+			}
+			return React.createElement(
+				"div",
+				null,
+				React.createElement("img", { className: "sceneBG", src: this.props.bgImage }),
+				fadedDiv
+			);
+		}
+	});
+	
+	module.exports = BackgroundImageContainer;
+
+/***/ },
+/* 184 */
+/*!************************************************************!*\
+  !*** ./react_assets/js/questionAsker/FeedbackContainer.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 185);
+	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 186);
+	var MiriIcon = __webpack_require__(/*! ./components/MiriIcon */ 187);
+	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 188);
+	
+	var FeedbackContainer = React.createClass({
+		displayName: 'FeedbackContainer',
+	
+		getInitialState: function () {
+			return {
+				hintClickDisable: false,
+				suggestionMode: false,
+				suggestionSubmitted: false
+			};
+		},
+		// Suggestions are activated when users want to add their answer to database
+		activateSuggestionMode: function () {
+			console.log("Suggestion Mode Activated");
+			this.setState({ suggestionMode: true });
+		},
+		submitSuggestion: function () {
+			var that = this;
+			console.log("Suggestion submitted");
+			this.setState({ suggestionMode: false });
+			this.setState({ suggestionSubmitted: true });
+			setTimeout(function () {
+				that.setState({ suggestionSubmitted: false });
+			}, 3000);
+		},
+		handleHintAudioClick: function () {
+			that = this;
+	
+			// Disable clicking on hint to play voice
+			this.setState({ hintClickDisable: true });
+	
+			// PLay audio from hint
+			this.props.onHintAudio(this.props.feedbackText);
+	
+			// Disable clicking on hint for some time before re-enabling
+			setTimeout(function () {
+				that.setState({
+					hintClickDisable: false
+				});
+			}, 1000);
+		},
+		render: function () {
+			// Show Hint when hints are active
+			// Change Miri's icon depending on type of hint/feedback
+			var hintDivClass;
+			var hintTemplateText;
+			var miriIconClass = "miriIcon";
+			var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
+			var hintDivClass = "hintDiv";
+	
+			// Case of hint being given
+			if (this.props.hintActive === true) {
+				hintTemplateText = React.createElement(
+					'p',
+					{ className: 'hintText' },
+					React.createElement(
+						'span',
+						null,
+						'Maybe you can say: '
+					),
+					React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText })
+				);
+				miriIconClass += " miriGlow";
+			}
+	
+			// User answers wrong, provide feedback
+			else if (this.props.answerFeedbackActive === true) {
+					// They comfirmed a suggestion...
+					if (this.state.suggestionSubmitted) {
+						hintTemplateText = React.createElement(
+							'p',
+							{ className: 'hintText' },
+							React.createElement(
+								'span',
+								null,
+								'I will add a request to add it to acceptable answers!'
+							)
+						);
+					}
+					// They pressed first suggestion submit and want to confirm a suggestion
+					else if (this.state.suggestionMode) {
+							hintTemplateText = React.createElement(
+								'p',
+								{ className: 'hintText' },
+								React.createElement(
+									'span',
+									null,
+									'Suggest '
+								),
+								React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText }),
+								React.createElement(
+									'span',
+									null,
+									' as a good answer?'
+								)
+							);
+							hintDivClass += " hintDivGold";
+						}
+						// All other cases
+						else {
+								hintTemplateText = React.createElement(
+									'p',
+									{ className: 'hintText' },
+									React.createElement(
+										'span',
+										null,
+										'I heard you say: '
+									),
+									React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText })
+								);
+							}
+					miriIconClass += " miriGlow";
+				} else {
+					hintDivClass = "hintDiv hidden";
+				}
+			// If hintClick disabled, span should do nothing, otherwise, it should play audio
+			return React.createElement(
+				'div',
+				{ className: 'bottomNavBar' },
+				React.createElement(
+					'div',
+					{ className: 'row-fluid' },
+					React.createElement(
+						'div',
+						{ className: 'buttonLine' },
+						React.createElement(CoinMeter, { coins: this.props.coins }),
+						React.createElement(
+							'p',
+							{ className: 'locationText' },
+							React.createElement(
+								'i',
+								null,
+								this.props.locationTextEnglish,
+								' '
+							),
+							'(',
+							this.props.locationTextChinese,
+							')'
+						),
+						React.createElement(
+							'div',
+							{ className: hintDivClass },
+							React.createElement(HintIcon, {
+								hintActive: this.props.hintActive,
+								answerFeedbackActive: this.props.answerFeedbackActive,
+								suggestionMode: this.state.suggestionMode,
+								suggestionSubmitted: this.state.suggestionSubmitted,
+								activateSuggestionMode: this.activateSuggestionMode,
+								submitSuggestion: this.submitSuggestion }),
+							hintTemplateText
+						),
+						React.createElement(MiriIcon, { miriClass: miriIconClass, miriIconSrc: this.props.miriIconSrc })
+					)
+				)
+			);
+		}
+	});
+	
+	module.exports = FeedbackContainer;
+
+/***/ },
+/* 185 */
+/*!********************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/SpeechableSpan.js ***!
+  \********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function SpeechableSpan(props) {
+		return React.createElement(
+			"span",
+			{ className: "speechableSpan",
+				onClick: props.clickFunction },
+			props.feedbackText
+		);
+	}
+	
+	module.exports = SpeechableSpan;
+
+/***/ },
+/* 186 */
+/*!***************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/CoinMeter.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function CoinMeter(props) {
+		return React.createElement(
+			"div",
+			{ className: "coinDiv" },
+			React.createElement("img", { className: "coinIcon", src: "/static/images/UI/Icon_coins-01.png" }),
+			React.createElement(
+				"div",
+				{ className: "coinCount" },
+				props.coins
+			)
+		);
+	}
+	
+	module.exports = CoinMeter;
+
+/***/ },
+/* 187 */
+/*!**************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function MiriIcon(props) {
+		return React.createElement(
+			'div',
+			null,
+			React.createElement('img', { className: props.miriClass, src: props.miriIconSrc })
+		);
+	}
+	
+	module.exports = MiriIcon;
+
+/***/ },
+/* 188 */
+/*!**************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/HintIcon.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	
+	var HintIcon = React.createClass({
+		displayName: "HintIcon",
+	
+		render: function () {
+			var hintIconDiv;
+			if (this.props.hintActive) {
+				hintIconDiv = React.createElement(
+					"div",
+					null,
+					React.createElement("img", { className: "hintIconImage payHintBg", src: "static/images/UI/ICON_payforhelp_bg-01.png" }),
+					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_qmark-01.png" }),
+					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_Big_sparkle-01.png" }),
+					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_L_spark-01.png" }),
+					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_R_sparkle-01.png" })
+				);
+			}
+			// User has confirmed a suggestion
+			else if (this.props.suggestionSubmitted) {
+					hintIconDiv = React.createElement("div", null);
+				}
+				// User has answered, but not clicked to add a suggestion
+				else if (this.props.answerFeedbackActive && !this.props.suggestionMode) {
+						hintIconDiv = React.createElement(
+							"div",
+							null,
+							React.createElement(
+								"div",
+								{ className: "suggestNewPhraseButton promptSuggestNewPhraseButton",
+									onClick: this.props.activateSuggestionMode },
+								React.createElement("span", { className: "glyphicon glyphicon-plus", "aria-hidden": "true" })
+							)
+						);
+					}
+					// User answered and wants to add suggestion, prompt confirm suggestion
+					else if (this.props.answerFeedbackActive && this.props.suggestionMode) {
+							hintIconDiv = React.createElement(
+								"div",
+								null,
+								React.createElement(
+									"div",
+									{ className: "suggestNewPhraseButton confirmSuggestNewPhraseButton",
+										onClick: this.props.submitSuggestion },
+									React.createElement("span", { className: "glyphicon glyphicon-plus", "aria-hidden": "true" })
+								)
+							);
+						}
+	
+			return React.createElement(
+				"div",
+				{ className: "hintIcon" },
+				hintIconDiv
+			);
+		}
+	});
+	
+	module.exports = HintIcon;
+
+/***/ },
+/* 189 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/SpeechSynth.js ***!
+  \************************************************/
+/***/ function(module, exports) {
+
+	var speechSynth = {
+		// Initialize with proper language, return "voicepack" for language
+		init: function (lang) {
+			// Temporarily stores 
+			var voices = [];
+	
+			// Get current language
+			var synthLang = "";
+	
+			// Convert the google language to the correct voice pack language
+			if (lang == "es-es") {
+				synthLang = "Monica";
+			} else if (lang === "cmn-Hant-TW" || "zh-zh" || "zh-CN") {
+				synthLang = "Google 普通话（中国大陆）";
+			}
+	
+			// Set the voice of the robot to be the correct language from browser
+			voicePack = this.findVoice(synthLang);
+			return voicePack;
+		},
+		findVoice: function (langToMatch) {
+			var voiceData;
+			var voices = window.speechSynthesis.getVoices();
+			for (i = 0; i < voices.length; i++) {
+				if (voices[i].name === langToMatch) {
+					voiceData = voices[i];
+				}
+			}
+			return voiceData;
+		},
+		play: function (textToSay, voicePack) {
+			var utterThis = new SpeechSynthesisUtterance(textToSay);
+			utterThis.voice = voicePack;
+			utterThis.rate = 0.8;
+			console.log(utterThis.voice);
+			window.speechSynthesis.speak(utterThis);
+		}
+	};
+	
+	module.exports = speechSynth;
+
+/***/ },
+/* 190 */
+/*!**************************************************************!*\
+  !*** ./react_assets/js/questionAsker/TransitionContainer.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(/*! react */ 1);
+	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
+	var ReactTransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 191);
+	var MyBox = React.createClass({
+	    displayName: 'MyBox',
+	
+	    show: function (callback) {
+	        var node = ReactDOM.findDOMNode(this);
+	        TweenMax.fromTo(node, 2, { width: 100, height: 100, backgroundColor: '#0cc', scale: 0.2, opacity: 0, rotation: -180 }, { width: 100, height: 100, backgroundColor: '#0cc', scale: 1, opacity: 1, rotation: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
+	    },
+	    hide: function (callback) {
+	        var node = ReactDOM.findDOMNode(this);
+	        TweenMax.to(node, 2, { width: 100, height: 100, backgroundColor: '#cc0', scale: 0.2, opacity: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
+	    },
+	    componentWillAppear: function (didAppearCallback) {
+	        console.log('MyBox.componentWillAppear');
+	        this.show(didAppearCallback);
+	    },
+	    componentDidAppear: function () {
+	        console.log('MyBox.componentDidAppear');
+	    },
+	    componentWillEnter: function (didEnterCallback) {
+	        console.log('MyBox.componentWillEnter');
+	        this.show(didEnterCallback);
+	    },
+	    componentDidEnter: function () {
+	        console.log('MyBox.componentDidEnter');
+	    },
+	    componentWillLeave: function (didLeaveCallback) {
+	        console.log('MyBox.componentWillLeave');
+	        this.hide(didLeaveCallback);
+	    },
+	    componentDidLeave: function () {
+	        console.log('MyBox.componentDidLeave');
+	    },
+	    componentDidMount: function () {
+	        console.log('MyBox.componentDidMount');
+	    },
+	    componentWillUnmount: function () {
+	        console.log('MyBox.componentWillUnmount');
+	    },
+	    render: function () {
+	        return React.createElement(
+	            'div',
+	            null,
+	            ' '
+	        );
+	    }
+	});
+	var TransitionContainer = React.createClass({
+	    displayName: 'TransitionContainer',
+	
+	    getInitialState: function () {
+	        return { isShowing: false };
+	    },
+	    onButtonClicked: function () {
+	        this.setState({ isShowing: !this.state.isShowing });
+	    },
+	    render: function () {
+	        var myBox = this.state.isShowing ? React.createElement(MyBox, { key: 'myBox' }) : '';
+	        return React.createElement(
+	            'div',
+	            { id: 'container' },
+	            React.createElement(MyButton, { onButtonClicked: this.onButtonClicked }),
+	            React.createElement(
+	                ReactTransitionGroup,
+	                { transitionName: 'hellotransition' },
+	                myBox
+	            )
+	        );
+	    }
+	});
+	var MyButton = React.createClass({
+	    displayName: 'MyButton',
+	
+	    render: function () {
+	        return React.createElement(
+	            'button',
+	            { onClick: this.props.onButtonClicked },
+	            'Click Me'
+	        );
+	    }
+	});
+	
+	module.exports = TransitionContainer;
+
+/***/ },
+/* 191 */
+/*!**************************************************!*\
+  !*** ./~/react-addons-transition-group/index.js ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(/*! react/lib/ReactTransitionGroup */ 192);
+
+/***/ },
+/* 192 */
+/*!*********************************************!*\
+  !*** ./~/react/lib/ReactTransitionGroup.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionGroup
+	 */
+	
+	'use strict';
+	
+	var _assign = __webpack_require__(/*! object-assign */ 4);
+	
+	var React = __webpack_require__(/*! ./React */ 2);
+	var ReactInstanceMap = __webpack_require__(/*! ./ReactInstanceMap */ 126);
+	var ReactTransitionChildMapping = __webpack_require__(/*! ./ReactTransitionChildMapping */ 193);
+	
+	var emptyFunction = __webpack_require__(/*! fbjs/lib/emptyFunction */ 12);
+	
+	/**
+	 * A basis for animations. When children are declaratively added or removed,
+	 * special lifecycle hooks are called.
+	 * See https://facebook.github.io/react/docs/animation.html#low-level-api-reacttransitiongroup
+	 */
+	var ReactTransitionGroup = React.createClass({
+	  displayName: 'ReactTransitionGroup',
+	
+	  propTypes: {
+	    component: React.PropTypes.any,
+	    childFactory: React.PropTypes.func
+	  },
+	
+	  getDefaultProps: function () {
+	    return {
+	      component: 'span',
+	      childFactory: emptyFunction.thatReturnsArgument
+	    };
+	  },
+	
+	  getInitialState: function () {
+	    return {
+	      // TODO: can we get useful debug information to show at this point?
+	      children: ReactTransitionChildMapping.getChildMapping(this.props.children)
+	    };
+	  },
+	
+	  componentWillMount: function () {
+	    this.currentlyTransitioningKeys = {};
+	    this.keysToEnter = [];
+	    this.keysToLeave = [];
+	  },
+	
+	  componentDidMount: function () {
+	    var initialChildMapping = this.state.children;
+	    for (var key in initialChildMapping) {
+	      if (initialChildMapping[key]) {
+	        this.performAppear(key);
+	      }
+	    }
+	  },
+	
+	  componentWillReceiveProps: function (nextProps) {
+	    var nextChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      nextChildMapping = ReactTransitionChildMapping.getChildMapping(nextProps.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      nextChildMapping = ReactTransitionChildMapping.getChildMapping(nextProps.children);
+	    }
+	    var prevChildMapping = this.state.children;
+	
+	    this.setState({
+	      children: ReactTransitionChildMapping.mergeChildMappings(prevChildMapping, nextChildMapping)
+	    });
+	
+	    var key;
+	
+	    for (key in nextChildMapping) {
+	      var hasPrev = prevChildMapping && prevChildMapping.hasOwnProperty(key);
+	      if (nextChildMapping[key] && !hasPrev && !this.currentlyTransitioningKeys[key]) {
+	        this.keysToEnter.push(key);
+	      }
+	    }
+	
+	    for (key in prevChildMapping) {
+	      var hasNext = nextChildMapping && nextChildMapping.hasOwnProperty(key);
+	      if (prevChildMapping[key] && !hasNext && !this.currentlyTransitioningKeys[key]) {
+	        this.keysToLeave.push(key);
+	      }
+	    }
+	
+	    // If we want to someday check for reordering, we could do it here.
+	  },
+	
+	  componentDidUpdate: function () {
+	    var keysToEnter = this.keysToEnter;
+	    this.keysToEnter = [];
+	    keysToEnter.forEach(this.performEnter);
+	
+	    var keysToLeave = this.keysToLeave;
+	    this.keysToLeave = [];
+	    keysToLeave.forEach(this.performLeave);
+	  },
+	
+	  performAppear: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+	
+	    var component = this.refs[key];
+	
+	    if (component.componentWillAppear) {
+	      component.componentWillAppear(this._handleDoneAppearing.bind(this, key));
+	    } else {
+	      this._handleDoneAppearing(key);
+	    }
+	  },
+	
+	  _handleDoneAppearing: function (key) {
+	    var component = this.refs[key];
+	    if (component.componentDidAppear) {
+	      component.componentDidAppear();
+	    }
+	
+	    delete this.currentlyTransitioningKeys[key];
+	
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+	
+	    if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
+	      // This was removed before it had fully appeared. Remove it.
+	      this.performLeave(key);
+	    }
+	  },
+	
+	  performEnter: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+	
+	    var component = this.refs[key];
+	
+	    if (component.componentWillEnter) {
+	      component.componentWillEnter(this._handleDoneEntering.bind(this, key));
+	    } else {
+	      this._handleDoneEntering(key);
+	    }
+	  },
+	
+	  _handleDoneEntering: function (key) {
+	    var component = this.refs[key];
+	    if (component.componentDidEnter) {
+	      component.componentDidEnter();
+	    }
+	
+	    delete this.currentlyTransitioningKeys[key];
+	
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+	
+	    if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
+	      // This was removed before it had fully entered. Remove it.
+	      this.performLeave(key);
+	    }
+	  },
+	
+	  performLeave: function (key) {
+	    this.currentlyTransitioningKeys[key] = true;
+	
+	    var component = this.refs[key];
+	    if (component.componentWillLeave) {
+	      component.componentWillLeave(this._handleDoneLeaving.bind(this, key));
+	    } else {
+	      // Note that this is somewhat dangerous b/c it calls setState()
+	      // again, effectively mutating the component before all the work
+	      // is done.
+	      this._handleDoneLeaving(key);
+	    }
+	  },
+	
+	  _handleDoneLeaving: function (key) {
+	    var component = this.refs[key];
+	
+	    if (component.componentDidLeave) {
+	      component.componentDidLeave();
+	    }
+	
+	    delete this.currentlyTransitioningKeys[key];
+	
+	    var currentChildMapping;
+	    if (process.env.NODE_ENV !== 'production') {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
+	    } else {
+	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
+	    }
+	
+	    if (currentChildMapping && currentChildMapping.hasOwnProperty(key)) {
+	      // This entered again before it fully left. Add it again.
+	      this.performEnter(key);
+	    } else {
+	      this.setState(function (state) {
+	        var newChildren = _assign({}, state.children);
+	        delete newChildren[key];
+	        return { children: newChildren };
+	      });
+	    }
+	  },
+	
+	  render: function () {
+	    // TODO: we could get rid of the need for the wrapper node
+	    // by cloning a single child
+	    var childrenToRender = [];
+	    for (var key in this.state.children) {
+	      var child = this.state.children[key];
+	      if (child) {
+	        // You may need to apply reactive updates to a child as it is leaving.
+	        // The normal React way to do it won't work since the child will have
+	        // already been removed. In case you need this behavior you can provide
+	        // a childFactory function to wrap every child, even the ones that are
+	        // leaving.
+	        childrenToRender.push(React.cloneElement(this.props.childFactory(child), { ref: key, key: key }));
+	      }
+	    }
+	
+	    // Do not forward ReactTransitionGroup props to primitive DOM nodes
+	    var props = _assign({}, this.props);
+	    delete props.transitionLeave;
+	    delete props.transitionName;
+	    delete props.transitionAppear;
+	    delete props.transitionEnter;
+	    delete props.childFactory;
+	    delete props.transitionLeaveTimeout;
+	    delete props.transitionEnterTimeout;
+	    delete props.transitionAppearTimeout;
+	    delete props.component;
+	
+	    return React.createElement(this.props.component, props, childrenToRender);
+	  }
+	});
+	
+	module.exports = ReactTransitionGroup;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
+
+/***/ },
+/* 193 */
+/*!****************************************************!*\
+  !*** ./~/react/lib/ReactTransitionChildMapping.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule ReactTransitionChildMapping
+	 */
+	
+	'use strict';
+	
+	var flattenChildren = __webpack_require__(/*! ./flattenChildren */ 134);
+	
+	var ReactTransitionChildMapping = {
+	  /**
+	   * Given `this.props.children`, return an object mapping key to child. Just
+	   * simple syntactic sugar around flattenChildren().
+	   *
+	   * @param {*} children `this.props.children`
+	   * @param {number=} selfDebugID Optional debugID of the current internal instance.
+	   * @return {object} Mapping of key to child
+	   */
+	  getChildMapping: function (children, selfDebugID) {
+	    if (!children) {
+	      return children;
+	    }
+	
+	    if (process.env.NODE_ENV !== 'production') {
+	      return flattenChildren(children, selfDebugID);
+	    }
+	
+	    return flattenChildren(children);
+	  },
+	
+	  /**
+	   * When you're adding or removing children some may be added or removed in the
+	   * same render pass. We want to show *both* since we want to simultaneously
+	   * animate elements in and out. This function takes a previous set of keys
+	   * and a new set of keys and merges them with its best guess of the correct
+	   * ordering. In the future we may expose some of the utilities in
+	   * ReactMultiChild to make this easy, but for now React itself does not
+	   * directly have this concept of the union of prevChildren and nextChildren
+	   * so we implement it here.
+	   *
+	   * @param {object} prev prev children as returned from
+	   * `ReactTransitionChildMapping.getChildMapping()`.
+	   * @param {object} next next children as returned from
+	   * `ReactTransitionChildMapping.getChildMapping()`.
+	   * @return {object} a key set that contains all keys in `prev` and all keys
+	   * in `next` in a reasonable order.
+	   */
+	  mergeChildMappings: function (prev, next) {
+	    prev = prev || {};
+	    next = next || {};
+	
+	    function getValueForKey(key) {
+	      if (next.hasOwnProperty(key)) {
+	        return next[key];
+	      } else {
+	        return prev[key];
+	      }
+	    }
+	
+	    // For each key of `next`, the list of keys to insert before that key in
+	    // the combined list
+	    var nextKeysPending = {};
+	
+	    var pendingKeys = [];
+	    for (var prevKey in prev) {
+	      if (next.hasOwnProperty(prevKey)) {
+	        if (pendingKeys.length) {
+	          nextKeysPending[prevKey] = pendingKeys;
+	          pendingKeys = [];
+	        }
+	      } else {
+	        pendingKeys.push(prevKey);
+	      }
+	    }
+	
+	    var i;
+	    var childMapping = {};
+	    for (var nextKey in next) {
+	      if (nextKeysPending.hasOwnProperty(nextKey)) {
+	        for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+	          var pendingNextKey = nextKeysPending[nextKey][i];
+	          childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+	        }
+	      }
+	      childMapping[nextKey] = getValueForKey(nextKey);
+	    }
+	
+	    // Finally, add the keys which didn't appear before any key in `next`
+	    for (i = 0; i < pendingKeys.length; i++) {
+	      childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+	    }
+	
+	    return childMapping;
+	  }
+	};
+	
+	module.exports = ReactTransitionChildMapping;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
+
+/***/ },
+/* 194 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/TaskIconImage.js ***!
   \*******************************************************************/
@@ -22419,28 +23294,14 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
 	var PropTypes = React.PropTypes;
-	var Transitions = __webpack_require__(/*! ../../helpers/Transitions.js */ 183);
+	var Transitions = __webpack_require__(/*! ../../helpers/Transitions.js */ 195);
 	
 	var TaskIconImage = React.createClass({
 		displayName: 'TaskIconImage',
 	
 		componentDidMount: function () {
 			var node = ReactDOM.findDOMNode(this);
-			if (this.props.transition === "activateTaskMic") {
-				Transitions.activateTask.mic(node);
-			}
-		},
-		componentWillUnmount: function () {
-			console.log("Unmount");
-			var node = ReactDOM.findDOMNode(this);
-			console.log(node);
-			if (this.props.transition === "taskCorrectMicFade") {
-				Transitions.activateTask.mic(node);
-			}
-		},
-		componentDidUpdate: function () {
-			var node = ReactDOM.findDOMNode(this);
-			console.log("Component Mounted");
+			console.log("Component mounted");
 			console.log(node);
 	
 			switch (this.props.transition) {
@@ -22450,6 +23311,27 @@
 				case "activateTaskStar":
 					Transitions.activateTask.star(node);
 					break;
+				case "taskCorrectMic":
+					Transitions.taskCorrect.mic(node);
+					break;
+				case "taskCorrectStar":
+					Transitions.taskCorrect.star(node);
+					break;
+				case "taskCorrectCoins":
+					Transitions.taskCorrect.coins(node);
+					break;
+				case "taskWrongStar":
+					Transitions.taskWrong.star(node);
+					break;
+				case "taskWrongQuestionMark":
+					Transitions.taskWrong.questionMark(node);
+				default:
+					break;
+			}
+		},
+		componentDidUpdate: function () {
+			var node = ReactDOM.findDOMNode(this);
+			switch (this.props.transition) {
 				case "taskCorrectMic":
 					Transitions.taskCorrect.mic(node);
 					break;
@@ -22472,7 +23354,7 @@
 	module.exports = TaskIconImage;
 
 /***/ },
-/* 183 */
+/* 195 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/Transitions.js ***!
   \************************************************/
@@ -22497,8 +23379,8 @@
 			tl.to(DOMnode, 1, { scale: 0.5 }).to(DOMnode, 1, { scale: 1.5 }).to(DOMnode, 1, { scale: 1 }).to(DOMnode, 1, { rotation: "360", scale: 0 });
 		},
 		mic: function (DOMnode) {
-			var tl = new TimelineMax({ delay: 1 });
-			tl.to(DOMnode, 1, { opacity: 0 });
+			var tl = new TimelineMax();
+			tl.to(DOMnode, 0, { scale: 1.5 }).to(DOMnode, 2, { opacity: 0, scale: 0 });
 		},
 		coins: function (DOMnode) {
 			var tl = new TimelineMax({ delay: 1 });
@@ -22506,7 +23388,23 @@
 		}
 	};
 	
-	var Transitions = {
+	var taskWrong = {
+		star: function (DOMnode) {
+	
+			var tl = new TimelineMax();
+			/*
+	  tl.to(DOMnode, 1, {scale: 1.5})
+	  	.to(DOMnode, 1, {scale: 0});
+	  */
+			tl.fromTo(DOMnode, 1, { scale: 1.5 }, { scale: 2.1 }).to(DOMnode, 1, { scale: 1.5 });
+		},
+		questionMark: function (DOMnode) {
+			var tl = new TimelineMax();
+			tl.fromTo(DOMnode, 1, { scale: 1.5 }, { scale: 2.1 }).to(DOMnode, 1, { scale: 1.5 });
+		}
+	};
+	
+	var referenceForNow = {
 		imageTransition: function (DOMnode, thisContext) {
 			TweenMax.fromTo(DOMnode, 2, { width: 0, height: 0, scale: 0.2, opacity: 0, rotation: -180, left: -50 }, { width: 50, height: 50, scale: 1, opacity: 1, rotation: 0, left: -25,
 				ease: Expo.easeInOut, onCompleteScope: thisContext });
@@ -22515,11 +23413,12 @@
 	
 	module.exports = {
 		activateTask: activateTask,
-		taskCorrect: taskCorrect
+		taskCorrect: taskCorrect,
+		taskWrong: taskWrong
 	};
 
 /***/ },
-/* 184 */
+/* 196 */
 /*!************************************!*\
   !*** ./static/css/transitions.css ***!
   \************************************/
@@ -22528,10 +23427,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./transitions.css */ 185);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./transitions.css */ 197);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 187)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 199)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22548,13 +23447,13 @@
 	}
 
 /***/ },
-/* 185 */
+/* 197 */
 /*!***************************************************!*\
   !*** ./~/css-loader!./static/css/transitions.css ***!
   \***************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 186)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 198)();
 	// imports
 	
 	
@@ -22565,7 +23464,7 @@
 
 
 /***/ },
-/* 186 */
+/* 198 */
 /*!**************************************!*\
   !*** ./~/css-loader/lib/css-base.js ***!
   \**************************************/
@@ -22624,7 +23523,7 @@
 
 
 /***/ },
-/* 187 */
+/* 199 */
 /*!*************************************!*\
   !*** ./~/style-loader/addStyles.js ***!
   \*************************************/
@@ -22879,1345 +23778,36 @@
 
 
 /***/ },
-/* 188 */
-/*!**************************************************!*\
-  !*** ./~/react-addons-transition-group/index.js ***!
-  \**************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(/*! react/lib/ReactTransitionGroup */ 189);
-
-/***/ },
-/* 189 */
-/*!*********************************************!*\
-  !*** ./~/react/lib/ReactTransitionGroup.js ***!
-  \*********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactTransitionGroup
-	 */
-	
-	'use strict';
-	
-	var _assign = __webpack_require__(/*! object-assign */ 4);
-	
-	var React = __webpack_require__(/*! ./React */ 2);
-	var ReactInstanceMap = __webpack_require__(/*! ./ReactInstanceMap */ 126);
-	var ReactTransitionChildMapping = __webpack_require__(/*! ./ReactTransitionChildMapping */ 190);
-	
-	var emptyFunction = __webpack_require__(/*! fbjs/lib/emptyFunction */ 12);
-	
-	/**
-	 * A basis for animations. When children are declaratively added or removed,
-	 * special lifecycle hooks are called.
-	 * See https://facebook.github.io/react/docs/animation.html#low-level-api-reacttransitiongroup
-	 */
-	var ReactTransitionGroup = React.createClass({
-	  displayName: 'ReactTransitionGroup',
-	
-	  propTypes: {
-	    component: React.PropTypes.any,
-	    childFactory: React.PropTypes.func
-	  },
-	
-	  getDefaultProps: function () {
-	    return {
-	      component: 'span',
-	      childFactory: emptyFunction.thatReturnsArgument
-	    };
-	  },
-	
-	  getInitialState: function () {
-	    return {
-	      // TODO: can we get useful debug information to show at this point?
-	      children: ReactTransitionChildMapping.getChildMapping(this.props.children)
-	    };
-	  },
-	
-	  componentWillMount: function () {
-	    this.currentlyTransitioningKeys = {};
-	    this.keysToEnter = [];
-	    this.keysToLeave = [];
-	  },
-	
-	  componentDidMount: function () {
-	    var initialChildMapping = this.state.children;
-	    for (var key in initialChildMapping) {
-	      if (initialChildMapping[key]) {
-	        this.performAppear(key);
-	      }
-	    }
-	  },
-	
-	  componentWillReceiveProps: function (nextProps) {
-	    var nextChildMapping;
-	    if (process.env.NODE_ENV !== 'production') {
-	      nextChildMapping = ReactTransitionChildMapping.getChildMapping(nextProps.children, ReactInstanceMap.get(this)._debugID);
-	    } else {
-	      nextChildMapping = ReactTransitionChildMapping.getChildMapping(nextProps.children);
-	    }
-	    var prevChildMapping = this.state.children;
-	
-	    this.setState({
-	      children: ReactTransitionChildMapping.mergeChildMappings(prevChildMapping, nextChildMapping)
-	    });
-	
-	    var key;
-	
-	    for (key in nextChildMapping) {
-	      var hasPrev = prevChildMapping && prevChildMapping.hasOwnProperty(key);
-	      if (nextChildMapping[key] && !hasPrev && !this.currentlyTransitioningKeys[key]) {
-	        this.keysToEnter.push(key);
-	      }
-	    }
-	
-	    for (key in prevChildMapping) {
-	      var hasNext = nextChildMapping && nextChildMapping.hasOwnProperty(key);
-	      if (prevChildMapping[key] && !hasNext && !this.currentlyTransitioningKeys[key]) {
-	        this.keysToLeave.push(key);
-	      }
-	    }
-	
-	    // If we want to someday check for reordering, we could do it here.
-	  },
-	
-	  componentDidUpdate: function () {
-	    var keysToEnter = this.keysToEnter;
-	    this.keysToEnter = [];
-	    keysToEnter.forEach(this.performEnter);
-	
-	    var keysToLeave = this.keysToLeave;
-	    this.keysToLeave = [];
-	    keysToLeave.forEach(this.performLeave);
-	  },
-	
-	  performAppear: function (key) {
-	    this.currentlyTransitioningKeys[key] = true;
-	
-	    var component = this.refs[key];
-	
-	    if (component.componentWillAppear) {
-	      component.componentWillAppear(this._handleDoneAppearing.bind(this, key));
-	    } else {
-	      this._handleDoneAppearing(key);
-	    }
-	  },
-	
-	  _handleDoneAppearing: function (key) {
-	    var component = this.refs[key];
-	    if (component.componentDidAppear) {
-	      component.componentDidAppear();
-	    }
-	
-	    delete this.currentlyTransitioningKeys[key];
-	
-	    var currentChildMapping;
-	    if (process.env.NODE_ENV !== 'production') {
-	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
-	    } else {
-	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
-	    }
-	
-	    if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
-	      // This was removed before it had fully appeared. Remove it.
-	      this.performLeave(key);
-	    }
-	  },
-	
-	  performEnter: function (key) {
-	    this.currentlyTransitioningKeys[key] = true;
-	
-	    var component = this.refs[key];
-	
-	    if (component.componentWillEnter) {
-	      component.componentWillEnter(this._handleDoneEntering.bind(this, key));
-	    } else {
-	      this._handleDoneEntering(key);
-	    }
-	  },
-	
-	  _handleDoneEntering: function (key) {
-	    var component = this.refs[key];
-	    if (component.componentDidEnter) {
-	      component.componentDidEnter();
-	    }
-	
-	    delete this.currentlyTransitioningKeys[key];
-	
-	    var currentChildMapping;
-	    if (process.env.NODE_ENV !== 'production') {
-	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
-	    } else {
-	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
-	    }
-	
-	    if (!currentChildMapping || !currentChildMapping.hasOwnProperty(key)) {
-	      // This was removed before it had fully entered. Remove it.
-	      this.performLeave(key);
-	    }
-	  },
-	
-	  performLeave: function (key) {
-	    this.currentlyTransitioningKeys[key] = true;
-	
-	    var component = this.refs[key];
-	    if (component.componentWillLeave) {
-	      component.componentWillLeave(this._handleDoneLeaving.bind(this, key));
-	    } else {
-	      // Note that this is somewhat dangerous b/c it calls setState()
-	      // again, effectively mutating the component before all the work
-	      // is done.
-	      this._handleDoneLeaving(key);
-	    }
-	  },
-	
-	  _handleDoneLeaving: function (key) {
-	    var component = this.refs[key];
-	
-	    if (component.componentDidLeave) {
-	      component.componentDidLeave();
-	    }
-	
-	    delete this.currentlyTransitioningKeys[key];
-	
-	    var currentChildMapping;
-	    if (process.env.NODE_ENV !== 'production') {
-	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children, ReactInstanceMap.get(this)._debugID);
-	    } else {
-	      currentChildMapping = ReactTransitionChildMapping.getChildMapping(this.props.children);
-	    }
-	
-	    if (currentChildMapping && currentChildMapping.hasOwnProperty(key)) {
-	      // This entered again before it fully left. Add it again.
-	      this.performEnter(key);
-	    } else {
-	      this.setState(function (state) {
-	        var newChildren = _assign({}, state.children);
-	        delete newChildren[key];
-	        return { children: newChildren };
-	      });
-	    }
-	  },
-	
-	  render: function () {
-	    // TODO: we could get rid of the need for the wrapper node
-	    // by cloning a single child
-	    var childrenToRender = [];
-	    for (var key in this.state.children) {
-	      var child = this.state.children[key];
-	      if (child) {
-	        // You may need to apply reactive updates to a child as it is leaving.
-	        // The normal React way to do it won't work since the child will have
-	        // already been removed. In case you need this behavior you can provide
-	        // a childFactory function to wrap every child, even the ones that are
-	        // leaving.
-	        childrenToRender.push(React.cloneElement(this.props.childFactory(child), { ref: key, key: key }));
-	      }
-	    }
-	
-	    // Do not forward ReactTransitionGroup props to primitive DOM nodes
-	    var props = _assign({}, this.props);
-	    delete props.transitionLeave;
-	    delete props.transitionName;
-	    delete props.transitionAppear;
-	    delete props.transitionEnter;
-	    delete props.childFactory;
-	    delete props.transitionLeaveTimeout;
-	    delete props.transitionEnterTimeout;
-	    delete props.transitionAppearTimeout;
-	    delete props.component;
-	
-	    return React.createElement(this.props.component, props, childrenToRender);
-	  }
-	});
-	
-	module.exports = ReactTransitionGroup;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
-
-/***/ },
-/* 190 */
-/*!****************************************************!*\
-  !*** ./~/react/lib/ReactTransitionChildMapping.js ***!
-  \****************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactTransitionChildMapping
-	 */
-	
-	'use strict';
-	
-	var flattenChildren = __webpack_require__(/*! ./flattenChildren */ 134);
-	
-	var ReactTransitionChildMapping = {
-	  /**
-	   * Given `this.props.children`, return an object mapping key to child. Just
-	   * simple syntactic sugar around flattenChildren().
-	   *
-	   * @param {*} children `this.props.children`
-	   * @param {number=} selfDebugID Optional debugID of the current internal instance.
-	   * @return {object} Mapping of key to child
-	   */
-	  getChildMapping: function (children, selfDebugID) {
-	    if (!children) {
-	      return children;
-	    }
-	
-	    if (process.env.NODE_ENV !== 'production') {
-	      return flattenChildren(children, selfDebugID);
-	    }
-	
-	    return flattenChildren(children);
-	  },
-	
-	  /**
-	   * When you're adding or removing children some may be added or removed in the
-	   * same render pass. We want to show *both* since we want to simultaneously
-	   * animate elements in and out. This function takes a previous set of keys
-	   * and a new set of keys and merges them with its best guess of the correct
-	   * ordering. In the future we may expose some of the utilities in
-	   * ReactMultiChild to make this easy, but for now React itself does not
-	   * directly have this concept of the union of prevChildren and nextChildren
-	   * so we implement it here.
-	   *
-	   * @param {object} prev prev children as returned from
-	   * `ReactTransitionChildMapping.getChildMapping()`.
-	   * @param {object} next next children as returned from
-	   * `ReactTransitionChildMapping.getChildMapping()`.
-	   * @return {object} a key set that contains all keys in `prev` and all keys
-	   * in `next` in a reasonable order.
-	   */
-	  mergeChildMappings: function (prev, next) {
-	    prev = prev || {};
-	    next = next || {};
-	
-	    function getValueForKey(key) {
-	      if (next.hasOwnProperty(key)) {
-	        return next[key];
-	      } else {
-	        return prev[key];
-	      }
-	    }
-	
-	    // For each key of `next`, the list of keys to insert before that key in
-	    // the combined list
-	    var nextKeysPending = {};
-	
-	    var pendingKeys = [];
-	    for (var prevKey in prev) {
-	      if (next.hasOwnProperty(prevKey)) {
-	        if (pendingKeys.length) {
-	          nextKeysPending[prevKey] = pendingKeys;
-	          pendingKeys = [];
-	        }
-	      } else {
-	        pendingKeys.push(prevKey);
-	      }
-	    }
-	
-	    var i;
-	    var childMapping = {};
-	    for (var nextKey in next) {
-	      if (nextKeysPending.hasOwnProperty(nextKey)) {
-	        for (i = 0; i < nextKeysPending[nextKey].length; i++) {
-	          var pendingNextKey = nextKeysPending[nextKey][i];
-	          childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
-	        }
-	      }
-	      childMapping[nextKey] = getValueForKey(nextKey);
-	    }
-	
-	    // Finally, add the keys which didn't appear before any key in `next`
-	    for (i = 0; i < pendingKeys.length; i++) {
-	      childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
-	    }
-	
-	    return childMapping;
-	  }
-	};
-	
-	module.exports = ReactTransitionChildMapping;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
-
-/***/ },
-/* 191 */
-/*!******************************************************!*\
-  !*** ./~/react-addons-css-transition-group/index.js ***!
-  \******************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(/*! react/lib/ReactCSSTransitionGroup */ 192);
-
-/***/ },
-/* 192 */
-/*!************************************************!*\
-  !*** ./~/react/lib/ReactCSSTransitionGroup.js ***!
-  \************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactCSSTransitionGroup
-	 */
-	
-	'use strict';
-	
-	var _assign = __webpack_require__(/*! object-assign */ 4);
-	
-	var React = __webpack_require__(/*! ./React */ 2);
-	
-	var ReactTransitionGroup = __webpack_require__(/*! ./ReactTransitionGroup */ 189);
-	var ReactCSSTransitionGroupChild = __webpack_require__(/*! ./ReactCSSTransitionGroupChild */ 193);
-	
-	function createTransitionTimeoutPropValidator(transitionType) {
-	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
-	  var enabledPropName = 'transition' + transitionType;
-	
-	  return function (props) {
-	    // If the transition is enabled
-	    if (props[enabledPropName]) {
-	      // If no timeout duration is provided
-	      if (props[timeoutPropName] == null) {
-	        return new Error(timeoutPropName + ' wasn\'t supplied to ReactCSSTransitionGroup: ' + 'this can cause unreliable animations and won\'t be supported in ' + 'a future version of React. See ' + 'https://fb.me/react-animation-transition-group-timeout for more ' + 'information.');
-	
-	        // If the duration isn't a number
-	      } else if (typeof props[timeoutPropName] !== 'number') {
-	          return new Error(timeoutPropName + ' must be a number (in milliseconds)');
-	        }
-	    }
-	  };
-	}
-	
-	/**
-	 * An easy way to perform CSS transitions and animations when a React component
-	 * enters or leaves the DOM.
-	 * See https://facebook.github.io/react/docs/animation.html#high-level-api-reactcsstransitiongroup
-	 */
-	var ReactCSSTransitionGroup = React.createClass({
-	  displayName: 'ReactCSSTransitionGroup',
-	
-	  propTypes: {
-	    transitionName: ReactCSSTransitionGroupChild.propTypes.name,
-	
-	    transitionAppear: React.PropTypes.bool,
-	    transitionEnter: React.PropTypes.bool,
-	    transitionLeave: React.PropTypes.bool,
-	    transitionAppearTimeout: createTransitionTimeoutPropValidator('Appear'),
-	    transitionEnterTimeout: createTransitionTimeoutPropValidator('Enter'),
-	    transitionLeaveTimeout: createTransitionTimeoutPropValidator('Leave')
-	  },
-	
-	  getDefaultProps: function () {
-	    return {
-	      transitionAppear: false,
-	      transitionEnter: true,
-	      transitionLeave: true
-	    };
-	  },
-	
-	  _wrapChild: function (child) {
-	    // We need to provide this childFactory so that
-	    // ReactCSSTransitionGroupChild can receive updates to name, enter, and
-	    // leave while it is leaving.
-	    return React.createElement(ReactCSSTransitionGroupChild, {
-	      name: this.props.transitionName,
-	      appear: this.props.transitionAppear,
-	      enter: this.props.transitionEnter,
-	      leave: this.props.transitionLeave,
-	      appearTimeout: this.props.transitionAppearTimeout,
-	      enterTimeout: this.props.transitionEnterTimeout,
-	      leaveTimeout: this.props.transitionLeaveTimeout
-	    }, child);
-	  },
-	
-	  render: function () {
-	    return React.createElement(ReactTransitionGroup, _assign({}, this.props, { childFactory: this._wrapChild }));
-	  }
-	});
-	
-	module.exports = ReactCSSTransitionGroup;
-
-/***/ },
-/* 193 */
-/*!*****************************************************!*\
-  !*** ./~/react/lib/ReactCSSTransitionGroupChild.js ***!
-  \*****************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactCSSTransitionGroupChild
-	 */
-	
-	'use strict';
-	
-	var React = __webpack_require__(/*! ./React */ 2);
-	var ReactDOM = __webpack_require__(/*! ./ReactDOM */ 39);
-	
-	var CSSCore = __webpack_require__(/*! fbjs/lib/CSSCore */ 194);
-	var ReactTransitionEvents = __webpack_require__(/*! ./ReactTransitionEvents */ 195);
-	
-	var onlyChild = __webpack_require__(/*! ./onlyChild */ 32);
-	
-	var TICK = 17;
-	
-	var ReactCSSTransitionGroupChild = React.createClass({
-	  displayName: 'ReactCSSTransitionGroupChild',
-	
-	  propTypes: {
-	    name: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.shape({
-	      enter: React.PropTypes.string,
-	      leave: React.PropTypes.string,
-	      active: React.PropTypes.string
-	    }), React.PropTypes.shape({
-	      enter: React.PropTypes.string,
-	      enterActive: React.PropTypes.string,
-	      leave: React.PropTypes.string,
-	      leaveActive: React.PropTypes.string,
-	      appear: React.PropTypes.string,
-	      appearActive: React.PropTypes.string
-	    })]).isRequired,
-	
-	    // Once we require timeouts to be specified, we can remove the
-	    // boolean flags (appear etc.) and just accept a number
-	    // or a bool for the timeout flags (appearTimeout etc.)
-	    appear: React.PropTypes.bool,
-	    enter: React.PropTypes.bool,
-	    leave: React.PropTypes.bool,
-	    appearTimeout: React.PropTypes.number,
-	    enterTimeout: React.PropTypes.number,
-	    leaveTimeout: React.PropTypes.number
-	  },
-	
-	  transition: function (animationType, finishCallback, userSpecifiedDelay) {
-	    var node = ReactDOM.findDOMNode(this);
-	
-	    if (!node) {
-	      if (finishCallback) {
-	        finishCallback();
-	      }
-	      return;
-	    }
-	
-	    var className = this.props.name[animationType] || this.props.name + '-' + animationType;
-	    var activeClassName = this.props.name[animationType + 'Active'] || className + '-active';
-	    var timeout = null;
-	
-	    var endListener = function (e) {
-	      if (e && e.target !== node) {
-	        return;
-	      }
-	
-	      clearTimeout(timeout);
-	
-	      CSSCore.removeClass(node, className);
-	      CSSCore.removeClass(node, activeClassName);
-	
-	      ReactTransitionEvents.removeEndEventListener(node, endListener);
-	
-	      // Usually this optional callback is used for informing an owner of
-	      // a leave animation and telling it to remove the child.
-	      if (finishCallback) {
-	        finishCallback();
-	      }
-	    };
-	
-	    CSSCore.addClass(node, className);
-	
-	    // Need to do this to actually trigger a transition.
-	    this.queueClassAndNode(activeClassName, node);
-	
-	    // If the user specified a timeout delay.
-	    if (userSpecifiedDelay) {
-	      // Clean-up the animation after the specified delay
-	      timeout = setTimeout(endListener, userSpecifiedDelay);
-	      this.transitionTimeouts.push(timeout);
-	    } else {
-	      // DEPRECATED: this listener will be removed in a future version of react
-	      ReactTransitionEvents.addEndEventListener(node, endListener);
-	    }
-	  },
-	
-	  queueClassAndNode: function (className, node) {
-	    this.classNameAndNodeQueue.push({
-	      className: className,
-	      node: node
-	    });
-	
-	    if (!this.timeout) {
-	      this.timeout = setTimeout(this.flushClassNameAndNodeQueue, TICK);
-	    }
-	  },
-	
-	  flushClassNameAndNodeQueue: function () {
-	    if (this.isMounted()) {
-	      this.classNameAndNodeQueue.forEach(function (obj) {
-	        CSSCore.addClass(obj.node, obj.className);
-	      });
-	    }
-	    this.classNameAndNodeQueue.length = 0;
-	    this.timeout = null;
-	  },
-	
-	  componentWillMount: function () {
-	    this.classNameAndNodeQueue = [];
-	    this.transitionTimeouts = [];
-	  },
-	
-	  componentWillUnmount: function () {
-	    if (this.timeout) {
-	      clearTimeout(this.timeout);
-	    }
-	    this.transitionTimeouts.forEach(function (timeout) {
-	      clearTimeout(timeout);
-	    });
-	
-	    this.classNameAndNodeQueue.length = 0;
-	  },
-	
-	  componentWillAppear: function (done) {
-	    if (this.props.appear) {
-	      this.transition('appear', done, this.props.appearTimeout);
-	    } else {
-	      done();
-	    }
-	  },
-	
-	  componentWillEnter: function (done) {
-	    if (this.props.enter) {
-	      this.transition('enter', done, this.props.enterTimeout);
-	    } else {
-	      done();
-	    }
-	  },
-	
-	  componentWillLeave: function (done) {
-	    if (this.props.leave) {
-	      this.transition('leave', done, this.props.leaveTimeout);
-	    } else {
-	      done();
-	    }
-	  },
-	
-	  render: function () {
-	    return onlyChild(this.props.children);
-	  }
-	});
-	
-	module.exports = ReactCSSTransitionGroupChild;
-
-/***/ },
-/* 194 */
-/*!*******************************!*\
-  !*** ./~/fbjs/lib/CSSCore.js ***!
-  \*******************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-	
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @typechecks
-	 */
-	
-	var invariant = __webpack_require__(/*! ./invariant */ 8);
-	
-	/**
-	 * The CSSCore module specifies the API (and implements most of the methods)
-	 * that should be used when dealing with the display of elements (via their
-	 * CSS classes and visibility on screen. It is an API focused on mutating the
-	 * display and not reading it as no logical state should be encoded in the
-	 * display of elements.
-	 */
-	
-	/* Slow implementation for browsers that don't natively support .matches() */
-	function matchesSelector_SLOW(element, selector) {
-	  var root = element;
-	  while (root.parentNode) {
-	    root = root.parentNode;
-	  }
-	
-	  var all = root.querySelectorAll(selector);
-	  return Array.prototype.indexOf.call(all, element) !== -1;
-	}
-	
-	var CSSCore = {
-	
-	  /**
-	   * Adds the class passed in to the element if it doesn't already have it.
-	   *
-	   * @param {DOMElement} element the element to set the class on
-	   * @param {string} className the CSS className
-	   * @return {DOMElement} the element passed in
-	   */
-	  addClass: function addClass(element, className) {
-	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSSCore.addClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(false) : void 0;
-	
-	    if (className) {
-	      if (element.classList) {
-	        element.classList.add(className);
-	      } else if (!CSSCore.hasClass(element, className)) {
-	        element.className = element.className + ' ' + className;
-	      }
-	    }
-	    return element;
-	  },
-	
-	  /**
-	   * Removes the class passed in from the element
-	   *
-	   * @param {DOMElement} element the element to set the class on
-	   * @param {string} className the CSS className
-	   * @return {DOMElement} the element passed in
-	   */
-	  removeClass: function removeClass(element, className) {
-	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSSCore.removeClass takes only a single class name. "%s" contains ' + 'multiple classes.', className) : invariant(false) : void 0;
-	
-	    if (className) {
-	      if (element.classList) {
-	        element.classList.remove(className);
-	      } else if (CSSCore.hasClass(element, className)) {
-	        element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)', 'g'), '$1').replace(/\s+/g, ' ') // multiple spaces to one
-	        .replace(/^\s*|\s*$/g, ''); // trim the ends
-	      }
-	    }
-	    return element;
-	  },
-	
-	  /**
-	   * Helper to add or remove a class from an element based on a condition.
-	   *
-	   * @param {DOMElement} element the element to set the class on
-	   * @param {string} className the CSS className
-	   * @param {*} bool condition to whether to add or remove the class
-	   * @return {DOMElement} the element passed in
-	   */
-	  conditionClass: function conditionClass(element, className, bool) {
-	    return (bool ? CSSCore.addClass : CSSCore.removeClass)(element, className);
-	  },
-	
-	  /**
-	   * Tests whether the element has the class specified.
-	   *
-	   * @param {DOMNode|DOMWindow} element the element to check the class on
-	   * @param {string} className the CSS className
-	   * @return {boolean} true if the element has the class, false if not
-	   */
-	  hasClass: function hasClass(element, className) {
-	    !!/\s/.test(className) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'CSS.hasClass takes only a single class name.') : invariant(false) : void 0;
-	    if (element.classList) {
-	      return !!className && element.classList.contains(className);
-	    }
-	    return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
-	  },
-	
-	  /**
-	   * Tests whether the element matches the selector specified
-	   *
-	   * @param {DOMNode|DOMWindow} element the element that we are querying
-	   * @param {string} selector the CSS selector
-	   * @return {boolean} true if the element matches the selector, false if not
-	   */
-	  matchesSelector: function matchesSelector(element, selector) {
-	    var matchesImpl = element.matches || element.webkitMatchesSelector || element.mozMatchesSelector || element.msMatchesSelector || function (s) {
-	      return matchesSelector_SLOW(element, s);
-	    };
-	    return matchesImpl.call(element, selector);
-	  }
-	
-	};
-	
-	module.exports = CSSCore;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
-
-/***/ },
-/* 195 */
-/*!**********************************************!*\
-  !*** ./~/react/lib/ReactTransitionEvents.js ***!
-  \**********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule ReactTransitionEvents
-	 */
-	
-	'use strict';
-	
-	var ExecutionEnvironment = __webpack_require__(/*! fbjs/lib/ExecutionEnvironment */ 53);
-	
-	var getVendorPrefixedEventName = __webpack_require__(/*! ./getVendorPrefixedEventName */ 116);
-	
-	var endEvents = [];
-	
-	function detectEvents() {
-	  var animEnd = getVendorPrefixedEventName('animationend');
-	  var transEnd = getVendorPrefixedEventName('transitionend');
-	
-	  if (animEnd) {
-	    endEvents.push(animEnd);
-	  }
-	
-	  if (transEnd) {
-	    endEvents.push(transEnd);
-	  }
-	}
-	
-	if (ExecutionEnvironment.canUseDOM) {
-	  detectEvents();
-	}
-	
-	// We use the raw {add|remove}EventListener() call because EventListener
-	// does not know how to remove event listeners and we really should
-	// clean up. Also, these events are not triggered in older browsers
-	// so we should be A-OK here.
-	
-	function addEventListener(node, eventName, eventListener) {
-	  node.addEventListener(eventName, eventListener, false);
-	}
-	
-	function removeEventListener(node, eventName, eventListener) {
-	  node.removeEventListener(eventName, eventListener, false);
-	}
-	
-	var ReactTransitionEvents = {
-	  addEndEventListener: function (node, eventListener) {
-	    if (endEvents.length === 0) {
-	      // If CSS transitions are not supported, trigger an "end animation"
-	      // event immediately.
-	      window.setTimeout(eventListener, 0);
-	      return;
-	    }
-	    endEvents.forEach(function (endEvent) {
-	      addEventListener(node, endEvent, eventListener);
-	    });
-	  },
-	
-	  removeEndEventListener: function (node, eventListener) {
-	    if (endEvents.length === 0) {
-	      return;
-	    }
-	    endEvents.forEach(function (endEvent) {
-	      removeEventListener(node, endEvent, eventListener);
-	    });
-	  }
-	};
-	
-	module.exports = ReactTransitionEvents;
-
-/***/ },
-/* 196 */
-/*!*******************************************************************!*\
-  !*** ./react_assets/js/questionAsker/BackgroundImageContainer.js ***!
-  \*******************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(/*! react */ 1);
-	
-	var BackgroundImageContainer = React.createClass({
-		displayName: "BackgroundImageContainer",
-	
-		render: function () {
-			var fadedDiv;
-			if (this.props.hintActive) {
-				fadedDiv = React.createElement("div", { className: "bgFadeOverlay" });
-			} else {
-				fadedDiv = React.createElement("div", null);
-			}
-			return React.createElement(
-				"div",
-				null,
-				React.createElement("img", { className: "sceneBG", src: this.props.bgImage }),
-				fadedDiv
-			);
-		}
-	});
-	
-	module.exports = BackgroundImageContainer;
-
-/***/ },
-/* 197 */
-/*!************************************************************!*\
-  !*** ./react_assets/js/questionAsker/FeedbackContainer.js ***!
-  \************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(/*! react */ 1);
-	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 198);
-	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 199);
-	var MiriIcon = __webpack_require__(/*! ./components/MiriIcon */ 200);
-	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 201);
-	
-	var FeedbackContainer = React.createClass({
-		displayName: 'FeedbackContainer',
-	
-		getInitialState: function () {
-			return {
-				hintClickDisable: false,
-				suggestionMode: false,
-				suggestionSubmitted: false
-			};
-		},
-		// Suggestions are activated when users want to add their answer to database
-		activateSuggestionMode: function () {
-			console.log("Suggestion Mode Activated");
-			this.setState({ suggestionMode: true });
-		},
-		submitSuggestion: function () {
-			var that = this;
-			console.log("Suggestion submitted");
-			this.setState({ suggestionMode: false });
-			this.setState({ suggestionSubmitted: true });
-			setTimeout(function () {
-				that.setState({ suggestionSubmitted: false });
-			}, 3000);
-		},
-		handleHintAudioClick: function () {
-			that = this;
-	
-			// Disable clicking on hint to play voice
-			this.setState({ hintClickDisable: true });
-	
-			// PLay audio from hint
-			this.props.onHintAudio(this.props.feedbackText);
-	
-			// Disable clicking on hint for some time before re-enabling
-			setTimeout(function () {
-				that.setState({
-					hintClickDisable: false
-				});
-			}, 1000);
-		},
-		render: function () {
-			// Show Hint when hints are active
-			// Change Miri's icon depending on type of hint/feedback
-			var hintDivClass;
-			var hintTemplateText;
-			var miriIconClass = "miriIcon";
-			var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
-			var hintDivClass = "hintDiv";
-	
-			// Case of hint being given
-			if (this.props.hintActive === true) {
-				hintTemplateText = React.createElement(
-					'p',
-					{ className: 'hintText' },
-					React.createElement(
-						'span',
-						null,
-						'Maybe you can say: '
-					),
-					React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText })
-				);
-				miriIconClass += " miriGlow";
-			}
-	
-			// User answers wrong, provide feedback
-			else if (this.props.answerFeedbackActive === true) {
-					// They comfirmed a suggestion...
-					if (this.state.suggestionSubmitted) {
-						hintTemplateText = React.createElement(
-							'p',
-							{ className: 'hintText' },
-							React.createElement(
-								'span',
-								null,
-								'I will add a request to add it to acceptable answers!'
-							)
-						);
-					}
-					// They pressed first suggestion submit and want to confirm a suggestion
-					else if (this.state.suggestionMode) {
-							hintTemplateText = React.createElement(
-								'p',
-								{ className: 'hintText' },
-								React.createElement(
-									'span',
-									null,
-									'Suggest '
-								),
-								React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText }),
-								React.createElement(
-									'span',
-									null,
-									' as a good answer?'
-								)
-							);
-							hintDivClass += " hintDivGold";
-						}
-						// All other cases
-						else {
-								hintTemplateText = React.createElement(
-									'p',
-									{ className: 'hintText' },
-									React.createElement(
-										'span',
-										null,
-										'I heard you say: '
-									),
-									React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText })
-								);
-							}
-					miriIconClass += " miriGlow";
-				} else {
-					hintDivClass = "hintDiv hidden";
-				}
-			// If hintClick disabled, span should do nothing, otherwise, it should play audio
-			return React.createElement(
-				'div',
-				{ className: 'bottomNavBar' },
-				React.createElement(
-					'div',
-					{ className: 'row-fluid' },
-					React.createElement(
-						'div',
-						{ className: 'buttonLine' },
-						React.createElement(CoinMeter, { coins: this.props.coins }),
-						React.createElement(
-							'p',
-							{ className: 'locationText' },
-							React.createElement(
-								'i',
-								null,
-								this.props.locationTextEnglish,
-								' '
-							),
-							'(',
-							this.props.locationTextChinese,
-							')'
-						),
-						React.createElement(
-							'div',
-							{ className: hintDivClass },
-							React.createElement(HintIcon, {
-								hintActive: this.props.hintActive,
-								answerFeedbackActive: this.props.answerFeedbackActive,
-								suggestionMode: this.state.suggestionMode,
-								suggestionSubmitted: this.state.suggestionSubmitted,
-								activateSuggestionMode: this.activateSuggestionMode,
-								submitSuggestion: this.submitSuggestion }),
-							hintTemplateText
-						),
-						React.createElement(MiriIcon, { miriClass: miriIconClass, miriIconSrc: this.props.miriIconSrc })
-					)
-				)
-			);
-		}
-	});
-	
-	module.exports = FeedbackContainer;
-
-/***/ },
-/* 198 */
-/*!********************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/SpeechableSpan.js ***!
-  \********************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	
-	function SpeechableSpan(props) {
-		return React.createElement(
-			"span",
-			{ className: "speechableSpan",
-				onClick: props.clickFunction },
-			props.feedbackText
-		);
-	}
-	
-	module.exports = SpeechableSpan;
-
-/***/ },
-/* 199 */
-/*!***************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/CoinMeter.js ***!
-  \***************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	
-	function CoinMeter(props) {
-		return React.createElement(
-			"div",
-			{ className: "coinDiv" },
-			React.createElement("img", { className: "coinIcon", src: "/static/images/UI/Icon_coins-01.png" }),
-			React.createElement(
-				"div",
-				{ className: "coinCount" },
-				props.coins
-			)
-		);
-	}
-	
-	module.exports = CoinMeter;
-
-/***/ },
 /* 200 */
 /*!**************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
-  \**************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	
-	function MiriIcon(props) {
-		return React.createElement(
-			'div',
-			null,
-			React.createElement('img', { className: props.miriClass, src: props.miriIconSrc })
-		);
-	}
-	
-	module.exports = MiriIcon;
-
-/***/ },
-/* 201 */
-/*!**************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/HintIcon.js ***!
+  !*** ./react_assets/js/questionAsker/components/TaskText.js ***!
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 1);
 	
-	var HintIcon = React.createClass({
-		displayName: "HintIcon",
+	var TaskText = React.createClass({
+		displayName: "TaskText",
 	
 		render: function () {
-			var hintIconDiv;
-			if (this.props.hintActive) {
-				hintIconDiv = React.createElement(
-					"div",
-					null,
-					React.createElement("img", { className: "hintIconImage payHintBg", src: "static/images/UI/ICON_payforhelp_bg-01.png" }),
-					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_qmark-01.png" }),
-					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_Big_sparkle-01.png" }),
-					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_L_spark-01.png" }),
-					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_R_sparkle-01.png" })
-				);
+			var displayText;
+			if (this.props.correctAnswerState && this.props.currentTaskIndex === this.props.index) {
+				displayText = "很好! 答对了!";
+			} else {
+				displayText = this.props.taskTextToDisplay;
 			}
-			// User has confirmed a suggestion
-			else if (this.props.suggestionSubmitted) {
-					hintIconDiv = React.createElement("div", null);
-				}
-				// User has answered, but not clicked to add a suggestion
-				else if (this.props.answerFeedbackActive && !this.props.suggestionMode) {
-						hintIconDiv = React.createElement(
-							"div",
-							null,
-							React.createElement(
-								"div",
-								{ className: "suggestNewPhraseButton promptSuggestNewPhraseButton",
-									onClick: this.props.activateSuggestionMode },
-								React.createElement("span", { className: "glyphicon glyphicon-plus", "aria-hidden": "true" })
-							)
-						);
-					}
-					// User answered and wants to add suggestion, prompt confirm suggestion
-					else if (this.props.answerFeedbackActive && this.props.suggestionMode) {
-							hintIconDiv = React.createElement(
-								"div",
-								null,
-								React.createElement(
-									"div",
-									{ className: "suggestNewPhraseButton confirmSuggestNewPhraseButton",
-										onClick: this.props.submitSuggestion },
-									React.createElement("span", { className: "glyphicon glyphicon-plus", "aria-hidden": "true" })
-								)
-							);
-						}
-	
 			return React.createElement(
 				"div",
-				{ className: "hintIcon" },
-				hintIconDiv
+				{
+					className: "taskText",
+					"data-index": this.props.index,
+					onClick: () => this.props.onSpeechInput(this.props.index) },
+				displayText
 			);
 		}
 	});
 	
-	module.exports = HintIcon;
-
-/***/ },
-/* 202 */
-/*!************************************************!*\
-  !*** ./react_assets/js/helpers/SpeechSynth.js ***!
-  \************************************************/
-/***/ function(module, exports) {
-
-	var speechSynth = {
-		// Initialize with proper language, return "voicepack" for language
-		init: function (lang) {
-			// Temporarily stores 
-			var voices = [];
-	
-			// Get current language
-			var synthLang = "";
-	
-			// Convert the google language to the correct voice pack language
-			if (lang == "es-es") {
-				synthLang = "Monica";
-			} else if (lang === "cmn-Hant-TW" || "zh-zh" || "zh-CN") {
-				synthLang = "Google 普通话（中国大陆）";
-			}
-	
-			// Set the voice of the robot to be the correct language from browser
-			voicePack = this.findVoice(synthLang);
-			return voicePack;
-		},
-		findVoice: function (langToMatch) {
-			var voiceData;
-			var voices = window.speechSynthesis.getVoices();
-			for (i = 0; i < voices.length; i++) {
-				if (voices[i].name === langToMatch) {
-					voiceData = voices[i];
-				}
-			}
-			return voiceData;
-		},
-		play: function (textToSay, voicePack) {
-			var utterThis = new SpeechSynthesisUtterance(textToSay);
-			utterThis.voice = voicePack;
-			utterThis.rate = 0.8;
-			console.log(utterThis.voice);
-			window.speechSynthesis.speak(utterThis);
-		}
-	};
-	
-	module.exports = speechSynth;
-
-/***/ },
-/* 203 */
-/*!**************************************************************!*\
-  !*** ./react_assets/js/questionAsker/TransitionContainer.js ***!
-  \**************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(/*! react */ 1);
-	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
-	var ReactTransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 188);
-	var MyBox = React.createClass({
-	    displayName: 'MyBox',
-	
-	    show: function (callback) {
-	        var node = ReactDOM.findDOMNode(this);
-	        TweenMax.fromTo(node, 2, { width: 100, height: 100, backgroundColor: '#0cc', scale: 0.2, opacity: 0, rotation: -180 }, { width: 100, height: 100, backgroundColor: '#0cc', scale: 1, opacity: 1, rotation: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
-	    },
-	    hide: function (callback) {
-	        var node = ReactDOM.findDOMNode(this);
-	        TweenMax.to(node, 2, { width: 100, height: 100, backgroundColor: '#cc0', scale: 0.2, opacity: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
-	    },
-	    componentWillAppear: function (didAppearCallback) {
-	        console.log('MyBox.componentWillAppear');
-	        this.show(didAppearCallback);
-	    },
-	    componentDidAppear: function () {
-	        console.log('MyBox.componentDidAppear');
-	    },
-	    componentWillEnter: function (didEnterCallback) {
-	        console.log('MyBox.componentWillEnter');
-	        this.show(didEnterCallback);
-	    },
-	    componentDidEnter: function () {
-	        console.log('MyBox.componentDidEnter');
-	    },
-	    componentWillLeave: function (didLeaveCallback) {
-	        console.log('MyBox.componentWillLeave');
-	        this.hide(didLeaveCallback);
-	    },
-	    componentDidLeave: function () {
-	        console.log('MyBox.componentDidLeave');
-	    },
-	    componentDidMount: function () {
-	        console.log('MyBox.componentDidMount');
-	    },
-	    componentWillUnmount: function () {
-	        console.log('MyBox.componentWillUnmount');
-	    },
-	    render: function () {
-	        return React.createElement(
-	            'div',
-	            null,
-	            ' '
-	        );
-	    }
-	});
-	var TransitionContainer = React.createClass({
-	    displayName: 'TransitionContainer',
-	
-	    getInitialState: function () {
-	        return { isShowing: false };
-	    },
-	    onButtonClicked: function () {
-	        this.setState({ isShowing: !this.state.isShowing });
-	    },
-	    render: function () {
-	        var myBox = this.state.isShowing ? React.createElement(MyBox, { key: 'myBox' }) : '';
-	        return React.createElement(
-	            'div',
-	            { id: 'container' },
-	            React.createElement(MyButton, { onButtonClicked: this.onButtonClicked }),
-	            React.createElement(
-	                ReactTransitionGroup,
-	                { transitionName: 'hellotransition' },
-	                myBox
-	            )
-	        );
-	    }
-	});
-	var MyButton = React.createClass({
-	    displayName: 'MyButton',
-	
-	    render: function () {
-	        return React.createElement(
-	            'button',
-	            { onClick: this.props.onButtonClicked },
-	            'Click Me'
-	        );
-	    }
-	});
-	
-	module.exports = TransitionContainer;
+	module.exports = TaskText;
 
 /***/ }
 /******/ ]);

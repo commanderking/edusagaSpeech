@@ -6,8 +6,9 @@ var TaskContainer = require('./questionAsker/TaskContainer');
 var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer');
 var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
-var TransitionContainer = require('./questionAsker/TransitionContainer')
-const IMAGE_BASE_PATH = './static/images/';
+var TransitionContainer = require('./questionAsker/TransitionContainer');
+const Constants = require('./helpers/Constants.js');
+// const IMAGE_BASE_PATH = './static/images/';
 
 var QuestionAsker = React.createClass({
 	// feedbackText can be hintText from clicking hint or feedback on what user said
@@ -89,7 +90,7 @@ var QuestionAsker = React.createClass({
 			this.playSound(newSceneData.character.tasks[taskIndex].soundID);
 
 			// Adjust character image
-			newSceneData.currentImage = IMAGE_BASE_PATH + newSceneData.character.tasks[taskIndex].emotion;
+			newSceneData.currentImage = newSceneData.character.tasks[taskIndex].emotion;
 
 			// Show response text
 			newSceneData.currentDialog = newSceneData.character.tasks[taskIndex].response;
@@ -159,7 +160,7 @@ var QuestionAsker = React.createClass({
 			this.turnMicStateOff();
 
 			// set image to confused
-			newSceneData.currentImage = IMAGE_BASE_PATH + this.state.sceneData.character.emotions.confused;
+			newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
 			// Grab random confused phrase
 		
 			var confusedPhrasesArray = newSceneData.character.confusedPhrases;
@@ -189,7 +190,7 @@ var QuestionAsker = React.createClass({
 
 			setTimeout(function() {
 				// Reset character image to default 
-				newSceneData.currentImage = IMAGE_BASE_PATH + that.state.sceneData.character.emotions.default;
+				newSceneData.currentImage = that.state.sceneData.character.emotions.default;
 				that.setState({wrongAnswerState: false});
 				that.setState({sceneData: newSceneData});
 			}, 3000);

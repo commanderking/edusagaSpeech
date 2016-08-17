@@ -1,11 +1,13 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var Constants = require('../helpers/Constants.js');
 
 var CharacterContainer = React.createClass({
 	render: function() {
 		var scenarioData = this.props.scenarioData;
 		var scenarioIndex = this.props.scenarioIndex;
 		var charImageDiv;
+		var charImgSrc = Constants.IMAGE_PATH + this.props.charImage;
 		if (this.props.scenarioOn === true) {
 			charImageDiv =
 			(
@@ -26,7 +28,7 @@ var CharacterContainer = React.createClass({
 			charImageDiv = 
 			(
 				<div className="characterImageDiv">
-					<img className="charImage" src={this.props.charImage} />
+					<img className="charImage" src={charImgSrc} />
 				</div>
 			)
 		}

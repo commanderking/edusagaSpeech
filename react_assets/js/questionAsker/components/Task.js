@@ -1,12 +1,10 @@
 var React = require('react')
 var PropTypes = React.PropTypes;
 var TaskIcon = require('./TaskIcon')
+var TaskText = require('./TaskText');
 
 
 var Task = React.createClass({
-	componentDidMount: function() {
-		console.log(this.props.index);
-	},
 	render: function() {
 		var hintClassName;
 		var taskDivClass;
@@ -49,12 +47,13 @@ var Task = React.createClass({
 						micActive = {this.props.micActive} 
 						index = {this.props.index} 
 						currentTaskIndex = {this.props.currentTaskIndex} />
-					<div 
+					<TaskText 
 						className="taskText" 
-						data-index={this.props.index} 
-						onClick={ () => this.props.onSpeechInput(this.props.index) }>
-							{this.props.taskName}
-					</div>
+						index={this.props.index} 
+						currentTaskIndex = {this.props.currentTaskIndex}
+						onSpeechInput = {this.props.onSpeechInput}
+						taskTextToDisplay = {this.props.taskName} 
+						correctAnswerState={this.props.correctAnswerState} />
 					{hintDiv}
 				</div>
 			</li>

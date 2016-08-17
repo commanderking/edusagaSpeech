@@ -7,21 +7,7 @@ var Transitions = require('../../helpers/Transitions.js');
 var TaskIconImage = React.createClass({
 	componentDidMount: function() {
 		var node = ReactDOM.findDOMNode(this);
-		if (this.props.transition === "activateTaskMic") {
-			Transitions.activateTask.mic(node);
-		}
-	},
-	componentWillUnmount: function() {
-		console.log("Unmount");
-		var node = ReactDOM.findDOMNode(this);
-		console.log(node);
-		if (this.props.transition === "taskCorrectMicFade") {
-			Transitions.activateTask.mic(node);
-		}
-	},
-	componentDidUpdate: function() {
-		var node = ReactDOM.findDOMNode(this);
-		console.log("Component Mounted");
+		console.log("Component mounted");
 		console.log(node);
 
 		switch(this.props.transition) {
@@ -31,6 +17,27 @@ var TaskIconImage = React.createClass({
 			case "activateTaskStar": 
 				Transitions.activateTask.star(node);
 				break;
+			case "taskCorrectMic":
+				Transitions.taskCorrect.mic(node);
+				break;
+			case "taskCorrectStar":
+				Transitions.taskCorrect.star(node);
+				break;
+			case "taskCorrectCoins":
+				Transitions.taskCorrect.coins(node);
+				break;
+			case "taskWrongStar":
+				Transitions.taskWrong.star(node);
+				break;
+			case "taskWrongQuestionMark":
+				Transitions.taskWrong.questionMark(node);
+			default: 
+				break;
+		}
+	},
+	componentDidUpdate: function() {
+		var node = ReactDOM.findDOMNode(this);
+		switch(this.props.transition) {
 			case "taskCorrectMic":
 				Transitions.taskCorrect.mic(node);
 				break;

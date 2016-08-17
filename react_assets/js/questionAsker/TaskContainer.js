@@ -2,8 +2,6 @@ var React = require('react');
 var Task = require('./components/Task');
 var PropTypes = React.PropTypes;
 var SpeechRecognition = require('../helpers/SpeechRecognition');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-var TransitionsCSS = require('../../../static/css/transitions.css');
 
 var TaskContainer = React.createClass({
 	getInitialState: function() {

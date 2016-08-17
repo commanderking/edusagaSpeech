@@ -23,8 +23,9 @@ var taskCorrect = {
 			.to(DOMnode, 1, {rotation:"360", scale: 0});
 	},
 	mic: function(DOMnode) {
-		var tl = new TimelineMax({delay: 1});
-		tl.to(DOMnode, 1, {opacity: 0});
+		var tl = new TimelineMax();
+		tl.to(DOMnode, 0, {scale: 1.5})
+			.to(DOMnode, 2, {opacity: 0, scale: 0});
 	},
 	coins: function(DOMnode) {
 		var tl = new TimelineMax({delay: 1});
@@ -34,7 +35,25 @@ var taskCorrect = {
 	}
 }
 
-var Transitions = {
+var taskWrong = {
+	star: function(DOMnode) {
+
+		var tl = new TimelineMax();
+		/*
+		tl.to(DOMnode, 1, {scale: 1.5})
+			.to(DOMnode, 1, {scale: 0});
+		*/
+		tl.fromTo(DOMnode, 1, {scale: 1.5}, {scale: 2.1})
+			.to(DOMnode, 1, {scale: 1.5});
+	},
+	questionMark: function(DOMnode) {
+		var tl = new TimelineMax();
+		tl.fromTo(DOMnode, 1, {scale: 1.5}, {scale: 2.1})
+			.to(DOMnode, 1, {scale: 1.5});
+	}
+}
+
+var referenceForNow = {
 	imageTransition: function(DOMnode, thisContext) {
 		TweenMax.fromTo(DOMnode, 2, 
 			{ width: 0, height: 0, scale: 0.2, opacity: 0, rotation: -180, left: -50 }, 
@@ -45,5 +64,6 @@ var Transitions = {
 
 module.exports = {
 	activateTask: activateTask,
-	taskCorrect: taskCorrect
+	taskCorrect: taskCorrect,
+	taskWrong: taskWrong
 };

@@ -1,7 +1,7 @@
 {
 	"score" : 0,
 	"currentCharName" : "",
-	"currentImage" : "/static/images/davidDefault.png",
+	"currentImage" : "characters/david/davidDefault.png",
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
 	"scenarioOn": false,
@@ -29,10 +29,10 @@
 			},
 			"emotions" : 
 			{
-				"default": "davidDefault.png",
-				"uncertain" : "davidUncertain.png",
-				"laughing" : "davidLaughing.png",
-				"confused" : "davidConfused.png"
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png"
 			},
 			"sounds" : 
 			[
@@ -118,7 +118,7 @@
 					"response" : "你好!",
 					"soundID" : "nihao",
 					"soundPath" : "david/nihao.ogg",
-					"emotion" : "davidLaughing.png",
+					"emotion" : "characters/david/davidLaughing.png",
 					"dialogNodeID" : 1,
 					"extensionTasks" : []
 				},
@@ -130,7 +130,7 @@
 					"correct" : false,
 					"response" : "非常好!",
 					"soundID" : "feichanghao",
-					"emotion" : "davidLaughing.png",
+					"emotion" : "characters/david/davidLaughing.png",
 					"dialogNodeID" : 2,
 					"extensionTasks" : 
 					[
@@ -140,9 +140,9 @@
 							"correct" : false,
 							"response" : "我叫张大伟.",
 							"soundID" : "wojiao",
-							"soundPath" : "david/wojiao.ogg",
+							"soundPath" : "characters/david/david/wojiao.ogg",
 							"dialogNodeID" : 3,
-							"emotion" : "davidDefault.png"
+							"emotion" : "characters/david/davidDefault.png"
 						},
 						{
 							"task" : "Ask for nationality", 
@@ -152,7 +152,7 @@
 							"soundID" : "nationality",
 							"soundPath" : "david/nationality.ogg",
 							"dialogNodeID" : 4,
-							"emotion" : "davidDefault.png"
+							"emotion" : "characters/david/davidDefault.png"
 						}, 
 						{
 							"task" : "Ask for age", 
@@ -161,7 +161,7 @@
 							"response" : "我十六岁.",
 							"soundID" : "age",
 							"soundPath" : "david/age.ogg",
-							"emotion" : "davidDefault.png",
+							"emotion" : "characters/david/davidDefault.png",
 							"dialogNodeID" : 5,
 							"extensionTasks" : 
 							[
@@ -173,7 +173,7 @@
 									"soundID" : "gotoSchool",
 									"soundPath" : "david/gotoSchool.ogg",
 									"dialogNodeID" : 6,
-									"emotion" : "davidDefault.png"
+									"emotion" : "characters/david/davidDefault.png"
 								},
 								{
 									"task" : "Ask for his Zodiac",
@@ -183,7 +183,7 @@
 									"soundID" : "zodiac",
 									"soundPath" : "david/zodiac.ogg",
 									"dialogNodeID" : 7,
-									"emotion" : "davidDefault.png"
+									"emotion" : "characters/david/davidDefault.png"
 								}
 							]
 						},
@@ -194,7 +194,7 @@
 							"response" : "我喜欢吃牛肉面.",
 							"soundID" : "foodLikes",
 							"soundPath" : "david/foodLikes.ogg",
-							"emotion" : "davidLaughing.png",
+							"emotion" : "characters/david/davidLaughing.png",
 							"dialogNodeID" : 8,
 							"extensionTasks" : 
 							[
@@ -207,7 +207,7 @@
 									"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
 									"soundID" : "zhenbang",
 									"soundPath" : "david/zhenbang.ogg",
-									"emotion" : "davidLaughing.png", 
+									"emotion" : "characters/david/davidLaughing.png", 
 									"dialogNodeID" : 9,
 									"extensionTasks" : []
 								},
@@ -221,7 +221,7 @@
 									"soundID" : "zhende",
 									"soundPath" : "david/zhende.ogg",
 									"dialogNodeID" : 10,
-									"emotion" : "davidLaughing.png"		
+									"emotion" : "characters/david/davidLaughing.png"		
 								}, 
 								{
 									"task" : "Ask what is his favorite drink",
@@ -230,7 +230,7 @@
 									"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
 									"soundID" : "favoriteDrink",
 									"soundPath" : "david/favoriteDrink.ogg",
-									"emotion" : "davidLaughing.png",
+									"emotion" : "characters/david/davidLaughing.png",
 									"dialogNodeID" : 11,
 									"extensionTasks" : 	
 									[
@@ -241,7 +241,7 @@
 											"response" : "我最喜欢打篮球和打乒乓球!",
 											"soundID" : "sportsLikes",
 											"soundPath" : "david/sportsLikes.ogg",
-											"emotion" : "davidLaughing.png",
+											"emotion" : "characters/david/davidLaughing.png",
 											"dialogNodeID" : 12,
 											"extensionTasks" : []						
 										},
@@ -252,7 +252,7 @@
 											"response" : "我最喜欢春天， 可是我不喜欢冬天",
 											"soundID" : "seasonLikes",
 											"soundPath" : "david/seasonLikes.ogg",
-											"emotion" : "davdiDefault.png",
+											"emotion" : "characters/david/davdiDefault.png",
 											"dialogNodeID" : 13,
 											"extensionTasks" : 	[]		
 										}
