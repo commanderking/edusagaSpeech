@@ -29,7 +29,7 @@ var QuestionAsker = React.createClass({
 	},
 	loadSceneData: function() {
 		var that = this;
-		$.getJSON("./static/data/demo" + demoLanguage + ".json", function(data) {})
+		$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function(data) {})
 			.success(function(data) {
 				that.setState({
 					sceneData: data
@@ -59,25 +59,39 @@ var QuestionAsker = React.createClass({
 	checkAnswer: function(userAnswer, taskIndex) {
 		var that = this;
 		var correctAnswer = false;
+		var responseSoundID;
+		var possibleAnswerIndex;
 
 		// Trick to get new instance of sceneData, to not alter the origial state
 		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 		var allCurrentTasks = this.state.sceneData.character.tasks;
 		var currentTaskData = allCurrentTasks[taskIndex];
-		var possibleCorrectAnswers = currentTaskData.possibilities;
+		var possibleCorrectAnswers = currentTaskData.possibleAnswers;
 
 		// Check if user's answers contains any of the possible answers
 		if (currentTaskData.completeMatchOnly === true) {
-			possibleCorrectAnswers.forEach(function(possibleWord) {
-				if (userAnswer === possibleWord) {
-					correctAnswer = true;
-				}
+			possibleCorrectAnswers.forEach(function(possibleAnswerObject, i) {
+				// Temporarily grab the soundID of this object
+				var tempSoundID = possibleAnswerObject.soundID;
+				possibleAnswerObject.answers.forEach(function(possibleWord){
+					if (userAnswer === possibleWord) {
+						correctAnswer = true;
+						responseSoundID = tempSoundID;
+						possibleAnswerIndex = i;
+					}
+				})
 			});
 		} else {
-			possibleCorrectAnswers.forEach(function(possibleWord) {
-				if (userAnswer.indexOf(possibleWord) >= 0) {
-					correctAnswer = true;
-				}
+			possibleCorrectAnswers.forEach(function(possibleAnswerObject, i) {
+				var tempSoundID = possibleAnswerObject.soundID;
+				possibleAnswerObject.answers.forEach(function(possibleWord){
+					if (userAnswer.indexOf(possibleWord) >= 0) {
+						correctAnswer = true;
+						responseSoundID = tempSoundID;
+						possibleAnswerIndex = i;
+					}
+				})
+
 			})
 		}
 		if (correctAnswer) {
@@ -87,17 +101,16 @@ var QuestionAsker = React.createClass({
 			----------------------------------------------*/
 
 			// Play response voice
-			this.playSound(newSceneData.character.tasks[taskIndex].soundID);
+			this.playSound(responseSoundID);
 
 			// Store sound ID in current Sound ID if player wnats to repeat
-			newSceneData.currentSoundID = newSceneData.character.tasks[taskIndex].soundID;
-			console.log(newSceneData.currentSoundID);
+			newSceneData.currentSoundID = newSceneData.character.tasks[taskIndex].possibleAnswers[possibleAnswerIndex].soundID;
 
 			// Adjust character image
 			newSceneData.currentImage = newSceneData.character.tasks[taskIndex].emotion;
 
 			// Show response text
-			newSceneData.currentDialog = newSceneData.character.tasks[taskIndex].response;
+			newSceneData.currentDialog = newSceneData.character.tasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
 
 			// Add coins 
 			this.addCoins(10);
@@ -114,7 +127,6 @@ var QuestionAsker = React.createClass({
 			var newerSceneData = JSON.parse(JSON.stringify(newSceneData));
 
 			setTimeout(function(){
-
 				// Turn off correct answer state
 				that.setState({correctAnswerState: false});
 				// Push this task into the completedTasks
@@ -153,7 +165,7 @@ var QuestionAsker = React.createClass({
 				}
 
 				that.setState({sceneData: newSceneData})
-			}, 4000)
+			}, 3000)
 			
 		/*--------------------------------------------
 		When user answers incorrectly
@@ -212,7 +224,7 @@ var QuestionAsker = React.createClass({
 
 	},
 	initializeSounds: function() {
-		var SOUND_BASE_PATH = './static/audio/';
+		var SOUND_BASE_PATH = Constants.SOUND_PATH;
 		var soundArray = [];
 		var sounds = this.state.sceneData.character.sounds;
 		var confusedPhrases = this.state.sceneData.character.confusedPhrases;
@@ -244,7 +256,7 @@ var QuestionAsker = React.createClass({
 	},
 	handleHintClick: function(hintIndex) {
 		var that = this;
-		var hintText = this.state.sceneData.character.tasks[hintIndex].possibilities[0]
+		var hintText = this.state.sceneData.character.tasks[hintIndex].possibleAnswers[0].answers[0];
 		this.setState({
 			answerFeedbackActive: false,
 			hintActive: true,
@@ -306,6 +318,7 @@ var QuestionAsker = React.createClass({
 		this.setState({ coins: newCoins });
 	},
 	handleRepeat: function() {
+		console.log(this.state.sceneData.currentSoundID);
 		this.playSound(this.state.sceneData.currentSoundID);
 	},
 	render: function() {
@@ -333,7 +346,7 @@ var QuestionAsker = React.createClass({
 						scenarioData = {this.state.sceneData.scenario}
 						scenarioIndex = {this.state.sceneData.scenarioIndex} 
 						charImage = {sceneData.currentImage} 
-						silhouette = {sceneData.character.silhouette}
+						silhouette = {sceneData.character.emotions.silhouette}
 						hintActive = {this.state.hintActive} 
 						correctAnswerState = {this.state.correctAnswerState} 
 						wrongAnswerState = {this.state.wrongAnswerState} />

@@ -1,0 +1,234 @@
+{
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/david/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"scenarioIndex": 0,
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Hey there. I'm M.I.R.I, the Mandarin Intelligence Robot Interpreter. I'm here to help you on your journey to Shanghai!",
+			"next" : "end"
+		}
+	],
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Shanghai Airport",
+				"nameChinese" : "上海机场", 
+				"bg" : "/static/images/bg/shanghaiAirport.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png",
+				"silhouette" : "characters/david/davidSilhouette.png"
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "david/feichanghao.ogg"
+				},
+				{
+					"soundID" : "wojiao",
+					"soundPath" : "david/wojiao.ogg"
+				},
+				{
+					"soundID" : "nationality",
+					"soundPath" : "david/nationality.ogg"
+				},
+				{
+					"soundID" : "age",
+					"soundPath" : "david/age.ogg"
+				},
+				{
+					"soundID" : "foodLikes",
+					"soundPath" : "david/foodLikes.ogg"
+				},
+				{
+					"soundID" : "zhenbang",
+					"soundPath" : "david/zhenbang.ogg"
+				},
+				{
+					"soundID" : "zhende",
+					"soundPath" : "david/zhende.ogg"		
+				},
+				{
+					"soundID" : "favoriteDrink",
+					"soundPath" : "david/favoriteDrink.ogg"
+				},
+				{
+					"soundID" : "sportsLikes",
+					"soundPath" : "david/sportsLikes.ogg"			
+				},
+				{
+					"soundID" : "seasonLikes",
+					"soundPath" : "david/seasonLikes.ogg"
+				},
+				{
+					"soundID" : "gotoSchool",
+					"soundPath" : "david/gotoSchool.ogg"
+				},
+				{
+					"soundID" : "zodiac",
+					"soundPath" : "david/zodiac.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"taskStructure": "linear",
+			"tasks" : 
+			[
+				{
+					"dialogNodeID" : 1,
+					"task" : "Greet her",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["你好吗", "怎么样"],
+							"response" : "我很好!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"extensionTasks" : 
+					[
+						{
+							"dialogNodeID" : 2,
+							"task" : "Introduce your name",
+							"possibleAnswers" : 
+							[
+								{
+									"answers" : ["我叫"],
+									"response" : "",
+									"soundID" : ""
+								}
+							],
+							"correct" : false,
+							"emotion" : "characters/david/davidLaughing.png",
+							"extensionTasks" : 
+							[
+								{
+									"dialogNodeID" : 3,
+									"task" : "Ask her for her name",
+									"possibleAnswers" : 
+									[
+										{
+											"answers" : ["你叫什么", "你呢"],
+											"response" : "我叫王丽丽!",
+											"soundID" : ""
+										}
+									],
+									"correct" : false,
+									"emotion" : "characters/david/davidLaughing.png",
+									"extensionTasks" : 
+									[
+										{
+											"dialogNodeID" : 4,
+											"task" : "Ask her grade",
+											"possibleAnswers" : 
+											[
+												{
+													"answers" : ["你上几年级"],
+													"response" : "我上九年级!",
+													"soundID" : ""
+												},
+												{
+													"answers" : ["几年级"],
+													"response" : "我九年级",
+													"soundID" : ""
+												}
+											],
+											"correct" : false,
+											"emotion" : "characters/david/davidLaughing.png",
+											"extensionTasks" : 
+											[
+												{
+													"dialogNodeID" : 5,
+													"task" : "Ask which grade her older brother is in.",
+													"possibleAnswers" : 
+													[
+														{
+															"answers" : ["你的哥哥几年级?"],
+															"response" : "我上十一年级!",
+															"soundID" : ""
+														}
+													],
+													"correct" : false,
+													"emotion" : "characters/david/davidLaughing.png",
+													"extensionTasks" : 
+													[
+														{
+															"dialogNodeID" : 3,
+															"task" : "Ask her grade",
+															"possibleAnswers" : 
+															[
+																{
+																	"answers" : ["你上几年级"],
+																	"response" : "我上九年级!",
+																	"soundID" : ""
+																},
+																{
+																	"answers" : ["几年级"],
+																	"response" : "我九年级",
+																	"soundID" : ""
+																}
+															],
+															"correct" : false,
+															"emotion" : "characters/david/davidLaughing.png",
+															"extensionTasks" : 
+															[
+																
+															]
+														}	
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}	
+					]
+				}
+			],
+			"completedTasks" : []
+		}
+}

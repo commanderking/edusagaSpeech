@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" href="static/css/icons.css">
-	<link rel="stylesheet" href="static/css/index.css">
-	<link rel="stylesheet" href="static/css/tutorial.css">
+	<link rel="stylesheet" href="/static/css/icons.css">
+	<link rel="stylesheet" href="/static/css/index.css">
+	<link rel="stylesheet" href="/static/css/tutorial.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
@@ -20,8 +20,11 @@
 </head>
 <body>
     <div id="app"></div>
-    <script>var demoLanguage = "{{ name }}"</script>
-    <script src="static/js/viewHelper.js"></script>
-    <script src="static/js/bundle_questionAsker.js"></script>
+    <script>
+    	var activity = "{{ activityName }}"
+    	var teacher = "{{ teacher }}"
+    	</script>
+    <script src="/static/js/viewHelper.js"></script>
+    <script src="/static/js/bundle_questionAsker.js"></script>
 </body>
 </html>

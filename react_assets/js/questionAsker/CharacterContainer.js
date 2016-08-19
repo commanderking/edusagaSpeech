@@ -10,19 +10,23 @@ var CharacterContainer = React.createClass({
 		var scenarioIndex = this.props.scenarioIndex;
 		var charImageDiv;
 		var charImgSrc = Constants.IMAGE_PATH + this.props.charImage;
+		var silhouetteSrc = Constants.IMAGE_PATH + this.props.silhouette;
+		var scenarioImage = Constants.IMAGE_PATH + scenarioData[scenarioIndex].image; 
+		var scenarioImageLayer = Constants.IMAGE_PATH + scenarioData[scenarioIndex].imageLayer;
+
 		if (this.props.scenarioOn === true) {
 			charImageDiv =
 			(
 				<div className="characterImageDiv">
-					<img className="charImage" src={scenarioData[scenarioIndex].image} />
-					<img className="charImage" src={scenarioData[scenarioIndex].imageLayer} />
+					<img className="charImage" src={scenarioImage} />
+					<img className="charImage" src={scenarioImageLayer} />
 				</div>
 			)
 		} else if (this.props.hintActive === true) {
 			charImageDiv = 
 			(
 				<div className="characterImageDiv">
-					<img className="charImage" src={this.props.silhouette} />
+					<img className="charImage" src={silhouetteSrc} />
 				</div>				
 			)
 		}

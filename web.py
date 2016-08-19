@@ -87,9 +87,13 @@ def reactTest(name="React"):
 	return render_template("reactTest.html", name=name)
 
 # Test for React Version of Question Asker (demoChinese)
-@app.route('/questionAsker')
-def demo(name="ChineseReact"):
-	return render_template("questionAsker.html", name=name)
+@app.route('/jinlaoshi/demo')
+def demo(activityName="demo", teacher="jinlaoshi"):
+	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+
+@app.route('/lilaoshi/pa1')
+def lilaoshiPreassess(activityName="pre-assessment1", teacher="lilaoshi"):
+	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
 
 @app.route('/log', methods=['Post'])
 def log():
@@ -102,15 +106,6 @@ def log():
 
 	print(response.get('MessageId'))
 	print(response.get('MD5OfMessageBody'))
-
-	'''
-	client = boto3.client('sns')
-	response = client.publish( 
-		TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
-		Message= json.dumps({'default': content}),
-		MessageStructure='json'
-	)
-	'''
 	return 'Success'
 
 if __name__ == '__main__':

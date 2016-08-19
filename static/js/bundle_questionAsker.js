@@ -80,7 +80,7 @@
 		},
 		loadSceneData: function () {
 			var that = this;
-			$.getJSON("./static/data/demo" + demoLanguage + ".json", function (data) {}).success(function (data) {
+			$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function (data) {}).success(function (data) {
 				that.setState({
 					sceneData: data
 				});
@@ -109,25 +109,38 @@
 		checkAnswer: function (userAnswer, taskIndex) {
 			var that = this;
 			var correctAnswer = false;
+			var responseSoundID;
+			var possibleAnswerIndex;
 	
 			// Trick to get new instance of sceneData, to not alter the origial state
 			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 			var allCurrentTasks = this.state.sceneData.character.tasks;
 			var currentTaskData = allCurrentTasks[taskIndex];
-			var possibleCorrectAnswers = currentTaskData.possibilities;
+			var possibleCorrectAnswers = currentTaskData.possibleAnswers;
 	
 			// Check if user's answers contains any of the possible answers
 			if (currentTaskData.completeMatchOnly === true) {
-				possibleCorrectAnswers.forEach(function (possibleWord) {
-					if (userAnswer === possibleWord) {
-						correctAnswer = true;
-					}
+				possibleCorrectAnswers.forEach(function (possibleAnswerObject, i) {
+					// Temporarily grab the soundID of this object
+					var tempSoundID = possibleAnswerObject.soundID;
+					possibleAnswerObject.answers.forEach(function (possibleWord) {
+						if (userAnswer === possibleWord) {
+							correctAnswer = true;
+							responseSoundID = tempSoundID;
+							possibleAnswerIndex = i;
+						}
+					});
 				});
 			} else {
-				possibleCorrectAnswers.forEach(function (possibleWord) {
-					if (userAnswer.indexOf(possibleWord) >= 0) {
-						correctAnswer = true;
-					}
+				possibleCorrectAnswers.forEach(function (possibleAnswerObject, i) {
+					var tempSoundID = possibleAnswerObject.soundID;
+					possibleAnswerObject.answers.forEach(function (possibleWord) {
+						if (userAnswer.indexOf(possibleWord) >= 0) {
+							correctAnswer = true;
+							responseSoundID = tempSoundID;
+							possibleAnswerIndex = i;
+						}
+					});
 				});
 			}
 			if (correctAnswer) {
@@ -137,17 +150,16 @@
 	   ----------------------------------------------*/
 	
 				// Play response voice
-				this.playSound(newSceneData.character.tasks[taskIndex].soundID);
+				this.playSound(responseSoundID);
 	
 				// Store sound ID in current Sound ID if player wnats to repeat
-				newSceneData.currentSoundID = newSceneData.character.tasks[taskIndex].soundID;
-				console.log(newSceneData.currentSoundID);
+				newSceneData.currentSoundID = newSceneData.character.tasks[taskIndex].possibleAnswers[possibleAnswerIndex].soundID;
 	
 				// Adjust character image
 				newSceneData.currentImage = newSceneData.character.tasks[taskIndex].emotion;
 	
 				// Show response text
-				newSceneData.currentDialog = newSceneData.character.tasks[taskIndex].response;
+				newSceneData.currentDialog = newSceneData.character.tasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
 	
 				// Add coins 
 				this.addCoins(10);
@@ -164,7 +176,6 @@
 				var newerSceneData = JSON.parse(JSON.stringify(newSceneData));
 	
 				setTimeout(function () {
-	
 					// Turn off correct answer state
 					that.setState({ correctAnswerState: false });
 					// Push this task into the completedTasks
@@ -203,7 +214,7 @@
 					}
 	
 					that.setState({ sceneData: newSceneData });
-				}, 4000);
+				}, 3000);
 	
 				/*--------------------------------------------
 	   When user answers incorrectly
@@ -258,7 +269,7 @@
 			// this.setState({sceneData: newSceneData});
 		},
 		initializeSounds: function () {
-			var SOUND_BASE_PATH = './static/audio/';
+			var SOUND_BASE_PATH = Constants.SOUND_PATH;
 			var soundArray = [];
 			var sounds = this.state.sceneData.character.sounds;
 			var confusedPhrases = this.state.sceneData.character.confusedPhrases;
@@ -290,7 +301,7 @@
 		},
 		handleHintClick: function (hintIndex) {
 			var that = this;
-			var hintText = this.state.sceneData.character.tasks[hintIndex].possibilities[0];
+			var hintText = this.state.sceneData.character.tasks[hintIndex].possibleAnswers[0].answers[0];
 			this.setState({
 				answerFeedbackActive: false,
 				hintActive: true,
@@ -351,6 +362,7 @@
 			this.setState({ coins: newCoins });
 		},
 		handleRepeat: function () {
+			console.log(this.state.sceneData.currentSoundID);
 			this.playSound(this.state.sceneData.currentSoundID);
 		},
 		render: function () {
@@ -383,7 +395,7 @@
 						scenarioData: this.state.sceneData.scenario,
 						scenarioIndex: this.state.sceneData.scenarioIndex,
 						charImage: sceneData.currentImage,
-						silhouette: sceneData.character.silhouette,
+						silhouette: sceneData.character.emotions.silhouette,
 						hintActive: this.state.hintActive,
 						correctAnswerState: this.state.correctAnswerState,
 						wrongAnswerState: this.state.wrongAnswerState }),
@@ -22066,18 +22078,22 @@
 			var scenarioIndex = this.props.scenarioIndex;
 			var charImageDiv;
 			var charImgSrc = Constants.IMAGE_PATH + this.props.charImage;
+			var silhouetteSrc = Constants.IMAGE_PATH + this.props.silhouette;
+			var scenarioImage = Constants.IMAGE_PATH + scenarioData[scenarioIndex].image;
+			var scenarioImageLayer = Constants.IMAGE_PATH + scenarioData[scenarioIndex].imageLayer;
+	
 			if (this.props.scenarioOn === true) {
 				charImageDiv = React.createElement(
 					'div',
 					{ className: 'characterImageDiv' },
-					React.createElement('img', { className: 'charImage', src: scenarioData[scenarioIndex].image }),
-					React.createElement('img', { className: 'charImage', src: scenarioData[scenarioIndex].imageLayer })
+					React.createElement('img', { className: 'charImage', src: scenarioImage }),
+					React.createElement('img', { className: 'charImage', src: scenarioImageLayer })
 				);
 			} else if (this.props.hintActive === true) {
 				charImageDiv = React.createElement(
 					'div',
 					{ className: 'characterImageDiv' },
-					React.createElement('img', { className: 'charImage', src: this.props.silhouette })
+					React.createElement('img', { className: 'charImage', src: silhouetteSrc })
 				);
 			} else {
 				charImageDiv = React.createElement(
@@ -22117,9 +22133,11 @@
 /***/ function(module, exports) {
 
 	const IMAGE_PATH = "https://s3.amazonaws.com/edusaga/assets/images/";
+	const SOUND_PATH = "https://s3.amazonaws.com/edusaga/assets/audio/";
 	
 	module.exports = {
-		IMAGE_PATH: IMAGE_PATH
+		IMAGE_PATH: IMAGE_PATH,
+		SOUND_PATH: SOUND_PATH
 	};
 
 /***/ },
@@ -22735,57 +22753,64 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(/*! react */ 1);
+	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 178);
 	
 	var HintIcon = React.createClass({
-		displayName: "HintIcon",
+		displayName: 'HintIcon',
 	
 		render: function () {
 			var hintIconDiv;
+			var iconBG = Constants.IMAGE_PATH + "UI/ICON_payforhelp_bg-01.png";
+			var iconQMark = Constants.IMAGE_PATH + "UI/ICON_payforhelp_qmark-01.png";
+			var iconBigSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_Big_sparkle-01.png";
+			var iconLeftSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_L_spark-01.png";
+			var iconRightSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_R_sparkle-01.png";
+	
 			if (this.props.hintActive) {
 				hintIconDiv = React.createElement(
-					"div",
+					'div',
 					null,
-					React.createElement("img", { className: "hintIconImage payHintBg", src: "static/images/UI/ICON_payforhelp_bg-01.png" }),
-					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_qmark-01.png" }),
-					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_Big_sparkle-01.png" }),
-					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_L_spark-01.png" }),
-					React.createElement("img", { className: "hintIconImage", src: "static/images/UI/ICON_payforhelp_R_sparkle-01.png" })
+					React.createElement('img', { className: 'hintIconImage payHintBg', src: iconBG }),
+					React.createElement('img', { className: 'hintIconImage', src: iconQMark }),
+					React.createElement('img', { className: 'hintIconImage', src: iconBigSparkle }),
+					React.createElement('img', { className: 'hintIconImage', src: iconLeftSparkle }),
+					React.createElement('img', { className: 'hintIconImage', src: iconRightSparkle })
 				);
 			}
 			// User has confirmed a suggestion
 			else if (this.props.suggestionSubmitted) {
-					hintIconDiv = React.createElement("div", null);
+					hintIconDiv = React.createElement('div', null);
 				}
 				// User has answered, but not clicked to add a suggestion
 				else if (this.props.answerFeedbackActive && !this.props.suggestionMode) {
 						hintIconDiv = React.createElement(
-							"div",
+							'div',
 							null,
 							React.createElement(
-								"div",
-								{ className: "suggestNewPhraseButton promptSuggestNewPhraseButton",
+								'div',
+								{ className: 'suggestNewPhraseButton promptSuggestNewPhraseButton',
 									onClick: this.props.activateSuggestionMode },
-								React.createElement("span", { className: "glyphicon glyphicon-plus", "aria-hidden": "true" })
+								React.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' })
 							)
 						);
 					}
 					// User answered and wants to add suggestion, prompt confirm suggestion
 					else if (this.props.answerFeedbackActive && this.props.suggestionMode) {
 							hintIconDiv = React.createElement(
-								"div",
+								'div',
 								null,
 								React.createElement(
-									"div",
-									{ className: "suggestNewPhraseButton confirmSuggestNewPhraseButton",
+									'div',
+									{ className: 'suggestNewPhraseButton confirmSuggestNewPhraseButton',
 										onClick: this.props.submitSuggestion },
-									React.createElement("span", { className: "glyphicon glyphicon-plus", "aria-hidden": "true" })
+									React.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' })
 								)
 							);
 						}
 	
 			return React.createElement(
-				"div",
-				{ className: "hintIcon" },
+				'div',
+				{ className: 'hintIcon' },
 				hintIconDiv
 			);
 		}
