@@ -371,6 +371,7 @@ CSS Related to Task List
 		&:hover {
 			background: linear-gradient(82deg, #38C6F3, #057FC5 20%);
 			border-radius: 25px;
+			cursor: pointer;
 		}
 		&:active {
 			box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);

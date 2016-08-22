@@ -6,6 +6,7 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"scenarioIndex": 0,
+	"assessmentMode": false,
 	"scenario" :
 	[	
 		{
@@ -34,6 +35,7 @@
 				"confused" : "characters/david/davidConfused.png",
 				"silhouette" : "characters/david/davidSilhouette.png"
 			},
+			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下"],
 			"sounds" : 
 			[
 				{
@@ -107,9 +109,9 @@
 					"soundPath" : "david/buhaoyisi.ogg"
 				}
 			],
-			"tasks" : 
-			[
+			"currentTasks" : [
 				{
+					"dialogNodeID" : 1,
 					"task" : "Greet him",
 					"possibleAnswers" : 
 					[
@@ -127,9 +129,12 @@
 					"completeMatchOnly" : true,
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"dialogNodeID" : 1,
-					"extensionTasks" : []
-				},
+					"tasksToQueue" : [2]
+				}
+
+			],
+			"queuedtasks" : 
+			[
 				{
 					"dialogNodeID" : 2,
 					"task" : "Ask how he's doing",
@@ -144,184 +149,191 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"extensionTasks" : 
+					"tasksToQueue" : [3,4,5],
+					"attemptedAnswers" : []
+				},
+				{
+					"dialogNodeID" : 3,
+					"task" : "Ask for name", 
+					"possibleAnswers" : 
 					[
 						{
-							"dialogNodeID" : 3,
-							"task" : "Ask for name", 
-							"possibleAnswers" : 
-							[
-								{
-									"answers": 	["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁", "你的中文名字叫什么"],
-									"response": "我叫张大伟.",
-									"soundID" : "wojiao"
-								}
-							],
-							"correct" : false,
-							"emotion" : "characters/david/davidDefault.png"
-						},
-						{
-							"dialogNodeID" : 4,
-							"task" : "Ask for nationality", 
-							"possibleAnswers" : 
-							[
-								{
-									"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你从哪里来", "你从哪里来的"],
-									"response" : "我是中国人.",
-									"soundID" : "nationality"
-								}
-							],
-							"correct" : false,
-							"emotion" : "characters/david/davidDefault.png"
-						}, 
-						{
-							"dialogNodeID" : 5,
-							"task" : "Ask for age", 
-							"possibleAnswers" :
-							[
-								{
-									"answers" : ["你几岁", "你多大", "你多大了", "你年纪多大", "你今年多大了"],
-									"response" : "我十六岁.",
-									"soundID" : "age"
-								}
-							],
-							"correct" : false,
-							"emotion" : "characters/david/davidDefault.png",
-							"soundPath" : "david/age.ogg",
-							"extensionTasks" : 
-							[
-								{
-									"dialogNodeID" : 6,
-									"task" : "Ask how he gets to school",
-									"possibleAnswers" : 
-									[
-										{
-											"answers" : ["你怎么去上学", "你怎么上学", "你怎么去学校", "你么天怎么去上学"],
-											"response" : "我平常走路去上学.",
-											"soundID" : "gotoSchool"
-										}
-									],
-									"correct" : false,
-									"emotion" : "characters/david/davidDefault.png"
-								},
-								{
-									"dialogNodeID" : 7,
-									"task" : "Ask for his Zodiac",
-									"possibleAnswers" : 
-									[
-										{
-											"answers" : ["你属什么", "你属什么生肖"],
-											"response" : "我属龙.",
-											"soundID" : "zodiac"
-										}
-									],
-									"correct" : false,
-									"emotion" : "characters/david/davidDefault.png"
-								}
-							]
-						},
-						{
-							"dialogNodeID" : 8,
-							"task" : "Ask what he likes to eat",
-							"possibleAnswers" : 
-							[
-								{
-									"answers" : ["你喜欢吃什么", "你爱吃什么"],
-									"response" : "我喜欢吃牛肉面.",
-									"soundID" : "foodLikes"
-								}
-							],
-							"correct" : "false",
-							"soundPath" : "david/foodLikes.ogg",
-							"emotion" : "characters/david/davidLaughing.png",
-							"extensionTasks" : 
-							[
-								{
-									"dialogNodeID" : 9,
-									"task" : "Share that I like beef noodle soup",
-									"taskType" : "choice",
-									"taskLink" : "choiceLikeDislike",
-									"possibleAnswers" : 
-									[
-										{
-											"answers": ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我喜欢牛肉面", "我也喜欢牛肉面" ,"我爱吃牛肉面"],
-											"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
-											"soundID" : "zhenbang"
-										}
-									],
-									"correct" : "false",
-									"emotion" : "characters/david/davidLaughing.png", 
-									"extensionTasks" : []
-								},
-								{
-									"dialogNodeID" : 10,
-									"task" : "Share that I don't like beef noodle soup",
-									"taskType" : "choice",
-									"taskLink" : "choiceLikeDislike",
-									"possibleAnswers" : 
-									[
-										{
-											"answers" : ["我不喜欢吃牛肉面", "我不喜欢牛肉面", "牛肉面不好吃", "牛肉面很难吃"],
-											"response" : "真的吗? 牛肉面非常好吃!",
-											"soundID" : "zhende"
-										}
-									],
-									"correct" : "false",
-									"soundPath" : "david/zhende.ogg",
-									"emotion" : "characters/david/davidLaughing.png"		
-								}, 
-								{
-									"dialogNodeID" : 11,
-									"task" : "Ask what is his favorite drink",
-									"possibleAnswers" : 
-									[
-										{
-											"answers" : ["你最喜欢喝什么", "你最喜欢喝什么饮料", "你喜欢喝什么"],
-											"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
-											"soundID" : "favoriteDrink"
-										}
-									],
-									"correct" : "false",
-									"emotion" : "characters/david/davidLaughing.png",
-									"extensionTasks" : 	
-									[
-										{
-											"dialogNodeID" : 12,
-											"task" : "Ask what is his favorite sport",
-											"possibleAnswers" : 
-											[
-												{
-													"answers" : ["你喜欢什么运动", "你最喜欢什么运动", "你最喜欢做什么运动", "你最喜欢做什么", "你最喜欢什么体育运动"],
-													"response" : "我最喜欢打篮球和打乒乓球!",
-													"soundID" : "sportsLikes"
-
-												}
-											],
-											
-											"correct" : "false",
-											"emotion" : "characters/david/davidLaughing.png",
-											"extensionTasks" : []						
-										},
-										{
-											"dialogNodeID" : 13,
-											"task" : "Ask what season he likes",
-											"possibleAnswers" : 
-											[
-												{
-													"answers" : ["你最喜欢什么季节", "你喜欢什么季节", "你喜欢哪个季节", "你最喜欢哪个季节"],
-													"response" : "我最喜欢春天, 可是我不喜欢冬天",
-													"soundID" : "seasonLikes"
-												}
-											],
-											"correct" : "false",
-											"emotion" : "characters/david/davidDefault.png",
-											"extensionTasks" : 	[]		
-										}
-									]
-								}
-							]
+							"answers": 	["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁", "你的中文名字叫什么"],
+							"response": "我叫张大伟.",
+							"soundID" : "wojiao"
 						}
-					]
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"dialogNodeID" : 4,
+					"task" : "Ask for nationality", 
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你从哪里来", "你从哪里来的"],
+							"response" : "我是中国人.",
+							"soundID" : "nationality"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				}, 
+				{
+					"dialogNodeID" : 5,
+					"task" : "Ask for age", 
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["你几岁", "你多大", "你多大了", "你年纪多大", "你今年多大了"],
+							"response" : "我十六岁.",
+							"soundID" : "age"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"soundPath" : "david/age.ogg",
+					"tasksToQueue" : [6,7],
+					"attemptedAnswers" : []
+				},
+				{
+					"dialogNodeID" : 6,
+					"task" : "Ask how he gets to school",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你怎么去上学", "你怎么上学", "你怎么去学校", "你么天怎么去上学"],
+							"response" : "我平常走路去上学.",
+							"soundID" : "gotoSchool"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"dialogNodeID" : 7,
+					"task" : "Ask for his Zodiac",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你属什么", "你属什么生肖"],
+							"response" : "我属龙.",
+							"soundID" : "zodiac"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [8],
+					"attemptedAnswers" : []
+				},
+				{
+					"dialogNodeID" : 8,
+					"task" : "Ask what he likes to eat",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢吃什么", "你爱吃什么"],
+							"response" : "我喜欢吃牛肉面.",
+							"soundID" : "foodLikes"
+						}
+					],
+					"correct" : "false",
+					"soundPath" : "david/foodLikes.ogg",
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [9, 10]					
+				},
+				{
+					"dialogNodeID" : 9,
+					"task" : "Share that I like beef noodle soup",
+					"taskType" : "choice",
+					"taskLink" : "choiceLikeDislike",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我喜欢牛肉面", "我也喜欢牛肉面" ,"我爱吃牛肉面"],
+							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
+							"soundID" : "zhenbang"
+						}
+					],
+					"correct" : "false",
+					"emotion" : "characters/david/davidLaughing.png", 
+					"tasksToQueue" : [11],
+					"attemptedAnswers" : []
+				},
+				{
+					"dialogNodeID" : 10,
+					"task" : "Share that I don't like beef noodle soup",
+					"taskType" : "choice",
+					"taskLink" : "choiceLikeDislike",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我不喜欢吃牛肉面", "我不喜欢牛肉面", "牛肉面不好吃", "牛肉面很难吃"],
+							"response" : "真的吗? 牛肉面非常好吃!",
+							"soundID" : "zhende"
+						}
+					],
+					"correct" : "false",
+					"soundPath" : "david/zhende.ogg",
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [11],
+					"attemptedAnswers" : []		
+				}, 
+				{
+					"dialogNodeID" : 11,
+					"task" : "Ask what is his favorite drink",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你最喜欢喝什么", "你最喜欢喝什么饮料", "你喜欢喝什么"],
+							"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
+							"soundID" : "favoriteDrink"
+						}
+					],
+					"correct" : "false",
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [12, 13],
+					"attemptedAnswers" : []	
+				},
+				{
+					"dialogNodeID" : 12,
+					"task" : "Ask what is his favorite sport",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢什么运动", "你最喜欢什么运动", "你最喜欢做什么运动", "你最喜欢做什么", "你最喜欢什么体育运动"],
+							"response" : "我最喜欢打篮球和打乒乓球!",
+							"soundID" : "sportsLikes"
+
+						}
+					],
+					
+					"correct" : "false",
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : []					
+				},
+				{
+					"dialogNodeID" : 13,
+					"task" : "Ask what season he likes",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你最喜欢什么季节", "你喜欢什么季节", "你喜欢哪个季节", "你最喜欢哪个季节"],
+							"response" : "我最喜欢春天, 可是我不喜欢冬天",
+							"soundID" : "seasonLikes"
+						}
+					],
+					"correct" : "false",
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [] 
 				}
 			],
 			"completedTasks" : []

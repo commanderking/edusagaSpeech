@@ -1,11 +1,12 @@
 {
 	"score" : 0,
 	"currentCharName" : "",
-	"currentImage" : "characters/david/davidDefault.png",
+	"currentImage" : "characters/chenguang/chengDefault.png",
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"scenarioIndex": 0,
+	"assessmentMode": false,
 	"scenario" :
 	[	
 		{
@@ -18,7 +19,7 @@
 	],
 	"character" : 
 		{
-			"name" : "David",
+			"name" : "Chenguang",
 			"language" : "zh-CN",
 			"location" : 
 			{
@@ -28,12 +29,16 @@
 			},
 			"emotions" : 
 			{
-				"default": "characters/david/davidDefault.png",
-				"uncertain" : "characters/david/davidUncertain.png",
-				"laughing" : "characters/david/davidLaughing.png",
-				"confused" : "characters/david/davidConfused.png",
+				"default": "characters/chenguang/chengDefault.png",
+				"uncertain" : "characters/chenguang/chengGoodJob.png",
+				"laughing" : "characters/chenguang/chengGreatJob.png",
+				"laughing2" : "characters/chenguang/chengSpeaking.png",
+				"smiling" : "characters/chenguang/chengGoodJob.png",
+				"confused" : "characters/chenguang/chengConfused.png",
+				"wistful" : "characters/chenguang/chengWistful.png",
 				"silhouette" : "characters/david/davidSilhouette.png"
 			},
+			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下"],
 			"sounds" : 
 			[
 				{
@@ -107,11 +112,9 @@
 					"soundPath" : "david/buhaoyisi.ogg"
 				}
 			],
-			"taskStructure": "linear",
-			"tasks" : 
-			[
+			"currentTasks": [
 				{
-					"dialogNodeID" : 1,
+					"taskID" : 1,
 					"task" : "Greet her",
 					"possibleAnswers" : 
 					[
@@ -126,108 +129,669 @@
 							"soundID" : ""
 						}
 					],
-					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
-					"extensionTasks" : 
+					"hints" : 
 					[
 						{
-							"dialogNodeID" : 2,
-							"task" : "Introduce your name",
-							"possibleAnswers" : 
-							[
-								{
-									"answers" : ["我叫"],
-									"response" : "",
-									"soundID" : ""
-								}
-							],
-							"correct" : false,
-							"emotion" : "characters/david/davidLaughing.png",
-							"extensionTasks" : 
-							[
-								{
-									"dialogNodeID" : 3,
-									"task" : "Ask her for her name",
-									"possibleAnswers" : 
-									[
-										{
-											"answers" : ["你叫什么", "你呢"],
-											"response" : "我叫王丽丽!",
-											"soundID" : ""
-										}
-									],
-									"correct" : false,
-									"emotion" : "characters/david/davidLaughing.png",
-									"extensionTasks" : 
-									[
-										{
-											"dialogNodeID" : 4,
-											"task" : "Ask her grade",
-											"possibleAnswers" : 
-											[
-												{
-													"answers" : ["你上几年级"],
-													"response" : "我上九年级!",
-													"soundID" : ""
-												},
-												{
-													"answers" : ["几年级"],
-													"response" : "我九年级",
-													"soundID" : ""
-												}
-											],
-											"correct" : false,
-											"emotion" : "characters/david/davidLaughing.png",
-											"extensionTasks" : 
-											[
-												{
-													"dialogNodeID" : 5,
-													"task" : "Ask which grade her older brother is in.",
-													"possibleAnswers" : 
-													[
-														{
-															"answers" : ["你的哥哥几年级?"],
-															"response" : "我上十一年级!",
-															"soundID" : ""
-														}
-													],
-													"correct" : false,
-													"emotion" : "characters/david/davidLaughing.png",
-													"extensionTasks" : 
-													[
-														{
-															"dialogNodeID" : 3,
-															"task" : "Ask her grade",
-															"possibleAnswers" : 
-															[
-																{
-																	"answers" : ["你上几年级"],
-																	"response" : "我上九年级!",
-																	"soundID" : ""
-																},
-																{
-																	"answers" : ["几年级"],
-																	"response" : "我九年级",
-																	"soundID" : ""
-																}
-															],
-															"correct" : false,
-															"emotion" : "characters/david/davidLaughing.png",
-															"extensionTasks" : 
-															[
-																
-															]
-														}	
-													]
-												}
-											]
-										}
-									]
-								}
-							]
-						}	
-					]
+							"speechableText" : "你好",
+							"coins" : 5
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"attemptedAnswers" : [],
+					"tasksToQueue" : [2]
+					}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 2,
+					"task" : "Introduce your name",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我叫"],
+							"response" : "",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Doesn't it start with",
+							"speechableText" : "我叫",
+							"postText" : "...",
+							"coins" : 5
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [3],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 3,
+					"task" : "Ask her for her name",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你叫什么名字", "你叫什么", "你呢"],
+							"response" : "我叫王丽丽",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Doesn't it start with",
+							"text" : "你叫",
+							"postText" : "?",
+							"coins" : 5
+						},
+						{
+							"text" : "Try",
+							"speechableText" : "你叫什么名字",
+							"postText" : "",
+							"coins" : 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"tasksToQueue" : [23],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 23,
+					"task" : "Ask what grade she's in",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你上几年级"],
+							"response" : "我上九年级。",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["你几年级", "几年级"],
+							"response" : "我九年级。",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "I think",
+							"speechableText" : "年级",
+							"postText" : "means 'grade'",
+							"coins" : 5
+						},
+						{
+							"text" : "Try saying",
+							"speechableText" : "你上几年级",
+							"coins" : 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengDefault.png",
+					"tasksToQueue" : [4],
+					"attemptedAnswers" : []
+				},		
+				{
+					"taskID" : 4,
+					"task" : "Tell her you're also in 9th grade",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我也上九年级", "我也九年级", "我也是"],
+							"response" : "哦! 真好! ",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "I think",
+							"speechableText" : "年级",
+							"postText" : "means 'grade'",
+							"coins" : 5
+						},
+						{
+							"text" : "Are you including 'also',",
+							"speechableText" : "也",
+							"coins" : 5
+						},
+						{
+							"text" : "Try saying",
+							"speechableText" : "我也上九年级",
+							"coins" : 5							
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [5],
+					"attemptedAnswers" : []	
+				},
+				{
+					"taskID" : 5,
+					"task" : "Ask which how many family members she has",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你家有几个人", "你家有几口人"],
+							"response" : "五个人。 爸爸，妈妈，哥哥，妹妹和我。",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "I think",
+							"speechableText" : "几个人 or 几口人",
+							"postText" : "means how many people",
+							"coins" : 5
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengDefault.png",
+					"tasksToQueue" : [6],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 6,
+					"task" : "Ask which grade her older brother is in",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的哥哥上几年级", "你的哥哥几年级", "你哥哥上几年级", "你哥哥几年级"],
+							"response" : "他上十一年级",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "The word for older brother is",
+							"speechableText" : "哥哥",
+							"postText" : "...",
+							"coins" : 5
+						},
+						{
+							"text" : "To ask for grade, use",
+							"speechableText" : "几年级", 
+							"coins" : 5
+						},
+						{
+							"text" : "Try saying",
+							"speechableText" : "你的哥哥上几年级"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengDefault.png",
+					"tasksToQueue" : [8],
+					"attemptedAnswers" : []		
+				}, 
+				{
+					"taskID" : 8,
+					"task" : "Ask how old her younger sister is",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的妹妹多大", "你的妹妹几岁", "你妹妹多大", "你妹妹几岁"],
+							"response" : "她九岁，是小学生。 啊。。。 你说中文说得很好。",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "For 'how old' try,",
+							"speechableText" : "多大",
+							"coins" : 5
+						},
+						{
+							"text" : "Younger sister is:",
+							"speechableText" : "妹妹",
+							"coins" : 5
+						},
+						{
+							"text" : "Try saying:",
+							"speechableText" : "你的妹妹多大",
+							"coins" : 5							
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [9],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 9,
+					"task" : "Respond to her compliment",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["谢谢", "哪里哪里"],
+							"response" : "",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "To be humble about the compliment, say:",
+							"speechableText" : "哪里哪里",
+							"coins" : 5
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengDefault.png",
+					"tasksToQueue" : [10],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 10,
+					"task" : "Ask her how her English is",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的英文好吗", "你的英文怎么样", "你的英文好不好", "你的英语怎么样", "你的英语好吗", "你的英语好不好"],
+							"response" : "我的英语不太好",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "You can use:",
+							"speechableText" : " 怎么样",
+							"postText": "at the end of the question.",
+							"coins" : 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [11],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 11,
+					"task" : "Ask what classes she takes this year",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你今年有什么课", "你今年修什么课", "你今年上哪些课", "你今年修那些课", "你今年上什么课"],
+							"response" : "我有英语，数学， 科学，历史，和法语。",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "",
+							"speechableText" : "什么课",
+							"postText" : "means what classes",
+							"coins" : 5
+						},
+						{
+							"text" : "This year is",
+							"speechableText" : "今年"
+						},
+						{
+							"text": "Try saying",
+							"speechableText": "你今年上什么课"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengSmile.png",
+					"tasksToQueue" : [24],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 24,
+					"task" : "Tell her you don't study French, but speak a little",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我不学法语可是我会说一点", 
+										"我不学法文可是我会说一点", 
+										"我不学法语但是我会说一点", 
+										"我不学法文但是我会说一点"],
+							"response" : "你喜不喜欢学中文?",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "To learn frech nis",
+							"speechableText" : "学法语",
+							"coins" : 5
+						},
+						{
+							"text" : "To say 'speak a little bit is'",
+							"speechabletext" : "会说一点儿",
+							"coins" : 5
+						},
+						{
+							"text" : "Try",
+							"speechableText" : "我不学法语, 可是我会说一点儿法语",
+							"coins" : 15
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengSpeaking.png",
+					"tasksToQueue" : [12],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 12,
+					"task" : "Respond to her question.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我爱中文", "喜欢中文", "马马虎虎", "我爱汉语", "喜欢汉语", "不喜欢汉语", "我爱学中文", "喜欢学中文", "不喜欢学汉语"],
+							"response" : "你的中文老师是谁?",
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "To like is",
+							"speechableText" : "喜欢",
+							"coins" : 5
+						},
+						{
+							"text" : "Try:",
+							"speechableText" : "我喜欢中文",
+							"coins" : 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [13],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 13,
+					"task" : "Tell her your Chinese teacher is Ms. Zhang.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我的中文老师是张老师", "张老师是我的老师", "我的韩语老师是张老师", "张老师是我的汉语老师", "我的汉语老师姓张", "我的中文老师姓张"],
+							"response" : "他是不是一个好老师?", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Chinese Teacher is",
+							"speechableText" : "中文老师",
+							"coins" : 5
+						},
+						{
+							"text" : "Try:",
+							"speechableText" : "我的中文老师是张老师",
+							"coins" : 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [14],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 14,
+					"task" : "Tell her she's a good teacher.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["他是一个好老师", "他是一个很好的老师", "是的"],
+							"response" : "哦! 真好!", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Try:",
+							"speechableText" : "她是一个好老师",
+							"coins" : 15
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengSpeaking.png",
+					"tasksToQueue" : [15],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 15,
+					"task" : "Ask what hobbies she has",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢做什么", "你有什么爱好"],
+							"response" : "我喜欢听音乐，看书和运动. 你呢?", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "hobbies is",
+							"speechableText" : "爱好",
+							"coins" : 5
+						},
+						{
+							"text" : "Try:",
+							"speechableText" : "你有什么爱好",
+							"coins" : 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [16],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 16,
+					"task" : "Tell her you like sports too.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我也喜欢运动", "我也爱运动"],
+							"response" : "哦。。。", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Sports is",
+							"speechableText" : "运动",
+							"coins" : 5
+						},
+						{
+							"text" : "Try:",
+							"speechableText" : "我也喜欢运动",
+							"coins" : 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [17],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 17,
+					"task" : "Tell her you also like watching TV and movies",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我也喜欢看电视和电影", "我还喜欢看电视和电影", "电影和电视", "电视和电影"],
+							"response" : "啊! 其实我也喜欢看电影。", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "TV and movies are",
+							"speechableText" : "电视和电影",
+							"coins" : 5
+						},
+						{
+							"text" : "Try:",
+							"speechableText" : "我也喜欢看电视和电影",
+							"coins" : 15
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengSpeaking.png",
+					"tasksToQueue" : [18],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 18,
+					"task" : "Ask what sport she likes best.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你最喜欢什么运动"],
+							"response" : "打乒乓球。 你打乒乓球打得怎么样?", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Sports is",
+							"speechableText" : "运动",
+							"coins" : 5
+						},
+						{
+							"text" : "For favorite or likes best, say",
+							"speechableText" : "最喜欢",
+							"coins" : 5
+						},
+						{
+							"text" : "Try",
+							"speechableText" : "你最喜欢什么运动",
+							"coins": 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [19],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 19,
+					"task" : "Tell her you play it very well",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我打得非常好", "很好", "非常好"],
+							"response" : "哦。。。真的! ", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Try",
+							"speechableText" : "你打得非常好",
+							"coins" : 15
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 20,
+					"task" : "Ask whether she wants to play ping pong with you this afternoon",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["今天下午你想和我打乒乓球吗", "今天下午你想不想和我打乒乓球", "你今天下午想和我打乒乓球吗", "你今天下午想不想和我打乒乓球"],
+							"response" : "好啊! 几点?", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Start with Today, afternoon",
+							"speechableText" : "今天下午",
+							"coins" : 5
+						},
+						{
+							"text" : "Try:",
+							"speechableText" : "今天下午你想和我打乒乓球吗",
+							"coins" : 15
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengSpeaking.png",
+					"tasksToQueue" : [21],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 21,
+					"task" : "Tell her a time.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["三点十五分", "三点十五", "三点一刻", "3点15"],
+							"response" : "没问题. 下午见!", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "They key words for time are",
+							"speechableText" : "点...分",
+							"coins" : 5
+						},
+						{
+							"text" : "Try:",
+							"speechableText" : "三点十五分",
+							"coins" : 10
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"tasksToQueue" : [22],
+					"attemptedAnswers" : []		
+				},
+				{
+					"taskID" : 22,
+					"task" : "Respond appropriately!",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["下午见", "再见", "待一会儿见"],
+							"response" : "嗯", 
+							"soundID" : ""
+						}
+					],
+					"hints" : 
+					[
+						{
+							"text" : "Try saying see you in the afternoon!",
+							"speechableText" : "下午见",
+							"coins" : 5
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/chengGoodJob.png",
+					"tasksToQueue" : [23],
+					"attemptedAnswers" : []		
 				}
+
 			],
 			"completedTasks" : []
 		}

@@ -125,7 +125,7 @@
 					[
 						{
 							"task" : "Ask for her surname",
-							"possibilities" : ["請問您貴姓", "請問你貴姓", "您貴姓", "你貴姓", "你的貴姓是什麼", "你姓什么", "你的贵姓是什么"],
+							"possibilities" : ["請問您貴姓", "請問你貴姓", "您貴姓", "你貴姓", "你的貴姓是什麼", "你姓什麼", "你的贵姓是什么"],
 							"correct" : false,
 							"response" : "我姓王.",
 							"soundID" : "surname",
@@ -162,7 +162,7 @@
 								},
 								{
 									"task" : "Ask for her birthday",
-									"possibilities" : ["你的生日幾月幾號", "你的生日幾月幾日", "你生日幾月幾號", "你生日幾月幾日"],
+									"possibilities" : ["你的生日幾月幾號", "你的生日幾月幾日", "你生日幾月幾號", "你生日幾月幾日", "你的生日是幾月幾號", "你的生日是幾月幾日"],
 									"correct" : false,
 									"response" : "我生日八月二十七號",
 									"soundID" : "birthday",
@@ -171,7 +171,7 @@
 								},
 								{
 									"task" : "Ask how many family members she has",
-									"possibilities" : ["你的家有幾口人", "您的家有幾口人", "你家有幾口人", "你家有几个人", "你的家有幾個人", "你家裏有幾個人", "你家裏有幾口人"],
+									"possibilities" : ["你的家有幾口人", "您的家有幾口人", "你家有幾口人", "你家有幾個人", "你的家有幾個人", "你家裏有幾個人", "你家裏有幾口人"],
 									"correct" : false,
 									"response" : "我家有五口人.",
 									"soundID" : "familyCount",
@@ -224,7 +224,7 @@
 										},
 										{
 											"task" : "Ask her for her mom's name",
-											"possibilities" : ["你的媽媽叫什麼名字", "你媽叫什麼名字", "你的媽媽叫什麼", "你的媽叫什麼"],
+											"possibilities" : ["你的媽媽叫什麼名字", "你媽叫什麼名字", "你的媽媽叫什麼", "你的媽叫什麼", "你媽媽叫什麼"],
 											"correct" : false,
 											"response" : "我的媽媽叫王安娜",
 											"soundID" : "momName",
