@@ -7,6 +7,7 @@ var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer
 var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TransitionContainer = require('./questionAsker/TransitionContainer');
+import {addQueuedTasksToCurrentTasks, getIndexesToSpliceQueuedTasks, removeTasksfromQueue} from './helpers/CorrectAnswerLogic';
 const Constants = require('./helpers/Constants.js');
 
 var QuestionAsker = React.createClass({
@@ -120,7 +121,7 @@ var QuestionAsker = React.createClass({
 			this.turnMicStateOff();
 
 			/*----------------------------------------------
-			These actions happen on delay of 1s
+			These actions happen on delay
 			----------------------------------------------*/
 
 			var newerSceneData = JSON.parse(JSON.stringify(newSceneData));
@@ -158,30 +159,23 @@ var QuestionAsker = React.createClass({
 				if (currentTaskData.tasksToQueue == null) {
 					// Do nothing
 				} else if (currentTaskData.tasksToQueue.length > 0) {
-					var tasksIndexesToRemoveFromQueue = [];
-					// For each ID store in extensionTask, find it in queuedTasks
-					currentTaskData.tasksToQueue.forEach(function(extensionTaskID, j) {
-						newSceneData.character.queuedTasks.forEach(function(taskObject, l) {
-							if (extensionTaskID === taskObject.taskID) {
-								newSceneData.character.currentTasks.push(taskObject);
-								tasksIndexesToRemoveFromQueue.push(l);
-								console.log(taskObject.taskID);
-								console.log(l);
-							}
-						})
-					})
-					// Splice out queuedTasks that have been pushed to current Queue
-					for (var i = tasksIndexesToRemoveFromQueue.length -1; i >= 0; i--) {
-   						newSceneData.character.queuedTasks.splice(tasksIndexesToRemoveFromQueue[i],1);
-					}
+					var currentTasks = newSceneData.character.currentTasks;
+					var tasksToQueueIDs = currentTaskData.tasksToQueue;
+					var queuedTasks = newSceneData.character.queuedTasks;
+
+					// Create new current task list
+					newSceneData.character.currentTasks = addQueuedTasksToCurrentTasks(currentTasks, tasksToQueueIDs, queuedTasks) 
+					
+					// Get indexes of tasks from queue to remove
+					var indexesToRemove = getIndexesToSpliceQueuedTasks(tasksToQueueIDs, queuedTasks)
+
+					// Remove tasks that are no longer in queue
+					newSceneData.character.queuedTasks = removeTasksfromQueue(indexesToRemove, queuedTasks)
 				}
 
 				that.setState({sceneData: newSceneData})
 			}, 3000)
 
-		// console.log(this.state.sceneData.character.currentTasks);
-		// console.log(this.state.sceneData.character.queuedTasks);
-		// console.log(this.state.sceneData.character.completedTasks);
 			
 		/*--------------------------------------------
 		When user answers incorrectly
@@ -348,8 +342,9 @@ var QuestionAsker = React.createClass({
 		this.setState({micActive: false})
 	},
 	addCoins: function(numberCoinsToAdd) {
-		newCoins = this.state.coins + numberCoinsToAdd;
+		var newCoins = this.state.coins + numberCoinsToAdd;
 		this.setState({ coins: newCoins });
+		
 	},
 	handleRepeat: function() {
 		console.log(this.state.sceneData.currentSoundID);

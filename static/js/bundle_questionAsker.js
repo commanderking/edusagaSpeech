@@ -47,6 +47,10 @@
   \******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	var _CorrectAnswerLogic = __webpack_require__(/*! ./helpers/CorrectAnswerLogic */ 208);
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
 	var CharacterContainer = __webpack_require__(/*! ./questionAsker/CharacterContainer */ 177);
@@ -56,13 +60,14 @@
 	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 201);
 	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 206);
 	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 207);
-	const Constants = __webpack_require__(/*! ./helpers/Constants.js */ 178);
+	
+	var Constants = __webpack_require__(/*! ./helpers/Constants.js */ 178);
 	
 	var QuestionAsker = React.createClass({
 		displayName: 'QuestionAsker',
 	
 		// feedbackText can be hintText from clicking hint or feedback on what user said
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return {
 				sceneData: undefined,
 				scenarioOn: true,
@@ -78,7 +83,7 @@
 				wrongAnswerState: false
 			};
 		},
-		loadSceneData: function () {
+		loadSceneData: function loadSceneData() {
 			var that = this;
 			$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function (data) {}).success(function (data) {
 				that.setState({
@@ -99,13 +104,13 @@
 				};
 			});
 		},
-		componentDidMount: function () {
+		componentDidMount: function componentDidMount() {
 			this.loadSceneData();
 		},
-		componentWillReceiveProps: function () {
+		componentWillReceiveProps: function componentWillReceiveProps() {
 			this.loadSceneData();
 		},
-		checkAnswer: function (userAnswer, taskIndex) {
+		checkAnswer: function checkAnswer(userAnswer, taskIndex) {
 			var that = this;
 			var correctAnswer = false;
 			var responseSoundID;
@@ -169,7 +174,7 @@
 				this.turnMicStateOff();
 	
 				/*----------------------------------------------
-	   These actions happen on delay of 1s
+	   These actions happen on delay
 	   ----------------------------------------------*/
 	
 				var newerSceneData = JSON.parse(JSON.stringify(newSceneData));
@@ -207,30 +212,22 @@
 					if (currentTaskData.tasksToQueue == null) {
 						// Do nothing
 					} else if (currentTaskData.tasksToQueue.length > 0) {
-						var tasksIndexesToRemoveFromQueue = [];
-						// For each ID store in extensionTask, find it in queuedTasks
-						currentTaskData.tasksToQueue.forEach(function (extensionTaskID, j) {
-							newSceneData.character.queuedTasks.forEach(function (taskObject, l) {
-								if (extensionTaskID === taskObject.taskID) {
-									newSceneData.character.currentTasks.push(taskObject);
-									tasksIndexesToRemoveFromQueue.push(l);
-									console.log(taskObject.taskID);
-									console.log(l);
-								}
-							});
-						});
-						// Splice out queuedTasks that have been pushed to current Queue
-						for (var i = tasksIndexesToRemoveFromQueue.length - 1; i >= 0; i--) {
-							newSceneData.character.queuedTasks.splice(tasksIndexesToRemoveFromQueue[i], 1);
-						}
+						var currentTasks = newSceneData.character.currentTasks;
+						var tasksToQueueIDs = currentTaskData.tasksToQueue;
+						var queuedTasks = newSceneData.character.queuedTasks;
+	
+						// Create new current task list
+						newSceneData.character.currentTasks = (0, _CorrectAnswerLogic.addQueuedTasksToCurrentTasks)(currentTasks, tasksToQueueIDs, queuedTasks);
+	
+						// Get indexes of tasks from queue to remove
+						var indexesToRemove = (0, _CorrectAnswerLogic.getIndexesToSpliceQueuedTasks)(tasksToQueueIDs, queuedTasks);
+	
+						// Remove tasks that are no longer in queue
+						newSceneData.character.queuedTasks = (0, _CorrectAnswerLogic.removeTasksfromQueue)(indexesToRemove, queuedTasks);
 					}
 	
 					that.setState({ sceneData: newSceneData });
 				}, 3000);
-	
-				// console.log(this.state.sceneData.character.currentTasks);
-				// console.log(this.state.sceneData.character.queuedTasks);
-				// console.log(this.state.sceneData.character.completedTasks);
 	
 				/*--------------------------------------------
 	   When user answers incorrectly
@@ -287,7 +284,7 @@
 			// return Miri Icon to default after 3s
 			// this.setState({sceneData: newSceneData});
 		},
-		initializeSounds: function () {
+		initializeSounds: function initializeSounds() {
 			var SOUND_BASE_PATH = Constants.SOUND_PATH;
 			var soundArray = [];
 			var sounds = this.state.sceneData.character.sounds;
@@ -315,10 +312,10 @@
 				createjs.Sound.registerSound(soundFile.soundPath, soundFile.soundID);
 			});
 		},
-		playSound: function (soundID) {
+		playSound: function playSound(soundID) {
 			createjs.Sound.play(soundID);
 		},
-		playConfusedPhrase: function (confusedPhrasesArray) {
+		playConfusedPhrase: function playConfusedPhrase(confusedPhrasesArray) {
 	
 			// Randomly pick a confused response
 			var randomVar = Math.random();
@@ -332,7 +329,7 @@
 			newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].response;
 			console.log(newSceneData.currentDialog);
 		},
-		handleHintClick: function (hintIndex) {
+		handleHintClick: function handleHintClick(hintIndex) {
 			var that = this;
 			var hintText = this.state.sceneData.character.currentTasks[0].possibleAnswers[0].answers[0];
 			this.setState({
@@ -350,21 +347,21 @@
 				});
 			}, 3000);
 		},
-		handleDisableHint: function () {
+		handleDisableHint: function handleDisableHint() {
 			this.setState({
 				hintActive: false,
 				currentHintIndex: -1,
 				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 			});
 		},
-		handleHintAudio: function (hintAudioToPlay) {
+		handleHintAudio: function handleHintAudio(hintAudioToPlay) {
 			SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 		},
-		changeScenarioMode: function () {
+		changeScenarioMode: function changeScenarioMode() {
 			var newScenarioState = !this.state.scenarioOn;
 			this.setState({ scenarioOn: newScenarioState });
 		},
-		activateFeedbackMode: function () {
+		activateFeedbackMode: function activateFeedbackMode() {
 			var that = this;
 			this.setState({
 				hintActive: false,
@@ -378,27 +375,27 @@
 				});
 			}, 3000);
 		},
-		deactivateFeedbackMode: function () {
+		deactivateFeedbackMode: function deactivateFeedbackMode() {
 			this.setState({
 				answerFeedbackActive: false,
 				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
 			});
 		},
-		turnMicStateOn: function () {
+		turnMicStateOn: function turnMicStateOn() {
 			this.setState({ micActive: true });
 		},
-		turnMicStateOff: function () {
+		turnMicStateOff: function turnMicStateOff() {
 			this.setState({ micActive: false });
 		},
-		addCoins: function (numberCoinsToAdd) {
-			newCoins = this.state.coins + numberCoinsToAdd;
+		addCoins: function addCoins(numberCoinsToAdd) {
+			var newCoins = this.state.coins + numberCoinsToAdd;
 			this.setState({ coins: newCoins });
 		},
-		handleRepeat: function () {
+		handleRepeat: function handleRepeat() {
 			console.log(this.state.sceneData.currentSoundID);
 			this.playSound(this.state.sceneData.currentSoundID);
 		},
-		handleAskRepeat: function (userAnswer) {
+		handleAskRepeat: function handleAskRepeat(userAnswer) {
 			var that = this;
 			this.turnMicStateOff();
 	
@@ -439,7 +436,7 @@
 				}, 2000);
 			}
 		},
-		render: function () {
+		render: function render() {
 			var sceneData = this.state.sceneData;
 	
 			if (!this.state.sceneData) {
@@ -22142,6 +22139,8 @@
   \*************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../helpers/Constants.js */ 178);
@@ -22151,7 +22150,7 @@
 	var CharacterContainer = React.createClass({
 		displayName: 'CharacterContainer',
 	
-		render: function () {
+		render: function render() {
 			var scenarioData = this.props.scenarioData;
 			var scenarioIndex = this.props.scenarioIndex;
 			var charImageDiv;
@@ -23082,6 +23081,8 @@
   \********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
@@ -23090,7 +23091,7 @@
 	var CharacterImage = React.createClass({
 		displayName: 'CharacterImage',
 	
-		componentDidUpdate: function () {
+		componentDidUpdate: function componentDidUpdate() {
 			// If correct or wrong answer, character has special transition entrance
 			var node = ReactDOM.findDOMNode(this);
 			if (this.props.correctAnswerState) {
@@ -23099,7 +23100,7 @@
 				Transitions.taskWrong.character(node);
 			}
 		},
-		render: function () {
+		render: function render() {
 			return React.createElement('img', { className: 'charImage', src: this.props.src });
 		}
 	});
@@ -23195,6 +23196,8 @@
   \**********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	
@@ -23203,7 +23206,7 @@
 	var DialogContainer = React.createClass({
 		displayName: "DialogContainer",
 	
-		render: function () {
+		render: function render() {
 			var textNameWrapper;
 			var characterName;
 			var characterNameClass = "characterNameDiv";
@@ -23289,6 +23292,8 @@
   \********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var Task = __webpack_require__(/*! ./components/Task */ 190);
 	var PropTypes = React.PropTypes;
@@ -23299,13 +23304,13 @@
 	var TaskContainer = React.createClass({
 		displayName: 'TaskContainer',
 	
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return {
 				currentTaskIndex: -1
 			};
 		},
 		// Task Index should be grabbed from the Task's index
-		handleSpeechInput: function (taskIndex) {
+		handleSpeechInput: function handleSpeechInput(taskIndex) {
 			// Turns off any active hints or feedback
 			this.props.onDisableHint();
 			this.props.deactivateFeedbackMode();
@@ -23328,7 +23333,7 @@
 				}
 			});
 		},
-		handleAskForRepeat: function (taskIndex) {
+		handleAskForRepeat: function handleAskForRepeat(taskIndex) {
 			var that = this;
 	
 			this.props.onDisableHint();
@@ -23340,7 +23345,7 @@
 				that.props.onHandleAskRepeat(userAnswer);
 			});
 		},
-		render: function () {
+		render: function render() {
 			var that = this;
 			var taskObject = this.props.tasks;
 			var skipButtonIndex = -2;
@@ -23410,6 +23415,8 @@
   \**********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var TaskIcon = __webpack_require__(/*! ./TaskIcon */ 191);
@@ -23419,7 +23426,7 @@
 	var Task = React.createClass({
 		displayName: 'Task',
 	
-		render: function () {
+		render: function render() {
 			var taskDivClass = "taskDiv taskDivNormalState";
 	
 			// Change Task Div based on different modes
@@ -23471,6 +23478,8 @@
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 192);
 	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 193);
@@ -23480,7 +23489,9 @@
 	var TaskIcon = React.createClass({
 		displayName: 'TaskIcon',
 	
-		render: function () {
+		render: function render() {
+			var _this = this;
+	
 			// Default TaskIcon image when nothing is being recorded or answered
 			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 			var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
@@ -23491,7 +23502,9 @@
 				'div',
 				{ className: 'taskIconDiv' },
 				React.createElement(TaskIconImage, {
-					ref: ref => this.mic = ref,
+					ref: function ref(_ref) {
+						return _this.mic = _ref;
+					},
 					keyToAttach: 'firstMic',
 					imageSrc: imgMic })
 			);
@@ -23559,6 +23572,8 @@
   \*******************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
 	var PropTypes = React.PropTypes;
@@ -23567,7 +23582,7 @@
 	var TaskIconImage = React.createClass({
 		displayName: 'TaskIconImage',
 	
-		componentDidMount: function () {
+		componentDidMount: function componentDidMount() {
 			var node = ReactDOM.findDOMNode(this);
 	
 			switch (this.props.transition) {
@@ -23595,7 +23610,7 @@
 					break;
 			}
 		},
-		componentDidUpdate: function () {
+		componentDidUpdate: function componentDidUpdate() {
 			var node = ReactDOM.findDOMNode(this);
 			switch (this.props.transition) {
 				case "taskCorrectMic":
@@ -23611,7 +23626,7 @@
 					break;
 			}
 		},
-		render: function () {
+		render: function render() {
 			return React.createElement('img', { key: this.props.keyToAttach, className: '', src: this.props.imageSrc });
 		}
 	
@@ -23995,6 +24010,8 @@
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
 	var PropTypes = React.PropTypes;
@@ -24003,16 +24020,18 @@
 	var TaskText = React.createClass({
 		displayName: 'TaskText',
 	
-		componentDidUpdate: function () {
+		componentDidUpdate: function componentDidUpdate() {
 			var node = ReactDOM.findDOMNode(this);
 			if (this.props.correctAnswerState && this.props.currentTaskIndex === this.props.index) {
 				Transitions.taskCorrect.taskText(node);
 			}
 		},
-		componentWillUnmount: function () {
+		componentWillUnmount: function componentWillUnmount() {
 			console.log("unmounting");
 		},
-		render: function () {
+		render: function render() {
+			var _this = this;
+	
 			var displayText;
 			if (this.props.correctAnswerState && this.props.currentTaskIndex === this.props.index) {
 				displayText = "很好! 答对了!";
@@ -24024,7 +24043,9 @@
 				{
 					className: 'taskText',
 					'data-index': this.props.index,
-					onClick: () => this.props.onSpeechInput(this.props.index) },
+					onClick: function onClick() {
+						return _this.props.onSpeechInput(_this.props.index);
+					} },
 				displayText
 			);
 		}
@@ -24046,13 +24067,17 @@
   \****************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	
 	var HintButton = React.createClass({
 		displayName: 'HintButton',
 	
-		render: function () {
+		render: function render() {
+			var _this = this;
+	
 			if (this.props.assessmentMode) {
 				return null;
 			} else {
@@ -24071,7 +24096,9 @@
 				// Display the normal taskDiv
 				else {
 						return React.createElement('a', { className: 'taskHelpIcon taskHelpInactive glyphicon glyphicon-question-sign',
-							onClick: () => this.props.onHintClick(this.props.index) });
+							onClick: function onClick() {
+								return _this.props.onHintClick(_this.props.index);
+							} });
 					}
 			}
 		}
@@ -24094,12 +24121,14 @@
   \*******************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
 	var React = __webpack_require__(/*! react */ 1);
 	
 	var BackgroundImageContainer = React.createClass({
 		displayName: "BackgroundImageContainer",
 	
-		render: function () {
+		render: function render() {
 			var fadedDiv;
 			if (this.props.hintActive) {
 				fadedDiv = React.createElement("div", { className: "bgFadeOverlay" });
@@ -24124,6 +24153,8 @@
   \************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 202);
 	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 203);
@@ -24133,7 +24164,7 @@
 	var FeedbackContainer = React.createClass({
 		displayName: 'FeedbackContainer',
 	
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return {
 				hintClickDisable: false,
 				suggestionMode: false,
@@ -24141,11 +24172,11 @@
 			};
 		},
 		// Suggestions are activated when users want to add their answer to database
-		activateSuggestionMode: function () {
+		activateSuggestionMode: function activateSuggestionMode() {
 			console.log("Suggestion Mode Activated");
 			this.setState({ suggestionMode: true });
 		},
-		submitSuggestion: function () {
+		submitSuggestion: function submitSuggestion() {
 			var that = this;
 			console.log("Suggestion submitted");
 			this.setState({ suggestionMode: false });
@@ -24154,7 +24185,7 @@
 				that.setState({ suggestionSubmitted: false });
 			}, 3000);
 		},
-		handleHintAudioClick: function () {
+		handleHintAudioClick: function handleHintAudioClick() {
 			that = this;
 	
 			// Disable clicking on hint to play voice
@@ -24170,7 +24201,7 @@
 				});
 			}, 1000);
 		},
-		render: function () {
+		render: function render() {
 			// Show Hint when hints are active
 			// Change Miri's icon depending on type of hint/feedback
 			var hintDivClass;
@@ -24296,6 +24327,8 @@
   \********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	
@@ -24317,6 +24350,8 @@
   \***************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	
@@ -24342,6 +24377,8 @@
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	
@@ -24362,13 +24399,15 @@
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 178);
 	
 	var HintIcon = React.createClass({
 		displayName: 'HintIcon',
 	
-		render: function () {
+		render: function render() {
 			var hintIconDiv;
 			var iconBG = Constants.IMAGE_PATH + "UI/ICON_payforhelp_bg-01.png";
 			var iconQMark = Constants.IMAGE_PATH + "UI/ICON_payforhelp_qmark-01.png";
@@ -24483,48 +24522,50 @@
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
 	var ReactTransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 197);
 	var MyBox = React.createClass({
 	    displayName: 'MyBox',
 	
-	    show: function (callback) {
+	    show: function show(callback) {
 	        var node = ReactDOM.findDOMNode(this);
 	        TweenMax.fromTo(node, 2, { width: 100, height: 100, backgroundColor: '#0cc', scale: 0.2, opacity: 0, rotation: -180 }, { width: 100, height: 100, backgroundColor: '#0cc', scale: 1, opacity: 1, rotation: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
 	    },
-	    hide: function (callback) {
+	    hide: function hide(callback) {
 	        var node = ReactDOM.findDOMNode(this);
 	        TweenMax.to(node, 2, { width: 100, height: 100, backgroundColor: '#cc0', scale: 0.2, opacity: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
 	    },
-	    componentWillAppear: function (didAppearCallback) {
+	    componentWillAppear: function componentWillAppear(didAppearCallback) {
 	        console.log('MyBox.componentWillAppear');
 	        this.show(didAppearCallback);
 	    },
-	    componentDidAppear: function () {
+	    componentDidAppear: function componentDidAppear() {
 	        console.log('MyBox.componentDidAppear');
 	    },
-	    componentWillEnter: function (didEnterCallback) {
+	    componentWillEnter: function componentWillEnter(didEnterCallback) {
 	        console.log('MyBox.componentWillEnter');
 	        this.show(didEnterCallback);
 	    },
-	    componentDidEnter: function () {
+	    componentDidEnter: function componentDidEnter() {
 	        console.log('MyBox.componentDidEnter');
 	    },
-	    componentWillLeave: function (didLeaveCallback) {
+	    componentWillLeave: function componentWillLeave(didLeaveCallback) {
 	        console.log('MyBox.componentWillLeave');
 	        this.hide(didLeaveCallback);
 	    },
-	    componentDidLeave: function () {
+	    componentDidLeave: function componentDidLeave() {
 	        console.log('MyBox.componentDidLeave');
 	    },
-	    componentDidMount: function () {
+	    componentDidMount: function componentDidMount() {
 	        console.log('MyBox.componentDidMount');
 	    },
-	    componentWillUnmount: function () {
+	    componentWillUnmount: function componentWillUnmount() {
 	        console.log('MyBox.componentWillUnmount');
 	    },
-	    render: function () {
+	    render: function render() {
 	        return React.createElement(
 	            'div',
 	            null,
@@ -24535,13 +24576,13 @@
 	var TransitionContainer = React.createClass({
 	    displayName: 'TransitionContainer',
 	
-	    getInitialState: function () {
+	    getInitialState: function getInitialState() {
 	        return { isShowing: false };
 	    },
-	    onButtonClicked: function () {
+	    onButtonClicked: function onButtonClicked() {
 	        this.setState({ isShowing: !this.state.isShowing });
 	    },
-	    render: function () {
+	    render: function render() {
 	        var myBox = this.state.isShowing ? React.createElement(MyBox, { key: 'myBox' }) : '';
 	        return React.createElement(
 	            'div',
@@ -24558,7 +24599,7 @@
 	var MyButton = React.createClass({
 	    displayName: 'MyButton',
 	
-	    render: function () {
+	    render: function render() {
 	        return React.createElement(
 	            'button',
 	            { onClick: this.props.onButtonClicked },
@@ -24568,6 +24609,177 @@
 	});
 	
 	module.exports = TransitionContainer;
+
+/***/ },
+/* 208 */
+/*!*******************************************************!*\
+  !*** ./react_assets/js/helpers/CorrectAnswerLogic.js ***!
+  \*******************************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.addQueuedTasksToCurrentTasks = addQueuedTasksToCurrentTasks;
+	exports.getIndexesToSpliceQueuedTasks = getIndexesToSpliceQueuedTasks;
+	exports.removeTasksfromQueue = removeTasksfromQueue;
+	
+	// Tasks to Queue is an array of IDs on correctly answered task, ex, [4,5]
+	// queuedTasksArray = All possible tasks that are still to come
+	
+	var currentTasks = exports.currentTasks = [{
+		"taskID": 2,
+		"task": "Ask how he's doing",
+		"possibleAnswers": [{
+			"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+			"response": "非常好",
+			"soundID": "feichanghao"
+		}],
+		"correct": false,
+		"emotion": "characters/david/davidLaughing.png",
+		"tasksToQueue": [3, 4],
+		"attemptedAnswers": []
+	}];
+	
+	var tasksToQueue = exports.tasksToQueue = [3, 4];
+	
+	var queuedTasks = exports.queuedTasks = [{
+		"taskID": 3,
+		"task": "Ask for name",
+		"possibleAnswers": [{
+			"answers": ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁", "你的中文名字叫什么"],
+			"response": "我叫张大伟.",
+			"soundID": "wojiao"
+		}],
+		"correct": false,
+		"emotion": "characters/david/davidDefault.png",
+		"tasksToQueue": [],
+		"attemptedAnswers": []
+	}, {
+		"taskID": 4,
+		"task": "Ask for nationality",
+		"possibleAnswers": [{
+			"answers": ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你从哪里来", "你从哪里来的"],
+			"response": "我是中国人.",
+			"soundID": "nationality"
+		}],
+		"correct": false,
+		"emotion": "characters/david/davidDefault.png",
+		"tasksToQueue": [5],
+		"attemptedAnswers": []
+	}, {
+		"taskID": 5,
+		"task": "Ask for age",
+		"possibleAnswers": [{
+			"answers": ["你几岁", "你多大", "你多大了", "你年纪多大", "你今年多大了"],
+			"response": "我十六岁.",
+			"soundID": "age"
+		}],
+		"correct": false,
+		"emotion": "characters/david/davidDefault.png",
+		"soundPath": "david/age.ogg",
+		"tasksToQueue": [6, 7],
+		"attemptedAnswers": []
+	}];
+	
+	// Returns the new CurrentTasksArray
+	function addQueuedTasksToCurrentTasks(currentTasksArray, tasksToQueueIDArray, queuedTasksArray) {
+		tasksToQueueIDArray.forEach(function (tasksToQueueID, i) {
+			queuedTasksArray.forEach(function (taskObject, j) {
+				if (tasksToQueueID === taskObject.taskID) {
+					currentTasksArray.push(taskObject);
+				}
+			});
+		});
+		return currentTasksArray;
+	}
+	
+	function getIndexesToSpliceQueuedTasks(tasksToQueueIDArray, queuedTasksArray) {
+		var indexesToSplice = [];
+		tasksToQueueIDArray.forEach(function (tasksToQueueID, i) {
+			queuedTasksArray.forEach(function (taskObject, j) {
+				if (tasksToQueueID === taskObject.taskID) {
+					indexesToSplice.push(j);
+				}
+			});
+		});
+		return indexesToSplice;
+	}
+	
+	function removeTasksfromQueue(indexesToRemove, queuedTasksArray) {
+		var newQueuedTasksArray = queuedTasksArray;
+		for (var i = indexesToRemove.length - 1; i >= 0; i--) {
+			newQueuedTasksArray.splice(indexesToRemove[i], 1);
+		}
+		return newQueuedTasksArray;
+	}
+	
+	var exepectedOutputaddQueuedTasksToCurrentTasks = exports.exepectedOutputaddQueuedTasksToCurrentTasks = [{
+		"taskID": 2,
+		"task": "Ask how he's doing",
+		"possibleAnswers": [{
+			"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+			"response": "非常好",
+			"soundID": "feichanghao"
+		}],
+		"correct": false,
+		"emotion": "characters/david/davidLaughing.png",
+		"tasksToQueue": [3, 4],
+		"attemptedAnswers": []
+	}, {
+		"taskID": 3,
+		"task": "Ask for name",
+		"possibleAnswers": [{
+			"answers": ["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁", "你的中文名字叫什么"],
+			"response": "我叫张大伟.",
+			"soundID": "wojiao"
+		}],
+		"correct": false,
+		"emotion": "characters/david/davidDefault.png",
+		"tasksToQueue": [],
+		"attemptedAnswers": []
+	}, {
+		"taskID": 4,
+		"task": "Ask for nationality",
+		"possibleAnswers": [{
+			"answers": ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你从哪里来", "你从哪里来的"],
+			"response": "我是中国人.",
+			"soundID": "nationality"
+		}],
+		"correct": false,
+		"emotion": "characters/david/davidDefault.png",
+		"tasksToQueue": [5],
+		"attemptedAnswers": []
+	}];
+	
+	var expectedOutputAfterSplicing = exports.expectedOutputAfterSplicing = [{
+		"taskID": 5,
+		"task": "Ask for age",
+		"possibleAnswers": [{
+			"answers": ["你几岁", "你多大", "你多大了", "你年纪多大", "你今年多大了"],
+			"response": "我十六岁.",
+			"soundID": "age"
+		}],
+		"correct": false,
+		"emotion": "characters/david/davidDefault.png",
+		"soundPath": "david/age.ogg",
+		"tasksToQueue": [6, 7],
+		"attemptedAnswers": []
+	}];
+	
+	/*
+	var tasksToQueueIDs = currentTaskData.tasksToQueue;
+	var queuedTasks = newSceneData.character.queuedTasks;
+		console.log(addQueuedTasksToCurrentTasks);
+	// Create new current task list
+	newSceneData.character.queuedTasks = addQueuedTasksToCurrentTasks(tasksToQueueIDs, queuedTasks) 
+		// Get indexes of tasks from queue to remove
+	var indexesToRemove = getIndexesToSpliceQueuedTasks(tasksToQueueIDArray, queuedTasks)
+		// Remove tasks that are no longer in queue
+	newSceneData.character.queuedTasks = removeTasksfromQueue(indexesToRemove, queuedTasks)
+	*/
 
 /***/ }
 /******/ ]);
