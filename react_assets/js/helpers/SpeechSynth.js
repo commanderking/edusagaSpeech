@@ -15,13 +15,13 @@ var speechSynth = {
 		}
 
 		// Set the voice of the robot to be the correct language from browser
-		voicePack = this.findVoice(synthLang);
+		var voicePack = this.findVoice(synthLang);
 		return voicePack;
 	},
 	findVoice: function(langToMatch) {
 		var voiceData;
 		var voices = window.speechSynthesis.getVoices();
-		for(i = 0; i < voices.length ; i++) {
+		for(var i = 0; i < voices.length ; i++) {
 			if(voices[i].name === langToMatch) {
 				voiceData = voices[i];
 			}

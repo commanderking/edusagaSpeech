@@ -27,7 +27,7 @@ var FeedbackContainer = React.createClass({
 		}, 3000);
 	},
 	handleHintAudioClick: function() {
-		that = this;
+		var that = this;
 
 		// Disable clicking on hint to play voice
 		this.setState({ hintClickDisable: true })

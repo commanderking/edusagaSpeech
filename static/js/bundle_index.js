@@ -47,6 +47,8 @@
   \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var App = __webpack_require__(/*! ./app */ 33);
 	
@@ -4072,6 +4074,8 @@
   \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var HeaderContainer = __webpack_require__(/*! ./containers/HeaderContainer.js */ 34);
 	var InputContainer = __webpack_require__(/*! ./containers/InputContainer.js */ 35);
@@ -4080,7 +4084,7 @@
 	module.exports = React.createClass({
 		displayName: 'exports',
 	
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return {
 				vocabData: {
 					'currentWordIndex': 0,
@@ -4121,7 +4125,7 @@
 				}
 			};
 		},
-		handleImageChange: function (newIndex) {
+		handleImageChange: function handleImageChange(newIndex) {
 			var newVocabData = this.state.vocabData;
 			newVocabData.currentWordIndex = newIndex;
 	
@@ -4136,7 +4140,7 @@
 				vocabData: newVocabData
 			});
 		},
-		checkAnswer: function (userAnswer) {
+		checkAnswer: function checkAnswer(userAnswer) {
 			var newVocabData = this.state.vocabData;
 			var index = this.state.vocabData.currentWordIndex;
 	
@@ -4161,7 +4165,7 @@
 			});
 			console.log(this.state.vocabData);
 		},
-		render: function () {
+		render: function render() {
 			var currentWordIndex = this.state.vocabData.currentWordIndex;
 			var vocabList = this.state.vocabData.list;
 			return React.createElement(
@@ -4193,12 +4197,14 @@
   \*******************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
 	var React = __webpack_require__(/*! react */ 1);
 	
 	var HeaderContainer = React.createClass({
 		displayName: "HeaderContainer",
 	
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				"div",
 				{ className: "header" },
@@ -4229,13 +4235,15 @@
   \******************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 36);
 	
 	var MicContainer = React.createClass({
 		displayName: 'MicContainer',
 	
-		render: function () {
+		render: function render() {
 			var className = "btn btn-info micWrap micActive-" + this.props.micActive;
 			var micFunction;
 			if (this.props.micActive) {
@@ -4341,13 +4349,13 @@
 	var InputContainer = React.createClass({
 		displayName: 'InputContainer',
 	
-		getInitialState: function () {
+		getInitialState: function getInitialState() {
 			return {
 				userAnswer: '',
 				micActive: false
 			};
 		},
-		handleUserAnswer: function () {
+		handleUserAnswer: function handleUserAnswer() {
 			var that = this;
 			var possibleAnswers = this.props.vocabList[this.props.currentWordIndex].name;
 	
@@ -4365,7 +4373,7 @@
 				that.handleMicDeactivate();
 			});
 		},
-		handleMicActivate: function () {
+		handleMicActivate: function handleMicActivate() {
 			this.setState({
 				micActive: true
 			});
@@ -4373,12 +4381,12 @@
 			//SpeechRecognition.checkBrowser();
 			this.handleUserAnswer();
 		},
-		handleMicDeactivate: function () {
+		handleMicDeactivate: function handleMicDeactivate() {
 			this.setState({
 				micActive: false
 			});
 		},
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'inputWrapper' },
@@ -4406,8 +4414,10 @@
   \******************************************************/
 /***/ function(module, exports) {
 
+	'use strict';
+	
 	var speechHelper = {
-		checkBrowser: function () {
+		checkBrowser: function checkBrowser() {
 			try {
 				var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 				var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
@@ -4416,7 +4426,7 @@
 				alert("Sorry, the browser does not support Web Speech. Please use Google Chrome for Speech Access.");
 			}
 		},
-		activateSpeech: function (possibleAnswers, lang) {
+		activateSpeech: function activateSpeech(possibleAnswers, lang) {
 			return new Promise(function (resolve, reject) {
 	
 				var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -4459,11 +4469,18 @@
 					if (event.results[0].isFinal) {
 						resolve(speechResult);
 					}
-				}, recognition.onspeechend = function () {
+				},
+	
+				// If user clicks task again, the task should cancel
+				$(".taskDiv").click(function () {
+					recognition.abort();
+				});
+	
+				recognition.onspeechend = function () {
 					recognition.stop();
 				}, recognition.onerror = function (event) {
 					console.log("Error " + event.error);
-					resolve();
+					resolve("Cancel Speech");
 				};
 			});
 		}
@@ -4483,12 +4500,14 @@
   \******************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
 	var React = __webpack_require__(/*! react */ 1);
 	
 	var ImageContainer = React.createClass({
 		displayName: "ImageContainer",
 	
-		nextVocab: function () {
+		nextVocab: function nextVocab() {
 			var index = this.props.currentWordIndex;
 			// If at end of Vocab list, loop back, otherwise move to next one
 			if (index >= this.props.vocabList.length - 1) {
@@ -4498,7 +4517,7 @@
 			}
 			this.props.onImageChange(index);
 		},
-		previousVocab: function () {
+		previousVocab: function previousVocab() {
 			var index = this.props.currentWordIndex;
 			if (index <= 0) {
 				index = this.props.vocabList.length - 1;
@@ -4507,7 +4526,7 @@
 			}
 			this.props.onImageChange(index);
 		},
-		render: function () {
+		render: function render() {
 			return React.createElement(
 				"div",
 				{ className: "foodWrapper" },

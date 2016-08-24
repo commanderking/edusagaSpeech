@@ -38,6 +38,7 @@ var Task = React.createClass({
 					<HintButton 
 						assessmentMode= {this.props.assessmentMode}
 						hintActive= {this.props.hintActive}
+						index = {this.props.index}
 						currentHintIndex= {this.props.currentHintIndex}
 						onDisableHint= {this.props.onDisableHint}
 						onHintClick= {this.props.onHintClick} />

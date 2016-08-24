@@ -7,7 +7,7 @@ var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer
 var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TransitionContainer = require('./questionAsker/TransitionContainer');
-import {addQueuedTasksToCurrentTasks, getIndexesToSpliceQueuedTasks, removeTasksfromQueue} from './helpers/CorrectAnswerLogic';
+import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
 const Constants = require('./helpers/Constants.js');
 
 var QuestionAsker = React.createClass({
@@ -43,7 +43,6 @@ var QuestionAsker = React.createClass({
 			// Wait until the voiceslist changes and then initialize speechSynth
 			// CARE: Will not work correctly if called on "render"
 			window.speechSynthesis.onvoiceschanged = function() {
-				// window.speechSynthesis.getVoices();
 				that.setState({
 					voicePack: SpeechSynth.init(that.state.sceneData.currentLanguage)
 				});
@@ -57,184 +56,170 @@ var QuestionAsker = React.createClass({
 		this.loadSceneData();
 	},
 	checkAnswer: function(userAnswer, taskIndex) {
-		var that = this;
-		var correctAnswer = false;
-		var responseSoundID;
-		var possibleAnswerIndex;
-
-		// Trick to get new instance of sceneData, to not alter the origial state
-		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
-		var allCurrentTasks = this.state.sceneData.character.currentTasks;
-		var currentTaskData = allCurrentTasks[taskIndex];
-		var possibleCorrectAnswers = currentTaskData.possibleAnswers;
-
-		// Check if user's answers contains any of the possible answers
-		if (currentTaskData.completeMatchOnly === true) {
-			possibleCorrectAnswers.forEach(function(possibleAnswerObject, i) {
-				// Temporarily grab the soundID of this object
-				var tempSoundID = possibleAnswerObject.soundID;
-				possibleAnswerObject.answers.forEach(function(possibleAnswer){
-					if (userAnswer === possibleAnswer) {
-						correctAnswer = true;
-						responseSoundID = tempSoundID;
-						possibleAnswerIndex = i;
-					}
-				})
-			});
+		// Case where there's an error due to user canceling
+		if (userAnswer === "Cancel Speech") {
+			// Do nothing
 		} else {
-			possibleCorrectAnswers.forEach(function(possibleAnswerObject, i) {
-				var tempSoundID = possibleAnswerObject.soundID;
-				possibleAnswerObject.answers.forEach(function(possibleAnswer){
-					if (userAnswer.indexOf(possibleAnswer) >= 0) {
-						correctAnswer = true;
-						responseSoundID = tempSoundID;
-						possibleAnswerIndex = i;
-					}
-				})
 
-			})
-		}
-		if (correctAnswer) {
+			var that = this;
+			var correctAnswer = false;
+			var responseSoundID;
+			var possibleAnswerIndex;
 
-			/*----------------------------------------------
-			These actions immediately happen
-			----------------------------------------------*/
+			// Trick to get new instance of sceneData, to not alter the origial state
+			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
+			var allCurrentTasks = TaskController.getCurrentTasks(newSceneData); 
+			var currentTaskData = TaskController.getActiveTask(newSceneData, taskIndex);
+			var possibleCorrectAnswers = TaskController.getPossibleCorrectAnswers(newSceneData, taskIndex);
 
-			// Play response voice
-			this.playSound(responseSoundID);
-
-			// Store sound ID in current Sound ID if player wnats to repeat
-			newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].soundID;
-
-			// Adjust character image
-			newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
-
-			// Show response text
-			newSceneData.currentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
-
-			// Add coins 
-			this.addCoins(10);
-
-			this.setState({sceneData: newSceneData});
-
-			this.setState({correctAnswerState: true});
-			this.turnMicStateOff();
-
-			/*----------------------------------------------
-			These actions happen on delay
-			----------------------------------------------*/
-
-			var newerSceneData = JSON.parse(JSON.stringify(newSceneData));
-
-			setTimeout(function(){
-				// Turn off correct answer state
-				that.setState({correctAnswerState: false});
-				// Push this task into the completedTasks
-				newSceneData.character.completedTasks.push(currentTaskData);
-
-				// Remove the task from the tasks array
-				// If it's a choice task, search the array for other choices that are linked and remove them
-				if (currentTaskData.taskType !== undefined) {
-					if (currentTaskData.taskType == "choice") {
-						// Search tasks to see if there's another task with the current link
-						var indexesToRemove = [];
-						allCurrentTasks.forEach(function(task, k) {
-							if (task.taskLink == currentTaskData.taskLink) {
-								indexesToRemove.push(k);
-							}
-						});
-
-						// Remove from the end of array all tasks that have matching link
-						for (var i = indexesToRemove.length -1; i >= 0; i--) {
-	   						allCurrentTasks.splice(indexesToRemove[i],1);
+			// Check if user's answers contains any of the possible answers
+			if (currentTaskData.completeMatchOnly === true) {
+				possibleCorrectAnswers.forEach(function(possibleAnswerObject, i) {
+					// Temporarily grab the soundID of this object
+					var tempSoundID = possibleAnswerObject.soundID;
+					possibleAnswerObject.answers.forEach(function(possibleAnswer){
+						if (userAnswer === possibleAnswer) {
+							correctAnswer = true;
+							responseSoundID = tempSoundID;
+							possibleAnswerIndex = i;
 						}
-						newSceneData.character.tasks = allCurrentTasks;
+					})
+				});
+			} else {
+				// Store the returned data;
+				var returnedObject = SpeechChecker.typicalCheck(userAnswer, newSceneData, taskIndex);
+				correctAnswer = returnedObject.answerCorrect;
+				responseSoundID = returnedObject.responseSoundID;
+				possibleAnswerIndex = returnedObject.possibleAnswersIndex;
+			}
+			if (correctAnswer) {
+
+				/*----------------------------------------------
+				These actions immediately happen
+				----------------------------------------------*/
+
+				// Play response voice
+				this.playSound(responseSoundID);
+
+				// Store sound ID in current Sound ID if player wnats to repeat
+				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].soundID;
+
+				// Adjust character image
+				newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
+
+				// Show response text
+				newSceneData.currentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
+
+				// Mark question as corrrect
+				newSceneData.character.currentTasks[taskIndex].possibleAnswers.correct = true;
+
+				// Add coins 
+				this.addCoins(10);
+
+				this.setState({sceneData: newSceneData});
+
+				this.setState({correctAnswerState: true});
+				this.turnMicStateOff();
+
+				/*----------------------------------------------
+				These actions happen on delay
+				----------------------------------------------*/
+				setTimeout(function(){
+					// Turn off correct answer state
+					that.setState({correctAnswerState: false});
+					// Push this task into the completedTasks
+					newSceneData.character.completedTasks.push(currentTaskData);
+
+					// Remove the task from the tasks array
+					// If it's a choice task, search the array for other choices that are linked and remove them
+					if (currentTaskData.taskType !== undefined) {
+						if (currentTaskData.taskType == "choice") {
+							// Search tasks to see if there's another task with the current link
+							var indexesToRemove = [];
+							allCurrentTasks.forEach(function(task, k) {
+								if (task.taskLink == currentTaskData.taskLink) {
+									indexesToRemove.push(k);
+								}
+							});
+
+							// Remove from the end of array all tasks that have matching link
+							for (var i = indexesToRemove.length -1; i >= 0; i--) {
+		   						allCurrentTasks.splice(indexesToRemove[i],1);
+							}
+							newSceneData.character.tasks = allCurrentTasks;
+						}
+					} else {
+						// Add task to completed tasks and then delete it from currentTasks
+						newSceneData.character.currentTasks.splice(taskIndex, 1);
 					}
-				} else {
-					// Add task to completed tasks and then delete it from currentTasks
-					newSceneData.character.currentTasks.splice(taskIndex, 1);
-				}
 
-				// If task has an extension task, add that new task to the Task List
-				if (currentTaskData.tasksToQueue == null) {
-					// Do nothing
-				} else if (currentTaskData.tasksToQueue.length > 0) {
-					var currentTasks = newSceneData.character.currentTasks;
-					var tasksToQueueIDs = currentTaskData.tasksToQueue;
-					var queuedTasks = newSceneData.character.queuedTasks;
+					// If task has an extension task, add that new task to the Task List
+					if (currentTaskData.tasksToQueue == null) {
+						// Do nothing
+					} else if (currentTaskData.tasksToQueue.length > 0) {
+						var currentTasks = newSceneData.character.currentTasks;
+						var tasksToQueueIDs = currentTaskData.tasksToQueue;
+						var queuedTasks = newSceneData.character.queuedTasks;
 
-					// Create new current task list
-					newSceneData.character.currentTasks = addQueuedTasksToCurrentTasks(currentTasks, tasksToQueueIDs, queuedTasks) 
-					
-					// Get indexes of tasks from queue to remove
-					var indexesToRemove = getIndexesToSpliceQueuedTasks(tasksToQueueIDs, queuedTasks)
+						// Add tasks from the queue list to the current list
+						newSceneData.character.currentTasks = TaskController.addQueuedTasksToCurrentTasks(currentTasks, tasksToQueueIDs, queuedTasks) 
+						
+						// Get indexes of tasks from queue to remove
+						var indexesToRemove = TaskController.getIndexesToSpliceQueuedTasks(tasksToQueueIDs, queuedTasks)
 
-					// Remove tasks that are no longer in queue
-					newSceneData.character.queuedTasks = removeTasksfromQueue(indexesToRemove, queuedTasks)
-				}
+						// Remove tasks that are no longer in queue
+						newSceneData.character.queuedTasks = TaskController.removeTasksfromQueue(indexesToRemove, queuedTasks)
+					}
 
-				that.setState({sceneData: newSceneData})
-			}, 3000)
+					that.setState({sceneData: newSceneData})
+				}, 3000)
 
-			
-		/*--------------------------------------------
-		When user answers incorrectly
-		--------------------------------------------*/
+				
+			/*--------------------------------------------
+			When user answers incorrectly
+			--------------------------------------------*/
 
-		} else {
-			// Turn off Mic recording state
-			this.turnMicStateOff();
+			} else {
+				// Turn off Mic recording state
+				this.turnMicStateOff();
 
-			// set image to confused
-			newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
-			
-			// Grab random confused phrase
-			var confusedPhrasesArray = newSceneData.character.confusedPhrases;
-			
-			// Randomly pick a confused response
-			var randomVar = Math.random();
+				// set image to confused
+				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
+				
+				// Grab random confused phrase
+				var confusedPhrasesArray = newSceneData.character.confusedPhrases;
+				
+				// Randomly pick a confused response
+				var randomVar = Math.random();
 
-			// Set text for confusion
-			newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
+				// Set text for confusion
+				newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
 
-			// Play confused sound
-			this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
+				// Play confused sound
+				this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
 
-			// Add the attempted answer to the attemptedAnswers;
-			newSceneData.character.currentTasks[taskIndex].attemptedAnswers.push(userAnswer);
-			console.log(newSceneData.character.currentTasks[taskIndex].attemptedAnswers);
-			// Activate Feedback Mode
-			var feedback = userAnswer; 
-			this.setState({
-				feedbackText: userAnswer
-			})
+				// Add the attempted answer to the attemptedAnswers;
+				newSceneData.character.currentTasks[taskIndex].attemptedAnswers.push(userAnswer);
 
-			// Turns on feedback mode to reveal what user said
-			this.activateFeedbackMode();
+				// Activate Feedback Mode
+				this.setState({
+					feedbackText: userAnswer
+				})
 
-			// Set new variables in sceneData
-			this.setState({sceneData: newSceneData});
+				// Turns on feedback mode to reveal what user said
+				this.activateFeedbackMode();
 
-			this.setState({wrongAnswerState: true});
+				// Set new variables in sceneData
+				this.setState({sceneData: newSceneData, wrongAnswerState: true});
 
-			setTimeout(function() {
-				// Reset character image to default 
-				newSceneData.currentImage = that.state.sceneData.character.emotions.default;
-				that.setState({wrongAnswerState: false});
-				that.setState({sceneData: newSceneData});
-			}, 3000);
+				setTimeout(function() {
+					// Reset character image to default 
+					newSceneData.currentImage = that.state.sceneData.character.emotions.default;
+					that.setState({wrongAnswerState: false, sceneData: newSceneData});
+				}, 3000);
 
+			}
 		}
-
-		/*---------------------------------------------
-		For both correct and incorrect answers 
-		---------------------------------------------*/
-
-
-		// Refresh the sceneData with newSceneData after 3 seconds
-		// return Miri Icon to default after 3s
-		// this.setState({sceneData: newSceneData});
-
 	},
 	initializeSounds: function() {
 		var SOUND_BASE_PATH = Constants.SOUND_PATH;
@@ -279,7 +264,6 @@ var QuestionAsker = React.createClass({
 
 		// Set text for confusion
 		newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
-		console.log(newSceneData.currentDialog);
 
 	},
 	handleHintClick: function(hintIndex) {
@@ -346,52 +330,80 @@ var QuestionAsker = React.createClass({
 		this.setState({ coins: newCoins });
 		
 	},
+	// Function triggers when user clicks text in dailog box
 	handleRepeat: function() {
-		console.log(this.state.sceneData.currentSoundID);
 		this.playSound(this.state.sceneData.currentSoundID);
 	},
+	// function triggers when user speaks "repeat" into microphone
 	handleAskRepeat: function(userAnswer) {
-		var that = this;
 		this.turnMicStateOff();
 
-		// check if what user said was one of the ask for repeat phrases
-		var possibleRepeatPhrases = JSON.parse(JSON.stringify(this.state.sceneData.character.repeatPhrases));
-		var correctRepeatAsk = false;
+		if (userAnswer === "Cancel Speech") {
+			// Do nothing
+		} else {
+
+			var that = this;
+
+			// check if what user said was one of the ask for repeat phrases
+			var possibleRepeatPhrases = JSON.parse(JSON.stringify(this.state.sceneData.character.repeatPhrases));
+			var correctRepeatAsk = false;
+			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
+
+			possibleRepeatPhrases.forEach(function(possiblePhrase, i) {
+				// Temporarily grab the soundID of this object
+				if (userAnswer === possiblePhrase) {
+					correctRepeatAsk = true;
+				}
+			});
+
+			if (correctRepeatAsk) {
+				this.handleRepeat();
+			} else {
+				// Randomly pick a confused response
+				var confusedPhrasesArray = this.state.sceneData.character.confusedPhrases;
+				var randomVar = Math.random();
+
+				// Show confused emotion
+				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
+
+				// Set text for confusion
+				newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
+
+				// Play confused sound
+				this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
+
+				this.setState({wrongAnswerState: true, sceneData: newSceneData });
+
+				setTimeout(function() {
+					// Reset character image to default 
+					newSceneData.currentImage = that.state.sceneData.character.emotions.default;
+					that.setState({wrongAnswerState: false, sceneData: newSceneData });
+				}, 2000);
+			}
+		}
+	},
+	skipTasks: function() {
+		// Grab relevant data from sceneData
+		var allCurrentTasks = TaskController.getCurrentTasks(this.state.sceneData); 
+		var taskIDsToQueue = TaskController.getTaskIDsToQueueOfCurrentTasks(this.state.sceneData);
+		var allQueuedTasks = TaskController.getQueuedTasks(this.state.sceneData);
+
 		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 
-		possibleRepeatPhrases.forEach(function(possiblePhrase, i) {
-			// Temporarily grab the soundID of this object
-			if (userAnswer === possiblePhrase) {
-				correctRepeatAsk = true;
-			}
-		});
+		// Set completed tasks to current tasks 
+		newSceneData.character.completedTasks = newSceneData.character.completedTasks.concat(allCurrentTasks);
 
-		if (correctRepeatAsk) {
-			this.handleRepeat();
-		} else {
-			// Randomly pick a confused response
-			var confusedPhrasesArray = this.state.sceneData.character.confusedPhrases;
-			var randomVar = Math.random();
+		// Remove all completed tasks
+		allCurrentTasks = [];
 
-			newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
+		// Add element from queue to the new queue;
+		newSceneData.character.currentTasks = TaskController.addQueuedTasksToCurrentTasks(allCurrentTasks, taskIDsToQueue, allQueuedTasks);
 
-			// Set text for confusion
-			newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
-			console.log(newSceneData.currentDialog);
+		// Remove appropriate queued tasks
+		var spliceIndexes = TaskController.getIndexesToSpliceQueuedTasks(taskIDsToQueue, allQueuedTasks) 
+		newSceneData.character.queuedTasks = TaskController.removeTasksfromQueue(spliceIndexes, allQueuedTasks);
 
-			// Play confused sound
-			this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
-
-
-			this.setState({wrongAnswerState: true, sceneData: newSceneData });
-
-			setTimeout(function() {
-				// Reset character image to default 
-				newSceneData.currentImage = that.state.sceneData.character.emotions.default;
-				that.setState({wrongAnswerState: false, sceneData: newSceneData });
-			}, 2000);
-		}
-
+		this.setState({sceneData: newSceneData})
 	},
 	render: function() {
 		var sceneData = this.state.sceneData;
@@ -441,7 +453,8 @@ var QuestionAsker = React.createClass({
 						wrongAnswerState = {this.state.wrongAnswerState}
 						assessmentMode = {sceneData.assessmentMode}
 						repeatPhrases = {sceneData.character.repeatPhrases} 
-						onHandleAskRepeat = {this.handleAskRepeat} />
+						onHandleAskRepeat = {this.handleAskRepeat} 
+						skipTasks = {this.skipTasks}/>
 					<FeedbackContainer 
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}

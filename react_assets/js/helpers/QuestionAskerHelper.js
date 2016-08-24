@@ -1,6 +1,101 @@
+// Functions to help grab the correct elements from data structure of QuestionAsker
 
-// Tasks to Queue is an array of IDs on correctly answered task, ex, [4,5]
-// queuedTasksArray = All possible tasks that are still to come
+export var TaskController = {
+	getCurrentTasks: function(data) {
+		return data.character.currentTasks;
+	},
+	getActiveTask: function(data, activeTaskIndex) {
+		return data.character.currentTasks[activeTaskIndex];
+	},
+	getPossibleCorrectAnswers: function(data, activeTaskIndex) {
+		return this.getActiveTask(data, activeTaskIndex).possibleAnswers;
+	},
+	getQueuedTasks: function(data) {
+		return data.character.queuedTasks;
+	},
+	// Used if user skips a task, then need to populate all potential future tasks
+	getTaskIDsToQueueOfCurrentTasks: function(data) {
+		var taskIDs = [];
+		this.getCurrentTasks(data).forEach(function(task){
+			// loop through all taskIDs for each task
+			task.tasksToQueue.forEach(function(taskID) {
+				taskIDs.push(taskID);
+			});
+		});
+		// Remove any duplicate IDs
+		var uniqTaskIDs = [ ...new Set(taskIDs)];
+		return uniqTaskIDs;
+	},
+	// Only get the TaskIDs to queue fo the active task
+	getTaskIDsToQueueOfCurrentTask: function(data, activeTaskIndex) {
+		var taskIDsToQueue = this.getActiveTask(data, activeTaskIndex).tasksToQueue;
+		return taskIDsToQueue;
+	},
+	// Adds queued tasks to current tasks; Does not remove previous tasks
+	addQueuedTasksToCurrentTasks: function(currentTasksArray, tasksToQueueIDArray, queuedTasksArray) {
+		tasksToQueueIDArray.forEach(function(tasksToQueueID, i) {
+			queuedTasksArray.forEach(function(taskObject, j) {
+				if (tasksToQueueID === taskObject.taskID) {
+					currentTasksArray.push(taskObject);
+				}
+			})
+		});
+		return currentTasksArray;
+	},
+	getIndexesToSpliceQueuedTasks: function(tasksToQueueIDArray, queuedTasksArray) {
+		var indexesToSplice = []
+		tasksToQueueIDArray.forEach(function(tasksToQueueID, i) {
+			queuedTasksArray.forEach(function(taskObject , j) {
+				if (tasksToQueueID === taskObject.taskID) {
+					indexesToSplice.push(j);
+				}
+			})
+		})
+		return indexesToSplice;	
+	},
+	removeTasksfromQueue: function(indexesToRemove, queuedTasksArray) {
+		var newQueuedTasksArray = queuedTasksArray;
+		for (var i = indexesToRemove.length -1; i >= 0; i--) {
+				newQueuedTasksArray.splice(indexesToRemove[i],1);
+		}
+		return newQueuedTasksArray;
+	},
+	skipTasks: function(data) {
+		var taskIDs = this.getTaskIDsToQueueOfCurrentTasks(data);
+		var currentTasksArray = this.getCurrentTasks(data);
+		var queuedTaskArray = this.getQueuedTasks(data);
+
+		this.addQueuedTasksToCurrentTasks(currentTasksArray, taskIDs, queuedTaskArray);
+	}
+}
+
+export var SpeechChecker = {
+	typicalCheck: function(userAnswer, data, activeTaskIndex) {
+		var possibleAnswers = TaskController.getPossibleCorrectAnswers(data, activeTaskIndex);
+		var answerCorrect = false;
+		var possibleAnswersIndex;
+		var tempSoundID;
+		possibleAnswers.forEach(function(possibleAnswerObject, i) {
+			tempSoundID = possibleAnswerObject.soundID;
+			possibleAnswerObject.answers.forEach(function(possibleAnswer){
+				if (userAnswer.indexOf(possibleAnswer) >= 0) {
+					answerCorrect = true;
+					possibleAnswersIndex = i; 
+				}
+			});
+		});
+		return {
+			"answerCorrect" : answerCorrect,
+			"responseSoundID" : tempSoundID,
+			"possibleAnswersIndex" : possibleAnswersIndex
+		};
+	},
+	addUserAnswerToAttemptedAnswers: function(userAnswer, data, activeTaskIndex) {
+		var attemptedAnswers = data.character.currentTasks[activeTaskIndex].attemptedAnswers;
+		attemptedAnswers.push(userAnswer);
+		return attemptedAnswers;
+	}
+}
 
 export var currentTasks = [
 		{
@@ -20,6 +115,10 @@ export var currentTasks = [
 			"attemptedAnswers" : []
 		}
 ]
+
+
+// Tasks to Queue is an array of IDs on correctly answered task, ex, [4,5]
+// queuedTasksArray = All possible tasks that are still to come 
 
 export var tasksToQueue = [3,4];
 
@@ -74,38 +173,6 @@ export var queuedTasks = [
 		"attemptedAnswers" : []
 	}
 ]
-
-// Returns the new CurrentTasksArray
-export function addQueuedTasksToCurrentTasks(currentTasksArray, tasksToQueueIDArray, queuedTasksArray) {
-	tasksToQueueIDArray.forEach(function(tasksToQueueID, i) {
-		queuedTasksArray.forEach(function(taskObject, j) {
-			if (tasksToQueueID === taskObject.taskID) {
-				currentTasksArray.push(taskObject);
-			}
-		})
-	});
-	return currentTasksArray;
-}
-
-export function getIndexesToSpliceQueuedTasks(tasksToQueueIDArray, queuedTasksArray) {
-	var indexesToSplice = []
-	tasksToQueueIDArray.forEach(function(tasksToQueueID, i) {
-		queuedTasksArray.forEach(function(taskObject , j) {
-			if (tasksToQueueID === taskObject.taskID) {
-				indexesToSplice.push(j);
-			}
-		})
-	})
-	return indexesToSplice;
-}
-
-export function removeTasksfromQueue(indexesToRemove, queuedTasksArray) {
-	var newQueuedTasksArray = queuedTasksArray;
-	for (var i = indexesToRemove.length -1; i >= 0; i--) {
-			newQueuedTasksArray.splice(indexesToRemove[i],1);
-	}
-	return newQueuedTasksArray;
-}
 
 export var exepectedOutputaddQueuedTasksToCurrentTasks = [
 	{
@@ -177,20 +244,3 @@ export var expectedOutputAfterSplicing = [
 		"attemptedAnswers" : []
 	}
 ]
-
-
-					/*
-					var tasksToQueueIDs = currentTaskData.tasksToQueue;
-					var queuedTasks = newSceneData.character.queuedTasks;
-
-					console.log(addQueuedTasksToCurrentTasks);
-					// Create new current task list
-					newSceneData.character.queuedTasks = addQueuedTasksToCurrentTasks(tasksToQueueIDs, queuedTasks) 
-
-					// Get indexes of tasks from queue to remove
-					var indexesToRemove = getIndexesToSpliceQueuedTasks(tasksToQueueIDArray, queuedTasks)
-
-					// Remove tasks that are no longer in queue
-					newSceneData.character.queuedTasks = removeTasksfromQueue(indexesToRemove, queuedTasks)
-					*/
-

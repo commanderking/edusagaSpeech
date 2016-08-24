@@ -3,11 +3,11 @@
 var activateTask = {
 	mic: function(DOMnode) {
 		var tl = new TimelineMax();
-		tl.to(DOMnode, 1, { scale: 0})
-			.to(DOMnode, 1, {scale: 1.5})	
+		tl.to(DOMnode, 0.25, { scale: 0})
+			.to(DOMnode, 0.25, {scale: 1.5})	
 	},
 	star: function(DOMnode) {
-		var tl = new TimelineMax({delay: 1});
+		var tl = new TimelineMax({delay: 0.25});
 		tl.to(DOMnode, 0.25, {scale: 2})
 			.to(DOMnode, 0.25, {scale: 1.5})
 			.to(DOMnode, 2, {rotation:"360", ease:Linear.easeNone, repeat: -1});

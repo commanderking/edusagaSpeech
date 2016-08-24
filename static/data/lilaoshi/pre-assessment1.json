@@ -36,7 +36,7 @@
 				"smiling" : "characters/chenguang/chengGoodJob.png",
 				"confused" : "characters/chenguang/chengConfused.png",
 				"wistful" : "characters/chenguang/chengWistful.png",
-				"silhouette" : "characters/david/davidSilhouette.png"
+				"silhouette" : "characters/chenguang/chengSilhouette.png"
 			},
 			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下"],
 			"sounds" : 
@@ -176,7 +176,7 @@
 					[
 						{
 							"answers" : ["你叫什么名字", "你叫什么", "你呢"],
-							"response" : "我叫王丽丽",
+							"response" : "我叫陈阳。",
 							"soundID" : ""
 						}
 					],
@@ -242,7 +242,7 @@
 					[
 						{
 							"answers" : ["我也上九年级", "我也九年级", "我也是"],
-							"response" : "哦! 真好! ",
+							"response" : "哦! 真好! ", 
 							"soundID" : ""
 						}
 					],
@@ -261,7 +261,7 @@
 						},
 						{
 							"text" : "Try saying",
-							"speechableText" : "我也上九年级",
+							"speechableText" : "我也上九年级!",
 							"coins" : 5							
 						}
 					],
@@ -302,7 +302,7 @@
 					[
 						{
 							"answers" : ["你的哥哥上几年级", "你的哥哥几年级", "你哥哥上几年级", "你哥哥几年级"],
-							"response" : "他上十一年级",
+							"response" : "他上十一年级。",
 							"soundID" : ""
 						}
 					],
@@ -394,7 +394,7 @@
 					[
 						{
 							"answers" : ["你的英文好吗", "你的英文怎么样", "你的英文好不好", "你的英语怎么样", "你的英语好吗", "你的英语好不好"],
-							"response" : "我的英语不太好",
+							"response" : "我的英语不太好。。。 It's not good.",
 							"soundID" : ""
 						}
 					],
@@ -441,7 +441,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengSmile.png",
+					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [24],
 					"attemptedAnswers" : []		
 				},
@@ -517,7 +517,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我的中文老师是张老师", "张老师是我的老师", "我的韩语老师是张老师", "张老师是我的汉语老师", "我的汉语老师姓张", "我的中文老师姓张"],
+							"answers" : ["我的中文老师是张老师", "张老师是我的老师", "我的汉语老师是张老师", "张老师是我的汉语老师", "我的汉语老师姓张", "我的中文老师姓张"],
 							"response" : "他是不是一个好老师?", 
 							"soundID" : ""
 						}
@@ -692,7 +692,7 @@
 					[
 						{
 							"answers" : ["我打得非常好", "很好", "非常好"],
-							"response" : "哦。。。真的! ", 
+							"response" : "哇！ 真的吗？ ", 
 							"soundID" : ""
 						}
 					],
@@ -711,11 +711,16 @@
 				},
 				{
 					"taskID" : 20,
-					"task" : "Ask whether she wants to play ping pong with you this afternoon",
+					"task" : "Ask if she wants to play ping pong with you this afternoon",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["今天下午你想和我打乒乓球吗", "今天下午你想不想和我打乒乓球", "你今天下午想和我打乒乓球吗", "你今天下午想不想和我打乒乓球"],
+							"answers" : ["今天下午你想和我打乒乓球吗", "今天下午你想不想和我打乒乓球", 
+										"你今天下午想和我打乒乓球吗", "你今天下午想不想和我打乒乓球",
+										"你今天下午要不要和我打乒乓球", "你今天下午要和我打乒乓球吗",
+										"今天下午你想跟我打乒乓球吗", "今天下午你想不想跟我打乒乓球", 
+										"你今天下午想跟我打乒乓球吗", "你今天下午想不想跟我打乒乓球",
+										"你今天下午要不要跟我打乒乓球", "你今天下午要跟我打乒乓球吗" ],
 							"response" : "好啊! 几点?", 
 							"soundID" : ""
 						}
@@ -723,7 +728,7 @@
 					"hints" : 
 					[
 						{
-							"text" : "Start with Today, afternoon",
+							"text" : "Start with today, afternoon: ",
 							"speechableText" : "今天下午",
 							"coins" : 5
 						},
@@ -740,7 +745,7 @@
 				},
 				{
 					"taskID" : 21,
-					"task" : "Tell her a time.",
+					"task" : "Tell her 3:15.",
 					"possibleAnswers" : 
 					[
 						{
@@ -787,7 +792,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/chengGoodJob.png",
+					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [23],
 					"attemptedAnswers" : []		
 				}

@@ -119,6 +119,11 @@
 							"answers" : ["你好"],
 							"response" : "你好!",
 							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "今天怎么样", "今天好吗", "今天过得怎么样"],
+							"response" : "非常好!",
+							"soundID" : "feichanghao"
 						}
 					],
 					"correct" : false,

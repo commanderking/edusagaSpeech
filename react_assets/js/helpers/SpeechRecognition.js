@@ -54,13 +54,18 @@ var speechHelper = {
 				}
 			},
 
+			// If user clicks task again, the task should cancel
+			$(".taskDiv").click(function() {
+				recognition.abort();
+			})
+
 			recognition.onspeechend = function() {
 				recognition.stop();
 			},
 
 			recognition.onerror = function(event) {
 				console.log("Error " + event.error);
-				resolve()
+				resolve("Cancel Speech");
 			}
 		});
 	}
