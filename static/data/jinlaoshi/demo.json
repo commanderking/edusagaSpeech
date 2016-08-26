@@ -5,7 +5,6 @@
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
 	"currentSoundID": "",
-	"scenarioIndex": 0,
 	"assessmentMode": false,
 	"scenario" :
 	[	
@@ -25,7 +24,7 @@
 			{
 				"nameEnglish" : "Shanghai Airport",
 				"nameChinese" : "上海机场", 
-				"bg" : "/static/images/bg/shanghaiAirport.jpg"
+				"bg" : "bg/shanghaiAirport.jpg"
 			},
 			"emotions" : 
 			{

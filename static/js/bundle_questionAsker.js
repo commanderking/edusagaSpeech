@@ -58,6 +58,7 @@
 	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 190);
 	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 201);
 	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 202);
+	var MenuContainer = __webpack_require__(/*! ./questionAsker/MenuContainer */ 209);
 	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 207);
 	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 208);
 	
@@ -71,24 +72,33 @@
 			return {
 				sceneData: undefined,
 				scenarioOn: true,
+				scenarioIndex: 0,
 				hintActive: false,
 				currentHintIndex: -1,
 				voicePack: {},
 				coins: 0,
+				possibleCoins: 0,
 				answerFeedbackActive: false,
 				feedbackText: "",
-				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png",
+				miriIconSrc: "miri/icons/Miri_Icon_default.png",
 				micActive: false,
 				correctAnswerState: false,
-				wrongAnswerState: false
+				wrongAnswerState: false,
+				sceneComplete: true
 			};
 		},
 		loadSceneData: function loadSceneData() {
 			var that = this;
 			$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function (data) {}).success(function (data) {
+	
+				// Calculate number of coins possible
+				var totalCoins = 10 * (data.character.currentTasks.length + data.character.queuedTasks.length);
 				that.setState({
-					sceneData: data
+					sceneData: data,
+					possibleCoins: totalCoins
 				});
+				that.resetScene();
+	
 				// Load all the sounds that are in the scene
 				that.initializeSounds();
 				// Load voice pack
@@ -103,11 +113,28 @@
 				};
 			});
 		},
+		resetScene: function resetScene() {
+			this.setState({
+				sceneComplete: false,
+				scenarioOn: true,
+				scenarioIndex: 0,
+				coins: 0
+			});
+		},
 		componentDidMount: function componentDidMount() {
 			this.loadSceneData();
 		},
 		componentWillReceiveProps: function componentWillReceiveProps() {
 			this.loadSceneData();
+		},
+		componentDidUpdate: function componentDidUpdate() {
+	
+			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
+				var that = this;
+				setTimeout(function () {
+					that.setState({ sceneComplete: true });
+				}, 500);
+			}
 		},
 		checkAnswer: function checkAnswer(userAnswer, taskIndex) {
 			// Case where there's an error due to user canceling
@@ -324,13 +351,13 @@
 				hintActive: true,
 				currentHintIndex: hintIndex,
 				feedbackText: hintText,
-				miriIconSrc: "/static/images/miri/icons/Miri_Icon_Yay.png"
+				miriIconSrc: "miri/icons/Miri_Icon_Yay.png"
 			});
 	
 			// return Miri Icon to default after 3s
 			setTimeout(function () {
 				that.setState({
-					miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+					miriIconSrc: "miri/icons/Miri_Icon_default.png"
 				});
 			}, 3000);
 		},
@@ -338,7 +365,7 @@
 			this.setState({
 				hintActive: false,
 				currentHintIndex: -1,
-				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+				miriIconSrc: "miri/icons/Miri_Icon_default.png"
 			});
 		},
 		handleHintAudio: function handleHintAudio(hintAudioToPlay) {
@@ -354,18 +381,18 @@
 				hintActive: false,
 				currentHintIndex: -1,
 				answerFeedbackActive: true,
-				miriIconSrc: "/static/images/miri/icons/Miri_Icon_Oh.png"
+				miriIconSrc: "miri/icons/Miri_Icon_Oh.png"
 			});
 			setTimeout(function () {
 				that.setState({
-					miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+					miriIconSrc: "miri/icons/Miri_Icon_default.png"
 				});
 			}, 3000);
 		},
 		deactivateFeedbackMode: function deactivateFeedbackMode() {
 			this.setState({
 				answerFeedbackActive: false,
-				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+				miriIconSrc: "miri/icons/Miri_Icon_default.png"
 			});
 		},
 		turnMicStateOn: function turnMicStateOn() {
@@ -431,6 +458,7 @@
 			}
 		},
 		skipTasks: function skipTasks() {
+			var that = this;
 			// Grab relevant data from sceneData
 			var allCurrentTasks = _QuestionAskerHelper.TaskController.getCurrentTasks(this.state.sceneData);
 			var taskIDsToQueue = _QuestionAskerHelper.TaskController.getTaskIDsToQueueOfCurrentTasks(this.state.sceneData);
@@ -453,6 +481,14 @@
 	
 			this.setState({ sceneData: newSceneData });
 		},
+		nextScenario: function nextScenario() {
+			if (this.state.scenarioIndex === this.state.sceneData.scenario.length - 1) {
+				this.changeScenarioMode();
+			} else {
+				var newScenarioIndex = this.state.scenarioIndex + 1;
+				this.setState({ scenarioIndex: newScenarioIndex });
+			}
+		},
 		render: function render() {
 			var sceneData = this.state.sceneData;
 	
@@ -472,17 +508,17 @@
 					React.createElement(DialogContainer, {
 						scenarioOn: this.state.scenarioOn,
 						scenarioData: sceneData.scenario,
-						scenarioIndex: sceneData.scenarioIndex,
+						scenarioIndex: this.state.scenarioIndex,
 						charName: this.state.sceneData.character.name,
 						currentDialog: sceneData.currentDialog,
 						hintActive: this.state.hintActive,
 						onRepeat: this.handleRepeat,
-						changeScenarioMode: this.changeScenarioMode,
+						nextScenario: this.nextScenario,
 						assessmentMode: sceneData.assessmentMode }),
 					React.createElement(CharacterContainer, {
 						scenarioOn: this.state.scenarioOn,
 						scenarioData: this.state.sceneData.scenario,
-						scenarioIndex: this.state.sceneData.scenarioIndex,
+						scenarioIndex: this.state.scenarioIndex,
 						charImage: sceneData.currentImage,
 						silhouette: sceneData.character.emotions.silhouette,
 						hintActive: this.state.hintActive,
@@ -516,7 +552,12 @@
 						coins: this.state.coins,
 						answerFeedbackActive: this.state.answerFeedbackActive,
 						feedbackText: this.state.feedbackText,
-						miriIconSrc: this.state.miriIconSrc })
+						miriIconSrc: this.state.miriIconSrc }),
+					React.createElement(MenuContainer, {
+						sceneComplete: this.state.sceneComplete,
+						coins: this.state.coins,
+						possibleCoins: this.state.possibleCoins,
+						loadSceneData: this.loadSceneData })
 				);
 			}
 		}
@@ -4713,24 +4754,33 @@
 		}
 	};
 	
+	var ScenarioController = exports.ScenarioController = {
+		nextScenario: function nextScenario(scenarioIndex) {
+			// Move to the next index 
+			return scenarioIndex + 1;
+		}
+	};
+	
 	var SpeechChecker = exports.SpeechChecker = {
 		typicalCheck: function typicalCheck(userAnswer, data, activeTaskIndex) {
 			var possibleAnswers = TaskController.getPossibleCorrectAnswers(data, activeTaskIndex);
 			var answerCorrect = false;
 			var possibleAnswersIndex;
-			var tempSoundID;
+			var responseSoundID;
 			possibleAnswers.forEach(function (possibleAnswerObject, i) {
-				tempSoundID = possibleAnswerObject.soundID;
+				var tempSoundID = possibleAnswerObject.soundID;
+				console.log(possibleAnswerObject.soundID);
 				possibleAnswerObject.answers.forEach(function (possibleAnswer) {
 					if (userAnswer.indexOf(possibleAnswer) >= 0) {
 						answerCorrect = true;
+						responseSoundID = tempSoundID;
 						possibleAnswersIndex = i;
 					}
 				});
 			});
 			return {
 				"answerCorrect": answerCorrect,
-				"responseSoundID": tempSoundID,
+				"responseSoundID": responseSoundID,
 				"possibleAnswersIndex": possibleAnswersIndex
 			};
 		},
@@ -23452,17 +23502,19 @@
   \**********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../helpers/Constants */ 179);
 	
 	//TODO: The dialog's name and text should be their own component
 	
 	var DialogContainer = React.createClass({
-		displayName: "DialogContainer",
+		displayName: 'DialogContainer',
 	
 		render: function render() {
+			var dialogSlantSrc = Constants.IMAGE_PATH + "UI/dialogbox_slant.png";
 			var textNameWrapper;
 			var characterName;
 			var characterNameClass = "characterNameDiv";
@@ -23479,16 +23531,16 @@
 				if (this.props.scenarioOn === true) {
 					characterName = this.props.scenarioData[this.props.scenarioIndex].name;
 					characterTextResponse = React.createElement(
-						"p",
-						{ className: "scenarioText" },
+						'p',
+						{ className: 'scenarioText' },
 						this.props.scenarioData[this.props.scenarioIndex].text
 					);
 					button = React.createElement(
-						"button",
+						'button',
 						{
-							className: "nextButton btn btn-lg btn-success",
-							onClick: this.props.changeScenarioMode },
-						"Start"
+							className: 'nextButton btn btn-lg btn-success',
+							onClick: this.props.nextScenario },
+						'Next'
 					);
 					// Case 2: Hint's active; Name, Text should fade color and the div should invert colors
 				} else if (this.props.hintActive === true) {
@@ -23504,19 +23556,19 @@
 						characterTextResponse = this.props.currentDialog;
 					}
 				return React.createElement(
-					"div",
+					'div',
 					{ className: dialogDivClass },
-					React.createElement("img", { className: "dialogSlantPiece", src: "static/images/UI/dialogbox_slant.png" }),
+					React.createElement('img', { className: 'dialogSlantPiece', src: dialogSlantSrc }),
 					React.createElement(
-						"div",
-						{ className: "responseNameWrapper col-md-8 col-sm-8 col-xs-8" },
+						'div',
+						{ className: 'responseNameWrapper col-md-8 col-sm-8 col-xs-8' },
 						React.createElement(
-							"div",
+							'div',
 							{ className: characterNameClass },
 							characterName
 						),
 						React.createElement(
-							"div",
+							'div',
 							{ className: characterTextClass,
 								onClick: this.props.onRepeat },
 							characterTextResponse
@@ -23535,7 +23587,7 @@
 		charName: PropTypes.string.isRequired,
 		hintActive: PropTypes.bool.isRequired,
 		onRepeat: PropTypes.func.isRequired,
-		changeScenarioMode: PropTypes.func.isRequired,
+		nextScenario: PropTypes.func.isRequired,
 		assessmentMode: PropTypes.bool.isRequired
 	};
 	
@@ -24388,24 +24440,26 @@
   \*******************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
+	var Constants = __webpack_require__(/*! ../helpers/Constants.js */ 179);
 	
 	var BackgroundImageContainer = React.createClass({
-		displayName: "BackgroundImageContainer",
+		displayName: 'BackgroundImageContainer',
 	
 		render: function render() {
+			var bgImageSrc = Constants.IMAGE_PATH + this.props.bgImage;
 			var fadedDiv;
 			if (this.props.hintActive) {
-				fadedDiv = React.createElement("div", { className: "bgFadeOverlay" });
+				fadedDiv = React.createElement('div', { className: 'bgFadeOverlay' });
 			} else {
-				fadedDiv = React.createElement("div", null);
+				fadedDiv = React.createElement('div', null);
 			}
 			return React.createElement(
-				"div",
+				'div',
 				null,
-				React.createElement("img", { className: "sceneBG", src: this.props.bgImage }),
+				React.createElement('img', { className: 'sceneBG', src: bgImageSrc }),
 				fadedDiv
 			);
 		}
@@ -24617,19 +24671,21 @@
   \***************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 179);
 	
 	function CoinMeter(props) {
+		var coinIconSrc = Constants.IMAGE_PATH + "UI/Icon_coins-01.png";
 		return React.createElement(
-			"div",
-			{ className: "coinDiv" },
-			React.createElement("img", { className: "coinIcon", src: "/static/images/UI/Icon_coins-01.png" }),
+			'div',
+			{ className: 'coinDiv' },
+			React.createElement('img', { className: 'coinIcon', src: coinIconSrc }),
 			React.createElement(
-				"div",
-				{ className: "coinCount" },
+				'div',
+				{ className: 'coinCount' },
 				props.coins
 			)
 		);
@@ -24648,12 +24704,14 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 179);
 	
 	function MiriIcon(props) {
+		var miriImgSrc = Constants.IMAGE_PATH + props.miriIconSrc;
 		return React.createElement(
 			'div',
 			null,
-			React.createElement('img', { className: props.miriClass, src: props.miriIconSrc })
+			React.createElement('img', { className: props.miriClass, src: miriImgSrc })
 		);
 	}
 	
@@ -24878,6 +24936,59 @@
 	});
 	
 	module.exports = TransitionContainer;
+
+/***/ },
+/* 209 */
+/*!********************************************************!*\
+  !*** ./react_assets/js/questionAsker/MenuContainer.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	var MenuContainer = React.createClass({
+		displayName: "MenuContainer",
+	
+		render: function render() {
+			if (this.props.sceneComplete === false) {
+				return null;
+			} else {
+				return React.createElement(
+					"div",
+					{ className: "menuContainer" },
+					React.createElement(
+						"h1",
+						null,
+						"You did it!"
+					),
+					React.createElement(
+						"h1",
+						null,
+						" You earned ",
+						this.props.coins,
+						" coins out of ",
+						this.props.possibleCoins,
+						" coins."
+					),
+					React.createElement(
+						"button",
+						{ className: "btn btn-danger restart",
+							onClick: this.props.loadSceneData },
+						"Replay Scene"
+					)
+				);
+			}
+		}
+	});
+	
+	MenuContainer.propTypes = {
+		sceneComplete: PropTypes.bool.isRequired
+	};
+	
+	module.exports = MenuContainer;
 
 /***/ }
 /******/ ]);

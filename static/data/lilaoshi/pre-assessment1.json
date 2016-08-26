@@ -5,16 +5,20 @@
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
 	"currentSoundID": "",
-	"scenarioIndex": 0,
-	"assessmentMode": false,
+	"assessmentMode": true,
 	"scenario" :
 	[	
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Hey there. I'm M.I.R.I, the Mandarin Intelligence Robot Interpreter. I'm here to help you on your journey to Shanghai!",
-			"next" : "end"
+			"text" : "Hey there. I'm M.I.R.I, the Mandarin Intelligence Robot Interpreter. I'm here to help you on your journey to Shanghai!"
+		},
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Yay-01.png",
+			"text" : "Looks like there's a girl sitting by herself in the high school cafeteria. Why don't you try talking to her and see what you remember from last year?"
 		}
 	],
 	"character" : 
@@ -25,7 +29,7 @@
 			{
 				"nameEnglish" : "Shanghai Airport",
 				"nameChinese" : "上海机场", 
-				"bg" : "/static/images/bg/shanghaiAirport.jpg"
+				"bg" : "bg/shitang.jpg"
 			},
 			"emotions" : 
 			{
@@ -42,56 +46,88 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "nihao",
-					"soundPath" : "david/nihao.ogg"
+					"soundID" : "hi",
+					"soundPath" : "chenyang/hi.ogg"
 				},
 				{
-					"soundID" : "feichanghao",
-					"soundPath" : "david/feichanghao.ogg"
+					"soundID" : "henhao",
+					"soundPath" : "chenyang/henhao.ogg"
+				},
+				{
+					"soundID" : "brother15",
+					"soundPath" : "chenyang/brother15.ogg"
+				},
+				{
+					"soundID" : "chineseteacher",
+					"soundPath" : "chenyang/chineseteacher.ogg"
+				},
+				{
+					"soundID" : "classes",
+					"soundPath" : "chenyang/classes.ogg"
+				},
+				{
+					"soundID" : "en",
+					"soundPath" : "chenyang/en.ogg"
+				},
+				{
+					"soundID" : "englishnotgood",
+					"soundPath" : "chenyang/englishnotgood.ogg"
+				},
+				{
+					"soundID" : "haolaoshi",
+					"soundPath" : "chenyang/haolaoshi.ogg"
+				},
+				{
+					"soundID" : "likechinese",
+					"soundPath" : "chenyang/likechinese.ogg"
+				},
+				{
+					"soundID" : "moviesalso",
+					"soundPath" : "chenyang/moviesalso.ogg"
+				},
+				{
+					"soundID" : "mylikes",
+					"soundPath" : "chenyang/mylikes.ogg"
+				},
+				{
+					"soundID" : "ninthgrade",
+					"soundPath" : "chenyang/ninthgrade.ogg"
+				},
+				{
+					"soundID" : "ninthgrade2",
+					"soundPath" : "chenyang/ninthgrade2.ogg"
+				},
+				{
+					"soundID" : "noprob",
+					"soundPath" : "chenyang/noprob.ogg"
+				},
+				{
+					"soundID" : "oh",
+					"soundPath" : "chenyang/oh.ogg"
+				},
+				{
+					"soundID" : "okwhattime",
+					"soundPath" : "chenyang/okwhattime.ogg"
+				},
+				{
+					"soundID" : "really",
+					"soundPath" : "chenyang/really.ogg"
+				},
+				{
+					"soundID" : "sister9",
+					"soundPath" : "chenyang/sister9.ogg"
 				},
 				{
 					"soundID" : "wojiao",
-					"soundPath" : "david/wojiao.ogg"
+					"soundPath" : "chenyang/wojiao.ogg"
 				},
 				{
-					"soundID" : "nationality",
-					"soundPath" : "david/nationality.ogg"
+					"soundID" : "wugeren",
+					"soundPath" : "chenyang/wugeren.ogg"
 				},
 				{
-					"soundID" : "age",
-					"soundPath" : "david/age.ogg"
-				},
-				{
-					"soundID" : "foodLikes",
-					"soundPath" : "david/foodLikes.ogg"
-				},
-				{
-					"soundID" : "zhenbang",
-					"soundPath" : "david/zhenbang.ogg"
-				},
-				{
-					"soundID" : "zhende",
-					"soundPath" : "david/zhende.ogg"		
-				},
-				{
-					"soundID" : "favoriteDrink",
-					"soundPath" : "david/favoriteDrink.ogg"
-				},
-				{
-					"soundID" : "sportsLikes",
-					"soundPath" : "david/sportsLikes.ogg"			
-				},
-				{
-					"soundID" : "seasonLikes",
-					"soundPath" : "david/seasonLikes.ogg"
-				},
-				{
-					"soundID" : "gotoSchool",
-					"soundPath" : "david/gotoSchool.ogg"
-				},
-				{
-					"soundID" : "zodiac",
-					"soundPath" : "david/zodiac.ogg"
+					"soundID" : "zhenhao",
+					"soundPath" : "chenyang/zhenhao.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -99,17 +135,17 @@
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
+					"soundPath" : "chenyang/shenme.ogg"
 				}, 
 				{ 
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
+					"soundPath" : "chenyang/tingbudong.ogg"
 				}, 
 				{ 
 					"response": "不好意思, 我没听懂.",
 					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
+					"soundPath" : "chenyang/buhaoyisi.ogg"
 				}
 			],
 			"currentTasks": [
@@ -121,12 +157,12 @@
 						{
 							"answers" : ["你好"],
 							"response" : "你好!",
-							"soundID" : "nihao"
+							"soundID" : "hi"
 						},
 						{
 							"answers" : ["你好吗", "怎么样"],
-							"response" : "我很好!",
-							"soundID" : ""
+							"response" : "很好!",
+							"soundID" : "henhao"
 						}
 					],
 					"hints" : 
@@ -177,7 +213,7 @@
 						{
 							"answers" : ["你叫什么名字", "你叫什么", "你呢"],
 							"response" : "我叫陈阳。",
-							"soundID" : ""
+							"soundID" : "wojiao"
 						}
 					],
 					"hints" : 
@@ -208,12 +244,12 @@
 						{
 							"answers" : ["你上几年级"],
 							"response" : "我上九年级。",
-							"soundID" : ""
+							"soundID" : "ninthgrade"
 						},
 						{
 							"answers" : ["你几年级", "几年级"],
 							"response" : "我九年级。",
-							"soundID" : ""
+							"soundID" : "ninthgrade2"
 						}
 					],
 					"hints" : 
@@ -243,7 +279,7 @@
 						{
 							"answers" : ["我也上九年级", "我也九年级", "我也是"],
 							"response" : "哦! 真好! ", 
-							"soundID" : ""
+							"soundID" : "zhenhao"
 						}
 					],
 					"hints" : 
@@ -278,7 +314,7 @@
 						{
 							"answers" : ["你家有几个人", "你家有几口人"],
 							"response" : "五个人。 爸爸，妈妈，哥哥，妹妹和我。",
-							"soundID" : ""
+							"soundID" : "wugeren"
 						}
 					],
 					"hints" : 
@@ -303,7 +339,7 @@
 						{
 							"answers" : ["你的哥哥上几年级", "你的哥哥几年级", "你哥哥上几年级", "你哥哥几年级"],
 							"response" : "他上十一年级。",
-							"soundID" : ""
+							"soundID" : "brother15"
 						}
 					],
 					"hints" : 
@@ -336,8 +372,8 @@
 					[
 						{
 							"answers" : ["你的妹妹多大", "你的妹妹几岁", "你妹妹多大", "你妹妹几岁"],
-							"response" : "她九岁，是小学生。 啊。。。 你说中文说得很好。",
-							"soundID" : ""
+							"response" : "她九岁，是小学生。 啊。。。 你的中文说得很好。",
+							"soundID" : "sister9"
 						}
 					],
 					"hints" : 
@@ -394,8 +430,8 @@
 					[
 						{
 							"answers" : ["你的英文好吗", "你的英文怎么样", "你的英文好不好", "你的英语怎么样", "你的英语好吗", "你的英语好不好"],
-							"response" : "我的英语不太好。。。 It's not good.",
-							"soundID" : ""
+							"response" : "我的英语不太好.",
+							"soundID" : "englishnotgood"
 						}
 					],
 					"hints" : 
@@ -420,7 +456,7 @@
 						{
 							"answers" : ["你今年有什么课", "你今年修什么课", "你今年上哪些课", "你今年修那些课", "你今年上什么课"],
 							"response" : "我有英语，数学， 科学，历史，和法语。",
-							"soundID" : ""
+							"soundID" : "classes"
 						}
 					],
 					"hints" : 
@@ -456,7 +492,7 @@
 										"我不学法语但是我会说一点", 
 										"我不学法文但是我会说一点"],
 							"response" : "你喜不喜欢学中文?",
-							"soundID" : ""
+							"soundID" : "likechinese"
 						}
 					],
 					"hints" : 
@@ -489,8 +525,8 @@
 					[
 						{
 							"answers" : ["我爱中文", "喜欢中文", "马马虎虎", "我爱汉语", "喜欢汉语", "不喜欢汉语", "我爱学中文", "喜欢学中文", "不喜欢学汉语"],
-							"response" : "你的中文老师是谁?",
-							"soundID" : ""
+							"response" : "哦。。。是吗？ 那你的中文老师是谁?",
+							"soundID" : "chineseteacher"
 						}
 					],
 					"hints" : 
@@ -519,7 +555,7 @@
 						{
 							"answers" : ["我的中文老师是张老师", "张老师是我的老师", "我的汉语老师是张老师", "张老师是我的汉语老师", "我的汉语老师姓张", "我的中文老师姓张"],
 							"response" : "他是不是一个好老师?", 
-							"soundID" : ""
+							"soundID" : "haolaoshi"
 						}
 					],
 					"hints" : 
@@ -546,9 +582,9 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["他是一个好老师", "他是一个很好的老师", "是的"],
+							"answers" : ["他是一个好老师", "他是一个很好的老师", "他是一个非常好的老师", "是的", "他是个好老师"],
 							"response" : "哦! 真好!", 
-							"soundID" : ""
+							"soundID" : "zhenhao"
 						}
 					],
 					"hints" : 
@@ -572,7 +608,7 @@
 						{
 							"answers" : ["你喜欢做什么", "你有什么爱好"],
 							"response" : "我喜欢听音乐，看书和运动. 你呢?", 
-							"soundID" : ""
+							"soundID" : "mylikes"
 						}
 					],
 					"hints" : 
@@ -601,7 +637,7 @@
 						{
 							"answers" : ["我也喜欢运动", "我也爱运动"],
 							"response" : "哦。。。", 
-							"soundID" : ""
+							"soundID" : "oh"
 						}
 					],
 					"hints" : 
@@ -628,9 +664,9 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我也喜欢看电视和电影", "我还喜欢看电视和电影", "电影和电视", "电视和电影"],
+							"answers" : ["我也喜欢看电视和电影", "我还喜欢看电视和电影", "电影和电视", "电视和电影", "看电视和克安电影", "看电影和看电视"],
 							"response" : "啊! 其实我也喜欢看电影。", 
-							"soundID" : ""
+							"soundID" : "moviesalso"
 						}
 					],
 					"hints" : 
@@ -659,7 +695,7 @@
 						{
 							"answers" : ["你最喜欢什么运动"],
 							"response" : "打乒乓球。 你打乒乓球打得怎么样?", 
-							"soundID" : ""
+							"soundID" : "pingpong"
 						}
 					],
 					"hints" : 
@@ -693,7 +729,7 @@
 						{
 							"answers" : ["我打得非常好", "很好", "非常好"],
 							"response" : "哇！ 真的吗？ ", 
-							"soundID" : ""
+							"soundID" : "really"
 						}
 					],
 					"hints" : 
@@ -722,7 +758,7 @@
 										"你今天下午想跟我打乒乓球吗", "你今天下午想不想跟我打乒乓球",
 										"你今天下午要不要跟我打乒乓球", "你今天下午要跟我打乒乓球吗" ],
 							"response" : "好啊! 几点?", 
-							"soundID" : ""
+							"soundID" : "okwhattime"
 						}
 					],
 					"hints" : 
@@ -751,7 +787,7 @@
 						{
 							"answers" : ["三点十五分", "三点十五", "三点一刻", "3点15"],
 							"response" : "没问题. 下午见!", 
-							"soundID" : ""
+							"soundID" : "noprob"
 						}
 					],
 					"hints" : 
@@ -780,7 +816,7 @@
 						{
 							"answers" : ["下午见", "再见", "待一会儿见"],
 							"response" : "嗯", 
-							"soundID" : ""
+							"soundID" : "en"
 						}
 					],
 					"hints" : 

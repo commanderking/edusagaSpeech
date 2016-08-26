@@ -1,10 +1,12 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var Constants = require('../helpers/Constants');
 
 //TODO: The dialog's name and text should be their own component
 
 var DialogContainer = React.createClass({
 	render: function() {
+		var dialogSlantSrc = Constants.IMAGE_PATH + "UI/dialogbox_slant.png" 
 		var textNameWrapper;
 		var characterName;
 		var characterNameClass = "characterNameDiv";
@@ -26,7 +28,7 @@ var DialogContainer = React.createClass({
 				</p>)
 				button = <button 
 						className="nextButton btn btn-lg btn-success"
-						onClick={this.props.changeScenarioMode} >Start</button>
+						onClick={this.props.nextScenario} >Next</button>
 			// Case 2: Hint's active; Name, Text should fade color and the div should invert colors
 			} else if(this.props.hintActive === true) {
 				dialogDivClass = "characterDialogueDiv dialogDivInverted col-md-12 col-sm-12 col-xs-12";
@@ -42,7 +44,7 @@ var DialogContainer = React.createClass({
 			}
 			return (
 				<div className={dialogDivClass}>
-					<img className="dialogSlantPiece" src="static/images/UI/dialogbox_slant.png" />
+					<img className="dialogSlantPiece" src={dialogSlantSrc}/>
 					<div className="responseNameWrapper col-md-8 col-sm-8 col-xs-8">
 						<div className={characterNameClass}>
 							{characterName}
@@ -67,7 +69,7 @@ DialogContainer.propTypes = {
 	charName: PropTypes.string.isRequired,
 	hintActive: PropTypes.bool.isRequired,
 	onRepeat: PropTypes.func.isRequired,
-	changeScenarioMode: PropTypes.func.isRequired,
+	nextScenario: PropTypes.func.isRequired,
 	assessmentMode: PropTypes.bool.isRequired
 }
 

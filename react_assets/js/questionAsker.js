@@ -5,6 +5,7 @@ var DialogContainer = require('./questionAsker/DialogContainer');
 var TaskContainer = require('./questionAsker/TaskContainer');
 var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer');
 var FeedbackContainer = require('./questionAsker/FeedbackContainer');
+var MenuContainer = require('./questionAsker/MenuContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TransitionContainer = require('./questionAsker/TransitionContainer');
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
@@ -16,25 +17,34 @@ var QuestionAsker = React.createClass({
 		return {
 			sceneData: undefined,
 			scenarioOn: true,
+			scenarioIndex: 0,
 			hintActive: false,
 			currentHintIndex: -1,
 			voicePack: {},
 			coins: 0,
+			possibleCoins: 0,
 			answerFeedbackActive: false,
 			feedbackText: "",
-			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png",
+			miriIconSrc: "miri/icons/Miri_Icon_default.png",
 			micActive: false,
 			correctAnswerState: false,
 			wrongAnswerState: false,
+			sceneComplete: true
 		}
 	},
 	loadSceneData: function() {
 		var that = this;
 		$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function(data) {})
 			.success(function(data) {
+
+				// Calculate number of coins possible
+				var totalCoins = 10 * (data.character.currentTasks.length + data.character.queuedTasks.length);
 				that.setState({
-					sceneData: data
+					sceneData: data,
+					possibleCoins: totalCoins
 			});
+			that.resetScene();
+
 			// Load all the sounds that are in the scene
 			that.initializeSounds();
 			// Load voice pack
@@ -49,11 +59,28 @@ var QuestionAsker = React.createClass({
 			};
 		})
 	},
+	resetScene: function() {
+		this.setState({
+			sceneComplete: false,
+			scenarioOn: true,
+			scenarioIndex: 0,
+			coins: 0,
+		})
+	},
 	componentDidMount: function() {
 		this.loadSceneData();
 	},
 	componentWillReceiveProps: function() {
 		this.loadSceneData();
+	},
+	componentDidUpdate: function() {
+
+		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
+			var that = this;
+			setTimeout(function(){
+				that.setState({sceneComplete: true})
+			}, 500)
+		}
 	},
 	checkAnswer: function(userAnswer, taskIndex) {
 		// Case where there's an error due to user canceling
@@ -173,7 +200,6 @@ var QuestionAsker = React.createClass({
 
 					that.setState({sceneData: newSceneData})
 				}, 3000)
-
 				
 			/*--------------------------------------------
 			When user answers incorrectly
@@ -274,13 +300,13 @@ var QuestionAsker = React.createClass({
 			hintActive: true,
 			currentHintIndex: hintIndex,
 			feedbackText: hintText,
-			miriIconSrc: "/static/images/miri/icons/Miri_Icon_Yay.png"
+			miriIconSrc: "miri/icons/Miri_Icon_Yay.png"
 		})
 
 		// return Miri Icon to default after 3s
 		setTimeout(function(){
 			that.setState({
-				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+				miriIconSrc: "miri/icons/Miri_Icon_default.png"
 			})
 		}, 3000)
 
@@ -289,7 +315,7 @@ var QuestionAsker = React.createClass({
 		this.setState({
 			hintActive: false,
 			currentHintIndex: -1,
-			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+			miriIconSrc: "miri/icons/Miri_Icon_default.png"
 		})
 	},
 	handleHintAudio: function(hintAudioToPlay) {
@@ -305,18 +331,18 @@ var QuestionAsker = React.createClass({
 			hintActive: false,
 			currentHintIndex: -1,
 			answerFeedbackActive: true,
-			miriIconSrc: "/static/images/miri/icons/Miri_Icon_Oh.png"
+			miriIconSrc: "miri/icons/Miri_Icon_Oh.png"
 		})
 		setTimeout(function(){
 			that.setState({
-				miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+				miriIconSrc: "miri/icons/Miri_Icon_default.png"
 			})
 		}, 3000)
 	},
 	deactivateFeedbackMode: function() {
 		this.setState({
 			answerFeedbackActive: false,
-			miriIconSrc: "/static/images/miri/icons/Miri_Icon_default.png"
+			miriIconSrc: "miri/icons/Miri_Icon_default.png"
 		})
 	},
 	turnMicStateOn: function() {
@@ -383,6 +409,7 @@ var QuestionAsker = React.createClass({
 		}
 	},
 	skipTasks: function() {
+		var that = this;
 		// Grab relevant data from sceneData
 		var allCurrentTasks = TaskController.getCurrentTasks(this.state.sceneData); 
 		var taskIDsToQueue = TaskController.getTaskIDsToQueueOfCurrentTasks(this.state.sceneData);
@@ -405,6 +432,14 @@ var QuestionAsker = React.createClass({
 
 		this.setState({sceneData: newSceneData})
 	},
+	nextScenario: function() {
+		if (this.state.scenarioIndex === this.state.sceneData.scenario.length - 1) {
+			this.changeScenarioMode();
+		} else {
+			var newScenarioIndex = this.state.scenarioIndex + 1;
+			this.setState({scenarioIndex: newScenarioIndex});
+		}
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
 
@@ -419,17 +454,17 @@ var QuestionAsker = React.createClass({
 					<DialogContainer
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {sceneData.scenario}
-						scenarioIndex = {sceneData.scenarioIndex}
+						scenarioIndex = {this.state.scenarioIndex}
 						charName={this.state.sceneData.character.name}
 						currentDialog = {sceneData.currentDialog} 
 						hintActive = {this.state.hintActive} 
 						onRepeat = {this.handleRepeat} 
-						changeScenarioMode = {this.changeScenarioMode}
+						nextScenario = {this.nextScenario}
 						assessmentMode = {sceneData.assessmentMode} />
 					<CharacterContainer 
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
-						scenarioIndex = {this.state.sceneData.scenarioIndex} 
+						scenarioIndex = {this.state.scenarioIndex} 
 						charImage = {sceneData.currentImage} 
 						silhouette = {sceneData.character.emotions.silhouette}
 						hintActive = {this.state.hintActive} 
@@ -464,6 +499,11 @@ var QuestionAsker = React.createClass({
 						answerFeedbackActive = {this.state.answerFeedbackActive}
 						feedbackText = {this.state.feedbackText} 
 						miriIconSrc = {this.state.miriIconSrc} />
+					<MenuContainer 
+						sceneComplete = {this.state.sceneComplete} 
+						coins = {this.state.coins}
+						possibleCoins = {this.state.possibleCoins}
+						loadSceneData = {this.loadSceneData} />
 				</div>
 			)
 		}

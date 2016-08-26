@@ -19,8 +19,8 @@ app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
 @app.route('/')
-def index(name="Index"):
-	return render_template('index.html', name=name)
+def index(name="Index", activityName="index", teacher="jinlaoshi"):
+	return render_template('index.html', name=name, activityName=activityName, teacher=teacher)
 
 @app.route('/demoChinese')
 def demoChinese(name="Chinese"):
@@ -89,6 +89,15 @@ def reactTest(name="React"):
 # Test for React Version of Question Asker (demoChinese)
 @app.route('/jinlaoshi/demo')
 def demo(activityName="demo", teacher="jinlaoshi"):
+	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+
+@app.route('/jinlaoshi/demo2')
+def demo2(activityName="demo2", teacher="jinlaoshi"):
+	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+
+
+@app.route('/jinlaoshi/demo3')
+def demo3(activityName="demo3", teacher="jinlaoshi"):
 	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
 
 @app.route('/lilaoshi/pa1')

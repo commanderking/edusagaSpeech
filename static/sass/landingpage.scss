@@ -57,7 +57,7 @@ html, body {
 
 .landingScreen {
 	background-color: $bgColorDefault;
-	background-image: url('/static/images/index/bg.png');
+	background-image: url('https://s3.amazonaws.com/edusaga/assets/images/index/bg.png');
 	background-size: 100% 100%;
 	height: 100%;
 	min-height: 400px;
@@ -119,15 +119,11 @@ html, body {
 
 .demoScreen	 {
 	height: 100%;
-	min-height: 500px;
-	max-height: 600px;
+	min-height: 600px;
+	max-height: 700px;
 	padding: 0;
 	.demoContainer {
-		margin: auto;
-		width: 80%;
-		height: 80%;
-		background-image: url("http://i.huffpost.com/gen/2159432/images/o-EMPTY-CLASSROOM-facebook.jpg");
-		background-size: cover;
+		height: 550px;
 	}
 }
 

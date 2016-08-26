@@ -173,7 +173,7 @@
 									"task" : "Ask how many family members she has",
 									"possibilities" : ["你的家有幾口人", "您的家有幾口人", "你家有幾口人", "你家有幾個人", "你的家有幾個人", "你家裏有幾個人", "你家裏有幾口人"],
 									"correct" : false,
-									"response" : "我家有五口人.",
+									"response" : "我家有五口人。",
 									"soundID" : "familyCount",
 									"emotion" : "default",
 									"extensionTasks" : 

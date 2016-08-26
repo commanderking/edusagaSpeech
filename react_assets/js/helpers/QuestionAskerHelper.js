@@ -69,24 +69,34 @@ export var TaskController = {
 	}
 }
 
+export var ScenarioController = {
+	nextScenario: function(scenarioIndex) {
+		// Move to the next index 
+		return scenarioIndex + 1;
+
+	}
+}
+
 export var SpeechChecker = {
 	typicalCheck: function(userAnswer, data, activeTaskIndex) {
 		var possibleAnswers = TaskController.getPossibleCorrectAnswers(data, activeTaskIndex);
 		var answerCorrect = false;
 		var possibleAnswersIndex;
-		var tempSoundID;
+		var responseSoundID;
 		possibleAnswers.forEach(function(possibleAnswerObject, i) {
-			tempSoundID = possibleAnswerObject.soundID;
+			var tempSoundID = possibleAnswerObject.soundID;
+			console.log(possibleAnswerObject.soundID);
 			possibleAnswerObject.answers.forEach(function(possibleAnswer){
 				if (userAnswer.indexOf(possibleAnswer) >= 0) {
 					answerCorrect = true;
+					responseSoundID = tempSoundID;
 					possibleAnswersIndex = i; 
 				}
 			});
 		});
 		return {
 			"answerCorrect" : answerCorrect,
-			"responseSoundID" : tempSoundID,
+			"responseSoundID" : responseSoundID,
 			"possibleAnswersIndex" : possibleAnswersIndex
 		};
 	},
