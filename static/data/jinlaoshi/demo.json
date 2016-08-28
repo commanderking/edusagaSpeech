@@ -34,6 +34,9 @@
 				"confused" : "characters/david/davidConfused.png",
 				"silhouette" : "characters/david/davidSilhouette.png"
 			},
+			"successPhrases" : {
+
+			},
 			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下"],
 			"sounds" : 
 			[
@@ -236,7 +239,7 @@
 							"soundID" : "foodLikes"
 						}
 					],
-					"correct" : "false",
+					"correct" : false,
 					"soundPath" : "david/foodLikes.ogg",
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [9, 10],
@@ -255,7 +258,7 @@
 							"soundID" : "zhenbang"
 						}
 					],
-					"correct" : "false",
+					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png", 
 					"tasksToQueue" : [11],
 					"attemptedAnswers" : []
@@ -273,7 +276,7 @@
 							"soundID" : "zhende"
 						}
 					],
-					"correct" : "false",
+					"correct" : false,
 					"soundPath" : "david/zhende.ogg",
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [11],
@@ -290,7 +293,7 @@
 							"soundID" : "favoriteDrink"
 						}
 					],
-					"correct" : "false",
+					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [12, 13],
 					"attemptedAnswers" : []	
@@ -308,7 +311,7 @@
 						}
 					],
 					
-					"correct" : "false",
+					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : []					
 				},
@@ -323,7 +326,7 @@
 							"soundID" : "seasonLikes"
 						}
 					],
-					"correct" : "false",
+					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [] 
 				}

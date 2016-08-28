@@ -23,12 +23,12 @@
 	],
 	"character" : 
 		{
-			"name" : "Chenguang",
+			"name" : "Chen Yang",
 			"language" : "zh-CN",
 			"location" : 
 			{
-				"nameEnglish" : "Shanghai Airport",
-				"nameChinese" : "上海机场", 
+				"nameEnglish" : "School Cafeteria",
+				"nameChinese" : "学校食堂", 
 				"bg" : "bg/shitang.jpg"
 			},
 			"emotions" : 
@@ -606,7 +606,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢做什么", "你有什么爱好"],
+							"answers" : ["你喜欢做什么", "有什么爱好", "你有没有爱好"],
 							"response" : "我喜欢听音乐，看书和运动. 你呢?", 
 							"soundID" : "mylikes"
 						}

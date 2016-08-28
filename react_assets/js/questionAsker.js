@@ -5,7 +5,7 @@ var DialogContainer = require('./questionAsker/DialogContainer');
 var TaskContainer = require('./questionAsker/TaskContainer');
 var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer');
 var FeedbackContainer = require('./questionAsker/FeedbackContainer');
-var MenuContainer = require('./questionAsker/MenuContainer');
+var ResultsContainer = require('./questionAsker/ResultsContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TransitionContainer = require('./questionAsker/TransitionContainer');
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
@@ -29,7 +29,7 @@ var QuestionAsker = React.createClass({
 			micActive: false,
 			correctAnswerState: false,
 			wrongAnswerState: false,
-			sceneComplete: true
+			sceneComplete: false
 		}
 	},
 	loadSceneData: function() {
@@ -128,6 +128,7 @@ var QuestionAsker = React.createClass({
 				// Play response voice
 				this.playSound(responseSoundID);
 
+
 				// Store sound ID in current Sound ID if player wnats to repeat
 				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].soundID;
 
@@ -138,7 +139,7 @@ var QuestionAsker = React.createClass({
 				newSceneData.currentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
 
 				// Mark question as corrrect
-				newSceneData.character.currentTasks[taskIndex].possibleAnswers.correct = true;
+				newSceneData.character.currentTasks[taskIndex].correct = true;
 
 				// Add coins 
 				this.addCoins(10);
@@ -294,7 +295,7 @@ var QuestionAsker = React.createClass({
 	},
 	handleHintClick: function(hintIndex) {
 		var that = this;
-		var hintText = this.state.sceneData.character.currentTasks[0].possibleAnswers[0].answers[0];
+		var hintText = this.state.sceneData.character.currentTasks[hintIndex].possibleAnswers[0].answers[0];
 		this.setState({
 			answerFeedbackActive: false,
 			hintActive: true,
@@ -499,11 +500,14 @@ var QuestionAsker = React.createClass({
 						answerFeedbackActive = {this.state.answerFeedbackActive}
 						feedbackText = {this.state.feedbackText} 
 						miriIconSrc = {this.state.miriIconSrc} />
-					<MenuContainer 
+					<ResultsContainer 
 						sceneComplete = {this.state.sceneComplete} 
 						coins = {this.state.coins}
 						possibleCoins = {this.state.possibleCoins}
-						loadSceneData = {this.loadSceneData} />
+						loadSceneData = {this.loadSceneData} 
+						completedTasks = {sceneData.character.completedTasks}
+						charName = {sceneData.character.name}
+						charProfilePic = {sceneData.character.emotions.default}/>
 				</div>
 			)
 		}

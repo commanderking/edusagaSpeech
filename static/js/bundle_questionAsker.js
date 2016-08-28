@@ -58,7 +58,7 @@
 	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 190);
 	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 201);
 	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 202);
-	var MenuContainer = __webpack_require__(/*! ./questionAsker/MenuContainer */ 209);
+	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 210);
 	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 207);
 	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 208);
 	
@@ -84,7 +84,7 @@
 				micActive: false,
 				correctAnswerState: false,
 				wrongAnswerState: false,
-				sceneComplete: true
+				sceneComplete: false
 			};
 		},
 		loadSceneData: function loadSceneData() {
@@ -192,7 +192,7 @@
 					newSceneData.currentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
 	
 					// Mark question as corrrect
-					newSceneData.character.currentTasks[taskIndex].possibleAnswers.correct = true;
+					newSceneData.character.currentTasks[taskIndex].correct = true;
 	
 					// Add coins 
 					this.addCoins(10);
@@ -345,7 +345,7 @@
 		},
 		handleHintClick: function handleHintClick(hintIndex) {
 			var that = this;
-			var hintText = this.state.sceneData.character.currentTasks[0].possibleAnswers[0].answers[0];
+			var hintText = this.state.sceneData.character.currentTasks[hintIndex].possibleAnswers[0].answers[0];
 			this.setState({
 				answerFeedbackActive: false,
 				hintActive: true,
@@ -553,11 +553,14 @@
 						answerFeedbackActive: this.state.answerFeedbackActive,
 						feedbackText: this.state.feedbackText,
 						miriIconSrc: this.state.miriIconSrc }),
-					React.createElement(MenuContainer, {
+					React.createElement(ResultsContainer, {
 						sceneComplete: this.state.sceneComplete,
 						coins: this.state.coins,
 						possibleCoins: this.state.possibleCoins,
-						loadSceneData: this.loadSceneData })
+						loadSceneData: this.loadSceneData,
+						completedTasks: sceneData.character.completedTasks,
+						charName: sceneData.character.name,
+						charProfilePic: sceneData.character.emotions.default })
 				);
 			}
 		}
@@ -24938,57 +24941,347 @@
 	module.exports = TransitionContainer;
 
 /***/ },
-/* 209 */
-/*!********************************************************!*\
-  !*** ./react_assets/js/questionAsker/MenuContainer.js ***!
-  \********************************************************/
+/* 209 */,
+/* 210 */
+/*!***********************************************************!*\
+  !*** ./react_assets/js/questionAsker/ResultsContainer.js ***!
+  \***********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var ResultsBase = __webpack_require__(/*! ./components/ResultsBase */ 211);
 	
-	var MenuContainer = React.createClass({
-		displayName: "MenuContainer",
+	var ResultsContainer = React.createClass({
+		displayName: 'ResultsContainer',
 	
 		render: function render() {
 			if (this.props.sceneComplete === false) {
 				return null;
 			} else {
 				return React.createElement(
-					"div",
-					{ className: "menuContainer" },
+					'div',
+					{ className: 'menuContainer' },
 					React.createElement(
-						"h1",
-						null,
-						"You did it!"
+						'h1',
+						{ className: 'menuHeader' },
+						'Level Complete'
 					),
-					React.createElement(
-						"h1",
-						null,
-						" You earned ",
-						this.props.coins,
-						" coins out of ",
-						this.props.possibleCoins,
-						" coins."
-					),
-					React.createElement(
-						"button",
-						{ className: "btn btn-danger restart",
-							onClick: this.props.loadSceneData },
-						"Replay Scene"
-					)
+					React.createElement(ResultsBase, this.props)
 				);
 			}
 		}
 	});
 	
-	MenuContainer.propTypes = {
-		sceneComplete: PropTypes.bool.isRequired
+	ResultsContainer.propTypes = {
+		sceneComplete: PropTypes.bool.isRequired,
+		loadSceneData: PropTypes.func.isRequired,
+		completedTasks: PropTypes.array.isRequired,
+		charProfilePic: PropTypes.string.isRequired
 	};
 	
-	module.exports = MenuContainer;
+	module.exports = ResultsContainer;
+
+/***/ },
+/* 211 */
+/*!*****************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ResultsBase.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var ResultsHeader = __webpack_require__(/*! ./ResultsHeader */ 212);
+	var ResultsSideBar = __webpack_require__(/*! ./ResultsSideBar */ 216);
+	var ResultsTasks = __webpack_require__(/*! ./ResultsTasks */ 214);
+	
+	var ResultsBase = React.createClass({
+		displayName: 'ResultsBase',
+	
+		render: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'resultsBaseContainer' },
+				React.createElement(ResultsHeader, null),
+				React.createElement(ResultsTasks, {
+					completedTasks: this.props.completedTasks,
+					charProfilePic: this.props.charProfilePic,
+					charName: this.props.charName,
+					coins: this.props.coins,
+					possibleCoins: this.props.possibleCoins }),
+				React.createElement(ResultsSideBar, {
+					loadSceneData: this.props.loadSceneData,
+					coins: this.props.coins,
+					possibleCoins: this.props.possibleCoins })
+			);
+		}
+	});
+	
+	module.exports = ResultsBase;
+
+/***/ },
+/* 212 */
+/*!*******************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ResultsHeader.js ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 179);
+	
+	function ResultsHeader(props) {
+		var miriIconSrc = Constants.IMAGE_PATH + "miri/icons/Miri_Icon_default.png";
+		return React.createElement(
+			'div',
+			{ className: 'resultsHeader' },
+			React.createElement(
+				'h1',
+				null,
+				'Results'
+			),
+			React.createElement(
+				'div',
+				{ className: 'miriIcon' },
+				React.createElement('img', { src: miriIconSrc })
+			)
+		);
+	}
+	
+	module.exports = ResultsHeader;
+
+/***/ },
+/* 213 */,
+/* 214 */
+/*!******************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ResultsTasks.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 215);
+	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 217);
+	
+	var ResultsTasks = React.createClass({
+		displayName: 'ResultsTasks',
+	
+		render: function render() {
+			// Function to render all completed tasks
+			var completedTasks = this.props.completedTasks;
+			var tasks = completedTasks.map(function (task, i) {
+				return React.createElement(ResultsCompletedTask, {
+					key: task.task,
+					index: i,
+					taskText: task.task,
+					taskCorrect: task.correct,
+					attemptedAnswers: task.attemptedAnswers,
+					possibleCorrectAnswers: task.possibleAnswers[0].answers });
+			});
+	
+			return React.createElement(
+				'div',
+				{ className: 'resultsTasks' },
+				React.createElement(ResultsCharProfile, {
+					charProfilePic: this.props.charProfilePic,
+					charName: this.props.charName,
+					coins: this.props.coins,
+					possibleCoins: this.props.possibleCoins }),
+				React.createElement(
+					'div',
+					{ className: 'completedTasks' },
+					tasks
+				)
+			);
+		}
+	});
+	
+	ResultsTasks.propTypes = {
+		completedTasks: PropTypes.array.isRequired
+	};
+	
+	module.exports = ResultsTasks;
+
+/***/ },
+/* 215 */
+/*!************************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ResultsCharProfile.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 179);
+	
+	var ResultsCharProfile = React.createClass({
+		displayName: 'ResultsCharProfile',
+	
+		render: function render() {
+			// Get default profile image source
+			var charProfilePic = Constants.IMAGE_PATH + this.props.charProfilePic;
+			// Get comment
+	
+			// Calculate completion decimal
+			var completionRate = this.props.coins / this.props.possible * 100;
+			var resultsComment;
+			if (completionRate > 90) {
+				resultsComment = "I had a really great time! Your Chinese is awesome!";
+			} else if (completionRate > 70) {
+				resultsComment = "I had a good time! It was fun to talk in Chinese.";
+			} else {
+				resultsComment = "Nice talking to you!";
+			}
+	
+			return React.createElement(
+				'div',
+				{ className: 'resultsCharProfile' },
+				React.createElement('img', { src: charProfilePic }),
+				React.createElement(
+					'div',
+					{ className: 'textContainer' },
+					React.createElement(
+						'h3',
+						null,
+						this.props.charName
+					),
+					React.createElement(
+						'h4',
+						null,
+						resultsComment
+					)
+				)
+			);
+		}
+	});
+	
+	ResultsCharProfile.propTypes = {
+		charProfilePic: PropTypes.string.isRequired
+	};
+	
+	module.exports = ResultsCharProfile;
+
+/***/ },
+/* 216 */
+/*!********************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ResultsSideBar.js ***!
+  \********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 179);
+	
+	var ResultsSideBar = React.createClass({
+		displayName: 'ResultsSideBar',
+	
+		render: function render() {
+			var coinImageSrc = Constants.IMAGE_PATH + "UI/Icon_coins-01.png";
+			var coinsToMax = this.props.possibleCoins - this.props.coins;
+			return React.createElement(
+				'div',
+				{ className: 'resultsSideBar' },
+				React.createElement(
+					'h1',
+					null,
+					'Coins Earned'
+				),
+				React.createElement(
+					'div',
+					{ className: 'coinWrapper' },
+					React.createElement('img', { src: coinImageSrc }),
+					React.createElement(
+						'h2',
+						null,
+						' ',
+						this.props.coins,
+						'/',
+						this.props.possibleCoins,
+						' '
+					)
+				),
+				React.createElement(
+					'h5',
+					null,
+					'Try again for ',
+					React.createElement(
+						'b',
+						null,
+						coinsToMax,
+						' MORE COINS'
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'buttonContainer' },
+					React.createElement(
+						'button',
+						{ className: 'btn',
+							onClick: this.props.loadSceneData },
+						'Go Now'
+					),
+					React.createElement(
+						'button',
+						{ className: 'btn' },
+						'Back to Map'
+					)
+				)
+			);
+		}
+	});
+	
+	ResultsSideBar.propTypes = {
+		loadSceneData: PropTypes.func.isRequired,
+		coins: PropTypes.number.isRequired,
+		possibleCoins: PropTypes.number.isRequired
+	};
+	
+	module.exports = ResultsSideBar;
+
+/***/ },
+/* 217 */
+/*!**************************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ResultsCompletedTask.js ***!
+  \**************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	
+	var ResultsCompletedTask = React.createClass({
+		displayName: "ResultsCompletedTask",
+	
+		render: function render() {
+			console.log(this.props);
+			console.log(this.props.taskCorrect);
+			var icon = this.props.taskCorrect ? React.createElement("span", { className: "glyphicon glyphicon-star", "aria-hidden": "true" }) : React.createElement("span", { className: "glyphicon glyphicon-question-sign", "aria-hidden": "true" });
+			console.log(icon);
+			return React.createElement(
+				"div",
+				{ className: "completedTaskContainer" },
+				icon,
+				React.createElement(
+					"span",
+					{ className: "text" },
+					this.props.taskText
+				)
+			);
+		}
+	});
+	
+	module.exports = ResultsCompletedTask;
 
 /***/ }
 /******/ ]);

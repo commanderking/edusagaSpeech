@@ -23,7 +23,7 @@
 			"location" : 
 			{
 				"nameEnglish" : "National Taiwan University",
-				"nameChinese" : "台大（國立台灣大學)", 
+				"nameChinese" : "台大", 
 				"bg" : "bg/NTUniversity.jpg"
 			},
 			"emotions" : 
@@ -31,7 +31,8 @@
 				"default": "characters/alex/alexDefault.png",
 				"confused" : "characters/alex/alexConfused.png",
 				"sass" : "characters/alex/alexSass.png",
-				"laughing" : "characters/alex/alexLaughing.png"
+				"laughing" : "characters/alex/alexLaughing.png",
+				"silhouette" : "characters/alex/alexSilhouette.png"
 			},
 			"repeatPhrases": ["再說一次", "再說一遍", "什麼", "你說什麼", "重複一次", "重複一下"],
 			"sounds" : 
