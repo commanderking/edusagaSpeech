@@ -11,6 +11,38 @@ var TransitionContainer = require('./questionAsker/TransitionContainer');
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
 const Constants = require('./helpers/Constants.js');
 
+
+var initialLogData = {
+	"startTime" : 0,
+	"studentID" : "",
+	"teacherID" : "",
+	"IP" : "",
+	"currentTime" : ""
+}
+
+var initializeLogData = {
+	setStartTime: function() {
+		initialLogData.startTime = new Date().getTime();
+		console.log(initialLogData.startTime);
+	},
+	setStudentID : function(studentID) {
+		initialLogData.studentID = studentID;
+	},
+	setTeacherID: function(teacherID) {
+		if (teacherID) {
+			initialLogData.teacherID = teacherID;
+		} else {
+			initialLogData.teacherID = "Unknown Teacher"
+		}
+	},
+	setIP: function() {
+		$.get("http://ipinfo.io", function(response) {
+			initialLogData.IP = response.ip;
+		    console.log(response.ip);
+		}, "jsonp");		
+	}
+}
+
 var QuestionAsker = React.createClass({
 	// feedbackText can be hintText from clicking hint or feedback on what user said
 	getInitialState: function() {
@@ -45,6 +77,20 @@ var QuestionAsker = React.createClass({
 			});
 			that.resetScene();
 
+			/*----------------------------------
+			 One time setting of initial log Data
+			 ----------------------------------*/
+			initializeLogData.setStartTime();
+			if (studentID === null) {
+				initializeLogData.setStudentID("Unknown Student HA");
+			} else {
+				initializeLogData.setStudentID(studentID);
+			}
+			initializeLogData.setTeacherID(teacher);
+			initializeLogData.setIP();
+			console.log(initialLogData);
+
+
 			// Load all the sounds that are in the scene
 			that.initializeSounds();
 			// Load voice pack
@@ -74,9 +120,22 @@ var QuestionAsker = React.createClass({
 		this.loadSceneData();
 	},
 	componentDidUpdate: function() {
-
 		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
 			var that = this;
+			var studentCompletedProgress = JSON.parse(JSON.stringify(initialLogData));
+			studentCompletedProgress.allTaskData = this.state.sceneData.character.completedTasks;
+			studentCompletedProgress.coins = this.state.coins;
+			studentCompletedProgress.possibleCoins = this.state.possibleCoins;
+			console.log(studentCompletedProgress);
+			
+			var logEvent = JSON.stringify(studentCompletedProgress);
+			$.ajax({
+				url: "/logStudent",
+				type: "POST",
+				data: logEvent, 
+				dataType: "json"
+			});
+
 			setTimeout(function(){
 				that.setState({sceneComplete: true})
 			}, 700)
@@ -201,8 +260,6 @@ var QuestionAsker = React.createClass({
 
 					that.setState({sceneData: newSceneData})
 				}, 3000)
-
-
 				
 			/*--------------------------------------------
 			When user answers incorrectly
@@ -248,6 +305,23 @@ var QuestionAsker = React.createClass({
 				}, 3000);
 
 			}
+
+			// Log data wheter correct or incorrect
+			var currentLogData = JSON.parse(JSON.stringify(initialLogData));
+			// Log info to SQS
+			currentLogData.currentTime = new Date().getTime();
+			currentLogData.taskID = currentTaskData.taskID;
+			currentLogData.userAnswer = userAnswer;
+			currentLogData.eventType = "speechAnswer";
+			currentLogData.correct = currentTaskData.correct;
+			console.log(currentLogData);
+			var logEvent = JSON.stringify(currentLogData);
+			$.ajax({
+				url: "/logSpeechResponse",
+				type: "POST",
+				data: logEvent, 
+				dataType: "json"
+			});
 		}
 	},
 	initializeSounds: function() {

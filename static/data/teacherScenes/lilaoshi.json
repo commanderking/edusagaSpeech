@@ -1,0 +1,13 @@
+{
+	"username" : "lilaoshi",
+	"name" : "李老師",
+	"scenes" : [
+		{
+			"name" : "Pre-assessment 1",
+			"jsonFile" : "pa1.json",
+			"image" : "",
+			"message" : "Let's see what you know!",
+			"assigned" : true
+		}
+	]
+}

@@ -7,7 +7,8 @@ module.exports = {
   // entry point of our app. assets/js/index.js should require other js modules and dependencies it needs
   entry: {
     "index": './react_assets/js/index',
-    "questionAsker": './react_assets/js/questionAsker'
+    "questionAsker": './react_assets/js/questionAsker',
+    "mainMenu": './react_assets/js/mainMenu'
   },
   output: {
       path: path.resolve('./static/js/'),

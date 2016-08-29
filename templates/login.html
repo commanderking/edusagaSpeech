@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>EduSaga - Create and Share Immersive Speaking Activities using Speech Recognition</title>
+	<meta name="description" content="EduSaga enables world language educators to create and share interactive speaking activities.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/icons.css">
+	<link rel="stylesheet" href="/static/css/login.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="col-md-4 col-xs-4 col-sm-4">
+			<div class="miriContainer">
+				<img src="https://s3.amazonaws.com/edusaga/assets/images/miri/MIRI_body_constant-01.png" />
+				<img src="https://s3.amazonaws.com/edusaga/assets/images/miri/faces/Miri_Default-01.png" />
+			</div>
+		</div>
+
+		<!-- Login Form !-->
+		<div class="loginFormContainer col-md-8 col-xs-8 col-sm-8">
+		<h2>Enter your EduSaga ID</h2>
+			<form class=" form-horizontal">
+			  <div class="form-group">
+			    <div class="col-sm-offset-4 col-sm-4 col-md-4 col-xs-8 col-xs-offset-2">
+			      <input name="studentID" type="text" class="form-control" id="inputEmail3" placeholder="EduSaga ID (Ex. A8)">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-12">
+			      <button type="submit" formmethod="post" formaction="/lilaoshi/login" class="btn btn-info">Begin</button>
+			    </div>
+			  </div>
+			</form>
+
+		</div>	
+	</div>
+</body>
