@@ -128,6 +128,10 @@
 				{
 					"soundID" : "zhenhao",
 					"soundPath" : "chenyang/zhenhao.ogg"
+				},
+				{
+					"soundID" : "pingpong",
+					"soundPath" : "chenyang/pingpong.ogg"
 				}
 			],
 			"confusedPhrases" : 
