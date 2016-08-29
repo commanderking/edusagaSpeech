@@ -133,7 +133,7 @@
 				var that = this;
 				setTimeout(function () {
 					that.setState({ sceneComplete: true });
-				}, 500);
+				}, 700);
 			}
 		},
 		checkAnswer: function checkAnswer(userAnswer, taskIndex) {
@@ -24967,7 +24967,7 @@
 					React.createElement(
 						'h1',
 						{ className: 'menuHeader' },
-						'Level Complete'
+						'LEVEL COMPLETE'
 					),
 					React.createElement(ResultsBase, this.props)
 				);
@@ -25044,7 +25044,7 @@
 			React.createElement(
 				'h1',
 				null,
-				'Results'
+				'RESULTS'
 			),
 			React.createElement(
 				'div',

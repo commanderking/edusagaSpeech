@@ -79,7 +79,7 @@ var QuestionAsker = React.createClass({
 			var that = this;
 			setTimeout(function(){
 				that.setState({sceneComplete: true})
-			}, 500)
+			}, 700)
 		}
 	},
 	checkAnswer: function(userAnswer, taskIndex) {
@@ -201,6 +201,8 @@ var QuestionAsker = React.createClass({
 
 					that.setState({sceneData: newSceneData})
 				}, 3000)
+
+
 				
 			/*--------------------------------------------
 			When user answers incorrectly

@@ -764,7 +764,7 @@ Robo Help Window
 	.miriIcon {
 		position: absolute;
 		right: 15px;
-		top: -35px;
+		top: -45px;
 		border: 5px solid gray;
 		background-color: gray;
 		border-radius: 50px;
@@ -809,7 +809,6 @@ Robo Help Window
 			}
 		}
 		.completedTasks {
-			overflow-y: scroll;
 			margin-bottom: 100px;
 		}
 		.completedtaskContainer {

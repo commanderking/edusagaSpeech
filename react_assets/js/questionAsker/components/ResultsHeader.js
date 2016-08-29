@@ -6,7 +6,7 @@ function ResultsHeader (props) {
 	var miriIconSrc = Constants.IMAGE_PATH + "miri/icons/Miri_Icon_default.png";
 	return (
 		<div className="resultsHeader">
-			<h1>Results</h1>
+			<h1>RESULTS</h1>
 			<div className="miriIcon">
 				<img src={miriIconSrc} />
 			</div>
