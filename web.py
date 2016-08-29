@@ -127,5 +127,9 @@ def logSpeechResponse():
 	response = queue.send_message(MessageBody=content)
 	return 'Success'
 
+@app.route('/.well-known/acme-challenge/Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4')
+def SSL():
+	return "Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q"
+
 if __name__ == '__main__':
 	app.run(debug=True)
