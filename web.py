@@ -131,5 +131,9 @@ def logSpeechResponse():
 def SSL():
 	return "Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q"
 
+@app.route('/.well-known/acme-challenge/Ndkby95ph0d_0X4E4p09iuBtJrSVl4pitbKUp1r-Q1E')
+def SSL2():
+	return 'Ndkby95ph0d_0X4E4p09iuBtJrSVl4pitbKUp1r-Q1E.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+
 if __name__ == '__main__':
 	app.run(debug=True)
