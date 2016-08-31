@@ -14,6 +14,10 @@ var CharacterContainer = React.createClass({
 		var scenarioImage = Constants.IMAGE_PATH + scenarioData[scenarioIndex].image; 
 		var scenarioImageLayer = Constants.IMAGE_PATH + scenarioData[scenarioIndex].imageLayer;
 
+		if (this.props.sceneComplete === true) {
+			return null;
+		} 
+
 		if (this.props.scenarioOn === true) {
 			charImageDiv =
 			(

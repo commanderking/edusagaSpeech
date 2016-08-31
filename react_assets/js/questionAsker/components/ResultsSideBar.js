@@ -8,16 +8,22 @@ var ResultsSideBar = React.createClass({
 		var coinsToMax = this.props.possibleCoins - this.props.coins;
 		return (
 			<div className="resultsSideBar">
-				<h1>Coins Earned</h1>
+				<h1>REWARD</h1>
 				<div className="coinWrapper">
 					<img src={coinImageSrc} />
 					<h2> {this.props.coins}/{this.props.possibleCoins} </h2>
 				</div>
-				<h5>Try again for <b>{coinsToMax} MORE COINS</b></h5>
+				<h4>Try again for <b>{coinsToMax} MORE COINS?</b></h4>
 				<div className="buttonContainer">
-					<button className="btn"
-						onClick = {this.props.loadSceneData}>Go Now</button>
-					<button className="btn">Back to Map</button>
+					<button className="btn btn-replay"
+						onClick = {this.props.loadSceneData}>
+						<span className="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+						<span className="buttonText">Go Now</span>
+					</button>
+					<button className="btn btn-map">
+						<span className="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+						<span className="buttonText">Back to Map</span>
+					</button>
 				</div>
 			</div>
 		)

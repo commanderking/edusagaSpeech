@@ -3,6 +3,7 @@ $darkerBlue: #205BA0;
 $lightBlue : #38C6F3;
 $invertedBlue: #9FDFF7;
 $borderBlue: #174D9E;
+$greenBlue: #3499BB;
 $yellow : #F3EC29;
 $disabledTextColor: #7DBEE4;
 $disabledDivBGColor: #90D3F3;
@@ -40,6 +41,10 @@ $desktopWidth: 1024px;
   0% { box-shadow:0 0 8px #ea4c89, inset 0 0 8px #ea4c89; }
   50% { box-shadow:0 0 16px #ea4c89, inset 0 0 14px #ea4c89; }
   100% { box-shadow:0 0 8px #ea4c89, inset 0 0 8px #ea4c89; }
+}
+
+html, body {
+	height: 100%;
 }
 
 .verticalCenter {
@@ -723,15 +728,19 @@ Robo Help Window
 }
 
 .menuContainer {
-	position: relative;
+	position: absolute;
 	width: 90%;
 	height: 90%;  // Hackey rigth now, referencing wrong parent container
-	top: 5%;
 	left: 5%;
 	z-index: 10;
+	bottom: 0;
 	.menuHeader {
+		position: absolute;
+		font-size: 50px;
+		font-weight: bold;
+		top: -40px;
 		margin-left: 20px;
-		text-shadow: 0 0 20px black;
+		// text-shadow: 0 0 20px black;
 		color: white;
 	}
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -740,33 +749,74 @@ Robo Help Window
 }
 
 .resultsBaseContainer {
-	position: relative;
-	height: 94%;
+	position: absolute;
+	height: 95%;
+	width: 100%;
 	background-color: gray;
-	padding: 20px;
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+	padding: 50px;
 	padding-bottom: 0px;
+	padding-top: 20px;
+	bottom: 0px;
+	background: white; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(left top, white, $lightBlue); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(bottom right, white, $lightBlue); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(bottom right, white, $lightBlue); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to bottom right, white, white 15%, $lightBlue); /* Standard syntax */
 	.resultsHeader {
-		height: 5%;
+		height: 18%;
+		max-height: 80px;
 		h1 {
+			font-weight: bold;
 			display: inline-block;
 			position: absolute;
-			color: white;
-			text-shadow: 0 0 20px black;
-			top: -20px;
-			left: -20px;
-		    -webkit-transform: rotate(-20deg); /* Safari and Chrome */
-		    -moz-transform: rotate(-20deg);   /* Firefox */
-		    -ms-transform: rotate(-20deg);   /* IE 9 */
-		    -o-transform: rotate(-20deg);   /* Opera */
-		    transform: rotate(-20deg);
+			color: $darkPink;
+			text-shadow: 0 0 5px yellow;
+			top: 20px;
+			left: -10px;
+		    -webkit-transform: rotate(-15deg); /* Safari and Chrome */
+		    -moz-transform: rotate(-15deg);   /* Firefox */
+		    -ms-transform: rotate(-15deg);   /* IE 9 */
+		    -o-transform: rotate(-15deg);   /* Opera */
+		    transform: rotate(-15deg);
+		}
+		.resultsCharProfile {
+			position: absolute;
+			top: 10px;
+			padding-left: 10%;
+			padding-right: 10%;
+			padding-bottom: 10px;
+			width: 80%;
+			img {
+				width: 75px;
+				height: 75px;
+				border-radius: 50px;
+				display: inline-block;
+				vertical-align: top;
+				background-color: $darkBlue;
+			}
+			.textContainer {
+				padding-left: 10px;
+				padding-top: 10px;
+				display: inline-block;
+				width: 60%;
+				height: 75px;
+				color: $borderBlue;
+
+				h3, h4 {
+					margin: 0px;
+					line-height: 30px;
+				}
+			}
 		}
 	}
 	.miriIcon {
 		position: absolute;
 		right: 15px;
 		top: -45px;
-		border: 5px solid gray;
-		background-color: gray;
+		border: 5px solid #A9E6FA;
+		background-color: #A9E6FA;
 		border-radius: 50px;
 	}
 	.btnCloseResults {
@@ -776,95 +826,156 @@ Robo Help Window
 		background-color:gray;
 	}
 	.resultsTasks {
-		background-color: white;
-		width: 65%;
+		background: $yellow; /* For browsers that do not support gradients */
+		background: -webkit-linear-gradient(white, white 60%, #F8F47C); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient(white, white 60%, #F8F47C); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient(white, white 60%, #F8F47C); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(white, white 60%, #F8F47C); /* Standard syntax */
+		width: 70%;
 		display: inline-block;
-		height: 95%;
+		height: 100%;
 		vertical-align: top;
 		overflow-y: scroll;
-		.resultsCharProfile {
-			padding-left: 10%;
-			padding-right: 10%;
-			padding-top: 10px;
-			padding-bottom: 10px;
-			img {
-				width: 75px;
-				height: 75px;
-				border-radius: 50px;
-				border: 1px solid black;
-				display: inline-block;
-				vertical-align: top;
+		.sceneInfo {
+			color: $borderBlue;
+			padding-left: 16%;
+			padding-right: 5%;
+			h3 {
+				font-size: 20px;
+				font-weight: bold;
+				margin-bottom: 0px;
 			}
-			.textContainer {
-				padding-left: 10px;
-				padding-top: 10px;
-				display: inline-block;
-				width: 60%;
-				height: 75px;
-
-				h3, h4 {
-					margin: 0px;
-					line-height: 30px;
-				}
+			p {
+				font-style: italic;
+				font-size: 15px;
+				font-weight: 500;
 			}
 		}
 		.completedTasks {
 			margin-bottom: 100px;
 		}
-		.completedtaskContainer {
+		.completedTaskContainer {
 			padding-left: 12%;
 			padding-right: 12%;
 			width: 100%;
+			padding-bottom: 4px;
 			.glyphicon {
 				font-size: 20px;
 				color: gray;
 				display: inline-block;
 				margin-right: 5px;
 			}
-			,text {
+			.glyphicon-question-sign {
+				color: $borderBlue;
+				background-color: $lightBlue;
+				border-radius: 25px;
+			}
+			.glyphicon-star {
+				color: $yellow;
+				text-shadow: -0.5px 0 $darkBlue, 0 0.5px $darkBlue, 0.5px 0 $darkBlue, 0 -0.5px $darkBlue;
+			    -webkit-transform: rotate(-20deg); /* Safari and Chrome */
+			    -moz-transform: rotate(-20deg);   /* Firefox */
+			    -ms-transform: rotate(-20deg);   /* IE 9 */
+			    -o-transform: rotate(-20deg);   /* Opera */
+			    transform: rotate(-20deg);
+			}
+			.text {
 				font-size: 20px;
 				display: inline-block;
-				font-weight: bold;
+				color: $borderBlue;
 			}
 		}
 	}
+	.divSideBarContainer {
+		position: absolute;
+		bottom: 0;
+		width: 90%;
+		height: 80%;
+		left: 5%;
+	}
 	.resultsSideBar {
 		background-color: darkgrey;
-		width: 35%;
+		width: 30%;
 		display: inline-block;
-		height: 95%;
+		height: 100%;
 		text-align: center;
+		background: $borderBlue; /* For browsers that do not support gradients */
+		background: -webkit-linear-gradient($greenBlue, $borderBlue); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient($greenBlue, $borderBlue); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient($greenBlue, $borderBlue); /* For Firefox 3.6 to 15 */
+		background: linear-gradient($greenBlue, $borderBlue); /* Standard syntax */
+		border-top-right-radius: 15px;
 		h1 {
-
+			font-style: italic;
+			font-weight: bold;
+			color: white;
 		}
 		.coinWrapper {
 			margin: auto;
-			background-color: white;
+			border: 3px solid $yellow;
+			background-color: $borderBlue;
+			background: -webkit-linear-gradient($borderBlue 50%, $greenBlue); /* For Safari 5.1 to 6.0 */
+			background: -o-linear-gradient($borderBlue 50%, $greenBlue); /* For Opera 11.1 to 12.0 */
+			background: -moz-linear-gradient($borderBlue 50%, $greenBlue); /* For Firefox 3.6 to 15 */
+			background: linear-gradient($borderBlue 50%, $greenBlue); /* Standard syntax */
 			border-radius: 100px;
-			width: 150px;
-			height: 150px;
+			width: 200px;
+			height: 200px;
 			img {
+				margin-top: 20px;
 				width: 100px;
 				height: 100px;
 			}
 			h2 {
 				margin: 0px;
 				font-weight: bold;
+				color: white;
 			}
 		}
+		h4 {
+			color: white;
+			font-weight: 100;
+		}
 		.buttonContainer {
-			button {
-				margin: 5px;
-				padding: 2px 5px;
-				background-color: white;
-
-				box-shadow: 0 0 20px $yellow;
+			.btn {
+				color: $darkPink;
+				font-size: 16px;
+				font-weight: bold;
+				margin: 1px;
+				width: 48%;
+				padding: 8px 5px;
+				background-color: $yellow;
+				background: -webkit-linear-gradient(to right, $yellow 50%, $greenBlue); /* For Safari 5.1 to 6.0 */
+				background: -o-linear-gradient($borderBlue 50%, $greenBlue); /* For Opera 11.1 to 12.0 */
+				background: -moz-linear-gradient($borderBlue 50%, $greenBlue); /* For Firefox 3.6 to 15 */
+				background: linear-gradient(to right, $yellow 60%, white); /* Standard syntax */
+				box-shadow: 0 0 20px white;
 				&:hover {
-					background-color: lightgray;
+					background: none;
+					background-color: $yellow;
+
+				}
+				.buttonText {
+					vertical-align: top;
+					line-height: 20px;
 				}
 			}
+			.btn-replay {
+				width: 44%;
+			}
+			.btn-map {
+				width: 54%;
+			}
+			.glyphicon {
+				line-height: 20px;
+				padding-right: 5px;
+				font-size: 18px;
+				font-weight: bold;
+			}
+
 		}
 	}
 
 }
+
 

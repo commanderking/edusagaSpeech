@@ -77,6 +77,46 @@ export var ScenarioController = {
 	}
 }
 
+
+var testString = "你今天想不想跟我打乒乓球"
+var possibleAnswers = [
+	{
+		"answers" : [
+			["你, 您"],
+			["今天下午"], 
+			["想不想", "要不要"],
+			["跟我", "和我"], 
+			["打乒乓球"]
+		],
+		"response" : "好啊。",
+		"soundID" : "wojiao"
+	},
+	{
+		"answers" : [
+			["你, 您"], 
+			["今天下午"], 
+			["想", "要", "想要"],
+			["跟我", "和我"],
+			["打乒乓球嗎"]
+		]
+	}
+]
+
+var testString2 = "我不学法语可是我会说一点"
+var possibleAnswers2 = [
+	{
+		"answers" : [
+			["我"], 
+			["不学", "不读"],
+			["法语", "法文"],
+			["可是", "但是"],
+			["说一点", "会一点"]
+		],
+		"response" : "好啊。",
+		"soundID" : "wojiao"
+	}
+
+]
 export var SpeechChecker = {
 	typicalCheck: function(userAnswer, data, activeTaskIndex) {
 		var possibleAnswers = TaskController.getPossibleCorrectAnswers(data, activeTaskIndex);
@@ -99,6 +139,9 @@ export var SpeechChecker = {
 			"responseSoundID" : responseSoundID,
 			"possibleAnswersIndex" : possibleAnswersIndex
 		};
+	},
+	advancedCheck: function(userAnswer, data, activeTaskIndex) {
+		return false;
 	},
 	addUserAnswerToAttemptedAnswers: function(userAnswer, data, activeTaskIndex) {
 		var attemptedAnswers = data.character.currentTasks[activeTaskIndex].attemptedAnswers;

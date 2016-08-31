@@ -120,14 +120,38 @@ var QuestionAsker = React.createClass({
 		this.loadSceneData();
 	},
 	componentDidUpdate: function() {
+
+		// Logic for when scene is over
 		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
 			var that = this;
-			var studentCompletedProgress = JSON.parse(JSON.stringify(initialLogData));
-			studentCompletedProgress.allTaskData = this.state.sceneData.character.completedTasks;
-			studentCompletedProgress.coins = this.state.coins;
-			studentCompletedProgress.possibleCoins = this.state.possibleCoins;
-			console.log(studentCompletedProgress);
+			var studentCompletedProgress = {};
+			studentCompletedProgress.studentID = initialLogData.studentID;
+			var allTaskData = [];
+
+			var timeInSeconds = Math.floor((new Date().getTime() - initialLogData.startTime) / 1000);
+			/*
+			var timeInMinutes = Math.floor(timeInSeconds / 60);
+			var seconds = Math.floor(timeInSeconds - (timeInMinutes * 60));
+			var readableTime = timeInMinutes + " minutes" + " and " + seconds + "seconds";
+			console.log(readableTime);
+			*/
+
+			// Only add needed pieces of information //
+			this.state.sceneData.character.completedTasks.forEach(function(task, i){
+				var taskData = {}
+				taskData.taskID = task.taskID;
+				taskData.task = task.task;
+				taskData.correct = task.correct;
+				taskData.attemptedAnswers = task.attemptedAnswers;
+				allTaskData.push(taskData);
+
+			})
+			studentCompletedProgress.score = this.state.coins/10;
+			studentCompletedProgress.possibleScore = this.state.possibleCoins/10;
+			studentCompletedProgress.time = timeInSeconds;
+			studentCompletedProgress.allTaskData = allTaskData;
 			
+
 			var logEvent = JSON.stringify(studentCompletedProgress);
 			$.ajax({
 				url: "/logStudent",
@@ -157,6 +181,9 @@ var QuestionAsker = React.createClass({
 			var allCurrentTasks = TaskController.getCurrentTasks(newSceneData); 
 			var currentTaskData = TaskController.getActiveTask(newSceneData, taskIndex);
 			var possibleCorrectAnswers = TaskController.getPossibleCorrectAnswers(newSceneData, taskIndex);
+
+			// Add the user answer to the attemptedAnswers (needed for right or wrong);
+			newSceneData.character.currentTasks[taskIndex].attemptedAnswers.push(userAnswer);
 
 			// Check if user's answers contains any of the possible answers
 			if (currentTaskData.completeMatchOnly === true) {
@@ -283,9 +310,6 @@ var QuestionAsker = React.createClass({
 
 				// Play confused sound
 				this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
-
-				// Add the attempted answer to the attemptedAnswers;
-				newSceneData.character.currentTasks[taskIndex].attemptedAnswers.push(userAnswer);
 
 				// Activate Feedback Mode
 				this.setState({
@@ -537,7 +561,8 @@ var QuestionAsker = React.createClass({
 						hintActive = {this.state.hintActive} 
 						onRepeat = {this.handleRepeat} 
 						nextScenario = {this.nextScenario}
-						assessmentMode = {sceneData.assessmentMode} />
+						assessmentMode = {sceneData.assessmentMode} 
+						sceneComplete = {this.state.sceneComplete} />
 					<CharacterContainer 
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
@@ -546,7 +571,8 @@ var QuestionAsker = React.createClass({
 						silhouette = {sceneData.character.emotions.silhouette}
 						hintActive = {this.state.hintActive} 
 						correctAnswerState = {this.state.correctAnswerState} 
-						wrongAnswerState = {this.state.wrongAnswerState} />
+						wrongAnswerState = {this.state.wrongAnswerState} 
+						sceneComplete = {this.state.sceneComplete} />
 					<TaskContainer 
 						scenarioOn = {this.state.scenarioOn}
 						tasks = {this.state.sceneData.character.currentTasks}
@@ -583,7 +609,9 @@ var QuestionAsker = React.createClass({
 						loadSceneData = {this.loadSceneData} 
 						completedTasks = {sceneData.character.completedTasks}
 						charName = {sceneData.character.name}
-						charProfilePic = {sceneData.character.emotions.default}/>
+						charProfilePic = {sceneData.character.emotions.default}
+						locationEnglish = {sceneData.character.location.nameEnglish}
+						locationChinese = {sceneData.character.location.nameChinese}/>
 				</div>
 			)
 		}

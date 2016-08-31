@@ -96,6 +96,10 @@ def lilaoshiPreassess(activityName="pa1", teacher="lilaoshi"):
 		studentID = ""
 	return render_template("questionAsker.html", activityName=activityName, teacher=teacher, studentID=studentID)
 
+@app.route('/yulaoshi/demo')
+def yulaoshi(activityName="introDavid", teacher="yulaoshi"):
+	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+
 @app.route('/log', methods=['Post'])
 def log():
 	content = request.get_data()

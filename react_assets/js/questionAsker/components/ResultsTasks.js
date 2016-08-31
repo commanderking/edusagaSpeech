@@ -7,6 +7,9 @@ var ResultsTasks = React.createClass({
 	render: function() {
 		// Function to render all completed tasks
 		var completedTasks = this.props.completedTasks;
+		var d = new Date();
+		var date = d.getMonth() + "月" + d.getDate() + "日" + d.getFullYear() + "年";
+		var locationEnglish = this.props.locationEnglish.toUpperCase();
 		var tasks = completedTasks.map(function(task, i) {
 			return (<ResultsCompletedTask
 						key = {task.task}
@@ -19,13 +22,12 @@ var ResultsTasks = React.createClass({
 
 		return (
 			<div className="resultsTasks">
-				<ResultsCharProfile 
-					charProfilePic = {this.props.charProfilePic}
-					charName = {this.props.charName}
-					coins = {this.props.coins}
-					possibleCoins = {this.props.possibleCoins} />
+				<div className="sceneInfo">
+					<h3>{locationEnglish} ({this.props.locationChinese})</h3>
+					<p>{date}</p>
+				</div>
 				<div className="completedTasks">
-				{tasks}
+					{tasks}
 				</div>
 
 			</div>

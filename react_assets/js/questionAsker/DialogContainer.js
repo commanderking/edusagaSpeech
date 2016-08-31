@@ -42,6 +42,12 @@ var DialogContainer = React.createClass({
 				characterName = this.props.charName;
 				characterTextResponse = this.props.currentDialog;
 			}
+
+			// If sceneComplete, hide certain elements
+			if (this.props.sceneComplete) {
+				characterName = "";
+				characterTextResponse = "";
+			}
 			return (
 				<div className={dialogDivClass}>
 					<img className="dialogSlantPiece" src={dialogSlantSrc}/>
