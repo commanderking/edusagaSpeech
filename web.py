@@ -1,5 +1,4 @@
 from flask import Flask, request, redirect, render_template, url_for, jsonify
-from flask_sslify import SSLify
 
 import boto3
 import json
@@ -10,7 +9,6 @@ import sys
 import logging
 
 app = Flask (__name__)
-sslify = SSLify(app)
 #app.config.from_envvar('GOOGLE_APPLICATION_CREDENTIALS')
 
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
