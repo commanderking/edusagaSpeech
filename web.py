@@ -97,8 +97,17 @@ def lilaoshiPreassess(activityName="pa1", teacher="lilaoshi"):
 	return render_template("questionAsker.html", activityName=activityName, teacher=teacher, studentID=studentID)
 
 @app.route('/yulaoshi/demo')
-def yulaoshi(activityName="introDavid", teacher="yulaoshi"):
+def yulaoshiDemo(activityName="introDavid", teacher="yulaoshi"):
 	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+
+@app.route('/lewlaoshi/demo')
+def lewlaoshiDemo(activityName="davidTorontoVisit", teacher="lewlaoshi"):
+	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+
+#-----------------------------------------------
+#POST requests 
+#-----------------------------------------------
+
 
 @app.route('/log', methods=['Post'])
 def log():
@@ -130,14 +139,6 @@ def logSpeechResponse():
 	queue = sqs.get_queue_by_name(QueueName='svc-edusaga-speech-response')
 	response = queue.send_message(MessageBody=content)
 	return 'Success'
-
-@app.route('/.well-known/acme-challenge/Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4')
-def SSL():
-	return "Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q"
-
-@app.route('/.well-known/acme-challenge/Ndkby95ph0d_0X4E4p09iuBtJrSVl4pitbKUp1r-Q1E')
-def SSL2():
-	return 'Ndkby95ph0d_0X4E4p09iuBtJrSVl4pitbKUp1r-Q1E.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
 
 if __name__ == '__main__':
 	app.run(debug=True)

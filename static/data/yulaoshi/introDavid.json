@@ -246,7 +246,23 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
-					"tasksToQueue" : [7, 16],
+					"tasksToQueue" : [16, 7],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 16,
+					"task" : "Tell him where you were born / grew up",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我在...出生的。", "出生", "长大"],
+							"response": "哦。。。",
+							"soundID" : "oh"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				},
 				{
@@ -374,22 +390,6 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : [],
-					"attemptedAnswers" : []
-				},
-				{
-					"taskID" : 16,
-					"task" : "Tell him where you were born / grew up",
-					"possibleAnswers" : 
-					[
-						{
-							"answers": 	["我在...出生的。", "出生", "长大"],
-							"response": "哦。。。",
-							"soundID" : "oh"
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				}

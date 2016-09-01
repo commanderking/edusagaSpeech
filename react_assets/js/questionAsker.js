@@ -150,7 +150,6 @@ var QuestionAsker = React.createClass({
 			studentCompletedProgress.possibleScore = this.state.possibleCoins/10;
 			studentCompletedProgress.time = timeInSeconds;
 			studentCompletedProgress.allTaskData = allTaskData;
-			
 
 			var logEvent = JSON.stringify(studentCompletedProgress);
 			$.ajax({
