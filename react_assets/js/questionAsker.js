@@ -74,7 +74,7 @@ var QuestionAsker = React.createClass({
 				that.setState({
 					sceneData: data,
 					possibleCoins: totalCoins
-			});
+				});
 			that.resetScene();
 
 			/*----------------------------------
@@ -158,6 +158,7 @@ var QuestionAsker = React.createClass({
 				data: logEvent, 
 				dataType: "json"
 			});
+
 
 			setTimeout(function(){
 				that.setState({sceneComplete: true})

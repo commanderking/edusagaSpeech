@@ -1,5 +1,5 @@
-from flask import Flask, request, redirect, url_for, jsonify
-from flask import render_template
+from flask import Flask, request, redirect, render_template, url_for, jsonify
+from flask_sslify import SSLify
 
 import boto3
 import json
@@ -9,10 +9,8 @@ import urlparse
 import sys
 import logging
 
-REGION = 'us-east-1'
-TOPIC  = ''
-
 app = Flask (__name__)
+sslify = SSLify(app)
 #app.config.from_envvar('GOOGLE_APPLICATION_CREDENTIALS')
 
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
@@ -103,6 +101,8 @@ def yulaoshiDemo(activityName="introDavid", teacher="yulaoshi"):
 @app.route('/lewlaoshi/demo')
 def lewlaoshiDemo(activityName="davidTorontoVisit", teacher="lewlaoshi"):
 	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+
+
 
 #-----------------------------------------------
 #POST requests 
