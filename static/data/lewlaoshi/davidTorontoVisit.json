@@ -37,7 +37,7 @@
 			"successPhrases" : {
 
 			},
-			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下"],
+			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
 			"sounds" : 
 			[
 				{
@@ -174,6 +174,7 @@
 							"soundID" : "toronto-really-poutineGood-CNTower"
 						}
 					],
+					"exceptions" : ["没吃了", "不吃了"],
 					"correct" : false,
 					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [4],

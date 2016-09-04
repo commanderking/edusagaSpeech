@@ -47,6 +47,8 @@ html, body {
 	height: 100%;
 }
 
+
+
 .verticalCenter {
 	min-height: 100vh;
 	display: flex;
@@ -106,9 +108,31 @@ html, body {
 	  height: 100%;
 	}
 	.nextButton {
+		font-size: 30px;
+		color: $lightBlue;
+		padding: 10px;
+		line-height: 60px;
+		border-radius: 10px;
+		border: 1px solid $darkerBlue;
+		background-color: $yellow;
+		background: -webkit-radial-gradient(white 20%, $yellow); /* Safari 5.1 to 6.0 */
+		background: -o-radial-gradient(white 20%, #1C90CF); /* For Opera 11.6 to 12.0 */
+		background: -moz-radial-gradient(white 20%, #1C90CF); /* For Firefox 3.6 to 15 */
+		background: radial-gradient(white 20%, $yellow); /* Standard syntax */
 		position: absolute;
 		right: 0;
 		bottom: 0;
+		.glyphicon-play {
+			text-shadow: -2px 0 $darkBlue, 0 2px $darkBlue, 2px 0 $darkBlue, 0 -2px $darkBlue;
+
+		}
+		&:hover {
+			background-color: $lightBlue;
+			background: -webkit-radial-gradient($lightBlue 20%, #1C90CF); /* Safari 5.1 to 6.0 */
+			background: -o-radial-gradient($lightBlue 20%, #1C90CF); /* For Opera 11.6 to 12.0 */
+			background: -moz-radial-gradient($lightBlue 20%, #1C90CF); /* For Firefox 3.6 to 15 */
+			background: radial-gradient($lightBlue 20%, #1C90CF); /* Standard syntax */
+		}
 	}
 }
 
@@ -165,6 +189,7 @@ html, body {
 }
 
 .gameWrapper {
+	font-family: "Source Sans Pro", sans-serif;
 	padding: 0px;
 	background: rgba(1,1,1,0.1);
 	min-height: 550px;
@@ -245,28 +270,6 @@ html, body {
 			}		
 		}
 }
-/*
-.scenarioWindow {
-	position: absolute;
-	margin-top: 10%;
-	margin-left: 30%;
-	padding : 15px;
-	padding-top: 0%;
-	width: 40%;
-	background-color: white;
-	border: 3px solid green;
-		h3 {
-			@include mobile {
-				font-size: 1.3em;
-				margin-top: 10px;
-			}
-		}
-
-	@include mobile {
-		width: 90%;
-		margin-left: 5%;
-	}
-}*/
 
 .feedback {
 	position: absolute;
@@ -364,6 +367,14 @@ CSS Related to Task List
 		font-size: 18px;
 		line-height: 44px;
 	}
+
+	.repeatOnDiv {
+		img {
+			height: 35px;
+			margin-top: 10px;
+			margin-left:10px;
+		}
+	}
 }
 
 .taskDivNormalState {
@@ -378,6 +389,29 @@ CSS Related to Task List
 	.taskText {
 		&:hover {
 			background: linear-gradient(82deg, #38C6F3, #057FC5 20%);
+			border-radius: 25px;
+			cursor: pointer;
+		}
+		&:active {
+			box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+			border-radius: 25px;
+		}
+	}
+}
+
+.taskDivRepeat {
+	color: #F3EC29;
+	background-color: #047FC5;
+	width: 250px;
+	display: inline-block;
+	box-shadow: 5px 5px 10px black;
+	border-bottom: 3px solid $borderBlue;
+	border-top: 3px solid $lightBlue;
+	border-left: 1px solid $borderBlue;
+	border-right: 1px solid $borderBlue;	
+	.taskText {
+		&:hover {
+			background: #38C6F3;
 			border-radius: 25px;
 			cursor: pointer;
 		}
@@ -405,6 +439,19 @@ CSS Related to Task List
 		color: #316086;
 	}
 }
+
+.taskDivRepeatDisabled {
+	background: #214f79;
+	color: #316086;
+	border: none;
+	width: 250px;
+	display: inline-block;
+	&:hover {
+		background: #214f79;
+		color: #316086;
+	}	
+}
+
 /* When user clicks task and is recording */
 .taskDivMicActive {
 	color: $darkerBlue;
@@ -566,7 +613,7 @@ CSS Related to Task List
 			.miriIcon {
 				position: absolute;
 				top: -30px;
-				right: 5%;
+				right: 3%;
 				height: 100%;
 				min-height: 100px;
 				z-index: 6;
@@ -580,8 +627,8 @@ CSS Related to Task List
 				position: absolute;
 				top: 0%;
 				height: 100%;
-				right: 12%;
-				width: 40%;
+				right: 9%;
+				width: 45%;
 				background-color: $invertedBlue;
 				border-top-left-radius: 25px;
 				border-bottom-left-radius: 25px;
@@ -738,7 +785,7 @@ Robo Help Window
 		position: absolute;
 		font-size: 50px;
 		font-weight: bold;
-		top: -40px;
+		top: -45px;
 		margin-left: 20px;
 		// text-shadow: 0 0 20px black;
 		color: white;
@@ -767,12 +814,10 @@ Robo Help Window
 	.resultsHeader {
 		height: 18%;
 		max-height: 80px;
-		h1 {
-			font-weight: bold;
-			display: inline-block;
+		.resultsImage {
 			position: absolute;
-			color: $darkPink;
-			text-shadow: 0 0 5px yellow;
+			width: 150px;
+			height: auto;
 			top: 20px;
 			left: -10px;
 		    -webkit-transform: rotate(-15deg); /* Safari and Chrome */
@@ -803,7 +848,9 @@ Robo Help Window
 				width: 60%;
 				height: 75px;
 				color: $borderBlue;
-
+				h3 {
+					font-weight: 900;
+				}
 				h3, h4 {
 					margin: 0px;
 					line-height: 30px;
@@ -906,8 +953,9 @@ Robo Help Window
 		background: linear-gradient($greenBlue, $borderBlue); /* Standard syntax */
 		border-top-right-radius: 15px;
 		h1 {
+			font-weight: 900;
 			font-style: italic;
-			font-weight: bold;
+			font-weight: Black;
 			color: white;
 		}
 		.coinWrapper {
@@ -958,6 +1006,7 @@ Robo Help Window
 				.buttonText {
 					vertical-align: top;
 					line-height: 20px;
+					font-weight: 900;
 				}
 			}
 			.btn-replay {

@@ -15,7 +15,7 @@ describe('Question Asker Logic', () => {
 			// Doesn't actually deep compare data structure, just some key elements
 			var lengthCurrentTasks = TaskController.getCurrentTasks(testJSON).length;
 			var task1text = TaskController.getCurrentTasks(testJSON)[0].task;
-			expect(lengthCurrentTasks).to.equal(2);
+			expect(lengthCurrentTasks).to.equal(5);
 			expect(task1text).to.equal("Greet him");
 		});
 
@@ -37,8 +37,36 @@ describe('Question Asker Logic', () => {
 		});
 	});
 
+
+
+
 	describe('Check user answers', () => {
-		it ('test exact answer', () => {
+		var possibleAnswers = [
+			{
+				"answers" : [
+					["你", "您"],
+					["今天", "下午"], 
+					["想不想", "要不要"],
+					["跟我", "和我"], 
+					["打乒乓球"]
+				],
+				"response" : "好啊。",
+				"soundID" : "ok1"
+			},
+			{
+				"answers" : [
+					["你", "您"], 
+					["今天", "下午"],
+					["想", "要", "想要"],
+					["跟我", "和我"],
+					["打乒乓球吗"]
+				],
+				"response" : "好啊。",
+				"soundID" : "ok2"
+			}
+		];
+
+		it ('test exact answers', () => {
 			var userAnswer = "你怎么样";
 			var userAnswer2 = "你好吗";
 			var expectedOutput = {
@@ -47,34 +75,63 @@ describe('Question Asker Logic', () => {
 				"possibleAnswersIndex" : 0
 			}
 
-			var actualOutput = SpeechChecker.typicalCheck(userAnswer, testJSON, 1);
+			var actualOutput = SpeechChecker.checkAnswer(userAnswer, testJSON, 1);
 			assert.deepEqual(actualOutput, expectedOutput);
 
-			var answerCorrect = SpeechChecker.typicalCheck(userAnswer2, testJSON, 1);
+			var actualOutput = SpeechChecker.checkAnswer(userAnswer2, testJSON, 1);
 			assert.deepEqual(actualOutput, expectedOutput);
+	
 		});
+
+		it ('test that exact match functionality works', () => {
+			// If 有吃 is a possible answer, but user says 没有吃, it'll still match.
+			// In this case, an exact match should be used to prevent this mistake from happening
+			var userAnswer = "没有吃"; // Should be wrong, even though contais "有吃" because of exact match
+
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 2).answerCorrect;
+			expect(answerCorrect).to.equal(false);
+
+			// should be right, exact match
+			var userAnswer2 = "有吃";
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer2, testJSON, 2).answerCorrect;
+			expect(answerCorrect).to.equal(true);
+
+			// should be wrong, might technically be riht, but not exact match
+			var userAnswer3 = "有吃汉堡";
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer3, testJSON, 2).answerCorrect;
+			expect(answerCorrect).to.equal(false);
+		})
 
 		it ('test correct, but non-exact answer', () => {
 			var userAnswer = "你今天好吗";
+			var userAnswer2 = "你好吗";
 			var expectedOutput = {
 				"answerCorrect" : true,
 				"responseSoundID" : "feichanghao",
 				"possibleAnswersIndex" : 0	
 			}
-			var actualOutput = SpeechChecker.typicalCheck(userAnswer, testJSON, 1);
+			var actualOutput = SpeechChecker.checkAnswer(userAnswer, testJSON, 1);
 			assert.deepEqual(actualOutput, expectedOutput);
 		})
 
 		it ('test incorrect answer', () => {
 			var userAnswer = "你是笨蛋";
 			var userAnswer2 = "杨怎么";
-			var answerCorrect = SpeechChecker.typicalCheck(userAnswer, testJSON, 1).answerCorrect;
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 1).answerCorrect;
 			expect(answerCorrect).to.equal(false);
 
-			var answerCorrect = SpeechChecker.typicalCheck(userAnswer2, testJSON, 1).answerCorrect;
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer2, testJSON, 1).answerCorrect;
 			expect(answerCorrect).to.equal(false);
 
 		});
+
+		it ('test that if answer contains an exception, answer will be incorrect when matched', () => {
+			// This is an answer that would be accepted for 吃了 or 没吃, but is grammatically wrong, so we want to make sure this answer is precluded
+			var userAnswer = "没吃了";
+
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 4).answerCorrect;
+			expect(answerCorrect).to.equal(false);
+		})
 
 		it ('add user answer to attemptedAnswers', () => {
 			var userAnswer = "你不好";
@@ -90,7 +147,45 @@ describe('Question Asker Logic', () => {
 			var expectedAttemptedAnswers = ["你不好", "你好"];
 			assert.deepEqual(expectedAttemptedAnswers, SpeechChecker.addUserAnswerToAttemptedAnswers(userAnswer, newTestJSON, 0));
 		});
+
+		it ('advanced check based on grammar components - correct check', () => {
+			var userAnswer = "你今天要不要跟我打乒乓球";
+			// Test a couple of correct answer for testString
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
+			var soundID = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).responseSoundID;
+			expect(answerCorrect).to.equal(true);
+			expect(soundID).to.equal("ok1");
+
+
+			var userAnswer = "你今天想和我打乒乓球吗";
+			var answerCorrect = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).answerCorrect;
+			var soundID = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).responseSoundID;
+			expect(answerCorrect).to.equal(true);
+			expect(soundID).to.equal("ok2");
+
+			var userAnswer = "你下午要不要跟我打乒乓球"
+			var answerCorrect = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).answerCorrect;
+			var soundID = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).responseSoundID;
+			expect(answerCorrect).to.equal(true);
+			expect(soundID).to.equal("ok1");
+
+		});
+
+		it ('advanced check - incorrect check', () => {
+			// Test incorrect answers 
+			var userAnswer = "你是笨蛋";
+			var answerCorrect = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).answerCorrect;
+			expect(answerCorrect).to.equal(false);
+
+			var userAnswer = "你今天想吃汉堡吗";
+			var answerCorrect = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).answerCorrect;
+			expect(answerCorrect).to.equal(false);
+		});
 	})
+
+
+
+
 
 	describe('Updating current, queued, and completed tasks', () => {
 		it ('add queued tasks to current tasks', () => {
@@ -111,6 +206,8 @@ describe('Question Asker Logic', () => {
 			assert.deepEqual(expectedOutputAfterSplicing, newQueuedArray);
 		}) 
 	})
+
+
 
 	describe ('Skipping Tasks', () => {
 		// Grab the IDs of tasks To be queued on current tasks

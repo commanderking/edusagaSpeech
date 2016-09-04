@@ -11,9 +11,9 @@ with open (sys.argv[1], 'r') as my_file:
 	# Manually unicode and remove it to make it json readable
 	eventsLogData = eventsLogData.replace("u'{", "{")
 	eventsLogData = eventsLogData.replace("}'", "}")
-	
-	jsonFile = json.loads(eventsLogData)
-	print(eventsLogData)
+	print (eventsLogData)
+	#jsonFile = json.loads(eventsLogData)
+	#print(eventsLogData)
 	'''
 	f = csv.writer(open("test.csv", "wb+"))
 

@@ -31,9 +31,10 @@
 			{
 				"default": "characters/tina/tinaDefault.png",
 				"ordering" : "characters/tina/tinaOrdering.png",
-				"confused" : "characters/tina/tinaConfused.png"
+				"confused" : "characters/tina/tinaConfused.png",
+				"silhouette" : "characters/tina/tinaSilhouette1.png"
 			},
-			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下"],
+			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
 			"sounds" : 
 			[
 				{

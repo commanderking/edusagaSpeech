@@ -118,7 +118,8 @@
 						{
 							"answers" : ["你好"],
 							"response" : "你好!",
-							"soundID" : "nihao"
+							"soundID" : "nihao",
+							"exactMatch" : true
 						},
 						{
 							"answers" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "今天怎么样", "今天好吗", "今天过得怎么样"],
@@ -146,6 +147,72 @@
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [3,4],
 					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 20,
+					"task" : "Answer whether you've eaten yet",
+					"possibleAnswers" : 
+					[
+						{
+							"exactMatch" : true,
+							"answers": ["我吃了", "有吃", "我有吃", "吃过了", "吃了"],
+							"response": "非常好",
+							"soundID": "feichanghao"
+						}			
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []					
+				},
+				{
+					"taskID" : 21,
+					"task" : "Answer whether you've eaten yet",
+					"possibleAnswers" : [
+						{
+							"answers" : [
+								["你", "您"],
+								["今天", "下午"], 
+								["想不想", "要不要"],
+								["跟我", "和我"], 
+								["打乒乓球"]
+							],
+							"response" : "好啊。",
+							"soundID" : "ok1"
+						},
+						{
+							"answers" : [
+								["你", "您"], 
+								["今天", "下午"],
+								["想", "要", "想要"],
+								["跟我", "和我"],
+								["打乒乓球吗"]
+							],
+							"response" : "好啊。",
+							"soundID" : "ok2"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []					
+				},
+				{
+					"taskID" : 22,
+					"task" : "Answer whether you've eaten yet",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["我吃了", "有吃", "我有吃", "吃过了", "吃了"],
+							"response": "非常好",
+							"soundID": "feichanghao"
+						}			
+					],
+					"exceptions": ["没吃了"],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []					
 				}
 			],
 			"queuedTasks" : 

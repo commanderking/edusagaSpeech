@@ -126,7 +126,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [2],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : true
 				},
 				{
 					"taskID" : 2,

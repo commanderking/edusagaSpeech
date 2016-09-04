@@ -27,8 +27,8 @@ var DialogContainer = React.createClass({
 					{this.props.scenarioData[this.props.scenarioIndex].text}
 				</p>)
 				button = <button 
-						className="nextButton btn btn-lg btn-success"
-						onClick={this.props.nextScenario} >Next</button>
+						className="nextButton"
+						onClick={this.props.nextScenario} ><span className="glyphicon glyphicon-play" aria-hidden="true"></span></button>
 			// Case 2: Hint's active; Name, Text should fade color and the div should invert colors
 			} else if(this.props.hintActive === true) {
 				dialogDivClass = "characterDialogueDiv dialogDivInverted col-md-12 col-sm-12 col-xs-12";

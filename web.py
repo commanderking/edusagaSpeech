@@ -5,7 +5,7 @@ import json
 import urlparse
 
 #For Heroku Logging
-import sys
+import sys, os
 import logging
 
 app = Flask (__name__)
@@ -100,8 +100,19 @@ def yulaoshiDemo(activityName="introDavid", teacher="yulaoshi"):
 def lewlaoshiDemo(activityName="davidTorontoVisit", teacher="lewlaoshi"):
 	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
 
+@app.route('/lewlaoshi/demo2')
+def lewlaoshiDemo2(activityName="davidTaiwanVisit", teacher="lewlaoshi"):
+	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
 
+'''
 
+@app.route('/<teacher>/<activityName>')
+def teacherScene(teacher, activityName):
+	if (os.path.isdir('./static/data/' + teacher) & os.path.isfile('./static/data/' + teacher + '/' + activityName + '.json')):
+		return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+	else:
+		return redirect(url_for('index'))
+'''
 #-----------------------------------------------
 #POST requests 
 #-----------------------------------------------

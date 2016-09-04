@@ -6,6 +6,7 @@ var ResultsSideBar = React.createClass({
 	render: function() {
 		var coinImageSrc = Constants.IMAGE_PATH + "UI/Icon_coins-01.png";
 		var coinsToMax = this.props.possibleCoins - this.props.coins;
+		var rewardsText = coinsToMax === 0 ? <h4>Perfect!</h4> : <h4>Try again for <b>{coinsToMax} MORE COINS?</b></h4>
 		return (
 			<div className="resultsSideBar">
 				<h1>REWARD</h1>
@@ -13,7 +14,7 @@ var ResultsSideBar = React.createClass({
 					<img src={coinImageSrc} />
 					<h2> {this.props.coins}/{this.props.possibleCoins} </h2>
 				</div>
-				<h4>Try again for <b>{coinsToMax} MORE COINS?</b></h4>
+				{rewardsText}
 				<div className="buttonContainer">
 					<button className="btn btn-replay"
 						onClick = {this.props.loadSceneData}>

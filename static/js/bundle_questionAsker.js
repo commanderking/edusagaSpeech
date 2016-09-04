@@ -59,8 +59,8 @@
 	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 201);
 	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 202);
 	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 207);
-	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 213);
-	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 214);
+	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 214);
+	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 215);
 	
 	var Constants = __webpack_require__(/*! ./helpers/Constants.js */ 179);
 	
@@ -68,7 +68,6 @@
 		"startTime": 0,
 		"studentID": "",
 		"teacherID": "",
-		"IP": "",
 		"currentTime": ""
 	};
 	
@@ -86,12 +85,6 @@
 			} else {
 				initialLogData.teacherID = "Unknown Teacher";
 			}
-		},
-		setIP: function setIP() {
-			$.get("http://ipinfo.io", function (response) {
-				initialLogData.IP = response.ip;
-				console.log(response.ip);
-			}, "jsonp");
 		}
 	};
 	
@@ -99,6 +92,7 @@
 		displayName: 'QuestionAsker',
 	
 		// feedbackText can be hintText from clicking hint or feedback on what user said
+		// lastDialogText is what the character last said. Important when asking for repeat to be able to reference this 
 		getInitialState: function getInitialState() {
 			return {
 				sceneData: undefined,
@@ -106,8 +100,11 @@
 				scenarioIndex: 0,
 				hintActive: false,
 				currentHintIndex: -1,
+				currentDialog: "",
+				lastDialogText: "",
 				voicePack: {},
 				coins: 0,
+				correctAnswers: 0,
 				possibleCoins: 0,
 				answerFeedbackActive: false,
 				feedbackText: "",
@@ -140,7 +137,6 @@
 					initializeLogData.setStudentID(studentID);
 				}
 				initializeLogData.setTeacherID(teacher);
-				initializeLogData.setIP();
 				console.log(initialLogData);
 	
 				// Load all the sounds that are in the scene
@@ -220,11 +216,8 @@
 			if (userAnswer === "Cancel Speech") {
 				// Do nothing
 			} else {
-	
+				console.log(userAnswer);
 				var that = this;
-				var correctAnswer = false;
-				var responseSoundID;
-				var possibleAnswerIndex;
 	
 				// Trick to get new instance of sceneData, to not alter the origial state
 				var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
@@ -235,26 +228,13 @@
 				// Add the user answer to the attemptedAnswers (needed for right or wrong);
 				newSceneData.character.currentTasks[taskIndex].attemptedAnswers.push(userAnswer);
 	
-				// Check if user's answers contains any of the possible answers
-				if (currentTaskData.completeMatchOnly === true) {
-					possibleCorrectAnswers.forEach(function (possibleAnswerObject, i) {
-						// Temporarily grab the soundID of this object
-						var tempSoundID = possibleAnswerObject.soundID;
-						possibleAnswerObject.answers.forEach(function (possibleAnswer) {
-							if (userAnswer === possibleAnswer) {
-								correctAnswer = true;
-								responseSoundID = tempSoundID;
-								possibleAnswerIndex = i;
-							}
-						});
-					});
-				} else {
-					// Store the returned data;
-					var returnedObject = _QuestionAskerHelper.SpeechChecker.typicalCheck(userAnswer, newSceneData, taskIndex);
-					correctAnswer = returnedObject.answerCorrect;
-					responseSoundID = returnedObject.responseSoundID;
-					possibleAnswerIndex = returnedObject.possibleAnswersIndex;
-				}
+				// Store the returned data;
+				var returnedObject = _QuestionAskerHelper.SpeechChecker.checkAnswer(userAnswer, newSceneData, taskIndex);
+				console.log(returnedObject);
+				var correctAnswer = returnedObject.answerCorrect;
+				var responseSoundID = returnedObject.responseSoundID;
+				var possibleAnswerIndex = returnedObject.possibleAnswersIndex;
+	
 				if (correctAnswer) {
 	
 					/*----------------------------------------------
@@ -271,7 +251,7 @@
 					newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
 	
 					// Show response text
-					newSceneData.currentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
+					var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
 	
 					// Mark question as corrrect
 					newSceneData.character.currentTasks[taskIndex].correct = true;
@@ -281,7 +261,11 @@
 	
 					this.setState({ sceneData: newSceneData });
 	
-					this.setState({ correctAnswerState: true });
+					// Add point to correct answers and set state to correctAnswerState
+					this.setState({ correctAnswerState: true,
+						correctAnswers: this.state.correctAnswers + 1,
+						currentDialog: newCurrentDialog,
+						lastDialogText: newCurrentDialog });
 					this.turnMicStateOff();
 	
 					/*----------------------------------------------
@@ -354,7 +338,7 @@
 					var randomVar = Math.random();
 	
 					// Set text for confusion
-					newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].response;
+					newCurrentDialog = confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].response;
 	
 					// Play confused sound
 					this.playSound(confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].soundID);
@@ -368,7 +352,10 @@
 					this.activateFeedbackMode();
 	
 					// Set new variables in sceneData
-					this.setState({ sceneData: newSceneData, wrongAnswerState: true });
+					this.setState({ sceneData: newSceneData,
+						wrongAnswerState: true,
+						currentDialog: newCurrentDialog
+					});
 	
 					setTimeout(function () {
 						// Reset character image to default 
@@ -427,17 +414,16 @@
 			createjs.Sound.play(soundID);
 		},
 		playConfusedPhrase: function playConfusedPhrase(confusedPhrasesArray) {
+			/*
+	  // Randomly pick a confused response
+	  var randomVar = Math.random();
+	  	// Play confused sound
+	  this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
+	  	newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
+	  	// Set text for confusion
+	  newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
+	  */
 	
-			// Randomly pick a confused response
-			var randomVar = Math.random();
-	
-			// Play confused sound
-			this.playSound(confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].soundID);
-	
-			newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
-	
-			// Set text for confusion
-			newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].response;
 		},
 		handleHintClick: function handleHintClick(hintIndex) {
 			var that = this;
@@ -449,6 +435,25 @@
 				feedbackText: hintText,
 				miriIconSrc: "miri/icons/Miri_Icon_Yay.png"
 			});
+	
+			// Track hints used
+			console.log(this.state.sceneData.character.currentTasks[hintIndex].hintUsed);
+	
+			// If clause for older versions which don't have hintUsed defined
+			if (this.state.sceneData.character.currentTasks[hintIndex].hintUsed !== undefined) {
+				var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
+	
+				// Check if hint was already used If so, then let student look for free again (no coin penalty)
+				var hintUsed = newSceneData.character.currentTasks[hintIndex].hintUsed;
+	
+				if (hintUsed === true) {} else {
+					this.subCoins(5);
+					hintUsed = true;
+					console.log(newSceneData.character.currentTasks[hintIndex].hintUsed);
+					this.setState({ sceneData: newSceneData });
+				}
+				console.log("Hint Used");
+			}
 	
 			// return Miri Icon to default after 3s
 			setTimeout(function () {
@@ -501,9 +506,14 @@
 			var newCoins = this.state.coins + numberCoinsToAdd;
 			this.setState({ coins: newCoins });
 		},
+		subCoins: function subCoins(numberCoinsToSub) {
+			var newCoins = this.state.coins - numberCoinsToSub;
+			this.setState({ coins: newCoins });
+		},
 		// Function triggers when user clicks text in dailog box
 		handleRepeat: function handleRepeat() {
 			this.playSound(this.state.sceneData.currentSoundID);
+			this.setState({ currentDialog: this.state.lastDialogText });
 		},
 		// function triggers when user speaks "repeat" into microphone
 		handleAskRepeat: function handleAskRepeat(userAnswer) {
@@ -538,12 +548,12 @@
 					newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
 	
 					// Set text for confusion
-					newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].response;
+					var newCurrentDialog = confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].response;
 	
 					// Play confused sound
 					this.playSound(confusedPhrasesArray[Math.floor(randomVar * confusedPhrasesArray.length)].soundID);
 	
-					this.setState({ wrongAnswerState: true, sceneData: newSceneData });
+					this.setState({ wrongAnswerState: true, sceneData: newSceneData, currentDialog: newCurrentDialog });
 	
 					setTimeout(function () {
 						// Reset character image to default 
@@ -606,7 +616,7 @@
 						scenarioData: sceneData.scenario,
 						scenarioIndex: this.state.scenarioIndex,
 						charName: this.state.sceneData.character.name,
-						currentDialog: sceneData.currentDialog,
+						currentDialog: this.state.currentDialog,
 						hintActive: this.state.hintActive,
 						onRepeat: this.handleRepeat,
 						nextScenario: this.nextScenario,
@@ -22396,46 +22406,134 @@
 		}
 	};
 	
-	var testString = "你今天想不想跟我打乒乓球";
-	var possibleAnswers = [{
-		"answers": [["你, 您"], ["今天下午"], ["想不想", "要不要"], ["跟我", "和我"], ["打乒乓球"]],
-		"response": "好啊。",
-		"soundID": "wojiao"
-	}, {
-		"answers": [["你, 您"], ["今天下午"], ["想", "要", "想要"], ["跟我", "和我"], ["打乒乓球嗎"]]
-	}];
-	
-	var testString2 = "我不学法语可是我会说一点";
 	var possibleAnswers2 = [{
 		"answers": [["我"], ["不学", "不读"], ["法语", "法文"], ["可是", "但是"], ["说一点", "会一点"]],
 		"response": "好啊。",
 		"soundID": "wojiao"
 	}];
 	var SpeechChecker = exports.SpeechChecker = {
-		typicalCheck: function typicalCheck(userAnswer, data, activeTaskIndex) {
+		// determine whether to use typical check or advancedCheck
+		checkAnswer: function checkAnswer(userAnswer, data, activeTaskIndex) {
+			var that = this;
+	
 			var possibleAnswers = TaskController.getPossibleCorrectAnswers(data, activeTaskIndex);
+			var objectToReturn = {
+				"answerCorrect": false,
+				"possibleAnswersIndex": -1,
+				"responseSoundID": ""
+			};
+	
+			// If the userAnswer contains an exception, immediately mark it as wrong
+			if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
+				var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
+				console.log(exceptions);
+				var exceptionMatch = false;
+				exceptions.forEach(function (exception) {
+					console.log(exception);
+					if (userAnswer === exception) {
+						console.log("exception exists");
+						exceptionMatch = true;
+					}
+				});
+	
+				console.log("Exception loop done");
+				if (exceptionMatch === true) {
+					console.log(objectToReturn);
+					return objectToReturn;
+				}
+			}
+	
+			possibleAnswers.forEach(function (possibleAnswerObject, i) {
+				var tempSoundID = possibleAnswerObject.soundID;
+	
+				// if the first entry in answers array is an array, we will need advancedCheck
+				if (possibleAnswerObject.answers[0].constructor === Array) {
+					objectToReturn = that.advancedCheck(userAnswer, possibleAnswers, objectToReturn);
+				} else {
+					objectToReturn = that.typicalCheck(userAnswer, possibleAnswers, objectToReturn);
+				}
+			});
+	
+			return objectToReturn;
+		},
+		typicalCheck: function typicalCheck(userAnswer, possibleAnswers, objectToReturn) {
+			possibleAnswers.forEach(function (possibleAnswerObject, i) {
+				var tempSoundID = possibleAnswerObject.soundID;
+				console.log(objectToReturn.answerCorrect);
+				// Case for exact match
+				if (possibleAnswerObject.exactMatch === true) {
+					console.log('in exact match');
+					possibleAnswerObject.answers.forEach(function (possibleAnswer) {
+						console.log(possibleAnswer);
+						console.log(objectToReturn.answerCorrect);
+						if (userAnswer === possibleAnswer) {
+							console.log("exact answer correct");
+							objectToReturn.answerCorrect = true;
+							objectToReturn.responseSoundID = tempSoundID;
+							objectToReturn.possibleAnswersIndex = i;
+						}
+					});
+				} else {
+					possibleAnswerObject.answers.forEach(function (possibleAnswer) {
+						if (userAnswer.indexOf(possibleAnswer) >= 0) {
+							console.log("using contains - answer correct");
+	
+							objectToReturn.answerCorrect = true;
+							objectToReturn.responseSoundID = tempSoundID;
+							objectToReturn.possibleAnswersIndex = i;
+						}
+					});
+				}
+			});
+			return objectToReturn;
+		},
+		advancedCheck: function advancedCheck(userAnswer, possibleAnswers, objectToReturn) {
 			var answerCorrect = false;
 			var possibleAnswersIndex;
 			var responseSoundID;
 			possibleAnswers.forEach(function (possibleAnswerObject, i) {
 				var tempSoundID = possibleAnswerObject.soundID;
-				console.log(possibleAnswerObject.soundID);
-				possibleAnswerObject.answers.forEach(function (possibleAnswer) {
-					if (userAnswer.indexOf(possibleAnswer) >= 0) {
-						answerCorrect = true;
-						responseSoundID = tempSoundID;
-						possibleAnswersIndex = i;
+				possibleAnswersIndex = i;
+				var checkListArray = [];
+				possibleAnswerObject.answers.forEach(function (answerPartArray, j) {
+					// Tracks how far along we are in user answer
+					var userAnswerIndex = 0;
+	
+					// All entries in this array must be true for answer to be correct
+					// Have something like ["你", "您"]
+					for (var k = 0; k < answerPartArray.length; k++) {
+						var answerPartCorrect = false;
+						// console.log(answerPartArray[k]);
+						var newAnswerIndex = userAnswer.indexOf(answerPartArray[k]);
+						// console.log(newAnswerIndex);
+						if (newAnswerIndex >= userAnswerIndex) {
+							answerPartCorrect = true;
+							userAnswerIndex = newAnswerIndex;
+							break;
+						}
 					}
+					checkListArray.push(answerPartCorrect);
+					// console.log(checkListArray);
 				});
+	
+				// Check if all the entries in checkListArray are true;
+				// if so, then the answer is correct
+				var correctCounter = 0;
+				for (var l = 0; l < checkListArray.length; l++) {
+					if (checkListArray[l]) {
+						correctCounter += 1;
+					}
+				}
+				if (correctCounter === checkListArray.length) {
+					responseSoundID = tempSoundID;
+					answerCorrect = true;
+				}
 			});
 			return {
 				"answerCorrect": answerCorrect,
 				"responseSoundID": responseSoundID,
 				"possibleAnswersIndex": possibleAnswersIndex
 			};
-		},
-		advancedCheck: function advancedCheck(userAnswer, data, activeTaskIndex) {
-			return false;
 		},
 		addUserAnswerToAttemptedAnswers: function addUserAnswerToAttemptedAnswers(userAnswer, data, activeTaskIndex) {
 			var attemptedAnswers = data.character.currentTasks[activeTaskIndex].attemptedAnswers;
@@ -23663,9 +23761,9 @@
 					button = React.createElement(
 						'button',
 						{
-							className: 'nextButton btn btn-lg btn-success',
+							className: 'nextButton',
 							onClick: this.props.nextScenario },
-						'Next'
+						React.createElement('span', { className: 'glyphicon glyphicon-play', 'aria-hidden': 'true' })
 					);
 					// Case 2: Hint's active; Name, Text should fade color and the div should invert colors
 				} else if (this.props.hintActive === true) {
@@ -23806,7 +23904,7 @@
 			});
 	
 			// Special class added to the Ask for Repeat button if hintACtive
-			var repeatDivClass = this.props.hintActive ? "taskDiv taskDivDisabled" : "taskDiv taskDivNormalState";
+			var repeatDivClass = this.props.hintActive ? "taskDiv taskDivRepeatDisabled" : "taskDiv taskDivRepeat";
 	
 			// No option to press skip button if answering question
 			var skipButton = this.props.correctAnswerState || this.props.micActive ? null : React.createElement(
@@ -23835,7 +23933,8 @@
 								wrongAnswerState: this.props.wrongAnswerState,
 								micActive: this.props.micActive,
 								index: skipButtonIndex,
-								currentTaskIndex: this.state.currentTaskIndex }),
+								currentTaskIndex: this.state.currentTaskIndex,
+								icon: 'repeatIcon' }),
 							React.createElement(TaskText, {
 								className: 'taskText',
 								index: skipButtonIndex,
@@ -23951,6 +24050,7 @@
 			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 			var imgCoins = Constants.IMAGE_PATH + "UI/Icon_10coins_flat_nostar-01.png";
 			var imgQuestion = Constants.IMAGE_PATH + "UI/Icon_Questionmark-01.png";
+			var imgRepeat = Constants.IMAGE_PATH + "UI/buttonRepeatOn.png";
 			var taskIconImage = React.createElement(
 				'div',
 				{ className: 'taskIconDiv' },
@@ -23961,6 +24061,7 @@
 					keyToAttach: 'firstMic',
 					imageSrc: imgMic })
 			);
+	
 			// Sets to true if this task is the active task
 			if (this.props.index === this.props.currentTaskIndex) {
 				if (this.props.micActive) {
@@ -24007,6 +24108,17 @@
 							transition: 'taskWrongQuestionMark' })
 					);
 				}
+			}
+	
+			// If this is the repeat button, return the repeat icon 
+			if (this.props.icon === "repeatIcon") {
+				return React.createElement(
+					'div',
+					{ className: 'taskIconDiv repeatOnDiv' },
+					React.createElement(TaskIconImage, {
+						keyToAttach: 'repeat',
+						imageSrc: imgRepeat })
+				);
 			}
 			return React.createElement(
 				'span',
@@ -25026,18 +25138,15 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 179);
-	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 215);
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 210);
 	
 	function ResultsHeader(props) {
 		var miriIconSrc = Constants.IMAGE_PATH + "miri/icons/Miri_Icon_Yay.png";
+		var resultsSrc = Constants.IMAGE_PATH + "UI/titleResults.png";
 		return React.createElement(
 			'div',
 			{ className: 'resultsHeader' },
-			React.createElement(
-				'h1',
-				null,
-				'RESULTS'
-			),
+			React.createElement('img', { className: 'resultsImage', src: resultsSrc }),
 			React.createElement(
 				'div',
 				{ className: 'miriIcon' },
@@ -25054,7 +25163,66 @@
 	module.exports = ResultsHeader;
 
 /***/ },
-/* 210 */,
+/* 210 */
+/*!************************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ResultsCharProfile.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 179);
+	
+	var ResultsCharProfile = React.createClass({
+		displayName: 'ResultsCharProfile',
+	
+		render: function render() {
+			// Get default profile image source
+			var charProfilePic = Constants.IMAGE_PATH + this.props.charProfilePic;
+			// Get comment
+	
+			// Calculate completion decimal
+			var completionRate = this.props.coins / this.props.possible * 100;
+			var resultsComment;
+			if (completionRate > 90) {
+				resultsComment = "I had a really great time! Your Chinese is awesome!";
+			} else if (completionRate > 70) {
+				resultsComment = "I had a good time! It was fun to talk in Chinese.";
+			} else {
+				resultsComment = "Nice talking to you!";
+			}
+	
+			return React.createElement(
+				'div',
+				{ className: 'resultsCharProfile' },
+				React.createElement('img', { src: charProfilePic }),
+				React.createElement(
+					'div',
+					{ className: 'textContainer' },
+					React.createElement(
+						'h3',
+						null,
+						this.props.charName
+					),
+					React.createElement(
+						'h4',
+						null,
+						resultsComment
+					)
+				)
+			);
+		}
+	});
+	
+	ResultsCharProfile.propTypes = {
+		charProfilePic: PropTypes.string.isRequired
+	};
+	
+	module.exports = ResultsCharProfile;
+
+/***/ },
 /* 211 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsSideBar.js ***!
@@ -25073,6 +25241,21 @@
 		render: function render() {
 			var coinImageSrc = Constants.IMAGE_PATH + "UI/Icon_coins-01.png";
 			var coinsToMax = this.props.possibleCoins - this.props.coins;
+			var rewardsText = coinsToMax === 0 ? React.createElement(
+				'h4',
+				null,
+				'Perfect!'
+			) : React.createElement(
+				'h4',
+				null,
+				'Try again for ',
+				React.createElement(
+					'b',
+					null,
+					coinsToMax,
+					' MORE COINS?'
+				)
+			);
 			return React.createElement(
 				'div',
 				{ className: 'resultsSideBar' },
@@ -25095,17 +25278,7 @@
 						' '
 					)
 				),
-				React.createElement(
-					'h4',
-					null,
-					'Try again for ',
-					React.createElement(
-						'b',
-						null,
-						coinsToMax,
-						' MORE COINS?'
-					)
-				),
+				rewardsText,
 				React.createElement(
 					'div',
 					{ className: 'buttonContainer' },
@@ -25154,8 +25327,8 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 215);
-	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 216);
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 210);
+	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 213);
 	
 	var ResultsTasks = React.createClass({
 		displayName: 'ResultsTasks',
@@ -25164,7 +25337,7 @@
 			// Function to render all completed tasks
 			var completedTasks = this.props.completedTasks;
 			var d = new Date();
-			var date = d.getMonth() + "月" + d.getDate() + "日" + d.getFullYear() + "年";
+			var date = d.getMonth() + 1 + "月" + d.getDate() + "日" + d.getFullYear() + "年";
 			var locationEnglish = this.props.locationEnglish.toUpperCase();
 			var tasks = completedTasks.map(function (task, i) {
 				return React.createElement(ResultsCompletedTask, {
@@ -25213,6 +25386,37 @@
 
 /***/ },
 /* 213 */
+/*!**************************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ResultsCompletedTask.js ***!
+  \**************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	
+	var ResultsCompletedTask = React.createClass({
+		displayName: "ResultsCompletedTask",
+	
+		render: function render() {
+			var icon = this.props.taskCorrect ? React.createElement("span", { className: "glyphicon glyphicon-star", "aria-hidden": "true" }) : React.createElement("span", { className: "glyphicon glyphicon-question-sign", "aria-hidden": "true" });
+			return React.createElement(
+				"div",
+				{ className: "completedTaskContainer" },
+				icon,
+				React.createElement(
+					"span",
+					{ className: "text" },
+					this.props.taskText
+				)
+			);
+		}
+	});
+	
+	module.exports = ResultsCompletedTask;
+
+/***/ },
+/* 214 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/SpeechSynth.js ***!
   \************************************************/
@@ -25262,7 +25466,7 @@
 	module.exports = speechSynth;
 
 /***/ },
-/* 214 */
+/* 215 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/TransitionContainer.js ***!
   \**************************************************************/
@@ -25355,97 +25559,6 @@
 	});
 	
 	module.exports = TransitionContainer;
-
-/***/ },
-/* 215 */
-/*!************************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/ResultsCharProfile.js ***!
-  \************************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 179);
-	
-	var ResultsCharProfile = React.createClass({
-		displayName: 'ResultsCharProfile',
-	
-		render: function render() {
-			// Get default profile image source
-			var charProfilePic = Constants.IMAGE_PATH + this.props.charProfilePic;
-			// Get comment
-	
-			// Calculate completion decimal
-			var completionRate = this.props.coins / this.props.possible * 100;
-			var resultsComment;
-			if (completionRate > 90) {
-				resultsComment = "I had a really great time! Your Chinese is awesome!";
-			} else if (completionRate > 70) {
-				resultsComment = "I had a good time! It was fun to talk in Chinese.";
-			} else {
-				resultsComment = "Nice talking to you!";
-			}
-	
-			return React.createElement(
-				'div',
-				{ className: 'resultsCharProfile' },
-				React.createElement('img', { src: charProfilePic }),
-				React.createElement(
-					'div',
-					{ className: 'textContainer' },
-					React.createElement(
-						'h3',
-						null,
-						this.props.charName
-					),
-					React.createElement(
-						'h4',
-						null,
-						resultsComment
-					)
-				)
-			);
-		}
-	});
-	
-	ResultsCharProfile.propTypes = {
-		charProfilePic: PropTypes.string.isRequired
-	};
-	
-	module.exports = ResultsCharProfile;
-
-/***/ },
-/* 216 */
-/*!**************************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/ResultsCompletedTask.js ***!
-  \**************************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(/*! react */ 1);
-	
-	var ResultsCompletedTask = React.createClass({
-		displayName: "ResultsCompletedTask",
-	
-		render: function render() {
-			var icon = this.props.taskCorrect ? React.createElement("span", { className: "glyphicon glyphicon-star", "aria-hidden": "true" }) : React.createElement("span", { className: "glyphicon glyphicon-question-sign", "aria-hidden": "true" });
-			return React.createElement(
-				"div",
-				{ className: "completedTaskContainer" },
-				icon,
-				React.createElement(
-					"span",
-					{ className: "text" },
-					this.props.taskText
-				)
-			);
-		}
-	});
-	
-	module.exports = ResultsCompletedTask;
 
 /***/ }
 /******/ ]);

@@ -11,13 +11,15 @@ var TaskIcon = React.createClass({
 		var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 		var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 		var imgCoins = Constants.IMAGE_PATH + "UI/Icon_10coins_flat_nostar-01.png";
-		var imgQuestion = Constants.IMAGE_PATH + "UI/Icon_Questionmark-01.png"
+		var imgQuestion = Constants.IMAGE_PATH + "UI/Icon_Questionmark-01.png";
+		var imgRepeat = Constants.IMAGE_PATH + "UI/buttonRepeatOn.png";
 		var taskIconImage = <div className="taskIconDiv">
 								<TaskIconImage 
 									ref={(ref) => this.mic = ref}
 									keyToAttach="firstMic"
 									imageSrc={imgMic} />
 							</div>;
+
 		// Sets to true if this task is the active task
 		if(this.props.index === this.props.currentTaskIndex) {
 			if (this.props.micActive) {
@@ -64,6 +66,15 @@ var TaskIcon = React.createClass({
 					</div>
 				)
 			}
+		}
+
+		// If this is the repeat button, return the repeat icon 
+		if (this.props.icon === "repeatIcon") {
+			return (<div className="taskIconDiv repeatOnDiv">
+						<TaskIconImage 
+							keyToAttach="repeat" 
+							imageSrc={imgRepeat} />
+					</div>)
 		}
 		return (
 			<span>

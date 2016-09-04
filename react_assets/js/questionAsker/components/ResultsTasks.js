@@ -8,7 +8,7 @@ var ResultsTasks = React.createClass({
 		// Function to render all completed tasks
 		var completedTasks = this.props.completedTasks;
 		var d = new Date();
-		var date = d.getMonth() + "月" + d.getDate() + "日" + d.getFullYear() + "年";
+		var date = d.getMonth() + 1 + "月" + d.getDate() + "日" + d.getFullYear() + "年";
 		var locationEnglish = this.props.locationEnglish.toUpperCase();
 		var tasks = completedTasks.map(function(task, i) {
 			return (<ResultsCompletedTask

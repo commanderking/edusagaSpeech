@@ -6,9 +6,10 @@ var ResultsCharProfile = require('./ResultsCharProfile');
 
 function ResultsHeader (props) {
 	var miriIconSrc = Constants.IMAGE_PATH + "miri/icons/Miri_Icon_Yay.png";
+	var resultsSrc = Constants.IMAGE_PATH + "UI/titleResults.png";
 	return (
 		<div className="resultsHeader">
-			<h1>RESULTS</h1>
+			<img className="resultsImage" src={resultsSrc} />
 			<div className="miriIcon">
 				<img src={miriIconSrc} />
 			</div>

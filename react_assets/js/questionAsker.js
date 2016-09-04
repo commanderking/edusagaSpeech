@@ -16,7 +16,6 @@ var initialLogData = {
 	"startTime" : 0,
 	"studentID" : "",
 	"teacherID" : "",
-	"IP" : "",
 	"currentTime" : ""
 }
 
@@ -34,17 +33,12 @@ var initializeLogData = {
 		} else {
 			initialLogData.teacherID = "Unknown Teacher"
 		}
-	},
-	setIP: function() {
-		$.get("http://ipinfo.io", function(response) {
-			initialLogData.IP = response.ip;
-		    console.log(response.ip);
-		}, "jsonp");		
 	}
 }
 
 var QuestionAsker = React.createClass({
 	// feedbackText can be hintText from clicking hint or feedback on what user said
+	// lastDialogText is what the character last said. Important when asking for repeat to be able to reference this 
 	getInitialState: function() {
 		return {
 			sceneData: undefined,
@@ -52,8 +46,11 @@ var QuestionAsker = React.createClass({
 			scenarioIndex: 0,
 			hintActive: false,
 			currentHintIndex: -1,
+			currentDialog: "",
+			lastDialogText: "",
 			voicePack: {},
 			coins: 0,
+			correctAnswers: 0,
 			possibleCoins: 0,
 			answerFeedbackActive: false,
 			feedbackText: "",
@@ -87,9 +84,7 @@ var QuestionAsker = React.createClass({
 				initializeLogData.setStudentID(studentID);
 			}
 			initializeLogData.setTeacherID(teacher);
-			initializeLogData.setIP();
 			console.log(initialLogData);
-
 
 			// Load all the sounds that are in the scene
 			that.initializeSounds();
@@ -170,11 +165,8 @@ var QuestionAsker = React.createClass({
 		if (userAnswer === "Cancel Speech") {
 			// Do nothing
 		} else {
-
+			console.log(userAnswer);
 			var that = this;
-			var correctAnswer = false;
-			var responseSoundID;
-			var possibleAnswerIndex;
 
 			// Trick to get new instance of sceneData, to not alter the origial state
 			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
@@ -185,26 +177,13 @@ var QuestionAsker = React.createClass({
 			// Add the user answer to the attemptedAnswers (needed for right or wrong);
 			newSceneData.character.currentTasks[taskIndex].attemptedAnswers.push(userAnswer);
 
-			// Check if user's answers contains any of the possible answers
-			if (currentTaskData.completeMatchOnly === true) {
-				possibleCorrectAnswers.forEach(function(possibleAnswerObject, i) {
-					// Temporarily grab the soundID of this object
-					var tempSoundID = possibleAnswerObject.soundID;
-					possibleAnswerObject.answers.forEach(function(possibleAnswer){
-						if (userAnswer === possibleAnswer) {
-							correctAnswer = true;
-							responseSoundID = tempSoundID;
-							possibleAnswerIndex = i;
-						}
-					})
-				});
-			} else {
-				// Store the returned data;
-				var returnedObject = SpeechChecker.typicalCheck(userAnswer, newSceneData, taskIndex);
-				correctAnswer = returnedObject.answerCorrect;
-				responseSoundID = returnedObject.responseSoundID;
-				possibleAnswerIndex = returnedObject.possibleAnswersIndex;
-			}
+			// Store the returned data;
+			var returnedObject = SpeechChecker.checkAnswer(userAnswer, newSceneData, taskIndex);
+			console.log(returnedObject);
+			var correctAnswer = returnedObject.answerCorrect;
+			var responseSoundID = returnedObject.responseSoundID;
+			var possibleAnswerIndex = returnedObject.possibleAnswersIndex;
+
 			if (correctAnswer) {
 
 				/*----------------------------------------------
@@ -214,7 +193,6 @@ var QuestionAsker = React.createClass({
 				// Play response voice
 				this.playSound(responseSoundID);
 
-
 				// Store sound ID in current Sound ID if player wnats to repeat
 				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].soundID;
 
@@ -222,7 +200,7 @@ var QuestionAsker = React.createClass({
 				newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
 
 				// Show response text
-				newSceneData.currentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
+				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
 
 				// Mark question as corrrect
 				newSceneData.character.currentTasks[taskIndex].correct = true;
@@ -232,7 +210,11 @@ var QuestionAsker = React.createClass({
 
 				this.setState({sceneData: newSceneData});
 
-				this.setState({correctAnswerState: true});
+				// Add point to correct answers and set state to correctAnswerState
+				this.setState({correctAnswerState: true, 
+								correctAnswers: this.state.correctAnswers +1,
+								currentDialog: newCurrentDialog,
+								lastDialogText: newCurrentDialog});
 				this.turnMicStateOff();
 
 				/*----------------------------------------------
@@ -306,7 +288,7 @@ var QuestionAsker = React.createClass({
 				var randomVar = Math.random();
 
 				// Set text for confusion
-				newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
+				newCurrentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
 
 				// Play confused sound
 				this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
@@ -320,7 +302,10 @@ var QuestionAsker = React.createClass({
 				this.activateFeedbackMode();
 
 				// Set new variables in sceneData
-				this.setState({sceneData: newSceneData, wrongAnswerState: true});
+				this.setState({sceneData: newSceneData, 
+								wrongAnswerState: true,
+								currentDialog: newCurrentDialog
+							});
 
 				setTimeout(function() {
 					// Reset character image to default 
@@ -347,7 +332,7 @@ var QuestionAsker = React.createClass({
 				dataType: "json"
 			});
 		}
-	},
+	}, 
 	initializeSounds: function() {
 		var SOUND_BASE_PATH = Constants.SOUND_PATH;
 		var soundArray = [];
@@ -380,7 +365,7 @@ var QuestionAsker = React.createClass({
 		createjs.Sound.play(soundID);
 	},
 	playConfusedPhrase: function(confusedPhrasesArray) {
-
+		/*
 		// Randomly pick a confused response
 		var randomVar = Math.random();
 
@@ -391,6 +376,7 @@ var QuestionAsker = React.createClass({
 
 		// Set text for confusion
 		newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
+		*/
 
 	},
 	handleHintClick: function(hintIndex) {
@@ -403,6 +389,26 @@ var QuestionAsker = React.createClass({
 			feedbackText: hintText,
 			miriIconSrc: "miri/icons/Miri_Icon_Yay.png"
 		})
+
+		// Track hints used
+		console.log(this.state.sceneData.character.currentTasks[hintIndex].hintUsed);
+
+		// If clause for older versions which don't have hintUsed defined
+		if (this.state.sceneData.character.currentTasks[hintIndex].hintUsed !== undefined) {
+			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
+
+			// Check if hint was already used If so, then let student look for free again (no coin penalty)
+			var hintUsed = newSceneData.character.currentTasks[hintIndex].hintUsed;
+
+			if (hintUsed === true) {
+			} else {
+				this.subCoins(5);
+				hintUsed = true;
+				console.log(newSceneData.character.currentTasks[hintIndex].hintUsed);
+				this.setState({sceneData: newSceneData});
+			}
+			console.log("Hint Used");
+		}
 
 		// return Miri Icon to default after 3s
 		setTimeout(function(){
@@ -455,11 +461,15 @@ var QuestionAsker = React.createClass({
 	addCoins: function(numberCoinsToAdd) {
 		var newCoins = this.state.coins + numberCoinsToAdd;
 		this.setState({ coins: newCoins });
-		
+	},
+	subCoins: function(numberCoinsToSub) {
+		var newCoins = this.state.coins - numberCoinsToSub;
+		this.setState({ coins: newCoins});
 	},
 	// Function triggers when user clicks text in dailog box
 	handleRepeat: function() {
 		this.playSound(this.state.sceneData.currentSoundID);
+		this.setState({currentDialog: this.state.lastDialogText})
 	},
 	// function triggers when user speaks "repeat" into microphone
 	handleAskRepeat: function(userAnswer) {
@@ -494,12 +504,12 @@ var QuestionAsker = React.createClass({
 				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
 
 				// Set text for confusion
-				newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
+				var newCurrentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
 
 				// Play confused sound
 				this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
 
-				this.setState({wrongAnswerState: true, sceneData: newSceneData });
+				this.setState({wrongAnswerState: true, sceneData: newSceneData, currentDialog: newCurrentDialog});
 
 				setTimeout(function() {
 					// Reset character image to default 
@@ -557,7 +567,7 @@ var QuestionAsker = React.createClass({
 						scenarioData = {sceneData.scenario}
 						scenarioIndex = {this.state.scenarioIndex}
 						charName={this.state.sceneData.character.name}
-						currentDialog = {sceneData.currentDialog} 
+						currentDialog = {this.state.currentDialog} 
 						hintActive = {this.state.hintActive} 
 						onRepeat = {this.handleRepeat} 
 						nextScenario = {this.nextScenario}

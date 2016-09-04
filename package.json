@@ -33,7 +33,8 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive",
     "gulp": "gulp",
-    "bundle": "./node_modules/.bin/webpack -d --watch"
+    "bundle": "./node_modules/.bin/webpack -d --watch",
+    "syncS3" : "aws s3 sync s3 s3://edusaga"
   },
   "babel": {
     "presets": [

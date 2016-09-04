@@ -75,7 +75,7 @@ var TaskContainer = React.createClass({
 		})
 
 		// Special class added to the Ask for Repeat button if hintACtive
-		var repeatDivClass = this.props.hintActive ? "taskDiv taskDivDisabled" : "taskDiv taskDivNormalState";
+		var repeatDivClass = this.props.hintActive ? "taskDiv taskDivRepeatDisabled" : "taskDiv taskDivRepeat";
 
 		// No option to press skip button if answering question
 		var skipButton = this.props.correctAnswerState || this.props.micActive ? null : <button type="button" 
@@ -95,7 +95,8 @@ var TaskContainer = React.createClass({
 								wrongAnswerState = {this.props.wrongAnswerState} 
 								micActive = {this.props.micActive} 
 								index = {skipButtonIndex}
-								currentTaskIndex = {this.state.currentTaskIndex} />
+								currentTaskIndex = {this.state.currentTaskIndex} 
+								icon = "repeatIcon" />
 				          	<TaskText 
 								className="taskText" 
 								index={skipButtonIndex} 

@@ -78,31 +78,6 @@ export var ScenarioController = {
 }
 
 
-var testString = "你今天想不想跟我打乒乓球"
-var possibleAnswers = [
-	{
-		"answers" : [
-			["你, 您"],
-			["今天下午"], 
-			["想不想", "要不要"],
-			["跟我", "和我"], 
-			["打乒乓球"]
-		],
-		"response" : "好啊。",
-		"soundID" : "wojiao"
-	},
-	{
-		"answers" : [
-			["你, 您"], 
-			["今天下午"], 
-			["想", "要", "想要"],
-			["跟我", "和我"],
-			["打乒乓球嗎"]
-		]
-	}
-]
-
-var testString2 = "我不学法语可是我会说一点"
 var possibleAnswers2 = [
 	{
 		"answers" : [
@@ -118,30 +93,131 @@ var possibleAnswers2 = [
 
 ]
 export var SpeechChecker = {
-	typicalCheck: function(userAnswer, data, activeTaskIndex) {
+	// determine whether to use typical check or advancedCheck
+	checkAnswer: function(userAnswer, data, activeTaskIndex) {
+		var that = this;
+
 		var possibleAnswers = TaskController.getPossibleCorrectAnswers(data, activeTaskIndex);
+		var objectToReturn = {
+			"answerCorrect" : false,
+			"possibleAnswersIndex" : -1,
+			"responseSoundID" : ""
+		}
+
+		// If the userAnswer contains an exception, immediately mark it as wrong
+		if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
+			var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
+			console.log(exceptions);
+			var exceptionMatch = false;
+			exceptions.forEach(function(exception){
+				console.log(exception);
+				if (userAnswer === exception) {
+					console.log("exception exists");
+					exceptionMatch = true;
+				}
+			});
+
+			console.log("Exception loop done");	
+			if (exceptionMatch === true) {
+				console.log(objectToReturn);
+				return objectToReturn;
+			}
+		}
+
+		possibleAnswers.forEach(function(possibleAnswerObject, i) {
+			var tempSoundID = possibleAnswerObject.soundID;
+
+			// if the first entry in answers array is an array, we will need advancedCheck
+			if (possibleAnswerObject.answers[0].constructor === Array) {
+				objectToReturn = that.advancedCheck(userAnswer, possibleAnswers, objectToReturn);
+			} else {
+				objectToReturn = that.typicalCheck(userAnswer, possibleAnswers, objectToReturn);
+			}
+		})
+
+		return objectToReturn;
+	},
+	typicalCheck: function(userAnswer, possibleAnswers, objectToReturn) {
+		possibleAnswers.forEach(function(possibleAnswerObject, i) {
+			var tempSoundID = possibleAnswerObject.soundID;
+			console.log(objectToReturn.answerCorrect);
+			// Case for exact match
+			if (possibleAnswerObject.exactMatch === true) {
+				console.log('in exact match');
+				possibleAnswerObject.answers.forEach(function(possibleAnswer){
+					console.log(possibleAnswer);
+					console.log(objectToReturn.answerCorrect);
+					if (userAnswer === possibleAnswer) {
+						console.log("exact answer correct");
+						objectToReturn.answerCorrect = true;
+						objectToReturn.responseSoundID = tempSoundID;
+						objectToReturn.possibleAnswersIndex = i; 
+					}
+				});
+			} else {
+				possibleAnswerObject.answers.forEach(function(possibleAnswer){
+					if (userAnswer.indexOf(possibleAnswer) >= 0) {
+						console.log("using contains - answer correct");
+
+						objectToReturn.answerCorrect = true;
+						objectToReturn.responseSoundID = tempSoundID;
+						objectToReturn.possibleAnswersIndex = i; 
+					}
+				});				
+			}
+
+		});
+		return objectToReturn;
+	},
+	advancedCheck: function(userAnswer, possibleAnswers, objectToReturn) {
 		var answerCorrect = false;
 		var possibleAnswersIndex;
 		var responseSoundID;
 		possibleAnswers.forEach(function(possibleAnswerObject, i) {
 			var tempSoundID = possibleAnswerObject.soundID;
-			console.log(possibleAnswerObject.soundID);
-			possibleAnswerObject.answers.forEach(function(possibleAnswer){
-				if (userAnswer.indexOf(possibleAnswer) >= 0) {
-					answerCorrect = true;
-					responseSoundID = tempSoundID;
-					possibleAnswersIndex = i; 
+			possibleAnswersIndex = i;
+			var checkListArray = [];
+			possibleAnswerObject.answers.forEach(function(answerPartArray, j) {
+				// Tracks how far along we are in user answer
+				var userAnswerIndex = 0;
+
+				// All entries in this array must be true for answer to be correct
+				// Have something like ["你", "您"]
+				for (var k=0;  k <answerPartArray.length; k++) {
+					var answerPartCorrect = false;
+					// console.log(answerPartArray[k]);
+					var newAnswerIndex = userAnswer.indexOf(answerPartArray[k]);
+					// console.log(newAnswerIndex);
+					if (newAnswerIndex >= userAnswerIndex) {
+						answerPartCorrect = true;
+						userAnswerIndex = newAnswerIndex;
+						break;
+					}
 				}
-			});
+				checkListArray.push(answerPartCorrect);
+				// console.log(checkListArray);
+			})
+
+			// Check if all the entries in checkListArray are true;
+			// if so, then the answer is correct
+			var correctCounter = 0;
+			for (var l=0; l < checkListArray.length; l++) {
+				if (checkListArray[l]) {
+					correctCounter += 1;
+				}
+			}
+			if (correctCounter === checkListArray.length) {
+				responseSoundID = tempSoundID;
+				answerCorrect = true;
+			}
+
 		});
 		return {
 			"answerCorrect" : answerCorrect,
 			"responseSoundID" : responseSoundID,
 			"possibleAnswersIndex" : possibleAnswersIndex
 		};
-	},
-	advancedCheck: function(userAnswer, data, activeTaskIndex) {
-		return false;
+
 	},
 	addUserAnswerToAttemptedAnswers: function(userAnswer, data, activeTaskIndex) {
 		var attemptedAnswers = data.character.currentTasks[activeTaskIndex].attemptedAnswers;
@@ -155,7 +231,7 @@ export var currentTasks = [
 			"taskID" : 2,
 			"task" : "Ask how he's doing",
 			"possibleAnswers" : 
-			[
+			[	
 				{
 					"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
 					"response": "非常好",
