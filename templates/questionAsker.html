@@ -28,5 +28,14 @@
     	</script>
     <script src="/static/js/viewHelper.js"></script>
     <script src="/static/js/bundle_questionAsker.js"></script>
+    <script>
+		try {
+			var SpeechRecognition = webkitSpeechRecognition;
+			var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+			var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+		} catch(err) {
+			alert("Sorry, EduSaga currently only supports Google Chrome on desktop or laptops (no mobile). Please switch over to Google Chrome for speech recognition access.");
+		}
+    </script>
 </body>
 </html>

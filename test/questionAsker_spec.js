@@ -76,6 +76,8 @@ describe('Question Asker Logic', () => {
 			}
 
 			var actualOutput = SpeechChecker.checkAnswer(userAnswer, testJSON, 1);
+			console.log(actualOutput);
+			console.log(expectedOutput);
 			assert.deepEqual(actualOutput, expectedOutput);
 
 			var actualOutput = SpeechChecker.checkAnswer(userAnswer2, testJSON, 1);
@@ -158,29 +160,41 @@ describe('Question Asker Logic', () => {
 
 
 			var userAnswer = "你今天想和我打乒乓球吗";
-			var answerCorrect = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).answerCorrect;
-			var soundID = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).responseSoundID;
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
+			var soundID = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).responseSoundID;
 			expect(answerCorrect).to.equal(true);
 			expect(soundID).to.equal("ok2");
 
 			var userAnswer = "你下午要不要跟我打乒乓球"
-			var answerCorrect = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).answerCorrect;
-			var soundID = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).responseSoundID;
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
+			var soundID = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).responseSoundID;
 			expect(answerCorrect).to.equal(true);
 			expect(soundID).to.equal("ok1");
 
 		});
 
+
 		it ('advanced check - incorrect check', () => {
 			// Test incorrect answers 
 			var userAnswer = "你是笨蛋";
-			var answerCorrect = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).answerCorrect;
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
 			expect(answerCorrect).to.equal(false);
 
 			var userAnswer = "你今天想吃汉堡吗";
-			var answerCorrect = SpeechChecker.advancedCheck(userAnswer, possibleAnswers).answerCorrect;
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
+			expect(answerCorrect).to.equal(false);
+
+			var userAnswer = "你";
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
 			expect(answerCorrect).to.equal(false);
 		});
+
+		it ('advanced check - reverse answer check' , () => {
+			var userAnswer = "打乒乓球跟我要不要你下午"
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
+			var soundID = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).responseSoundID;
+			expect(answerCorrect).to.equal(false);
+		})
 	})
 
 

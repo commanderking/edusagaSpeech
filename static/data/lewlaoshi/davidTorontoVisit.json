@@ -174,7 +174,7 @@
 							"soundID" : "toronto-really-poutineGood-CNTower"
 						}
 					],
-					"exceptions" : ["没吃了", "不吃了"],
+					"exceptions" : ["没吃了", "不吃了", "有没有"],
 					"correct" : false,
 					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [4],
@@ -196,6 +196,7 @@
 							"soundID" : "toronto-pity-raptorsBasketball"
 						}
 					],
+					"exceptions" : ["有没有", "没去了"],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [5],
@@ -217,6 +218,7 @@
 							"soundID" : "toronto-pity-planeMovies"
 						}
 					],
+					"exceptions" : ["有没有", "没看了"],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [6],
@@ -238,6 +240,7 @@
 							"soundID" : "toronto-really-goHome"
 						}
 					],
+					"exceptions" : ["有没有", "没看了"],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [],
