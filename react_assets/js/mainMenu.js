@@ -20,25 +20,33 @@ var MainMenu = React.createClass({
 	render: function() {
 		var scenes;
 		if (this.state.teacherData) {
-			this.state.teacherData.scenes.forEach(function(scene, i) {
-				scenes = <a href="../pa1"><li>{scene.name}</li></a>
-			});
-		} else {
-			scenes = "Nothing!";
-		}
 
+			scenes = this.state.teacherData.scenes.map(function(scene, i) {
+				var link = scene.link + "?" + studentID;
+				return (<a href={link}
+							key={i}
+							data-index={i}>
+							<li>
+								<h3>{scene.name}</h3>
+								<p><b>Scenario:</b> {scene.scenario}</p>
+								<p><b>Key Phrases:</b> {scene.grammar}</p>
+							</li>
+
+						</a>)
+			});
+		} else { scenes = "Nothing!"; }
 
 		if (!this.state.teacherData) {
-			return <div>Loading</div>
+				return <div>Loading</div>
 		} else {
 			return (
-				<div>
-					<h1>{this.state.teacherData.name}</h1>
-					<ul>
+				<div className="container-fluid">
+					<h1>Episodes Available</h1>
+					<ul className="scenarioList">
 						{scenes}
 					</ul>
 				</div>	
-			)	
+			)
 		}
 	}
 });

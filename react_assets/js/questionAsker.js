@@ -7,7 +7,7 @@ var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer
 var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var ResultsContainer = require('./questionAsker/ResultsContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
-var TransitionContainer = require('./questionAsker/TransitionContainer');
+var TimerContainer = require('./questionAsker/TimerContainer');
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
 const Constants = require('./helpers/Constants.js');
 
@@ -22,7 +22,6 @@ var initialLogData = {
 var initializeLogData = {
 	setStartTime: function() {
 		initialLogData.startTime = new Date().getTime();
-		console.log(initialLogData.startTime);
 	},
 	setStudentID : function(studentID) {
 		initialLogData.studentID = studentID;
@@ -52,13 +51,16 @@ var QuestionAsker = React.createClass({
 			coins: 0,
 			correctAnswers: 0,
 			possibleCoins: 0,
+			hintsUsed: 0,
 			answerFeedbackActive: false,
 			feedbackText: "",
 			miriIconSrc: "miri/icons/Miri_Icon_default.png",
 			micActive: false,
 			correctAnswerState: false,
 			wrongAnswerState: false,
-			sceneComplete: false
+			sceneComplete: false,
+			taskPause: false,
+			timeRemaining: 20
 		}
 	},
 	loadSceneData: function() {
@@ -117,7 +119,7 @@ var QuestionAsker = React.createClass({
 	componentDidUpdate: function() {
 
 		// Logic for when scene is over
-		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
+		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneData.character.queuedTasks.length === 0 this.state.sceneComplete === false) {
 			var that = this;
 			var studentCompletedProgress = {};
 			studentCompletedProgress.studentID = initialLogData.studentID;
@@ -215,6 +217,15 @@ var QuestionAsker = React.createClass({
 								correctAnswers: this.state.correctAnswers +1,
 								currentDialog: newCurrentDialog,
 								lastDialogText: newCurrentDialog});
+
+				// If time mode active, clear the timer countdown
+				console.log(this.state.sceneData.APTimeMode);
+				if (this.state.sceneData.APTimeMode) {
+					console.log("interval cleared from correct answer");
+					console.log(this.timerInterval);
+					clearInterval(this.timerInterval);
+				}
+
 				this.turnMicStateOff();
 
 				/*----------------------------------------------
@@ -267,7 +278,11 @@ var QuestionAsker = React.createClass({
 						newSceneData.character.queuedTasks = TaskController.removeTasksfromQueue(indexesToRemove, queuedTasks)
 					}
 
-					that.setState({sceneData: newSceneData})
+					that.setState({sceneData: newSceneData});
+
+					if (that.state.sceneData.APTimeMode) {
+						that.setState({taskPause: true});
+					}
 				}, 3000)
 				
 			/*--------------------------------------------
@@ -305,12 +320,23 @@ var QuestionAsker = React.createClass({
 				this.setState({sceneData: newSceneData, 
 								wrongAnswerState: true,
 								currentDialog: newCurrentDialog
-							});
+				});
 
+
+				if (that.state.sceneData.APTimeMode) {
+					console.log("interval cleared");
+					console.log(this.timerInterval);
+					clearInterval(this.timerInterval);
+
+				}
 				setTimeout(function() {
 					// Reset character image to default 
 					newSceneData.currentImage = that.state.sceneData.character.emotions.default;
 					that.setState({wrongAnswerState: false, sceneData: newSceneData});
+					console.log("Interval set after wrong answer");
+					that.startTimer();
+					// that.timerInterval = setInterval(that.updateTime, 1000);
+
 				}, 3000);
 
 			}
@@ -391,23 +417,19 @@ var QuestionAsker = React.createClass({
 		})
 
 		// Track hints used
-		console.log(this.state.sceneData.character.currentTasks[hintIndex].hintUsed);
-
 		// If clause for older versions which don't have hintUsed defined
 		if (this.state.sceneData.character.currentTasks[hintIndex].hintUsed !== undefined) {
 			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 
 			// Check if hint was already used If so, then let student look for free again (no coin penalty)
 			var hintUsed = newSceneData.character.currentTasks[hintIndex].hintUsed;
-
 			if (hintUsed === true) {
 			} else {
 				this.subCoins(5);
-				hintUsed = true;
-				console.log(newSceneData.character.currentTasks[hintIndex].hintUsed);
-				this.setState({sceneData: newSceneData});
+				newSceneData.character.currentTasks[hintIndex].hintUsed = true;
+				var numberHintsUsed = this.state.hintsUsed + 1;
+				this.setState({sceneData: newSceneData, hintsUsed: numberHintsUsed});
 			}
-			console.log("Hint Used");
 		}
 
 		// return Miri Icon to default after 3s
@@ -464,6 +486,9 @@ var QuestionAsker = React.createClass({
 	},
 	subCoins: function(numberCoinsToSub) {
 		var newCoins = this.state.coins - numberCoinsToSub;
+		if (newCoins < 0) {
+			newCoins = 0;
+		}
 		this.setState({ coins: newCoins});
 	},
 	// Function triggers when user clicks text in dailog box
@@ -542,6 +567,33 @@ var QuestionAsker = React.createClass({
 		newSceneData.character.queuedTasks = TaskController.removeTasksfromQueue(spliceIndexes, allQueuedTasks);
 
 		this.setState({sceneData: newSceneData})
+		
+		if (that.state.sceneData.APTimeMode) {
+			that.setState({taskPause: true});
+			console.log("Interval cleared from skipTasks");
+			clearInterval(this.timerInterval);
+		}
+	},
+	resumeTasks: function() {
+		this.setState({ taskPause: false});
+		this.setState({ timeRemaining: 20});
+		this.startTimer();
+	},
+	startTimer: function() {
+		console.log("interval started from startTimer");
+		this.timerInterval = setInterval(this.updateTime, 1000);
+		// this.updateTime();
+
+	},
+	updateTime: function() {
+		if (this.state.timeRemaining <= 0) {
+			console.log("Timer at 0");
+			this.skipTasks();
+		} else {
+			console.log(this.state.timeRemaining);
+			var newTime = this.state.timeRemaining - 1;
+			this.setState({ timeRemaining: newTime});
+		}
 	},
 	nextScenario: function() {
 		if (this.state.scenarioIndex === this.state.sceneData.scenario.length - 1) {
@@ -557,6 +609,12 @@ var QuestionAsker = React.createClass({
 		if (!this.state.sceneData) {
 			return <div>Loading Scene</div>
 		} else {
+			// Timer appears if APTimeMode is on in sceneData
+			var timer = this.state.sceneData.APTimeMode === true ? <TimerContainer 
+																		taskPause = {this.state.taskPause}
+																		timeRemaining = {this.state.timeRemaining}
+																		scenarioOn = {this.state.scenarioOn} /> : null;
+
 			return (
 				<div className="gameWrapper col-md-12 col-sm-12 col-xs-12">
 					<BackgroundImageContainer
@@ -602,7 +660,9 @@ var QuestionAsker = React.createClass({
 						assessmentMode = {sceneData.assessmentMode}
 						repeatPhrases = {sceneData.character.repeatPhrases} 
 						onHandleAskRepeat = {this.handleAskRepeat} 
-						skipTasks = {this.skipTasks}/>
+						skipTasks = {this.skipTasks}
+						taskPause = {this.state.taskPause}
+						resumeTasks = {this.resumeTasks} />
 					<FeedbackContainer 
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
@@ -622,6 +682,7 @@ var QuestionAsker = React.createClass({
 						charProfilePic = {sceneData.character.emotions.default}
 						locationEnglish = {sceneData.character.location.nameEnglish}
 						locationChinese = {sceneData.character.location.nameChinese}/>
+					{timer}
 				</div>
 			)
 		}

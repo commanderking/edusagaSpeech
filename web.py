@@ -1,12 +1,9 @@
 from flask import Flask, request, redirect, render_template, url_for, jsonify
 
-import boto3
-import json
-import urlparse
+import boto3, json, urlparse
 
 #For Heroku Logging
-import sys, os
-import logging
+import sys, os, logging
 
 app = Flask (__name__)
 #app.config.from_envvar('GOOGLE_APPLICATION_CREDENTIALS')
@@ -18,17 +15,18 @@ app.logger.setLevel(logging.ERROR)
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
 	return render_template('index.html', name=name, activityName=activityName, teacher=teacher)
 
-@app.route('/lilaoshi/login', methods=['GET', 'POST'])
-def lilaoshilogin():
+@app.route('/<teacher>/home/')
+def teacherHome(teacher):
+	studentID = request.args.get('studentID')
+	return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+
+@app.route('/<teacher>/login', methods=['GET', 'POST'])
+def login(teacher):
 	if request.method == 'POST':
 		studentID = request.form.get("studentID")
-		return redirect(url_for('lilaoshiPreassess', studentID=studentID))
-	else:
-		return render_template('login.html')
-
-@app.route('/lilaoshi/home/')
-def lilaoshihome():
-	return render_template('mainMenu.html', teacher="lilaoshi")
+		return redirect(url_for('teacherHome', studentID=studentID, teacher=teacher))
+	else: 
+		return render_template("login.html")
 
 
 @app.route('/demoChinese/')
@@ -69,50 +67,17 @@ def demoVocab1(name="Vocab1"):
 def demoVocab2(name="Vocab2"):
 	return render_template("demoVocab2.html", name=name)
 
-@app.route('/jinlaoshi/demo')
-def demo(activityName="demo", teacher="jinlaoshi"):
-	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
-
-@app.route('/jinlaoshi/demo2')
-def demo2(activityName="demo2", teacher="jinlaoshi"):
-	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
-
-@app.route('/jinlaoshi/demo3')
-def demo3(activityName="demo3", teacher="jinlaoshi"):
-	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
-
-@app.route('/lilaoshi/pa1')
-def lilaoshiPreassess(activityName="pa1", teacher="lilaoshi"):
-	#current_url = request.url
-	#parsed = urlparse.urlparse(current_url)
-	try:
-		studentID = request.args['studentID']
-		#studentID = str(urlparse.parse_qs(parsed.query)['studentID'][0])
-	except: 
-		studentID = ""
-	return render_template("questionAsker.html", activityName=activityName, teacher=teacher, studentID=studentID)
-
-@app.route('/yulaoshi/demo')
-def yulaoshiDemo(activityName="introDavid", teacher="yulaoshi"):
-	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
-
-@app.route('/lewlaoshi/demo')
-def lewlaoshiDemo(activityName="davidTorontoVisit", teacher="lewlaoshi"):
-	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
-
-@app.route('/lewlaoshi/demo2')
-def lewlaoshiDemo2(activityName="davidTaiwanVisit", teacher="lewlaoshi"):
-	return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
-
-'''
-
 @app.route('/<teacher>/<activityName>')
 def teacherScene(teacher, activityName):
 	if (os.path.isdir('./static/data/' + teacher) & os.path.isfile('./static/data/' + teacher + '/' + activityName + '.json')):
-		return render_template("questionAsker.html", activityName=activityName, teacher=teacher)
+		try:
+			studentID = request.args['studentID']
+		except: 
+			studentID = ""
+		return render_template("questionAsker.html", activityName=activityName, teacher=teacher, studentID=studentID)
 	else:
-		return redirect(url_for('index'))
-'''
+		return redirect(url_for('teacherHome', teacher=teacher))
+
 #-----------------------------------------------
 #POST requests 
 #-----------------------------------------------

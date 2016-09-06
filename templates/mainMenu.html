@@ -7,7 +7,8 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/static/css/icons.css">
-	<link rel="stylesheet" href="/static/css/login.css">
+	<link rel="stylesheet" href="/static/css/mainMenu.css">
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -16,7 +17,10 @@
 	<div id="app">
 	</div>
 	<script>
-		var teacher = "{{ teacher }}"
+		var teacher = "{{ teacher }}";
+		// web.py passes in a parameter from login page of studentID
+		// this studentID value is used in the React app of mainMenu.js to keep the studentID in the URL of the link
+		var studentID = "studentID={{ studentID }}";
 	</script>
 	<script src="/static/js/bundle_mainMenu.js"></script>
 

@@ -698,6 +698,16 @@ CSS Related to Task List
 	}
 }
 
+.taskPaused {
+	background-color: $darkerBlue;
+	min-height: 300px;
+	padding: 5px;
+	text-align: center;
+	border: 2px solid black;
+	border-radius: 10px;
+	color: white;
+}
+
 /*----------------------------------------
 Robo Help Window 
 ----------------------------------------*/
@@ -1024,7 +1034,30 @@ Robo Help Window
 
 		}
 	}
+}
 
+/*------------------------------------------
+Timer Container 
+------------------------------------------*/
+
+.timerContainer {
+	position: absolute;
+	right: 0px;
+	width: 125px;
+	height: 125px;
+	text-align: center;
+	background-color: $lightBlue;
+	border-radius: 10px;
+	color: white;
+	font-size: 35px;
+	.glyphicon {
+		vertical-align: top;
+		line-height: 125px;
+		margin-right: 10px;
+	}
+	.timeText {
+		line-height: 125px;
+	}
 }
 
 

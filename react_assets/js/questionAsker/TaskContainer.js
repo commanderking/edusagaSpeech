@@ -84,6 +84,22 @@ var TaskContainer = React.createClass({
 
 		if (this.props.scenarioOn === true) {
 			return null;
+		} 
+		// If teacher wants to pause between each tasks for timing purposes
+		else if (this.props.taskPause === true && this.props.micActive === false && this.props.wrongAnswerState === false) {
+			return (
+					<div className="combinedTaskList col-md-6 col-sm-6 col-xs-6">
+						<div className="taskPaused">
+							<h3>When ready, click button to continue to the next task. You will have 15 seconds to respond.</h3>
+							<button 
+								onClick={this.props.resumeTasks} 
+								className="btn btn-info btn-large">
+								Ready!
+							</button>
+
+						</div>
+					</div>
+				) 
 		} else {
 			return (
 				<div className="combinedTaskList col-md-6 col-sm-6 col-xs-6">

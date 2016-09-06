@@ -72,14 +72,44 @@
 		render: function render() {
 			var scenes;
 			if (this.state.teacherData) {
-				this.state.teacherData.scenes.forEach(function (scene, i) {
-					scenes = React.createElement(
+	
+				scenes = this.state.teacherData.scenes.map(function (scene, i) {
+					var link = scene.link + "?" + studentID;
+					return React.createElement(
 						'a',
-						{ href: '../pa1' },
+						{ href: link,
+							key: i,
+							'data-index': i },
 						React.createElement(
 							'li',
 							null,
-							scene.name
+							React.createElement(
+								'h3',
+								null,
+								scene.name
+							),
+							React.createElement(
+								'p',
+								null,
+								React.createElement(
+									'b',
+									null,
+									'Scenario:'
+								),
+								' ',
+								scene.scenario
+							),
+							React.createElement(
+								'p',
+								null,
+								React.createElement(
+									'b',
+									null,
+									'Key Phrases:'
+								),
+								' ',
+								scene.grammar
+							)
 						)
 					);
 				});
@@ -96,15 +126,15 @@
 			} else {
 				return React.createElement(
 					'div',
-					null,
+					{ className: 'container-fluid' },
 					React.createElement(
 						'h1',
 						null,
-						this.state.teacherData.name
+						'Episodes Available'
 					),
 					React.createElement(
 						'ul',
-						null,
+						{ className: 'scenarioList' },
 						scenes
 					)
 				);

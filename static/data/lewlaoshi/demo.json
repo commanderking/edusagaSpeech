@@ -126,7 +126,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [2],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}
 			],
 			"queuedTasks" : 
@@ -138,7 +139,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers": 	["很好", "非常好", "好玩", "不错", "挺好", "不可思议"],
+							"answers": 	["Toronto 很好啊", "很好", "非常好", "好玩", "不错", "挺好", "不可思议"],
 							"response": "太好了! 你在 Toronto 吃 poutine 了没有?",
 							"soundID" : "poutine-great-poutineQuestion"
 						},
@@ -156,7 +157,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [3],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 3,
@@ -178,7 +180,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [4],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 4,
@@ -200,7 +203,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [5],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 5,
@@ -222,7 +226,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [6],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 6,
@@ -244,7 +249,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}
 			],
 			"completedTasks" : []

@@ -60,7 +60,7 @@
 	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 202);
 	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 207);
 	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 214);
-	var TransitionContainer = __webpack_require__(/*! ./questionAsker/TransitionContainer */ 215);
+	var TimerContainer = __webpack_require__(/*! ./questionAsker/TimerContainer */ 216);
 	
 	var Constants = __webpack_require__(/*! ./helpers/Constants.js */ 179);
 	
@@ -74,7 +74,6 @@
 	var initializeLogData = {
 		setStartTime: function setStartTime() {
 			initialLogData.startTime = new Date().getTime();
-			console.log(initialLogData.startTime);
 		},
 		setStudentID: function setStudentID(studentID) {
 			initialLogData.studentID = studentID;
@@ -106,13 +105,16 @@
 				coins: 0,
 				correctAnswers: 0,
 				possibleCoins: 0,
+				hintsUsed: 0,
 				answerFeedbackActive: false,
 				feedbackText: "",
 				miriIconSrc: "miri/icons/Miri_Icon_default.png",
 				micActive: false,
 				correctAnswerState: false,
 				wrongAnswerState: false,
-				sceneComplete: false
+				sceneComplete: false,
+				taskPause: false,
+				timeRemaining: 20
 			};
 		},
 		loadSceneData: function loadSceneData() {
@@ -266,6 +268,15 @@
 						correctAnswers: this.state.correctAnswers + 1,
 						currentDialog: newCurrentDialog,
 						lastDialogText: newCurrentDialog });
+	
+					// If time mode active, clear the timer countdown
+					console.log(this.state.sceneData.APTimeMode);
+					if (this.state.sceneData.APTimeMode) {
+						console.log("interval cleared from correct answer");
+						console.log(this.timerInterval);
+						clearInterval(this.timerInterval);
+					}
+	
 					this.turnMicStateOff();
 	
 					/*----------------------------------------------
@@ -319,6 +330,10 @@
 						}
 	
 						that.setState({ sceneData: newSceneData });
+	
+						if (that.state.sceneData.APTimeMode) {
+							that.setState({ taskPause: true });
+						}
 					}, 3000);
 	
 					/*--------------------------------------------
@@ -357,10 +372,18 @@
 						currentDialog: newCurrentDialog
 					});
 	
+					if (that.state.sceneData.APTimeMode) {
+						console.log("interval cleared");
+						console.log(this.timerInterval);
+						clearInterval(this.timerInterval);
+					}
 					setTimeout(function () {
 						// Reset character image to default 
 						newSceneData.currentImage = that.state.sceneData.character.emotions.default;
 						that.setState({ wrongAnswerState: false, sceneData: newSceneData });
+						console.log("Interval set after wrong answer");
+						that.startTimer();
+						// that.timerInterval = setInterval(that.updateTime, 1000);
 					}, 3000);
 				}
 	
@@ -437,22 +460,18 @@
 			});
 	
 			// Track hints used
-			console.log(this.state.sceneData.character.currentTasks[hintIndex].hintUsed);
-	
 			// If clause for older versions which don't have hintUsed defined
 			if (this.state.sceneData.character.currentTasks[hintIndex].hintUsed !== undefined) {
 				var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 	
 				// Check if hint was already used If so, then let student look for free again (no coin penalty)
 				var hintUsed = newSceneData.character.currentTasks[hintIndex].hintUsed;
-	
 				if (hintUsed === true) {} else {
 					this.subCoins(5);
-					hintUsed = true;
-					console.log(newSceneData.character.currentTasks[hintIndex].hintUsed);
-					this.setState({ sceneData: newSceneData });
+					newSceneData.character.currentTasks[hintIndex].hintUsed = true;
+					var numberHintsUsed = this.state.hintsUsed + 1;
+					this.setState({ sceneData: newSceneData, hintsUsed: numberHintsUsed });
 				}
-				console.log("Hint Used");
 			}
 	
 			// return Miri Icon to default after 3s
@@ -508,6 +527,9 @@
 		},
 		subCoins: function subCoins(numberCoinsToSub) {
 			var newCoins = this.state.coins - numberCoinsToSub;
+			if (newCoins < 0) {
+				newCoins = 0;
+			}
 			this.setState({ coins: newCoins });
 		},
 		// Function triggers when user clicks text in dailog box
@@ -586,6 +608,32 @@
 			newSceneData.character.queuedTasks = _QuestionAskerHelper.TaskController.removeTasksfromQueue(spliceIndexes, allQueuedTasks);
 	
 			this.setState({ sceneData: newSceneData });
+	
+			if (that.state.sceneData.APTimeMode) {
+				that.setState({ taskPause: true });
+				console.log("Interval cleared from skipTasks");
+				clearInterval(this.timerInterval);
+			}
+		},
+		resumeTasks: function resumeTasks() {
+			this.setState({ taskPause: false });
+			this.setState({ timeRemaining: 20 });
+			this.startTimer();
+		},
+		startTimer: function startTimer() {
+			console.log("interval started from startTimer");
+			this.timerInterval = setInterval(this.updateTime, 1000);
+			// this.updateTime();
+		},
+		updateTime: function updateTime() {
+			if (this.state.timeRemaining <= 0) {
+				console.log("Timer at 0");
+				this.skipTasks();
+			} else {
+				console.log(this.state.timeRemaining);
+				var newTime = this.state.timeRemaining - 1;
+				this.setState({ timeRemaining: newTime });
+			}
 		},
 		nextScenario: function nextScenario() {
 			if (this.state.scenarioIndex === this.state.sceneData.scenario.length - 1) {
@@ -605,6 +653,12 @@
 					'Loading Scene'
 				);
 			} else {
+				// Timer appears if APTimeMode is on in sceneData
+				var timer = this.state.sceneData.APTimeMode === true ? React.createElement(TimerContainer, {
+					taskPause: this.state.taskPause,
+					timeRemaining: this.state.timeRemaining,
+					scenarioOn: this.state.scenarioOn }) : null;
+	
 				return React.createElement(
 					'div',
 					{ className: 'gameWrapper col-md-12 col-sm-12 col-xs-12' },
@@ -651,7 +705,9 @@
 						assessmentMode: sceneData.assessmentMode,
 						repeatPhrases: sceneData.character.repeatPhrases,
 						onHandleAskRepeat: this.handleAskRepeat,
-						skipTasks: this.skipTasks }),
+						skipTasks: this.skipTasks,
+						taskPause: this.state.taskPause,
+						resumeTasks: this.resumeTasks }),
 					React.createElement(FeedbackContainer, {
 						locationTextEnglish: this.state.sceneData.character.location.nameEnglish,
 						locationTextChinese: this.state.sceneData.character.location.nameChinese,
@@ -670,7 +726,8 @@
 						charName: sceneData.character.name,
 						charProfilePic: sceneData.character.emotions.default,
 						locationEnglish: sceneData.character.location.nameEnglish,
-						locationChinese: sceneData.character.location.nameChinese })
+						locationChinese: sceneData.character.location.nameChinese }),
+					timer
 				);
 			}
 		}
@@ -23926,36 +23983,59 @@
 	
 			if (this.props.scenarioOn === true) {
 				return null;
-			} else {
-				return React.createElement(
-					'div',
-					{ className: 'combinedTaskList col-md-6 col-sm-6 col-xs-6' },
-					React.createElement(
-						'ul',
-						{ className: 'taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked' },
-						tasks,
+			}
+			// If teacher wants to pause between each tasks for timing purposes
+			else if (this.props.taskPause === true && this.props.micActive === false && this.props.wrongAnswerState === false) {
+					return React.createElement(
+						'div',
+						{ className: 'combinedTaskList col-md-6 col-sm-6 col-xs-6' },
 						React.createElement(
 							'div',
-							{ className: repeatDivClass },
-							React.createElement(TaskIcon, {
-								correctAnswerState: this.props.correctAnswerState,
-								wrongAnswerState: this.props.wrongAnswerState,
-								micActive: this.props.micActive,
-								index: skipButtonIndex,
-								currentTaskIndex: this.state.currentTaskIndex,
-								icon: 'repeatIcon' }),
-							React.createElement(TaskText, {
-								className: 'taskText',
-								index: skipButtonIndex,
-								currentTaskIndex: this.state.currentTaskIndex,
-								onSpeechInput: this.handleAskForRepeat,
-								taskTextToDisplay: 'Ask for repeat',
-								correctAnswerState: this.props.correctAnswerState })
-						),
-						skipButton
-					)
-				);
-			}
+							{ className: 'taskPaused' },
+							React.createElement(
+								'h3',
+								null,
+								'When ready, click button to continue to the next task. You will have 15 seconds to respond.'
+							),
+							React.createElement(
+								'button',
+								{
+									onClick: this.props.resumeTasks,
+									className: 'btn btn-info btn-large' },
+								'Ready!'
+							)
+						)
+					);
+				} else {
+					return React.createElement(
+						'div',
+						{ className: 'combinedTaskList col-md-6 col-sm-6 col-xs-6' },
+						React.createElement(
+							'ul',
+							{ className: 'taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked' },
+							tasks,
+							React.createElement(
+								'div',
+								{ className: repeatDivClass },
+								React.createElement(TaskIcon, {
+									correctAnswerState: this.props.correctAnswerState,
+									wrongAnswerState: this.props.wrongAnswerState,
+									micActive: this.props.micActive,
+									index: skipButtonIndex,
+									currentTaskIndex: this.state.currentTaskIndex,
+									icon: 'repeatIcon' }),
+								React.createElement(TaskText, {
+									className: 'taskText',
+									index: skipButtonIndex,
+									currentTaskIndex: this.state.currentTaskIndex,
+									onSpeechInput: this.handleAskForRepeat,
+									taskTextToDisplay: 'Ask for repeat',
+									correctAnswerState: this.props.correctAnswerState })
+							),
+							skipButton
+						)
+					);
+				}
 		}
 	});
 	
@@ -25475,99 +25555,39 @@
 	module.exports = speechSynth;
 
 /***/ },
-/* 215 */
-/*!**************************************************************!*\
-  !*** ./react_assets/js/questionAsker/TransitionContainer.js ***!
-  \**************************************************************/
+/* 215 */,
+/* 216 */
+/*!*********************************************************!*\
+  !*** ./react_assets/js/questionAsker/TimerContainer.js ***!
+  \*********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
-	var ReactTransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 198);
-	var MyBox = React.createClass({
-	    displayName: 'MyBox',
 	
-	    show: function show(callback) {
-	        var node = ReactDOM.findDOMNode(this);
-	        TweenMax.fromTo(node, 2, { width: 100, height: 100, backgroundColor: '#0cc', scale: 0.2, opacity: 0, rotation: -180 }, { width: 100, height: 100, backgroundColor: '#0cc', scale: 1, opacity: 1, rotation: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
-	    },
-	    hide: function hide(callback) {
-	        var node = ReactDOM.findDOMNode(this);
-	        TweenMax.to(node, 2, { width: 100, height: 100, backgroundColor: '#cc0', scale: 0.2, opacity: 0, ease: Expo.easeInOut, onComplete: callback, onCompleteScope: this });
-	    },
-	    componentWillAppear: function componentWillAppear(didAppearCallback) {
-	        console.log('MyBox.componentWillAppear');
-	        this.show(didAppearCallback);
-	    },
-	    componentDidAppear: function componentDidAppear() {
-	        console.log('MyBox.componentDidAppear');
-	    },
-	    componentWillEnter: function componentWillEnter(didEnterCallback) {
-	        console.log('MyBox.componentWillEnter');
-	        this.show(didEnterCallback);
-	    },
-	    componentDidEnter: function componentDidEnter() {
-	        console.log('MyBox.componentDidEnter');
-	    },
-	    componentWillLeave: function componentWillLeave(didLeaveCallback) {
-	        console.log('MyBox.componentWillLeave');
-	        this.hide(didLeaveCallback);
-	    },
-	    componentDidLeave: function componentDidLeave() {
-	        console.log('MyBox.componentDidLeave');
-	    },
-	    componentDidMount: function componentDidMount() {
-	        console.log('MyBox.componentDidMount');
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	        console.log('MyBox.componentWillUnmount');
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            ' '
-	        );
-	    }
-	});
-	var TransitionContainer = React.createClass({
-	    displayName: 'TransitionContainer',
+	var TimerContainer = React.createClass({
+		displayName: "TimerContainer",
 	
-	    getInitialState: function getInitialState() {
-	        return { isShowing: false };
-	    },
-	    onButtonClicked: function onButtonClicked() {
-	        this.setState({ isShowing: !this.state.isShowing });
-	    },
-	    render: function render() {
-	        var myBox = this.state.isShowing ? React.createElement(MyBox, { key: 'myBox' }) : '';
-	        return React.createElement(
-	            'div',
-	            { id: 'container' },
-	            React.createElement(MyButton, { onButtonClicked: this.onButtonClicked }),
-	            React.createElement(
-	                ReactTransitionGroup,
-	                { transitionName: 'hellotransition' },
-	                myBox
-	            )
-	        );
-	    }
-	});
-	var MyButton = React.createClass({
-	    displayName: 'MyButton',
-	
-	    render: function render() {
-	        return React.createElement(
-	            'button',
-	            { onClick: this.props.onButtonClicked },
-	            'Click Me'
-	        );
-	    }
+		render: function render() {
+			if (this.props.taskPause || this.props.scenarioOn) {
+				return null;
+			} else {
+				return React.createElement(
+					"div",
+					{ className: "timerContainer" },
+					React.createElement("span", { className: "glyphicon glyphicon-time", "aria-hidden": "true" }),
+					React.createElement(
+						"span",
+						{ className: "timeText" },
+						this.props.timeRemaining
+					)
+				);
+			}
+		}
 	});
 	
-	module.exports = TransitionContainer;
+	module.exports = TimerContainer;
 
 /***/ }
 /******/ ]);

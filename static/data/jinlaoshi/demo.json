@@ -127,7 +127,7 @@
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [2],
 					"attemptedAnswers" : [],
-					"hintUsed" : true
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 2,
@@ -143,7 +143,9 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [3,4],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+
 				}
 			],
 			"queuedTasks" : 
@@ -162,7 +164,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				},
 				{
 					"taskID" : 4,
@@ -178,7 +181,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [5],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				}, 
 				{
 					"taskID" : 5,
@@ -195,7 +199,8 @@
 					"emotion" : "characters/david/davidDefault.png",
 					"soundPath" : "david/age.ogg",
 					"tasksToQueue" : [6,7],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				},
 				{
 					"taskID" : 6,
@@ -211,7 +216,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				},
 				{
 					"taskID" : 7,
@@ -227,7 +233,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [8],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				},
 				{
 					"taskID" : 8,
@@ -244,7 +251,8 @@
 					"soundPath" : "david/foodLikes.ogg",
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [9, 10],
-					"attemptedAnswers" : []					
+					"attemptedAnswers" : [],
+					"hintUsed" : false					
 				},
 				{
 					"taskID" : 9,
@@ -262,7 +270,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png", 
 					"tasksToQueue" : [11],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				},
 				{
 					"taskID" : 10,
@@ -281,7 +290,8 @@
 					"soundPath" : "david/zhende.ogg",
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [11],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				}, 
 				{
 					"taskID" : 11,
@@ -297,7 +307,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [12, 13],
-					"attemptedAnswers" : []	
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				},
 				{
 					"taskID" : 12,
@@ -314,7 +325,9 @@
 					
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : []					
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false				
 				},
 				{
 					"taskID" : 13,
@@ -329,7 +342,9 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
-					"tasksToQueue" : [] 
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				}
 			],
 			"completedTasks" : []

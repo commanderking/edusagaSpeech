@@ -6,6 +6,7 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": true,
+	"APTimeMode": true,
 	"scenario" :
 	[	
 		{
@@ -179,6 +180,7 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"attemptedAnswers" : [],
+					"hintUsed" : false,
 					"tasksToQueue" : [2]
 					}
 			],
@@ -190,7 +192,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我叫"],
+							"answers" : ["我叫", "我是", "我姓"],
 							"response" : "",
 							"soundID" : ""
 						}
@@ -207,7 +209,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [3],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 3,
@@ -215,7 +218,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你叫什么名字", "你叫什么", "你呢"],
+							"answers" : ["你叫什么名字", "你叫什么", "你呢", "你是谁", "你的名字是什么"],
 							"response" : "我叫陈阳。",
 							"soundID" : "wojiao"
 						}
@@ -238,7 +241,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [23],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 23,
@@ -246,7 +250,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你上几年级"],
+							"answers" : ["你上几年级", "你是几年级"],
 							"response" : "我上九年级。",
 							"soundID" : "ninthgrade"
 						},
@@ -273,7 +277,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengDefault.png",
 					"tasksToQueue" : [4],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},		
 				{
 					"taskID" : 4,
@@ -308,7 +313,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [5],
-					"attemptedAnswers" : []	
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
 				},
 				{
 					"taskID" : 5,
@@ -333,7 +339,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengDefault.png",
 					"tasksToQueue" : [6],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 6,
@@ -367,7 +374,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengDefault.png",
 					"tasksToQueue" : [8],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				}, 
 				{
 					"taskID" : 8,
@@ -375,7 +383,10 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你的妹妹多大", "你的妹妹几岁", "你妹妹多大", "你妹妹几岁"],
+							"answers" : [
+								["你的妹妹", "你妹妹"],
+								["多大", "几岁"]
+							],
 							"response" : "她九岁，是小学生。 啊。。。 你的中文说得很好。",
 							"soundID" : "sister9"
 						}
@@ -401,7 +412,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [9],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 9,
@@ -425,7 +437,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengDefault.png",
 					"tasksToQueue" : [10],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 10,
@@ -433,7 +446,11 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你的英文好吗", "你的英文怎么样", "你的英文好不好", "你的英语怎么样", "你的英语好吗", "你的英语好不好"],
+							"answers" : [
+								["你的", "你"],
+								["英文", "英语"], 
+								["怎么样", "好吗", "好不好"]
+							],
 							"response" : "我的英语不太好.",
 							"soundID" : "englishnotgood"
 						}
@@ -450,7 +467,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [11],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 11,
@@ -458,7 +476,12 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你今年有什么课", "你今年修什么课", "你今年上哪些课", "你今年修那些课", "你今年上什么课"],
+							"answers" : [
+								["今年"],
+								["有", "上", "修"],
+								["什么", "哪些", "那一些"],
+								["课"]
+							],
 							"response" : "我有英语，数学， 科学，历史，和法语。",
 							"soundID" : "classes"
 						}
@@ -483,7 +506,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [24],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 24,
@@ -491,10 +515,14 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我不学法语可是我会说一点", 
-										"我不学法文可是我会说一点", 
-										"我不学法语但是我会说一点", 
-										"我不学法文但是我会说一点"],
+							"answers" : [
+								["我"],
+								["不学", "不读"],
+								["法语", "法文"],
+								["可是", "但是"],
+								["会", "会说", "会讲", "说"],
+								["一点"]
+							], 
 							"response" : "你喜不喜欢学中文?",
 							"soundID" : "likechinese"
 						}
@@ -520,7 +548,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengSpeaking.png",
 					"tasksToQueue" : [12],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 12,
@@ -528,7 +557,17 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我爱中文", "喜欢中文", "马马虎虎", "我爱汉语", "喜欢汉语", "不喜欢汉语", "我爱学中文", "喜欢学中文", "不喜欢学汉语", "喜歡"],
+							"answers" : [
+								["我"],
+								["喜欢", "不喜欢", "爱", "讨厌"],
+								["中文", "汉语"]
+							],
+							"response" : "哦。。。是吗？ 那你的中文老师是谁?",
+							"soundID" : "chineseteacher"
+						},
+						{
+							"answers" : ["我喜欢", "喜欢", "不喜欢", "很喜欢", "非常喜欢", "很不喜欢", "马马虎虎", "还可以"],
+							"exactMatch" : true,
 							"response" : "哦。。。是吗？ 那你的中文老师是谁?",
 							"soundID" : "chineseteacher"
 						}
@@ -549,7 +588,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
 					"tasksToQueue" : [13],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 13,
@@ -579,7 +619,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
 					"tasksToQueue" : [14],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 14,
@@ -615,7 +656,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengSpeaking.png",
 					"tasksToQueue" : [15],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 15,
@@ -644,7 +686,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [16],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 16,
@@ -652,7 +695,12 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我也喜欢运动", "我也爱运动"],
+							"answers" : [
+								["我"],
+								["也"],
+								["喜欢", "爱"], 
+								["运动", "打球"]
+							],
 							"response" : "哦。。。", 
 							"soundID" : "oh"
 						}
@@ -673,7 +721,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
 					"tasksToQueue" : [17],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 17,
@@ -681,10 +730,29 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我也喜欢看电视和电影", "我还喜欢看电视和电影", "电影和电视", "电视和电影", "看电视和克安电影", "看电影和看电视"],
+							"answers" : [
+								["我"],
+								["也", "还"],
+								["喜欢", "爱"],
+								["看电视"],
+								["和"],
+								["电影"]
+							],
 							"response" : "啊! 其实我也喜欢看电影。", 
 							"soundID" : "moviesalso"
-						}
+						},
+						{
+							"answers" : [
+								["我"],
+								["也", "还"],
+								["喜欢", "爱"],
+								["看电影"],
+								["和"],
+								["电视"]
+							],
+							"response" : "啊! 其实我也喜欢看电影。", 
+							"soundID" : "moviesalso"
+						}						
 					],
 					"hints" : 
 					[
@@ -702,7 +770,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengSpeaking.png",
 					"tasksToQueue" : [18],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 18,
@@ -710,7 +779,13 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你最喜欢什么运动"],
+							"answers" : [
+								["你"], 
+								["最"],
+								["喜欢", "爱"],
+								["什么", "打什么"],
+								["运动", "球"]
+							],
 							"response" : "打乒乓球。 你打乒乓球打得怎么样?", 
 							"soundID" : "pingpong"
 						}
@@ -736,7 +811,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
 					"tasksToQueue" : [19],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 19,
@@ -760,7 +836,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [20],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 20,
@@ -772,7 +849,6 @@
 								["你", "您"],
 								["今天", "下午"], 
 								["想不想", "要不要"],
-								["跟我", "和我"], 
 								["打乒乓球"]
 							],
 							"response" : "好啊。",
@@ -783,7 +859,6 @@
 								["你", "您"], 
 								["今天", "下午"],
 								["想", "要", "想要"],
-								["跟我", "和我"],
 								["打乒乓球吗"]
 							],
 							"response" : "好啊。",
@@ -806,7 +881,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengSpeaking.png",
 					"tasksToQueue" : [21],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 21,
@@ -835,7 +911,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [22],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				},
 				{
 					"taskID" : 22,
@@ -859,7 +936,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [23],
-					"attemptedAnswers" : []		
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
 				}
 
 			],

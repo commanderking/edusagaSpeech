@@ -5,6 +5,7 @@
 		{
 			"name" : "Pre-assessment 1",
 			"jsonFile" : "pa1.json",
+			"link" : "../pa1",
 			"image" : "",
 			"message" : "Let's see what you know!",
 			"assigned" : true

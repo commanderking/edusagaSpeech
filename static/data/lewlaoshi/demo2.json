@@ -12,7 +12,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Didn't David just come back from Taiwan? Why don't you ask him some questions aobut his trip on your ride home on the subway?",
+			"text" : "Didn't David just come back from Taiwan? Why don't you ask him some questions about his trip on your ride home on the subway?",
 			"next" : "end"
 		}
 	],
@@ -131,7 +131,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [2,3,4,5],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}
 			],
 			"queuedTasks" : 
@@ -159,7 +160,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [20],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 20,
@@ -175,7 +177,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 3,
@@ -200,7 +203,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [30],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 30,
@@ -226,7 +230,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 4,
@@ -269,7 +274,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 5,
@@ -312,7 +318,8 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}
 			],
 			"completedTasks" : []
