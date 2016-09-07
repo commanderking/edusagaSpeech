@@ -51,6 +51,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 38);
+	var Constants = __webpack_require__(/*! ./helpers/Constants */ 179);
 	
 	var MainMenu = React.createClass({
 		displayName: 'MainMenu',
@@ -71,10 +72,14 @@
 		},
 		render: function render() {
 			var scenes;
-			if (this.state.teacherData) {
 	
+			// Create link for each scene that should be available to student
+			if (this.state.teacherData) {
 				scenes = this.state.teacherData.scenes.map(function (scene, i) {
 					var link = scene.link + "?" + studentID;
+					var className = "activeScene-" + scene.assigned;
+					var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
+					var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
 					return React.createElement(
 						'a',
 						{ href: link,
@@ -82,7 +87,8 @@
 							'data-index': i },
 						React.createElement(
 							'li',
-							null,
+							{ className: className },
+							starIcon,
 							React.createElement(
 								'h3',
 								null,
@@ -21693,6 +21699,25 @@
 	var ReactMount = __webpack_require__(/*! ./ReactMount */ 169);
 	
 	module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ },
+/* 177 */,
+/* 178 */,
+/* 179 */
+/*!**********************************************!*\
+  !*** ./react_assets/js/helpers/Constants.js ***!
+  \**********************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var IMAGE_PATH = "https://s3.amazonaws.com/edusaga/assets/images/";
+	var SOUND_PATH = "https://s3.amazonaws.com/edusaga/assets/audio/";
+	
+	module.exports = {
+		IMAGE_PATH: IMAGE_PATH,
+		SOUND_PATH: SOUND_PATH
+	};
 
 /***/ }
 /******/ ]);

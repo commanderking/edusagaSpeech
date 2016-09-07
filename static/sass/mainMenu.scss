@@ -3,12 +3,17 @@
 	min-height: 500px;
     background-image: url("https://s3.amazonaws.com/edusaga/assets/images/index/bg.png");
     background-size: 120% 120%;
+    overflow: scroll;
 }
 
 
 .scenarioList {
-	width: 80%;
+	width: 100%;
+	.activeScene-true {
+		background-color: yellow;
+	}
 	li {
+		position: relative;
 		opacity: 0.8;
 		text-align: center;
 		vertical-align: top;
@@ -20,6 +25,16 @@
 		padding: 10px;
 		border-radius: 20px;
 		background-color: lightBlue;
+		img {
+			position: absolute;
+			width: 75px;
+			height: 75px;
+			left: -25px;
+			top: -25px;
+		}
+		&:hover {
+			opacity: 1.0;
+		}
 		p {
 			color: black;
 			text-align: left;

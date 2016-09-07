@@ -18,7 +18,17 @@ def index(name="Index", activityName="index", teacher="jinlaoshi"):
 @app.route('/<teacher>/home/')
 def teacherHome(teacher):
 	studentID = request.args.get('studentID')
+	if studentID == None:
+		return redirect(url_for("login", teacher=teacher))
+	else: 
+		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+
+@app.route('/public/home/')
+def publicHome():
+	studentID = request.args.get('studentID')
+	teacher = "public"
 	return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+
 
 @app.route('/<teacher>/login', methods=['GET', 'POST'])
 def login(teacher):
@@ -28,6 +38,9 @@ def login(teacher):
 	else: 
 		return render_template("login.html")
 
+@app.route('/<teacher>/dashboard')
+def teacherDashboard(teacher):
+	return render_template("dashboard.html", teacher=teacher)
 
 @app.route('/demoChinese/')
 def demoChinese(name="Chinese"):
@@ -83,7 +96,7 @@ def teacherScene(teacher, activityName):
 #-----------------------------------------------
 
 
-@app.route('/log', methods=['Post'])
+@app.route('/log', methods=['POST'])
 def log():
 	content = request.get_data()
 	#content = request.data

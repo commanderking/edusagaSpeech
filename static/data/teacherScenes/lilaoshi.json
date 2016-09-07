@@ -4,11 +4,29 @@
 	"scenes" : [
 		{
 			"name" : "Pre-assessment 1",
-			"jsonFile" : "pa1.json",
+			"scenario" : "Looks like there's a girl sitting by herself in the high school cafeteria. Why don't you try talking to her and see what you remember from last year?",
+			"grammar" : "",
 			"link" : "../pa1",
 			"image" : "",
-			"message" : "Let's see what you know!",
 			"assigned" : true
+		},
+		{
+			"name" : "Meeting David",
+			"scenario" : "There's a fellow student hanging out at the school cafeteria. Let's meet him!",
+			"grammar" : "你叫什么名字?, 你住在哪里?, 你的电话号码...",
+			"link" : "../yuDemo",
+			"image" : "",
+			"assigned" : false
+		},
+		{
+			"name" : "David's Visit to Taiwan",
+			"scenario" : "Didn't David just come back from Taiwan? Why don't you ask him some questions about his trip on your ride home on the subway?",
+			"grammar" : "你____了沒有?, 你_____ 了吗?",
+			"jsonFile" : "pa1.json",
+			"link" : "../lewDemo2",
+			"image" : "",
+			"message" : "Let's see what you know!",
+			"assigned" : false
 		}
 	]
 }

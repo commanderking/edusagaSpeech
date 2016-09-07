@@ -6,10 +6,8 @@
 			"name" : "Meeting David",
 			"scenario" : "There's a fellow student hanging out at the school cafeteria. Let's meet him!",
 			"grammar" : "你叫什么名字?, 你住在哪里?, 你的电话号码...",
-			"jsonFile" : "demo.json",
 			"link" : "../demo",
 			"image" : "",
-			"message" : "Let's see what you know!",
 			"assigned" : true
 		}
 	]

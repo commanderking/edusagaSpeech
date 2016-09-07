@@ -1,0 +1,36 @@
+{
+	"username" : "jinlaoshi",
+	"name" : "金老師",
+	"scenes" : [
+		{
+			"name" : "Ordering at a Fast Food Restaurant",
+			"scenario" : "Ask about what the restaurant has, the price of different foods, and finally order something at this fast food restaurant scenario.",
+			"grammar" : "你有没有...? 几块钱?, 来一个／我要一个",
+			"jsonFile" : "demo.json",
+			"link" : "../demo2",
+			"image" : "",
+			"message" : "Let's see what you know!",
+			"assigned" : true
+		},
+		{
+			"name" : "Meeting a New Friend",
+			"scenario" : "Welcome to Shanghai Airport! Looks like your taxi driver is over there waiting to pick you up. Why don't you head over and chat with him?",
+			"grammar" : "你是哪里人, 你几岁, 你属什么, 你喜欢...?",
+			"jsonFile" : "demo.json",
+			"link" : "../demo",
+			"image" : "",
+			"message" : "Let's see what you know!",
+			"assigned" : true
+		},
+		{
+			"name" : "Meeting Alex and Asking about Her Family",
+			"scenario" : "You and Alex have just met and you're curious to learn more about her family.",
+			"grammar" : "你家有几口人?, 你的妈妈是哪里人?, 你的爸爸几岁?",
+			"jsonFile" : "demo.json",
+			"link" : "../demo3",
+			"image" : "",
+			"message" : "Let's see what you know!",
+			"assigned" : true
+		}
+	]
+}

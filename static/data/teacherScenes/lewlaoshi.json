@@ -20,7 +20,7 @@
 			"link" : "../demo2",
 			"image" : "",
 			"message" : "Let's see what you know!",
-			"assigned" : true
+			"assigned" : false
 		}
 	]
 }

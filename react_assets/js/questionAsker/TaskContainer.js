@@ -90,10 +90,11 @@ var TaskContainer = React.createClass({
 			return (
 					<div className="combinedTaskList col-md-6 col-sm-6 col-xs-6">
 						<div className="taskPaused">
-							<h3>When ready, click button to continue to the next task. You will have 15 seconds to respond.</h3>
+							<h3>When ready, click the "Ready!" button to continue to the next task. You will have 20 seconds to respond.</h3>
+							<h3>During the task, remember to click the task itself before saying anything.</h3>
 							<button 
 								onClick={this.props.resumeTasks} 
-								className="btn btn-info btn-large">
+								className="btn btn-info btn-lg">
 								Ready!
 							</button>
 

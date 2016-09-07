@@ -169,50 +169,7 @@
 		componentWillReceiveProps: function componentWillReceiveProps() {
 			this.loadSceneData();
 		},
-		componentDidUpdate: function componentDidUpdate() {
-	
-			// Logic for when scene is over
-			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
-				var that = this;
-				var studentCompletedProgress = {};
-				studentCompletedProgress.studentID = initialLogData.studentID;
-				var allTaskData = [];
-	
-				var timeInSeconds = Math.floor((new Date().getTime() - initialLogData.startTime) / 1000);
-				/*
-	   var timeInMinutes = Math.floor(timeInSeconds / 60);
-	   var seconds = Math.floor(timeInSeconds - (timeInMinutes * 60));
-	   var readableTime = timeInMinutes + " minutes" + " and " + seconds + "seconds";
-	   console.log(readableTime);
-	   */
-	
-				// Only add needed pieces of information //
-				this.state.sceneData.character.completedTasks.forEach(function (task, i) {
-					var taskData = {};
-					taskData.taskID = task.taskID;
-					taskData.task = task.task;
-					taskData.correct = task.correct;
-					taskData.attemptedAnswers = task.attemptedAnswers;
-					allTaskData.push(taskData);
-				});
-				studentCompletedProgress.score = this.state.coins / 10;
-				studentCompletedProgress.possibleScore = this.state.possibleCoins / 10;
-				studentCompletedProgress.time = timeInSeconds;
-				studentCompletedProgress.allTaskData = allTaskData;
-	
-				var logEvent = JSON.stringify(studentCompletedProgress);
-				$.ajax({
-					url: "/logStudent",
-					type: "POST",
-					data: logEvent,
-					dataType: "json"
-				});
-	
-				setTimeout(function () {
-					that.setState({ sceneComplete: true });
-				}, 700);
-			}
-		},
+		componentDidUpdate: function componentDidUpdate() {},
 		checkAnswer: function checkAnswer(userAnswer, taskIndex) {
 			// Case where there's an error due to user canceling
 			if (userAnswer === "Cancel Speech") {
@@ -232,7 +189,6 @@
 	
 				// Store the returned data;
 				var returnedObject = _QuestionAskerHelper.SpeechChecker.checkAnswer(userAnswer, newSceneData, taskIndex);
-				console.log(returnedObject);
 				var correctAnswer = returnedObject.answerCorrect;
 				var responseSoundID = returnedObject.responseSoundID;
 				var possibleAnswerIndex = returnedObject.possibleAnswersIndex;
@@ -270,10 +226,7 @@
 						lastDialogText: newCurrentDialog });
 	
 					// If time mode active, clear the timer countdown
-					console.log(this.state.sceneData.APTimeMode);
 					if (this.state.sceneData.APTimeMode) {
-						console.log("interval cleared from correct answer");
-						console.log(this.timerInterval);
 						clearInterval(this.timerInterval);
 					}
 	
@@ -311,7 +264,7 @@
 							newSceneData.character.currentTasks.splice(taskIndex, 1);
 						}
 	
-						// If task has an extension task, add that new task to the Task List
+						// If task has a follow up task to queue, add that new task to the Task List
 						if (currentTaskData.tasksToQueue == null) {
 							// Do nothing
 						} else if (currentTaskData.tasksToQueue.length > 0) {
@@ -329,7 +282,7 @@
 							newSceneData.character.queuedTasks = _QuestionAskerHelper.TaskController.removeTasksfromQueue(indexesToRemove, queuedTasks);
 						}
 	
-						that.setState({ sceneData: newSceneData });
+						that.setState({ sceneData: newSceneData }, that.checkSceneOver);
 	
 						if (that.state.sceneData.APTimeMode) {
 							that.setState({ taskPause: true });
@@ -372,18 +325,17 @@
 						currentDialog: newCurrentDialog
 					});
 	
-					if (that.state.sceneData.APTimeMode) {
-						console.log("interval cleared");
-						console.log(this.timerInterval);
+					if (this.state.sceneData.APTimeMode) {
 						clearInterval(this.timerInterval);
 					}
 					setTimeout(function () {
 						// Reset character image to default 
 						newSceneData.currentImage = that.state.sceneData.character.emotions.default;
 						that.setState({ wrongAnswerState: false, sceneData: newSceneData });
-						console.log("Interval set after wrong answer");
-						that.startTimer();
-						// that.timerInterval = setInterval(that.updateTime, 1000);
+	
+						if (that.state.sceneData.APTimeMode) {
+							that.startTimer();
+						}
 					}, 3000);
 				}
 	
@@ -395,7 +347,6 @@
 				currentLogData.userAnswer = userAnswer;
 				currentLogData.eventType = "speechAnswer";
 				currentLogData.correct = currentTaskData.correct;
-				console.log(currentLogData);
 				var logEvent = JSON.stringify(currentLogData);
 				$.ajax({
 					url: "/logSpeechResponse",
@@ -403,6 +354,53 @@
 					data: logEvent,
 					dataType: "json"
 				});
+			}
+		},
+		checkSceneOver: function checkSceneOver() {
+			console.log("in checkSceneOver function");
+			console.log(this.state.sceneData.character.currentTasks);
+			console.log(this.state.sceneData.character.queuedTasks);
+			// Logic for when scene is over
+			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneData.character.queuedTasks.length === 0 && this.state.sceneComplete === false) {
+				console.log("scene complete true");
+				var that = this;
+				var studentCompletedProgress = {};
+				studentCompletedProgress.studentID = initialLogData.studentID;
+				var allTaskData = [];
+	
+				var timeInSeconds = Math.floor((new Date().getTime() - initialLogData.startTime) / 1000);
+	
+				// Only add needed pieces of information //
+				this.state.sceneData.character.completedTasks.forEach(function (task, i) {
+					var taskData = {};
+					taskData.taskID = task.taskID;
+					taskData.task = task.task;
+					taskData.correct = task.correct;
+					taskData.attemptedAnswers = task.attemptedAnswers;
+					allTaskData.push(taskData);
+				});
+				studentCompletedProgress.score = this.state.coins / 10;
+				studentCompletedProgress.possibleScore = this.state.possibleCoins / 10;
+				studentCompletedProgress.time = timeInSeconds;
+				studentCompletedProgress.allTaskData = allTaskData;
+	
+				var logEvent = JSON.stringify(studentCompletedProgress);
+				console.log(logEvent);
+				$.ajax({
+					url: "/logStudent",
+					type: "POST",
+					data: logEvent,
+					dataType: "json"
+				});
+	
+				// If time mode active, clear the timer countdown
+				if (this.state.sceneData.APTimeMode) {
+					clearInterval(this.timerInterval);
+				}
+	
+				setTimeout(function () {
+					that.setState({ sceneComplete: true });
+				}, 700);
 			}
 		},
 		initializeSounds: function initializeSounds() {
@@ -435,18 +433,6 @@
 		},
 		playSound: function playSound(soundID) {
 			createjs.Sound.play(soundID);
-		},
-		playConfusedPhrase: function playConfusedPhrase(confusedPhrasesArray) {
-			/*
-	  // Randomly pick a confused response
-	  var randomVar = Math.random();
-	  	// Play confused sound
-	  this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
-	  	newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
-	  	// Set text for confusion
-	  newSceneData.currentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
-	  */
-	
 		},
 		handleHintClick: function handleHintClick(hintIndex) {
 			var that = this;
@@ -607,11 +593,11 @@
 			var spliceIndexes = _QuestionAskerHelper.TaskController.getIndexesToSpliceQueuedTasks(taskIDsToQueue, allQueuedTasks);
 			newSceneData.character.queuedTasks = _QuestionAskerHelper.TaskController.removeTasksfromQueue(spliceIndexes, allQueuedTasks);
 	
-			this.setState({ sceneData: newSceneData });
+			// Check if no more tasks remaining
+			this.setState({ sceneData: newSceneData }, this.checkSceneOver);
 	
 			if (that.state.sceneData.APTimeMode) {
 				that.setState({ taskPause: true });
-				console.log("Interval cleared from skipTasks");
 				clearInterval(this.timerInterval);
 			}
 		},
@@ -621,16 +607,15 @@
 			this.startTimer();
 		},
 		startTimer: function startTimer() {
-			console.log("interval started from startTimer");
 			this.timerInterval = setInterval(this.updateTime, 1000);
 			// this.updateTime();
 		},
 		updateTime: function updateTime() {
-			if (this.state.timeRemaining <= 0) {
-				console.log("Timer at 0");
+			// !this.state.micActive allows student to finish last response before moving to delay screen
+			if (this.state.timeRemaining <= 0 && !this.state.micActive) {
+				console.log(this.state.timeRemaining);
 				this.skipTasks();
 			} else {
-				console.log(this.state.timeRemaining);
 				var newTime = this.state.timeRemaining - 1;
 				this.setState({ timeRemaining: newTime });
 			}
@@ -23995,13 +23980,18 @@
 							React.createElement(
 								'h3',
 								null,
-								'When ready, click button to continue to the next task. You will have 15 seconds to respond.'
+								'When ready, click the "Ready!" button to continue to the next task. You will have 20 seconds to respond.'
+							),
+							React.createElement(
+								'h3',
+								null,
+								'During the task, remember to click the task itself before saying anything.'
 							),
 							React.createElement(
 								'button',
 								{
 									onClick: this.props.resumeTasks,
-									className: 'btn btn-info btn-large' },
+									className: 'btn btn-info btn-lg' },
 								'Ready!'
 							)
 						)

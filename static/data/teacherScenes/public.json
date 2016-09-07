@@ -1,0 +1,66 @@
+{
+	"username" : "public",
+	"name" : "public",
+	"scenes" : [
+		{
+			"name" : "Ordering at a Fast Food Restaurant",
+			"scenario" : "Ask about what the restaurant has, the price of different foods, and finally order something at this fast food restaurant scenario.",
+			"grammar" : "你有没有...? 几块钱?, 来一个／我要一个",
+			"link" : "../publicDemo2",
+			"image" : "",
+			"assigned" : false
+		},
+		{
+			"name" : "Meeting a New Friend",
+			"scenario" : "Welcome to Shanghai Airport! Looks like your taxi driver is over there waiting to pick you up. Why don't you head over and chat with him?",
+			"grammar" : "你是哪里人, 你几岁, 你属什么, 你喜欢...?",
+			"link" : "../publicDemo",
+			"image" : "",
+			"assigned" : false
+		},
+		{
+			"name" : "Meeting Alex and Asking about Her Family",
+			"scenario" : "You and Alex have just met and you're curious to learn more about her family.",
+			"grammar" : "你家有几口人?, 你的妈妈是哪里人?, 你的爸爸几岁?",
+			"link" : "../publicDemo3",
+			"image" : "",
+			"assigned" : false
+		},
+		{
+			"name" : "Meeting David",
+			"scenario" : "There's a fellow student hanging out at the school cafeteria. Let's meet him!",
+			"grammar" : "你叫什么名字?, 你住在哪里?, 你的电话号码...",
+			"link" : "../yuDemo",
+			"image" : "",
+			"assigned" : false
+		},
+		{
+			"name" : "Pre-assessment 1",
+			"scenario" : "Looks like there's a girl sitting by herself in the high school cafeteria. Why don't you try talking to her and see what you remember from last year?",
+			"grammar" : "",
+			"link" : "../pa1",
+			"image" : "",
+			"assigned" : false
+		},
+		{
+			"name" : "Your Visit to Toronto",
+			"scenario" : "Welcome back from your trip to Toronto! Your friend David has picked you up at the airport and wants to hear all about what you did!",
+			"grammar" : "你____了沒有?, 我__了, 我沒___",
+			"jsonFile" : "pa1.json",
+			"link" : "../lewDemo",
+			"image" : "",
+			"message" : "Let's see what you know!",
+			"assigned" : false
+		},
+		{
+			"name" : "David's Visit to Taiwan",
+			"scenario" : "Didn't David just come back from Taiwan? Why don't you ask him some questions about his trip on your ride home on the subway?",
+			"grammar" : "你____了沒有?, 你_____ 了吗?",
+			"jsonFile" : "pa1.json",
+			"link" : "../lewDemo2",
+			"image" : "",
+			"message" : "Let's see what you know!",
+			"assigned" : false
+		}	
+	]
+}
