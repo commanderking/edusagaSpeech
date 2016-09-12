@@ -381,7 +381,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你最喜欢喝什么", "你最喜欢喝什么饮料", "你喜欢喝什么"],
+							"answers" : ["你最喜欢喝什么", "你最喜欢什么饮料", "你喜欢喝什么"],
 							"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
 							"soundID" : "favoriteDrink"
 						},

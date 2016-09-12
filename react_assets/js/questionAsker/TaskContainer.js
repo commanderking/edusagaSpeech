@@ -78,7 +78,7 @@ var TaskContainer = React.createClass({
 		var repeatDivClass = this.props.hintActive ? "taskDiv taskDivRepeatDisabled" : "taskDiv taskDivRepeat";
 
 		// No option to press skip button if answering question
-		var skipButton = this.props.correctAnswerState || this.props.micActive ? null : <button type="button" 
+		var skipButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState ? null : <button type="button" 
 				          									className="btn-skip btn btn-danger"
 				          									onClick={this.props.skipTasks}>Skip Current Questions</button>
 
