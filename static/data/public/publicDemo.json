@@ -208,7 +208,11 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你怎么去上学", "你怎么上学", "你怎么去学校", "你么天怎么去上学"],
+							"answers" : [
+								["你", "您"],
+								["怎么", "如何"],
+								["上学", "去学校", "上课"] 
+							],
 							"response" : "我平常走路去上学.",
 							"soundID" : "gotoSchool"
 						}
@@ -242,7 +246,12 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢吃什么", "你爱吃什么"],
+							"answers" : [
+								["你"],
+								["喜欢", "爱"],
+								["吃"],
+								["什么"]
+							],
 							"response" : "我喜欢吃牛肉面.",
 							"soundID" : "foodLikes"
 						}
@@ -256,13 +265,31 @@
 				},
 				{
 					"taskID" : 9,
-					"task" : "Share that I like beef noodle soup",
+					"task" : "Share that I like to eat beef noodle soup",
 					"taskType" : "choice",
 					"taskLink" : "choiceLikeDislike",
 					"possibleAnswers" : 
 					[
 						{
-							"answers": ["我也喜欢吃牛肉面", "我喜欢吃牛肉面", "我喜欢牛肉面", "我也喜欢牛肉面" ,"我爱吃牛肉面"],
+							"answers": ["我也喜欢吃牛肉面"],
+							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
+							"soundID" : "zhenbang"
+						},
+						{
+							"answers": [
+								["我"],
+								["也喜欢", "喜欢", "爱"],
+								["吃"],
+								["牛肉面"]
+							],
+							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
+							"soundID" : "zhenbang"
+						},
+						{
+							"answers": [
+								["牛肉面"],
+								["好吃"]
+							],
 							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
 							"soundID" : "zhenbang"
 						}
@@ -281,7 +308,24 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我不喜欢吃牛肉面", "我不喜欢牛肉面", "牛肉面不好吃", "牛肉面很难吃"],
+							"answers" : ["我不喜欢吃牛肉面"],
+							"response" : "真的吗? 牛肉面非常好吃!",
+							"soundID" : "zhende"
+						},
+						{
+							"answers" : [
+								["我"],
+								["不喜欢"],
+								["牛肉面"]
+							],
+							"response" : "真的吗? 牛肉面非常好吃!",
+							"soundID" : "zhende"
+						},
+						{
+							"answers" : [
+								["牛肉面"],
+								["不好吃", "难吃"]
+							],
 							"response" : "真的吗? 牛肉面非常好吃!",
 							"soundID" : "zhende"
 						}
@@ -302,6 +346,17 @@
 							"answers" : ["你最喜欢喝什么", "你最喜欢喝什么饮料", "你喜欢喝什么"],
 							"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
 							"soundID" : "favoriteDrink"
+						},
+						{
+							"answers" : [
+								["你"],
+								["最喜欢", "喜欢"],
+								["喝"],
+								["什么", "哪些饮料", "哪一些饮料", "哪种饮料"]
+
+							],
+							"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
+							"soundID" : "favoriteDrink"	
 						}
 					],
 					"correct" : false,

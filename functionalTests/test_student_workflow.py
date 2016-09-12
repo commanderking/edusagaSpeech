@@ -1,38 +1,46 @@
 import unittest
-
-# your test cases
-import urllib2
-from flask import Flask
-from flask_testing import LiveServerTestCase
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-class MyTest(LiveServerTestCase):
+from flask import Flask
+from flask_testing import LiveServerTestCase
 
-	def setup(self):
-		self.driver = webdriver.Firefox()
+class SubscribeTest(unittest.TestCase):
 
-	def test_search_in_python_org(self):
-		driver = self.driver
-		driver.get("http://www.python.org")
-		self.assertIn("Python", driver.title)
-		elem = driver.find_element_by_name("q")
-		elem.send_keys("pycon")
-		elem.send_keys(Keys.RETURN)
-		assert "No results found." not in driver.page_source
+    def setUp(self):
+        self.driver = webdriver.Firefox()
 
-	def tearDown(self):
-		self.driver.close()
+	def switch_to_new_window(self, text_in_title):
+		retries = 60
+		while retries > 0:
+			for handle in self.driver.window_handles:
+				self.driver.switch_to_window(handle)
+				if text_in_title in self.driver.title:
+					return
+			retries -= 1
+			time.sleep(0.5)
+		self.fail('could not find window')
 
-	def create_app(self):
-		app = Flask(__name__)
-		app.config['TESTING'] = True
-		return app
 
-	def test_server_is_up_and_running(self):
-		response = urllib2.urlopen(self.get_server_url())
-		self.assertEqual(response.code, 200)
+    def test_search_in_python_org(self):
+        driver = self.driver
+        driver.get("http://localhost:3000")
+        self.assertIn("EduSaga", driver.title)
+        elem = driver.find_element_by_id('signup')
+        elem.send_keys("this.would.never.be.an.email.would.it.at.games@whatever.com")
+        elem.send_keys(Keys.RETURN)
+      	driver.implicitly_wait(3)
+      	self.switch_to_new_window('EduSaga Subscription List')
 
-if __name__ == '__main__':
+        header = driver.find_element_by_class_name('masthead')
+
+        print header
+
+        assertIn("EduSaga Subscription List", header)
+
+
+    def tearDown(self):
+        self.driver.close()
+
+if __name__ == "__main__":
     unittest.main()

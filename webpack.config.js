@@ -8,7 +8,8 @@ module.exports = {
   entry: {
     "index": './react_assets/js/index',
     "questionAsker": './react_assets/js/questionAsker',
-    "mainMenu": './react_assets/js/mainMenu'
+    "mainMenu": './react_assets/js/mainMenu',
+    "dashboard": './react_assets/js/dashboard.js',
   },
   output: {
       path: path.resolve('./static/js/'),

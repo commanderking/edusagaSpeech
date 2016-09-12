@@ -1,5 +1,6 @@
 [{
 	"studentID": "A1",
+	"activityName" : "Order food at the Restaurant",
 	"score": 4,
 	"possibleScore": 7,
 	"time": 47,

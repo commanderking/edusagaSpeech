@@ -1,6 +1,4 @@
-import sys
-import csv
-import json
+import sys, csv, json
 
 eventsLogData = ''
 with open (sys.argv[1], 'r') as my_file:

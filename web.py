@@ -49,7 +49,7 @@ def demoChinese(name="Chinese"):
 
 	# If it's a tracked address, send notification via SMS
 	try: 
-		userID = str(urlparse.parse_qs(parsed.query)['p'][0])
+		userID = 'Tried Demo' + str(urlparse.parse_qs(parsed.query)['p'][0])
 		client = boto3.client('sns', region_name ='us-east-1')
 		response = client.publish( 
 			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
@@ -62,15 +62,33 @@ def demoChinese(name="Chinese"):
 		print current_url
 		print parsed
 	#return render_template('demo.html', name=name)
-	return redirect(url_for('demo'))
+	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo"))
+
+@app.route('/video/')
+def videoRedirect(name="Video Redirect"):
+	current_url = request.url
+	parsed = urlparse.urlparse(current_url)
+
+	try:
+		userID = 'Watched video ' + str(urlparse.parse_qs(parsed.query)['p'][0])
+		client = boto3.client('sns', region_name ='us-east-1')
+		response = client.publish( 
+			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
+			Message= userID,
+			MessageStructure='string'
+		)
+		print userID
+	except: 
+		pass
+	return redirect('https://youtu.be/nQeKi-2JOnA')
 
 @app.route('/demoChinese2')
 def demoChinese2(name="Chinese2"):
-	return redirect(url_for('demo'))
+	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo2"))
 
 @app.route('/demoChinese3')
 def demoChinese3(name="Chinese3"):
-	return redirect(url_for('demo'))
+	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo3"))
 
 @app.route('/demoVocab1')
 def demoVocab1(name="Vocab1"):
