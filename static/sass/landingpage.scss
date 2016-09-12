@@ -330,6 +330,9 @@ html, body {
 				min-width: 4em;
 				display: block;
 				margin: auto;
+				&:hover {
+					background-color: yellow;
+				}
 			}
 		}
 	}
