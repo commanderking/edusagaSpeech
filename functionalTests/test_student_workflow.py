@@ -21,8 +21,25 @@ class SubscribeTest(unittest.TestCase):
 			time.sleep(0.5)
 		self.fail('could not find window')
 
+    def test_demo_pages_propery_load(self):
+        driver = self.driver
+        driver.get("http://localhost:3000/public/home")
+        driver.implicitly_wait(3)
+        header_text = driver.find_element_by_tag_name("h1").text
+        self.assertIn("Episodes Available", header_text)
 
-    def test_search_in_python_org(self):
+        # Check one teacher page
+        driver.get("http://localhost:3000/lewlaoshi/demo")
+        driver.switch_to.alert()
+        alert.accept()
+
+        driver.implicitly_wait(3)
+
+        scenario_text = driver.find_element_by_class_name("scenarioText")
+        self.assertIn("Welcome back from your trip to Toronto! Your friend David has picked you up at the airport and wants to hear all about what you did!", scenario_text)
+
+
+    def search_in_python_org(self):
         driver = self.driver
         driver.get("http://localhost:3000")
         self.assertIn("EduSaga", driver.title)

@@ -91,6 +91,7 @@ export var SpeechChecker = {
 
 		// If the userAnswer contains an exception, immediately mark it as wrong
 		if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
+			console.log("Checking exceptions");
 			var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
 			// console.log(exceptions);
 			var exceptionMatch = false;

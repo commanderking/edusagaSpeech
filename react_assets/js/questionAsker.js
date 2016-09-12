@@ -309,12 +309,8 @@ var QuestionAsker = React.createClass({
 		}
 	},
 	checkSceneOver: function() {
-		console.log("in checkSceneOver function");
-		console.log(this.state.sceneData.character.currentTasks);
-		console.log(this.state.sceneData.character.queuedTasks);	
 		// Logic for when scene is over
 		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneData.character.queuedTasks.length === 0 && this.state.sceneComplete === false) {
-			console.log("scene complete true");
 			var that = this;
 			var studentCompletedProgress = {};
 			studentCompletedProgress.studentID = initialLogData.studentID;
@@ -338,7 +334,6 @@ var QuestionAsker = React.createClass({
 			studentCompletedProgress.allTaskData = allTaskData;
 
 			var logEvent = JSON.stringify(studentCompletedProgress);
-			console.log(logEvent);
 			$.ajax({
 				url: "/logStudent",
 				type: "POST",
@@ -569,7 +564,6 @@ var QuestionAsker = React.createClass({
 	updateTime: function() {
 		// !this.state.micActive allows student to finish last response before moving to delay screen
 		if (this.state.timeRemaining <= 0 && !this.state.micActive) {
-			console.log(this.state.timeRemaining);
 			this.skipTasks();
 		} else {
 			var newTime = this.state.timeRemaining - 1;

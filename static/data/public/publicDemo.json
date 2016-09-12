@@ -12,7 +12,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Welcome to Shanghai Airport! Looks like your taxi driver is over there waiting to pick you up. Why don't you head over and chat with him?",
+			"text" : "Welcome to Shanghai Airport! Looks like your there's a fellow student who's waiting to be picked up. Why don't you head over and chat with him?",
 			"next" : "end"
 		}
 	],
@@ -118,7 +118,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你好"],
+							"answers" : ["你好", "你早", "早安"],
 							"response" : "你好!",
 							"soundID" : "nihao"
 						}
@@ -173,7 +173,25 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你是哪国人", "你是哪里人", "你来自哪里", "你是从哪里来的", "你从哪里来", "你从哪里来的"],
+							"answers" : ["你是哪国人"],
+							"response" : "我是中国人.",
+							"soundID" : "nationality"
+						},
+						{
+							"answers" : [
+								["你"],
+								["是"],
+								["哪国人", "哪里人", "哪里来的"]
+							],
+							"response" : "我是中国人.",
+							"soundID" : "nationality"
+						},
+						{
+							"answers" : [
+								["你"],
+								["从"],
+								["哪里来"]
+							],
 							"response" : "我是中国人.",
 							"soundID" : "nationality"
 						}
@@ -190,7 +208,7 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["你几岁", "你多大", "你多大了", "你年纪多大", "你今年多大了"],
+							"answers" : ["你多大了", "你几岁", "你多大", "年纪多大", "今年多大了"],
 							"response" : "我十六岁.",
 							"soundID" : "age"
 						}
@@ -207,6 +225,11 @@
 					"task" : "Ask how he gets to school",
 					"possibleAnswers" : 
 					[
+						{
+							"answers" : ["你怎么去上学"],
+							"response" : "我平常走路去上学.",
+							"soundID" : "gotoSchool"
+						},
 						{
 							"answers" : [
 								["你", "您"],
@@ -232,6 +255,15 @@
 							"answers" : ["你属什么", "你属什么生肖"],
 							"response" : "我属龙.",
 							"soundID" : "zodiac"
+						}, 
+						{
+							"answers" : [
+								["你"],
+								["属"],
+								["什么", "吗"]
+							],
+							"response" : "我属龙.",
+							"soundID" : "zodiac"
 						}
 					],
 					"correct" : false,
@@ -246,13 +278,18 @@
 					"possibleAnswers" : 
 					[
 						{
+							"answers" : [ "你最喜欢吃什么"],
+							"response" : "我喜欢吃牛肉面和汤圆.",
+							"soundID" : "foodLikes"
+						},
+						{
 							"answers" : [
 								["你"],
 								["喜欢", "爱"],
 								["吃"],
 								["什么"]
 							],
-							"response" : "我喜欢吃牛肉面.",
+							"response" : "我喜欢吃牛肉面和汤圆.",
 							"soundID" : "foodLikes"
 						}
 					],
@@ -294,6 +331,7 @@
 							"soundID" : "zhenbang"
 						}
 					],
+					"exceptions" : ["不喜欢"],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png", 
 					"tasksToQueue" : [11],
@@ -371,13 +409,22 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢什么运动", "你最喜欢什么运动", "你最喜欢做什么运动", "你最喜欢做什么", "你最喜欢什么体育运动"],
+							"answers" : ["你最喜欢什么运动"],
+							"response" : "我最喜欢打篮球和打乒乓球!",
+							"soundID" : "sportsLikes"
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜欢", "最喜欢"],
+								["什么", "哪些", "那一些", "打什么"],
+								["运动", "体育", "球赛", "球"]
+							],
 							"response" : "我最喜欢打篮球和打乒乓球!",
 							"soundID" : "sportsLikes"
 
 						}
 					],
-					
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [],
@@ -390,11 +437,22 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你最喜欢什么季节", "你喜欢什么季节", "你喜欢哪个季节", "你最喜欢哪个季节"],
+							"answers" : ["你最喜欢什么季节"],
+							"response" : "我最喜欢春天, 可是我不喜欢冬天",
+							"soundID" : "seasonLikes"
+						},
+						{
+							"answers" : [
+								["你"],
+								["最喜欢", "喜欢"],
+								["什么", "哪个", "哪一个"],
+								["季节"]
+							],
 							"response" : "我最喜欢春天, 可是我不喜欢冬天",
 							"soundID" : "seasonLikes"
 						}
 					],
+					"exceptions" : ["不喜欢"],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [],

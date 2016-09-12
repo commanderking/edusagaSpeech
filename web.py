@@ -59,10 +59,9 @@ def demoChinese(name="Chinese"):
 		print userID
 
 	except:
-		print current_url
-		print parsed
+		pass
 	#return render_template('demo.html', name=name)
-	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo"))
+	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
 
 @app.route('/video/')
 def videoRedirect(name="Video Redirect"):
