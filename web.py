@@ -28,6 +28,8 @@ def trackVisitorWithText(textMessage):
 	except:
 		pass
 
+
+
 @app.route('/')
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
 	trackVisitorWithText("Visited MainPage ")
