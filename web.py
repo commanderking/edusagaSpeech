@@ -11,8 +11,26 @@ app = Flask (__name__)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
+def trackVisitorWithText(textMessage): 
+	current_url = request.url
+	parsed = urlparse.urlparse(current_url)
+
+	# If it's a tracked address, send notification via SMS
+	try: 
+		userID = textMessage + str(urlparse.parse_qs(parsed.query)['p'][0])
+		client = boto3.client('sns', region_name ='us-east-1')
+		response = client.publish( 
+			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
+			Message= userID,
+			MessageStructure='string'
+		)
+		print userID
+	except:
+		pass
+
 @app.route('/')
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
+	trackVisitorWithText("Visited MainPage ")
 	return render_template('index.html', name=name, activityName=activityName, teacher=teacher)
 
 @app.route('/<teacher>/home/')
@@ -44,41 +62,12 @@ def teacherDashboard(teacher):
 
 @app.route('/demoChinese/')
 def demoChinese(name="Chinese"):
-	current_url = request.url
-	parsed = urlparse.urlparse(current_url)
-
-	# If it's a tracked address, send notification via SMS
-	try: 
-		userID = 'Tried Demo' + str(urlparse.parse_qs(parsed.query)['p'][0])
-		client = boto3.client('sns', region_name ='us-east-1')
-		response = client.publish( 
-			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
-			Message= userID,
-			MessageStructure='string'
-		)
-		print userID
-
-	except:
-		pass
-	#return render_template('demo.html', name=name)
+	trackVisitorWithText("Tried Demo ")
 	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
 
 @app.route('/video/')
 def videoRedirect(name="Video Redirect"):
-	current_url = request.url
-	parsed = urlparse.urlparse(current_url)
-
-	try:
-		userID = 'Watched video ' + str(urlparse.parse_qs(parsed.query)['p'][0])
-		client = boto3.client('sns', region_name ='us-east-1')
-		response = client.publish( 
-			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
-			Message= userID,
-			MessageStructure='string'
-		)
-		print userID
-	except: 
-		pass
+	trackVisitorWithText("Watched video ")
 	return redirect('https://youtu.be/nQeKi-2JOnA')
 
 @app.route('/demoChinese2')
