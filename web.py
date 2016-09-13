@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, render_template, url_for, jsonify
+from flask.ext.sqlalchemy import SQLAlchemy
 
 import boto3, json, urlparse
 
@@ -6,6 +7,11 @@ import boto3, json, urlparse
 import sys, os, logging
 
 app = Flask (__name__)
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+from models import *
+
 #app.config.from_envvar('GOOGLE_APPLICATION_CREDENTIALS')
 
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
@@ -99,10 +105,31 @@ def teacherScene(teacher, activityName):
 	else:
 		return redirect(url_for('teacherHome', teacher=teacher))
 
+@app.route('/signup', methods=['GET', 'POST'])
+def signup(name="Sign Up Page"):
+	errors = []
+	results = {}
+	test = ""
+	if request.method == "POST":
+		# get name and email that user has entered
+		try:
+			firstName = request.form['firstName']
+			lastName = request.form['lastName']
+			email = request.form['email']
+			test = firstName + " " + lastName + " " + email
+			newTeacher = Teacher(firstName, lastName, email)
+			db.session.add(newTeacher)
+			db.session.commit()
+		except: 
+			errors.append(
+				"Unable to get URL."
+			)
+	return render_template("teacherSignup.html", name=name, errors=errors, results=results, email=test)
+
+
 #-----------------------------------------------
 #POST requests 
 #-----------------------------------------------
-
 
 @app.route('/log', methods=['POST'])
 def log():

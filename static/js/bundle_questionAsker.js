@@ -24211,61 +24211,47 @@
   \*******************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var PropTypes = React.PropTypes;
-	var Transitions = __webpack_require__(/*! ../../helpers/Transitions.js */ 188);
+	//var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+	
+	
+	/*
+			<ReactCSSTransitionGroup 
+		    	transitionName="taskIconImage" 
+		    	transitionAppear = {true}
+		    	transitionAppearTimeout = {500}
+		    	transitionEnterTimeout={500} 
+		    	transitionLeaveTimeout={500}>
+				<img key={props.keyToAttach} className="" src={props.imageSrc} />
+			</ReactCSSTransitionGroup>
+	*/
 	
 	var TaskIconImage = React.createClass({
 		displayName: 'TaskIconImage',
 	
-		componentDidMount: function componentDidMount() {
+		show: function (callback) {
 			var node = ReactDOM.findDOMNode(this);
-	
-			switch (this.props.transition) {
-				case "activateTaskMic":
-					Transitions.activateTask.mic(node);
-					break;
-				case "activateTaskStar":
-					Transitions.activateTask.star(node);
-					break;
-				case "taskCorrectMic":
-					Transitions.taskCorrect.mic(node);
-					break;
-				case "taskCorrectStar":
-					Transitions.taskCorrect.star(node);
-					break;
-				case "taskCorrectCoins":
-					Transitions.taskCorrect.coins(node);
-					break;
-				case "taskWrongStar":
-					Transitions.taskWrong.star(node);
-					break;
-				case "taskWrongQuestionMark":
-					Transitions.taskWrong.questionMark(node);
-				default:
-					break;
-			}
+			console.log(callback);
 		},
-		componentDidUpdate: function componentDidUpdate() {
+		componentWillEnter: function (callback) {
+			console.log("Component Entered");
+			callback();
+		},
+		componentWillLeave: function (callback) {
+			callback();
+		},
+		componentDidMount: function () {
+			console.log("Component Mounted");
 			var node = ReactDOM.findDOMNode(this);
-			switch (this.props.transition) {
-				case "taskCorrectMic":
-					Transitions.taskCorrect.mic(node);
-					break;
-				case "taskCorrectStar":
-					Transitions.taskCorrect.star(node);
-					break;
-				case "taskCorrectCoins":
-					Transitions.taskCorrect.coins(node);
-					break;
-				default:
-					break;
-			}
+			// this.props.imageTransition(node, this);
+			console.log(node);
 		},
-		render: function render() {
+		componentWillUnmount: function () {
+			console.log("Component unmounted");
+		},
+		render: function () {
 			return React.createElement('img', { key: this.props.keyToAttach, className: '', src: this.props.imageSrc });
 		}
 	

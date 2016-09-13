@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>EduSaga - Speech</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="static/css/icons.css">
+	<link rel="stylesheet" href="static/css/index.css">
+	<link rel="stylesheet" href="static/css/tutorial.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+	<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script></head>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+ <div class="container">
+      <h1>Sign up</h1>
+      <form role="form" method='POST' action='/signup'>
+        <div class="form-group">
+          <input type="text" name="firstName" class="form-control" id="url-box" placeholder="Enter first name..." style="max-width: 300px;" autofocus required>
+          <input type="text" name="lastName" class="form-control" id="url-box" placeholder="Enter last name..." style="max-width: 300px;" autofocus required>
+          <input type="text" name="email" class="form-control" id="url-box" placeholder="Enter email..." style="max-width: 300px;" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <br>
+      {% for error in errors %}
+        <h4>{{ error }}</h4>
+      {% endfor %}
+      {{ email }}
+    </div>
+</body>
+
+</html>
