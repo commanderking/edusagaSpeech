@@ -316,7 +316,17 @@
 							"answers": 	["你的电话号码几号", "电话号码", "电话几号", "手机号码", "家的电话"],
 							"response": "我的电话号码是 133-8879-6654。",
 							"soundID" : "phoneNumber"
-						}
+						},
+						{
+							"answers": 	[
+								["你", "你的"],
+								["电话号码", "手机号码", "家的电话"],
+								
+
+							],
+							"response": "我的电话号码是 133-8879-6654。",
+							"soundID" : "phoneNumber"
+						},
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
