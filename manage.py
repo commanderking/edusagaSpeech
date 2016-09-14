@@ -3,7 +3,7 @@ from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 
 from web import app, db
-
+from models import *
 
 app.config.from_object(os.environ['APP_SETTINGS'])
 

@@ -8,7 +8,12 @@ class Config(object):
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
-
+    MAIL_SERVER='smtp.gmail.com'
+    MAIL_PORT=465
+    MAIL_USE_SSL=True
+    MAIL_USERNAME = 'edusaga.games@gmail.com'
+    MAIL_PASSWORD = os.environ['MAIL_PASSWORD']
+    MAIL_DEFAULT_SENDER = 'EduSaga'
 
 
 class ProductionConfig(Config):
