@@ -11,9 +11,9 @@ app = Flask (__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-print os.environ['APP_SETTINGS']
-print os.environ['MAIL_USERNAME']
-print os.environ['MAIL_PASSWORD']
+print 'App Settings: ' + os.environ['APP_SETTINGS']
+print 'Mail Username: ' + os.environ['MAIL_USERNAME']
+print 'Stuff: ' + os.environ['MAIL_PASSWORD']
 
 '''
 app.config.update(
