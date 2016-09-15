@@ -19,17 +19,6 @@ print 'Following relate to config variables'
 print 'Mail Username: ' + app.config['MAIL_USERNAME']
 print "Stuff: " + app.config['MAIL_PASSWORD']
 
-'''
-app.config.update(
-	DEBUG=True,
-	#EMAIL SETTINGS
-	MAIL_SERVER='smtp.gmail.com',
-	MAIL_PORT=465,
-	MAIL_USE_SSL=True,
-	MAIL_USERNAME = 'edusaga.games@gmail.com',
-	MAIL_PASSWORD = '',
-    MAIL_DEFAULT_SENDER = 'EduSaga')
-'''
 db = SQLAlchemy(app)
 mail = Mail(app)
 

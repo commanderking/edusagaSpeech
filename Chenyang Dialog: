@@ -1,0 +1,73 @@
+Chenyang Dialog: Chenyang asks you questions about family, nationality, and their jobs
+
+P: 你好陈阳! 
+
+CY: 嘿! 你好。 今天怎么样啊?
+
+P: 很好啊! 
+
+CY: 欸, 我想问你一下, 你是哪国人?
+
+P: 我是 _____ 人
+
+CY: 哦. 是吗? 那你有没有兄弟姐妹
+
+	1: 
+		P: 我有兄弟姐妹
+
+		CY: 他们都是学生吗? 
+
+		P: 是的 / 不是
+
+		CY: 啊, 真好 / 哦
+
+	2: 
+		P: 我没有兄弟姐妹
+
+		CY: 哦, 我也没有兄弟姐妹。那你妈妈有兄弟姐妹吗?
+
+		P: 我妈妈没有兄弟姐妹.
+
+		CY: 有 / 没有
+
+CY: 你爸爸是哪国人?
+
+CY: 你妈妈是哪国人? 
+
+CY: 你爸爸做什么工作?
+
+P: 我爸是一个工程师. 
+
+CY: 你妈妈做什么工作? 
+
+P: 我妈是一个工程师. 
+
+CY: 哎呀! 我忘了. 我今天得去跟我朋友看电影. 不好意思. 我得走了. 再见! 
+
+
+
+Chenyang Dialog 2: 
+
+P: Ask how she's doing
+
+CY: 非常好啊! 
+
+P: 
+
+	Ask her for her nationality
+
+	Ask if she has any siblings 
+
+		If yes - How old are they.
+
+		If yes - What grade are they in
+
+	Ask for nationality of mom 
+
+	Ask for job of mom
+
+	Ask for nationality of dad 
+
+	Ask for job of dad
+
+
