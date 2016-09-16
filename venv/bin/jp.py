@@ -1,4 +1,4 @@
-#!/Users/king/edusagaSpeech/venv/bin/python
+#!/Users/Beabrave/PyCharmProjects/edusagaSpeech/venv/bin/python
 
 import sys
 import json
