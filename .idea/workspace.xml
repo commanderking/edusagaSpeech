@@ -2,98 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5412198-3326-492a-8328-90ee9d138e30" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/edusagaSpeech.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/npm-debug.log" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/DESCRIPTION.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/INSTALLER" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/METADATA" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/RECORD" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/WHEEL" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/dependency_links.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/entry_points.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/metadata.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/top_level.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools-25.2.0.dist-info/zip-safe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/DESCRIPTION.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/INSTALLER" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/METADATA" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/RECORD" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/WHEEL" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/entry_points.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/metadata.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/top_level.txt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/markupsafe/_speedups.so" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/markupsafe/_speedups.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/.bin/gulp" afterPath="$PROJECT_DIR$/node_modules/.bin/gulp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/activate" afterPath="$PROJECT_DIR$/venv/bin/activate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/activate.csh" afterPath="$PROJECT_DIR$/venv/bin/activate.csh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/activate.fish" afterPath="$PROJECT_DIR$/venv/bin/activate.fish" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/aws" afterPath="$PROJECT_DIR$/venv/bin/aws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/aws_completer" afterPath="$PROJECT_DIR$/venv/bin/aws_completer" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/easy_install" afterPath="$PROJECT_DIR$/venv/bin/easy_install" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/easy_install-2.7" afterPath="$PROJECT_DIR$/venv/bin/easy_install-2.7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/gunicorn" afterPath="$PROJECT_DIR$/venv/bin/gunicorn" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/gunicorn_django" afterPath="$PROJECT_DIR$/venv/bin/gunicorn_django" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/gunicorn_paster" afterPath="$PROJECT_DIR$/venv/bin/gunicorn_paster" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/jp.py" afterPath="$PROJECT_DIR$/venv/bin/jp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pip" afterPath="$PROJECT_DIR$/venv/bin/pip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pip2" afterPath="$PROJECT_DIR$/venv/bin/pip2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pip2.7" afterPath="$PROJECT_DIR$/venv/bin/pip2.7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pyrsa-decrypt" afterPath="$PROJECT_DIR$/venv/bin/pyrsa-decrypt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pyrsa-decrypt-bigfile" afterPath="$PROJECT_DIR$/venv/bin/pyrsa-decrypt-bigfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pyrsa-encrypt" afterPath="$PROJECT_DIR$/venv/bin/pyrsa-encrypt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pyrsa-encrypt-bigfile" afterPath="$PROJECT_DIR$/venv/bin/pyrsa-encrypt-bigfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pyrsa-keygen" afterPath="$PROJECT_DIR$/venv/bin/pyrsa-keygen" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pyrsa-priv2pub" afterPath="$PROJECT_DIR$/venv/bin/pyrsa-priv2pub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pyrsa-sign" afterPath="$PROJECT_DIR$/venv/bin/pyrsa-sign" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/pyrsa-verify" afterPath="$PROJECT_DIR$/venv/bin/pyrsa-verify" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/python-config" afterPath="$PROJECT_DIR$/venv/bin/python-config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2html.py" afterPath="$PROJECT_DIR$/venv/bin/rst2html.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2latex.py" afterPath="$PROJECT_DIR$/venv/bin/rst2latex.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2man.py" afterPath="$PROJECT_DIR$/venv/bin/rst2man.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2odt.py" afterPath="$PROJECT_DIR$/venv/bin/rst2odt.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2odt_prepstyles.py" afterPath="$PROJECT_DIR$/venv/bin/rst2odt_prepstyles.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2pseudoxml.py" afterPath="$PROJECT_DIR$/venv/bin/rst2pseudoxml.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2s5.py" afterPath="$PROJECT_DIR$/venv/bin/rst2s5.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2xetex.py" afterPath="$PROJECT_DIR$/venv/bin/rst2xetex.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rst2xml.py" afterPath="$PROJECT_DIR$/venv/bin/rst2xml.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/rstpep2html.py" afterPath="$PROJECT_DIR$/venv/bin/rstpep2html.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/bin/wheel" afterPath="$PROJECT_DIR$/venv/bin/wheel" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/MarkupSafe-0.23.dist-info/RECORD" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/MarkupSafe-0.23.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/MarkupSafe-0.23.dist-info/WHEEL" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/MarkupSafe-0.23.dist-info/WHEEL" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/gunicorn-19.6.0.dist-info/RECORD" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/gunicorn-19.6.0.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pip-8.1.2.dist-info/RECORD" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pip-8.1.2.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pkg_resources/__init__.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pkg_resources/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pkg_resources/_vendor/packaging/specifiers.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pkg_resources/_vendor/packaging/specifiers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pkg_resources/_vendor/pyparsing.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pkg_resources/_vendor/pyparsing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pkg_resources/extern/__init__.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/pkg_resources/extern/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/rsa-3.4.2.dist-info/RECORD" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/rsa-3.4.2.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/__init__.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/command/build_ext.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/command/build_ext.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/command/easy_install.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/command/easy_install.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/command/sdist.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/command/sdist.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/command/upload_docs.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/command/upload_docs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/dist.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/dist.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/extension.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/extension.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/msvc.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/msvc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/py26compat.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/setuptools/py26compat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/__init__.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/archive.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/archive.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/bdist_wheel.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/bdist_wheel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/egg2wheel.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/egg2wheel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/install.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/install.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/metadata.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/metadata.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/pep425tags.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/pep425tags.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/signatures/keys.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/signatures/keys.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/test/test_basic.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/test/test_basic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/tool/__init__.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/tool/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/wininst2wheel.py" afterPath="$PROJECT_DIR$/venv/lib/python2.7/site-packages/wheel/wininst2wheel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/venv/pip-selfcheck.json" afterPath="$PROJECT_DIR$/venv/pip-selfcheck.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack-stats.json" afterPath="$PROJECT_DIR$/webpack-stats.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/css/user.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/sass/user.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/flask_user/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Chenyang Dialog:" afterPath="$PROJECT_DIR$/Chenyang Dialog:" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/react-addons-css-transition-group/package.json" afterPath="$PROJECT_DIR$/node_modules/react-addons-css-transition-group/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/react-addons-transition-group/package.json" afterPath="$PROJECT_DIR$/node_modules/react-addons-transition-group/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/react-dom/dist/react-dom-server.js" afterPath="$PROJECT_DIR$/node_modules/react-dom/dist/react-dom-server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/react-dom/dist/react-dom-server.min.js" afterPath="$PROJECT_DIR$/node_modules/react-dom/dist/react-dom-server.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/react-dom/dist/react-dom.js" afterPath="$PROJECT_DIR$/node_modules/react-dom/dist/react-dom.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/react-dom/dist/react-dom.min.js" afterPath="$PROJECT_DIR$/node_modules/react-dom/dist/react-dom.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/react-dom/package.json" afterPath="$PROJECT_DIR$/node_modules/react-dom/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/landingPage.css" afterPath="$PROJECT_DIR$/static/css/landingPage.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_dashboard.js.map" afterPath="$PROJECT_DIR$/static/js/bundle_dashboard.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_index.js.map" afterPath="$PROJECT_DIR$/static/js/bundle_index.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_mainMenu.js.map" afterPath="$PROJECT_DIR$/static/js/bundle_mainMenu.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" afterPath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_questionAsker.js.map" afterPath="$PROJECT_DIR$/static/js/bundle_questionAsker.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/sass/landingpage.scss" afterPath="$PROJECT_DIR$/static/sass/landingpage.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web.py" afterPath="$PROJECT_DIR$/web.py" />
     </list>
     <ignored path="edusagaSpeech.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -115,11 +44,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="transitions.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="transitions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react_assets/js/helpers/transitions.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
               <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -191,6 +130,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="edusagaSpeech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edusagaSpeech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edusagaSpeech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="venv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edusagaSpeech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="edusagaSpeech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -526,8 +493,8 @@
         <state relative-caret-position="435">
           <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -578,8 +545,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -614,8 +581,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -633,8 +600,8 @@
         <state relative-caret-position="435">
           <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -667,8 +634,8 @@
         <state relative-caret-position="435">
           <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -693,8 +660,8 @@
         <state relative-caret-position="435">
           <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -712,8 +679,8 @@
         <state relative-caret-position="435">
           <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -731,8 +698,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -754,21 +721,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/sass/landingpage.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
           <folding>
-            <marker date="1474030525000" expanded="true" signature="827:889" ph="{...}" />
-            <marker date="1474030525000" expanded="true" signature="1973:1977" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="827:889" ph="{...}" />
+            <marker date="1474048025000" expanded="true" signature="1973:1977" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -785,6 +744,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>

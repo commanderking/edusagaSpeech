@@ -53,6 +53,10 @@ html, body {
 	bottom: 2%;
 }
 
+// Formatting for the user pages
+.no-margins { margin: 0px; }
+.col-centered { float: none; margin: 0 auto; }
+
 // Top Landing Screen View
 
 .landingScreen {
@@ -265,7 +269,7 @@ html, body {
 			position: relative;
 			vertical-align: top;
 			width: 63%;
-			height: 100%;
+			height: 200px;
 			display: inline-block;
 			text-align: left;
 			background-color: $bgColorDefault;

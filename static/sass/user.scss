@@ -1,0 +1,22 @@
+/*-------------------------------------
+Styles for all user related pages 
+-------------------------------------*/
+
+#header-div {
+	position: absolute;
+	z-index: 100;
+	width: 100%;
+	padding: 5px;
+}
+
+.user-alert {
+	z-index: 100;
+	position: absolute;
+	width: 96%;
+	margin-left: 2%;
+	margin-top: 10px;
+	&:hover {
+		cursor: pointer;
+		opacity: 0.9;
+	}
+}
