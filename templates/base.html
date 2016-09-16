@@ -7,15 +7,29 @@
     <title>MyApp</title>
 
     <!-- Bootstrap -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>EduSaga - Create and Share Immersive Speaking Activities using Speech Recognition</title>
+    <meta name="description" content="EduSaga enables world language educators to create and share interactive speaking activities.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/icons.css">
+    <link rel="stylesheet" href="/static/css/tutorial.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/user.css">
+
+    {% block header %}
+    {% endblock %}
+
+    <script src="static/js/smooth-scroll.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Needed if demo is on the first page !-->
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TimelineMax.min.js"></script>
     <!-- In-lining styles to avoid needing a separate .css file -->
-    <style>
-        hr { border-color: #cccccc; margin: 0; }
-        .no-margins { margin: 0px; }
-        .with-margins { margin: 10px; }
-        .col-centered { float: none; margin: 0 auto; }
-    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -23,13 +37,19 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
+
+    <!-- formatting for all user related pages !-->
+    <style>
+        .no-margins { margin: 0px; }
+        .col-centered { float: none; margin: 0 auto; }
+    </style>
   </head>
 
 
 <body>
     {% block body %}
     <div id="header-div" class="clearfix with-margins">
-        <div class="pull-left"><a href="/"><h1 class="no-margins">MyApp</h1></a></div>
+        <!--<div class="pull-left"><a href="/"><h1 class="no-margins">EduSaga</h1></a></div>!-->
         <div class="pull-right">
             {% if call_or_get(current_user.is_authenticated) %}
                 <a href="{{ url_for('user.profile') }}">{{ current_user.username }}</a>
@@ -41,14 +61,15 @@
         </div>
     </div>
     {% block menu %}
+    <!--
     <div id="menu-div" class="with-margins">
         <a href="/">Home</a>
         {% if call_or_get(current_user.is_authenticated) %}
             &nbsp; | &nbsp; <a href="{{ url_for('user.profile') }}">User profile</a>
         {% endif %}
     </div>
+    !-->
     {% endblock %}
-    <hr class="no-margins"/>
 
     <div id="main-div" class="with-margins">
     {# One-time system messages called Flash messages #}
@@ -59,15 +80,24 @@
                     {% if category=='error' %}
                         {% set category='danger' %}
                     {% endif %}
-                    <div class="alert alert-{{category}}">{{ message|safe }}</div>
+                    <div class="alert alert-{{category}} user-alert">{{ message|safe }}
+                        <span class="glyphicon glyphicon-remove close-alert" aria-hidden="true"></span>
+                    </div>
                 {% endfor %}
             {% endif %}
         {%- endwith %}
     {% endblock %}
 
-    {% block main %}{% block content %}{% endblock %}{% endblock %}
+    <!-- small script for closing alert !-->
+    <script>
+        $('.close-alert, .user-alert').click(function() {
+            $('.user-alert').hide();
+        })
+    </script>
+
     </div>
     {% endblock %}
+    {% block main %}{% block content %}{% endblock %}{% endblock %}
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
