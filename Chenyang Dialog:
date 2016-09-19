@@ -73,46 +73,55 @@ P:
 
 David Dialog (Combined): 
 
-P: 你好陈阳! 
+P: 你好David! 
 
 David: 嘿! 你好。 今天怎么样啊?
 
 P: Answer his question. 
 
-CY: 不错哦 / 怎么了 
+David: 哦真好。 
 
-P: 我是 _____ 人
+P: Ask for his nationality.
 
-CY: 哦. 是吗? 那你有没有兄弟姐妹
+David: 我是美国人. 你是哪里人? 
 
-	1: 
-		P: 我有兄弟姐妹
+P: Respond to his question.
 
-		CY: 他们都是学生吗? 
+David: 你有没有哥哥弟弟? 
 
-		P: 是的 / 不是
+P: Respond to his question. 
 
-		CY: 啊, 真好 / 哦
+	我有弟弟。
 
-	2: 
-		P: 我没有兄弟姐妹
+	我有哥哥。
 
-		CY: 哦, 我也没有兄弟姐妹。那你妈妈有兄弟姐妹吗?
+	我没有。
 
-		P: 我妈妈没有兄弟姐妹.
+	David: 哦。 哪你有没有姐姐妹妹? 
 
-		CY: 有 / 没有
+	P: 我有妹妹, 我有姐姐. 
 
-CY: 你爸爸是哪国人?
+	我没有
 
-CY: 你妈妈是哪国人? 
+David: 哦... 
 
-CY: 你爸爸做什么工作?
+Ask him whether he has any siblings.
 
-P: 我爸是一个工程师. 
+Ask the nationality of his dad
 
-CY: 你妈妈做什么工作? 
+	我爸爸是台湾人. 诶. 你的爸爸是哪里人? 
 
-P: 我妈是一个工程师. 
+	IMMEDIATE RESPONSE QUESTION: Answer his question about your dad.
 
-CY: 哎呀! 我忘了. 我今天得去跟我朋友看电影. 不好意思. 我得走了. 再见! 
+	David: 哦... 真好. 
+
+	Ask what his dad does
+
+Ask the nationality of his mom
+
+	我妈妈是中国上海人. 
+	
+	Ask what his mom does
+
+	我妈妈是一个会计. 你的妈妈做什么工作? 
+

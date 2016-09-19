@@ -1,4 +1,4 @@
-#!/Users/Beabrave/PyCharmProjects/edusagaSpeech/venv/bin/python
+#!/Users/king/edusagaSpeech/venv/bin/python
 
 # $Id: rst2xetex.py 7038 2011-05-19 09:12:02Z milde $
 # Author: Guenter Milde

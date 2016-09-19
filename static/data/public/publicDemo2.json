@@ -115,7 +115,25 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers": ["你有没有炒饭", "请问你有没有炒饭", "你们有没有炒饭", "你们卖炒饭吗", "你有炒饭吗", "你们有炒饭吗?" ],
+							"answers": ["你们有没有炒饭" ],
+							"response": "不好意思, 我们没有炒饭.",
+							"soundID": "noFriedRice"
+						},
+						{
+							"answers": [
+								["有没有", "卖不卖"], 
+								["炒饭"]
+							],
+							"response": "不好意思, 我们没有炒饭.",
+							"soundID": "noFriedRice"
+						},
+						{
+							"answers": [
+								["卖", "有"], 
+								["炒饭"],
+								["吗"]
+
+							],
 							"response": "不好意思, 我们没有炒饭.",
 							"soundID": "noFriedRice"
 						}
@@ -134,6 +152,24 @@
 							"answers": 	["你有没有牛肉面", "你们有没有牛肉面", "我们买牛肉面吗", "你有牛肉面吗", "你们有牛肉面吗"],
 							"response": "不好意思, 我们只有汉堡和薯条.",
 							"soundID" : "onlyBurgersAndFries"
+						},
+						{
+							"answers": 	[
+								["有没有", "卖不卖"], 
+								["牛肉面"]
+							],
+							"response": "不好意思, 我们只有汉堡和薯条.",
+							"soundID" : "onlyBurgersAndFries"
+						},
+						{
+							"answers": [
+								["卖", "有"], 
+								["炒饭"],
+								["吗"]
+
+							],
+							"response": "不好意思, 我们只有汉堡和薯条.",
+							"soundID" : "onlyBurgersAndFries"
 						}
 					],
 					"correct" : false,
@@ -147,7 +183,16 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我要一个汉堡", "来一个汉堡", "来个汉堡", "给我一个汉堡"],
+							"answers" : ["我要一个汉堡"],
+							"response" : "好, 来一个汉堡!.",
+							"soundID" : "hamburgerOrder"
+						},
+						{
+							"answers" : [
+								["要", "给我", "想要"],
+								["一个", "一份", "个", "份"],
+								["汉堡", "汉堡包"]
+							],
 							"response" : "好, 来一个汉堡!.",
 							"soundID" : "hamburgerOrder"
 						}
@@ -166,6 +211,15 @@
 							"answers" : ["我要一个薯条", "我要薯条", "给我一个薯条", "给我薯条", "来一个薯条", "来个薯条"],
 							"response" : "好的, 来一个薯条!",
 							"soundID" : "frenchFriesOrder"
+						},
+						{
+							"answers" : [
+								["要", "给我", "想要"],
+								["一个", "一份", "个", "份", "盘"],
+								["薯条"]
+							],
+							"response" : "好的, 来一个薯条!",
+							"soundID" : "frenchFriesOrder"
 						}
 					],
 					"correct" : false,
@@ -179,7 +233,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["谢谢", "谢谢您", "谢谢你", "感谢"],
+							"answers" : ["谢谢", "感谢"],
 							"response" : "不谢!",
 							"soundID" : "welcome"
 						}
