@@ -72,21 +72,34 @@ html, body {
 
 	.landingScreenContainer {
 		text-align: center;
-		width: 100%;
+		width: 40%;
+		@include mobilePortrait {
+			width: 90%;
+		}
 		h2 {
 			margin: 0px;
-			font-size: 75px;
+			font-size: 60px;
+			margin-bottom: 10px;
 		}
 		p {
 			color: white;
 			text-shadow: 0.5px 0.5px black;
 			font-size: 20px;
-			width: 55%;
+			width: 90%;
 			margin: auto;
+			margin-bottom:50px;
 			@include mobile {
 				font-size: 20px;
-				width: 70%;
+				width: 100%;
 			}
+		}
+	}
+	.landingScreenVideo {
+		width: 56%;
+		text-align:center;
+
+		iframe {
+			border-radius: 5px;
 		}
 	}
 	.btn-login {
