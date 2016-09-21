@@ -610,6 +610,38 @@ CSS Related to Task List
 				font-weight: bold;
 			}
 
+			.button {
+				position: absolute;
+				top: 0px;
+				height: 100%;
+				z-index: 6;	
+				cursor: pointer;		
+			}
+			.repeatButton {
+				right: 200px;
+			}
+
+			.repeatButtonDiv:hover .toolTipText {
+				visibility: visible;
+			}
+
+			.toolTipText {
+				visibility: hidden;
+				position: absolute;
+				background-color: $yellow;
+				padding: 5px;
+				font-size: 20px;
+				font-weight: bold;
+				border-radius: 5px;
+				color: $darkBlue;
+				right: 200px;
+				top: -40px;
+			}
+
+			.skipButton {
+				right: 150px;		
+			}
+
 			.miriIcon {
 				position: absolute;
 				top: -30px;
@@ -673,13 +705,15 @@ CSS Related to Task List
 						color: yellow;
 					}
 				}
-
-				.hintText {
+				.miriIconText {
+					width: 70%;
 					margin-left: 50px;
 					margin-bottom: 0px;
 					vertical-align: top;
 					display: inline-block;
 					line-height: 40px;
+				}
+				.hintText {
 					font-size: 20px;
 					color: $darkerBlue;
 					font-weight: bold;
@@ -687,6 +721,18 @@ CSS Related to Task List
 						color: #EA338B;
 						border-bottom: 1px solid #EA338B;
 						cursor: pointer;
+					}
+					.glyphicon {
+						position: absolute;
+						font-size: 25px;
+						line-height: 40px;
+					}
+					.glyphicon-question-sign {
+						right: 85px;
+					}
+					.glyphicon-remove {
+						right: 50px;
+						color: $darkPink;
 					}
 				}
 			}
@@ -1059,5 +1105,7 @@ Timer Container
 		line-height: 125px;
 	}
 }
+
+
 
 

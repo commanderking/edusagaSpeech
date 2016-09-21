@@ -58,9 +58,9 @@
 	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 190);
 	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 201);
 	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 202);
-	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 207);
-	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 214);
-	var TimerContainer = __webpack_require__(/*! ./questionAsker/TimerContainer */ 215);
+	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 211);
+	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 218);
+	var TimerContainer = __webpack_require__(/*! ./questionAsker/TimerContainer */ 219);
 	
 	var Constants = __webpack_require__(/*! ./helpers/Constants.js */ 177);
 	
@@ -98,7 +98,14 @@
 				scenarioOn: true,
 				scenarioIndex: 0,
 				hintActive: false,
+	
+				// When true, user is trying to ask for repeat
+				askingForRepeat: false,
 				currentHintIndex: -1,
+				// Current Task Index affects which tasks are highlighted when the user is answering question
+				// It should be reset to -2 when user asks for repeat, else the task who has index of the previously set currentTaskIndex
+				// will blink
+				currentTaskIndex: -1,
 				currentDialog: "",
 				lastDialogText: "",
 				voicePack: {},
@@ -114,7 +121,8 @@
 				wrongAnswerState: false,
 				sceneComplete: false,
 				taskPause: false,
-				timeRemaining: 20
+				timeRemaining: 20,
+				repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"]
 			};
 		},
 		loadSceneData: function loadSceneData() {
@@ -513,19 +521,28 @@
 			}
 			this.setState({ coins: newCoins });
 		},
-		// Function triggers when user clicks text in dailog box
+		// Changes whether user is asking or not asking for repeat
+		activateRepeatMode: function activateRepeatMode() {
+			console.log("Repeat mode activated");
+			this.setState({ askingForRepeat: true });
+		},
+		deactivateRepeatMode: function deactivateRepeatMode() {
+			this.setState({ askingForRepeat: false });
+		},
+		// Function triggers when user correct says/asks for repeat
 		handleRepeat: function handleRepeat() {
 			this.playSound(this.state.sceneData.currentSoundID);
 			this.setState({ currentDialog: this.state.lastDialogText });
 		},
-		// function triggers when user speaks "repeat" into microphone
+		// function triggers when user say something into the mic with intentioning of asking for repeat
 		handleAskRepeat: function handleAskRepeat(userAnswer) {
 			this.turnMicStateOff();
 	
 			if (userAnswer === "Cancel Speech") {
 				// Do nothing
+				console.log("Repeat speech canceled");
+				this.deactivateRepeatMode();
 			} else {
-	
 				var that = this;
 	
 				// check if what user said was one of the ask for repeat phrases
@@ -535,7 +552,7 @@
 	
 				possibleRepeatPhrases.forEach(function (possiblePhrase, i) {
 					// Temporarily grab the soundID of this object
-					if (userAnswer === possiblePhrase) {
+					if (userAnswer.indexOf(possiblePhrase) >= 0) {
 						correctRepeatAsk = true;
 					}
 				});
@@ -564,6 +581,7 @@
 						that.setState({ wrongAnswerState: false, sceneData: newSceneData });
 					}, 2000);
 				}
+				this.deactivateRepeatMode();
 			}
 		},
 		skipTasks: function skipTasks() {
@@ -621,6 +639,9 @@
 				var newScenarioIndex = this.state.scenarioIndex + 1;
 				this.setState({ scenarioIndex: newScenarioIndex });
 			}
+		},
+		setCurrentTaskIndex: function setCurrentTaskIndex(newIndex) {
+			this.setState({ currentTaskIndex: newIndex });
 		},
 		render: function render() {
 			var sceneData = this.state.sceneData;
@@ -682,11 +703,14 @@
 						correctAnswerState: this.state.correctAnswerState,
 						wrongAnswerState: this.state.wrongAnswerState,
 						assessmentMode: sceneData.assessmentMode,
-						repeatPhrases: sceneData.character.repeatPhrases,
 						onHandleAskRepeat: this.handleAskRepeat,
 						skipTasks: this.skipTasks,
 						taskPause: this.state.taskPause,
-						resumeTasks: this.resumeTasks }),
+						resumeTasks: this.resumeTasks
+	
+						// Give component ability to manipulate currentTaskIndex
+						, currentTaskIndex: this.state.currentTaskIndex,
+						setCurrentTaskIndex: this.setCurrentTaskIndex }),
 					React.createElement(FeedbackContainer, {
 						locationTextEnglish: this.state.sceneData.character.location.nameEnglish,
 						locationTextChinese: this.state.sceneData.character.location.nameChinese,
@@ -695,7 +719,27 @@
 						coins: this.state.coins,
 						answerFeedbackActive: this.state.answerFeedbackActive,
 						feedbackText: this.state.feedbackText,
-						miriIconSrc: this.state.miriIconSrc }),
+						miriIconSrc: this.state.miriIconSrc,
+						repeatActive: this.state.repeatActive,
+						correctAnswerState: this.state.correctAnswerState,
+						micActive: this.state.micActive,
+						wrongAnswerState: this.state.wrongAnswerState,
+						skipTasks: this.skipTasks,
+						handleAskRepeat: this.handleAskRepeat,
+						onDisableHint: this.handleDisableHint,
+						deactivateFeedbackMode: this.deactivateFeedbackMode,
+						turnMicStateOn: this.turnMicStateOn
+	
+						// Repeat mode related 
+						, repeatPhrases: this.state.repeatPhrases,
+						askingForRepeat: this.state.askingForRepeat,
+						deactivateRepeatMode: this.deactivateRepeatMode,
+						activateRepeatMode: this.activateRepeatMode,
+						taskLang: sceneData.currentLanguage
+	
+						// Give component ability to manipulate currentTaskIndex
+						, currentTaskIndex: this.state.currentTaskIndex,
+						setCurrentTaskIndex: this.setCurrentTaskIndex }),
 					React.createElement(ResultsContainer, {
 						sceneComplete: this.state.sceneComplete,
 						coins: this.state.coins,
@@ -22327,9 +22371,19 @@
 				},
 	
 				// If user clicks task again, the task should cancel
-				$(".taskDiv").click(function () {
+				$(".taskDiv, .coinIcon").click(function () {
 					recognition.abort();
 				});
+	
+				// TODO: Fix hackiness of this with proper callbacks
+				// Right now, stop-repeat is not loaded quickly enough on page. Without timeout, jquery wont' find it on page. So give a delay.
+				setTimeout(function () {
+					// Reset character image to default 
+					console.log($(".stop-repeat").length);
+					$(".stop-repeat").click(function () {
+						recognition.abort();
+					});
+				}, 200);
 	
 				recognition.onspeechend = function () {
 					recognition.stop();
@@ -23887,12 +23941,7 @@
 	var TaskContainer = React.createClass({
 		displayName: 'TaskContainer',
 	
-		getInitialState: function getInitialState() {
-			return {
-				currentTaskIndex: -1
-			};
-		},
-		// Task Index should be grabbed from the Task's index
+		// Task Index should be grabbed from the Task's index property
 		handleSpeechInput: function handleSpeechInput(taskIndex) {
 			// Turns off any active hints or feedback
 			this.props.onDisableHint();
@@ -23905,7 +23954,7 @@
 			}
 			// Activate MicActive State
 			this.props.turnMicStateOn();
-			this.setState({ currentTaskIndex: taskIndex });
+			this.props.setCurrentTaskIndex(taskIndex);
 	
 			var that = this;
 			SpeechRecognition.activateSpeech(this.props.tasks[taskIndex].possibilities, this.props.taskLang).then(function (userAnswer) {
@@ -23914,18 +23963,6 @@
 				if (userAnswer !== null) {
 					that.props.checkAnswer(userAnswer, taskIndex);
 				}
-			});
-		},
-		handleAskForRepeat: function handleAskForRepeat(taskIndex) {
-			var that = this;
-	
-			this.props.onDisableHint();
-			this.props.deactivateFeedbackMode();
-			this.props.turnMicStateOn();
-	
-			this.setState({ currentTaskIndex: taskIndex });
-			SpeechRecognition.activateSpeech(this.props.repeatPhrases, this.props.taskLang).then(function (userAnswer) {
-				that.props.onHandleAskRepeat(userAnswer);
 			});
 		},
 		render: function render() {
@@ -23943,24 +23980,11 @@
 					onHintClick: that.props.onHintClick,
 					onDisableHint: that.props.onDisableHint,
 					micActive: that.props.micActive,
-					currentTaskIndex: that.state.currentTaskIndex,
+					currentTaskIndex: that.props.currentTaskIndex,
 					correctAnswerState: that.props.correctAnswerState,
 					wrongAnswerState: that.props.wrongAnswerState,
 					assessmentMode: that.props.assessmentMode });
 			});
-	
-			// Special class added to the Ask for Repeat button if hintACtive
-			var repeatDivClass = this.props.hintActive ? "taskDiv taskDivRepeatDisabled" : "taskDiv taskDivRepeat";
-	
-			// No option to press skip button if answering question
-			var skipButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState ? null : React.createElement(
-				'button',
-				{ type: 'button',
-					className: 'btn-skip btn btn-danger',
-					onClick: this.props.skipTasks },
-				'Skip Current Questions'
-			);
-	
 			if (this.props.scenarioOn === true) {
 				return null;
 			}
@@ -23998,26 +24022,7 @@
 						React.createElement(
 							'ul',
 							{ className: 'taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked' },
-							tasks,
-							React.createElement(
-								'div',
-								{ className: repeatDivClass },
-								React.createElement(TaskIcon, {
-									correctAnswerState: this.props.correctAnswerState,
-									wrongAnswerState: this.props.wrongAnswerState,
-									micActive: this.props.micActive,
-									index: skipButtonIndex,
-									currentTaskIndex: this.state.currentTaskIndex,
-									icon: 'repeatIcon' }),
-								React.createElement(TaskText, {
-									className: 'taskText',
-									index: skipButtonIndex,
-									currentTaskIndex: this.state.currentTaskIndex,
-									onSpeechInput: this.handleAskForRepeat,
-									taskTextToDisplay: 'Ask for repeat',
-									correctAnswerState: this.props.correctAnswerState })
-							),
-							skipButton
+							tasks
 						)
 					);
 				}
@@ -24027,8 +24032,7 @@
 	TaskContainer.propTypes = {
 		scenarioOn: PropTypes.bool.isRequired,
 		tasks: PropTypes.array.isRequired,
-		assessmentMode: PropTypes.bool.isRequired,
-		repeatPhrases: PropTypes.array.isRequired
+		assessmentMode: PropTypes.bool.isRequired
 	};
 	
 	module.exports = TaskContainer;
@@ -24799,124 +24803,16 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 203);
 	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 204);
-	var MiriIcon = __webpack_require__(/*! ./components/MiriIcon */ 205);
-	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 206);
+	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 205);
+	var RepeatButton = __webpack_require__(/*! ./components/RepeatButton */ 206);
+	var SkipButton = __webpack_require__(/*! ./components/SkipButton */ 207);
+	var MiriIconText = __webpack_require__(/*! ./components/MiriIconText */ 208);
+	var MiriFeedback = __webpack_require__(/*! ./components/MiriFeedback */ 209);
 	
 	var FeedbackContainer = React.createClass({
 		displayName: 'FeedbackContainer',
 	
-		getInitialState: function getInitialState() {
-			return {
-				hintClickDisable: false,
-				suggestionMode: false,
-				suggestionSubmitted: false
-			};
-		},
-		// Suggestions are activated when users want to add their answer to database
-		activateSuggestionMode: function activateSuggestionMode() {
-			console.log("Suggestion Mode Activated");
-			this.setState({ suggestionMode: true });
-		},
-		submitSuggestion: function submitSuggestion() {
-			var that = this;
-			console.log("Suggestion submitted");
-			this.setState({ suggestionMode: false });
-			this.setState({ suggestionSubmitted: true });
-			setTimeout(function () {
-				that.setState({ suggestionSubmitted: false });
-			}, 3000);
-		},
-		handleHintAudioClick: function handleHintAudioClick() {
-			var that = this;
-	
-			// Disable clicking on hint to play voice
-			this.setState({ hintClickDisable: true });
-	
-			// PLay audio from hint
-			this.props.onHintAudio(this.props.feedbackText);
-	
-			// Disable clicking on hint for some time before re-enabling
-			setTimeout(function () {
-				that.setState({
-					hintClickDisable: false
-				});
-			}, 1000);
-		},
 		render: function render() {
-			// Show Hint when hints are active
-			// Change Miri's icon depending on type of hint/feedback
-			var hintDivClass;
-			var hintTemplateText;
-			var miriIconClass = "miriIcon";
-			var spanClickFunction = this.state.hintClickDisable ? null : this.handleHintAudioClick;
-			var hintDivClass = "hintDiv";
-	
-			// Case of hint being given
-			if (this.props.hintActive === true) {
-				hintTemplateText = React.createElement(
-					'p',
-					{ className: 'hintText' },
-					React.createElement(
-						'span',
-						null,
-						'Maybe you can say: '
-					),
-					React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText })
-				);
-				miriIconClass += " miriGlow";
-			}
-	
-			// User answers wrong, provide feedback
-			else if (this.props.answerFeedbackActive === true) {
-					// They comfirmed a suggestion...
-					if (this.state.suggestionSubmitted) {
-						hintTemplateText = React.createElement(
-							'p',
-							{ className: 'hintText' },
-							React.createElement(
-								'span',
-								null,
-								'I will add a request to add it to acceptable answers!'
-							)
-						);
-					}
-					// They pressed first suggestion submit and want to confirm a suggestion
-					else if (this.state.suggestionMode) {
-							hintTemplateText = React.createElement(
-								'p',
-								{ className: 'hintText' },
-								React.createElement(
-									'span',
-									null,
-									'Suggest '
-								),
-								React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText }),
-								React.createElement(
-									'span',
-									null,
-									' as a good answer?'
-								)
-							);
-							hintDivClass += " hintDivGold";
-						}
-						// All other cases
-						else {
-								hintTemplateText = React.createElement(
-									'p',
-									{ className: 'hintText' },
-									React.createElement(
-										'span',
-										null,
-										'I heard you say: '
-									),
-									React.createElement(SpeechableSpan, { clickFunction: spanClickFunction, feedbackText: this.props.feedbackText })
-								);
-							}
-					miriIconClass += " miriGlow";
-				} else {
-					hintDivClass = "hintDiv hidden";
-				}
-			// If hintClick disabled, span should do nothing, otherwise, it should play audio
 			return React.createElement(
 				'div',
 				{ className: 'bottomNavBar' },
@@ -24940,19 +24836,35 @@
 							this.props.locationTextChinese,
 							')'
 						),
-						React.createElement(
-							'div',
-							{ className: hintDivClass },
-							React.createElement(HintIcon, {
-								hintActive: this.props.hintActive,
-								answerFeedbackActive: this.props.answerFeedbackActive,
-								suggestionMode: this.state.suggestionMode,
-								suggestionSubmitted: this.state.suggestionSubmitted,
-								activateSuggestionMode: this.activateSuggestionMode,
-								submitSuggestion: this.submitSuggestion }),
-							hintTemplateText
-						),
-						React.createElement(MiriIcon, { miriClass: miriIconClass, miriIconSrc: this.props.miriIconSrc })
+						React.createElement(MiriFeedback, {
+							hintActive: this.props.hintActive,
+							answerFeedbackActive: this.props.answerFeedbackActive,
+							feedbackText: this.props.feedbackText,
+							miriIconSrc: this.props.miriIconSrc,
+							onHintAudio: this.props.onHintAudio,
+							askingForRepeat: this.props.askingForRepeat }),
+						React.createElement(RepeatButton, {
+							repeatActive: this.props.repeatActive,
+							handleAskRepeat: this.props.handleAskRepeat,
+							onDisableHint: this.props.onDisableHint,
+							deactivateFeedbackMode: this.props.deactivateFeedbackMode,
+							turnMicStateOn: this.props.turnMicStateOn,
+							repeatPhrases: this.props.repeatPhrases,
+							taskLang: this.props.currentLanguage,
+							hintActive: this.props.hintActive,
+							correctAnswerState: this.props.correctAnswerState,
+							micActive: this.props.micActive,
+							wrongAnswerState: this.props.wrongAnswerState,
+							setCurrentTaskIndex: this.props.setCurrentTaskIndex,
+							askingForRepeat: this.props.askingForRepeat,
+							activateRepeatMode: this.props.activateRepeatMode }),
+						React.createElement(SkipButton, {
+							askingForRepeat: this.props.askingForRepeat,
+							correctAnswerState: this.props.correctAnswerState,
+							micActive: this.props.micActive,
+							wrongAnswerState: this.props.wrongAnswerState,
+							skipTasks: this.props.skipTasks,
+							hintActive: this.props.hintActive })
 					)
 				)
 			);
@@ -25016,30 +24928,6 @@
 /***/ },
 /* 205 */
 /*!**************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
-  \**************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 177);
-	
-	function MiriIcon(props) {
-		var miriImgSrc = Constants.IMAGE_PATH + props.miriIconSrc;
-		return React.createElement(
-			'div',
-			null,
-			React.createElement('img', { className: props.miriClass, src: miriImgSrc })
-		);
-	}
-	
-	module.exports = MiriIcon;
-
-/***/ },
-/* 206 */
-/*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/HintIcon.js ***!
   \**************************************************************/
 /***/ function(module, exports, __webpack_require__) {
@@ -25048,6 +24936,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 177);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 193);
 	
 	var HintIcon = React.createClass({
 		displayName: 'HintIcon',
@@ -25059,6 +24948,10 @@
 			var iconBigSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_Big_sparkle-01.png";
 			var iconLeftSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_L_spark-01.png";
 			var iconRightSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_R_sparkle-01.png";
+	
+			// Images related to asking for repeat
+			var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
+			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 	
 			if (this.props.hintActive) {
 				hintIconDiv = React.createElement(
@@ -25101,6 +24994,21 @@
 								)
 							);
 						}
+						// User has clicked the repeat button and wants to ask for repeat
+						else if (this.props.askingForRepeat) {
+								hintIconDiv = React.createElement(
+									'div',
+									null,
+									React.createElement(TaskIconImage, {
+										keyToAttach: 'iconStar',
+										imageSrc: imgStar,
+										transition: 'activateTaskStar' }),
+									React.createElement(TaskIconImage, {
+										keyToAttach: 'iconMic',
+										imageSrc: imgMic,
+										transition: 'activateTaskMic' })
+								);
+							}
 	
 			return React.createElement(
 				'div',
@@ -25113,7 +25021,405 @@
 	module.exports = HintIcon;
 
 /***/ },
+/* 206 */
+/*!******************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/RepeatButton.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 177);
+	var SpeechRecognition = __webpack_require__(/*! ../../helpers/SpeechRecognition */ 175);
+	
+	var RepeatButton = React.createClass({
+		displayName: 'RepeatButton',
+	
+		getInitialState: function getInitialState() {
+			return { hover: false,
+				currentTaskIndex: -1
+			};
+		},
+		clickRepeat: function clickRepeat() {
+			var that = this;
+	
+			this.props.activateRepeatMode();
+	
+			// Resets currentTaskIndex to a non real task so that the tasks will not highlight
+			// while listening for speech. Will activiate because MicActive activates task higlighting.
+			// TODO: Might want to refactor later and add repeatActive to separate from micActive
+			this.props.setCurrentTaskIndex(-2);
+	
+			this.props.onDisableHint();
+			this.props.deactivateFeedbackMode();
+			this.props.turnMicStateOn();
+	
+			this.setState({ hover: false });
+	
+			SpeechRecognition.activateSpeech(this.props.repeatPhrases, this.props.taskLang).then(function (userAnswer) {
+				console.log(userAnswer);
+				that.props.handleAskRepeat(userAnswer);
+			});
+		},
+		mouseOver: function mouseOver() {
+			this.setState({ hover: true });
+		},
+		mouseOut: function mouseOut() {
+			this.setState({ hover: false });
+		},
+		render: function render() {
+			var _this = this;
+	
+			var repeatImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonRepeatOn.png' : Constants.IMAGE_PATH + 'UI/buttonRepeat.png';
+			var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive ? null : React.createElement('img', {
+				className: ' button repeatButton',
+				src: repeatImgSrc,
+				onMouseOver: this.mouseOver,
+				onMouseOut: this.mouseOut,
+				onClick: function onClick() {
+					return _this.clickRepeat();
+				} });
+			return React.createElement(
+				'div',
+				{ className: 'repeatButtonDiv' },
+				repeatButton,
+				React.createElement(
+					'span',
+					{ className: 'toolTipText' },
+					'Repeat'
+				)
+			);
+		}
+	});
+	
+	module.exports = RepeatButton;
+
+/***/ },
 /* 207 */
+/*!****************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/SkipButton.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 177);
+	
+	var SkipButton = React.createClass({
+		displayName: 'SkipButton',
+	
+		getInitialState: function getInitialState() {
+			return { hover: false };
+		},
+		mouseOver: function mouseOver() {
+			this.setState({ hover: true });
+		},
+		mouseOut: function mouseOut() {
+			this.setState({ hover: false });
+		},
+		render: function render() {
+			var skipImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonSkipOn.png' : Constants.IMAGE_PATH + 'UI/buttonSkip.png';
+	
+			// No option to press skip button if answering question
+			var skipButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive ? null : React.createElement('img', {
+				className: ' button skipButton',
+				src: skipImgSrc,
+				onMouseOver: this.mouseOver,
+				onMouseOut: this.mouseOut,
+				onClick: this.props.skipTasks });
+			return React.createElement(
+				'div',
+				null,
+				skipButton
+			);
+		}
+	});
+	
+	module.exports = SkipButton;
+
+/***/ },
+/* 208 */
+/*!******************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/MiriIconText.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 203);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 193);
+	
+	function MiriIconText(props) {
+		var hintTemplateText;
+		var spanClickFunction = props.hintClickDisable ? null : props.handleHintAudioClick;
+	
+		// Case of hint being given
+		if (props.hintActive === true) {
+			hintTemplateText = React.createElement(
+				'p',
+				{ className: 'hintText' },
+				React.createElement(
+					'span',
+					null,
+					'Maybe you can say: '
+				),
+				React.createElement(SpeechableSpan, { clickFunction: function clickFunction() {
+						return spanClickFunction(props.feedbackText);
+					}, feedbackText: props.feedbackText })
+			);
+		}
+	
+		// User answers wrong, provide feedback
+		else if (props.answerFeedbackActive === true) {
+				// They comfirmed a suggestion...
+				if (props.suggestionSubmitted) {
+					hintTemplateText = React.createElement(
+						'p',
+						{ className: 'hintText' },
+						React.createElement(
+							'span',
+							null,
+							'I will add a request to add it to acceptable answers!'
+						)
+					);
+				}
+				// They pressed first suggestion submit and want to confirm a suggestion
+				else if (props.suggestionMode) {
+						hintTemplateText = React.createElement(
+							'p',
+							{ className: 'hintText' },
+							React.createElement(
+								'span',
+								null,
+								'Suggest '
+							),
+							React.createElement(SpeechableSpan, { clickFunction: function clickFunction() {
+									return spanClickFunction(props.feedbackText);
+								}, feedbackText: props.feedbackText }),
+							React.createElement(
+								'span',
+								null,
+								' as a good answer?'
+							)
+						);
+					}
+					// All other cases
+					else {
+							hintTemplateText = React.createElement(
+								'p',
+								{ className: 'hintText' },
+								React.createElement(
+									'span',
+									null,
+									'Ask them to repeat'
+								),
+								React.createElement(SpeechableSpan, { clickFunction: function clickFunction() {
+										return spanClickFunction(props.feedbackText);
+									}, feedbackText: props.feedbackText })
+							);
+						}
+			}
+			// Case of asking for repeat 
+			else if (props.askingForRepeat) {
+					var span = React.createElement(
+						'span',
+						null,
+						'Ask them to say it again.'
+					);
+					if (props.askingForRepeatHelp) {
+						span = React.createElement(
+							'span',
+							null,
+							'Try saying: ',
+							React.createElement(SpeechableSpan, { clickFunction: function clickFunction() {
+									return spanClickFunction("请再说一遍");
+								}, feedbackText: '请再说一遍' })
+						);
+					}
+					hintTemplateText = React.createElement(
+						'p',
+						{ className: 'hintText' },
+						span,
+						React.createElement('span', {
+							className: 'glyphicon glyphicon-question-sign',
+							'aria-hidden': 'true',
+							onClick: props.askRepeatHelp }),
+						React.createElement('span', {
+							className: 'glyphicon glyphicon-remove stop-repeat',
+							'aria-hidden': 'true',
+							onClick: props.cancelRepeatOnClick })
+					);
+				}
+		return React.createElement(
+			'div',
+			{ className: 'miriIconText' },
+			hintTemplateText
+		);
+	}
+	
+	module.exports = MiriIconText;
+
+/***/ },
+/* 209 */
+/*!******************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/MiriFeedback.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var HintIcon = __webpack_require__(/*! ./HintIcon */ 205);
+	var MiriIconText = __webpack_require__(/*! ./MiriIconText */ 208);
+	var MiriIcon = __webpack_require__(/*! ./MiriIcon */ 210);
+	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 203);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 193);
+	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 177);
+	
+	var MiriFeedback = React.createClass({
+		displayName: 'MiriFeedback',
+	
+		getInitialState: function getInitialState() {
+			return {
+				hintClickDisable: false,
+				suggestionMode: false,
+				suggestionSubmitted: false,
+				askingForRepeatHelp: false
+			};
+		},
+		// Suggestions are activated when users want to add their answer to database
+		activateSuggestionMode: function activateSuggestionMode() {
+			this.setState({ suggestionMode: true });
+		},
+		submitSuggestion: function submitSuggestion() {
+			var that = this;
+			this.setState({ suggestionMode: false });
+			this.setState({ suggestionSubmitted: true });
+			setTimeout(function () {
+				that.setState({ suggestionSubmitted: false });
+			}, 3000);
+		},
+		// Prevent repetitive clicking on Speechable Span for repeat
+		handleHintAudioClick: function handleHintAudioClick(textToSay) {
+			console.log(textToSay);
+			console.log("handling audio click");
+			var that = this;
+	
+			// Disable clicking on hint to play voice
+			this.setState({ hintClickDisable: true });
+	
+			// PLay audio from hint
+			this.props.onHintAudio(textToSay);
+	
+			// Disable clicking on hint for some time before re-enabling
+			setTimeout(function () {
+				that.setState({
+					hintClickDisable: false
+				});
+			}, 1000);
+		},
+		cancelRepeatOnClick: function cancelRepeatOnClick() {
+			// This does nothing
+			// The code that triggers canceling of Speech lies in SpeechRecognition
+			// The code that triggers askingForRepeat : false is handled in questionAsker: handleAskRepeat
+		},
+		askRepeatHelp: function askRepeatHelp() {
+			console.log("Clicked for help");
+			this.setState({ askingForRepeatHelp: true });
+		},
+		render: function render() {
+			var _React$createElement;
+	
+			// Show Hint when hints are active
+			// Change Miri's icon depending on type of hint/feedback
+			var miriIconClass = "miriIcon";
+			var hintDivClass = "hintDiv";
+	
+			// Case of hint being given
+			if (this.props.hintActive === true) {
+				miriIconClass += " miriGlow";
+			}
+			// User answers wrong, provide feedback
+			else if (this.props.answerFeedbackActive === true) {
+					miriIconClass += " miriGlow";
+					// They pressed first suggestion submit and want to confirm a suggestion
+					if (this.state.suggestionMode) {
+						hintDivClass += " hintDivGold";
+					}
+					// All other cases
+					else {}
+				}
+				// User is asking for repeat 
+				else if (this.props.askingForRepeat) {
+						hintDivClass = "hintDiv";
+					} else {
+						hintDivClass = "hintDiv hidden";
+					}
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					'div',
+					{ className: hintDivClass },
+					React.createElement(HintIcon, {
+						hintActive: this.props.hintActive,
+						answerFeedbackActive: this.props.answerFeedbackActive,
+						suggestionMode: this.props.suggestionMode,
+						suggestionSubmitted: this.props.suggestionSubmitted,
+						activateSuggestionMode: this.props.activateSuggestionMode,
+						submitSuggestion: this.props.submitSuggestion,
+						askingForRepeat: this.props.askingForRepeat }),
+					React.createElement(MiriIconText
+					// Hint related
+					, (_React$createElement = { hintActive: this.props.hintActive,
+						hintClickDisable: this.props.hintClickDisable,
+						handleHintAudioClick: this.handleHintAudioClick,
+						suggestionMode: this.props.suggestionMode,
+						suggestionSubmitted: this.props.suggestionSubmitted
+					}, _defineProperty(_React$createElement, 'suggestionMode', this.props.suggestionMode), _defineProperty(_React$createElement, 'feedbackText', this.props.feedbackText), _defineProperty(_React$createElement, 'answerFeedbackActive', this.props.answerFeedbackActive), _defineProperty(_React$createElement, 'askingForRepeat', this.props.askingForRepeat), _defineProperty(_React$createElement, 'cancelRepeatOnClick', this.cancelRepeatOnClick), _defineProperty(_React$createElement, 'askRepeatHelp', this.askRepeatHelp), _defineProperty(_React$createElement, 'askingForRepeatHelp', this.state.askingForRepeatHelp), _React$createElement))
+				),
+				React.createElement(MiriIcon, {
+					miriClass: miriIconClass,
+					miriIconSrc: this.props.miriIconSrc })
+			);
+		}
+	});
+	
+	module.exports = MiriFeedback;
+
+/***/ },
+/* 210 */
+/*!**************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 177);
+	
+	function MiriIcon(props) {
+		var miriImgSrc = Constants.IMAGE_PATH + props.miriIconSrc;
+		return React.createElement(
+			'div',
+			null,
+			React.createElement('img', { className: props.miriClass, src: miriImgSrc })
+		);
+	}
+	
+	module.exports = MiriIcon;
+
+/***/ },
+/* 211 */
 /*!***********************************************************!*\
   !*** ./react_assets/js/questionAsker/ResultsContainer.js ***!
   \***********************************************************/
@@ -25123,7 +25429,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsBase = __webpack_require__(/*! ./components/ResultsBase */ 208);
+	var ResultsBase = __webpack_require__(/*! ./components/ResultsBase */ 212);
 	
 	var ResultsContainer = React.createClass({
 		displayName: 'ResultsContainer',
@@ -25156,7 +25462,7 @@
 	module.exports = ResultsContainer;
 
 /***/ },
-/* 208 */
+/* 212 */
 /*!*****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsBase.js ***!
   \*****************************************************************/
@@ -25166,9 +25472,9 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsHeader = __webpack_require__(/*! ./ResultsHeader */ 209);
-	var ResultsSideBar = __webpack_require__(/*! ./ResultsSideBar */ 211);
-	var ResultsTasks = __webpack_require__(/*! ./ResultsTasks */ 212);
+	var ResultsHeader = __webpack_require__(/*! ./ResultsHeader */ 213);
+	var ResultsSideBar = __webpack_require__(/*! ./ResultsSideBar */ 215);
+	var ResultsTasks = __webpack_require__(/*! ./ResultsTasks */ 216);
 	
 	var ResultsBase = React.createClass({
 		displayName: 'ResultsBase',
@@ -25201,7 +25507,7 @@
 	module.exports = ResultsBase;
 
 /***/ },
-/* 209 */
+/* 213 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsHeader.js ***!
   \*******************************************************************/
@@ -25212,7 +25518,7 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 177);
-	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 210);
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 214);
 	
 	function ResultsHeader(props) {
 		var miriIconSrc = Constants.IMAGE_PATH + "miri/icons/Miri_Icon_Yay.png";
@@ -25237,7 +25543,7 @@
 	module.exports = ResultsHeader;
 
 /***/ },
-/* 210 */
+/* 214 */
 /*!************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsCharProfile.js ***!
   \************************************************************************/
@@ -25297,7 +25603,7 @@
 	module.exports = ResultsCharProfile;
 
 /***/ },
-/* 211 */
+/* 215 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsSideBar.js ***!
   \********************************************************************/
@@ -25391,7 +25697,7 @@
 	module.exports = ResultsSideBar;
 
 /***/ },
-/* 212 */
+/* 216 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsTasks.js ***!
   \******************************************************************/
@@ -25401,8 +25707,8 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 210);
-	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 213);
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 214);
+	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 217);
 	
 	var ResultsTasks = React.createClass({
 		displayName: 'ResultsTasks',
@@ -25459,7 +25765,7 @@
 	module.exports = ResultsTasks;
 
 /***/ },
-/* 213 */
+/* 217 */
 /*!**************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsCompletedTask.js ***!
   \**************************************************************************/
@@ -25490,7 +25796,7 @@
 	module.exports = ResultsCompletedTask;
 
 /***/ },
-/* 214 */
+/* 218 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/SpeechSynth.js ***!
   \************************************************/
@@ -25540,7 +25846,7 @@
 	module.exports = speechSynth;
 
 /***/ },
-/* 215 */
+/* 219 */
 /*!*********************************************************!*\
   !*** ./react_assets/js/questionAsker/TimerContainer.js ***!
   \*********************************************************/

@@ -1,5 +1,6 @@
 var React = require('react');
 var Constants = require('../../helpers/Constants.js');
+var TaskIconImage = require('./TaskIconImage');
 
 var HintIcon = React.createClass({
 	render: function() {
@@ -9,6 +10,12 @@ var HintIcon = React.createClass({
 		var iconBigSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_Big_sparkle-01.png";
 		var iconLeftSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_L_spark-01.png";
 		var iconRightSparkle = Constants.IMAGE_PATH + "UI/ICON_payforhelp_R_sparkle-01.png";
+
+		// Images related to asking for repeat
+		var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
+		var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
+
+
 
 		if (this.props.hintActive) {
 			hintIconDiv = (
@@ -43,6 +50,21 @@ var HintIcon = React.createClass({
 				</div>
 			</div>)	
 		} 
+		// User has clicked the repeat button and wants to ask for repeat
+		else if (this.props.askingForRepeat) {
+			hintIconDiv = (
+				<div>
+					<TaskIconImage 
+						keyToAttach="iconStar" 
+						imageSrc={imgStar}
+						transition = "activateTaskStar"/>
+					<TaskIconImage 
+						keyToAttach="iconMic" 
+						imageSrc={imgMic}
+						transition ="activateTaskMic"/>
+				</div>
+			)
+		}
 
 		return (
 			<div className="hintIcon">

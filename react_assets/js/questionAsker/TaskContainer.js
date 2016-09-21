@@ -6,12 +6,7 @@ var TaskIcon = require('./components/TaskIcon');
 var TaskText = require('./components/TaskText');
 
 var TaskContainer = React.createClass({
-	getInitialState: function() {
-		return {
-			currentTaskIndex: -1
-		}
-	},
-	// Task Index should be grabbed from the Task's index
+	// Task Index should be grabbed from the Task's index property
 	handleSpeechInput: function(taskIndex) {
 		// Turns off any active hints or feedback
 		this.props.onDisableHint();
@@ -24,7 +19,7 @@ var TaskContainer = React.createClass({
 		}
 		// Activate MicActive State
 		this.props.turnMicStateOn();
-		this.setState ({currentTaskIndex: taskIndex});
+		this.props.setCurrentTaskIndex(taskIndex);
 
 		var that = this;
 		SpeechRecognition.activateSpeech(this.props.tasks[taskIndex].possibilities, this.props.taskLang)
@@ -36,20 +31,6 @@ var TaskContainer = React.createClass({
 				}
 			}
 		);
-	},
-	handleAskForRepeat: function(taskIndex) {
-		var that = this;
-
-		this.props.onDisableHint();
-		this.props.deactivateFeedbackMode();
-		this.props.turnMicStateOn();
-
-		this.setState({currentTaskIndex: taskIndex});
-		SpeechRecognition.activateSpeech(this.props.repeatPhrases, this.props.taskLang)
-			.then(function(userAnswer) {
-				that.props.onHandleAskRepeat(userAnswer);
-			})
-
 	},
 	render: function() {
 		var that = this;
@@ -67,21 +48,12 @@ var TaskContainer = React.createClass({
 					onHintClick = {that.props.onHintClick} 
 					onDisableHint = {that.props.onDisableHint} 
 					micActive = {that.props.micActive} 
-					currentTaskIndex = {that.state.currentTaskIndex} 
+					currentTaskIndex = {that.props.currentTaskIndex} 
 					correctAnswerState = {that.props.correctAnswerState} 
 					wrongAnswerState = {that.props.wrongAnswerState} 
 					assessmentMode = {that.props.assessmentMode} />
 			)
 		})
-
-		// Special class added to the Ask for Repeat button if hintACtive
-		var repeatDivClass = this.props.hintActive ? "taskDiv taskDivRepeatDisabled" : "taskDiv taskDivRepeat";
-
-		// No option to press skip button if answering question
-		var skipButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState ? null : <button type="button" 
-				          									className="btn-skip btn btn-danger"
-				          									onClick={this.props.skipTasks}>Skip Current Questions</button>
-
 		if (this.props.scenarioOn === true) {
 			return null;
 		} 
@@ -106,23 +78,6 @@ var TaskContainer = React.createClass({
 				<div className="combinedTaskList col-md-6 col-sm-6 col-xs-6">
 					<ul className="taskList col-md-11 col-sm-11 col-xs-11 nav nav-pills nav-stacked">
 				          {tasks}
-				          <div className={repeatDivClass}>
-				          	<TaskIcon 
-								correctAnswerState={this.props.correctAnswerState}
-								wrongAnswerState = {this.props.wrongAnswerState} 
-								micActive = {this.props.micActive} 
-								index = {skipButtonIndex}
-								currentTaskIndex = {this.state.currentTaskIndex} 
-								icon = "repeatIcon" />
-				          	<TaskText 
-								className="taskText" 
-								index={skipButtonIndex} 
-								currentTaskIndex = {this.state.currentTaskIndex}
-								onSpeechInput = {this.handleAskForRepeat}
-								taskTextToDisplay = "Ask for repeat"
-								correctAnswerState={this.props.correctAnswerState} />
-				          </div>
-				          {skipButton}
 					</ul>
 				</div>
 			)
@@ -134,7 +89,6 @@ TaskContainer.propTypes = {
 	scenarioOn: PropTypes.bool.isRequired,
 	tasks: PropTypes.array.isRequired,
 	assessmentMode: PropTypes.bool.isRequired,
-	repeatPhrases: PropTypes.array.isRequired
 }
 
 module.exports = TaskContainer;

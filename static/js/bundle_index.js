@@ -4509,9 +4509,19 @@
 				},
 	
 				// If user clicks task again, the task should cancel
-				$(".taskDiv").click(function () {
+				$(".taskDiv, .coinIcon").click(function () {
 					recognition.abort();
 				});
+	
+				// TODO: Fix hackiness of this with proper callbacks
+				// Right now, stop-repeat is not loaded quickly enough on page. Without timeout, jquery wont' find it on page. So give a delay.
+				setTimeout(function () {
+					// Reset character image to default 
+					console.log($(".stop-repeat").length);
+					$(".stop-repeat").click(function () {
+						recognition.abort();
+					});
+				}, 200);
 	
 				recognition.onspeechend = function () {
 					recognition.stop();
