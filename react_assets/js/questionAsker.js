@@ -44,7 +44,14 @@ var QuestionAsker = React.createClass({
 			scenarioOn: true,
 			scenarioIndex: 0,
 			hintActive: false,
+
+			// When true, user is trying to ask for repeat
+			askingForRepeat: false,
 			currentHintIndex: -1,
+			// Current Task Index affects which tasks are highlighted when the user is answering question
+			// It should be reset to -2 when user asks for repeat, else the task who has index of the previously set currentTaskIndex
+			// will blink
+			currentTaskIndex: -1,
 			currentDialog: "",
 			lastDialogText: "",
 			voicePack: {},
@@ -60,7 +67,8 @@ var QuestionAsker = React.createClass({
 			wrongAnswerState: false,
 			sceneComplete: false,
 			taskPause: false,
-			timeRemaining: 20
+			timeRemaining: 20,
+			repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"]
 		}
 	},
 	loadSceneData: function() {
@@ -468,19 +476,29 @@ var QuestionAsker = React.createClass({
 		}
 		this.setState({ coins: newCoins});
 	},
-	// Function triggers when user clicks text in dailog box
+	// Changes whether user is asking or not asking for repeat
+	activateRepeatMode: function() {
+		console.log("Repeat mode activated");
+		this.setState({askingForRepeat: true});
+	},
+	deactivateRepeatMode: function() {
+		this.setState({askingForRepeat: false});
+	},
+	// Function triggers when user correct says/asks for repeat
 	handleRepeat: function() {
 		this.playSound(this.state.sceneData.currentSoundID);
 		this.setState({currentDialog: this.state.lastDialogText})
 	},
-	// function triggers when user speaks "repeat" into microphone
+	// function triggers when user say something into the mic with intentioning of asking for repeat
 	handleAskRepeat: function(userAnswer) {
 		this.turnMicStateOff();
 
 		if (userAnswer === "Cancel Speech") {
 			// Do nothing
-		} else {
+			console.log("Repeat speech canceled");
+			this.deactivateRepeatMode();
 
+		} else {
 			var that = this;
 
 			// check if what user said was one of the ask for repeat phrases
@@ -490,7 +508,7 @@ var QuestionAsker = React.createClass({
 
 			possibleRepeatPhrases.forEach(function(possiblePhrase, i) {
 				// Temporarily grab the soundID of this object
-				if (userAnswer === possiblePhrase) {
+				if (userAnswer.indexOf(possiblePhrase) >= 0) {
 					correctRepeatAsk = true;
 				}
 			});
@@ -519,6 +537,8 @@ var QuestionAsker = React.createClass({
 					that.setState({wrongAnswerState: false, sceneData: newSceneData });
 				}, 2000);
 			}
+			this.deactivateRepeatMode();
+
 		}
 	},
 	skipTasks: function() {
@@ -578,6 +598,9 @@ var QuestionAsker = React.createClass({
 			this.setState({scenarioIndex: newScenarioIndex});
 		}
 	},
+	setCurrentTaskIndex: function(newIndex) {
+		this.setState({ currentTaskIndex: newIndex})
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
 
@@ -633,11 +656,14 @@ var QuestionAsker = React.createClass({
 						correctAnswerState = {this.state.correctAnswerState}
 						wrongAnswerState = {this.state.wrongAnswerState}
 						assessmentMode = {sceneData.assessmentMode}
-						repeatPhrases = {sceneData.character.repeatPhrases} 
 						onHandleAskRepeat = {this.handleAskRepeat} 
 						skipTasks = {this.skipTasks}
 						taskPause = {this.state.taskPause}
-						resumeTasks = {this.resumeTasks} />
+						resumeTasks = {this.resumeTasks} 
+
+						// Give component ability to manipulate currentTaskIndex
+						currentTaskIndex = {this.state.currentTaskIndex} 
+						setCurrentTaskIndex = {this.setCurrentTaskIndex} />
 					<FeedbackContainer 
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
@@ -646,7 +672,27 @@ var QuestionAsker = React.createClass({
 						coins = {this.state.coins} 
 						answerFeedbackActive = {this.state.answerFeedbackActive}
 						feedbackText = {this.state.feedbackText} 
-						miriIconSrc = {this.state.miriIconSrc} />
+						miriIconSrc = {this.state.miriIconSrc} 
+						repeatActive = {this.state.repeatActive}
+						correctAnswerState = {this.state.correctAnswerState} 
+						micActive = {this.state.micActive} 
+						wrongAnswerState = {this.state.wrongAnswerState} 
+						skipTasks = {this.skipTasks} 
+						handleAskRepeat = {this.handleAskRepeat}
+						onDisableHint = {this.handleDisableHint}
+						deactivateFeedbackMode = {this.deactivateFeedbackMode}
+						turnMicStateOn = {this.turnMicStateOn}
+
+						// Repeat mode related 
+						repeatPhrases = {this.state.repeatPhrases}
+						askingForRepeat = {this.state.askingForRepeat}
+						deactivateRepeatMode = {this.deactivateRepeatMode}
+						activateRepeatMode = {this.activateRepeatMode}
+						taskLang = {sceneData.currentLanguage} 
+
+						// Give component ability to manipulate currentTaskIndex
+						currentTaskIndex = {this.state.currentTaskIndex} 
+						setCurrentTaskIndex = {this.setCurrentTaskIndex} />
 					<ResultsContainer 
 						sceneComplete = {this.state.sceneComplete} 
 						coins = {this.state.coins}

@@ -4,3 +4,4 @@ node_modules/
 s3/
 eventslog/
 *.pyc
+.DS_Store

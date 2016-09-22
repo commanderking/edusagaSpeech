@@ -62,6 +62,10 @@ def login(teacher):
 def teacherDashboard(teacher):
 	return render_template("dashboard.html", teacher=teacher)
 
+@app.route('/demo/')
+def demo(name="Chinese"):
+	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
+
 @app.route('/demoChinese/')
 def demoChinese(name="Chinese"):
 	trackVisitorWithText("Tried Demo ")

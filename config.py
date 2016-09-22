@@ -18,7 +18,7 @@ class Config(object):
 
     USER_APP_NAME = "EduSaga"
 
-''' What should work:
+''' What should work but doesn't through namecheap:
     MAIL_SERVER='mail.privateemail.com'
     MAIL_PORT=587
     MAIL_USE_TLS=True
