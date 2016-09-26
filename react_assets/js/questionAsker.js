@@ -667,6 +667,7 @@ var QuestionAsker = React.createClass({
 						currentTaskIndex = {this.state.currentTaskIndex} 
 						setCurrentTaskIndex = {this.setCurrentTaskIndex} />
 					<FeedbackContainer 
+						scenarioOn = {this.state.scenarioOn}
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
 						hintActive = {this.state.hintActive} 

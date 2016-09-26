@@ -714,6 +714,7 @@
 						, currentTaskIndex: this.state.currentTaskIndex,
 						setCurrentTaskIndex: this.setCurrentTaskIndex }),
 					React.createElement(FeedbackContainer, {
+						scenarioOn: this.state.scenarioOn,
 						locationTextEnglish: this.state.sceneData.character.location.nameEnglish,
 						locationTextChinese: this.state.sceneData.character.location.nameChinese,
 						hintActive: this.state.hintActive,
@@ -24846,6 +24847,7 @@
 							onHintAudio: this.props.onHintAudio,
 							askingForRepeat: this.props.askingForRepeat }),
 						React.createElement(RepeatButton, {
+							scenarioOn: this.props.scenarioOn,
 							repeatActive: this.props.repeatActive,
 							handleAskRepeat: this.props.handleAskRepeat,
 							onDisableHint: this.props.onDisableHint,
@@ -24861,6 +24863,7 @@
 							askingForRepeat: this.props.askingForRepeat,
 							activateRepeatMode: this.props.activateRepeatMode }),
 						React.createElement(SkipButton, {
+							scenarioOn: this.props.scenarioOn,
 							askingForRepeat: this.props.askingForRepeat,
 							correctAnswerState: this.props.correctAnswerState,
 							micActive: this.props.micActive,
@@ -25074,7 +25077,7 @@
 			var _this = this;
 	
 			var repeatImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonRepeatOn.png' : Constants.IMAGE_PATH + 'UI/buttonRepeat.png';
-			var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive ? null : React.createElement('img', {
+			var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive || this.props.scenarioOn ? null : React.createElement('img', {
 				className: ' button repeatButton',
 				src: repeatImgSrc,
 				onMouseOver: this.mouseOver,
@@ -25126,7 +25129,7 @@
 			var skipImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonSkipOn.png' : Constants.IMAGE_PATH + 'UI/buttonSkip.png';
 	
 			// No option to press skip button if answering question
-			var skipButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive ? null : React.createElement('img', {
+			var skipButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive || this.props.scenarioOn ? null : React.createElement('img', {
 				className: ' button skipButton',
 				src: skipImgSrc,
 				onMouseOver: this.mouseOver,
