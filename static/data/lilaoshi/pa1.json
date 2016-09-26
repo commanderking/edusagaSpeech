@@ -1,4 +1,6 @@
 {
+	"activityID": "A1",
+	"activityName": "Pre-assessment - Chinese 1",
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/chenguang/chengDefault.png",
@@ -863,7 +865,27 @@
 							],
 							"response" : "好啊。",
 							"soundID" : "okwhattime"
-						}
+						},
+						{
+							"answers" : [
+								["今天", "下午"],
+								["你", "您"], 
+								["想不想", "要不要"],
+								["打乒乓球"]
+							],
+							"response" : "好啊。",
+							"soundID" : "okwhattime"
+						},
+						{
+							"answers" : [
+								["今天", "下午"], 
+								["你", "您"],
+								["想", "要", "想要"],
+								["打乒乓球吗"]
+							],
+							"response" : "好啊。",
+							"soundID" : "okwhattime"
+						}		
 					],
 					"hints" : 
 					[

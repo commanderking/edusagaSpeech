@@ -387,6 +387,8 @@
 				studentCompletedProgress.possibleScore = this.state.possibleCoins / 10;
 				studentCompletedProgress.time = timeInSeconds;
 				studentCompletedProgress.allTaskData = allTaskData;
+				studentCompletedProgress.activityID = this.state.sceneData.activityID;
+				studentCompletedProgress.activityName = this.state.sceneData.activityName;
 	
 				var logEvent = JSON.stringify(studentCompletedProgress);
 				$.ajax({
