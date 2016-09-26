@@ -1,10 +1,10 @@
-from flask import Flask, request, redirect, render_template, render_template_string, url_for, jsonify
+from flask import Flask, request, redirect, render_template, render_template_string, url_for, jsonify, session
 from flask_user import login_required, UserManager, SQLAlchemyAdapter
 
-import boto3, json, urlparse
+import boto3, json, urlparse, datetime
 
 #For Heroku Logging
-import sys, os
+import sys, os, uuid
 
 from web import app
 from models import *
@@ -17,23 +17,65 @@ def trackVisitorWithText(textMessage):
 	parsed = urlparse.urlparse(current_url)
 
 	# If it's a tracked address, send notification via SMS
-	try: 
+	try:
+		print "tracking user"
 		userID = textMessage + str(urlparse.parse_qs(parsed.query)['p'][0])
-		client = boto3.client('sns', region_name ='us-east-1')
-		response = client.publish( 
-			TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
-			Message= userID,
-			MessageStructure='string'
-		)
-		print userID
+		# Ensure it's a set 
+		print len(userID)
+		if len(userID) < 10: 
+			client = boto3.client('sns', region_name ='us-east-1')
+			response = client.publish( 
+				TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
+				Message= userID,
+				MessageStructure='string'
+			)
+			print response
+			print userID
+			return userID
 	except:
+		print "user not tracked"
 		pass
+
+def trackVisitorEvent(eventText):
+	#trackVisitorWithText("Tried Demo ")
+	try:
+		current_url = request.url
+		parsed = urlparse.urlparse(current_url)
+		userID = str(urlparse.parse_qs(parsed.query)['p'][0])
+
+		# Create JSON to send
+		content = {}
+		content['userID'] = userID
+		content['eventType'] = eventText
+		content['time'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+
+		# Turn it to JSON string
+		content = json.dumps(content)
+		print content
+		sqs = boto3.resource('sqs', region_name = 'us-east-1')
+		queue = sqs.get_queue_by_name(QueueName='svc-edusaga-visitor-events')
+		response = queue.send_message(MessageBody=content)
+	except: 
+		pass
+
 
 
 @app.route('/')
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
-	trackVisitorWithText("Visited MainPage ")
-	return render_template('index.html', name=name, activityName=activityName, teacher=teacher)
+	# If no user ID generate a random one
+	if session['userID'] == None:
+		userID = uuid.uuid4()
+	else:
+		userID = session['userID']
+	return render_template('index.html', name=name, activityName=activityName, teacher=teacher, userID=userID)
+
+#--------------------------------------------
+# E-mail this link and redirect to homepage to track with text
+# -------------------------------------------
+@app.route('/home')
+def home(name="Home"):
+	session['userID'] = trackVisitorWithText('')
+	return redirect(url_for('index'))
 
 @app.route('/<teacher>/home/')
 def teacherHome(teacher):
@@ -45,6 +87,7 @@ def teacherHome(teacher):
 
 @app.route('/public/home/')
 def publicHome():
+	trackVisitorEvent("Visited See More Episodes")
 	studentID = request.args.get('studentID')
 	teacher = "public"
 	return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
@@ -62,36 +105,6 @@ def login(teacher):
 def teacherDashboard(teacher):
 	return render_template("dashboard.html", teacher=teacher)
 
-@app.route('/demo/')
-def demo(name="Chinese"):
-	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
-
-@app.route('/demoChinese/')
-def demoChinese(name="Chinese"):
-	trackVisitorWithText("Tried Demo ")
-	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
-
-@app.route('/video/')
-def videoRedirect(name="Video Redirect"):
-	trackVisitorWithText("Watched video ")
-	return redirect('https://youtu.be/nQeKi-2JOnA')
-
-@app.route('/demoChinese2')
-def demoChinese2(name="Chinese2"):
-	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo2"))
-
-@app.route('/demoChinese3')
-def demoChinese3(name="Chinese3"):
-	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo3"))
-
-@app.route('/demoVocab1')
-def demoVocab1(name="Vocab1"):
-	return render_template("demoVocab1.html", name=name)
-
-@app.route('/demoVocab2')
-def demoVocab2(name="Vocab2"):
-	return render_template("demoVocab2.html", name=name)
-
 @app.route('/<teacher>/<activityName>')
 def teacherScene(teacher, activityName):
 	if (os.path.isdir('./static/data/' + teacher) & os.path.isfile('./static/data/' + teacher + '/' + activityName + '.json')):
@@ -99,34 +112,14 @@ def teacherScene(teacher, activityName):
 			studentID = request.args['studentID']
 		except: 
 			studentID = ""
+		textToTrack = "Visited " + activityName + " "
+		trackVisitorEvent("Visited " + activityName + " Page")
+
 		return render_template("questionAsker.html", activityName=activityName, teacher=teacher, studentID=studentID)
 	else:
 		return redirect(url_for('teacherHome', teacher=teacher))
 
 
-# Old signup form
-'''
-@app.route('/signup', methods=['GET', 'POST'])
-def signup(name="Sign Up Page"):
-	errors = []
-	results = {}
-	test = ""
-	if request.method == "POST":
-		# get name and email that user has entered
-		try:
-			firstName = request.form['firstName']
-			lastName = request.form['lastName']
-			email = request.form['email']
-			test = firstName + " " + lastName + " " + email
-			newTeacher = Teacher(firstName, lastName, email)
-			db.session.add(newTeacher)
-			db.session.commit()
-		except: 
-			errors.append(
-				"Unable to get URL."
-			)
-	return render_template("teacherSignup.html", name=name, errors=errors, results=results, email=test)
-'''
 # The Home page is accessible to anyone
 @app.route('/signup')
 def home_page():
@@ -156,9 +149,60 @@ def members_page():
 
 
 
+#------------------------------------------------
+# Links from old emails that redirect to their new version
+#------------------------------------------------
+
+@app.route('/demo/')
+def demo(name="Chinese"):
+	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
+
+@app.route('/demoChinese/')
+def demoChinese(name="Chinese"):
+	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
+
+@app.route('/demoChinese2')
+def demoChinese2(name="Chinese2"):
+	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo2"))
+
+@app.route('/demoChinese3')
+def demoChinese3(name="Chinese3"):
+	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo3"))
+
+@app.route('/demoVocab1')
+def demoVocab1(name="Vocab1"):
+	return render_template("demoVocab1.html", name=name)
+
+@app.route('/demoVocab2')
+def demoVocab2(name="Vocab2"):
+	return render_template("demoVocab2.html", name=name)
+
+@app.route('/video/')
+def videoRedirect(name="Video Redirect"):
+	trackVisitorWithText("Watched video ")
+	return redirect('https://youtu.be/nQeKi-2JOnA')
+
+
 #-----------------------------------------------
 #POST requests 
 #-----------------------------------------------
+
+#-----------------------------------------------
+#Business/Engagement Logic
+@app.route('/logVisitorEvents', methods=['POST'])
+def logVisitorEvents(): 
+	content = request.get_data()
+	sqs = boto3.resource('sqs', region_name = 'us-east-1')
+	queue = sqs.get_queue_by_name(QueueName='svc-edusaga-visitor-events')
+	response = queue.send_message(MessageBody=content)
+
+	print(response.get('MessageId'))
+	print(response.get('MD5OfMessageBody'))
+	return 'Success'
+
+
+#-----------------------------------------------
+#Game related posts/data
 
 @app.route('/log', methods=['POST'])
 def log():

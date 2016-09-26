@@ -2,6 +2,10 @@
 
 {% block header %}
     <link rel="stylesheet" href="/static/css/landingPage.css">
+    <script>
+		var userID = "{{ userID }}"
+	</script>
+
 {% endblock %}
 {% block content %}
 <body>
@@ -17,7 +21,11 @@
 			<a data-scroll href="#signup"><button class="btn btn-signup">SIGN UP</button></a>
 		</div>
 		<div class="landingScreenVideo">
-			<iframe width="100%" height="315" src="https://www.youtube.com/embed/nQeKi-2JOnA" frameborder="0" allowfullscreen></iframe>
+			<div id="player">
+			<!--
+			<iframe class="videoTrailer" width="100%" height="315" src="https://www.youtube.com/embed/nQeKi-2JOnA" frameborder="0" allowfullscreen></iframe>
+			!-->
+		</div>
 		</div>
 	</div>
 
@@ -58,7 +66,7 @@
 					<p><span>Key Phrases:</span> 你有没有...? 几块钱?, 来一个／我要一个</p>
 				</div>
 				<div class="buttonWrapper">
-					<a href="public/publicDemo2" target="_blank" class="btn btn-tryDemo">Start</a>
+					<a href="demoChinese/?p={{ userID }}" target="_blank" class="btn btn-tryDemo">Start</a>
 				</div>
 			</div>
 		</div>
@@ -73,7 +81,7 @@
 					<p><span>Key Phrases:</span> 你是哪里人, 你几岁, 你属什么, 你喜欢...? </p>
 				</div>
 				<div class="buttonWrapper">
-					<a href="public/publicDemo" target="_blank" class="btn btn-tryDemo">Start</a>
+					<a href="public/publicDemo?p={{ userID }}" target="_blank" class="btn btn-tryDemo">Start</a>
 				</div>
 			</diV>
 		</div>
@@ -88,12 +96,12 @@
 					<p><span>Key Phrases:</span> 你家有几口人?, 你的妈妈是哪里人?, 你的爸爸几岁?</p>
 				</div>
 				<div class="buttonWrapper">
-					<a href="public/publicDemo3" target="_blank" class="btn btn-tryDemo">Start</a>
+					<a href="public/publicDemo3?p={{ userID }}" target="_blank" class="btn btn-tryDemo">Start</a>
 				</div>
 			</div>
 		</div>
 
-		<a href="/public/home"><button class="btn btn-signup-lg">SEE MORE EPISODES</button></a>
+		<a href="/public/home?p={{ userID }}"><button class="btn btn-signup-lg">SEE MORE EPISODES</button></a>
 	</div>
 
 	<!-- Activities Div linking to specific demo examples !-->
@@ -158,17 +166,98 @@
 	<div class="footer">
 	</div>
 
-	<!-- Scripts !-->
+	<!-- Tracking and YouTube API scripts !--> 
 	<script>
 		smoothScroll.init();
+		console.log(userID);
+		// Track user visited page
+		var formatDateForLog = function() {
+			var d = new Date();
+			var dateToLog = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
+			return dateToLog;
+		}
+
+		console.log(formatDateForLog());
+
+		var currentLogData = {
+			"userID" : userID
+		}
+
+		currentLogData.time = formatDateForLog();
+		currentLogData.eventType = "Visited Page";
+        var logEvent = JSON.stringify(currentLogData);
+
+		$.ajax({
+			url: "/logVisitorEvents",
+			type: "POST",
+			data: logEvent, 
+			dataType: "json"
+		});	
+
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          videoId: 'nQeKi-2JOnA',
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      /*
+      function onPlayerReady(event) {
+      }
+      */
+
+      // 5. The API calls this function when the player's state changes.
+      var playedAlready = false;
+      var playedTime = 0;
+
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !playedAlready) {
+        	currentLogData.eventType = "Played Video";
+        	var logEvent = JSON.stringify(currentLogData);
+			$.ajax({
+				url: "/logVisitorEvents",
+				type: "POST",
+				data: logEvent, 
+				dataType: "json"
+			});
+          console.log("Played video for first time");
+          playedAlready = true;
+        }
+        if (event.data == YT.PlayerState.PAUSED || YT.PlayerState.ENDED) {
+        	currentLogData.eventType = "Stopped video at " + player.getCurrentTime();
+			var logEvent = JSON.stringify(currentLogData);
+			$.ajax({
+				url: "/logVisitorEvents",
+				type: "POST",
+				data: logEvent, 
+				dataType: "json"
+			});
+          console.log(player.getCurrentTime());
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+
 	</script>
-	<script>var demoLanguage = "{{ name }}"</script>
 
 	<script src="static/js/viewHelper.js"></script>
-	<!--<script src="static/js/tutorial.js"></script>!-->
-	<!--<script src="static/js/questionAsker.js"></script>!-->
     <script src="/static/js/bundle_questionAsker.js"></script>
 	<!-- What to do if opened in safari or firefox !-->
+	<!--
 	<script>
 		try {
 			var SpeechRecognition = webkitSpeechRecognition;
@@ -185,6 +274,7 @@
 			scenarioTextWrapper.children(".btn-confirm").hide();
 		}
 	</script>
+	!-->
 
 
 </body>
