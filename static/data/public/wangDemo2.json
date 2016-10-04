@@ -1,0 +1,376 @@
+{
+	"activityID": "W2",
+	"activityName": "Answering about one's own schedule",
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/david/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "It's 2:30 and classes are over for the day! Looks like David's looking to chat with you before you head home.",
+			"next" : "end"
+		}
+	],
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "High School Cafeteria",
+				"nameChinese" : "高中食堂", 
+				"bg" : "bg/shitang.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png",
+				"silhouette" : "characters/david/davidSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "taiwan-goodTime",
+					"soundPath" : "david/taiwan-goodTime.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Greet David",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "嘿! 怎么样?",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Answer his question.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["很好", "非常好", "不错", "马马虎虎", "还可以", "不舒服", "不太好"],
+							"response": "啊... 我好累，今天六点半起床。 你每天几点起床?",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [21, 22, 23, 24],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 21,
+					"task" : "Tell him you '起床' at 6:00",
+					"taskType" : "choice",
+					"taskLink" : "choiceTimeWakeUp",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我早上六点起床", "六点"],
+							"response": "哇！ 真早！那你晚上几点睡觉?",
+							"soundID" : ""
+						},
+						{
+							"answers": 	[
+								["六点"],
+								["起床"]
+							],
+							"response": "哇！ 真早！那你晚上几点睡觉?",
+							"soundID" : ""
+						}
+					],
+					"exceptions" : ["你", "半", "一", "二", "三", "四", "五", "七", "八", "九", "十"],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [30, 31, 32],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 22,
+					"task" : "Tell him you '起床' at 6:30",
+					"taskType" : "choice",
+					"taskLink" : "choiceTimeWakeUp",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我早上六点半起床", "六点半", "六点三十分", "六点三十"],
+							"response": "哇！ 真早！那你晚上几点睡觉?",
+							"soundID" : ""
+						},
+						{
+							"answers": 	[
+								["六点半", "六点三十"],
+								["起床"]
+							],
+							"response": "哇！ 真早！那你晚上几点睡觉?",
+							"soundID" : ""
+						}
+					],
+					"exceptions" : ["你"],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [30, 31, 32],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 23,
+					"task" : "Tell him you '起床' at 7:00",
+					"taskType" : "choice",
+					"taskLink" : "choiceTimeWakeUp",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我早上七点起床", "七点"],
+							"response": "哦。。。 跟我差不多！那你晚上几点睡觉?",
+							"soundID" : ""
+						},
+						{
+							"answers": 	[
+								["七点"],
+								["起床"]
+							],
+							"response": "哦。。。 跟我差不多！",
+							"soundID" : ""
+						}
+					],
+					"exceptions" : ["你"],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [30, 31, 32],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Tell him you '睡觉' at 10:00",
+					"taskType" : "choice",
+					"taskLink" : "choiceTimeSleep",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我晚上十点睡觉", "十点"],
+							"response": "哦。。。 那挺早的! 你现在要回家吗?",
+							"soundID" : ""
+						},
+						{
+							"answers": 	[
+								["十点"],
+								["睡觉"]
+							],
+							"response": "哦。。。 那挺早的! 你现在要回家吗?",
+							"soundID" : ""
+						}
+					],
+					"exceptions" : ["你"],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [40,41],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"task" : "Tell him you '睡觉' at 10:30",
+					"taskType" : "choice",
+					"taskLink" : "choiceTimeSleep",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我晚上十点半睡觉", "十点半", "十点三十"],
+							"response": "哦。。。 比我早睡一点儿! 你现在要回家吗?",
+							"soundID" : ""
+						},
+						{
+							"answers": 	[
+								["十点半"],
+								["睡觉"]
+							],
+							"response": "哦。。。 比我早睡一点儿! 你现在要回家吗?",
+							"soundID" : ""
+						}
+					],
+					"exceptions" : ["你"],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [40,41],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 32,
+					"task" : "Tell him you '睡觉' at 11:00",
+					"taskType" : "choice",
+					"taskLink" : "choiceTimeSleep",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我晚上十一点睡觉", "十一点"],
+							"response": "哦。。。 跟我一样! 你现在要回家吗?",
+							"soundID" : ""
+						},
+						{
+							"answers": 	[
+								["十一点"],
+								["睡觉"]
+							],
+							"response": "哦。。。 跟我一样! 你现在要回家吗?",
+							"soundID" : ""
+						}
+					],
+					"exceptions" : ["你"],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [40,41],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 40,
+					"task" : "Tell him you are",
+					"taskType" : "choice",
+					"taskLink" : "choiceGoHome",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我现在要回家!"],
+							"response": "好的! 那我们一起回去吧!",
+							"soundID" : ""
+						},
+						{
+							"answers": 	["是的", "是"],
+							"response": "好的! 那我们一起回去吧!",
+							"soundID" : "",
+							"exactMatch" : "true"
+						},
+						{
+							"answers": 	[
+								["我"],
+								["要"],
+								["回家"]
+							],
+							"response": "好的! 那我们一起回去吧!",
+							"soundID" : "",
+							"exactMatch" : "true"
+						}
+					],
+					"exceptions" : ["你"],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 41,
+					"task" : "Tell him you'll go home at 3:30.",
+					"taskType" : "choice",
+					"taskLink" : "choiceGoHome",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我今天三点半回家"],
+							"response": "哦， 是吗? 那我先走了. 明天见!",
+							"soundID" : ""
+						},
+						{
+							"answers": 	[
+								["我"],
+								["三点半", "三点三十"],
+								["回家"]
+							],
+							"response": "哦， 是吗? 那我先走了. 明天见!",
+							"soundID" : "",
+							"exactMatch" : "true"
+						}
+					],
+					"exceptions" : ["你"],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [51],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 50,
+					"task" : "Say ok (or let's go!)",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["走吧", "好的", "好", "我们走吧"],
+							"response": "",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 51,
+					"task" : "Say goodbye!",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["再见", "拜拜", "明天见"],
+							"response": "",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}
