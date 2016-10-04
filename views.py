@@ -37,7 +37,6 @@ def trackVisitorWithText(textMessage):
 		pass
 
 def trackVisitorEvent(eventText):
-	#trackVisitorWithText("Tried Demo ")
 	try:
 		current_url = request.url
 		parsed = urlparse.urlparse(current_url)
@@ -55,6 +54,7 @@ def trackVisitorEvent(eventText):
 		sqs = boto3.resource('sqs', region_name = 'us-east-1')
 		queue = sqs.get_queue_by_name(QueueName='svc-edusaga-visitor-events')
 		response = queue.send_message(MessageBody=content)
+		return userID
 	except: 
 		pass
 
@@ -63,10 +63,10 @@ def trackVisitorEvent(eventText):
 @app.route('/')
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
 	# If no user ID generate a random one
-	if session['userID'] == None:
-		userID = uuid.uuid4()
-	else:
+	try: 
 		userID = session['userID']
+	except:
+		userID = uuid.uuid4()
 	return render_template('index.html', name=name, activityName=activityName, teacher=teacher, userID=userID)
 
 #--------------------------------------------
@@ -74,7 +74,8 @@ def index(name="Index", activityName="index", teacher="jinlaoshi"):
 # -------------------------------------------
 @app.route('/home')
 def home(name="Home"):
-	session['userID'] = trackVisitorWithText('')
+	session['userID'] = trackVisitorEvent('Visited Main Page')
+	print session['userID']
 	return redirect(url_for('index'))
 
 @app.route('/<teacher>/home/')

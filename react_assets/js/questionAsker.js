@@ -318,7 +318,7 @@ var QuestionAsker = React.createClass({
 	},
 	checkSceneOver: function() {
 		// Logic for when scene is over
-		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneData.character.queuedTasks.length === 0 && this.state.sceneComplete === false) {
+		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
 			var that = this;
 			var studentCompletedProgress = {};
 			studentCompletedProgress.studentID = initialLogData.studentID;

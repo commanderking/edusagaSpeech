@@ -189,7 +189,6 @@ export var SpeechChecker = {
 				console.log(newAnswerIndex);
 				console.log(userAnswerIndex);
 				if (newAnswerIndex >= userAnswerIndex) {
-					console.log("will return True");
 					answerPartCorrect = true;
 					userAnswerIndex = newAnswerIndex;
 					break;

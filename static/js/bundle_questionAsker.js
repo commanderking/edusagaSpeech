@@ -366,7 +366,7 @@
 		},
 		checkSceneOver: function checkSceneOver() {
 			// Logic for when scene is over
-			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneData.character.queuedTasks.length === 0 && this.state.sceneComplete === false) {
+			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
 				var that = this;
 				var studentCompletedProgress = {};
 				studentCompletedProgress.studentID = initialLogData.studentID;
@@ -22627,7 +22627,6 @@
 					console.log(newAnswerIndex);
 					console.log(userAnswerIndex);
 					if (newAnswerIndex >= userAnswerIndex) {
-						console.log("will return True");
 						answerPartCorrect = true;
 						userAnswerIndex = newAnswerIndex;
 						break;
@@ -25213,7 +25212,7 @@
 							)
 						);
 					}
-					// All other cases
+					// All other cases (when user gets answer wrong)
 					else {
 							hintTemplateText = React.createElement(
 								'p',
@@ -25221,7 +25220,7 @@
 								React.createElement(
 									'span',
 									null,
-									'Ask them to repeat'
+									'I heard you say: '
 								),
 								React.createElement(SpeechableSpan, { clickFunction: function clickFunction() {
 										return spanClickFunction(props.feedbackText);

@@ -42,9 +42,21 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "taiwan-goodTime",
-					"soundPath" : "david/taiwan-goodTime.ogg"
-				}
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "time-wakeup-seven-thirty",
+					"soundPath" : "david/time-wakeup-seven-thirty.ogg"
+				},	
+				{
+					"soundID" : "time-threethirty-gottogo",
+					"soundPath" : "time-threethirty-gottogo.ogg"
+				},
+				{
+					"soundID" : "time-sleep-eleven",
+					"soundPath" : "time-sleep-eleven.ogg"
+				}	
 			],
 			"confusedPhrases" : 
 			[
@@ -93,7 +105,7 @@
 						{
 							"answers": 	["你早上几点起床"],
 							"response": "我平常七点半起床。",
-							"soundID" : ""
+							"soundID" : "time-wakeup-seven-thirty"
 						},
 						{
 							"answers": 	[
@@ -102,7 +114,7 @@
 								["起床"]
 							],
 							"response": "我平常七点半起床。",
-							"soundID" : ""
+							"soundID" : "time-wakeup-seven-thirty"
 						}
 					],
 					"correct" : false,
@@ -128,17 +140,16 @@
 								["睡觉"]
 							],
 							"response": "我平常十一点睡觉。",
-							"soundID" : ""
+							"soundID" : "time-sleep-eleven"
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidUncertain.png",
-					"tasksToQueue" : [21, 40],
+					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
-					"priorTasksNeeded" : [31,21],
 					"taskID" : 40,
 					"task" : "Ask him what time it is now",
 					"possibleAnswers" : 
@@ -146,16 +157,15 @@
 						{
 							"answers": 	["现在几点"],
 							"response": "现在三点半... 哎呀! 已经三点半了啊! 我得去跟朋友打篮球。再见! ",
-							"soundID" : ""
+							"soundID" : "time-threethirty-gottogo"
 						},
 						{
 							"answers": 	[
 								["现在"],
-								["几点"],
-								["了", "钟"]
+								["几点"]
 							],
 							"response": "现在三点半... 哎呀! 已经三点半了啊! 我得去跟朋友打篮球。",
-							"soundID" : ""
+							"soundID" : "time-threethirty-gottogo"
 						}
 					],
 					"correct" : false,
