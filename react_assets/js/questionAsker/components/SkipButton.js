@@ -24,8 +24,9 @@ var SkipButton = React.createClass({
 						onMouseOut = {this.mouseOut}
 						onClick={this.props.skipTasks}/>
 		return (
-			<div>
+			<div className="skipButtonDiv">
 				{skipButton}
+				<span className="toolTipText">Skip</span>
 			</div>
 		)
 	}

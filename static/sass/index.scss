@@ -625,6 +625,10 @@ CSS Related to Task List
 				visibility: visible;
 			}
 
+			.skipButtonDiv:hover .toolTipText {
+				visibility: visible;
+			}
+
 			.toolTipText {
 				visibility: hidden;
 				position: absolute;
@@ -634,10 +638,17 @@ CSS Related to Task List
 				font-weight: bold;
 				border-radius: 5px;
 				color: $darkBlue;
+			}
+
+			.repeatButtonDiv .toolTipText {
 				right: 200px;
 				top: -40px;
 			}
 
+			.skipButtonDiv .toolTipText {
+				top: -40px;
+				right: 150px;
+			}
 			.skipButton {
 				right: 150px;		
 			}

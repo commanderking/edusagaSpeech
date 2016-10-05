@@ -25136,8 +25136,13 @@
 				onClick: this.props.skipTasks });
 			return React.createElement(
 				'div',
-				null,
-				skipButton
+				{ className: 'skipButtonDiv' },
+				skipButton,
+				React.createElement(
+					'span',
+					{ className: 'toolTipText' },
+					'Skip'
+				)
 			);
 		}
 	});
