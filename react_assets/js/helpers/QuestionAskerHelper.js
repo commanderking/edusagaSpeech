@@ -89,7 +89,7 @@ export var SpeechChecker = {
 			"responseSoundID" : ""
 		}
 
-		// If the userAnswer contains an exception, immediately mark it as wrong
+		// If the userAnswer contains a global exception, immediately mark it as wrong
 		if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
 			console.log("Checking exceptions");
 			var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
@@ -119,26 +119,43 @@ export var SpeechChecker = {
 					{
 						"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
 						"response": "非常好",
-						"soundID": "feichanghao"
+						"soundID": "feichanghao",
+						"exceptions": []
 					}
 			*/
-			if (possibleAnswerObject.answers[0].constructor === Array) {
-				// console.log("using advanced check");
-				checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
-				// Only set object to return if 
-				console.log(possibleAnswerObject.answers);
-				if (checkResult === true) {
-					objectToReturn.answerCorrect = true;
-					objectToReturn.possibleAnswersIndex = i;
-					objectToReturn.responseSoundID = tempSoundID;
-				}
-			} else {
-				// console.log("using typical check");
-				checkResult = that.typicalCheck(userAnswer, possibleAnswerObject);
-				if (checkResult === true) {
-					objectToReturn.answerCorrect = true;
-					objectToReturn.possibleAnswersIndex = i;
-					objectToReturn.responseSoundID = tempSoundID;
+
+			// check if user answer contains an exception word
+			var exceptionFound = false;
+
+			if (possibleAnswerObject.exceptions !== undefined) {
+				possibleAnswerObject.exceptions.forEach(function(exception){
+					if (userAnswer.indexOf(exception) >= 0) {
+						console.log("exception exists");
+						exceptionFound = true;
+					}
+				})
+			}
+
+			if (exceptionFound === false) {
+				// If the answers are an array of arrays, then we must use an advanced check
+				if (possibleAnswerObject.answers[0].constructor === Array) {
+					// console.log("using advanced check");
+					checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
+					// Only set object to return if the result is true
+					console.log(possibleAnswerObject.answers);
+					if (checkResult === true) {
+						objectToReturn.answerCorrect = true;
+						objectToReturn.possibleAnswersIndex = i;
+						objectToReturn.responseSoundID = tempSoundID;
+					}
+				} else {
+					// console.log("using typical check");
+					checkResult = that.typicalCheck(userAnswer, possibleAnswerObject);
+					if (checkResult === true) {
+						objectToReturn.answerCorrect = true;
+						objectToReturn.possibleAnswersIndex = i;
+						objectToReturn.responseSoundID = tempSoundID;
+					}
 				}
 			}
 		})

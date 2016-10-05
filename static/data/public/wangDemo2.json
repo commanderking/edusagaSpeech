@@ -42,8 +42,48 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "taiwan-goodTime",
+					"soundID" : "hey-whatsup",
+					"soundPath" : "david/hey-whatsup.ogg"
+				},
+				{
+					"soundID" : "time-soearly-sleep-whattime",
+					"soundPath" : "david/time-soearly-sleep-whattime.ogg"
+				},
+				{
+					"soundID" : "time-oh-sametimeasme-sleep-whattime",
+					"soundPath" : "david/time-oh-sametimeasme-sleep-whattime.ogg"
+				},
+				{
+					"soundID" : "time-oh-thatsearly-areyougoinghome",
+					"soundPath" : "david/time-oh-thatsearly-areyougoinghome.ogg"
+				},
+				{
+					"soundID" : "oh-sametimeasme-goinghome",
 					"soundPath" : "david/taiwan-goodTime.ogg"
+				},
+				{
+					"soundID" : "oh-sametimeasme-goinghome",
+					"soundPath" : "david/taiwan-goodTime.ogg"
+				},
+				{
+					"soundID" : "ok-letsgo-together",
+					"soundPath" : "david/ok-letsgo-together.ogg"
+				},
+				{
+					"soundID" : "time-ohreally-illgofirst",
+					"soundPath" : "david/time-ohreally-illgofirst.ogg"
+				},
+				{
+					"soundID" : "time-so-tired-what-time-do-you-get-up",
+					"soundPath" : "david/time-so-tired-what-time-do-you-get-up.ogg"
+				},
+				{
+					"soundID" : "time-wow-so-late-going-home",
+					"soundPath" : "david/time-wow-so-late-going-home.ogg"
+				},
+				{
+					"soundID" : "time-wow-so-late-whattime-sleep",
+					"soundPath" : "david/time-wow-so-late-whattime-sleep.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -73,7 +113,7 @@
 						{
 							"answers" : ["你好"],
 							"response" : "嘿! 怎么样?",
-							"soundID" : "nihao"
+							"soundID" : "hey-whatsup"
 						}
 					],
 					"correct" : false,
@@ -93,7 +133,7 @@
 						{
 							"answers": 	["很好", "非常好", "不错", "马马虎虎", "还可以", "不舒服", "不太好"],
 							"response": "啊... 我好累，今天六点半起床。 你每天几点起床?",
-							"soundID" : ""
+							"soundID" : "time-so-tired-what-time-do-you-get-up"
 						}
 					],
 					"correct" : false,
@@ -112,17 +152,17 @@
 						{
 							"answers": 	["我早上六点起床"],
 							"response": "哇！ 真早！那你晚上几点睡觉?",
-							"soundID" : ""
+							"soundID" : "time-soearly-sleep-whattime"
 						},
 						{
-							"answers": 	["1点", "两点", "3点", "4点", "5点", "6点", "7点"],
+							"answers": 	["1点", "两点", "3点", "4点", "5点", "6点", "7点", "一点", "两点", "三点", "四点", "五点", "六点", "七点"],
 							"response": "哇！ 真早！那你晚上几点睡觉?",
-							"soundID" : "",
+							"soundID" : "time-soearly-sleep-whattime",
 							"exactMatch": true
 						},
 						{
 							"answers": 	[
-								["1点", "两点", "3点", "4点", "5点", "6点", "7点"],
+								["1点", "两点", "3点", "4点", "5点", "6点", "7点", "一点", "两点", "三点", "四点", "五点", "六点", "七点"],
 								["10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25",
 									"26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
 									"40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
@@ -130,25 +170,26 @@
 								["分"]
 							],
 							"response": "哇！ 真早！那你晚上几点睡觉?",
-							"soundID" : ""
+							"soundID" : "time-soearly-sleep-whattime"
 						},
 						{
 							"answers": 	[
-								["1点", "两点", "3点", "4点", "5点", "6点", "7点"],
+								["1点", "两点", "3点", "4点", "5点", "6点", "7点", "一点", "两点", "三点", "四点", "五点", "六点", "七点"],
 								["半", "一刻", "三刻"]
 							],
 							"response": "哇！ 真早！那你晚上几点睡觉?",
-							"soundID" : "",
-							"exceptions": "分"
+							"soundID" : "time-soearly-sleep-whattime",
+							"exceptions": ["分"]
 						},
 						{
 							"answers": 	[
-								["8点", "9点", "11点", "10点", "12点"],
+								["8点", "9点", "11点", "10点", "12点", "八点", "九点", "十点", "十一点", "十二点"],
 								["起床"]
 							],
 							"response": "哇！ 那么晚！你晚上几点睡觉?",
-							"soundID" : "",
-							"exacMatch" : true
+							"soundID" : "time-wow-so-late-whattime-sleep",
+							"exceptions": ["分"]
+
 						}
 					],
 					"exceptions": ["20点", "60分", "70分", "80分", "90分"],
@@ -168,31 +209,31 @@
 						{
 							"answers": 	["我晚上六点睡觉"],
 							"response": "哦。。。 那挺早的! 你现在要回家吗?",
-							"soundID" : ""
+							"soundID" : "time-oh-thatsearly-areyougoinghome"
 						},
 						{
 							"answers": 	[
-								["六点", "七点", "八点", "九点"],
+								["六点", "七点", "八点", "九点", "6点", "7点", "8点", "9点"],
 								["睡觉"]
 							],
 							"response": "哦。。。 那挺早的! 你现在要回家吗?",
-							"soundID" : ""
+							"soundID" : "time-oh-thatsearly-areyougoinghome"
 						},
 						{
 							"answers": 	[
-								["十点", "十一点"],
+								["十点", "十一点", "10点", "11点"],
 								["睡觉"]
 							],
 							"response": "哦。。。 跟我一样! 你现在要回家吗?",
-							"soundID" : ""
+							"soundID" : "oh-sametimeasme-goinghome"
 						},
 						{
 							"answers": 	[
-								["十二点", "一点", "两点", "三点", "四点", "五点"],
+								["十二点", "一点", "两点", "三点", "四点", "五点", "12点", "1点", "2点", "3点", "4点", "5点"],
 								["睡觉"]
 							],
 							"response": "哇! 那么晚! 你现在要回家吗?",
-							"soundID" : ""
+							"soundID" : "time-wow-so-late-going-home"
 						}				
 					],
 					"exceptions" : ["你"],
@@ -212,13 +253,13 @@
 						{
 							"answers": 	["我现在要回家!"],
 							"response": "好的! 那我们一起回去吧!",
-							"soundID" : ""
+							"soundID" : "ok-letsgo-together"
 						},
 						{
 							"answers": 	["是的", "是"],
 							"response": "好的! 那我们一起回去吧!",
-							"soundID" : "",
-							"exactMatch" : "true"
+							"soundID" : "ok-letsgo-together",
+							"exactMatch" : true
 						},
 						{
 							"answers": 	[
@@ -227,7 +268,7 @@
 								["回家"]
 							],
 							"response": "好的! 那我们一起回去吧!",
-							"soundID" : "",
+							"soundID" : "ok-letsgo-together",
 							"exactMatch" : "true"
 						}
 					],
@@ -248,7 +289,7 @@
 						{
 							"answers": 	["我今天三点半回家"],
 							"response": "哦， 是吗? 那我先走了. 明天见!",
-							"soundID" : ""
+							"soundID" : "time-ohreally-illgofirst"
 						},
 						{
 							"answers": 	[
@@ -257,7 +298,7 @@
 								["回家"]
 							],
 							"response": "哦， 是吗? 那我先走了. 明天见!",
-							"soundID" : "",
+							"soundID" : "time-ohreally-illgofirst",
 							"exactMatch" : "true"
 						}
 					],

@@ -218,6 +218,62 @@
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false					
+				},
+				{
+					"taskID" : 50,
+					"task" : "Answer his question '你每天几点起床'",
+					"taskType" : "choice",
+					"taskLink" : "choiceTimeWakeUp",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我早上六点起床"],
+							"response": "哇！ 真早！那你晚上几点睡觉?",
+							"soundID" : "time-soearly-sleep-whattime"
+						},
+						{
+							"answers": 	["1点", "两点", "3点", "4点", "5点", "6点", "7点", "一点", "两点", "三点", "四点", "五点", "六点", "七点"],
+							"response": "哇！ 真早！那你晚上几点睡觉?",
+							"soundID" : "time-soearly-sleep-whattime",
+							"exactMatch": true
+						},
+						{
+							"answers": 	[
+								["1点", "两点", "3点", "4点", "5点", "6点", "7点", "一点", "两点", "三点", "四点", "五点", "六点", "七点"],
+								["10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25",
+									"26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
+									"40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
+									"50", "51", "52", "53", "54", "55", "56", "57", "58", "59"],
+								["分"]
+							],
+							"response": "哇！ 真早！那你晚上几点睡觉?",
+							"soundID" : "time-soearly-sleep-whattime"
+						},
+						{
+							"answers": 	[
+								["1点", "两点", "3点", "4点", "5点", "6点", "7点", "一点", "两点", "三点", "四点", "五点", "六点", "七点"],
+								["半", "一刻", "三刻"]
+							],
+							"response": "哇！ 真早！那你晚上几点睡觉?",
+							"soundID" : "time-soearly-sleep-whattime",
+							"exceptions" : ["分"]
+						},
+						{
+							"answers": 	[
+								["8点", "9点", "11点", "10点", "12点", "八点", "九点", "十点", "十一点", "十二点"],
+								["起床"]
+							],
+							"response": "哇！ 那么晚！你晚上几点睡觉?",
+							"soundID" : "time-wow-so-late-whattime-sleep",
+							"exceptions" : ["分"]
+						}
+					],
+					"exceptions": ["20点", "60分", "70分", "80分", "90分"],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}
 			],
 			"queuedTasks" : 

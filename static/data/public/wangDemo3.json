@@ -42,8 +42,36 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "taiwan-goodTime",
-					"soundPath" : "david/taiwan-goodTime.ogg"
+					"soundID" : "birthday-mybirthday-whataboutyou",
+					"soundPath" : "david/birthday-mybirthday-whataboutyou.ogg"
+				},
+				{
+					"soundID" : "birthday-ah-i-must-remember",
+					"soundPath" : "david/birthday-ah-i-must-remember.ogg"
+				},
+				{
+					"soundID" : "birthday-oh-born-in-march-also",
+					"soundPath" : "david/birthday-oh-born-in-march-also.ogg"
+				},
+				{
+					"soundID" : "birthday-wow-same-as-me",
+					"soundPath" : "david/birthday-wow-same-as-me.ogg"
+				},
+				{
+					"soundID" : "birthday-younger-sister-forgot",
+					"soundPath" : "david/birthday-younger-sister-forgot.ogg"
+				},
+				{
+					"soundID" : "birthday-mom-october-23",
+					"soundPath" : "david/birthday-mom-october-23.ogg"
+				},
+				{
+					"soundID" : "birthday-mom-ofcourse-know",
+					"soundPath" : "david/birthday-mom-ofcourse-know.ogg"
+				},
+				{
+					"soundID" : "birthday-dad-forgot-tomorrow",
+					"soundPath" : "david/birthday-dad-forgot-tomorrow.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -73,7 +101,7 @@
 						{
 							"answers" : ["你的生日是几月几号"],
 							"response" : "我的生日三月二十九号。 你的生日是几月几号?",
-							"soundID" : ""
+							"soundID" : "birthday-mybirthday-whataboutyou"
 						},
 						{
 							"answers" : [
@@ -82,7 +110,7 @@
 								["几月几号"]
 							],
 							"response" : "我的生日三月二十九号。 你的生日是几月几号?",
-							"soundID" : ""
+							"soundID" : "birthday-mybirthday-whataboutyou"
 						}
 					],
 					"correct" : false,
@@ -102,7 +130,7 @@
 						{
 							"answers": 	["我的生日__月__号"],
 							"response": "啊。。。我一定要好好记住。",
-							"soundID" : ""
+							"soundID" : "birthday-ah-i-must-remember"
 						},
 						{
 							"answers": 	[
@@ -112,7 +140,7 @@
 								["号", "日"]
 							],
 							"response": "你也是三月出生的啊! 真巧!",
-							"soundID" : ""
+							"soundID" : "birthday-oh-born-in-march-also"
 						},
 						{
 							"answers": 	[
@@ -122,7 +150,7 @@
 								["号", "日"]
 							],
 							"response": "哇! 真的? 跟我一样!",
-							"soundID" : ""
+							"soundID" : "birthday-wow-same-as-me"
 						},
 						{
 							"answers": 	[
@@ -132,7 +160,7 @@
 								["号", "日"]
 							],
 							"response": "啊。。。我一定要好好记住。",
-							"soundID" : ""
+							"soundID" : "birthday-ah-i-must-remember"
 						}
 					],
 					"exceptions": [20, 30, 40, 50, 60, 70, 80, 90],
@@ -150,7 +178,7 @@
 						{
 							"answers": 	["我妹妹的生日是几月几号"],
 							"response": "我妹妹的生日。。。哎呀. 我忘了!",
-							"soundID" : ""
+							"soundID" : "birthday-younger-sister-forgot"
 						},
 						{
 							"answers": 	[
@@ -160,7 +188,7 @@
 								["几月几号", "几月几日", "哪一天", "什么时候"]
 							],
 							"response": "我妹妹的生日。。。哎呀. 我忘了!",
-							"soundID" : ""
+							"soundID" : "birthday-younger-sister-forgot"
 						}
 					],
 					"exceptions": ["哥哥", "弟弟"],
@@ -177,8 +205,8 @@
 					[
 						{
 							"answers": 	["你妈妈的生日是几月几号"],
-							"response": "我妈妈生日十月二十三号。",
-							"soundID" : ""
+							"response": "我妈妈生日是十月二十三号。",
+							"soundID" : "birthday-mom-october-23"
 						},
 						{
 							"answers": 	[
@@ -187,8 +215,8 @@
 								["生日"],
 								["几月几号", "几月几日", "哪一天", "什么时候"]
 							],
-							"response": "我妈妈生日十月二十三号。",
-							"soundID" : ""
+							"response": "我妈妈的生日是十月二十三号。",
+							"soundID" : "birthday-mom-october-23"
 						},
 						{
 							"answers": 	[
@@ -198,8 +226,8 @@
 								["妈妈", "妈", "娘", "母亲"],
 								["生日"]
 							],
-							"response": "我妈妈的生日知道，是十月二十三号。",
-							"soundID" : ""
+							"response": "我妈妈的生日当让知道，是十月二十三号。",
+							"soundID" : "birthday-mom-ofcourse-know"
 						},
 						{
 							"answers": 	[
@@ -210,8 +238,8 @@
 								["生日"],
 								["吗"]
 							],
-							"response": "我妈妈的生日知道，是十月二十三号。",
-							"soundID" : ""
+							"response": "我妈妈的生日当然知道，是十月二十三号。",
+							"soundID" : "birthday-mom-ofcourse-know"
 						}										
 					],
 					"correct" : false,
@@ -228,7 +256,7 @@
 						{
 							"answers": 	["你爸爸的生日是几月几号"],
 							"response": "我爸爸的生日是...啊! 是明天! 我忘了给他买礼物。 我得走了! 再见!",
-							"soundID" : ""
+							"soundID" : "birthday-dad-forgot-tomorrow"
 						},
 						{
 							"answers": 	[
@@ -238,7 +266,7 @@
 								["几月几号", "几月几日", "哪一天", "什么时候", "呢"]
 							],
 							"response": "我爸爸的生日是...啊! 是明天! 我忘了给他买礼物。 我得走了! 再见!",
-							"soundID" : ""
+							"soundID" : "birthday-dad-forgot-tomorrow"
 						},
 						{
 							"answers": 	[
@@ -249,7 +277,7 @@
 								["生日"]
 							],
 							"response": "我爸爸的生日是...啊! 是明天! 我忘了给他买礼物。 我得走了! 再见!",
-							"soundID" : ""
+							"soundID" : "birthday-dad-forgot-tomorrow"
 						},
 						{
 							"answers": 	[
@@ -261,11 +289,11 @@
 								["吗"]
 							],
 							"response": "我爸爸的生日是...啊! 是明天! 我忘了给他买礼物。 我得走了! 再见!",
-							"soundID" : ""
+							"soundID" : "birthday-dad-forgot-tomorrow"
 						}										
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidConfused.png",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

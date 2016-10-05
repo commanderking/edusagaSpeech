@@ -75,15 +75,10 @@ var QuestionAsker = React.createClass({
 		var that = this;
 		$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function(data) {})
 			.success(function(data) {
-
-				// Calculate number of coins possible
-				var totalCoins = 10 * (data.character.currentTasks.length + data.character.queuedTasks.length);
+				that.resetScene();
 				that.setState({
 					sceneData: data,
-					possibleCoins: totalCoins
 				});
-			that.resetScene();
-
 			/*----------------------------------
 			 One time setting of initial log Data
 			 ----------------------------------*/
@@ -320,6 +315,14 @@ var QuestionAsker = React.createClass({
 		// Logic for when scene is over
 		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
 			var that = this;
+
+			// Calculate number of coins possible
+			var totalCoins = 10 * (this.state.sceneData.character.completedTasks.length);
+			this.setState({
+				possibleCoins: totalCoins
+			});
+
+			// Post completed progress results
 			var studentCompletedProgress = {};
 			studentCompletedProgress.studentID = initialLogData.studentID;
 			var allTaskData = [];
@@ -504,7 +507,7 @@ var QuestionAsker = React.createClass({
 			var that = this;
 
 			// check if what user said was one of the ask for repeat phrases
-			var possibleRepeatPhrases = JSON.parse(JSON.stringify(this.state.sceneData.character.repeatPhrases));
+			var possibleRepeatPhrases = JSON.parse(JSON.stringify(this.state.repeatPhrases));
 			var correctRepeatAsk = false;
 			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 

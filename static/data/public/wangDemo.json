@@ -51,11 +51,11 @@
 				},	
 				{
 					"soundID" : "time-threethirty-gottogo",
-					"soundPath" : "time-threethirty-gottogo.ogg"
+					"soundPath" : "david/time-threethirty-gottogo.ogg"
 				},
 				{
 					"soundID" : "time-sleep-eleven",
-					"soundPath" : "time-sleep-eleven.ogg"
+					"soundPath" : "david/time-sleep-eleven.ogg"
 				}	
 			],
 			"confusedPhrases" : 
@@ -171,6 +171,23 @@
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [41],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 41,
+					"task" : "Say goodbye!",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["再见", "拜拜", "明天见"],
+							"response": "",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
