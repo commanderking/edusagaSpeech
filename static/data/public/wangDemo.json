@@ -24,8 +24,8 @@
 			"language" : "zh-CN",
 			"location" : 
 			{
-				"nameEnglish" : "High School Cafeteria",
-				"nameChinese" : "高中食堂", 
+				"nameEnglish" : "Cafeteria",
+				"nameChinese" : "食堂", 
 				"bg" : "bg/shitang.jpg"
 			},
 			"emotions" : 
@@ -129,7 +129,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers": 	["你晚上几点睡觉?"],
+							"answers": 	["你晚上几点睡觉?", "你几点睡觉"],
 							"response": "我平常十一点睡觉。",
 							"soundID" : ""
 						},
