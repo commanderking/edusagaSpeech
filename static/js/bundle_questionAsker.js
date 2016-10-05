@@ -24108,7 +24108,8 @@
 						currentTaskIndex: this.props.currentTaskIndex,
 						onSpeechInput: this.props.onSpeechInput,
 						taskTextToDisplay: this.props.taskName,
-						correctAnswerState: this.props.correctAnswerState }),
+						correctAnswerState: this.props.correctAnswerState,
+						wrongAnswerState: this.props.wrongAnswerState }),
 					React.createElement(HintButton, {
 						assessmentMode: this.props.assessmentMode,
 						hintActive: this.props.hintActive,
@@ -24695,7 +24696,11 @@
 			console.log("unmounting");
 		},
 		render: function render() {
-			var _this = this;
+			var that = this;
+			// Allow task to be unclickable if in correctAnswerState, prevents mic recording after answer is correct
+			var activateSpeechInput = this.props.correctAnswerState || this.props.wrongAnswerState ? function () {} : function () {
+				that.props.onSpeechInput(that.props.index);
+			};
 	
 			var displayText;
 			if (this.props.correctAnswerState && this.props.currentTaskIndex === this.props.index) {
@@ -24708,9 +24713,7 @@
 				{
 					className: 'taskText',
 					'data-index': this.props.index,
-					onClick: function onClick() {
-						return _this.props.onSpeechInput(_this.props.index);
-					} },
+					onClick: activateSpeechInput },
 				displayText
 			);
 		}
