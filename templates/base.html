@@ -49,6 +49,13 @@
     {% block body %}
     <div id="header-div" class="clearfix with-margins">
         <!--<div class="pull-left"><a href="/"><h1 class="no-margins">EduSaga</h1></a></div>!-->
+
+
+        <!-- UNCOMMENT WHEN READY FOR SIGNUPS !-->
+
+
+
+        <!--
         <div class="pull-right">
             {% if call_or_get(current_user.is_authenticated) %}
                 <a href="{{ url_for('user.profile') }}">{{ current_user.username }}</a>
@@ -58,7 +65,9 @@
                 <a href="{{ url_for('user.login') }}">Sign in</a>
             {% endif %}
         </div>
+        !-->
     </div>
+
     {% block menu %}
     <!--
     <div id="menu-div" class="with-margins">
