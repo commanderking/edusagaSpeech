@@ -72,7 +72,7 @@
 						{
 							"answers" : ["你是哪国人", "你是哪里人"],
 							"response" : "猜一猜吧!  Take a guess!",
-							"soundID" : "nihao"
+							"soundID" : ""
 						}
 					],
 					"correct" : false,
