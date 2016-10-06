@@ -12,7 +12,7 @@
 		},
 		{
 			"name" : "Asking about David's Schedule",
-			"scenario" : "You seem really tired recently and want to learn more about David's schedule.",
+			"scenario" : "What's David's schedule like? Does he get up early? Sleep late?",
 			"grammar" : "几点__, 睡觉, 起床, 现在几点",
 			"link" : "../wangDemo",
 			"image" : "",
