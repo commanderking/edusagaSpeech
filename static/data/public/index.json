@@ -62,48 +62,96 @@
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
+					"soundPath" : "chenyang/shenme.ogg"
 				}, 
 				{ 
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
+					"soundPath" : "chenyang/tingbudong.ogg"
 				}, 
 				{ 
 					"response": "不好意思, 我没听懂.",
 					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
+					"soundPath" : "chenyang/buhaoyisi.ogg"
 				}
 			],
 			"currentTasks" : [
 				{
 					"taskID" : 1,
-					"task" : "Greet him",
+					"task" : "Ask her for her nationality.",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你好"],
-							"response" : "你好!",
+							"answers" : ["你是哪国人"],
+							"response" : "猜一猜吧!  Take a guess!",
 							"soundID" : "nihao"
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : [2],
+					"tasksToQueue" : [20, 21, 22, 23],
 					"attemptedAnswers" : []
 				}
 			],
 			"queuedTasks" :
 			[
 				{
-					"taskID" : 2,
-					"task" : "Ask how he's doing",
+					"taskID" : 20,
+					"task" : "Ask if she's American",
 					"possibleAnswers" : 
 					[
 						{
-							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
-							"response": "非常好! Great start! Try the other demos below for even more interactive Chinese speech activities!",
-							"soundID": "feichanghao"
+							"answers": ["你是不是美国人", "你是美国人吗"],
+							"response": "不是! 再猜吧!",
+							"soundID": ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 21,
+					"task" : "Ask if she's Chinese",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你是不是中国人", "你是中国人吗"],
+							"response": "没错",
+							"soundID": ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 22,
+					"task" : "Ask if she's Japanese",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你是不是日本人", "你是日本人吗"],
+							"response": "不是! 再猜吧!",
+							"soundID": ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 23,
+					"task" : "Ask if she's Canadian",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你是不是加拿大人", "你是加拿大人吗"],
+							"response": "不是! 再猜吧!",
+							"soundID": ""
 						}
 					],
 					"correct" : false,
