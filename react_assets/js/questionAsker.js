@@ -324,6 +324,14 @@ var QuestionAsker = React.createClass({
 
 			// Post completed progress results
 			var studentCompletedProgress = {};
+			// Pull teacher variable set in html page if possible
+			try {
+				studentCompletedProgress.teacherID = teacher;			
+			} catch(err) {
+				studentCompletedProgress.teacherID = "Unknown teacher";
+			}
+
+
 			studentCompletedProgress.studentID = initialLogData.studentID;
 			var allTaskData = [];
 
