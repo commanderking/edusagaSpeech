@@ -98,7 +98,7 @@ export var SpeechChecker = {
 			exceptions.forEach(function(exception){
 				// console.log(exception);
 				if (userAnswer.indexOf(exception) >= 0) {
-					console.log("exception exists");
+					console.log("exception exists: " + exception);
 					exceptionMatch = true;
 				}
 			});
@@ -201,8 +201,8 @@ export var SpeechChecker = {
 			// Have something like ["你", "您"]
 			var answerPartCorrect = false;
 			for (var k=0;  k <answerPartArray.length; k++) {
-				console.log(answerPartArray[k]);
 				var newAnswerIndex = userAnswer.indexOf(answerPartArray[k]);
+				console.log(answerPartArray[k])
 				console.log(newAnswerIndex);
 				console.log(userAnswerIndex);
 				if (newAnswerIndex >= userAnswerIndex) {
