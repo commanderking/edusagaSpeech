@@ -230,7 +230,10 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers": 	["我是", "人"],
+							"answers": 	[
+								["我是"], 
+								["人"]
+							],
 							"response": "哦。。。",
 							"soundID" : "oh"
 						}
