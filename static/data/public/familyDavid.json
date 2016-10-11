@@ -42,6 +42,10 @@
 			"sounds" : 
 			[
 				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
 					"soundID" : "nationality-really-both-americans",
 					"soundPath" : "david/nationality-really-both-americans.ogg"
 				},
@@ -62,8 +66,8 @@
 					"soundPath" : "david/nationality-oh-your-english-good-thought-you-american.ogg"
 				},
 				{
-					"soundID" : "dad-job-businessman.ogg",
-					"soundPath" : "david/time-sleep-eleven.ogg"
+					"soundID" : "dad-job-businessman",
+					"soundPath" : "david/dad-job-businessman.ogg"
 				},
 				{
 					"soundID" : "dad-nationality-beijing",
@@ -144,6 +148,8 @@
 				},
 				{
 					"taskID" : 30,
+					"taskType" : "choice",
+					"taskLink" : "choiceAmericanOrNot",
 					"task" : "Respond that you are 美国人",
 					"possibleAnswers" : 
 					[
@@ -168,6 +174,8 @@
 				{
 					"taskID" : 31,
 					"task" : "Respond that you are not 美国人",
+					"taskType" : "choice",
+					"taskLink" : "choiceAmericanOrNot",
 					"possibleAnswers" : 
 					[
 						{
@@ -226,7 +234,7 @@
 						},
 						{
 							"answers": [
-								["你爸爸", "你的爸爸", "他"],
+								["你爸爸", "你的爸爸", "他", "你爸"],
 								["做什么"],
 								["工作", "事"]
 							],
@@ -235,7 +243,7 @@
 						},
 						{
 							"answers": [
-								["你爸爸", "你的爸爸", "他"],
+								["你爸爸", "你的爸爸", "他", "你爸"],
 								["从事"],
 								["什么", "哪个", "哪一个"],
 								["行业"]
@@ -257,7 +265,7 @@
 					[
 						{
 							"answers": ["你妈妈是哪国人", "你妈妈是哪里人"],
-							"response": "她是中国人，可是她不是北京人。 他来自上海。",
+							"response": "她也是中国人，可是她不是北京人。 他来自上海。",
 							"soundID": "mom-nationality-shanghai"
 						},
 						{
@@ -288,16 +296,16 @@
 						},
 						{
 							"answers": [
-								["你妈妈", "你的妈妈", "他", "她"],
+								["你妈妈", "你的妈妈", "他", "她", "你妈"],
 								["做什么"],
 								["工作", "事"]
 							],
 							"response": "她是一个工程师。",
-							"soundID": ""
+							"soundID": "mom-job-engineer"
 						},
 						{
 							"answers": [
-								["你妈妈", "你的妈妈", "他", "她"],
+								["你妈妈", "你的妈妈", "他", "她", "你妈"],
 								["从事"],
 								["什么", "哪个", "哪一个"],
 								["行业"]
@@ -308,30 +316,15 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
-					"tasksToQueue" : [60, 61, 62],
+					"tasksToQueue" : [60, 62],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
 					"taskID" : 60,
 					"task" : "Say goodbye!",
-					"possibleAnswers" : 
-					[
-						{
-							"answers": ["再见"],
-							"response": "Uhh...  再见???",
-							"soundID": "uh-goodbye"
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
-					"tasksToQueue" : [],
-					"attemptedAnswers" : [],
-					"hintUsed" : false
-				},
-				{
-					"taskID" : 61,
-					"task" : "Say you need to go (我得走了 - Wǒ déi zǒule) !",
+					"taskType" : "choice",
+					"taskLink" : "bye",
 					"possibleAnswers" : 
 					[
 						{
@@ -348,11 +341,13 @@
 				},
 				{
 					"taskID" : 62,
-					"task" : "Apologize/say you need to go (Click Hint) !",
+					"task" : "Apologize/say you have something to do (Click Hint)",
+					"taskType" : "choice",
+					"taskLink" : "bye",
 					"possibleAnswers" : 
 					[
 						{
-							"answers": ["不好意思, 我得走了"],
+							"answers": ["不好意思 我有事", "不好意思我有事"],
 							"response": "再见!",
 							"soundID": "zaijian"
 						}
