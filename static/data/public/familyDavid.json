@@ -347,7 +347,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers": ["不好意思 我有事", "不好意思我有事"],
+							"answers": ["不好意思,我有事", "不好意思我有事"],
 							"response": "再见!",
 							"soundID": "zaijian"
 						}
