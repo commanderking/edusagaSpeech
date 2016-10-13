@@ -8,6 +8,12 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : [
+		"Ask others if they're free or busy on certain days of the week",
+		"Invite someone to eat lunch with you",
+		"Tell someone a time for an activity",
+		"Ask people how they feel about different kinds of food"
+	],
 	"scenario" :
 	[	
 		{
@@ -83,7 +89,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : [20],
+					"tasksToQueue" : [20, 21, 22,23],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
@@ -93,6 +99,7 @@
 				{
 					"taskID" : 20,
 					"task" : "Ask him if he's busy on Friday.",
+					"taskLink" : "freeDay",
 					"possibleAnswers" : 
 					[
 						{
@@ -111,13 +118,14 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : [30],
+					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
 					"taskID" : 21,
 					"task" : "Ask him if he's busy on Saturday.",
+					"taskLink" : "freeDay",
 					"possibleAnswers" : 
 					[
 						{
@@ -136,13 +144,15 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : [30],
+					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
 					"taskID" : 22,
 					"task" : "Ask him if he's busy on Sunday.",
+					"taskType" : "choice",
+					"taskLink" : "freeDay",
 					"possibleAnswers" : 
 					[
 						{
@@ -168,6 +178,8 @@
 				{
 					"taskID" : 23,
 					"task" : "Ask him if he's busy on the weekend.",
+					"taskType" : "choice",
+					"taskLink" : "freeDay",
 					"possibleAnswers" : 
 					[
 						{
@@ -203,7 +215,7 @@
 						{
 							"answers" : [
 								["星期天我", "我星期天"],
-								["请你吃饭"], 
+								["请你吃饭", "我们吃饭", "我们一起吃饭", "我们去吃饭", "一起吃饭"], 
 								["好吗", "怎么样"]
 							],
 							"response" : "哇! 好极了! 星期天几点?",
@@ -224,7 +236,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["十一点一刻", "十一点十五", "十一点十五分"],
+							"answers" : ["十一点一刻", "十一点十五", "十一点十五分", "11点15分"],
 							"response" : "太好了!",
 							"soundID" : ""
 						}
@@ -243,7 +255,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["十一点半", "十一点三十", "十一点三十分"],
+							"answers" : ["十一点半", "十一点三十", "十一点三十分", "11点30分"],
 							"response" : "好极了!",
 							"soundID" : ""
 						}
@@ -262,7 +274,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["十一点三刻", "十一点四十五"],
+							"answers" : ["十一点三刻", "十一点四十五", "11点45分"],
 							"response" : "没问题!",
 							"soundID" : ""
 						}
@@ -372,7 +384,7 @@
 						},
 						{
 							"answers" : [
-								["我们吃韩国菜", "吃韩国菜"],
+								["我们吃墨西哥菜", "吃墨西哥菜"],
 								["好吗", "怎么样"]
 							],
 							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
@@ -407,7 +419,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["星期天见", "星期日见", "礼拜天见"],
+							"answers" : ["星期天见", "星期天建", "星期日见", "星期日间", "礼拜天见"],
 							"response" : "再见!",
 							"soundID" : ""
 						}
