@@ -185,6 +185,8 @@
 				{
 					"taskID" : 30,
 					"task" : "Ask if he likes Chinese food",
+					"taskType" : "choice",
+					"taskLink" : "askAboutFoodType",
 					"possibleAnswers" : 
 					[
 						{
@@ -216,6 +218,7 @@
 				{
 					"taskID" : 31,
 					"task" : "Ask if he likes Vietnamese Food",
+					"taskLink" : "askAboutFoodType",
 					"possibleAnswers" : 
 					[
 						{
@@ -247,6 +250,8 @@
 				{
 					"taskID" : 32,
 					"task" : "Ask if he likes Mexican food",
+					"taskType" : "choice",
+					"taskLink" : "askAboutFoodType",
 					"possibleAnswers" : 
 					[
 						{
