@@ -1,0 +1,369 @@
+{
+	"activityID": "likesFoodDavid",
+	"activityName": "Asking what kind of food David likes",
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/david/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "It'd be great to invite David to lunch sometime. I wonder what kind of food he likes.",
+			"next" : "end"
+		}
+	],
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Cafeteria",
+				"nameChinese" : "食堂", 
+				"bg" : "bg/shitang.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png",
+				"silhouette" : "characters/david/davidSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Greet David.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Ask him if he likes American food",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢吃美国菜吗"],
+							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜不喜欢吃", "爱不爱吃", "想不想吃", "要不要吃"],
+								["美国菜"]
+							],
+							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 21,
+					"task" : "Ask him if he likes Japanese food",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢吃日本菜吗"],
+							"response" : "我喜欢吃日本菜! 我爱吃寿司...",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜不喜欢吃", "爱不爱吃", "想不想吃", "要不要吃"],
+								["日本菜"]
+							],
+							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [31],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 22,
+					"task" : "Ask if he likes Korean food",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢吃韩国菜吗"],
+							"response" : "韩国菜。。。 我不喜欢吃韩国菜。太辣了。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜不喜欢吃", "爱不爱吃", "想不想吃", "要不要吃"],
+								["韩国菜"]
+							],
+							"response" : "韩国菜。。。 我不喜欢吃韩国菜。太辣了。",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [32],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask if he likes Chinese food",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢吃中国菜吗"],
+							"response" : "我爱吃中国菜!!!",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜不喜欢吃", "爱不爱吃", "想不想吃", "要不要吃"],
+								["中国菜"]
+							],
+							"response" : "我爱吃中国菜!!! 你喜欢吃中国菜吗?",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [40],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"task" : "Ask if he likes Vietnamese Food",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢吃越南菜吗"],
+							"response" : "越南菜...还可以吧. 我很喜欢吃 Pho.",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜不喜欢吃", "爱不爱吃", "想不想吃", "要不要吃"],
+								["越南菜"]
+							],
+							"response" : "越南菜...还可以吧. 我很喜欢吃 Pho.",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 32,
+					"task" : "Ask if he likes Mexican food",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜不喜欢吃墨西哥菜"],
+							"response" : "墨西哥菜很好吃啊! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜不喜欢吃", "爱不爱吃", "想不想吃", "要不要吃"],
+								["越南菜"]
+							],
+							"response" : "墨西哥菜很好吃啊! 你喜欢吃墨西哥菜吗?",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [42],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 40,
+					"task" : "Respond to his question: 你喜欢中国菜吗?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我喜欢吃中国菜"],
+							"response" : "哦. 真好! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["喜欢", "我喜欢", "我喜欢啊"],
+							"response" : "哦. 真好! ",
+							"soundID" : "",
+							"exactMatch" : true
+						},
+						{
+							"answers" : [
+								["我喜欢", "我很喜欢", "我爱"],
+								["吃中国菜", "中国菜"]
+							],
+							"response" : "哦. 真好! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["中国菜"],
+								["很好吃", "不错", "挺好吃"]
+							],
+							"response" : "哦. 真好! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["不喜欢", "我不喜欢", "我不喜欢啊"],
+							"response" : "哇！真的吗? ",
+							"soundID" : "",
+							"exactMatch" : true
+						},
+						{
+							"answers" : [
+								["我不喜欢", "我很不喜欢"],
+								["吃中国菜", "中国菜"]
+							],
+							"response" : "哇！真的吗?  ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["中国菜"],
+								["不好吃", "不怎么样", "还可以"]
+							],
+							"response" : "哇! 真的吗? ",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 42,
+					"task" : "Respond to his question: 你喜欢墨西哥菜吗?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我喜欢吃墨西哥菜"],
+							"response" : "哦. 真好! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["喜欢", "我喜欢", "我喜欢啊"],
+							"response" : "哦. 真好! ",
+							"soundID" : "",
+							"exactMatch" : true
+						},
+						{
+							"answers" : [
+								["我喜欢", "我很喜欢", "我爱"],
+								["吃墨西哥菜", "墨西哥菜"]
+							],
+							"response" : "哦. 真好! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["墨西哥菜"],
+								["很好吃", "不错", "挺好吃"]
+							],
+							"response" : "哦. 真好! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["不喜欢", "我不喜欢", "我不喜欢啊"],
+							"response" : "哇！真的吗? ",
+							"soundID" : "",
+							"exactMatch" : true
+						},
+						{
+							"answers" : [
+								["我不喜欢", "我很不喜欢"],
+								["吃墨西哥菜", "墨西哥菜"]
+							],
+							"response" : "哇！真的吗?  ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["墨西哥菜"],
+								["不好吃", "不怎么样", "还可以"]
+							],
+							"response" : "哇! 真的吗? ",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}

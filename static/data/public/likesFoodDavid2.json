@@ -1,0 +1,424 @@
+{
+	"activityID": "likesFoodDavid",
+	"activityName": "Asking which day David can eat a meal",
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/david/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Now that we know what meals David likes to eat, let's invite him to lunch sometime.",
+			"next" : "end"
+		}
+	],
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Cafeteria",
+				"nameChinese" : "食堂", 
+				"bg" : "bg/shitang.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png",
+				"silhouette" : "characters/david/davidSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Ask David how he's doing.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["你好吗", "怎么样"],
+							"response" : "非常好!",
+							"soundID" : ""							
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Ask him if he's busy on Friday.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你星期五忙不忙"],
+							"response" : "我星期六很忙。 我要打篮球。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你星期五", "星期五你", "你礼拜五", "你礼拜五"],
+								["忙不忙", "忙吗", "有空吗", "有没有空", "有事吗", "有没有事"]
+							],
+							"response" : "我星期五有事儿。 我跟陈阳要一起吃饭。",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 21,
+					"task" : "Ask him if he's busy on Saturday.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你星期六忙不忙"],
+							"response" : "我星期六很忙。 我要打篮球。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你星期六", "星期六你"],
+								["忙不忙", "忙吗", "有空吗", "有没有空", "有事吗", "有没有事"]
+							],
+							"response" : "我星期六很忙。 我要打篮球。",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 22,
+					"task" : "Ask him if he's busy on Sunday.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你星期天忙不忙"],
+							"response" : "我星期六很忙。 我要打篮球。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["星期日", "星期天", "礼拜天", "周日"],
+								["忙不忙", "忙吗", "有空吗", "有没有空", "有事吗", "有没有事"]
+							],
+							"response" : "我星期天没事儿! 怎么样? 你有什么事吗?",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 23,
+					"task" : "Ask him if he's busy on the weekend.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你周末忙不忙"],
+							"response" : "我星期六很忙。 我要打篮球。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["忙不忙", "忙吗", "有空吗", "有没有空", "有事吗", "有没有事"]
+							],
+							"response" : "我星期六很忙, 可是我星期天没事儿!",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Invite him to eat with you on his free day.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我星期天请你吃饭, 怎么样"],
+							"response" : "哇! 好极了! 星期天几点?",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["星期天我", "我星期天"],
+								["请你吃饭"], 
+								["好吗", "怎么样"]
+							],
+							"response" : "哇! 好极了! 星期天几点?",
+							"soundID" : ""
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [31,32,33,34],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"taskType" : "choice",
+					"taskLink" : "lunchTime",
+					"task" : "Tell him 11:15",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["十一点一刻", "十一点十五", "十一点十五分"],
+							"response" : "太好了!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [40,41,42],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 32,
+					"taskType" : "choice",
+					"taskLink" : "lunchTime",
+					"task" : "Tell him 11:30",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["十一点半", "十一点三十", "十一点三十分"],
+							"response" : "好极了!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [40,41,42],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 33,
+					"taskType" : "choice",
+					"taskLink" : "lunchTime",
+					"task" : "Tell him 11:45",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["十一点三刻", "十一点四十五"],
+							"response" : "没问题!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [40,41,42],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 40,
+					"task" : "Ask him how he feels about eating Chinese food",
+					"taskType" : "choice",
+					"taskLink" : "choiceFoodType",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我们吃中国菜好吗"],
+							"response" : "好啊! 我很喜欢吃中国菜!",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我们吃中国菜", "吃中国菜"],
+								["好吗", "怎么样"]
+							],
+							"response" : "好啊! 我很喜欢吃中国菜!",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你想吃", "你要吃"],
+								["中国菜吗"]
+							],
+							"response" : "好啊! 我很喜欢吃中国菜! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你想不想", "你要不要"],
+								["吃中国菜"]
+							],
+							"response" : "好啊! 我很喜欢吃中国菜! ",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 41,
+					"task" : "Ask him how he feels about eating Korean food",
+					"taskLink" : "choiceFoodType",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我们吃韩国菜好吗"],
+							"response" : "我不是很喜欢吃韩国菜。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我们吃韩国菜", "吃韩国菜"],
+								["好吗", "怎么样"]
+							],
+							"response" : "我不是很喜欢吃韩国菜。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你想吃", "你要吃"],
+								["韩国菜吗"]
+							],
+							"response" : "我不是很喜欢吃韩国菜。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你想不想", "你要不要"],
+								["吃韩国菜"]
+							],
+							"response" : "我不是很喜欢吃韩国菜。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 42,
+					"task" : "Ask him how he feels about eating Mexican food",
+					"taskType" : "choice",
+					"taskLink" : "choiceFoodType",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我们吃墨西哥菜好吗"],
+							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我们吃韩国菜", "吃韩国菜"],
+								["好吗", "怎么样"]
+							],
+							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你想吃", "你要吃"],
+								["墨西哥菜吗"]
+							],
+							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你想不想", "你要不要"],
+								["吃墨西哥菜"]
+							],
+							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 50,
+					"task" : "Tell him you'll see him on Sunday.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期天见", "星期日见", "礼拜天见"],
+							"response" : "再见!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}
