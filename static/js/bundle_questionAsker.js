@@ -25483,7 +25483,7 @@
 					React.createElement(
 						'h1',
 						{ className: 'menuHeader' },
-						'LEVEL COMPLETE!'
+						'EPISODE COMPLETE!'
 					),
 					React.createElement(ResultsBase, this.props)
 				);
