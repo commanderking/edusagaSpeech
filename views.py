@@ -69,6 +69,9 @@ def index(name="Index", activityName="index", teacher="jinlaoshi"):
 		userID = uuid.uuid4()
 	return render_template('index.html', name=name, activityName=activityName, teacher=teacher, userID=userID)
 
+@app.route('/test')
+def index2(name="Index"):
+	return render_template('index2.html')
 
 #--------------------------------------------
 # E-mail this link and redirect to homepage to track with text
