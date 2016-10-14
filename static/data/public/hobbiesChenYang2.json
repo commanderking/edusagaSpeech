@@ -90,74 +90,318 @@
 			[
 				{
 					"taskID" : 20,
-					"task" : "Invite her to do something she likes on the weekend",
+					"task" : "Invite her to go shopping",
 					"possibleAnswers" : 
 					[
 						{
 							"answers" : ["我们周末去______, 怎么样"],
-							"response" : "",
+							"response" : "不好意思。。。我不是很喜欢逛街。",
 							"soundID" : ""
 						},
 						{
 							"answers" : [
 								["我们周末", "周末我们"],
-								["打羽毛球", "打麻将"],
+								["逛街", "买衣服", "买东西"],
 								["怎么样", "好吗"]
 							],
-							"response" : "",
+							"response" : "不好意思。。。我不是很喜欢逛街。",
 							"soundID" : ""
 						},
 						{
 							"answers" : [
 								["我周末", "周末我"],
 								["请你", "跟你"],
-								["打麻将", "打羽毛球"],
+								["逛街", "买衣服", "买东西"],
 								["怎么样", "好吗"]
 							],
-							"response" : "",
+							"response" : "不好意思。。。我不是很喜欢逛街。",
 							"soundID" : ""
 						},
 						{
 							"answers" : [
 								["你周末", "周末你"],
 								["要不要", "想不想"],
-								["打麻将", "打羽毛球"]
+								["逛街", "买衣服", "买东西"]
 							],
-							"response" : "",
+							"response" : "不好意思。。。我不是很喜欢逛街。",
 							"soundID" : ""
 						},
 						{
 							"answers" : [
 								["你周末", "周末你"],
 								["要", "想"],
-								["打麻将吗", "打羽毛球吗"]
+								["逛街", "买衣服", "买东西"]
 							],
-							"response" : "",
+							"response" : "不好意思。。。我不是很喜欢逛街。",
 							"soundID" : ""
 						}
 					],
-					"specificFeedbackResponse" : 
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengBored.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+					{
+					"taskID" : 21,
+					"task" : "Invite her to play badminton",
+					"possibleAnswers" : 
 					[
+						{
+							"answers" : ["我们周末去______, 怎么样"],
+							"response" : "羽毛球。。。 你怎么。。。 哦。。。 一定是David 那鬼家伙告诉你的。好吧。星期几?",
+							"soundID" : ""
+						},
 						{
 							"answers" : [
 								["我们周末", "周末我们"],
+								["打羽毛球", "玩羽毛球"],
 								["怎么样", "好吗"]
 							],
-							"response" : "不好意思, 我没什么兴趣。",
+							"response" : "羽毛球。。。 你怎么。。。 哦。。。 一定是David 那鬼家伙告诉你的。好吧。星期几?",
 							"soundID" : ""
 						},
 						{
 							"answers" : [
 								["我周末", "周末我"],
 								["请你", "跟你"],
+								["打羽毛球", "玩羽毛球"],
 								["怎么样", "好吗"]
 							],
-							"response" : "不好意思, 我没什么兴趣。",
+							"response" : "羽毛球。。。 你怎么。。。 哦。。。 一定是David 那鬼家伙告诉你的。好吧。星期几?",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["要不要", "想不想"],
+								["打羽毛球", "玩羽毛球"]
+							],
+							"response" : "羽毛球。。。 你怎么。。。 哦。。。 一定是David 那鬼家伙告诉你的。好吧。星期几?",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["要", "想"],
+								["打羽毛球", "玩羽毛球"]
+							],
+							"response" : "羽毛球。。。 你怎么。。。 哦。。。 一定是David 那鬼家伙告诉你的。好吧。星期几?",
 							"soundID" : ""
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [31, 32, 33]
+				},
+				{
+					"taskID" : 22,
+					"task" : "Invite her to go eat",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我周末请你吃饭, 怎么样"],
+							"response" : "吃饭? 不好意思, 这周末我要跟我爸妈在家吃饭。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我们周末", "周末我们"],
+								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"],
+								["怎么样", "好吗"]
+							],
+							"response" : "吃饭? 不好意思, 这周末我要跟我爸妈在家吃饭。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我周末", "周末我"],
+								["请你", "跟你"],
+								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"],
+								["怎么样", "好吗"]
+							],
+							"response" : "吃饭? 不好意思, 这周末我要跟我爸妈在家吃饭。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["要不要", "想不想"],
+								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"]
+							],
+							"response" : "吃饭? 不好意思, 这周末我要跟我爸妈在家吃饭。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["要", "想"],
+								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"]
+							],
+							"response" : "吃饭? 不好意思, 这周末我要跟我爸妈在家吃饭。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 23,
+					"task" : "Invite her to play Mahjong",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我们周末去打麻将, 怎么样"],
+							"response" : "奇怪! 你怎么知道我喜欢打麻将。。。哦。。。 一定是David告诉你的。。。 我这周末不想打。 下一次吧! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我们周末", "周末我们"],
+								["打麻将", "玩麻将", "刷麻将"],
+								["怎么样", "好吗"]
+							],
+							"response" : "奇怪! 你怎么知道我喜欢打麻将。。。哦。。。 一定是David告诉你的。。。 我这周末不想打。 下一次吧! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我周末", "周末我"],
+								["请你", "跟你"],
+								["打麻将", "玩麻将", "刷麻将"],
+								["怎么样", "好吗"]
+							],
+							"response" : "奇怪! 你怎么知道我喜欢打麻将。。。哦。。。 一定是David告诉你的。。。 我这周末不想打。 下一次吧! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["要不要", "想不想"],
+								["打麻将", "玩麻将", "刷麻将"]
+							],
+							"response" : "奇怪! 你怎么知道我喜欢打麻将。。。哦。。。 一定是David告诉你的。。。 我这周末不想打。 下一次吧! ",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["要", "想"],
+								["打麻将", "玩麻将", "刷麻将"]
+							],
+							"response" : "",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 31,
+					"task" : "Tell her Saturday.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期六, 怎么样"],
+							"response" : "星期六几点",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["星期六"],
+							"response" : "星期六几点",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [41],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 32,
+					"task" : "Tell her Sunday.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期天, 怎么样"],
+							"response" : "好啊, 星期天几点?",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["星期天"],
+							"response" : "好啊, 星期天几点?",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [42],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 33,
+					"task" : "Tell her Monday.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期一, 怎么样"],
+							"response" : "星期一? 你不是说周末吗? ",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["星期天"],
+							"response" : "星期一? 你不是说周末吗? ",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 41,
+					"task" : "Tell her at 3:30",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["三点半, 怎么样"],
+							"response" : "三点半, 好啊!",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["星期六"],
+							"response" : "星期六几点",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 42,
+					"task" : "Tell her at 5:30",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期六, 怎么样"],
+							"response" : "星期六几点",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["星期六"],
+							"response" : "星期六几点",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				},
