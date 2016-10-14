@@ -10,6 +10,9 @@ export var TaskController = {
 	getPossibleCorrectAnswers: function(data, activeTaskIndex) {
 		return this.getActiveTask(data, activeTaskIndex).possibleAnswers;
 	},
+	getSpecificFeedbackResponses: function(data, activeTaskIndex) {
+		return data.character.currentTasks[activeTaskIndex].specificFeedbackResponse;
+	},
 	getQueuedTasks: function(data) {
 		return data.character.queuedTasks;
 	},
@@ -91,14 +94,12 @@ export var SpeechChecker = {
 
 		// If the userAnswer contains a global exception, immediately mark it as wrong
 		if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
-			console.log("Checking exceptions");
 			var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
 			// console.log(exceptions);
 			var exceptionMatch = false;
 			exceptions.forEach(function(exception){
 				// console.log(exception);
 				if (userAnswer.indexOf(exception) >= 0) {
-					console.log("exception exists: " + exception);
 					exceptionMatch = true;
 				}
 			});
@@ -130,7 +131,6 @@ export var SpeechChecker = {
 			if (possibleAnswerObject.exceptions !== undefined) {
 				possibleAnswerObject.exceptions.forEach(function(exception){
 					if (userAnswer.indexOf(exception) >= 0) {
-						console.log("exception exists");
 						exceptionFound = true;
 					}
 				})
@@ -164,6 +164,19 @@ export var SpeechChecker = {
 		If answer is wrong, see if there's any specific feedback we want to give
 		------------------------------------------------------------*/
 
+		// Check if there's any specific feedback for wrong answers
+		if (objectToReturn.answerCorrect === false ) {
+			try {
+				var possibleFeedbackAnswers = TaskController.getSpecificFeedbackResponses(data, activeTaskIndex);
+				/* 
+				objectToReturn.specificFeedback = true;
+				objectToReturn.feedbackText = 
+				console.log(objectToReturn.specificFeedback);
+				*/	
+			} catch(err) {
+				console.log ("error");
+			}
+		}
 
 
 		// Return object should contain a 4th entry, specificFeedback: true

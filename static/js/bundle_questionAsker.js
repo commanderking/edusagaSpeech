@@ -22460,6 +22460,9 @@
 		getPossibleCorrectAnswers: function getPossibleCorrectAnswers(data, activeTaskIndex) {
 			return this.getActiveTask(data, activeTaskIndex).possibleAnswers;
 		},
+		getSpecificFeedbackResponses: function getSpecificFeedbackResponses(data, activeTaskIndex) {
+			return data.character.currentTasks[activeTaskIndex].specificFeedbackResponse;
+		},
 		getQueuedTasks: function getQueuedTasks(data) {
 			return data.character.queuedTasks;
 		},
@@ -22540,14 +22543,12 @@
 	
 			// If the userAnswer contains a global exception, immediately mark it as wrong
 			if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
-				console.log("Checking exceptions");
 				var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
 				// console.log(exceptions);
 				var exceptionMatch = false;
 				exceptions.forEach(function (exception) {
 					// console.log(exception);
 					if (userAnswer.indexOf(exception) >= 0) {
-						console.log("exception exists: " + exception);
 						exceptionMatch = true;
 					}
 				});
@@ -22579,7 +22580,6 @@
 				if (possibleAnswerObject.exceptions !== undefined) {
 					possibleAnswerObject.exceptions.forEach(function (exception) {
 						if (userAnswer.indexOf(exception) >= 0) {
-							console.log("exception exists");
 							exceptionFound = true;
 						}
 					});
@@ -22612,6 +22612,20 @@
 			/*------------------------------------------------------------
 	  If answer is wrong, see if there's any specific feedback we want to give
 	  ------------------------------------------------------------*/
+	
+			// Check if there's any specific feedback for wrong answers
+			if (objectToReturn.answerCorrect === false) {
+				try {
+					var possibleFeedbackAnswers = TaskController.getSpecificFeedbackResponses(data, activeTaskIndex);
+					/* 
+	    objectToReturn.specificFeedback = true;
+	    objectToReturn.feedbackText = 
+	    console.log(objectToReturn.specificFeedback);
+	    */
+				} catch (err) {
+					console.log("error");
+				}
+			}
 	
 			// Return object should contain a 4th entry, specificFeedback: true
 			// Then in questionAsker script, if returnedObject answer is false, but contains specificFeedback: true, then enter specificFeedback phase

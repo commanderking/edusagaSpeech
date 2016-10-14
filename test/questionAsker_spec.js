@@ -35,6 +35,12 @@ describe('Question Asker Logic', () => {
 			var expectedIDs = [2,3,4];
 			assert.deepEqual(TaskController.getTaskIDsToQueueOfCurrentTasks(testJSON), expectedIDs);
 		});
+
+		it ('get specificFeedback if answer is wrong, but specific feedback applies', () => {
+			var returnedObject = TaskController.getSpecificFeedbackResponses(testJSON, 4);
+			console.log(returnedObject);
+			expect(returnedObject[0].answers = "我吃");
+		})
 	});
 
 
@@ -251,8 +257,9 @@ describe('Question Asker Logic', () => {
 	describe('If answer is wrong, but specific feedback should be given', () => {
 		it ('returned object is correct', () => {
 			var userAnswer = "我吃";
-			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
-			expect(answerCorrect).to.equal(false);
+			var answerCorrectObject = SpeechChecker.checkAnswer(userAnswer, testJSON, 4);
+			expect(answerCorrectObject.answerCorrect).to.equal(false);
+			expect(answerCorrectObject.specificFeedback).to.equal(true);
 
 		})
 	}) 
