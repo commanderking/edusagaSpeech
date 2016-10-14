@@ -44,6 +44,50 @@
 				{
 					"soundID" : "nihao",
 					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "david/feichanghao.ogg"
+				},
+				{
+					"soundID" : "hobbies-weekend-likes",
+					"soundPath" : "david/hobbies-weekend-likes.ogg"
+				},
+				{
+					"soundID" : "hobbies-movies-tomorrow",
+					"soundPath" : "david/hobbies-movies-tomorrow.ogg"
+				},
+				{
+					"soundID" : "hobbies-basketball-tomorrow",
+					"soundPath" : "david/hobbies-basketball-tomorrow.ogg"
+				},
+				{
+					"soundID" : "hobbies-karaoke-tomorrow",
+					"soundPath" : "david/hobbies-karaoke-tomorrow.ogg"
+				},
+				{
+					"soundID" : "hobbies-tomorrow-7",
+					"soundPath" : "david/hobbies-tomorrow-7.ogg"
+				},
+				{
+					"soundID" : "hobbies-oh-toobad-nextday",
+					"soundPath" : "david/hobbies-oh-toobad-nextday.ogg"
+				},
+				{
+					"soundID" : "hobbies-then-see-you-tomorrow",
+					"soundPath" : "david/hobbies-then-see-you-tomorrow.ogg"
+				},
+				{
+					"soundID" : "hobbies-toobad-leave-first",
+					"soundPath" : "david/hobbies-toobad-leave-first.ogg"
+				},
+				{
+					"soundID" : "see-you-tomorrow",
+					"soundPath" : "david/see-you-tomorrow.ogg"
+				},
+				{
+					"soundID" : "see-you-day-after",
+					"soundPath" : "david/see-you-day-after.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -78,7 +122,7 @@
 						{
 							"answers" : ["你好吗", "怎么样"],
 							"response" : "非常好!",
-							"soundID" : ""							
+							"soundID" : "feichanghao"							
 						}
 					],
 					"correct" : false,
@@ -97,16 +141,16 @@
 					[
 						{
 							"answers" : ["你周末喜欢做什么"],
-							"response" : "我周末喜欢打篮球，看电影, 还喜欢去卡拉ok唱歌。",
-							"soundID" : ""
+							"response" : "我周末喜欢打篮球，看电影, 还喜欢唱卡拉ok。",
+							"soundID" : "hobbies-weekend-likes"
 						},
 						{
 							"answers" : [
 								["你周末", "周末你"],
 								["喜欢做什么", "爱做什么"]
 							],
-							"response" : "我周末喜欢打篮球，看电影, 还喜欢去卡拉ok唱歌。",
-							"soundID" : ""
+							"response" : "我周末喜欢打篮球，看电影, 还喜欢唱卡拉ok。",
+							"soundID" : "hobbies-weekend-likes"
 						}
 					],
 					"correct" : false,
@@ -125,7 +169,7 @@
 						{
 							"answers" : ["我也喜欢打篮球"],
 							"response" : "哦! 是吗? 那我们明天打篮球, 好不好?",
-							"soundID" : ""
+							"soundID" : "hobbies-basketball-tomorrow"
 						},
 						{
 							"answers" : [
@@ -134,7 +178,7 @@
 								["打篮球"]
 							],
 							"response" : "哦! 是吗? 那我们明天打篮球, 好不好?",
-							"soundID" : ""
+							"soundID" : "hobbies-basketball-tomorrow"
 						}
 					],
 					"correct" : false,
@@ -153,7 +197,7 @@
 						{
 							"answers" : ["我也喜欢看电影"],
 							"response" : "哦! 真的? 那我们明天看电影, 怎么样?",
-							"soundID" : ""
+							"soundID" : "hobbies-movies-tomorrow"
 						},
 						{
 							"answers" : [
@@ -162,7 +206,7 @@
 								["看电影"]
 							],
 							"response" : "哦! 真的? 那我们明天看电影, 怎么样?",
-							"soundID" : ""
+							"soundID" : "hobbies-movies-tomorrow"
 						}
 					],
 					"correct" : false,
@@ -181,16 +225,16 @@
 						{
 							"answers" : ["我也喜欢唱歌"],
 							"response" : "那我们明天唱歌, 好吗?",
-							"soundID" : ""
+							"soundID" : "hobbies-karaoke-tomorrow"
 						},
 						{
 							"answers" : [
 								["我也"],
 								["很", "非常", "挺"],
-								["唱歌"]
+								["唱歌", "唱卡拉ok", "卡拉ok"]
 							],
 							"response" : "那我们明天唱歌, 好吗?",
-							"soundID" : ""
+							"soundID" : "hobbies-karaoke-tomorrow"
 						}
 					],
 					"correct" : false,
@@ -209,7 +253,7 @@
 						{
 							"answers" : ["明天几点"],
 							"response" : "明天晚上七点, 怎么样?",
-							"soundID" : "",
+							"soundID" : "hobbies-tomorrow-7",
 							"exactMatch" : true
 						}
 					],
@@ -229,7 +273,7 @@
 						{
 							"answers" : ["我明天有事", "我明天有事儿"],
 							"response" : "哦, 真可惜。 那后天呢?",
-							"soundID" : "",
+							"soundID" : "hobbies-oh-toobad-nextday",
 							"exactMatch" : true
 						},
 						{
@@ -238,7 +282,7 @@
 								["很忙", "没有空", "没空", "有事", "有事儿", "挺忙", "非常忙"]
 							],
 							"response" : "哦, 真可惜。 那后天呢?",
-							"soundID" : "",
+							"soundID" : "hobbies-oh-toobad-nextday",
 							"exactMatch" : true
 						}
 					],
@@ -258,7 +302,7 @@
 						{
 							"answers" : ["好啊", "好的", "好", "好极了", "太好了"],
 							"response" : "那我们明天见!",
-							"soundID" : "",
+							"soundID" : "hobbies-then-see-you-tomorrow",
 							"exactMatch" : true
 						}
 					],
@@ -277,8 +321,8 @@
 					[
 						{
 							"answers" : ["好啊", "好的", "好", "好极了", "太好了"],
-							"response" : "那我们后天见!",
-							"soundID" : "",
+							"response" : "那我们就后天见!",
+							"soundID" : "hobbies",
 							"exactMatch" : true
 						}
 					],
@@ -297,7 +341,7 @@
 					[
 						{
 							"answers" : ["我后天有事", "我后天有事儿"],
-							"response" : "哦, 真可惜。 那后天呢?",
+							"response" : "哎呀。真可惜。 好吧。那我先走了。 再见!",
 							"soundID" : "",
 							"exactMatch" : true
 						},

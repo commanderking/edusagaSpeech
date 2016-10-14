@@ -47,7 +47,35 @@
 			[
 				{
 					"soundID" : "nihao",
-					"soundPath" : "david/nihao.ogg"
+					"soundPath" : "david/likes-american-food.ogg"
+				},
+				{
+					"soundID" : "likes-japanese-food",
+					"soundPath" : "david/likes-japanese-food.ogg"
+				},
+				{
+					"soundID" : "dislikes-korean-food",
+					"soundPath" : "david/dislikes-korean-food.ogg"
+				},
+				{
+					"soundID" : "likes-chinese-food-do-you",
+					"soundPath" : "david/likes-chinese-food-do-you.ogg"
+				},
+				{
+					"soundID" : "likes-vietnamese-ok",
+					"soundPath" : "david/likes-vietnamese-ok.ogg"
+				},
+				{
+					"soundID" : "likes-mexican-food",
+					"soundPath" : "david/likes-mexican-food.ogg"
+				},
+				{
+					"soundID" : "wow-really",
+					"soundPath" : "david/wow-really.ogg"
+				},
+				{
+					"soundID" : "hownice-zhenhao",
+					"soundPath" : "david/hownice-zhenhao.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -97,7 +125,7 @@
 						{
 							"answers" : ["你喜欢吃美国菜吗"],
 							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
-							"soundID" : ""
+							"soundID" : "likes-american-food"
 						},
 						{
 							"answers" : [
@@ -106,12 +134,12 @@
 								["美国菜"]
 							],
 							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
-							"soundID" : ""
+							"soundID" : "likes-american-food"
 						},
 						{
 							"answers" : ["喜欢吃美国菜吗", "爱吃美国菜吗"],
-							"response" : "我喜欢吃美国菜! 我爱吃寿司...",
-							"soundID" : ""
+							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
+							"soundID" : "likes-american-food"
 						}
 					],
 					"correct" : false,
@@ -128,7 +156,7 @@
 						{
 							"answers" : ["你喜欢吃日本菜吗"],
 							"response" : "我喜欢吃日本菜! 我爱吃寿司...",
-							"soundID" : ""
+							"soundID" : "likes-japanese-food"
 						},
 						{
 							"answers" : [
@@ -137,12 +165,12 @@
 								["日本菜"]
 							],
 							"response" : "我喜欢吃日本菜! 我爱吃寿司...",
-							"soundID" : ""
+							"soundID" : "likes-japanese-food"
 						},
 						{
 							"answers" : ["喜欢吃日本菜吗", "爱吃日本菜吗"],
 							"response" : "我喜欢吃日本菜! 我爱吃寿司...",
-							"soundID" : ""
+							"soundID" : "likes-japanese-food"
 						}
 					],
 					"correct" : false,
@@ -159,7 +187,7 @@
 						{
 							"answers" : ["你喜欢吃韩国菜吗"],
 							"response" : "韩国菜。。。 我不喜欢吃韩国菜。太辣了。",
-							"soundID" : ""
+							"soundID" : "dislikes-korean-food"
 						},
 						{
 							"answers" : [
@@ -168,12 +196,12 @@
 								["韩国菜"]
 							],
 							"response" : "韩国菜。。。 我不喜欢吃韩国菜。太辣了。",
-							"soundID" : ""
+							"soundID" : "dislikes-korean-food"
 						},
 						{
 							"answers" : ["喜欢吃中国菜吗", "爱吃中国菜吗"],
 							"response" : "韩国菜。。。 我不喜欢吃韩国菜。太辣了。",
-							"soundID" : ""
+							"soundID" : "dislikes-korean-food"
 						}
 					],
 					"correct" : false,
@@ -192,7 +220,7 @@
 						{
 							"answers" : ["你喜欢吃中国菜吗"],
 							"response" : "我爱吃中国菜!!! 你喜欢吃中国菜吗?",
-							"soundID" : ""
+							"soundID" : "likes-chinese-food-do-you"
 						},
 						{
 							"answers" : [
@@ -201,12 +229,12 @@
 								["中国菜"]
 							],
 							"response" : "我爱吃中国菜!!! 你喜欢吃中国菜吗?",
-							"soundID" : ""
+							"soundID" : "likes-chinese-food-do-you"
 						},
 						{
 							"answers" : ["喜欢吃中国菜吗", "爱吃中国菜吗"],
 							"response" : "我爱吃中国菜!!! 你喜欢吃中国菜吗?",
-							"soundID" : ""
+							"soundID" : "likes-chinese-food-do-you"
 						}
 					],
 					"correct" : false,
@@ -224,7 +252,7 @@
 						{
 							"answers" : ["你喜欢吃越南菜吗"],
 							"response" : "越南菜...还可以吧. 我很喜欢吃 Pho.",
-							"soundID" : ""
+							"soundID" : "likes-vietnamese-ok"
 						},
 						{
 							"answers" : [
@@ -233,12 +261,12 @@
 								["越南菜"]
 							],
 							"response" : "越南菜...还可以吧. 我很喜欢吃 Pho.",
-							"soundID" : ""
+							"soundID" : "likes-vietnamese-ok"
 						},
 						{
 							"answers" : ["喜欢吃越南菜吗", "爱吃越南菜吗"],
 							"response" : "越南菜...还可以吧. 我很喜欢吃 Pho.",
-							"soundID" : ""
+							"soundID" : "likes-vietnamese-ok"
 						}
 					],
 					"correct" : false,
@@ -256,8 +284,8 @@
 					[
 						{
 							"answers" : ["你喜不喜欢吃墨西哥菜"],
-							"response" : "墨西哥菜很好吃啊! 你呢？ 你喜不喜欢吃墨西哥菜吗?",
-							"soundID" : ""
+							"response" : "墨西哥菜很好吃啊! 你呢？ 你喜不喜欢吃墨西哥菜?",
+							"soundID" : "likes-mexican-food"
 						},
 						{
 							"answers" : [
@@ -265,13 +293,13 @@
 								["喜不喜欢吃", "爱不爱吃", "想不想吃", "要不要吃"],
 								["墨西哥菜"]
 							],
-							"response" : "墨西哥菜很好吃啊! 你喜欢吃墨西哥菜吗?",
-							"soundID" : ""
+							"response" : "墨西哥菜很好吃啊! 你喜不喜欢吃墨西哥菜?",
+							"soundID" : "likes-mexican-food"
 						},
 						{
 							"answers" : ["喜欢吃墨西哥菜吗", "爱吃墨西哥菜吗"],
-							"response" : "墨西哥菜很好吃啊! 你喜欢吃墨西哥菜吗?",
-							"soundID" : ""
+							"response" : "墨西哥菜很好吃啊! 你喜不喜欢吃墨西哥菜?",
+							"soundID" : "likes-mexican-food"
 						}	
 					],
 					"correct" : false,
@@ -287,13 +315,13 @@
 					[
 						{
 							"answers" : ["我喜欢吃中国菜"],
-							"response" : "哦. 真好! ",
-							"soundID" : ""
+							"response" : "真好! ",
+							"soundID" : "hownice-zhenhao"
 						},
 						{
 							"answers" : ["喜欢", "我喜欢", "我喜欢啊"],
-							"response" : "哦. 真好! ",
-							"soundID" : "",
+							"response" : "真好! ",
+							"soundID" : "hownice-zhenhao",
 							"exactMatch" : true
 						},
 						{
@@ -301,16 +329,16 @@
 								["我喜欢", "我很喜欢", "我爱"],
 								["吃中国菜", "中国菜"]
 							],
-							"response" : "哦. 真好! ",
-							"soundID" : ""
+							"response" : "真好! ",
+							"soundID" : "hownice-zhenhao"
 						},
 						{
 							"answers" : [
 								["中国菜"],
 								["很好吃", "不错", "挺好吃"]
 							],
-							"response" : "哦. 真好! ",
-							"soundID" : ""
+							"response" : "真好! ",
+							"soundID" : "hownice-zhenhao"
 						},
 						{
 							"answers" : ["不喜欢", "我不喜欢", "我不喜欢啊"],
@@ -324,7 +352,7 @@
 								["吃中国菜", "中国菜"]
 							],
 							"response" : "哇！真的吗?  ",
-							"soundID" : ""
+							"soundID" : "wow-really"
 						},
 						{
 							"answers" : [
@@ -332,7 +360,7 @@
 								["不好吃", "不怎么样", "还可以"]
 							],
 							"response" : "哇! 真的吗? ",
-							"soundID" : ""
+							"soundID" : "wow-really"
 						}
 					],
 					"correct" : false,
@@ -348,12 +376,12 @@
 					[
 						{
 							"answers" : ["我喜欢吃墨西哥菜"],
-							"response" : "哦. 真好! ",
-							"soundID" : ""
+							"response" : "真好! ",
+							"soundID" : "hownice-zhenhao"
 						},
 						{
 							"answers" : ["喜欢", "我喜欢", "我喜欢啊"],
-							"response" : "哦. 真好! ",
+							"response" : "真好! ",
 							"soundID" : "",
 							"exactMatch" : true
 						},
@@ -362,16 +390,16 @@
 								["我喜欢", "我很喜欢", "我爱"],
 								["吃墨西哥菜", "墨西哥菜"]
 							],
-							"response" : "哦. 真好! ",
-							"soundID" : ""
+							"response" : "真好! ",
+							"soundID" : "hownice-zhenhao"
 						},
 						{
 							"answers" : [
 								["墨西哥菜"],
 								["很好吃", "不错", "挺好吃"]
 							],
-							"response" : "哦. 真好! ",
-							"soundID" : ""
+							"response" : "真好! ",
+							"soundID" : "hownice-zhenhao"
 						},
 						{
 							"answers" : ["不喜欢", "我不喜欢", "我不喜欢啊"],
@@ -385,7 +413,7 @@
 								["吃墨西哥菜", "墨西哥菜"]
 							],
 							"response" : "哇！真的吗?  ",
-							"soundID" : ""
+							"soundID" : "wow-really"
 						},
 						{
 							"answers" : [
@@ -393,7 +421,7 @@
 								["不好吃", "不怎么样", "还可以"]
 							],
 							"response" : "哇! 真的吗? ",
-							"soundID" : ""
+							"soundID" : "wow-really"
 						}
 					],
 					"correct" : false,

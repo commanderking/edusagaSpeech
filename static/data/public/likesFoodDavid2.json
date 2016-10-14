@@ -50,6 +50,58 @@
 				{
 					"soundID" : "nihao",
 					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "david/feichanghao.ogg"
+				},
+				{
+					"soundID" : "schedule-friday-busy",
+					"soundPath" : "david/schedule-friday-busy.ogg"
+				},
+				{
+					"soundID" : "schedule-saturday-busy",
+					"soundPath" : "david/schedule-saturday-busy.ogg"
+				},
+				{
+					"soundID" : "schedule-sunday-free",
+					"soundPath" : "david/schedule-sunday-free.ogg"
+				},
+				{
+					"soundID" : "schedule-saturday-busy-sunday-free",
+					"soundPath" : "david/schedule-saturday-busy-sunday-free.ogg"
+				},
+				{
+					"soundID" : "schedule-wow-great-whattime",
+					"soundPath" : "david/schedule-wow-great-whattime.ogg"
+				},
+				{
+					"soundID" : "taihaole",
+					"soundPath" : "david/taihaole.ogg"
+				},
+				{
+					"soundID" : "haojile",
+					"soundPath" : "david/haojile.ogg"
+				},
+				{
+					"soundID" : "meiwenti",
+					"soundPath" : "david/meiwenti.ogg"
+				},
+				{
+					"soundID" : "schedule-ok-like-chinese-food",
+					"soundPath" : "david/schedule-ok-like-chinese-food.ogg"
+				},
+				{
+					"soundID" : "schedule-dislike-korean-food",
+					"soundPath" : "david/schedule-dislike-korean-food.ogg"
+				},
+				{
+					"soundID" : "schedule-ok-like-mexican-food",
+					"soundPath" : "david/schedule-ok-like-mexican-food.ogg"
+				},
+				{
+					"soundID" : "zaijian",
+					"soundPath" : "david/zaijian.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -84,7 +136,7 @@
 						{
 							"answers" : ["你好吗", "怎么样"],
 							"response" : "非常好!",
-							"soundID" : ""							
+							"soundID" : "feichanghao"							
 						}
 					],
 					"correct" : false,
@@ -104,8 +156,8 @@
 					[
 						{
 							"answers" : ["你星期五忙不忙"],
-							"response" : "我星期六很忙。 我要打篮球。",
-							"soundID" : ""
+							"response" : "我星期五有事儿。 我跟陈阳要一起吃饭。",
+							"soundID" : "schedule-friday-busy"
 						},
 						{
 							"answers" : [
@@ -113,7 +165,7 @@
 								["忙不忙", "忙吗", "有空吗", "有没有空", "有事吗", "有没有事"]
 							],
 							"response" : "我星期五有事儿。 我跟陈阳要一起吃饭。",
-							"soundID" : ""
+							"soundID" : "schedule-friday-busy"
 						}	
 					],
 					"correct" : false,
@@ -131,7 +183,7 @@
 						{
 							"answers" : ["你星期六忙不忙"],
 							"response" : "我星期六很忙。 我要打篮球。",
-							"soundID" : ""
+							"soundID" : "schedule-saturday-busy"
 						},
 						{
 							"answers" : [
@@ -139,7 +191,7 @@
 								["忙不忙", "忙吗", "有空吗", "有没有空", "有事吗", "有没有事"]
 							],
 							"response" : "我星期六很忙。 我要打篮球。",
-							"soundID" : ""
+							"soundID" : "schedule-saturday-busy"
 						}	
 					],
 					"correct" : false,
@@ -157,16 +209,16 @@
 					[
 						{
 							"answers" : ["你星期天忙不忙"],
-							"response" : "我星期六很忙。 我要打篮球。",
-							"soundID" : ""
+							"response" : "我星期天没事儿! 怎么样? 你有什么事儿吗?",
+							"soundID" : "schedule-sunday-free"
 						},
 						{
 							"answers" : [
 								["星期日", "星期天", "礼拜天", "周日"],
 								["忙不忙", "忙吗", "有空吗", "有没有空", "有事吗", "有没有事"]
 							],
-							"response" : "我星期天没事儿! 怎么样? 你有什么事吗?",
-							"soundID" : ""
+							"response" : "我星期天没事儿! 怎么样? 你有什么事儿吗?",
+							"soundID" : "schedule-sunday-free"
 						}	
 					],
 					"correct" : false,
@@ -184,8 +236,8 @@
 					[
 						{
 							"answers" : ["你周末忙不忙"],
-							"response" : "我星期六很忙。 我要打篮球。",
-							"soundID" : ""
+							"response" : "我星期六很忙, 可是我星期天没事儿!",
+							"soundID" : "schedule-saturday-busy-sunday-free"
 						},
 						{
 							"answers" : [
@@ -193,7 +245,7 @@
 								["忙不忙", "忙吗", "有空吗", "有没有空", "有事吗", "有没有事"]
 							],
 							"response" : "我星期六很忙, 可是我星期天没事儿!",
-							"soundID" : ""
+							"soundID" : "schedule-saturday-busy-sunday-free"
 						}	
 					],
 					"correct" : false,
@@ -210,7 +262,7 @@
 						{
 							"answers" : ["我星期天请你吃饭, 怎么样"],
 							"response" : "哇! 好极了! 星期天几点?",
-							"soundID" : ""
+							"soundID" : "schedule-wow-great-whattime"
 						},
 						{
 							"answers" : [
@@ -219,7 +271,7 @@
 								["好吗", "怎么样"]
 							],
 							"response" : "哇! 好极了! 星期天几点?",
-							"soundID" : ""
+							"soundID" : "schedule-wow-great-whattime"
 						}	
 					],
 					"correct" : false,
@@ -238,7 +290,7 @@
 						{
 							"answers" : ["十一点一刻", "十一点十五", "十一点十五分", "11点15分"],
 							"response" : "太好了!",
-							"soundID" : ""
+							"soundID" : "taihaole"
 						}
 					],
 					"correct" : false,
@@ -257,7 +309,7 @@
 						{
 							"answers" : ["十一点半", "十一点三十", "十一点三十分", "11点30分"],
 							"response" : "好极了!",
-							"soundID" : ""
+							"soundID" : "haojile"
 						}
 					],
 					"correct" : false,
@@ -276,7 +328,7 @@
 						{
 							"answers" : ["十一点三刻", "十一点四十五", "11点45分"],
 							"response" : "没问题!",
-							"soundID" : ""
+							"soundID" : "meiwenti"
 						}
 					],
 					"correct" : false,
@@ -295,7 +347,7 @@
 						{
 							"answers" : ["我们吃中国菜好吗"],
 							"response" : "好啊! 我很喜欢吃中国菜!",
-							"soundID" : ""
+							"soundID" : "schedule-ok-like-chinese-food"
 						},
 						{
 							"answers" : [
@@ -303,7 +355,7 @@
 								["好吗", "怎么样"]
 							],
 							"response" : "好啊! 我很喜欢吃中国菜!",
-							"soundID" : ""
+							"soundID" : "schedule-ok-like-chinese-food"
 						},
 						{
 							"answers" : [
@@ -311,7 +363,7 @@
 								["中国菜吗"]
 							],
 							"response" : "好啊! 我很喜欢吃中国菜! ",
-							"soundID" : ""
+							"soundID" : "schedule-ok-like-chinese-food"
 						},
 						{
 							"answers" : [
@@ -319,7 +371,7 @@
 								["吃中国菜"]
 							],
 							"response" : "好啊! 我很喜欢吃中国菜! ",
-							"soundID" : ""
+							"soundID" : "schedule-ok-like-chinese-food"
 						}
 					],
 					"correct" : false,
@@ -337,7 +389,7 @@
 						{
 							"answers" : ["我们吃韩国菜好吗"],
 							"response" : "我不是很喜欢吃韩国菜。",
-							"soundID" : ""
+							"soundID" : "schedule-dislike-korean-food"
 						},
 						{
 							"answers" : [
@@ -345,7 +397,7 @@
 								["好吗", "怎么样"]
 							],
 							"response" : "我不是很喜欢吃韩国菜。",
-							"soundID" : ""
+							"soundID" : "schedule-dislike-korean-food"
 						},
 						{
 							"answers" : [
@@ -353,7 +405,7 @@
 								["韩国菜吗"]
 							],
 							"response" : "我不是很喜欢吃韩国菜。",
-							"soundID" : ""
+							"soundID" : "schedule-dislike-korean-food"
 						},
 						{
 							"answers" : [
@@ -361,7 +413,7 @@
 								["吃韩国菜"]
 							],
 							"response" : "我不是很喜欢吃韩国菜。",
-							"soundID" : ""
+							"soundID" : "schedule-dislike-korean-food"
 						}
 					],
 					"correct" : false,
@@ -380,7 +432,7 @@
 						{
 							"answers" : ["我们吃墨西哥菜好吗"],
 							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
-							"soundID" : ""
+							"soundID" : "schedule-ok-like-mexican-food"
 						},
 						{
 							"answers" : [
@@ -388,7 +440,7 @@
 								["好吗", "怎么样"]
 							],
 							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
-							"soundID" : ""
+							"soundID" : "schedule-ok-like-mexican-food"
 						},
 						{
 							"answers" : [
@@ -396,7 +448,7 @@
 								["墨西哥菜吗"]
 							],
 							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
-							"soundID" : ""
+							"soundID" : "schedule-ok-like-mexican-food"
 						},
 						{
 							"answers" : [
@@ -404,7 +456,7 @@
 								["吃墨西哥菜"]
 							],
 							"response" : "好啊! 我挺喜欢吃墨西哥菜。",
-							"soundID" : ""
+							"soundID" : "schedule-ok-like-mexican-food"
 						}
 					],
 					"correct" : false,
@@ -421,7 +473,7 @@
 						{
 							"answers" : ["星期天见", "星期天建", "星期日见", "星期日间", "礼拜天见"],
 							"response" : "再见!",
-							"soundID" : ""
+							"soundID" : "zaijian"
 						}
 					],
 					"correct" : false,
