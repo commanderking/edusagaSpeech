@@ -27,6 +27,7 @@ var FeedbackContainer = React.createClass({
 								onHintAudio = {this.props.onHintAudio} 
 								askingForRepeat = {this.props.askingForRepeat} />
 						<RepeatButton
+							scenarioOn = {this.props.scenarioOn}
 							repeatActive = {this.props.repeatActive} 
 							handleAskRepeat = {this.props.handleAskRepeat}
 							onDisableHint = {this.props.onDisableHint}
@@ -42,6 +43,7 @@ var FeedbackContainer = React.createClass({
 							askingForRepeat = {this.props.askingForRepeat} 
 							activateRepeatMode = {this.props.activateRepeatMode} />
 						<SkipButton 
+							scenarioOn = {this.props.scenarioOn}
 							askingForRepeat = {this.props.askingForRepeat} 
 							correctAnswerState = {this.props.correctAnswerState}
 							micActive = {this.props.micActive} 

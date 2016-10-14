@@ -128,15 +128,10 @@
 		loadSceneData: function loadSceneData() {
 			var that = this;
 			$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function (data) {}).success(function (data) {
-	
-				// Calculate number of coins possible
-				var totalCoins = 10 * (data.character.currentTasks.length + data.character.queuedTasks.length);
-				that.setState({
-					sceneData: data,
-					possibleCoins: totalCoins
-				});
 				that.resetScene();
-	
+				that.setState({
+					sceneData: data
+				});
 				/*----------------------------------
 	    One time setting of initial log Data
 	    ----------------------------------*/
@@ -366,9 +361,24 @@
 		},
 		checkSceneOver: function checkSceneOver() {
 			// Logic for when scene is over
-			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneData.character.queuedTasks.length === 0 && this.state.sceneComplete === false) {
+			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
 				var that = this;
+	
+				// Calculate number of coins possible
+				var totalCoins = 10 * this.state.sceneData.character.completedTasks.length;
+				this.setState({
+					possibleCoins: totalCoins
+				});
+	
+				// Post completed progress results
 				var studentCompletedProgress = {};
+				// Pull teacher variable set in html page if possible
+				try {
+					studentCompletedProgress.teacherID = teacher;
+				} catch (err) {
+					studentCompletedProgress.teacherID = "Unknown teacher";
+				}
+	
 				studentCompletedProgress.studentID = initialLogData.studentID;
 				var allTaskData = [];
 	
@@ -387,6 +397,8 @@
 				studentCompletedProgress.possibleScore = this.state.possibleCoins / 10;
 				studentCompletedProgress.time = timeInSeconds;
 				studentCompletedProgress.allTaskData = allTaskData;
+				studentCompletedProgress.activityID = this.state.sceneData.activityID;
+				studentCompletedProgress.activityName = this.state.sceneData.activityName;
 	
 				var logEvent = JSON.stringify(studentCompletedProgress);
 				$.ajax({
@@ -546,7 +558,7 @@
 				var that = this;
 	
 				// check if what user said was one of the ask for repeat phrases
-				var possibleRepeatPhrases = JSON.parse(JSON.stringify(this.state.sceneData.character.repeatPhrases));
+				var possibleRepeatPhrases = JSON.parse(JSON.stringify(this.state.repeatPhrases));
 				var correctRepeatAsk = false;
 				var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 	
@@ -712,6 +724,7 @@
 						, currentTaskIndex: this.state.currentTaskIndex,
 						setCurrentTaskIndex: this.setCurrentTaskIndex }),
 					React.createElement(FeedbackContainer, {
+						scenarioOn: this.state.scenarioOn,
 						locationTextEnglish: this.state.sceneData.character.location.nameEnglish,
 						locationTextChinese: this.state.sceneData.character.location.nameChinese,
 						hintActive: this.state.hintActive,
@@ -22781,6 +22794,9 @@
 		getPossibleCorrectAnswers: function getPossibleCorrectAnswers(data, activeTaskIndex) {
 			return this.getActiveTask(data, activeTaskIndex).possibleAnswers;
 		},
+		getSpecificFeedbackResponses: function getSpecificFeedbackResponses(data, activeTaskIndex) {
+			return data.character.currentTasks[activeTaskIndex].specificFeedbackResponse;
+		},
 		getQueuedTasks: function getQueuedTasks(data) {
 			return data.character.queuedTasks;
 		},
@@ -22848,7 +22864,7 @@
 	};
 	
 	var SpeechChecker = exports.SpeechChecker = {
-		// determine whether to use typical check or advancedCheck
+		// determine whether to use typical check or advancedCheck, returns objectToReturn
 		checkAnswer: function checkAnswer(userAnswer, data, activeTaskIndex) {
 			var that = this;
 	
@@ -22859,16 +22875,14 @@
 				"responseSoundID": ""
 			};
 	
-			// If the userAnswer contains an exception, immediately mark it as wrong
+			// If the userAnswer contains a global exception, immediately mark it as wrong
 			if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
-				console.log("Checking exceptions");
 				var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
 				// console.log(exceptions);
 				var exceptionMatch = false;
 				exceptions.forEach(function (exception) {
 					// console.log(exception);
 					if (userAnswer.indexOf(exception) >= 0) {
-						console.log("exception exists");
 						exceptionMatch = true;
 					}
 				});
@@ -22889,29 +22903,66 @@
 	   		{
 	   			"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
 	   			"response": "非常好",
-	   			"soundID": "feichanghao"
+	   			"soundID": "feichanghao",
+	   			"exceptions": []
 	   		}
 	   */
-				if (possibleAnswerObject.answers[0].constructor === Array) {
-					// console.log("using advanced check");
-					checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
-					// Only set object to return if 
-					console.log(possibleAnswerObject.answers);
-					if (checkResult === true) {
-						objectToReturn.answerCorrect = true;
-						objectToReturn.possibleAnswersIndex = i;
-						objectToReturn.responseSoundID = tempSoundID;
-					}
-				} else {
-					// console.log("using typical check");
-					checkResult = that.typicalCheck(userAnswer, possibleAnswerObject);
-					if (checkResult === true) {
-						objectToReturn.answerCorrect = true;
-						objectToReturn.possibleAnswersIndex = i;
-						objectToReturn.responseSoundID = tempSoundID;
+	
+				// check if user answer contains an exception word for this answerObject
+				var exceptionFound = false;
+	
+				if (possibleAnswerObject.exceptions !== undefined) {
+					possibleAnswerObject.exceptions.forEach(function (exception) {
+						if (userAnswer.indexOf(exception) >= 0) {
+							exceptionFound = true;
+						}
+					});
+				}
+	
+				if (exceptionFound === false) {
+					// If the answers are an array of arrays, then we must use an advanced check
+					if (possibleAnswerObject.answers[0].constructor === Array) {
+						// console.log("using advanced check");
+						checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
+						// Only set object to return if the result is true
+						// console.log(possibleAnswerObject.answers);
+						if (checkResult === true) {
+							objectToReturn.answerCorrect = true;
+							objectToReturn.possibleAnswersIndex = i;
+							objectToReturn.responseSoundID = tempSoundID;
+						}
+					} else {
+						// console.log("using typical check");
+						checkResult = that.typicalCheck(userAnswer, possibleAnswerObject);
+						if (checkResult === true) {
+							objectToReturn.answerCorrect = true;
+							objectToReturn.possibleAnswersIndex = i;
+							objectToReturn.responseSoundID = tempSoundID;
+						}
 					}
 				}
 			});
+	
+			/*------------------------------------------------------------
+	  If answer is wrong, see if there's any specific feedback we want to give
+	  ------------------------------------------------------------*/
+	
+			// Check if there's any specific feedback for wrong answers
+			if (objectToReturn.answerCorrect === false) {
+				try {
+					var possibleFeedbackAnswers = TaskController.getSpecificFeedbackResponses(data, activeTaskIndex);
+					/* 
+	    objectToReturn.specificFeedback = true;
+	    objectToReturn.feedbackText = 
+	    console.log(objectToReturn.specificFeedback);
+	    */
+				} catch (err) {
+					console.log("error");
+				}
+			}
+	
+			// Return object should contain a 4th entry, specificFeedback: true
+			// Then in questionAsker script, if returnedObject answer is false, but contains specificFeedback: true, then enter specificFeedback phase
 	
 			return objectToReturn;
 		},
@@ -22953,12 +23004,11 @@
 				// Have something like ["你", "您"]
 				var answerPartCorrect = false;
 				for (var k = 0; k < answerPartArray.length; k++) {
-					console.log(answerPartArray[k]);
 					var newAnswerIndex = userAnswer.indexOf(answerPartArray[k]);
-					console.log(newAnswerIndex);
-					console.log(userAnswerIndex);
+					// console.log(answerPartArray[k])
+					// console.log(newAnswerIndex);
+					// console.log(userAnswerIndex);
 					if (newAnswerIndex >= userAnswerIndex) {
-						console.log("will return True");
 						answerPartCorrect = true;
 						userAnswerIndex = newAnswerIndex;
 						break;
@@ -22966,7 +23016,7 @@
 				}
 				checkListArray.push(answerPartCorrect);
 	
-				console.log(checkListArray);
+				// console.log(checkListArray);
 			});
 	
 			// console.log(answerCorrect);
@@ -24420,7 +24470,8 @@
 						currentTaskIndex: this.props.currentTaskIndex,
 						onSpeechInput: this.props.onSpeechInput,
 						taskTextToDisplay: this.props.taskName,
-						correctAnswerState: this.props.correctAnswerState }),
+						correctAnswerState: this.props.correctAnswerState,
+						wrongAnswerState: this.props.wrongAnswerState }),
 					React.createElement(HintButton, {
 						assessmentMode: this.props.assessmentMode,
 						hintActive: this.props.hintActive,
@@ -25007,7 +25058,11 @@
 			console.log("unmounting");
 		},
 		render: function render() {
-			var _this = this;
+			var that = this;
+			// Allow task to be unclickable if in correctAnswerState, prevents mic recording after answer is correct
+			var activateSpeechInput = this.props.correctAnswerState || this.props.wrongAnswerState ? function () {} : function () {
+				that.props.onSpeechInput(that.props.index);
+			};
 	
 			var displayText;
 			if (this.props.correctAnswerState && this.props.currentTaskIndex === this.props.index) {
@@ -25020,9 +25075,7 @@
 				{
 					className: 'taskText',
 					'data-index': this.props.index,
-					onClick: function onClick() {
-						return _this.props.onSpeechInput(_this.props.index);
-					} },
+					onClick: activateSpeechInput },
 				displayText
 			);
 		}
@@ -25178,6 +25231,7 @@
 							onHintAudio: this.props.onHintAudio,
 							askingForRepeat: this.props.askingForRepeat }),
 						React.createElement(RepeatButton, {
+							scenarioOn: this.props.scenarioOn,
 							repeatActive: this.props.repeatActive,
 							handleAskRepeat: this.props.handleAskRepeat,
 							onDisableHint: this.props.onDisableHint,
@@ -25193,6 +25247,7 @@
 							askingForRepeat: this.props.askingForRepeat,
 							activateRepeatMode: this.props.activateRepeatMode }),
 						React.createElement(SkipButton, {
+							scenarioOn: this.props.scenarioOn,
 							askingForRepeat: this.props.askingForRepeat,
 							correctAnswerState: this.props.correctAnswerState,
 							micActive: this.props.micActive,
@@ -25406,7 +25461,7 @@
 			var _this = this;
 	
 			var repeatImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonRepeatOn.png' : Constants.IMAGE_PATH + 'UI/buttonRepeat.png';
-			var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive ? null : React.createElement('img', {
+			var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive || this.props.scenarioOn ? null : React.createElement('img', {
 				className: ' button repeatButton',
 				src: repeatImgSrc,
 				onMouseOver: this.mouseOver,
@@ -25458,7 +25513,7 @@
 			var skipImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonSkipOn.png' : Constants.IMAGE_PATH + 'UI/buttonSkip.png';
 	
 			// No option to press skip button if answering question
-			var skipButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive ? null : React.createElement('img', {
+			var skipButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive || this.props.scenarioOn ? null : React.createElement('img', {
 				className: ' button skipButton',
 				src: skipImgSrc,
 				onMouseOver: this.mouseOver,
@@ -25466,8 +25521,13 @@
 				onClick: this.props.skipTasks });
 			return React.createElement(
 				'div',
-				null,
-				skipButton
+				{ className: 'skipButtonDiv' },
+				skipButton,
+				React.createElement(
+					'span',
+					{ className: 'toolTipText' },
+					'Skip'
+				)
 			);
 		}
 	});
@@ -25542,7 +25602,7 @@
 							)
 						);
 					}
-					// All other cases
+					// All other cases (when user gets answer wrong)
 					else {
 							hintTemplateText = React.createElement(
 								'p',
@@ -25550,7 +25610,7 @@
 								React.createElement(
 									'span',
 									null,
-									'Ask them to repeat'
+									'I heard you say: '
 								),
 								React.createElement(SpeechableSpan, { clickFunction: function clickFunction() {
 										return spanClickFunction(props.feedbackText);
@@ -25778,7 +25838,7 @@
 					React.createElement(
 						'h1',
 						{ className: 'menuHeader' },
-						'LEVEL COMPLETE!'
+						'EPISODE COMPLETE!'
 					),
 					React.createElement(ResultsBase, this.props)
 				);

@@ -1,4 +1,6 @@
 {
+	"activityID": "L1",
+	"activityName": "Answering questions about your trip to Toronto",
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -236,6 +238,11 @@
 					[
 						{
 							"answers": 	["我看了电影", "看了电影", "我有看", "看了" ],
+							"response": "真好! 来， 你一定很累了。 我们快回家吧。",
+							"soundID" : "toronto-good-goHome"
+						},
+						{
+							"answers": 	["电影很好看"],
 							"response": "真好! 来， 你一定很累了。 我们快回家吧。",
 							"soundID" : "toronto-good-goHome"
 						},

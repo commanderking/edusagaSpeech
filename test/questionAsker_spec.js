@@ -15,7 +15,7 @@ describe('Question Asker Logic', () => {
 			// Doesn't actually deep compare data structure, just some key elements
 			var lengthCurrentTasks = TaskController.getCurrentTasks(testJSON).length;
 			var task1text = TaskController.getCurrentTasks(testJSON)[0].task;
-			expect(lengthCurrentTasks).to.equal(5);
+			expect(lengthCurrentTasks).to.equal(6);
 			expect(task1text).to.equal("Greet him");
 		});
 
@@ -35,8 +35,13 @@ describe('Question Asker Logic', () => {
 			var expectedIDs = [2,3,4];
 			assert.deepEqual(TaskController.getTaskIDsToQueueOfCurrentTasks(testJSON), expectedIDs);
 		});
-	});
 
+		it ('get specificFeedback if answer is wrong, but specific feedback applies', () => {
+			var returnedObject = TaskController.getSpecificFeedbackResponses(testJSON, 4);
+			console.log(returnedObject);
+			expect(returnedObject[0].answers = "我吃");
+		})
+	});
 
 
 
@@ -76,8 +81,6 @@ describe('Question Asker Logic', () => {
 			}
 
 			var actualOutput = SpeechChecker.checkAnswer(userAnswer, testJSON, 1);
-			console.log(actualOutput);
-			console.log(expectedOutput);
 			assert.deepEqual(actualOutput, expectedOutput);
 
 			var actualOutput = SpeechChecker.checkAnswer(userAnswer2, testJSON, 1);
@@ -135,6 +138,60 @@ describe('Question Asker Logic', () => {
 			expect(answerCorrect).to.equal(false);
 		})
 
+		describe ('test very tricky case with use of time', () => {
+
+			it ('test 7点39分', () => {
+				var userAnswer = "7点39分";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(true);
+			})
+
+			it ('test 七点半', () => {
+				var userAnswer = "七点半";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(true);
+			})
+
+			it ('test 七点30分', () => {
+				var userAnswer = "七点30分";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(true);
+			})
+
+			it ('test 七点分三十', () => {
+				var userAnswer = "七点分三十";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(false);
+
+				var userAnswer = "七点分30";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(false);
+			})
+
+			it ('test 我三点半起床', () => {
+				var userAnswer = "我三点半起床";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(true);
+			})
+
+			it ('test 我三点半睡觉', () => {
+				var userAnswer = "我三点半睡觉";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(false);
+			})
+
+			it ('test 我八点起床', () => {
+				var userAnswer = "我八点起床";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(true);
+			})
+			it ('test 我八点分三十起床', () => {
+				var userAnswer = "我八点分三十起床";
+				var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+				expect(answerCorrect).to.equal(false);
+			})
+		})
+
 		it ('add user answer to attemptedAnswers', () => {
 			var userAnswer = "你不好";
 			var expectedAttemptedAnswers = ["你不好"];
@@ -190,14 +247,22 @@ describe('Question Asker Logic', () => {
 		});
 
 		it ('advanced check - reverse answer check' , () => {
-			var userAnswer = "打乒乓球跟我要不要你下午"
+			var userAnswer = "打乒乓球跟我要不要你下午";
 			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
 			var soundID = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).responseSoundID;
 			expect(answerCorrect).to.equal(false);
 		})
 	})
 
+	describe('If answer is wrong, but specific feedback should be given', () => {
+		it ('returned object is correct', () => {
+			var userAnswer = "我吃";
+			var answerCorrectObject = SpeechChecker.checkAnswer(userAnswer, testJSON, 4);
+			expect(answerCorrectObject.answerCorrect).to.equal(false);
+			expect(answerCorrectObject.specificFeedback).to.equal(true);
 
+		})
+	}) 
 
 
 

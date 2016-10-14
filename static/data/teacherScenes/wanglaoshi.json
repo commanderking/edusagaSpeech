@@ -1,0 +1,30 @@
+{
+	"username" : "wanglaoshi",
+	"name" : "老師",
+	"scenes" : [
+		{
+			"name" : "David's Birthday",
+			"scenario" : "Now that you've been friends with David for a while, I think it's time to figure out his birthday.",
+			"grammar" : "你的生日是几月几号, 妹妹, 妈妈, 爸爸",
+			"link" : "../wangDemo3",
+			"image" : "",
+			"assigned" : false
+		},
+		{
+			"name" : "Asking about David's Schedule",
+			"scenario" : "What's David's schedule like? Does he get up early? Sleep late?",
+			"grammar" : "几点__, 睡觉, 起床, 现在几点",
+			"link" : "../wangDemo",
+			"image" : "",
+			"assigned" : false
+		},
+		{
+			"name" : "Chatting with David After School",
+			"scenario" : "It's 2:30 and classes are over for the day! Looks like David's looking to chat with you before you head home.",
+			"grammar" : "__点__分, 睡觉, 起床",
+			"link" : "../wangDemo2",
+			"image" : "",
+			"assigned" : false
+		}
+	]
+}

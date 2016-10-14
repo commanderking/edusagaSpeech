@@ -34,7 +34,8 @@ var Task = React.createClass({
 						currentTaskIndex = {this.props.currentTaskIndex}
 						onSpeechInput = {this.props.onSpeechInput}
 						taskTextToDisplay = {this.props.taskName} 
-						correctAnswerState={this.props.correctAnswerState} />
+						correctAnswerState={this.props.correctAnswerState}
+						wrongAnswerState = {this.props.wrongAnswerState} />
 					<HintButton 
 						assessmentMode= {this.props.assessmentMode}
 						hintActive= {this.props.hintActive}

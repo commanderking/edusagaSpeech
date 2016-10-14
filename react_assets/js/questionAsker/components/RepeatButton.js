@@ -39,7 +39,7 @@ var RepeatButton = React.createClass({
 	},
 	render: function() {
 		var repeatImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonRepeatOn.png' : Constants.IMAGE_PATH + 'UI/buttonRepeat.png';
-		var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive 
+		var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive || this.props.scenarioOn
 			? null : <img 
 					className=" button repeatButton" 
 					src={repeatImgSrc} 

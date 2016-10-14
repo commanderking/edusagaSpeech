@@ -10,7 +10,7 @@ var ResultsContainer = React.createClass({
 		} else {
 			return (
 				<div className="menuContainer">
-					<h1 className="menuHeader">LEVEL COMPLETE!</h1>
+					<h1 className="menuHeader">EPISODE COMPLETE!</h1>
 					<ResultsBase {...this.props} />
 				</div>)
 		}

@@ -75,15 +75,10 @@ var QuestionAsker = React.createClass({
 		var that = this;
 		$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function(data) {})
 			.success(function(data) {
-
-				// Calculate number of coins possible
-				var totalCoins = 10 * (data.character.currentTasks.length + data.character.queuedTasks.length);
+				that.resetScene();
 				that.setState({
 					sceneData: data,
-					possibleCoins: totalCoins
 				});
-			that.resetScene();
-
 			/*----------------------------------
 			 One time setting of initial log Data
 			 ----------------------------------*/
@@ -318,9 +313,24 @@ var QuestionAsker = React.createClass({
 	},
 	checkSceneOver: function() {
 		// Logic for when scene is over
-		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneData.character.queuedTasks.length === 0 && this.state.sceneComplete === false) {
+		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
 			var that = this;
+
+			// Calculate number of coins possible
+			var totalCoins = 10 * (this.state.sceneData.character.completedTasks.length);
+			this.setState({
+				possibleCoins: totalCoins
+			});
+
+			// Post completed progress results
 			var studentCompletedProgress = {};
+			// Pull teacher variable set in html page if possible
+			try {
+				studentCompletedProgress.teacherID = teacher;			
+			} catch(err) {
+				studentCompletedProgress.teacherID = "Unknown teacher";
+			}
+
 			studentCompletedProgress.studentID = initialLogData.studentID;
 			var allTaskData = [];
 
@@ -340,6 +350,8 @@ var QuestionAsker = React.createClass({
 			studentCompletedProgress.possibleScore = this.state.possibleCoins/10;
 			studentCompletedProgress.time = timeInSeconds;
 			studentCompletedProgress.allTaskData = allTaskData;
+			studentCompletedProgress.activityID = this.state.sceneData.activityID;
+			studentCompletedProgress.activityName = this.state.sceneData.activityName;
 
 			var logEvent = JSON.stringify(studentCompletedProgress);
 			$.ajax({
@@ -502,7 +514,7 @@ var QuestionAsker = React.createClass({
 			var that = this;
 
 			// check if what user said was one of the ask for repeat phrases
-			var possibleRepeatPhrases = JSON.parse(JSON.stringify(this.state.sceneData.character.repeatPhrases));
+			var possibleRepeatPhrases = JSON.parse(JSON.stringify(this.state.repeatPhrases));
 			var correctRepeatAsk = false;
 			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 
@@ -665,6 +677,7 @@ var QuestionAsker = React.createClass({
 						currentTaskIndex = {this.state.currentTaskIndex} 
 						setCurrentTaskIndex = {this.setCurrentTaskIndex} />
 					<FeedbackContainer 
+						scenarioOn = {this.state.scenarioOn}
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
 						hintActive = {this.state.hintActive} 

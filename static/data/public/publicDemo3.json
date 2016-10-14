@@ -1,4 +1,6 @@
 {
+	"activityID": "PD1",
+	"activityName": "Learning about Alex at National Taiwan University",
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/alex/alexDefault.png",
@@ -190,6 +192,15 @@
 							"answers" : ["你的生日幾月幾號", "你的生日幾月幾日", "你生日幾月幾號", "你生日幾月幾日", "你的生日是幾月幾號", "你的生日是幾月幾日", "什麼時候"],
 							"response" : "我生日八月二十七號。",
 							"soundID" : "birthday"
+						},
+						{
+							"answers" : [
+								["你的", "你"],
+								["生日"],
+								["幾月幾號", "幾月幾日", "什麼時候", "那一天"]
+							],
+							"response" : "我生日八月二十七號。",
+							"soundID" : "birthday"							
 						}
 					],
 					"correct" : false,
@@ -221,11 +232,12 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你有哥哥嗎", "你有沒有哥哥", "你有沒有一個哥哥"],
+							"answers" : ["有哥哥嗎", "你有沒有哥哥", "你有沒有一個哥哥"],
 							"response" : "我有一個哥哥和一個妹妹!",
 							"soundID" : "siblings"
 						}
 					],
+					"exceptions" : ["我", "他"],
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [],

@@ -1,4 +1,6 @@
 {
+	"activityID": "Y1",
+	"activityName": "Review of Basic Questions",
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -228,7 +230,10 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers": 	["我是", "人"],
+							"answers": 	[
+								["我是"], 
+								["人"]
+							],
 							"response": "哦。。。",
 							"soundID" : "oh"
 						}

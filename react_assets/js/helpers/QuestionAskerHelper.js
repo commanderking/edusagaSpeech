@@ -10,6 +10,9 @@ export var TaskController = {
 	getPossibleCorrectAnswers: function(data, activeTaskIndex) {
 		return this.getActiveTask(data, activeTaskIndex).possibleAnswers;
 	},
+	getSpecificFeedbackResponses: function(data, activeTaskIndex) {
+		return data.character.currentTasks[activeTaskIndex].specificFeedbackResponse;
+	},
 	getQueuedTasks: function(data) {
 		return data.character.queuedTasks;
 	},
@@ -78,7 +81,7 @@ export var ScenarioController = {
 }
 
 export var SpeechChecker = {
-	// determine whether to use typical check or advancedCheck
+	// determine whether to use typical check or advancedCheck, returns objectToReturn
 	checkAnswer: function(userAnswer, data, activeTaskIndex) {
 		var that = this;
 
@@ -89,16 +92,14 @@ export var SpeechChecker = {
 			"responseSoundID" : ""
 		}
 
-		// If the userAnswer contains an exception, immediately mark it as wrong
+		// If the userAnswer contains a global exception, immediately mark it as wrong
 		if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
-			console.log("Checking exceptions");
 			var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
 			// console.log(exceptions);
 			var exceptionMatch = false;
 			exceptions.forEach(function(exception){
 				// console.log(exception);
 				if (userAnswer.indexOf(exception) >= 0) {
-					console.log("exception exists");
 					exceptionMatch = true;
 				}
 			});
@@ -119,29 +120,67 @@ export var SpeechChecker = {
 					{
 						"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
 						"response": "非常好",
-						"soundID": "feichanghao"
+						"soundID": "feichanghao",
+						"exceptions": []
 					}
 			*/
-			if (possibleAnswerObject.answers[0].constructor === Array) {
-				// console.log("using advanced check");
-				checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
-				// Only set object to return if 
-				console.log(possibleAnswerObject.answers);
-				if (checkResult === true) {
-					objectToReturn.answerCorrect = true;
-					objectToReturn.possibleAnswersIndex = i;
-					objectToReturn.responseSoundID = tempSoundID;
-				}
-			} else {
-				// console.log("using typical check");
-				checkResult = that.typicalCheck(userAnswer, possibleAnswerObject);
-				if (checkResult === true) {
-					objectToReturn.answerCorrect = true;
-					objectToReturn.possibleAnswersIndex = i;
-					objectToReturn.responseSoundID = tempSoundID;
+
+			// check if user answer contains an exception word for this answerObject
+			var exceptionFound = false;
+
+			if (possibleAnswerObject.exceptions !== undefined) {
+				possibleAnswerObject.exceptions.forEach(function(exception){
+					if (userAnswer.indexOf(exception) >= 0) {
+						exceptionFound = true;
+					}
+				})
+			}
+
+			if (exceptionFound === false) {
+				// If the answers are an array of arrays, then we must use an advanced check
+				if (possibleAnswerObject.answers[0].constructor === Array) {
+					// console.log("using advanced check");
+					checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
+					// Only set object to return if the result is true
+					// console.log(possibleAnswerObject.answers);
+					if (checkResult === true) {
+						objectToReturn.answerCorrect = true;
+						objectToReturn.possibleAnswersIndex = i;
+						objectToReturn.responseSoundID = tempSoundID;
+					}
+				} else {
+					// console.log("using typical check");
+					checkResult = that.typicalCheck(userAnswer, possibleAnswerObject);
+					if (checkResult === true) {
+						objectToReturn.answerCorrect = true;
+						objectToReturn.possibleAnswersIndex = i;
+						objectToReturn.responseSoundID = tempSoundID;
+					}
 				}
 			}
 		})
+
+		/*------------------------------------------------------------
+		If answer is wrong, see if there's any specific feedback we want to give
+		------------------------------------------------------------*/
+
+		// Check if there's any specific feedback for wrong answers
+		if (objectToReturn.answerCorrect === false ) {
+			try {
+				var possibleFeedbackAnswers = TaskController.getSpecificFeedbackResponses(data, activeTaskIndex);
+				/* 
+				objectToReturn.specificFeedback = true;
+				objectToReturn.feedbackText = 
+				console.log(objectToReturn.specificFeedback);
+				*/	
+			} catch(err) {
+				console.log ("error");
+			}
+		}
+
+
+		// Return object should contain a 4th entry, specificFeedback: true
+		// Then in questionAsker script, if returnedObject answer is false, but contains specificFeedback: true, then enter specificFeedback phase
 
 		return objectToReturn;
 	},
@@ -184,12 +223,11 @@ export var SpeechChecker = {
 			// Have something like ["你", "您"]
 			var answerPartCorrect = false;
 			for (var k=0;  k <answerPartArray.length; k++) {
-				console.log(answerPartArray[k]);
 				var newAnswerIndex = userAnswer.indexOf(answerPartArray[k]);
-				console.log(newAnswerIndex);
-				console.log(userAnswerIndex);
+				// console.log(answerPartArray[k])
+				// console.log(newAnswerIndex);
+				// console.log(userAnswerIndex);
 				if (newAnswerIndex >= userAnswerIndex) {
-					console.log("will return True");
 					answerPartCorrect = true;
 					userAnswerIndex = newAnswerIndex;
 					break;
@@ -197,7 +235,7 @@ export var SpeechChecker = {
 			}
 			checkListArray.push(answerPartCorrect);
 
-			console.log(checkListArray);
+			// console.log(checkListArray);
 		});
 
 		// console.log(answerCorrect);

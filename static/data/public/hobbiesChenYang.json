@@ -1,0 +1,254 @@
+{
+	"activityID": "CY1",
+	"activityName": "Asking about Chen Yang's Hobbies (Part 1)",
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/chenguang/chengDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Try to get to know Chen Yang a little better by learning about her family.",
+			"next" : "end"
+		}
+	],
+	"character" : 
+		{
+			"name" : "Chen Yang",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Cafeteria",
+				"nameChinese" : "食堂", 
+				"bg" : "bg/shitang.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/chenguang/chengDefault.png",
+				"uncertain" : "characters/chenguang/chengGoodJob.png",
+				"laughing" : "characters/chenguang/chengGreatJob.png",
+				"laughing2" : "characters/chenguang/chengSpeaking.png",
+				"smiling" : "characters/chenguang/chengGoodJob.png",
+				"confused" : "characters/chenguang/chengConfused.png",
+				"wistful" : "characters/chenguang/chengWistful.png",
+				"silhouette" : "characters/chenguang/chengSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "chenyang/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "chenyang/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "chenyang/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet her.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["怎么样", "你好吗"],
+							"response" : "不错",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : []
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Ask what she likes to do on the weekend.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你周末喜欢做什么"],
+							"response" : "我周末啊? 我周末不做什么。睡觉, 努力学习, 休息。。。",
+							"soundID" : "hobbies-weekend-likes"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["喜欢做什么", "爱做什么"]
+							],
+							"response" : "我周末啊? 我周末不做什么。睡觉,努力学习, 休息。。。",
+							"soundID" : "hobbies-weekend-likes"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [30,31,32],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask if she likes to sing",
+					"taskLink" : "goodbye",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜不喜欢唱歌", "你爱不爱唱歌"],
+							"response" : "我不是很喜欢唱歌。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你喜欢", "你爱"],
+								["唱歌吗"]
+							],
+							"response" : "我不是很喜欢唱歌。",
+							"soundID" : "",
+							"exceptions" : ["喜不喜欢", "爱不爱"]
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengBored.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 31,
+					"task" : "Ask if she likes to dance",
+					"taskLink" : "goodbye",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜不喜欢跳舞", "你爱不爱跳舞"],
+							"response" : "跳舞? 我不是很喜欢跳舞。",
+							"soundID" : "hobbies-weekend-likes"
+						},
+						{
+							"answers" : [
+								["你喜欢", "你爱"],
+								["跳舞吗"]
+							],
+							"response" : "跳舞? 我不是很喜欢跳舞。",
+							"soundID" : "hobbies-weekend-likes",
+							"exceptions" : ["喜不喜欢", "爱不爱"]
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengBored.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 32,
+					"task" : "Ask if she likes to play sports",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜不喜欢打球"],
+							"response" : "我不是很喜欢打球",
+							"soundID" : "hobbies-weekend-likes"
+						},
+						{
+							"answers" : [
+								["你喜不喜欢", "你爱不爱"],
+								["打球", "运动"]
+							],
+							"response" : "我不是很喜欢打球",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你喜欢", "你爱"],
+								["打球吗", "运动吗"]
+							],
+							"response" : "我不是很喜欢打球",
+							"soundID" : "",
+							"exceptions" : ["喜不喜欢", "爱不爱"]
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengBored.png",
+					"tasksToQueue" : [33],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 33,
+					"task" : "Ask if she likes to watch TV",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜不喜欢看电视"],
+							"response" : "我有时候看电视, 可是不是特别喜欢。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你喜不喜欢", "你爱不爱"],
+								["看电视"]
+							],
+							"response" : "我有时候看电视, 可是不是特别喜欢。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你喜欢", "你爱"],
+								["看电视吗", "看电视吗"]
+							],
+							"response" : "我有时候看电视, 可是不是特别喜欢。",
+							"soundID" : "",
+							"exceptions" : ["喜不喜欢", "爱不爱"]
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengBored.png",
+					"tasksToQueue" : [40],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 40,
+					"task" : "Say goodbye (she seems uninterested).",
+					"taskType" : "choice",
+					"taskLink" : "goodbye",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["再见", "明天见"],
+							"response" : "再见",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengBored.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				}
+			],
+			"completedTasks" : []
+		}
+}

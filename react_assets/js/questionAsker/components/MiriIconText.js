@@ -34,11 +34,11 @@ function MiriIconText (props) {
 				<span> as a good answer?</span>
 			</p>)
 		} 
-		// All other cases
+		// All other cases (when user gets answer wrong)
 		else {
 			hintTemplateText = 
 			(<p className="hintText">
-					<span>Ask them to repeat</span>
+					<span>I heard you say: </span>
 					<SpeechableSpan clickFunction={() => spanClickFunction(props.feedbackText)} feedbackText={props.feedbackText} />
 			</p>) 
 		}
