@@ -331,7 +331,6 @@ var QuestionAsker = React.createClass({
 				studentCompletedProgress.teacherID = "Unknown teacher";
 			}
 
-
 			studentCompletedProgress.studentID = initialLogData.studentID;
 			var allTaskData = [];
 

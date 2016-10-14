@@ -12,7 +12,7 @@
 		"Ask others if they're free or busy on certain days of the week",
 		"Invite someone to eat lunch with you",
 		"Tell someone a time for an activity",
-		"Ask people how they feel about different kinds of food"
+		"Ask others how they feel about different kinds of food"
 	],
 	"scenario" :
 	[	
@@ -272,7 +272,16 @@
 							],
 							"response" : "哇! 好极了! 星期天几点?",
 							"soundID" : "schedule-wow-great-whattime"
-						}	
+						},
+						{
+							"answers" : [
+								["你"],
+								["要不要", "想不想", "有没有时间", "有空"],
+								["吃饭"]
+							],
+							"response" : "哇! 好极了! 星期天几点?",
+							"soundID" : "schedule-wow-great-whattime"
+						}
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
@@ -307,7 +316,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["十一点半", "十一点三十", "十一点三十分", "11点30分"],
+							"answers" : ["十一点半", "11点半", "十一点三十", "十一点三十分", "11点30分"],
 							"response" : "好极了!",
 							"soundID" : "haojile"
 						}
@@ -471,7 +480,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["星期天见", "星期天建", "星期日见", "星期日间", "礼拜天见"],
+							"answers" : ["星期天见", "星期天健", "星期日见", "星期日间", "礼拜天见"],
 							"response" : "再见!",
 							"soundID" : "zaijian"
 						}

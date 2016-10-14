@@ -287,7 +287,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [54, 55],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -342,7 +342,7 @@
 						{
 							"answers" : ["我后天有事", "我后天有事儿"],
 							"response" : "哎呀。真可惜。 好吧。那我先走了。 再见!",
-							"soundID" : "",
+							"soundID" : "hobbies-toobad-leave-first",
 							"exactMatch" : true
 						},
 						{
@@ -351,8 +351,7 @@
 								["很忙", "没有空", "没空", "有事", "有事儿", "挺忙", "非常忙"]
 							],
 							"response" : "哎呀。真可惜。 好吧。那我先走了。 再见!",
-							"soundID" : "",
-							"exactMatch" : true
+							"soundID" : "hobbies-toobad-leave-first"
 						}
 					],
 					"correct" : false,

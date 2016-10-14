@@ -212,6 +212,14 @@
 							"soundID": "feichanghao"
 						}			
 					],
+					"specificFeedbackResponse" : 
+					[
+						{
+							"answers": ["我吃"],
+							"response": "你是不是想说 '我吃了'",
+							"soundID": "chileFeedback"
+						}
+					],
 					"exceptions": ["没吃了"],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",

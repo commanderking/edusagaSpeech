@@ -1,0 +1,188 @@
+{
+	"activityID": "CY1",
+	"activityName": "Asking about Chen Yang's Hobbies (Part 1)",
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/chenguang/chengDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Now that you've talked to David about what Chen Yang likes (you do remember, right?), let's see if we can invite her to do one of those activities on the weekend.",
+			"next" : "end"
+		}
+	],
+	"character" : 
+		{
+			"name" : "Chen Yang",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Cafeteria",
+				"nameChinese" : "食堂", 
+				"bg" : "bg/shitang.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/chenguang/chengDefault.png",
+				"uncertain" : "characters/chenguang/chengGoodJob.png",
+				"laughing" : "characters/chenguang/chengGreatJob.png",
+				"laughing2" : "characters/chenguang/chengSpeaking.png",
+				"smiling" : "characters/chenguang/chengGoodJob.png",
+				"confused" : "characters/chenguang/chengConfused.png",
+				"wistful" : "characters/chenguang/chengWistful.png",
+				"silhouette" : "characters/chenguang/chengSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "chenyang/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "chenyang/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "chenyang/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet her.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["怎么样", "你好吗"],
+							"response" : "不错",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [20,21],
+					"attemptedAnswers" : []
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Invite her to do something she likes on the weekend",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我们周末去______, 怎么样"],
+							"response" : "",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我们周末", "周末我们"],
+								["打羽毛球", "打麻将"],
+								["怎么样", "好吗"]
+							],
+							"response" : "",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我周末", "周末我"],
+								["请你", "跟你"],
+								["打麻将", "打羽毛球"],
+								["怎么样", "好吗"]
+							],
+							"response" : "",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["要不要", "想不想"],
+								["打麻将", "打羽毛球"]
+							],
+							"response" : "",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你周末", "周末你"],
+								["要", "想"],
+								["打麻将吗", "打羽毛球吗"]
+							],
+							"response" : "",
+							"soundID" : ""
+						}
+					],
+					"specificFeedbackResponse" : 
+					[
+						{
+							"answers" : [
+								["我们周末", "周末我们"],
+								["怎么样", "好吗"]
+							],
+							"response" : "不好意思, 我没什么兴趣。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我周末", "周末我"],
+								["请你", "跟你"],
+								["怎么样", "好吗"]
+							],
+							"response" : "不好意思, 我没什么兴趣。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 21,
+					"task" : "Say goodbye.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["再见", "明天见"],
+							"response" : "再见",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["再见", "明天见"],
+							"response" : "再见",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				}
+			],
+			"completedTasks" : []
+		}
+}

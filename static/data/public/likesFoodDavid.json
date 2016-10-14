@@ -47,6 +47,10 @@
 			[
 				{
 					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "likes-american-food",
 					"soundPath" : "david/likes-american-food.ogg"
 				},
 				{
@@ -303,7 +307,7 @@
 						}	
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [42],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -387,7 +391,7 @@
 						},
 						{
 							"answers" : [
-								["我喜欢", "我很喜欢", "我爱"],
+								["我喜欢", "我很喜欢", "我爱", "我挺喜欢", "我非常喜欢"],
 								["吃墨西哥菜", "墨西哥菜"]
 							],
 							"response" : "真好! ",

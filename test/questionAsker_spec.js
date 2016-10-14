@@ -39,7 +39,6 @@ describe('Question Asker Logic', () => {
 
 
 
-
 	describe('Check user answers', () => {
 		var possibleAnswers = [
 			{
@@ -242,14 +241,21 @@ describe('Question Asker Logic', () => {
 		});
 
 		it ('advanced check - reverse answer check' , () => {
-			var userAnswer = "打乒乓球跟我要不要你下午"
+			var userAnswer = "打乒乓球跟我要不要你下午";
 			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).answerCorrect;
 			var soundID = SpeechChecker.checkAnswer(userAnswer, testJSON, 3).responseSoundID;
 			expect(answerCorrect).to.equal(false);
 		})
 	})
 
+	describe('If answer is wrong, but specific feedback should be given', () => {
+		it ('returned object is correct', () => {
+			var userAnswer = "我吃";
+			var answerCorrect = SpeechChecker.checkAnswer(userAnswer, testJSON, 5).answerCorrect;
+			expect(answerCorrect).to.equal(false);
 
+		})
+	}) 
 
 
 

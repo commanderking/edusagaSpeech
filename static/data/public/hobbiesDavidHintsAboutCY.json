@@ -1,0 +1,258 @@
+{
+	"activityID": "likesFoodDavid",
+	"activityName": "Asking about Chen Yang's interest",
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/david/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "I wonder what Chen Yang likes to do on the weekend. Maybe David will know.",
+			"next" : "end"
+		}
+	],
+	"character" :
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Cafeteria",
+				"nameChinese" : "食堂", 
+				"bg" : "bg/shitang.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png",
+				"silhouette" : "characters/david/davidSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Ask David how he's doing.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["你好吗", "怎么样"],
+							"response" : "非常好!",
+							"soundID" : "feichanghao"							
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Ask him what Chen Yang likes to do on the weekend",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["陈阳周末喜欢做什么"],
+							"response" : "陈阳啊? 她喜欢打麻将。。。 还喜欢打羽毛球。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["沉阳周末", "沉阳周末"],
+								["喜欢做什么", "爱做什么", "做什么"]
+							],
+							"response" : "陈阳啊? 她喜欢打麻将。。。 还喜欢打羽毛球。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [30, 31],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask what's 打麻将 (Dǎ májiàng)",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["打麻将?", "打麻将"],
+							"response" : "打麻将。。。 英文是 'Mahjong', 是一个中国游戏。陈阳周末跟他外公， 外婆，和妈妈打。",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["打麻将是什么", "麻将是什么", "什么是打麻将", "什么是麻将"],
+							"response" : "打麻将。。。 英文是 'Mahjong', 是一个中国游戏。陈阳周末跟他外公， 外婆，和妈妈打。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [40],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"task" : "Ask what's 打羽毛球 (Dǎ yǔmáoqiú)",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["打羽毛球?", "打羽毛球"],
+							"response" : "打羽毛球。。。 英文是 'Badminton'。 中国人非常喜欢打羽毛球!",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["打羽毛球是什么", "打羽毛球是什么", "什么是羽毛球", "什么是打羽毛球"],
+							"response" : "打羽毛球。。。 英文是 'Badminton'。 中国人非常喜欢打羽毛球!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [41],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 40,
+					"task" : "Ask David if he likes playing Mahjong",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜不喜欢打麻将"],
+							"response" : "我有时候喜欢打麻将, 可是我打得。。。不怎么样。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你喜不喜欢", "你爱不爱"],
+								["打麻将", "麻将"]
+							],
+							"response" : "我有时候喜欢打麻将, 可是我打得。。。不怎么样。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你喜欢", "你爱"],
+								["打麻将吗"]
+							],
+							"response" : "我有时候喜欢打麻将, 可是我打得。。。不怎么样。",
+							"soundID" : "",
+							"exceptions" : ["喜不喜欢", "爱不爱"]
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 41,
+					"task" : "Ask David if he likes playing Badminton",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜不喜欢打羽毛球"],
+							"response" : "打羽毛球很好玩啊! 我很喜欢。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你喜不喜欢", "你爱不爱"],
+								["打羽毛球", "羽毛球"]
+							],
+							"response" : "打羽毛球很好玩啊! 我很喜欢。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你喜欢", "你爱"],
+								["羽毛球吗"]
+							],
+							"response" : "打羽毛球很好玩啊! 我很喜欢。",
+							"soundID" : "",
+							"exceptions" : ["喜不喜欢", "爱不爱"]
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 50,
+					"task" : "Say you need to go home。",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我要回家了。 再见!"],
+							"response" : "再见!",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我要", "我需要", "我得"],
+								["回家", "回去"]
+							],
+							"response" : "再见!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}

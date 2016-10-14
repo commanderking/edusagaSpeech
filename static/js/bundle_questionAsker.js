@@ -22527,7 +22527,7 @@
 	};
 	
 	var SpeechChecker = exports.SpeechChecker = {
-		// determine whether to use typical check or advancedCheck
+		// determine whether to use typical check or advancedCheck, returns objectToReturn
 		checkAnswer: function checkAnswer(userAnswer, data, activeTaskIndex) {
 			var that = this;
 	
@@ -22573,7 +22573,7 @@
 	   		}
 	   */
 	
-				// check if user answer contains an exception word
+				// check if user answer contains an exception word for this answerObject
 				var exceptionFound = false;
 	
 				if (possibleAnswerObject.exceptions !== undefined) {
@@ -22591,7 +22591,7 @@
 						// console.log("using advanced check");
 						checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
 						// Only set object to return if the result is true
-						console.log(possibleAnswerObject.answers);
+						// console.log(possibleAnswerObject.answers);
 						if (checkResult === true) {
 							objectToReturn.answerCorrect = true;
 							objectToReturn.possibleAnswersIndex = i;
@@ -22608,6 +22608,13 @@
 					}
 				}
 			});
+	
+			/*------------------------------------------------------------
+	  If answer is wrong, see if there's any specific feedback we want to give
+	  ------------------------------------------------------------*/
+	
+			// Return object should contain a 4th entry, specificFeedback: true
+			// Then in questionAsker script, if returnedObject answer is false, but contains specificFeedback: true, then enter specificFeedback phase
 	
 			return objectToReturn;
 		},
@@ -22650,9 +22657,9 @@
 				var answerPartCorrect = false;
 				for (var k = 0; k < answerPartArray.length; k++) {
 					var newAnswerIndex = userAnswer.indexOf(answerPartArray[k]);
-					console.log(answerPartArray[k]);
-					console.log(newAnswerIndex);
-					console.log(userAnswerIndex);
+					// console.log(answerPartArray[k])
+					// console.log(newAnswerIndex);
+					// console.log(userAnswerIndex);
 					if (newAnswerIndex >= userAnswerIndex) {
 						answerPartCorrect = true;
 						userAnswerIndex = newAnswerIndex;
@@ -22661,7 +22668,7 @@
 				}
 				checkListArray.push(answerPartCorrect);
 	
-				console.log(checkListArray);
+				// console.log(checkListArray);
 			});
 	
 			// console.log(answerCorrect);
