@@ -407,65 +407,149 @@
 				},
 				{
 					"taskID" : 43,
-					"task" : "Tell her at 9:30",
+					"task" : "Tell her at 10:30",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["九点半, 怎么样"],
-							"response" : "晚上九点半还是早上九点半?",
+							"answers" : ["十点半, 怎么样"],
+							"response" : "晚上十点半还是早上十点半?",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["九点半", "9点半", "9点30分", "九点三十分", "九点三十"],
-							"response" : "九点半。。。晚上还是早上?",
+							"answers" : ["十点半", "10点半", "10点30分", "十点三十分", "十点三十"],
+							"response" : "十点半。。。晚上还是早上?",
 							"soundID" : ""
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [50,51],
+					"tasksToQueue" : [53,54],
 					"attemptedAnswers" : []
 				},
 				{
-					"taskID" : 50,
+					"taskID" : 53,
 					"task" : "Tell her in the morning.",
 					"possibleAnswers" : 
 					[
 						{
 							"answers" : ["早上九点半, 好吗"],
-							"response" : "九点半。。。可以。",
+							"response" : "好啊！ 早睡早起, 身体好。",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["早上", "九点半"],
+							"answers" : ["早上"],
+							"response" : "好啊！ 早睡早起, 身体好。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 54,
+					"task" : "Tell her at night.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["晚上九点半, 好吗"],
+							"response" : "十点半太晚了。我平常十点睡觉。",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["晚上"],
+							"response" : "十点半太晚了。我平常十点睡觉。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [64, 65],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 64,
+					"task" : "Tell her at 3:30",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["三点半, 怎么样"],
+							"response" : "三点半。。。 好啊!",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["三点半", "3点半", "3点30分", "三点三十分", "三点三十"],
+							"response" : "三点半。。。 好啊!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [74],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 65,
+					"task" : "Tell her at 5:30",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["五点半, 怎么样"],
+							"response" : "五点半。。。可以。",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["五点半", "5点半", "5点30分", "五点三十分", "五点三十"],
 							"response" : "五点半。。。可以。",
 							"soundID" : ""
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [],
+					"tasksToQueue" : [75],
 					"attemptedAnswers" : []
 				},
 				{
-					"taskID" : 21,
-					"task" : "Say goodbye.",
+					"taskID" : 64,
+					"task" : "Say you'll see her at 3:30.",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["再见", "明天见"],
-							"response" : "再见",
+							"answers" : ["三点半见"],
+							"response" : "三点半见。",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["再见", "明天见"],
-							"response" : "再见",
+							"answers" : ["三点半见", "3点半见", "3点30分见", "三点三十分见", "三点三十见"],
+							"response" : "三点半见。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengDefault.png",
+					"tasksToQueue" : [74],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 65,
+					"task" : "Tell her you'll see her at 5:30.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["五点半见"],
+							"response" : "五点半见",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["五点半见", "5点半见", "5点30分见", "五点三十分见", "五点三十见"],
+							"response" : "五点半见",
 							"soundID" : ""
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [],
+					"tasksToQueue" : [75],
 					"attemptedAnswers" : []
 				}
 			],
