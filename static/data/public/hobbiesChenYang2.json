@@ -339,7 +339,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [42],
+					"tasksToQueue" : [41, 42, 43],
 					"attemptedAnswers" : []
 				},
 				{
@@ -370,12 +370,12 @@
 					[
 						{
 							"answers" : ["三点半, 怎么样"],
-							"response" : "三点半, 好啊!",
+							"response" : "三点半。。。 好啊!",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["星期六"],
-							"response" : "星期六几点",
+							"answers" : ["三点半", "3点半", "3点30分", "三点三十分", "三点三十"],
+							"response" : "三点半。。。 好啊!",
 							"soundID" : ""
 						}
 					],
@@ -390,13 +390,55 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["星期六, 怎么样"],
-							"response" : "星期六几点",
+							"answers" : ["五点半, 怎么样"],
+							"response" : "五点半。。。可以。",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["星期六"],
-							"response" : "星期六几点",
+							"answers" : ["五点半", "5点半", "5点30分", "五点三十分", "五点三十"],
+							"response" : "五点半。。。可以。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 43,
+					"task" : "Tell her at 9:30",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["九点半, 怎么样"],
+							"response" : "晚上九点半还是早上九点半?",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["九点半", "9点半", "9点30分", "九点三十分", "九点三十"],
+							"response" : "九点半。。。晚上还是早上?",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [50,51],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 50,
+					"task" : "Tell her in the morning.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["早上九点半, 好吗"],
+							"response" : "九点半。。。可以。",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["早上", "九点半"],
+							"response" : "五点半。。。可以。",
 							"soundID" : ""
 						}
 					],
