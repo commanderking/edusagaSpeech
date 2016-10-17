@@ -799,37 +799,55 @@
 	}
 
 	#banner {
+		background-image: url('https://s3.amazonaws.com/edusaga/assets/images/index/girlTablet.jpeg');
 		background-attachment: scroll, scroll, scroll, fixed;
 		background-color: _palette(three, bg);
-		background-image: url('images/light-bl.svg'), url('images/light-br.svg'), url('images/overlay.png'), url('../../images/banner.jpg');
-		background-position: bottom left, bottom right, top left, top center;
+		//background-image: url('images/light-bl.svg'), url('images/light-br.svg'), url('images/overlay.png'), url('../../images/banner.jpg');
+		//background-position: bottom left, bottom right, top left, top center;
 		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-		background-size: $pattern-background-size, $pattern-background-size, auto, cover;
+		background-size: cover;
+		//background-size: $pattern-background-size, $pattern-background-size, auto, cover;
 		color: _palette(banner, fg);
 		cursor: default;
 		padding: 6em 0;
-		text-align: center;
+		text-align: left;
+
+
+		//.main-image {
+		//	background-position: bottom left, bottom right, top left, top center;
+		//	background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+		//}
 
 		.inner {
 			@include vendor('animation', 'reveal-banner 1s 0.25s ease-in-out');
 			@include vendor('animation-fill-mode', 'forwards');
 			background: transparentize(_palette(banner, inner-bg), 0.5);
 			color: _palette(banner, inner-fg);
+			//float: left;
 			display: inline-block;
 			opacity: 0;
 			padding: 3em;
-			text-align: center;
+			margin-top: 0;
+			margin-right: 3em;
+			margin-left: 3em;
+			margin-bottom: 0;
+			text-align: left;
+			//since .inner is an inline-block element, it's justification is determined by it's parent, banner.
+			//changed #banner text align to left, changed .inner margin, changed .inner text-align
+
+
 
 			header {
 				display: inline-block;
-				border-bottom: solid 2px;
-				border-top: solid 2px;
+				border-bottom: solid 5px;
+				border-top-width: 5px;
+				border-top-style: solid;
 				margin: 0 0 2em 0;
 				padding: 3px 0 3px 0;
 
 				h2 {
-					border-bottom: solid 2px;
-					border-top: solid 2px;
+					border-bottom: double 5px;
+					border-top: double 5px;
 					font-size: 2.5em;
 					font-weight: 900;
 					letter-spacing: 0.2em;
@@ -837,6 +855,7 @@
 					padding-left: 0.05em;
 					position: relative;
 					text-transform: uppercase;
+				//	weirdly, the double-bars around "Twenty" are located in header and h2, it's child. Not sure how they are assigned to the word "Twenty" from header.
 				}
 			}
 
@@ -854,6 +873,7 @@
 
 			footer {
 				margin: 2em 0 0 0;
+			//	this extends the foot of the .inner box, which in turn expands it's parent banner
 			}
 		}
 	}
