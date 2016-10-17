@@ -1,6 +1,7 @@
 {
 	"activityID": "PD1",
 	"activityName": "Learning about Alex at National Taiwan University",
+	"tags" : ["family", "nationality"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/alex/alexDefault.png",
@@ -9,6 +10,12 @@
 	"currentSoundID": "",
 	"scenarioIndex": 0,
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can ask and say someone’s nationality.",
+		"I can introduce myself and provide basic personal information.",
+		"I can say or write something about the members of my family and ask about someone’s family"
+	],
 	"scenario" :
 	[	
 		{

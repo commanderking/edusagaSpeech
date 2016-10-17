@@ -1,6 +1,7 @@
 {
 	"activityID": "likesFoodDavid",
 	"activityName": "Asking which day David can eat a meal",
+	"tags": ["food, hobbies", "date", "time"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -8,11 +9,11 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives" : [
-		"Ask others if they're free or busy on certain days of the week",
-		"Invite someone to eat lunch with you",
-		"Tell someone a time for an activity",
-		"Ask others how they feel about different kinds of food"
+	"objectives" : 
+	[
+		"I can invite and make plans with someone to do something or go somewhere.",
+		"I can give times and dates.",
+		"I can ask questions about what others like and dislike."
 	],
 	"scenario" :
 	[	

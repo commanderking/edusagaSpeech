@@ -1,0 +1,158 @@
+{
+	"activityID": "I1",
+	"activityName": "Introduction - Alex",
+	"tags" : ["greetings", "introductions"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/alex/alexDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"scenarioIndex": 0,
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can say hello and goodbye to someone my age or younger.", 
+		"I can respond to an introduction."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Looks like another student is approaching you as you wait or classes to start. Time for some introductions!"
+		},
+		{
+			"name" : "???",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "characters/alex/alexDefault.png",
+			"text" : "你好!"
+		}
+	],
+	"character" : 
+		{
+			"name" : "Alex",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "National Taiwan University",
+				"nameChinese" : "台大", 
+				"bg" : "bg/NTUniversity.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/alex/alexDefault.png",
+				"confused" : "characters/alex/alexConfused.png",
+				"sass" : "characters/alex/alexSass.png",
+				"laughing" : "characters/alex/alexLaughing.png",
+				"silhouette" : "characters/alex/alexSilhouette.png"
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "hi",
+					"soundPath" : "alex/hi.ogg"
+				},
+				{
+					"soundID" : "henhao",
+					"soundPath" : "alex/henhao.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "alex/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "alex/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "alex/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Respond to her saying: 你好 ",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 11,
+					"task" : "Ask her how she's doing",
+					"taskType" : "choice",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好吗", "怎么样"],
+							"response" : "很好啊。 我叫 Alex。 你叫什么名字?",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Answer her question: 你叫什么名字?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我叫", "我是"],
+							"response" : "我姓白 请问你贵姓? ",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [21],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 21,
+					"task" : "Respond to: 我姓白 请问你贵姓?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我姓"],
+							"response" : "很高兴认识你!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [22],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}	
+			],
+			"completedTasks" : []
+		}
+}

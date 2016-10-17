@@ -1,6 +1,7 @@
 {
 	"activityID": "F1",
 	"activityName": "Learning about Chen Yang's Parents",
+	"tags" : ["family", "nationality", "careers"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/chenguang/chengDefault.png",
@@ -8,6 +9,12 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives": 
+	[
+		"I can ask for someone's nationality", 
+		"I can ask about someone's family.",
+		"I can ask about other people's professions."
+	],
 	"scenario" :
 	[	
 		{

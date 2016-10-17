@@ -1,7 +1,10 @@
 from flask import Flask, request, redirect, render_template, render_template_string, url_for, jsonify, session
 from flask_user import login_required, UserManager, SQLAlchemyAdapter
 
-import boto3, json, urlparse, datetime
+import boto3, json, simplejson, urlparse, datetime
+
+from glob import glob
+from loadJson import getAllEpisodeData
 
 #For Heroku Logging
 import sys, os, uuid
@@ -92,10 +95,14 @@ def teacherHome(teacher):
 
 @app.route('/public/home/')
 def publicHome():
+
+	# Check for any new episodes and update JSON to reflect any new files in the public folder
+	episodeData = json.dumps(getAllEpisodeData(), ensure_ascii=False).encode('utf8');
+	#print json.dumps(episodeData)
 	trackVisitorEvent("Visited See More Episodes")
 	studentID = request.args.get('studentID')
 	teacher = "public"
-	return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+	return render_template('mainMenu.html', teacher=teacher, studentID=studentID, episodeData=episodeData)
 
 
 @app.route('/<teacher>/login', methods=['GET', 'POST'])

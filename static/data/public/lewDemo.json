@@ -1,6 +1,7 @@
 {
 	"activityID": "L1",
 	"activityName": "Answering questions about your trip to Toronto",
+	"tags" : ["activities", "past"], 
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -8,6 +9,10 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can answer questions about what I am doing and what I did."
+	],
 	"scenario" :
 	[	
 		{

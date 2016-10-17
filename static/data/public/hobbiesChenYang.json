@@ -1,6 +1,7 @@
 {
 	"activityID": "CY1",
 	"activityName": "Asking about Chen Yang's Hobbies (Part 1)",
+	"tags" : ["hobbies"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/chenguang/chengDefault.png",
@@ -8,13 +9,17 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives": 
+	[
+		"I can ask others what they like or dislike."
+	],
 	"scenario" :
 	[	
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Try to get to know Chen Yang a little better by learning about her family.",
+			"text" : "Let's try to get to know Chen Yang a little better by learning about what she likes to do.",
 			"next" : "end"
 		}
 	],

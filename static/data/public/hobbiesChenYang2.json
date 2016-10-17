@@ -1,6 +1,7 @@
 {
 	"activityID": "CY1",
-	"activityName": "Asking about Chen Yang's Hobbies (Part 1)",
+	"activityName": "Asking about Chen Yang's Hobbies (Part 2)",
+	"tags" : ["hobbies", "date", "time"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/chenguang/chengDefault.png",
@@ -8,6 +9,10 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can invite and make plans with someone to do something or go somewhere."
+	],
 	"scenario" :
 	[	
 		{
@@ -82,7 +87,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [20,21],
+					"tasksToQueue" : [20,21,22,23],
 					"attemptedAnswers" : []
 				}
 			],
@@ -90,7 +95,7 @@
 			[
 				{
 					"taskID" : 20,
-					"task" : "Invite her to go shopping",
+					"task" : "Invite her to go shopping this weekend",
 					"possibleAnswers" : 
 					[
 						{
@@ -143,7 +148,7 @@
 				},
 					{
 					"taskID" : 21,
-					"task" : "Invite her to play badminton",
+					"task" : "Invite her to play badminton this weekend",
 					"possibleAnswers" : 
 					[
 						{
@@ -191,12 +196,12 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
-					"tasksToQueue" : [],
-					"attemptedAnswers" : [31, 32, 33]
+					"tasksToQueue" : [31, 32, 33],
+					"attemptedAnswers" : []
 				},
 				{
 					"taskID" : 22,
-					"task" : "Invite her to go eat",
+					"task" : "Invite her to go eat this weekend",
 					"possibleAnswers" : 
 					[
 						{
@@ -249,7 +254,7 @@
 				},
 				{
 					"taskID" : 23,
-					"task" : "Invite her to play Mahjong",
+					"task" : "Invite her to play Mahjong this weekend",
 					"possibleAnswers" : 
 					[
 						{
@@ -318,7 +323,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [41],
+					"tasksToQueue" : [41, 42, 43],
 					"attemptedAnswers" : []
 				},
 				{
@@ -381,7 +386,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [],
+					"tasksToQueue" : [74],
 					"attemptedAnswers" : []
 				},
 				{
@@ -402,7 +407,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [],
+					"tasksToQueue" : [75],
 					"attemptedAnswers" : []
 				},
 				{
@@ -511,7 +516,7 @@
 					"attemptedAnswers" : []
 				},
 				{
-					"taskID" : 64,
+					"taskID" : 74,
 					"task" : "Say you'll see her at 3:30.",
 					"possibleAnswers" : 
 					[
@@ -532,7 +537,7 @@
 					"attemptedAnswers" : []
 				},
 				{
-					"taskID" : 65,
+					"taskID" : 75,
 					"task" : "Tell her you'll see her at 5:30.",
 					"possibleAnswers" : 
 					[

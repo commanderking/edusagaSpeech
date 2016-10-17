@@ -1,4 +1,7 @@
 {
+	"activityID": "orderingFood",
+	"activityName": "Ordering Food at a Fast Food Restaurant",
+	"tags" : ["food"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/tina/tinaDefault.png",
@@ -7,6 +10,10 @@
 	"currentSoundID": "",
 	"scenarioIndex": 0,
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can order a meal."
+	],
 	"scenario" :
 	[	
 		{

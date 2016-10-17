@@ -1,6 +1,7 @@
 {
 	"activityID": "likesFoodDavid",
 	"activityName": "Asking what kind of food David likes",
+	"tags" : ["food", "hobbies"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -9,8 +10,8 @@
 	"currentSoundID": "",
 	"assessmentMode": false,
 	"objectives" : [
-		"Ask others if they like certain types of food",
-		"Describe if one likes or dislikes certain types of food"
+		"I can ask questions about what foods others like and dislike.",
+		"I can answer questions about what I like and dislike."
 	],
 	"scenario" :
 	[	

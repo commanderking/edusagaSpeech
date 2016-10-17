@@ -1,6 +1,7 @@
 {
 	"activityID": "likesFoodDavid",
-	"activityName": "Asking which day David can eat a meal",
+	"activityName": "Asking David about his hobbies",
+	"tags" : ["hobbies", "date", "time"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -8,6 +9,11 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can invite and make plans with someone to do something or go somewhere.", 
+		"I can accept or reject an invitation to do something or go somewhere."
+	],
 	"scenario" :
 	[	
 		{

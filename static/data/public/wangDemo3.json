@@ -1,6 +1,7 @@
 {
 	"activityID": "W3",
 	"activityName": "Asking about Birthdays",
+	"tags": ["date", "family"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -8,6 +9,10 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can ask about birthdays of friends and family."
+	],
 	"scenario" :
 	[	
 		{

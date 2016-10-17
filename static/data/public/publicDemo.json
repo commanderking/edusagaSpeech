@@ -1,4 +1,7 @@
 {
+	"activityID": "publicDemo",
+	"activityName": "Review of Chinese 1",
+	"tags" : ["review", "nationality", "time", "hobbies", "introduction"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -6,6 +9,12 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives": 
+	[
+		"I can introduce myself and provide basic personal information.",
+		"I can ask questions about what other people like.",
+		"I can answer questions about what I like and dislike."
+	],
 	"scenario" :
 	[	
 		{

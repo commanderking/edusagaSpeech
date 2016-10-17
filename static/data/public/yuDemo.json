@@ -1,6 +1,7 @@
 {
 	"activityID": "Y1",
 	"activityName": "Review of Basic Questions",
+	"tags" : ["review", "nationality", "location", "family"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -8,6 +9,12 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can say or write something about the members of my family and ask about someone’s family.",
+		"I can ask and say a home address and e-mail address.",
+		"I can ask and say someone’s nationality."
+	],
 	"scenario" :
 	[	
 		{
