@@ -2,6 +2,7 @@
 	"activityID": "orderingFood",
 	"activityName": "Ordering Food at a Fast Food Restaurant",
 	"tags" : ["food"],
+	"sequence" : 300,
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/tina/tinaDefault.png",

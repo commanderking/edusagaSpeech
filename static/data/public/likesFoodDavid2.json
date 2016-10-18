@@ -1,7 +1,8 @@
 {
 	"activityID": "likesFoodDavid",
-	"activityName": "Asking which day David can eat a meal",
+	"activityName": "Inviting David to a Meal",
 	"tags": ["food", "hobbies", "date", "time"],
+	"sequence" : 10,
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",

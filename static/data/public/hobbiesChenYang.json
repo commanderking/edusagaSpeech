@@ -2,6 +2,7 @@
 	"activityID": "CY1",
 	"activityName": "Asking about Chen Yang's Hobbies (Part 1)",
 	"tags" : ["hobbies"],
+	"sequence" : 110,
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/chenguang/chengDefault.png",

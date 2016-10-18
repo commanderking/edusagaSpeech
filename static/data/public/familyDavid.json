@@ -2,6 +2,7 @@
 	"activityID": "familyDavid",
 	"activityName": "Asking about David's Family",
 	"tags" : ["family", "nationality", "careers"],
+	"sequence" : [],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",

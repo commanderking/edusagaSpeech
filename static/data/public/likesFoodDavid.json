@@ -2,6 +2,7 @@
 	"activityID": "likesFoodDavid",
 	"activityName": "Asking what kind of food David likes",
 	"tags" : ["food", "hobbies"],
+	"sequence": 0,
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",

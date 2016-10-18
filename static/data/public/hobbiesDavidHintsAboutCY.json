@@ -2,6 +2,7 @@
 	"activityID": "likesFoodDavid",
 	"activityName": "Asking about Chen Yang's interests",
 	"tags" : ["hobbies"],
+	"sequence" : 200,
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
