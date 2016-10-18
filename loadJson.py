@@ -20,7 +20,7 @@ def getAllEpisodeData():
 
 	sceneMenuDataStructure = json.dumps(sceneMenuDataStructure, ensure_ascii=False).encode('utf8')
 
-	newFile = open("static/data/teacherScenes/publicEpisodes.json", "w")
+	newFile = open("static/data/teacherScenes/public.json", "w")
 	newFile.write("%s\n" % sceneMenuDataStructure)
 	newFile.close()
 

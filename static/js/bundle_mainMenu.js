@@ -51,7 +51,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
-	var Constants = __webpack_require__(/*! ./helpers/Constants */ 177);
+	var Constants = __webpack_require__(/*! ./helpers/Constants */ 179);
 	
 	var MainMenu = React.createClass({
 		displayName: 'MainMenu',
@@ -67,6 +67,68 @@
 				that.setState({ teacherData: data });
 			});
 		},
+		generateDOMfromEpisodesArray: function generateDOMfromEpisodesArray(episodeArray) {
+			console.log("in generate");
+			var episodeListToReturn = episodeArray.map(function (scene, i) {
+				console.log(scene);
+				var link = scene.link + "?" + studentID;
+				var className = "episodeBlock activeScene-" + scene.assigned;
+				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
+				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
+	
+				// Loop through can do statements for each episode to prepare DOM elements
+				var canDoStatements = scene.objectives.map(function (objective, i) {
+					var reactKey = "objective" + i;
+					return React.createElement(
+						'li',
+						{ key: reactKey },
+						objective
+					);
+				});
+	
+				return React.createElement(
+					'a',
+					{ href: link,
+						key: i,
+						'data-index': i },
+					React.createElement(
+						'li',
+						{ className: className },
+						starIcon,
+						React.createElement(
+							'h3',
+							null,
+							scene.name
+						),
+						React.createElement(
+							'p',
+							null,
+							React.createElement(
+								'b',
+								null,
+								'Scenario:'
+							),
+							' ',
+							scene.scenario
+						),
+						React.createElement(
+							'div',
+							null,
+							React.createElement(
+								'b',
+								null,
+								'Can Do Statements:'
+							),
+							' ',
+							React.createElement('br', null),
+							' ',
+							canDoStatements
+						)
+					)
+				);
+			});
+			return episodeListToReturn;
+		},
 		componentDidMount: function componentDidMount() {
 			this.loadSceneData();
 		},
@@ -79,15 +141,49 @@
 			if (this.state.teacherData) {
 				var that = this;
 				// Divide teacherData into subcategories
+	
+				var introEpisodes = [];
+				var familyNationalityEpisodes = [];
+				var dateTimeEpisodes = [];
+				var likesDislikesEpisodes = [];
+				var reviewEpisodes = [];
+				var otherEpisodes = [];
+	
 				this.state.teacherData.scenes.forEach(function (episode, i) {
 					// Generate array of tags
 					tagsSet.add(episode.tags[0]);
 					console.log(episode.tags[0]);
+					switch (episode.tags[0]) {
+						case "introduction":
+						case "greetings":
+							introEpisodes.push(episode);
+							break;
+						case "family":
+						case "nationality":
+							familyNationalityEpisodes.push(episode);
+							break;
+						case "date":
+						case "time":
+							dateTimeEpisodes.push(episode);
+							break;
+						case "hobbies":
+						case "food":
+							likesDislikesEpisodes.push(episode);
+							break;
+						case "review":
+							reviewEpisodes.push(episode);
+							break;
+						case "activities":
+							otherEpisodes.push(episode);
+							break;
+						default:
+							break;
+					}
 				});
-				console.log(tagsSet);
 	
 				// Sort episodes by their tag in one object
 				var sortedEpisodes = {};
+	
 				tagsSet.forEach(function (tag) {
 					sortedEpisodes[tag] = [];
 					that.state.teacherData.scenes.forEach(function (episode) {
@@ -95,66 +191,19 @@
 							sortedEpisodes[tag].push(episode);
 						}
 					});
-					console.log(sortedEpisodes);
 				});
+				console.log(introEpisodes);
+				console.log(familyNationalityEpisodes);
+				console.log(otherEpisodes);
+				console.log(sortedEpisodes);
 	
-				scenes = this.state.teacherData.scenes.map(function (scene, i) {
-					var link = scene.link + "?" + studentID;
-					var className = "episodeBlock activeScene-" + scene.assigned;
-					var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
-					var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
-	
-					// Loop through can do statements for each episode to prepare DOM elements
-					var canDoStatements = scene.objectives.map(function (objective, i) {
-						var reactKey = "objective" + i;
-						return React.createElement(
-							'li',
-							{ key: reactKey },
-							objective
-						);
-					});
-	
-					return React.createElement(
-						'a',
-						{ href: link,
-							key: i,
-							'data-index': i },
-						React.createElement(
-							'li',
-							{ className: className },
-							starIcon,
-							React.createElement(
-								'h3',
-								null,
-								scene.name
-							),
-							React.createElement(
-								'p',
-								null,
-								React.createElement(
-									'b',
-									null,
-									'Scenario:'
-								),
-								' ',
-								scene.scenario
-							),
-							React.createElement(
-								'div',
-								null,
-								React.createElement(
-									'b',
-									null,
-									'Can Do Statements:'
-								),
-								' ',
-								React.createElement('br', null),
-								' ',
-								canDoStatements
-							)
-						)
-					);
-				});
+				// Generate DOM elements to display
+				var introEpisodeList = this.generateDOMfromEpisodesArray(introEpisodes);
+				var familyNationalityEpisodeList = this.generateDOMfromEpisodesArray(familyNationalityEpisodes);
+				var dateTimeEpisodeList = this.generateDOMfromEpisodesArray(dateTimeEpisodes);
+				var likesDislikesEpisodeList = this.generateDOMfromEpisodesArray(likesDislikesEpisodes);
+				var reviewEpisodeList = this.generateDOMfromEpisodesArray(reviewEpisodes);
+				var otherEpisodeList = this.generateDOMfromEpisodesArray(otherEpisodes);
 			} else {
 				scenes = "Nothing!";
 			}
@@ -178,6 +227,66 @@
 						'ul',
 						{ className: 'scenarioList' },
 						scenes
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Introduction/Greetings'
+					),
+					React.createElement(
+						'ul',
+						{ className: 'scenarioList' },
+						introEpisodeList
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Family/Nationality'
+					),
+					React.createElement(
+						'ul',
+						{ className: 'scenarioList' },
+						familyNationalityEpisodeList
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Dates and Times'
+					),
+					React.createElement(
+						'ul',
+						{ className: 'scenarioList' },
+						dateTimeEpisodeList
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Likes and Dislikes, Appointments'
+					),
+					React.createElement(
+						'ul',
+						{ className: 'scenarioList' },
+						likesDislikesEpisodeList
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Review'
+					),
+					React.createElement(
+						'ul',
+						{ className: 'scenarioList' },
+						reviewEpisodeList
+					),
+					React.createElement(
+						'h2',
+						null,
+						'Additional'
+					),
+					React.createElement(
+						'ul',
+						{ className: 'scenarioList' },
+						otherEpisodeList
 					)
 				);
 			}
@@ -21737,7 +21846,9 @@
 /* 174 */,
 /* 175 */,
 /* 176 */,
-/* 177 */
+/* 177 */,
+/* 178 */,
+/* 179 */
 /*!**********************************************!*\
   !*** ./react_assets/js/helpers/Constants.js ***!
   \**********************************************/
