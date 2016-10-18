@@ -35,10 +35,8 @@ def buildEpisodeData(jsonPath):
 		episodeContent['name'] = d['activityName']
 		episodeContent['scenario'] = d['scenario'][0]['text']
 		episodeContent['link'] = jsonPath.replace('static/data/public', '..').replace('.json', '')
-		try: 
-			episodeContent['tags'] = d['tags']
-		except: 
-			pass
+		episodeContent['tags'] = d['tags']
+		episodeContent['objectives'] = d['objectives']
 
 		#print(episodeContent)
 		return episodeContent

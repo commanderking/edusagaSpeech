@@ -1,7 +1,7 @@
 {
 	"activityID": "likesFoodDavid",
 	"activityName": "Asking which day David can eat a meal",
-	"tags": ["food, hobbies", "date", "time"],
+	"tags": ["food", "hobbies", "date", "time"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -170,7 +170,7 @@
 						}	
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -196,7 +196,7 @@
 						}	
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

@@ -97,7 +97,7 @@ def teacherHome(teacher):
 def publicHome():
 
 	# Check for any new episodes and update JSON to reflect any new files in the public folder
-	episodeData = json.dumps(getAllEpisodeData(), ensure_ascii=False).encode('utf8');
+	episodeData = json.dumps(getAllEpisodeData(), ensure_ascii=False).encode('utf8')
 	#print json.dumps(episodeData)
 	trackVisitorEvent("Visited See More Episodes")
 	studentID = request.args.get('studentID')

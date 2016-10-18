@@ -92,9 +92,10 @@
 					"soundPath" : "david/see-you-tomorrow.ogg"
 				},
 				{
-					"soundID" : "see-you-day-after",
-					"soundPath" : "david/see-you-day-after.ogg"
+					"soundID" : "see-you-day-after-tomorrow",
+					"soundPath" : "david/see-you-day-after-tomorrow.ogg"
 				}
+
 			],
 			"confusedPhrases" : 
 			[
@@ -327,7 +328,7 @@
 					[
 						{
 							"answers" : ["好啊", "好的", "好", "好极了", "太好了"],
-							"response" : "那我们就后天见!",
+							"response" : "see-you-day-after-tomorrow",
 							"soundID" : "hobbies",
 							"exactMatch" : true
 						}

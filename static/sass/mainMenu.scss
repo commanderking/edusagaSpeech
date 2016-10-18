@@ -12,7 +12,7 @@
 	.activeScene-true {
 		background-color: yellow;
 	}
-	li {
+	.episodeBlock {
 		position: relative;
 		opacity: 0.8;
 		text-align: center;
@@ -25,6 +25,7 @@
 		padding: 10px;
 		border-radius: 20px;
 		background-color: lightBlue;
+		overflow: scroll;
 		img {
 			position: absolute;
 			width: 75px;
@@ -35,11 +36,16 @@
 		&:hover {
 			opacity: 1.0;
 		}
-		p {
+		p, div {
 			color: black;
 			text-align: left;
 			font-size: 14px;
 
+		}
+
+		li {
+			text-align: left;
+			margin-left: 16px;
 		}
 	}
 }

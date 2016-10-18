@@ -25,8 +25,8 @@
 		},
 		{
 			"name" : "???",
-			"image" : "miri/MIRI_body_constant-01.png",
-			"imageLayer" : "characters/alex/alexDefault.png",
+			"image" : "characters/alex/alexDefault.png",
+			"imageLayer" : "blank.png",
 			"text" : "你好!"
 		}
 	],
@@ -91,7 +91,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -110,7 +110,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/alex/alexLaughing.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -130,7 +130,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -147,7 +147,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/alex/alexLaughing.png",
 					"tasksToQueue" : [22],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
