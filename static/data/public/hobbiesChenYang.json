@@ -101,7 +101,7 @@
 					[
 						{
 							"answers" : ["你周末喜欢做什么"],
-							"response" : "我周末啊? 我周末不做什么。睡觉, 努力学习, 休息。。。",
+							"response" : "我周末啊? 我周末不做什么。睡觉, 学习。。。",
 							"soundID" : "hobbies-weekend-likes"
 						},
 						{
@@ -109,7 +109,7 @@
 								["你周末", "周末你"],
 								["喜欢做什么", "爱做什么"]
 							],
-							"response" : "我周末啊? 我周末不做什么。睡觉,努力学习, 休息。。。",
+							"response" : "我周末啊? 我周末不做什么。睡觉, 学习。。。",
 							"soundID" : "hobbies-weekend-likes"
 						}
 					],
@@ -172,12 +172,12 @@
 				},
 				{
 					"taskID" : 32,
-					"task" : "Ask if she likes to play sports",
+					"task" : "Ask if she likes to play sports or exercise",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜不喜欢打球"],
-							"response" : "我不是很喜欢打球",
+							"answers" : ["你喜不喜欢运动"],
+							"response" : "我不是很喜欢运动。",
 							"soundID" : "hobbies-weekend-likes"
 						},
 						{
@@ -185,7 +185,7 @@
 								["你喜不喜欢", "你爱不爱"],
 								["打球", "运动"]
 							],
-							"response" : "我不是很喜欢打球",
+							"response" : "我不是很喜欢运动。",
 							"soundID" : ""
 						},
 						{
@@ -193,7 +193,7 @@
 								["你喜欢", "你爱"],
 								["打球吗", "运动吗"]
 							],
-							"response" : "我不是很喜欢打球",
+							"response" : "我不是很喜欢运动。",
 							"soundID" : "",
 							"exceptions" : ["喜不喜欢", "爱不爱"]
 						}

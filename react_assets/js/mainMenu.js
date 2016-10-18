@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Constants = require('./helpers/Constants');
+var EpisodeTagList = require('./mainMenu/EpisodeTagLists');
 
 var MainMenu = React.createClass({
 	getInitialState: function() {
@@ -16,9 +17,7 @@ var MainMenu = React.createClass({
 			});
 	},
 	generateDOMfromEpisodesArray: function(episodeArray) {
-		console.log("in generate");
 		var episodeListToReturn = episodeArray.map(function(scene, i) {
-			console.log(scene);
 			var link = scene.link + "?" + studentID;
 			var className = "episodeBlock activeScene-" + scene.assigned;
 			var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
@@ -99,6 +98,7 @@ var MainMenu = React.createClass({
 			})
 
 			// Sort episodes by their tag in one object
+			/*
 			var sortedEpisodes = {};
 
 			tagsSet.forEach(function(tag) {
@@ -108,11 +108,7 @@ var MainMenu = React.createClass({
 						sortedEpisodes[tag].push(episode);
 					}
 				})
-			})
-			console.log(introEpisodes);
-			console.log(familyNationalityEpisodes);
-			console.log(otherEpisodes);
-			console.log(sortedEpisodes);
+			})*/
 
 			// Generate DOM elements to display
 			var introEpisodeList = this.generateDOMfromEpisodesArray(introEpisodes);
@@ -122,9 +118,6 @@ var MainMenu = React.createClass({
 			var reviewEpisodeList = this.generateDOMfromEpisodesArray(reviewEpisodes);
 			var otherEpisodeList = this.generateDOMfromEpisodesArray(otherEpisodes);
 
-
-
-
 		} else { scenes = "Nothing!"; }
 
 		if (!this.state.teacherData) {
@@ -133,33 +126,24 @@ var MainMenu = React.createClass({
 			return (
 				<div className="container-fluid">
 					<h1>Episodes Available</h1>
-					<ul className="scenarioList">
-						{scenes}
-					</ul>
-					<h2>Introduction/Greetings</h2>
-					<ul className="scenarioList">
-						{introEpisodeList}
-					</ul>
-					<h2>Family/Nationality</h2>
-					<ul className="scenarioList">
-						{familyNationalityEpisodeList}
-					</ul>
-					<h2>Dates and Times</h2>
-					<ul className="scenarioList">
-						{dateTimeEpisodeList}
-					</ul>
-					<h2>Likes and Dislikes, Appointments</h2>
-					<ul className="scenarioList">
-						{likesDislikesEpisodeList}
-					</ul>
-					<h2>Review</h2>
-					<ul className="scenarioList">
-						{reviewEpisodeList}
-					</ul>
-					<h2>Additional</h2>
-					<ul className="scenarioList">
-						{otherEpisodeList}
-					</ul>
+					<EpisodeTagList
+						header = "Introduction/Greetings"
+						episodeList = {introEpisodeList} />
+					<EpisodeTagList
+						header = "Family/Nationality"
+						episodeList = {familyNationalityEpisodeList} />
+					<EpisodeTagList
+						header = "Dates and Times"
+						episodeList = {dateTimeEpisodeList} />
+					<EpisodeTagList
+						header = "Likes and Dislikes, Inviting People"
+						episodeList = {likesDislikesEpisodeList} />
+					<EpisodeTagList
+						header = "Review"
+						episodeList = {reviewEpisodeList} />
+					<EpisodeTagList
+						header = "Additional"
+						episodeList = {otherEpisodeList} />
 				</div>	
 			)
 		}

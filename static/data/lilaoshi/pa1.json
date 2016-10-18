@@ -1,6 +1,7 @@
 {
 	"activityID": "A1",
 	"activityName": "Pre-assessment - Chinese 1",
+	"tags" : ["review", "time", "hobbies", "introduction", "pre-assessment"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/chenguang/chengDefault.png",
@@ -9,6 +10,13 @@
 	"currentSoundID": "",
 	"assessmentMode": true,
 	"APTimeMode": true,
+	"objectives": 
+	[
+		"I can invite and make plans with someone to do something or go somewhere.",
+		"I can ask about someone's family.",
+		"I can ask questions about what other people like.",
+		"I can answer questions about what I like and dislike."
+	],
 	"scenario" :
 	[	
 		{

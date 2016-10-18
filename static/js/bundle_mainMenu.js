@@ -51,7 +51,8 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
-	var Constants = __webpack_require__(/*! ./helpers/Constants */ 179);
+	var Constants = __webpack_require__(/*! ./helpers/Constants */ 177);
+	var EpisodeTagList = __webpack_require__(/*! ./mainMenu/EpisodeTagLists */ 220);
 	
 	var MainMenu = React.createClass({
 		displayName: 'MainMenu',
@@ -68,9 +69,7 @@
 			});
 		},
 		generateDOMfromEpisodesArray: function generateDOMfromEpisodesArray(episodeArray) {
-			console.log("in generate");
 			var episodeListToReturn = episodeArray.map(function (scene, i) {
-				console.log(scene);
 				var link = scene.link + "?" + studentID;
 				var className = "episodeBlock activeScene-" + scene.assigned;
 				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
@@ -182,20 +181,16 @@
 				});
 	
 				// Sort episodes by their tag in one object
-				var sortedEpisodes = {};
-	
-				tagsSet.forEach(function (tag) {
-					sortedEpisodes[tag] = [];
-					that.state.teacherData.scenes.forEach(function (episode) {
-						if (episode.tags[0] === tag) {
-							sortedEpisodes[tag].push(episode);
-						}
-					});
-				});
-				console.log(introEpisodes);
-				console.log(familyNationalityEpisodes);
-				console.log(otherEpisodes);
-				console.log(sortedEpisodes);
+				/*
+	   var sortedEpisodes = {};
+	   	tagsSet.forEach(function(tag) {
+	   	sortedEpisodes[tag] = [];
+	   	that.state.teacherData.scenes.forEach(function(episode) {
+	   		if (episode.tags[0] === tag) {
+	   			sortedEpisodes[tag].push(episode);
+	   		}
+	   	})
+	   })*/
 	
 				// Generate DOM elements to display
 				var introEpisodeList = this.generateDOMfromEpisodesArray(introEpisodes);
@@ -223,71 +218,24 @@
 						null,
 						'Episodes Available'
 					),
-					React.createElement(
-						'ul',
-						{ className: 'scenarioList' },
-						scenes
-					),
-					React.createElement(
-						'h2',
-						null,
-						'Introduction/Greetings'
-					),
-					React.createElement(
-						'ul',
-						{ className: 'scenarioList' },
-						introEpisodeList
-					),
-					React.createElement(
-						'h2',
-						null,
-						'Family/Nationality'
-					),
-					React.createElement(
-						'ul',
-						{ className: 'scenarioList' },
-						familyNationalityEpisodeList
-					),
-					React.createElement(
-						'h2',
-						null,
-						'Dates and Times'
-					),
-					React.createElement(
-						'ul',
-						{ className: 'scenarioList' },
-						dateTimeEpisodeList
-					),
-					React.createElement(
-						'h2',
-						null,
-						'Likes and Dislikes, Appointments'
-					),
-					React.createElement(
-						'ul',
-						{ className: 'scenarioList' },
-						likesDislikesEpisodeList
-					),
-					React.createElement(
-						'h2',
-						null,
-						'Review'
-					),
-					React.createElement(
-						'ul',
-						{ className: 'scenarioList' },
-						reviewEpisodeList
-					),
-					React.createElement(
-						'h2',
-						null,
-						'Additional'
-					),
-					React.createElement(
-						'ul',
-						{ className: 'scenarioList' },
-						otherEpisodeList
-					)
+					React.createElement(EpisodeTagList, {
+						header: 'Introduction/Greetings',
+						episodeList: introEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Family/Nationality',
+						episodeList: familyNationalityEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Dates and Times',
+						episodeList: dateTimeEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Likes and Dislikes, Inviting People',
+						episodeList: likesDislikesEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Review',
+						episodeList: reviewEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Additional',
+						episodeList: otherEpisodeList })
 				);
 			}
 		}
@@ -21846,9 +21794,7 @@
 /* 174 */,
 /* 175 */,
 /* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */
+/* 177 */
 /*!**********************************************!*\
   !*** ./react_assets/js/helpers/Constants.js ***!
   \**********************************************/
@@ -21863,6 +21809,84 @@
 		IMAGE_PATH: IMAGE_PATH,
 		SOUND_PATH: SOUND_PATH
 	};
+
+/***/ },
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */
+/*!*****************************************************!*\
+  !*** ./react_assets/js/mainMenu/EpisodeTagLists.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function EpisodeTagList(props) {
+		if (props.episodeList.length > 0) {
+			console.log(props.episodeList);
+			return React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"h2",
+					null,
+					props.header
+				),
+				React.createElement(
+					"ul",
+					{ className: "scenarioList" },
+					props.episodeList
+				)
+			);
+		} else {
+			return null;
+		}
+	}
+	
+	module.exports = EpisodeTagList;
 
 /***/ }
 /******/ ]);

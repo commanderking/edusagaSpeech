@@ -1,4 +1,7 @@
 {
+	"activityID": "Y1",
+	"activityName": "Review of Basic Questions",
+	"tags" : ["review", "nationality", "location", "family"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -6,6 +9,12 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can say or write something about the members of my family and ask about someone’s family.",
+		"I can ask and say a home address and e-mail address.",
+		"I can ask and say someone’s nationality."
+	],
 	"scenario" :
 	[	
 		{
@@ -228,7 +237,10 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers": 	["我是", "人"],
+							"answers": 	[
+								["我是"], 
+								["人"]
+							],
 							"response": "哦。。。",
 							"soundID" : "oh"
 						}
@@ -316,6 +328,15 @@
 							"answers": 	["你的电话号码几号", "电话号码", "电话几号", "手机号码", "家的电话"],
 							"response": "我的电话号码是 133-8879-6654。",
 							"soundID" : "phoneNumber"
+						},
+						{
+							"answers": 	[
+								["你", "你的"],
+								["电话号码", "手机号码", "家的电话"],
+								["多少", "几号", "是多少"]
+							],
+							"response": "我的电话号码是 133-8879-6654。",
+							"soundID" : "phoneNumber"
 						}
 					],
 					"correct" : false,
@@ -333,7 +354,25 @@
 							"answers": 	["你有没有电子邮件", "你有电子邮件吗", "有电子邮件"],
 							"response": "我有啊! 是dawei@qqz.com",
 							"soundID" : "haveEmail-email"
-						}
+						},
+						{
+							"answers": 	[	
+								["你"],
+								["有没有"],
+								["电子邮件"]
+							],
+							"response": "我有啊! 是dawei@qqz.com",
+							"soundID" : "haveEmail-email"
+						},
+						{
+							"answers": 	[
+								["你"],
+								["电子邮件"],
+								["是什么"]
+							],
+							"response": "我有啊! 是dawei@qqz.com",
+							"soundID" : "haveEmail-email"
+						}		
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
@@ -350,7 +389,25 @@
 							"answers": 	["你家有几口人", "你家有几个人", "几个家人", "几个人", "几口人"],
 							"response": "我家有四口人。",
 							"soundID" : "familyFour"
-						}
+						},
+						{
+							"answers": 	[
+								["你家", "你的家"],
+								["有"],
+								["几口人", "几个人"]
+							],
+							"response": "我家有四口人。",
+							"soundID" : "familyFour"
+						},
+						{
+							"answers": 	[
+								["你"],
+								["有"],
+								["几口家人", "几个家人"]
+							],
+							"response": "我家有四口人。",
+							"soundID" : "familyFour"
+						}		
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",

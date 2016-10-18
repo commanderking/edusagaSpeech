@@ -1,6 +1,7 @@
 {
 	"activityID": "W1",
 	"activityName": "Asking about David's Schedule",
+	"tags": ["date", "time"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -8,13 +9,17 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can ask about what time my friends do different activities."
+	],
 	"scenario" :
 	[	
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "What's David's schedule like? Does he get up early? Sleep late?",
+			"text" : "You seem really tired recently and want to learn more about David's schedule.",
 			"next" : "end"
 		}
 	],

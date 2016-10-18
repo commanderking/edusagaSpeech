@@ -1,4 +1,7 @@
 {
+	"activityID": "lewDemo2",
+	"activityName": "David's Return from Taiwan",
+	"tags" : ["activities", "past"], 
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -6,6 +9,10 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can ask friends about the activities that they did."
+	],
 	"scenario" :
 	[	
 		{

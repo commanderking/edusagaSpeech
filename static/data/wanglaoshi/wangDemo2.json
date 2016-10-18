@@ -1,6 +1,7 @@
 {
 	"activityID": "W2",
-	"activityName": "Answering about one's own schedule",
+	"activityName": "Answering questions about your schedule",
+	"tags": ["date", "time"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -8,6 +9,10 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can tell others the times I do different activities."
+	],
 	"scenario" :
 	[	
 		{
@@ -26,7 +31,7 @@
 			{
 				"nameEnglish" : "Shanghai Jiao Tong University",
 				"nameChinese" : "上海交通大学", 
-				"bg" : "bg/jiaoTongUniversity.jpg"
+				"bg" : "bg/shitang.jpg"
 			},
 			"emotions" : 
 			{
@@ -34,7 +39,8 @@
 				"uncertain" : "characters/david/davidUncertain.png",
 				"laughing" : "characters/david/davidLaughing.png",
 				"confused" : "characters/david/davidConfused.png",
-				"silhouette" : "characters/david/davidSilhouette.png"
+				"silhouette" : "characters/david/davidSilhouette.png",
+				"blank" : "blank.png"
 			},
 			"successPhrases" : {
 
@@ -253,7 +259,7 @@
 						{
 							"answers": 	[
 								["六点", "七点", "八点", "九点", "6点", "7点", "8点", "9点"],
-								["睡觉"]
+								["睡"]
 							],
 							"response": "哦。。。 那挺早的! 你现在要回家吗?",
 							"soundID" : "time-oh-thatsearly-areyougoinghome"
@@ -261,7 +267,7 @@
 						{
 							"answers": 	[
 								["十点", "十一点", "10点", "11点"],
-								["睡觉"]
+								["睡"]
 							],
 							"response": "哦。。。 跟我一样! 你现在要回家吗?",
 							"soundID" : "oh-sametimeasme-goinghome"
@@ -269,7 +275,7 @@
 						{
 							"answers": 	[
 								["十二点", "一点", "两点", "三点", "四点", "五点", "12点", "1点", "2点", "3点", "4点", "5点"],
-								["睡觉"]
+								["睡"]
 							],
 							"response": "哇! 那么晚! 你现在要回家吗?",
 							"soundID" : "time-wow-so-late-going-home"
@@ -377,7 +383,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "blank.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
