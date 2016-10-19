@@ -1,11 +1,11 @@
 {
-	"activityID": "PD1",
+	"activityID": "PD3",
 	"activityName": "Learning about Alex's Family!",
 	"tags" : ["family", "nationality"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/alex/alexDefault.png",
-	"currentLanguage" : "cmn-Hant-TW",
+	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"scenarioIndex": 0,
@@ -14,7 +14,7 @@
 	[
 		"I can ask and say someone’s nationality.",
 		"I can introduce myself and provide basic personal information.",
-		"I can say or write something about the members of my family and ask about someone’s family"
+		"I can say ask about someone’s family."
 	],
 	"scenario" :
 	[	
@@ -28,7 +28,7 @@
 	"character" : 
 		{
 			"name" : "Alex",
-			"language" : "cmn-Hant-TW",
+			"language" : "zh-CN",
 			"location" : 
 			{
 				"nameEnglish" : "National Taiwan University",
@@ -136,99 +136,34 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [2],
+					"tasksToQueue" : [6],
 					"attemptedAnswers" : []
 				}
 			],
 			"queuedTasks" : 
 			[
 				{
-					"taskID" : 2,
-					"task" : "Ask for her surname",
-					"possibleAnswers" : 
-					[
-						{
-							"answers": ["請問您貴姓", "請問你貴姓", "您貴姓", "你貴姓", "你的貴姓是什麼", "你姓什麼", "你的贵姓是什么"],
-							"response": "我姓王",
-							"soundID": "surname"
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [3],
-					"attemptedAnswers" : []
-				},
-				{
-					"taskID" : 3,
-					"task" : "Ask for her first name / name", 
-					"possibleAnswers" : 
-					[
-						{
-							"answers": 	["你叫什麼", "你叫什麼名字"],
-							"response": "我叫琳娜",
-							"soundID" : "name"
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [4,5,6],
-					"attemptedAnswers" : []
-				},
-				{
-					"taskID" : 4,
-					"task" : "Ask if she's a student", 
-					"possibleAnswers" : 
-					[
-						{
-							"answers" : ["你是學生嗎", "你是不是學生", "請問你是不是學生"],
-							"response" : "我是學生。",
-							"soundID" : "student"
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [],
-					"attemptedAnswers" : []
-				}, 
-				{
-					"taskID" : 5,
-					"task" : "Ask for her birthday", 
-					"possibleAnswers" :
-					[
-						{
-							"answers" : ["你的生日幾月幾號", "你的生日幾月幾日", "你生日幾月幾號", "你生日幾月幾日", "你的生日是幾月幾號", "你的生日是幾月幾日", "什麼時候"],
-							"response" : "我生日八月二十七號。",
-							"soundID" : "birthday"
-						},
-						{
-							"answers" : [
-								["你的", "你"],
-								["生日"],
-								["幾月幾號", "幾月幾日", "什麼時候", "那一天"]
-							],
-							"response" : "我生日八月二十七號。",
-							"soundID" : "birthday"							
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [6],
-					"attemptedAnswers" : []
-				},
-				{
 					"taskID" : 6,
 					"task" : "Ask how many family members she has",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你的家有幾口人", "您的家有幾口人", "你家有幾口人", "你家有幾個人", "你的家有幾個人", "你家裏有幾個人", "你家裏有幾口人"],
+							"answers" : ["你的家有幾口人"],
+							"response" : "我家有五口人。",
+							"soundID" : "familyCount"
+						},
+						{
+							"answers" : [
+								["你的家", "你家"],
+								["有几口人", "有几个人"]
+							],
 							"response" : "我家有五口人。",
 							"soundID" : "familyCount"
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [7,8],
+					"tasksToQueue" : [7,8,9],
 					"attemptedAnswers" : []
 				},
 				{
@@ -239,10 +174,26 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["有哥哥嗎", "你有沒有哥哥", "你有沒有一個哥哥"],
-							"response" : "我有一個哥哥和一個妹妹!",
+							"answers" : ["你有没有哥哥"],
+							"response" : "我有一个哥哥和一个妹妹!",
 							"soundID" : "siblings"
-						}
+						},
+						{
+							"answers" : [
+								["你有没有"],
+								["哥哥", "一个哥哥", "个哥哥"]
+							],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "siblings"
+						},
+						{
+							"answers" : [
+								["你有"],
+								["哥哥吗", "一个哥哥吗", "个哥哥吗"]
+							],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "siblings"
+						}			
 					],
 					"exceptions" : ["我", "他"],
 					"correct" : false,
@@ -258,57 +209,93 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你有沒有妹妹", "你有妹妹嗎", "你有沒有一個妹妹", "你有沒有個妹妹"],
+							"answers" : ["你有没有妹妹"],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "siblings"
+						},
+						{
+							"answers" : [
+								["你有没有"],
+								["妹妹", "一个妹妹", "个妹妹"]
+							],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "siblings"
+						},
+						{
+							"answers" : [
+								["你有"],
+								["妹妹吗", "一个妹妹吗", "个妹妹吗"]
+							],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "siblings"
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [10],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 9,
+					"task" : "Ask whether she has any siblings",	
+					"taskType" : "choice",
+					"taskLink" : "siblings",				
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你有沒有兄弟姐妹", "你有兄弟姐妹吗"],
 							"response" : "我有一個哥哥和一個妹妹",
 							"soundID" : "siblings"
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [9,10],
-					"attemptedAnswers" : []
-				},	
-				{
-					"taskID" : 9,
-					"task" : "Ask her for her dad's name",					
-					"possibleAnswers" : 
-					[
-						{
-							"answers" : ["你的爸爸叫什麼名字", "你爸爸叫什麼名字", "你的爸爸叫什麼", "你的爸叫什麼"],
-							"response" : "我的爸爸叫王大偉",
-							"soundID" : "dadName"
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [11],
+					"tasksToQueue" : [10],
 					"attemptedAnswers" : []
 				},
 				{
 					"taskID" : 10,
-					"task" : "Ask her for her mom's name",					
+					"task" : "Ask for her nationality",	
+					"taskType" : "choice",
+					"taskLink" : "siblings",				
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你的媽媽叫什麼名字", "你媽叫什麼名字", "你的媽媽叫什麼", "你的媽叫什麼", "你媽媽叫什麼"],
-							"response" : "我的媽媽叫王安娜",
-							"soundID" : "momName"
+							"answers" : ["你是哪国人"],
+							"response" : "我有一個哥哥和一個妹妹",
+							"soundID" : "siblings"
+						},
+						{
+							"answers" : [
+								["你"],
+								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
+							],
+							"response" : "我是美国人, 可是我爸妈不是美国人。",
+							"soundID" : ""
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [12],
+					"tasksToQueue" : [11, 12],
 					"attemptedAnswers" : []
-				},	
+				},			
 				{
 					"taskID" : 11,
 					"task" : "Ask her for her dad's nationality",					
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你的爸爸是哪國人",	 "你的爸爸是哪裡人", "你爸是哪國人", "你爸是哪裡人"],
-							"response" : "我的爸爸也是台灣人。",
-							"soundID" : "dadNationality"
+							"answers" : ["你的爸爸是哪国人"],
+							"response" : "我的爸爸也是中国人。他来自上海。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你爸爸", "你爸", "你的爸爸", "你的爸"],
+								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
+							],
+							"response" : "我的爸爸也是中国人。他来自上海。",
+							"soundID" : ""
 						}
 					],
 					"correct" : false,
@@ -322,9 +309,17 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你的媽媽是哪國人",	 "你的媽媽是哪裡人", "你媽是哪國人", "你媽是哪裡人"],
-							"response" : "我的媽媽是新加坡人。",
-							"soundID" : "momNationality"
+							"answers" : ["你的妈妈是哪国人"],
+							"response" : "我的妈妈是新加坡人。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你爸爸", "你爸", "你的爸爸", "你的爸"],
+								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
+							],
+							"response" : "我的妈妈是新加坡人。",
+							"soundID" : ""
 						}
 					],
 					"correct" : false,
