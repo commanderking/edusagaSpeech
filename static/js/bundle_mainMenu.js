@@ -68,6 +68,13 @@
 				that.setState({ teacherData: data });
 			});
 		},
+		sortEpisodeArraybySequence: function sortEpisodeArraybySequence(episodeArray) {
+			return episodeArray.sort(function (a, b) {
+				var x = a["sequence"];
+				var y = b["sequence"];
+				return x < y ? -1 : x > y ? 1 : 0;
+			});
+		},
 		generateDOMfromEpisodesArray: function generateDOMfromEpisodesArray(episodeArray) {
 			var episodeListToReturn = episodeArray.map(function (scene, i) {
 				var link = scene.link + "?" + studentID;
@@ -180,25 +187,13 @@
 					}
 				});
 	
-				// Sort episodes by their tag in one object
-				/*
-	   var sortedEpisodes = {};
-	   	tagsSet.forEach(function(tag) {
-	   	sortedEpisodes[tag] = [];
-	   	that.state.teacherData.scenes.forEach(function(episode) {
-	   		if (episode.tags[0] === tag) {
-	   			sortedEpisodes[tag].push(episode);
-	   		}
-	   	})
-	   })*/
-	
-				// Generate DOM elements to display
-				var introEpisodeList = this.generateDOMfromEpisodesArray(introEpisodes);
-				var familyNationalityEpisodeList = this.generateDOMfromEpisodesArray(familyNationalityEpisodes);
-				var dateTimeEpisodeList = this.generateDOMfromEpisodesArray(dateTimeEpisodes);
-				var likesDislikesEpisodeList = this.generateDOMfromEpisodesArray(likesDislikesEpisodes);
-				var reviewEpisodeList = this.generateDOMfromEpisodesArray(reviewEpisodes);
-				var otherEpisodeList = this.generateDOMfromEpisodesArray(otherEpisodes);
+				// Sort array by sequence and then generate DOM elements to display
+				var introEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(introEpisodes));
+				var familyNationalityEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(familyNationalityEpisodes));
+				var dateTimeEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(dateTimeEpisodes));
+				var likesDislikesEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(likesDislikesEpisodes));
+				var reviewEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(reviewEpisodes));
+				var otherEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(otherEpisodes));
 			} else {
 				scenes = "Nothing!";
 			}

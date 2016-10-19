@@ -264,6 +264,7 @@
 				{
 					"taskID" : 50,
 					"task" : "Say you need to go home。",
+					"taskType" : "end",
 					"possibleAnswers" : 
 					[
 						{

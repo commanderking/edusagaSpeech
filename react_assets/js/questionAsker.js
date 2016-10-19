@@ -192,9 +192,19 @@ var QuestionAsker = React.createClass({
 					// Push this task into the completedTasks
 					newSceneData.character.completedTasks.push(currentTaskData);
 
+
+
 					// Remove the task from the tasks array
-					// If it's a choice task, search the array for other choices that are linked and remove them
 					if (currentTaskData.taskType !== undefined) {
+
+
+						// If task is an "end" task, then end the scene by removing all other current tasks. 
+						if (currentTaskData.taskType === "end") {
+							console.log("scene should be over");
+							newSceneData.character.currentTasks = [];
+						}
+
+						// If it's a choice task, search the array for other choices that are linked and remove them
 						if (currentTaskData.taskType == "choice") {
 							// Search tasks to see if there's another task with the current link
 							var indexesToRemove = [];

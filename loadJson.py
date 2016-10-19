@@ -37,6 +37,10 @@ def buildEpisodeData(jsonPath, teacherName):
 		episodeContent['link'] = jsonPath.replace('static/data/' + teacherName, '..').replace('.json', '')
 		episodeContent['tags'] = d['tags']
 		episodeContent['objectives'] = d['objectives']
+		try: 
+			episodeContent['sequence'] = d['sequence']
+		except:
+			episodeContent['sequence'] = 0
 
 		#print(episodeContent)
 		return episodeContent
