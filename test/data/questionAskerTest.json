@@ -322,6 +322,23 @@
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
+				},
+				{
+					"taskID" : 60,
+					"task" : "Say Goodbye",
+					"taskType" : "end",
+					"possibleAnswers" : [
+						{
+							"answers" : ["再见"],
+							"response" : "再见。",
+							"soundID" : "bye"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false					
 				}
 			],
 			"queuedTasks" : 

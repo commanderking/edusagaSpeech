@@ -166,7 +166,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -188,7 +188,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [41],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -222,7 +222,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [50],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -267,7 +267,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我要回家了。 再见!"],
+							"answers" : ["我要回家了。 再见!", "我得走了", "我需要走了", "我有事"],
 							"response" : "再见!",
 							"soundID" : "zaijian"
 						},

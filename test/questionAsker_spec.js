@@ -15,7 +15,7 @@ describe('Question Asker Logic', () => {
 			// Doesn't actually deep compare data structure, just some key elements
 			var lengthCurrentTasks = TaskController.getCurrentTasks(testJSON).length;
 			var task1text = TaskController.getCurrentTasks(testJSON)[0].task;
-			expect(lengthCurrentTasks).to.equal(6);
+			expect(lengthCurrentTasks).to.equal(7);
 			expect(task1text).to.equal("Greet him");
 		});
 
