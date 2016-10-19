@@ -30,9 +30,9 @@
 			"language" : "zh-CN",
 			"location" : 
 			{
-				"nameEnglish" : "Cafeteria",
-				"nameChinese" : "食堂", 
-				"bg" : "bg/shitang.jpg"
+				"nameEnglish" : "University Walkway",
+				"nameChinese" : "大学走道", 
+				"bg" : "bg/jiaoTongUniversity2.jpg"
 			},
 			"emotions" : 
 			{

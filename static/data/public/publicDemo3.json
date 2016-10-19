@@ -22,7 +22,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Wow! You're attending National Taiwan University and it's move in day! Looks like your roommate has already arrived. Why don't you try to learn more about her family?"
+			"text" : "Lets' try to get to know Alex and her family a little bit better."
 		}
 	],
 	"character" : 
@@ -31,9 +31,9 @@
 			"language" : "zh-CN",
 			"location" : 
 			{
-				"nameEnglish" : "National Taiwan University",
-				"nameChinese" : "台大", 
-				"bg" : "bg/NTUniversity.jpg"
+				"nameEnglish" : "University Park",
+				"nameChinese" : "大学公园", 
+				"bg" : "bg/jiaoTongStatue.jpg"
 			},
 			"emotions" : 
 			{
