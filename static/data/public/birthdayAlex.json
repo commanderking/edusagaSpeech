@@ -1,0 +1,227 @@
+{
+	"activityID": "birthday Alex",
+	"activityName": "Alex's Birthday",
+	"tags" : ["greetings", "introductions"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/alex/alexDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"scenarioIndex": 0,
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can ask for soemone's birthday."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "I wonder when Alex's birthday is. It would be a shame to miss her or her family member's birthdays."
+		}
+	],
+	"character" : 
+		{
+			"name" : "Alex",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "National Taiwan University",
+				"nameChinese" : "台大", 
+				"bg" : "bg/NTUniversity.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/alex/alexDefault.png",
+				"confused" : "characters/alex/alexConfused.png",
+				"sass" : "characters/alex/alexSass.png",
+				"laughing" : "characters/alex/alexLaughing.png",
+				"silhouette" : "characters/alex/alexSilhouette.png"
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "hi",
+					"soundPath" : "alex/hi.ogg"
+				},
+				{
+					"soundID" : "henhao",
+					"soundPath" : "alex/henhao.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "alex/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "alex/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "alex/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Ask Alex when her birthday is",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的生日是几月几号"],
+							"response" : "我的生日八月十七号。",
+							"soundID" : "birthday-mybirthday-whataboutyou"
+						},
+						{
+							"answers" : [
+								["你生日", "你的生日"],
+								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
+							],
+							"response" : "我的生日八月十七号。",
+							"soundID" : "birthday-mybirthday-whataboutyou"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [11],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 11,
+					"task" : "Ask Alex how old she is this year",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你今年多大了", "今年你多大"],
+							"response" : "十九岁。",
+							"soundID" : "birthday-mybirthday-whataboutyou"
+						},
+						{
+							"answers" : ["你多大", "你几岁", "年纪多多大"],
+							"response" : "十九岁。",
+							"soundID" : "birthday-mybirthday-whataboutyou"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [20, 21],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 20,
+					"task" : "Ask her when her younger sister's birthday is",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你妹妹的生日几月几号"],
+							"response" : "让我想一想。。。她的生日是六月三十号。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你妹妹生日", "你妹妹的生日"],
+								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
+							],
+							"response" : "我的生日八月十七号。",
+							"soundID" : "让我想一想。。。她的生日是六月三十号。"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 21,
+					"task" : "Ask her when her older brother's birthday is",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我哥哥的生日是几月几号"],
+							"response" : "我哥哥啊。。。他的生日是一月三十一号。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你妹妹生日", "你妹妹的生日"],
+								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
+							],
+							"response" : "我哥哥啊。。。他的生日八月十七号。",
+							"soundID" : "我哥哥啊。。。他的生日是一月三一号。"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexLaughing.png",
+					"tasksToQueue" : [31],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask Alex how old her younger sister is this year",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的妹妹多大"],
+							"response" : "她今年十六岁。",
+							"soundID" : "birthday-mybirthday-whataboutyou"
+						},
+						{
+							"answers" : [
+								["她", "他", "你的妹妹", "你妹妹"],
+								["多大", "几岁", "年纪多大"]
+							],
+							"response" : "她今年十六岁。",
+							"soundID" : "birthday-mybirthday-whataboutyou"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"task" : "Ask Alex how old her older brother is this year",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的哥哥多大"],
+							"response" : "他二十四。。。不对， 他二十三岁。",
+							"soundID" : "birthday-mybirthday-whataboutyou"
+						},
+						{
+							"answers" : [
+								["他", "你的哥哥", "你哥哥"],
+								["多大", "几岁", "年纪多大"]
+							],
+							"response" : "他二十四。。。不对， 他二十三岁。",
+							"soundID" : "birthday-mybirthday-whataboutyou"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}
