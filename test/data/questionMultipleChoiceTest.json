@@ -1,0 +1,122 @@
+{
+	"activityID": "introMax",
+	"activityName": "Introduction - Maxwell",
+	"tags" : ["greetings", "introductions"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/maxwell/maxDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"scenarioIndex": 0,
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can say hello and goodbye to someone my age or younger.", 
+		"I can respond to an introduction."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Back in the dormitory! It's your roommate Maxwell! Looks like he's watching some show on TV."
+		},
+		{
+			"name" : "???",
+			"image" : "characters/maxwell/maxDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh! Hey there! I'm Maxwell. My Chinese isn't great, but I love watching Chinese TV shows. I'm watching one right now. Can you help me out?"
+		}
+	],
+	"character" : 
+		{
+			"name" : "Max",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "National Taiwan University",
+				"nameChinese" : "台大", 
+				"bg" : "bg/NTUniversity.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/alex/alexDefault.png",
+				"confused" : "characters/alex/alexConfused.png",
+				"sass" : "characters/alex/alexSass.png",
+				"laughing" : "characters/alex/alexLaughing.png",
+				"silhouette" : "characters/alex/alexSilhouette.png"
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "hi",
+					"soundPath" : "alex/hi.ogg"
+				},
+				{
+					"soundID" : "henhao",
+					"soundPath" : "alex/henhao.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "alex/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "alex/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "alex/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Respond to her saying: 你好",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/max/maxDefault.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Answer her question: 你叫什么名字?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我叫", "我是"],
+							"response" : "我姓白 请问你贵姓? ",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [21],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}

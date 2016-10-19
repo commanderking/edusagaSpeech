@@ -32,16 +32,21 @@ var TaskContainer = React.createClass({
 			}
 		);
 	},
+	handleMultipleChoiceSelection: function() {
+
+	},
 	render: function() {
 		var that = this;
 		var taskObject = this.props.tasks;
 		var skipButtonIndex = -2;
+
 		var tasks = taskObject.map(function(task, i){
 			return (
 				<Task 
-					key={taskObject[i].task} 
+					key={taskObject[i].task}
 					index={i}
 					taskName={taskObject[i].task}
+					taskType={taskObject[i].taskType}
 					onSpeechInput = {that.handleSpeechInput} 
 					hintActive = {that.props.hintActive}
 					currentHintIndex = {that.props.currentHintIndex}

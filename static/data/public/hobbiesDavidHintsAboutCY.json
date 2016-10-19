@@ -50,6 +50,34 @@
 				{
 					"soundID" : "nihao",
 					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "david/feichanghao.ogg"
+				},
+				{
+					"soundID" : "hobbies-chenyang-mahjong-badminton",
+					"soundPath" : "david/hobbies-chenyang-mahjong-badminton.ogg"
+				},
+				{
+					"soundID" : "hobbies-mahjong-definition",
+					"soundPath" : "david/hobbies-mahjong-definition.ogg"
+				},
+				{
+					"soundID" : "hobbies-badminton-definition",
+					"soundPath" : "david/hobbies-badminton-definition.ogg"
+				},
+				{
+					"soundID" : "mahjong-bad-at-it",
+					"soundPath" : "david/mahjong-bad-at-it.ogg"
+				},
+				{
+					"soundID" : "hobbies-badminton-fun",
+					"soundPath" : "david/hobbies-badminton-fun.ogg"
+				},
+				{
+					"soundID" : "zaijian",
+					"soundPath" : "david/zaijian.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -104,7 +132,7 @@
 						{
 							"answers" : ["陈阳周末喜欢做什么"],
 							"response" : "陈阳啊? 她喜欢打麻将。。。 还喜欢打羽毛球。",
-							"soundID" : ""
+							"soundID" : "hobbies-chenyang-mahjong-badminton"
 						},
 						{
 							"answers" : [
@@ -112,7 +140,7 @@
 								["喜欢做什么", "爱做什么", "做什么"]
 							],
 							"response" : "陈阳啊? 她喜欢打麻将。。。 还喜欢打羽毛球。",
-							"soundID" : ""
+							"soundID" : "hobbies-chenyang-mahjong-badminton"
 						}
 					],
 					"correct" : false,
@@ -129,12 +157,12 @@
 						{
 							"answers" : ["打麻将?", "打麻将"],
 							"response" : "打麻将。。。 英文是 'Mahjong', 是一个中国游戏。陈阳周末跟他外公， 外婆，和妈妈打。",
-							"soundID" : ""
+							"soundID" : "hobbies-mahjong-definition"
 						},
 						{
 							"answers" : ["打麻将是什么", "麻将是什么", "什么是打麻将", "什么是麻将"],
 							"response" : "打麻将。。。 英文是 'Mahjong', 是一个中国游戏。陈阳周末跟他外公， 外婆，和妈妈打。",
-							"soundID" : ""
+							"soundID" : "hobbies-mahjong-definition"
 						}
 					],
 					"correct" : false,
@@ -151,12 +179,12 @@
 						{
 							"answers" : ["打羽毛球?", "打羽毛球"],
 							"response" : "打羽毛球。。。 英文是 'Badminton'。 中国人非常喜欢打羽毛球!",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-definition"
 						},
 						{
 							"answers" : ["打羽毛球是什么", "打羽毛球是什么", "什么是羽毛球", "什么是打羽毛球"],
 							"response" : "打羽毛球。。。 英文是 'Badminton'。 中国人非常喜欢打羽毛球!",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-definition"
 						}
 					],
 					"correct" : false,
@@ -173,7 +201,7 @@
 						{
 							"answers" : ["你喜不喜欢打麻将"],
 							"response" : "我有时候喜欢打麻将, 可是我打得。。。不怎么样。",
-							"soundID" : ""
+							"soundID" : "mahjong-bad-at-it"
 						},
 						{
 							"answers" : [
@@ -181,7 +209,7 @@
 								["打麻将", "麻将"]
 							],
 							"response" : "我有时候喜欢打麻将, 可是我打得。。。不怎么样。",
-							"soundID" : ""
+							"soundID" : "mahjong-bad-at-it"
 						},
 						{
 							"answers" : [
@@ -189,7 +217,7 @@
 								["打麻将吗"]
 							],
 							"response" : "我有时候喜欢打麻将, 可是我打得。。。不怎么样。",
-							"soundID" : "",
+							"soundID" : "mahjong-bad-at-it",
 							"exceptions" : ["喜不喜欢", "爱不爱"]
 						}
 					],
@@ -207,7 +235,7 @@
 						{
 							"answers" : ["你喜不喜欢打羽毛球"],
 							"response" : "打羽毛球很好玩啊! 我很喜欢。",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-fun"
 						},
 						{
 							"answers" : [
@@ -215,7 +243,7 @@
 								["打羽毛球", "羽毛球"]
 							],
 							"response" : "打羽毛球很好玩啊! 我很喜欢。",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-fun"
 						},
 						{
 							"answers" : [
@@ -223,7 +251,7 @@
 								["羽毛球吗"]
 							],
 							"response" : "打羽毛球很好玩啊! 我很喜欢。",
-							"soundID" : "",
+							"soundID" : "hobbies-badminton-fun",
 							"exceptions" : ["喜不喜欢", "爱不爱"]
 						}
 					],
@@ -241,7 +269,7 @@
 						{
 							"answers" : ["我要回家了。 再见!"],
 							"response" : "再见!",
-							"soundID" : ""
+							"soundID" : "zaijian"
 						},
 						{
 							"answers" : [
@@ -249,7 +277,7 @@
 								["回家", "回去"]
 							],
 							"response" : "再见!",
-							"soundID" : ""
+							"soundID" : "zaijian"
 						}
 					],
 					"correct" : false,

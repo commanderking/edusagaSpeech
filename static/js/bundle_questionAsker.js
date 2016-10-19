@@ -24015,15 +24015,18 @@
 				}
 			});
 		},
+		handleMultipleChoiceSelection: function handleMultipleChoiceSelection() {},
 		render: function render() {
 			var that = this;
 			var taskObject = this.props.tasks;
 			var skipButtonIndex = -2;
+	
 			var tasks = taskObject.map(function (task, i) {
 				return React.createElement(Task, {
 					key: taskObject[i].task,
 					index: i,
 					taskName: taskObject[i].task,
+					taskType: taskObject[i].taskType,
 					onSpeechInput: that.handleSpeechInput,
 					hintActive: that.props.hintActive,
 					currentHintIndex: that.props.currentHintIndex,
@@ -24118,35 +24121,40 @@
 					taskDivClass = 'taskDiv taskDivMicActive';
 				}
 			}
-			return React.createElement(
-				'li',
-				{ className: 'inactiveLink', role: 'presentation', 'data-index': this.props.index },
-				React.createElement(
-					'div',
-					{ className: taskDivClass, 'data-index': this.props.index },
-					React.createElement(TaskIcon, {
-						correctAnswerState: this.props.correctAnswerState,
-						wrongAnswerState: this.props.wrongAnswerState,
-						micActive: this.props.micActive,
-						index: this.props.index,
-						currentTaskIndex: this.props.currentTaskIndex }),
-					React.createElement(TaskText, {
-						className: 'taskText',
-						index: this.props.index,
-						currentTaskIndex: this.props.currentTaskIndex,
-						onSpeechInput: this.props.onSpeechInput,
-						taskTextToDisplay: this.props.taskName,
-						correctAnswerState: this.props.correctAnswerState,
-						wrongAnswerState: this.props.wrongAnswerState }),
-					React.createElement(HintButton, {
-						assessmentMode: this.props.assessmentMode,
-						hintActive: this.props.hintActive,
-						index: this.props.index,
-						currentHintIndex: this.props.currentHintIndex,
-						onDisableHint: this.props.onDisableHint,
-						onHintClick: this.props.onHintClick })
-				)
-			);
+	
+			if (this.props.taskType === "multipleChoice") {
+				console.log("hey!");
+			} else {
+				return React.createElement(
+					'li',
+					{ className: 'inactiveLink', role: 'presentation', 'data-index': this.props.index },
+					React.createElement(
+						'div',
+						{ className: taskDivClass, 'data-index': this.props.index },
+						React.createElement(TaskIcon, {
+							correctAnswerState: this.props.correctAnswerState,
+							wrongAnswerState: this.props.wrongAnswerState,
+							micActive: this.props.micActive,
+							index: this.props.index,
+							currentTaskIndex: this.props.currentTaskIndex }),
+						React.createElement(TaskText, {
+							className: 'taskText',
+							index: this.props.index,
+							currentTaskIndex: this.props.currentTaskIndex,
+							onSpeechInput: this.props.onSpeechInput,
+							taskTextToDisplay: this.props.taskName,
+							correctAnswerState: this.props.correctAnswerState,
+							wrongAnswerState: this.props.wrongAnswerState }),
+						React.createElement(HintButton, {
+							assessmentMode: this.props.assessmentMode,
+							hintActive: this.props.hintActive,
+							index: this.props.index,
+							currentHintIndex: this.props.currentHintIndex,
+							onDisableHint: this.props.onDisableHint,
+							onHintClick: this.props.onHintClick })
+					)
+				);
+			}
 		}
 	});
 	

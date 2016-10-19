@@ -651,7 +651,7 @@ var QuestionAsker = React.createClass({
 						correctAnswerState = {this.state.correctAnswerState} 
 						wrongAnswerState = {this.state.wrongAnswerState} 
 						sceneComplete = {this.state.sceneComplete} />
-					<TaskContainer 
+					<TaskContainer
 						scenarioOn = {this.state.scenarioOn}
 						tasks = {this.state.sceneData.character.currentTasks}
 						taskLang = {sceneData.currentLanguage} 
