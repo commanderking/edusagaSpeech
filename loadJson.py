@@ -29,6 +29,7 @@ def getAllEpisodeData(teacherName):
 def buildEpisodeData(jsonPath, teacherName): 
 	with open(jsonPath) as episodeJSON:
 		episodeContent = {}
+		print jsonPath
 		d = json.load(episodeJSON)
 
 		# Add activity name

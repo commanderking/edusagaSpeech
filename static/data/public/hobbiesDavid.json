@@ -123,14 +123,15 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你好"],
-							"response" : "你好!",
-							"soundID" : "nihao"
-						},
-						{
-							"answers" : ["你好吗", "怎么样"],
+							"answers" : [ "怎么样", "你好吗"],
 							"response" : "非常好!",
 							"soundID" : "feichanghao"							
+						},
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao",
+							"exceptions" : ["你好吗"]
 						}
 					],
 					"correct" : false,
@@ -162,7 +163,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [30,31,32,33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -239,6 +240,7 @@
 							"answers" : [
 								["我也"],
 								["很", "非常", "挺"],
+								["喜欢"],
 								["唱歌", "唱卡拉ok", "卡拉ok"]
 							],
 							"response" : "那我们明天唱歌, 好吗?",
