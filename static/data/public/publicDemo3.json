@@ -173,7 +173,7 @@
 					"exceptions" : ["我", "他"],
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [],
+					"tasksToQueue" : [10],
 					"attemptedAnswers" : []
 				},
 				{
@@ -218,7 +218,15 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你有沒有兄弟姐妹", "你有兄弟姐妹吗"],
+							"answers" : ["你有没有兄弟姐妹", "你有兄弟姐妹吗"],
+							"response" : "我有一個哥哥和一個妹妹",
+							"soundID" : "family-one-brother-one-sister"
+						},
+						{
+							"answers" : [
+								["你有没有"],
+								["兄弟姐妹", "哥哥弟弟", "姐姐妹妹"]
+							],
 							"response" : "我有一個哥哥和一個妹妹",
 							"soundID" : "family-one-brother-one-sister"
 						}
@@ -290,7 +298,7 @@
 						},
 						{
 							"answers" : [
-								["你爸爸", "你爸", "你的爸爸", "你的爸"],
+								["你妈妈", "你妈", "你的妈妈", "你的妈"],
 								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
 							],
 							"response" : "我的妈妈是新加坡人。",

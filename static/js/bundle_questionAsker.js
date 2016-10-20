@@ -130,7 +130,8 @@
 			$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function (data) {}).success(function (data) {
 				that.resetScene();
 				that.setState({
-					sceneData: data
+					sceneData: data,
+					currentDialog: data.initialTaskDialog
 				});
 				/*----------------------------------
 	    One time setting of initial log Data
@@ -684,10 +685,12 @@
 					React.createElement(BackgroundImageContainer, {
 						bgImage: this.state.sceneData.character.location.bg,
 						hintActive: this.state.hintActive }),
-					React.createElement(DialogContainer, {
-						scenarioOn: this.state.scenarioOn,
+					React.createElement(DialogContainer
+					// Variables related to display scenario text and playing sounds
+					, { scenarioOn: this.state.scenarioOn,
 						scenarioData: sceneData.scenario,
 						scenarioIndex: this.state.scenarioIndex,
+						playSound: this.playSound,
 						charName: this.state.sceneData.character.name,
 						currentDialog: this.state.currentDialog,
 						hintActive: this.state.hintActive,
@@ -23915,6 +23918,12 @@
 						{ className: 'scenarioText' },
 						this.props.scenarioData[this.props.scenarioIndex].text
 					);
+	
+					// Play sound for scenario if exists
+					if (this.props.scenarioData[this.props.scenarioIndex].soundID) {
+						this.props.playSound(this.props.scenarioData[this.props.scenarioIndex].soundID);
+					}
+					// Display next Button
 					button = React.createElement(
 						'button',
 						{
@@ -23970,6 +23979,7 @@
 		scenarioOn: PropTypes.bool.isRequired,
 		scenarioData: PropTypes.array.isRequired,
 		scenarioIndex: PropTypes.number.isRequired,
+		playSound: PropTypes.func.isRequired,
 		charName: PropTypes.string.isRequired,
 		hintActive: PropTypes.bool.isRequired,
 		onRepeat: PropTypes.func.isRequired,

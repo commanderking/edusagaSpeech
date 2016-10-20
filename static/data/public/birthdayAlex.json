@@ -94,7 +94,7 @@
 					[
 						{
 							"answers" : ["你的生日是几月几号"],
-							"response" : "我的生日八月十七号。",
+							"response" : "我的生日是八月十七号。",
 							"soundID" : "birthday-august-seventeen"
 						},
 						{
@@ -149,7 +149,7 @@
 						},
 						{
 							"answers" : [
-								["你妹妹生日", "你妹妹的生日"],
+								["你妹妹生日", "你妹妹的生日",  "你的妹妹生日"],
 								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
 							],
 							"response" : "让我想一想。。。她的生日是六月三十号。",
@@ -168,17 +168,17 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我哥哥的生日是几月几号"],
+							"answers" : ["你哥哥的生日是几月几号"],
 							"response" : "我哥哥啊。。。他的生日是一月三十一号。",
-							"soundID" : ""
+							"soundID" : "birthday-brother-january-thirtyfirst"
 						},
 						{
 							"answers" : [
-								["你妹妹生日", "你妹妹的生日"],
+								["你哥哥生日", "你哥哥的生日", "你的哥哥日"],
 								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
 							],
-							"response" : "我哥哥啊。。。他的生日八月十七号。",
-							"soundID" : "我哥哥啊。。。他的生日是一月三一号。"
+							"response" : "我哥哥啊。。。他的生日是一月三十一号。",
+							"soundID" : "birthday-brother-january-thirtyfirst"
 						}
 					],
 					"correct" : false,
@@ -195,7 +195,7 @@
 						{
 							"answers" : ["你的妹妹多大"],
 							"response" : "她今年十六岁。",
-							"soundID" : "birthday-mybirthday-whataboutyou"
+							"soundID" : "sister-sixteen"
 						},
 						{
 							"answers" : [
@@ -203,7 +203,7 @@
 								["多大", "几岁", "年纪多大"]
 							],
 							"response" : "她今年十六岁。",
-							"soundID" : "birthday-mybirthday-whataboutyou"
+							"soundID" : "sister-sixteen"
 						}
 					],
 					"correct" : false,
@@ -220,7 +220,7 @@
 						{
 							"answers" : ["你的哥哥多大"],
 							"response" : "二十四。。。不对， 他二十三岁。",
-							"soundID" : "birthday-mybirthday-whataboutyou"
+							"soundID" : "birthday-brother-twentyfour-no-twentythree"
 						},
 						{
 							"answers" : [
@@ -228,7 +228,7 @@
 								["多大", "几岁", "年纪多大"]
 							],
 							"response" : "二十四。。。不对， 他二十三岁。",
-							"soundID" : "birthday-mybirthday-whataboutyou"
+							"soundID" : "birthday-brother-twentyfour-no-twentythree"
 						}
 					],
 					"correct" : false,

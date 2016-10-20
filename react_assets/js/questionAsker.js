@@ -78,6 +78,7 @@ var QuestionAsker = React.createClass({
 				that.resetScene();
 				that.setState({
 					sceneData: data,
+					currentDialog: data.initialTaskDialog
 				});
 			/*----------------------------------
 			 One time setting of initial log Data
@@ -641,9 +642,11 @@ var QuestionAsker = React.createClass({
 						bgImage={this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
 					<DialogContainer
+						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {sceneData.scenario}
 						scenarioIndex = {this.state.scenarioIndex}
+						playSound = {this.playSound}
 						charName={this.state.sceneData.character.name}
 						currentDialog = {this.state.currentDialog} 
 						hintActive = {this.state.hintActive} 

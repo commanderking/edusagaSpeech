@@ -26,6 +26,12 @@ var DialogContainer = React.createClass({
 				(<p className="scenarioText"> 
 					{this.props.scenarioData[this.props.scenarioIndex].text}
 				</p>)
+
+				// Play sound for scenario if exists
+				if (this.props.scenarioData[this.props.scenarioIndex].soundID) {
+					this.props.playSound(this.props.scenarioData[this.props.scenarioIndex].soundID);
+				}
+				// Display next Button
 				button = <button 
 						className="nextButton"
 						onClick={this.props.nextScenario} ><span className="glyphicon glyphicon-play" aria-hidden="true"></span></button>
@@ -72,6 +78,7 @@ DialogContainer.propTypes = {
 	scenarioOn: PropTypes.bool.isRequired,
 	scenarioData: PropTypes.array.isRequired,
 	scenarioIndex: PropTypes.number.isRequired,
+	playSound: PropTypes.func.isRequired,
 	charName: PropTypes.string.isRequired,
 	hintActive: PropTypes.bool.isRequired,
 	onRepeat: PropTypes.func.isRequired,

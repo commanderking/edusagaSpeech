@@ -7,6 +7,7 @@
 	"currentImage" : "characters/alex/alexDefault.png",
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
+	"initialTaskDialog" : "你好!",
 	"currentSoundID": "",
 	"scenarioIndex": 0,
 	"assessmentMode": false,
@@ -27,7 +28,8 @@
 			"name" : "???",
 			"image" : "characters/alex/alexDefault.png",
 			"imageLayer" : "blank.png",
-			"text" : "你好!"
+			"text" : "你好!",
+			"soundID" : "nihao"
 		}
 	],
 	"character" : 
@@ -59,8 +61,8 @@
 					"soundPath" : "alex/bucuo.ogg"
 				},
 				{
-					"soundID" : "intro-good-alex-yourname",
-					"soundPath" : "alex/intro-good-alex-yourname.ogg"
+					"soundID" : "intro-alex-yourname",
+					"soundPath" : "alex/intro-alex-yourname.ogg"
 				},
 				{
 					"soundID" : "intro-surname-bai-your",
@@ -99,31 +101,12 @@
 					[
 						{
 							"answers" : ["你好"],
-							"response" : "你好!",
-							"soundID" : "nihao"
+							"response" : "我叫 Alex。你叫什么名字?",
+							"soundID" : "intro-alex-yourname"
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
-					"tasksToQueue" : [],
-					"attemptedAnswers" : [],
-					"hintUsed" : false
-				},
-				{
-					"taskID" : 11,
-					"task" : "Ask her how she's doing",
-					"taskType" : "choice",
-					"taskLink" : "greeting",
-					"possibleAnswers" : 
-					[
-						{
-							"answers" : ["你好吗", "怎么样"],
-							"response" : "很好啊。 我叫 Alex。 你叫什么名字?",
-							"soundID" : "intro-good-alex-yourname"
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/alex/alexLaughing.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
