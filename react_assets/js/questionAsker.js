@@ -322,6 +322,9 @@ var QuestionAsker = React.createClass({
 			});
 		}
 	},
+	checkAnswerMC: function() {
+		console.log("Checking multiple choice answer");
+	},
 	checkSceneOver: function() {
 		// Logic for when scene is over
 		if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
@@ -669,6 +672,7 @@ var QuestionAsker = React.createClass({
 						tasks = {this.state.sceneData.character.currentTasks}
 						taskLang = {sceneData.currentLanguage} 
 						checkAnswer = {this.checkAnswer} 
+						checkAnswerMC = {this.checkAnswerMC}
 						hintActive = {this.state.hintActive}
 						currentHintIndex = {this.state.currentHintIndex}
 						onHintClick = {this.handleHintClick}

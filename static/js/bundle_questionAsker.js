@@ -367,6 +367,9 @@
 				});
 			}
 		},
+		checkAnswerMC: function checkAnswerMC() {
+			console.log("Checking multiple choice answer");
+		},
 		checkSceneOver: function checkSceneOver() {
 			// Logic for when scene is over
 			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
@@ -713,6 +716,7 @@
 						tasks: this.state.sceneData.character.currentTasks,
 						taskLang: sceneData.currentLanguage,
 						checkAnswer: this.checkAnswer,
+						checkAnswerMC: this.checkAnswerMC,
 						hintActive: this.state.hintActive,
 						currentHintIndex: this.state.currentHintIndex,
 						onHintClick: this.handleHintClick,
@@ -24032,9 +24036,12 @@
 				}
 			});
 		},
-		handleMultipleChoiceSelection: function handleMultipleChoiceSelection() {},
+		handleMultipleChoiceSelection: function handleMultipleChoiceSelection() {
+			checkAnswerMC();
+		},
 		render: function render() {
 			var that = this;
+	
 			var taskObject = this.props.tasks;
 			var skipButtonIndex = -2;
 	
@@ -24050,6 +24057,7 @@
 							taskName: possibleChoice.choiceText,
 							taskType: taskObject[i].taskType,
 							onSpeechInput: that.handleSpeechInput,
+							onMultipleChoiceSelection: that.handleMultipleChoiceSelection,
 							hintActive: that.props.hintActive,
 							currentHintIndex: that.props.currentHintIndex,
 							onHintClick: that.props.onHintClick,
@@ -24151,6 +24159,7 @@
 		displayName: 'Task',
 	
 		render: function render() {
+			var that = this;
 			var taskDivClass = "taskDiv taskDivNormalState";
 	
 			// Change Task Div based on different modes
@@ -24164,11 +24173,19 @@
 				}
 			}
 	
-			// For case of Multiple Choice Selection
-			if (this.props.taskType === "multipleChocie") {
-				console.log("multipleChoice");
-			}
+			// Allow task to be unclickable if in correctAnswerState, prevents mic recording after answer is correct
+			var activateSpeechInput = this.props.correctAnswerState || this.props.wrongAnswerState ? function () {} : function () {
+				that.props.onSpeechInput(that.props.index);
+			};
 	
+			var activateMCcheck = function activateMCcheck() {
+				console.log("hey");
+			};
+	
+			// Change behavior of clicking task depending on whether it's a speech or multiple choice task
+			var taskClick = this.props.taskType === "multipleChoice" ? activateMCcheck : activateSpeechInput;
+	
+			console.log();
 			return React.createElement(
 				'li',
 				{ className: 'inactiveLink', role: 'presentation', 'data-index': this.props.index },
@@ -24183,10 +24200,11 @@
 						index: this.props.index,
 						currentTaskIndex: this.props.currentTaskIndex }),
 					React.createElement(TaskText, {
+						taskType: this.props.taskType,
 						className: 'taskText',
 						index: this.props.index,
 						currentTaskIndex: this.props.currentTaskIndex,
-						onSpeechInput: this.props.onSpeechInput,
+						taskClick: taskClick,
 						taskTextToDisplay: this.props.taskName,
 						correctAnswerState: this.props.correctAnswerState,
 						wrongAnswerState: this.props.wrongAnswerState }),
@@ -24234,7 +24252,7 @@
 			var imgRepeat = Constants.IMAGE_PATH + "UI/buttonRepeatOn.png";
 			var imgCircle = Constants.IMAGE_PATH + "UI/circlePassiveTasklist.png";
 	
-			// Default taskIconImage is the mic image
+			// If multiplechoice Task, show circle image
 			if (this.props.taskType === "multipleChoice") {
 				var taskIconImage = React.createElement(
 					'div',
@@ -24247,19 +24265,21 @@
 						imageSrc: imgCircle,
 						imgClass: 'circle' })
 				);
-			} else {
-	
-				var taskIconImage = React.createElement(
-					'div',
-					{ className: 'taskIconDiv' },
-					React.createElement(TaskIconImage, {
-						ref: function ref(_ref2) {
-							return _this.mic = _ref2;
-						},
-						keyToAttach: 'firstMic',
-						imageSrc: imgMic })
-				);
 			}
+			// Default taskIconImage is the mic image
+			else {
+	
+					var taskIconImage = React.createElement(
+						'div',
+						{ className: 'taskIconDiv' },
+						React.createElement(TaskIconImage, {
+							ref: function ref(_ref2) {
+								return _this.mic = _ref2;
+							},
+							keyToAttach: 'firstMic',
+							imageSrc: imgMic })
+					);
+				}
 	
 			// Sets to true if this task is the active task
 			if (this.props.index === this.props.currentTaskIndex) {
@@ -24800,24 +24820,20 @@
 			console.log("unmounting");
 		},
 		render: function render() {
-			var that = this;
-			// Allow task to be unclickable if in correctAnswerState, prevents mic recording after answer is correct
-			var activateSpeechInput = this.props.correctAnswerState || this.props.wrongAnswerState ? function () {} : function () {
-				that.props.onSpeechInput(that.props.index);
-			};
-	
+			// Text to display
 			var displayText;
 			if (this.props.correctAnswerState && this.props.currentTaskIndex === this.props.index) {
 				displayText = "很好! 答对了!";
 			} else {
 				displayText = this.props.taskTextToDisplay;
 			}
+	
 			return React.createElement(
 				'div',
 				{
 					className: 'taskText',
 					'data-index': this.props.index,
-					onClick: activateSpeechInput },
+					onClick: this.props.taskClick },
 				displayText
 			);
 		}
@@ -24827,7 +24843,7 @@
 		correctAnswerState: PropTypes.bool.isRequired,
 		currentTaskIndex: PropTypes.number.isRequired,
 		index: PropTypes.number.isRequired,
-		onSpeechInput: PropTypes.func.isRequired
+		taskClick: PropTypes.func.isRequired
 	};
 	
 	module.exports = TaskText;

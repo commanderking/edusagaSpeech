@@ -15,7 +15,7 @@ var TaskIcon = React.createClass({
 		var imgRepeat = Constants.IMAGE_PATH + "UI/buttonRepeatOn.png";
 		var imgCircle = Constants.IMAGE_PATH + "UI/circlePassiveTasklist.png";
 
-		// Default taskIconImage is the mic image
+		// If multiplechoice Task, show circle image
 		if (this.props.taskType === "multipleChoice") {
 			var taskIconImage = <div className="taskIconDiv">
 								<TaskIconImage 
@@ -24,7 +24,9 @@ var TaskIcon = React.createClass({
 									imageSrc={imgCircle}
 									imgClass="circle" />
 							</div>;
-		} else {
+		}
+		// Default taskIconImage is the mic image
+		else {
 
 			var taskIconImage = <div className="taskIconDiv">
 									<TaskIconImage 
