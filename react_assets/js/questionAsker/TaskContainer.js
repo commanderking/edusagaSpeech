@@ -41,23 +41,51 @@ var TaskContainer = React.createClass({
 		var skipButtonIndex = -2;
 
 		var tasks = taskObject.map(function(task, i){
-			return (
-				<Task 
-					key={taskObject[i].task}
-					index={i}
-					taskName={taskObject[i].task}
-					taskType={taskObject[i].taskType}
-					onSpeechInput = {that.handleSpeechInput} 
-					hintActive = {that.props.hintActive}
-					currentHintIndex = {that.props.currentHintIndex}
-					onHintClick = {that.props.onHintClick} 
-					onDisableHint = {that.props.onDisableHint} 
-					micActive = {that.props.micActive} 
-					currentTaskIndex = {that.props.currentTaskIndex} 
-					correctAnswerState = {that.props.correctAnswerState} 
-					wrongAnswerState = {that.props.wrongAnswerState} 
-					assessmentMode = {that.props.assessmentMode} />
-			)
+
+			// If multiple choice task, loop through possibleChoices and display each one as a choice
+			if (task.taskType === "multipleChoice") {
+				console.log("multipleChoice");
+				var multipleChoices = task.possibleAnswers.map(function(possibleChoice, j) {
+					return (
+						<Task 
+							key={possibleChoice.choiceText}
+							index={j}
+							taskName={possibleChoice.choiceText}
+							taskType={taskObject[i].taskType}
+							onSpeechInput = {that.handleSpeechInput} 
+							hintActive = {that.props.hintActive}
+							currentHintIndex = {that.props.currentHintIndex}
+							onHintClick = {that.props.onHintClick} 
+							onDisableHint = {that.props.onDisableHint} 
+							micActive = {that.props.micActive} 
+							currentTaskIndex = {that.props.currentTaskIndex} 
+							correctAnswerState = {that.props.correctAnswerState} 
+							wrongAnswerState = {that.props.wrongAnswerState} 
+							assessmentMode = {that.props.assessmentMode} />
+					)	
+				})
+				console.log(multipleChoices);
+				return multipleChoices;
+			} else {
+				return (
+					<Task 
+						key={taskObject[i].task}
+						index={i}
+						taskName={taskObject[i].task}
+						taskType={taskObject[i].taskType}
+						onSpeechInput = {that.handleSpeechInput} 
+						hintActive = {that.props.hintActive}
+						currentHintIndex = {that.props.currentHintIndex}
+						onHintClick = {that.props.onHintClick} 
+						onDisableHint = {that.props.onDisableHint} 
+						micActive = {that.props.micActive} 
+						currentTaskIndex = {that.props.currentTaskIndex} 
+						correctAnswerState = {that.props.correctAnswerState} 
+						wrongAnswerState = {that.props.wrongAnswerState} 
+						assessmentMode = {that.props.assessmentMode} />
+				)			
+			}
+
 		})
 		if (this.props.scenarioOn === true) {
 			return null;

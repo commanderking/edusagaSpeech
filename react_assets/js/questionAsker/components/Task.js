@@ -20,13 +20,17 @@ var Task = React.createClass({
 			}
 		}
 
-		if (this.props.taskType === "multipleChoice") {
-			console.log("hey!");
-		} else {
+		// For case of Multiple Choice Selection
+		if (this.props.taskType === "multipleChocie") {
+			console.log("multipleChoice");
+
+		}
+
 			return (
 				<li className='inactiveLink' role='presentation' data-index={this.props.index}>
 					<div className={taskDivClass} data-index={this.props.index}>
 						<TaskIcon 
+							taskType = {this.props.taskType}
 							correctAnswerState={this.props.correctAnswerState}
 							wrongAnswerState = {this.props.wrongAnswerState} 
 							micActive = {this.props.micActive} 
@@ -51,7 +55,6 @@ var Task = React.createClass({
 					</div>
 				</li>
 			)
-		}
 	}
 });
 
