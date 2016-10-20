@@ -81,11 +81,6 @@
 							"answers" : ["你好"],
 							"response" : "你好!",
 							"soundID" : "nihao"
-						},
-						{
-							"answers" : ["你好"],
-							"response" : "非常好!",
-							"soundID" : "feichanghao"							
 						}
 					],
 					"correct" : false,
