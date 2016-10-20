@@ -44,12 +44,28 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "hi",
-					"soundPath" : "alex/hi.ogg"
+					"soundID" : "birthday-august-seventeen",
+					"soundPath" : "alex/birthday-august-seventeen.ogg"
 				},
 				{
-					"soundID" : "henhao",
-					"soundPath" : "alex/henhao.ogg"
+					"soundID" : "nineteen-years",
+					"soundPath" : "alex/nineteen-years.ogg"
+				},
+				{
+					"soundID" : "birthday-sister-let-me-think-june-thirty",
+					"soundPath" : "alex/birthday-sister-let-me-think-june-thirty.ogg"
+				},
+				{
+					"soundID" : "birthday-brother-january-thirtyfirst",
+					"soundPath" : "alex/birthday-brother-january-thirtyfirst.ogg"
+				},
+				{
+					"soundID" : "sister-sixteen",
+					"soundPath" : "alex/sister-sixteen.ogg"
+				},
+				{
+					"soundID" : "birthday-brother-twentyfour-no-twentythree",
+					"soundPath" : "alex/birthday-brother-twentyfour-no-twentythree.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -79,7 +95,7 @@
 						{
 							"answers" : ["你的生日是几月几号"],
 							"response" : "我的生日八月十七号。",
-							"soundID" : "birthday-mybirthday-whataboutyou"
+							"soundID" : "birthday-august-seventeen"
 						},
 						{
 							"answers" : [
@@ -87,7 +103,7 @@
 								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
 							],
 							"response" : "我的生日八月十七号。",
-							"soundID" : "birthday-mybirthday-whataboutyou"
+							"soundID" : "birthday-august-seventeen"
 						}
 					],
 					"correct" : false,
@@ -107,12 +123,12 @@
 						{
 							"answers" : ["你今年多大了", "今年你多大"],
 							"response" : "十九岁。",
-							"soundID" : "birthday-mybirthday-whataboutyou"
+							"soundID" : "nineteen-years"
 						},
 						{
 							"answers" : ["你多大", "你几岁", "年纪多多大"],
 							"response" : "十九岁。",
-							"soundID" : "birthday-mybirthday-whataboutyou"
+							"soundID" : "nineteen-years"
 						}
 					],
 					"correct" : false,
@@ -129,15 +145,15 @@
 						{
 							"answers" : ["你妹妹的生日几月几号"],
 							"response" : "让我想一想。。。她的生日是六月三十号。",
-							"soundID" : ""
+							"soundID" : "birthday-sister-let-me-think-june-thirty"
 						},
 						{
 							"answers" : [
 								["你妹妹生日", "你妹妹的生日"],
 								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
 							],
-							"response" : "我的生日八月十七号。",
-							"soundID" : "让我想一想。。。她的生日是六月三十号。"
+							"response" : "让我想一想。。。她的生日是六月三十号。",
+							"soundID" : "birthday-sister-let-me-think-june-thirty"
 						}
 					],
 					"correct" : false,
@@ -203,7 +219,7 @@
 					[
 						{
 							"answers" : ["你的哥哥多大"],
-							"response" : "他二十四。。。不对， 他二十三岁。",
+							"response" : "二十四。。。不对， 他二十三岁。",
 							"soundID" : "birthday-mybirthday-whataboutyou"
 						},
 						{
@@ -211,7 +227,7 @@
 								["他", "你的哥哥", "你哥哥"],
 								["多大", "几岁", "年纪多大"]
 							],
-							"response" : "他二十四。。。不对， 他二十三岁。",
+							"response" : "二十四。。。不对， 他二十三岁。",
 							"soundID" : "birthday-mybirthday-whataboutyou"
 						}
 					],

@@ -51,13 +51,26 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "hi",
-					"soundPath" : "alex/hi.ogg"
+					"soundID" : "nihao",
+					"soundPath" : "alex/nihao.ogg"
 				},
 				{
-					"soundID" : "henhao",
-					"soundPath" : "alex/henhao.ogg"
+					"soundID" : "bucuo",
+					"soundPath" : "alex/bucuo.ogg"
+				},
+				{
+					"soundID" : "intro-good-alex-yourname",
+					"soundPath" : "alex/intro-good-alex-yourname.ogg"
+				},
+				{
+					"soundID" : "intro-surname-bai-your",
+					"soundPath" : "alex/intro-surname-bai-your.ogg"
+				},
+				{
+					"soundID" : "intro-happy-to-meet-you",
+					"soundPath" : "alex/intro-happy-to-meet-you.ogg"
 				}
+
 			],
 			"confusedPhrases" : 
 			[
@@ -106,7 +119,7 @@
 						{
 							"answers" : ["你好吗", "怎么样"],
 							"response" : "很好啊。 我叫 Alex。 你叫什么名字?",
-							"soundID" : "nihao"
+							"soundID" : "intro-good-alex-yourname"
 						}
 					],
 					"correct" : false,
@@ -126,7 +139,7 @@
 						{
 							"answers" : ["我叫", "我是"],
 							"response" : "我姓白 请问你贵姓? ",
-							"soundID" : ""
+							"soundID" : "intro-surname-bai-your"
 						}
 					],
 					"correct" : false,
@@ -143,7 +156,7 @@
 						{
 							"answers" : ["我姓"],
 							"response" : "很高兴认识你!",
-							"soundID" : ""
+							"soundID" : "intro-happy-to-meet-you"
 						}
 					],
 					"correct" : false,

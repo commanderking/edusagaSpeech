@@ -43,7 +43,6 @@
 				"laughing" : "characters/alex/alexLaughing.png",
 				"silhouette" : "characters/alex/alexSilhouette.png"
 			},
-			"repeatPhrases": ["再說一次", "再說一遍", "什麼", "你說什麼", "重複一次", "重複一下"],
 			"sounds" : 
 			[
 				{
@@ -51,52 +50,28 @@
 					"soundPath" : "alex/hi.ogg"
 				},
 				{
-					"soundID" : "henhao",
-					"soundPath" : "alex/henhao.ogg"
+					"soundID" : "bucuo",
+					"soundPath" : "alex/bucuo.ogg"
 				},
 				{
-					"soundID" : "surname",
-					"soundPath" : "alex/surname.ogg"
+					"soundID" : "family-five-people",
+					"soundPath" : "alex/family-five-people.ogg"
 				},
 				{
-					"soundID" : "name",
-					"soundPath" : "alex/name.ogg"
+					"soundID" : "family-one-brother-one-sister",
+					"soundPath" : "alex/family-one-brother-one-sister.ogg"
 				},
 				{
-					"soundID" : "student",
-					"soundPath" : "alex/student.ogg"
+					"soundID" : "family-im-american-parents-not",
+					"soundPath" : "alex/family-im-american-parents-not.ogg"
 				},
 				{
-					"soundID" : "nationality",
-					"soundPath" : "alex/nationality.ogg"
+					"soundID" : "family-dad-chinese-from-shanghai",
+					"soundPath" : "alex/family-dad-chinese-from-shanghai.ogg"
 				},
 				{
-					"soundID" : "birthday",
-					"soundPath" : "alex/birthday.ogg"
-				},
-				{
-					"soundID" : "familyCount",
-					"soundPath" : "alex/familyCount.ogg"
-				},
-				{
-					"soundID" : "siblings",
-					"soundPath" : "alex/siblings.ogg"
-				},
-				{
-					"soundID" : "dadName",
-					"soundPath" : "alex/dadName.ogg"
-				},
-				{
-					"soundID" : "dadNationality",
-					"soundPath" : "alex/dadNationality.ogg"	
-				},
-				{
-					"soundID" : "momName",
-					"soundPath" : "alex/momName.ogg"
-				},
-				{
-					"soundID" : "momNationality",
-					"soundPath" : "alex/momNationality.ogg"
+					"soundID" : "family-mom-singaporean",
+					"soundPath" : "alex/family-mom-singaporean.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -129,7 +104,7 @@
 							"soundID" : "hi"
 						},
 						{
-							"answers" : ["你好嗎", "你怎麼樣", "怎麼樣", "吃飯了嗎", "今天好嗎", "今天过得怎么样"],
+							"answers" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "今天好吗", "今天过得怎么样"],
 							"response" : "不错!",
 							"soundID" : "bucuo"
 						}
@@ -150,7 +125,7 @@
 						{
 							"answers" : ["你的家有幾口人"],
 							"response" : "我家有五口人。",
-							"soundID" : "familyCount"
+							"soundID" : "family-five-people"
 						},
 						{
 							"answers" : [
@@ -158,7 +133,7 @@
 								["有几口人", "有几个人"]
 							],
 							"response" : "我家有五口人。",
-							"soundID" : "familyCount"
+							"soundID" : "family-five-people"
 						}
 					],
 					"correct" : false,
@@ -176,7 +151,7 @@
 						{
 							"answers" : ["你有没有哥哥"],
 							"response" : "我有一个哥哥和一个妹妹!",
-							"soundID" : "siblings"
+							"soundID" : "family-one-brother-one-sister"
 						},
 						{
 							"answers" : [
@@ -184,7 +159,7 @@
 								["哥哥", "一个哥哥", "个哥哥"]
 							],
 							"response" : "我有一个哥哥和一个妹妹!",
-							"soundID" : "siblings"
+							"soundID" : "family-one-brother-one-sister"
 						},
 						{
 							"answers" : [
@@ -192,7 +167,7 @@
 								["哥哥吗", "一个哥哥吗", "个哥哥吗"]
 							],
 							"response" : "我有一个哥哥和一个妹妹!",
-							"soundID" : "siblings"
+							"soundID" : "family-one-brother-one-sister"
 						}			
 					],
 					"exceptions" : ["我", "他"],
@@ -211,7 +186,7 @@
 						{
 							"answers" : ["你有没有妹妹"],
 							"response" : "我有一个哥哥和一个妹妹!",
-							"soundID" : "siblings"
+							"soundID" : "family-one-brother-one-sister"
 						},
 						{
 							"answers" : [
@@ -219,7 +194,7 @@
 								["妹妹", "一个妹妹", "个妹妹"]
 							],
 							"response" : "我有一个哥哥和一个妹妹!",
-							"soundID" : "siblings"
+							"soundID" : "family-one-brother-one-sister"
 						},
 						{
 							"answers" : [
@@ -227,7 +202,7 @@
 								["妹妹吗", "一个妹妹吗", "个妹妹吗"]
 							],
 							"response" : "我有一个哥哥和一个妹妹!",
-							"soundID" : "siblings"
+							"soundID" : "family-one-brother-one-sister"
 						}	
 					],
 					"correct" : false,
@@ -245,7 +220,7 @@
 						{
 							"answers" : ["你有沒有兄弟姐妹", "你有兄弟姐妹吗"],
 							"response" : "我有一個哥哥和一個妹妹",
-							"soundID" : "siblings"
+							"soundID" : "family-one-brother-one-sister"
 						}
 					],
 					"correct" : false,
@@ -262,8 +237,8 @@
 					[
 						{
 							"answers" : ["你是哪国人"],
-							"response" : "我有一個哥哥和一個妹妹",
-							"soundID" : "siblings"
+							"response" : "我是美国人, 可是我爸妈不是美国人。",
+							"soundID" : "family-im-american-parents-not"
 						},
 						{
 							"answers" : [
@@ -271,7 +246,7 @@
 								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
 							],
 							"response" : "我是美国人, 可是我爸妈不是美国人。",
-							"soundID" : ""
+							"soundID" : "family-im-american-parents-not"
 						}
 					],
 					"correct" : false,
@@ -286,16 +261,16 @@
 					[
 						{
 							"answers" : ["你的爸爸是哪国人"],
-							"response" : "我的爸爸也是中国人。他来自上海。",
-							"soundID" : ""
+							"response" : "我的爸爸是中国人。他来自上海。",
+							"soundID" : "family-dad-chinese-from-shanghai"
 						},
 						{
 							"answers" : [
 								["你爸爸", "你爸", "你的爸爸", "你的爸"],
 								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
 							],
-							"response" : "我的爸爸也是中国人。他来自上海。",
-							"soundID" : ""
+							"response" : "我的爸爸是中国人。他来自上海。",
+							"soundID" : "family-dad-chinese-from-shanghai"
 						}
 					],
 					"correct" : false,
@@ -311,7 +286,7 @@
 						{
 							"answers" : ["你的妈妈是哪国人"],
 							"response" : "我的妈妈是新加坡人。",
-							"soundID" : ""
+							"soundID" : "family-mom-singaporean"
 						},
 						{
 							"answers" : [
@@ -319,7 +294,7 @@
 								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
 							],
 							"response" : "我的妈妈是新加坡人。",
-							"soundID" : ""
+							"soundID" : "family-mom-singaporean"
 						}
 					],
 					"correct" : false,
