@@ -50,7 +50,13 @@ var TaskIconImage = React.createClass({
 		}
 	},
 	render: function() {
-		return <img key={this.props.keyToAttach} className="" src={this.props.imageSrc} />
+		var imgClass;
+		if (this.props.imgClass) {
+			imgClass = this.props.imgClass;
+		}
+		return <img key={this.props.keyToAttach} 
+					className={imgClass}
+					src={this.props.imageSrc} />
 	}
 
 });

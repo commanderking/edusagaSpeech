@@ -13,12 +13,28 @@ var TaskIcon = React.createClass({
 		var imgCoins = Constants.IMAGE_PATH + "UI/Icon_10coins_flat_nostar-01.png";
 		var imgQuestion = Constants.IMAGE_PATH + "UI/Icon_Questionmark-01.png";
 		var imgRepeat = Constants.IMAGE_PATH + "UI/buttonRepeatOn.png";
-		var taskIconImage = <div className="taskIconDiv">
+		var imgCircle = Constants.IMAGE_PATH + "UI/circlePassiveTasklist.png";
+
+		// If multiplechoice Task, show circle image
+		if (this.props.taskType === "multipleChoice") {
+			var taskIconImage = <div className="taskIconDiv">
 								<TaskIconImage 
 									ref={(ref) => this.mic = ref}
 									keyToAttach="firstMic"
-									imageSrc={imgMic} />
+									imageSrc={imgCircle}
+									imgClass="circle" />
 							</div>;
+		}
+		// Default taskIconImage is the mic image
+		else {
+
+			var taskIconImage = <div className="taskIconDiv">
+									<TaskIconImage 
+										ref={(ref) => this.mic = ref}
+										keyToAttach="firstMic"
+										imageSrc={imgMic} />
+								</div>;
+		}
 
 		// Sets to true if this task is the active task
 		if(this.props.index === this.props.currentTaskIndex) {

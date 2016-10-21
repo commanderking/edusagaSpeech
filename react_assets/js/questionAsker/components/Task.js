@@ -7,6 +7,7 @@ var HintButton = require('./HintButton');
 
 var Task = React.createClass({
 	render: function() {
+		var that = this;
 		var taskDivClass = "taskDiv taskDivNormalState"
 
 		// Change Task Div based on different modes
@@ -20,38 +21,49 @@ var Task = React.createClass({
 			}
 		}
 
-		if (this.props.taskType === "multipleChoice") {
-			console.log("hey!");
-		} else {
-			return (
-				<li className='inactiveLink' role='presentation' data-index={this.props.index}>
-					<div className={taskDivClass} data-index={this.props.index}>
-						<TaskIcon 
-							correctAnswerState={this.props.correctAnswerState}
-							wrongAnswerState = {this.props.wrongAnswerState} 
-							micActive = {this.props.micActive} 
-							index = {this.props.index} 
-							currentTaskIndex = {this.props.currentTaskIndex} />
-						<TaskText 
-							className="taskText" 
-							index={this.props.index} 
-							currentTaskIndex = {this.props.currentTaskIndex}
-							onSpeechInput = {this.props.onSpeechInput}
-							taskTextToDisplay = {this.props.taskName} 
-							correctAnswerState={this.props.correctAnswerState}
-							wrongAnswerState = {this.props.wrongAnswerState} />
-						<HintButton 
-							assessmentMode= {this.props.assessmentMode}
-							hintActive= {this.props.hintActive}
-							index = {this.props.index}
-							currentHintIndex= {this.props.currentHintIndex}
-							onDisableHint= {this.props.onDisableHint}
-							onHintClick= {this.props.onHintClick} />
-
-					</div>
-				</li>
-			)
+		// Allow task to be unclickable if in correctAnswerState, prevents mic recording after answer is correct
+		var activateSpeechInput = this.props.correctAnswerState || this.props.wrongAnswerState ? function() {} : function() {
+			that.props.onSpeechInput(that.props.index);
 		}
+
+		var activateMCcheck = function() {
+			console.log("hey");
+		}
+
+		// Change behavior of clicking task depending on whether it's a speech or multiple choice task
+		var taskClick = this.props.taskType === "multipleChoice" ? activateMCcheck : activateSpeechInput;
+
+		console.log()
+		return (
+			<li className='inactiveLink' role='presentation' data-index={this.props.index}>
+				<div className={taskDivClass} data-index={this.props.index}>
+					<TaskIcon 
+						taskType = {this.props.taskType}
+						correctAnswerState={this.props.correctAnswerState}
+						wrongAnswerState = {this.props.wrongAnswerState} 
+						micActive = {this.props.micActive} 
+						index = {this.props.index} 
+						currentTaskIndex = {this.props.currentTaskIndex} />
+					<TaskText 
+						taskType = {this.props.taskType}
+						className="taskText" 
+						index={this.props.index} 
+						currentTaskIndex = {this.props.currentTaskIndex}
+						taskClick = {taskClick}
+						taskTextToDisplay = {this.props.taskName} 
+						correctAnswerState={this.props.correctAnswerState}
+						wrongAnswerState = {this.props.wrongAnswerState} />
+					<HintButton 
+						assessmentMode= {this.props.assessmentMode}
+						hintActive= {this.props.hintActive}
+						index = {this.props.index}
+						currentHintIndex= {this.props.currentHintIndex}
+						onDisableHint= {this.props.onDisableHint}
+						onHintClick= {this.props.onHintClick} />
+
+				</div>
+			</li>
+		)
 	}
 });
 
