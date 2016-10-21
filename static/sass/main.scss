@@ -3,6 +3,7 @@
 @import 'libs/mixins';
 @import url("font-awesome.min.css");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,900");
+@import url("https://fonts.googleapis.com/css?family=Biryani:400,700,900");
 
 /*
 	Twenty by HTML5 UP
@@ -25,7 +26,8 @@
 		boxModel: 'border',
 		grid: ( gutters: (50px, 50px) ),
 		conditionals: true,
-		containers: 1400px,
+		containers: 100%,
+					//this is where I got the content box below banner to extend across the entire width, but while containing any content size!
 		breakpoints: (
 			wide: (
 				containers: 1200px,
@@ -587,7 +589,14 @@
 			background-position: bottom left, bottom right;
 			background-repeat: no-repeat, no-repeat;
 			background-size: $pattern-background-size, $pattern-background-size;
+			//width: 100%;
+			//height: 30em;
+			//margin-top: 0;
+			//margin-right: 0;
+			//margin-left: 0;
+			margin-bottom: 10em;
 			color: _palette(one, fg);
+			//so far this seems to apply to the first visible block below the banner - but I want it to extend the whole width.
 
 			.button {
 				&:hover {
@@ -625,7 +634,12 @@
 		0% { top: -5em; }
 		100% { top: 0; }
 	}
+	#logo {
+		display: inline-block;
+		font-family: 'Biryani', sans-serif;
+		//border: solid 1px black;
 
+	}
 	#header {
 		background: _palette(header, bg);
 		box-shadow: 0 1px 2px 0 rgba(0,0,0,0.075);
@@ -642,35 +656,50 @@
 		h1 {
 			font-weight: 900;
 			margin: 0;
+			width: 50%;
 
 			span {
 				font-weight: 300;
 			}
+
 		}
 
 		nav {
-			letter-spacing: 0.075em;
+			letter-spacing: 0.075e;
+			//display: inline-block;
 			position: absolute;
-			right: 1.5em;
-			text-transform: uppercase;
-			top: 0.75em;
+			right: 3em;
+			//bottom: 10px;
+			//text-transform: uppercase;
+			//top: 0.75em;
+
 
 			ul {
 				li {
 					display: inline-block;
 					margin-left: 1.5em;
+					font-family: 'Biryani', sans-serif;
+
+
+					//this refers to the top nav as a whole; it's a horizontal list
 
 					> ul {
 						display: none;
+						//not sure. couldn't get anything to show.
 					}
 
 					a {
-						border: solid 1px transparent;
+						border: solid 1px black;
 						color: inherit;
 						display: inline-block;
 						line-height: 1em;
+						margin-top: 0;
+						margin-right: 0;
+						margin-left: 1.5em;
+						margin-bottom: 1.5em;
 						padding: 0.6em 0.75em;
 						text-decoration: none;
+						//these are for the individual items welcome, layout
 					}
 
 					input[type="button"],
@@ -680,6 +709,7 @@
 						font-size: 1em;
 						min-width: 0;
 						width: auto;
+						//this is just the signup button. not sure about input above.
 					}
 
 					&.submenu {
@@ -698,6 +728,7 @@
 						> a {
 							@include vendor('transition', 'all 0.2s ease-in-out');
 							background: rgba(188,202,206,0.15);
+							//what is this? I thought it would break the nav hover actions but it doesn't.
 						}
 					}
 
@@ -719,7 +750,7 @@
 			background: _palette(header, alt-bg);
 			box-shadow: none;
 			color: _palette(header, alt-fg);
-			padding: 2em 2.5em;
+			padding: 1em 2.5em;
 			position: absolute;
 
 			nav {
@@ -799,13 +830,14 @@
 	}
 
 	#banner {
-		background-image: url('https://s3.amazonaws.com/edusaga/assets/images/index/girlTablet.jpeg');
+		background-image: url('https://s3.amazonaws.com/edusaga/assets/images/index/girlsComputerLearningHappy.jpeg');
 		background-attachment: scroll, scroll, scroll, fixed;
 		background-color: _palette(three, bg);
 		//background-image: url('images/light-bl.svg'), url('images/light-br.svg'), url('images/overlay.png'), url('../../images/banner.jpg');
 		//background-position: bottom left, bottom right, top left, top center;
 		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
 		background-size: cover;
+		background-position: 50%, 100%;
 		//background-size: $pattern-background-size, $pattern-background-size, auto, cover;
 		color: _palette(banner, fg);
 		cursor: default;
@@ -821,9 +853,9 @@
 		.inner {
 			@include vendor('animation', 'reveal-banner 1s 0.25s ease-in-out');
 			@include vendor('animation-fill-mode', 'forwards');
-			background: transparentize(_palette(banner, inner-bg), 0.5);
+			background: transparentize(_palette(banner, inner-bg), 0.25);
+			border-radius: 25px;
 			color: _palette(banner, inner-fg);
-			//float: left;
 			display: inline-block;
 			opacity: 0;
 			padding: 3em;
@@ -839,15 +871,15 @@
 
 			header {
 				display: inline-block;
-				border-bottom: solid 5px;
-				border-top-width: 5px;
+				border-bottom: solid 2px;
+				border-top-width: 2px;
 				border-top-style: solid;
 				margin: 0 0 2em 0;
 				padding: 3px 0 3px 0;
 
 				h2 {
-					border-bottom: double 5px;
-					border-top: double 5px;
+					border-bottom: solid 5px;
+					border-top: solid 5px;
 					font-size: 2.5em;
 					font-weight: 900;
 					letter-spacing: 0.2em;

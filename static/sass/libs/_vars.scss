@@ -19,21 +19,21 @@
 
 // Palette.
 	$palette: (
-		bg:				#f3f6fa,
+		bg:				#59658D,
 		fg:				#7c8081,
 		border:			transparentize(#7c8081, 0.8),
 
 		header: (
 			bg:			#fff,
-			fg:			inherit,
-			alt-bg:		transparent,
+			fg:			#59658d,
+			alt-bg:		#59658d,
 			alt-fg:		#fff
 		),
 
 		banner: (
 			bg:			#898786,
 			fg:			#fff,
-			inner-bg:	#341b2b,
+			inner-bg:	#38C6F3,
 			inner-fg:	#fff
 		),
 
@@ -45,6 +45,7 @@
 		one: (
 			bg:			#83d3c9,
 			fg:			#fff
+						//This is for that first visible block below the banner
 		),
 
 		two: (
