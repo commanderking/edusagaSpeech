@@ -64,6 +64,10 @@
 					"soundPath" : "chenyang/family-guessed-right.ogg"
 				},
 				{ 
+					"soundID" : "nationality-guess-right-dad-is-chinese-mom-not",
+					"soundPath" : "chenyang/nationality-guess-right-dad-is-chinese-mom-not.ogg"
+				},
+				{ 
 					"soundID" : "family-im-chinese",
 					"soundPath" : "chenyang/family-im-chinese.ogg"
 				}, 
@@ -96,12 +100,8 @@
 					"soundPath" : "chenyang/family-mom-doctor.ogg"
 				},
 				{ 
-					"soundID" : "family-dad-teacher",
-					"soundPath" : "chenyang/family-dad-teacher.ogg"
-				}, 
-				{ 
-					"soundID" : "family-ah-dad-here-bye",
-					"soundPath" : "chenyang/family-ah-dad-here-bye.ogg"
+					"soundID" : "family-dad-teacher-bzz-got-to-go",
+					"soundPath" : "chenyang/family-dad-teacher-bzz-got-to-go.ogg"
 				},
 				{ 
 					"soundID" : "en",
@@ -222,6 +222,14 @@
 					[
 						{
 							"answers": ["你妈妈是哪国人", "你妈妈是哪里人"],
+							"response": "我不告诉你! 猜一猜吧!",
+							"soundID": "family-wont-tell-you-guess"
+						},
+						{
+							"answers": [
+								["你的妈妈", "你的吗", "你妈", "你妈妈"],
+								["是哪国人", "是哪里人", "来自哪里", "从哪里来的"]
+							],
 							"response": "我不告诉你! 猜一猜吧!",
 							"soundID": "family-wont-tell-you-guess"
 						}
@@ -477,7 +485,7 @@
 						{
 							"answers": ["你的爸爸做什么工作"],
 							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见! ",
-							"soundID": "family-dad-teacher"
+							"soundID": "family-dad-teacher-bzz-got-to-go"
 						},
 						{
 							"answers": [
@@ -486,7 +494,7 @@
 								["工作", "事"]
 							],
 							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
-							"soundID": "family-dad-teacher"
+							"soundID": "family-dad-teacher-bzz-got-to-go"
 						},
 						{
 							"answers": [
@@ -496,7 +504,12 @@
 								["行业"]
 							],
 							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
-							"soundID": "family-dad-teacher"
+							"soundID": "family-dad-teacher-bzz-got-to-go"
+						},
+						{
+							"answers": ["你爸呢", "你爸爸呢"],
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
+							"soundID": "family-dad-teacher-bzz-got-to-go"
 						}
 					],
 					"correct" : false,
