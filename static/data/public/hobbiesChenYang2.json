@@ -51,7 +51,7 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "hi",
+					"soundID" : "nihao",
 					"soundPath" : "chenyang/hi.ogg"
 				},
 				{
@@ -113,6 +113,10 @@
 				{
 					"soundID" : "hobbies-see-you-five-thirty",
 					"soundPath" : "chenyang/hobbies-see-you-five-thirty.ogg"
+				},
+				{
+					"soundID" : "zaijian",
+					"soundPath" : "chenyang/zaijian(sad).ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -161,6 +165,7 @@
 				{
 					"taskID" : 20,
 					"task" : "Invite her to go shopping this weekend",
+					"taskLink" :"activity",
 					"possibleAnswers" : 
 					[
 						{
@@ -214,6 +219,8 @@
 					{
 					"taskID" : 21,
 					"task" : "Invite her to play badminton this weekend",
+					"taskType" : "choice",
+					"taskLink" :"activity",
 					"possibleAnswers" : 
 					[
 						{
@@ -260,13 +267,14 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [31, 32, 33],
 					"attemptedAnswers" : []
 				},
 				{
 					"taskID" : 22,
 					"task" : "Invite her to go eat this weekend",
+					"taskLink" :"activity",
 					"possibleAnswers" : 
 					[
 						{
@@ -313,13 +321,14 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "characters/chenguang/chengConfused.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				},
 				{
 					"taskID" : 23,
 					"task" : "Invite her to play Mahjong this weekend",
+					"taskLink" :"activity",
 					"possibleAnswers" : 
 					[
 						{
@@ -366,23 +375,25 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				},
 				{
 					"taskID" : 31,
 					"task" : "Tell her Saturday.",
+					"taskType" : "choice",
+					"taskLink" : "dayOfTheWeek",
 					"possibleAnswers" : 
 					[
 						{
 							"answers" : ["星期六, 怎么样"],
-							"response" : "星期六几点",
+							"response" : "星期六几点?",
 							"soundID" : "hobbies-saturday-what-time"
 						},
 						{
 							"answers" : ["星期六"],
-							"response" : "星期六几点",
+							"response" : "星期六几点?",
 							"soundID" : "hobbies-saturday-what-time"
 						}
 					],
@@ -394,6 +405,8 @@
 				{
 					"taskID" : 32,
 					"task" : "Tell her Sunday.",
+					"taskType" : "choice",
+					"taskLink" : "dayOfTheWeek",
 					"possibleAnswers" : 
 					[
 						{
@@ -415,6 +428,7 @@
 				{
 					"taskID" : 33,
 					"task" : "Tell her Monday.",
+					"taskLink" : "dayOfTheWeek",
 					"possibleAnswers" : 
 					[
 						{
@@ -423,19 +437,21 @@
 							"soundID" : "hobbies-monday-you-said-weekend"
 						},
 						{
-							"answers" : ["星期天"],
+							"answers" : ["星期一"],
 							"response" : "星期一? 你不是说周末吗? ",
 							"soundID" : "hobbies-monday-you-said-weekend"
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "characters/chenguang/chengConfused.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				},
 				{
 					"taskID" : 41,
 					"task" : "Tell her at 3:30",
+					"taskType" :"choice",
+					"taskLink" : "time",
 					"possibleAnswers" : 
 					[
 						{
@@ -457,6 +473,8 @@
 				{
 					"taskID" : 42,
 					"task" : "Tell her at 5:30",
+					"taskType" : "choice",
+					"taskLink" : "time",
 					"possibleAnswers" : 
 					[
 						{
@@ -478,6 +496,8 @@
 				{
 					"taskID" : 43,
 					"task" : "Tell her at 10:30",
+					"taskType" : "choice",
+					"taskLink" : "time",
 					"possibleAnswers" : 
 					[
 						{
@@ -492,13 +512,15 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "characters/chenguang/chengConfused.png",
 					"tasksToQueue" : [53,54],
 					"attemptedAnswers" : []
 				},
 				{
 					"taskID" : 53,
 					"task" : "Tell her in the morning.",
+					"taskType" : "choice",
+					"taskLink" : "time",
 					"possibleAnswers" : 
 					[
 						{
@@ -514,7 +536,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
-					"tasksToQueue" : [],
+					"tasksToQueue" : [76],
 					"attemptedAnswers" : []
 				},
 				{
@@ -534,13 +556,15 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "characters/chenguang/chengWistful.png",
 					"tasksToQueue" : [64, 65],
 					"attemptedAnswers" : []
 				},
 				{
 					"taskID" : 64,
 					"task" : "Tell her at 3:30",
+					"taskType" : "choice",
+					"taskLink" : "time",
 					"possibleAnswers" : 
 					[
 						{
@@ -562,6 +586,8 @@
 				{
 					"taskID" : 65,
 					"task" : "Tell her at 5:30",
+					"taskType" : "choice",
+					"taskLink" : "time",
 					"possibleAnswers" : 
 					[
 						{
@@ -583,6 +609,8 @@
 				{
 					"taskID" : 74,
 					"task" : "Say you'll see her at 3:30.",
+					"taskType" : "choice",
+					"taskLink" : "goodbye",
 					"possibleAnswers" : 
 					[
 						{
@@ -604,6 +632,8 @@
 				{
 					"taskID" : 75,
 					"task" : "Tell her you'll see her at 5:30.",
+					"taskType" : "choice",
+					"taskLink" : "goodbye",
 					"possibleAnswers" : 
 					[
 						{
@@ -620,6 +650,27 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [75],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 76,
+					"task" : "Say goodbye!",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["再见"],
+							"response" : "再见",
+							"soundID" : "zaijian"
+						},
+						{
+							"answers" : ["五点半见", "5点半见", "5点30分见", "五点三十分见", "五点三十见"],
+							"response" : "五点半见。",
+							"soundID" : "zaijian"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				}
 			],
