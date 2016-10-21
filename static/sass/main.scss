@@ -93,7 +93,7 @@
 	}
 
 	p, ul, ol, dl, table, blockquote {
-		margin: 0 0 2em 0;
+		margin: 0 0 0 0;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -642,6 +642,7 @@
 	}
 	#header {
 		background: _palette(header, bg);
+		opacity: .5;
 		box-shadow: 0 1px 2px 0 rgba(0,0,0,0.075);
 		color: _palette(header, fg);
 		cursor: default;
@@ -665,22 +666,29 @@
 		}
 
 		nav {
-			letter-spacing: 0.075e;
-			//display: inline-block;
-			position: absolute;
-			right: 3em;
-			//bottom: 10px;
+			letter-spacing: 0.075em;
+			display: inline-block;
+			//position: fixed;
+			//top: 0;
+			//right: 0;
+			//left: 30em;
+			//top: -5em;
+			//position: absolute;
+			//right: 3em;
 			//text-transform: uppercase;
 			//top: 0.75em;
 
 
 			ul {
+				border: solid 1px black;
+				display: inline-block;
+				//position: absolute;
+				//right: 0;
 				li {
 					display: inline-block;
 					margin-left: 1.5em;
+					border: solid 1px black;
 					font-family: 'Biryani', sans-serif;
-
-
 					//this refers to the top nav as a whole; it's a horizontal list
 
 					> ul {
@@ -696,7 +704,7 @@
 						margin-top: 0;
 						margin-right: 0;
 						margin-left: 1.5em;
-						margin-bottom: 1.5em;
+						margin-bottom: .5em;
 						padding: 0.6em 0.75em;
 						text-decoration: none;
 						//these are for the individual items welcome, layout
@@ -750,7 +758,10 @@
 			background: _palette(header, alt-bg);
 			box-shadow: none;
 			color: _palette(header, alt-fg);
-			padding: 1em 2.5em;
+			padding-top: 1em;
+			padding-right: 2.5em;
+			padding-left: 2.5em;
+			padding-bottom: 1em;
 			position: absolute;
 
 			nav {
@@ -837,7 +848,8 @@
 		//background-position: bottom left, bottom right, top left, top center;
 		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
 		background-size: cover;
-		background-position: 50%, 100%;
+		background-position: 50%;
+		//I thought I knew why the above worked but I don't. I wanted to nudge the photo a little, but it didn't work in degrees like I thought.
 		//background-size: $pattern-background-size, $pattern-background-size, auto, cover;
 		color: _palette(banner, fg);
 		cursor: default;
