@@ -50,6 +50,70 @@
 			},
 			"sounds" : 
 			[
+				{
+					"soundID" : "hi",
+					"soundPath" : "chenyang/hi.ogg"
+				},
+				{
+					"soundID" : "haikeyi",
+					"soundPath" : "chenyang/haikeyi.ogg"
+				},
+				{
+					"soundID" : "hobbies-dislike-shopping",
+					"soundPath" : "chenyang/hobbies-dislike-shopping.ogg"
+				},
+				{
+					"soundID" : "hobbies-badminton-when",
+					"soundPath" : "chenyang/hobbies-badminton-when.ogg"
+				},
+				{
+					"soundID" : "hobbies-sorry-eating-with-family",
+					"soundPath" : "chenyang/hobbies-sorry-eating-with-family.ogg"
+				},
+				{
+					"soundID" : "hobbies-like-mahjong-not-this-weekend",
+					"soundPath" : "chenyang/hobbies-like-mahjong-not-this-weekend.ogg"
+				},
+				{
+					"soundID" : "hobbies-saturday-what-time",
+					"soundPath" : "chenyang/hobbies-saturday-what-time.ogg"
+				},
+				{
+					"soundID" : "hobbies-sunday-what-time",
+					"soundPath" : "chenyang/hobbies-sunday-what-time.ogg"
+				},
+				{
+					"soundID" : "hobbies-monday-you-said-weekend",
+					"soundPath" : "chenyang/hobbies-monday-you-said-weekend.ogg"
+				},
+				{
+					"soundID" : "hobbies-three-thirty-ok",
+					"soundPath" : "chenyang/hobbies-three-thirty-ok.ogg"
+				},
+				{
+					"soundID" : "hobbies-five-thirty-ok",
+					"soundPath" : "chenyang/hobbies-five-thirty-ok.ogg"
+				},
+				{
+					"soundID" : "hobbies-ten-thirty-at-night-or-morning",
+					"soundPath" : "chenyang/hobbies-ten-thirty-at-night-or-morning.ogg"
+				},
+				{
+					"soundID" : "hobbies-ok-early-to-rise",
+					"soundPath" : "chenyang/hobbies-ok-early-to-rise.ogg"
+				},
+				{
+					"soundID" : "hobbies-ten-thirty-too-late",
+					"soundPath" : "chenyang/hobbies-ten-thirty-too-late.ogg"
+				},
+				{
+					"soundID" : "hobbies-see-you-three-thirty",
+					"soundPath" : "chenyang/hobbies-see-you-three-thirty.ogg"
+				},
+				{
+					"soundID" : "hobbies-see-you-five-thirty",
+					"soundPath" : "chenyang/hobbies-see-you-five-thirty.ogg"
+				}
 			],
 			"confusedPhrases" : 
 			[
@@ -78,12 +142,12 @@
 						{
 							"answers" : ["你好"],
 							"response" : "你好",
-							"soundID" : ""
+							"soundID" : "nihao"
 						},
 						{
 							"answers" : ["怎么样", "你好吗"],
 							"response" : "还可以",
-							"soundID" : ""
+							"soundID" : "haikeyi"
 						}
 					],
 					"correct" : false,
@@ -102,7 +166,7 @@
 						{
 							"answers" : ["我们周末去逛街, 怎么样"],
 							"response" : "不好意思。。。我不是很喜欢逛街。",
-							"soundID" : ""
+							"soundID" : "hobbies-dislike-shopping"
 						},
 						{
 							"answers" : [
@@ -111,7 +175,7 @@
 								["怎么样", "好吗"]
 							],
 							"response" : "不好意思。。。我不是很喜欢逛街。",
-							"soundID" : ""
+							"soundID" : "hobbies-dislike-shopping"
 						},
 						{
 							"answers" : [
@@ -121,7 +185,7 @@
 								["怎么样", "好吗"]
 							],
 							"response" : "不好意思。。。我不是很喜欢逛街。",
-							"soundID" : ""
+							"soundID" : "hobbies-dislike-shopping"
 						},
 						{
 							"answers" : [
@@ -130,7 +194,7 @@
 								["逛街", "买衣服", "买东西"]
 							],
 							"response" : "不好意思。。。我不是很喜欢逛街。",
-							"soundID" : ""
+							"soundID" : "hobbies-dislike-shopping"
 						},
 						{
 							"answers" : [
@@ -139,7 +203,7 @@
 								["逛街", "买衣服", "买东西"]
 							],
 							"response" : "不好意思。。。我不是很喜欢逛街。",
-							"soundID" : ""
+							"soundID" : "hobbies-dislike-shopping"
 						}
 					],
 					"correct" : false,
@@ -155,7 +219,7 @@
 						{
 							"answers" : ["我们周末去打羽毛球, 怎么样"],
 							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-when"
 						},
 						{
 							"answers" : [
@@ -164,7 +228,7 @@
 								["怎么样", "好吗"]
 							],
 							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-when"
 						},
 						{
 							"answers" : [
@@ -174,7 +238,7 @@
 								["怎么样", "好吗"]
 							],
 							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-when"
 						},
 						{
 							"answers" : [
@@ -183,7 +247,7 @@
 								["打羽毛球", "玩羽毛球"]
 							],
 							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-when"
 						},
 						{
 							"answers" : [
@@ -192,7 +256,7 @@
 								["打羽毛球", "玩羽毛球"]
 							],
 							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
-							"soundID" : ""
+							"soundID" : "hobbies-badminton-when"
 						}
 					],
 					"correct" : false,
@@ -217,7 +281,7 @@
 								["怎么样", "好吗"]
 							],
 							"response" : "不好意思, 这周末我要跟我爸妈吃饭。",
-							"soundID" : ""
+							"soundID" : "hobbies-sorry-eating-with-family"
 						},
 						{
 							"answers" : [
@@ -227,7 +291,7 @@
 								["怎么样", "好吗"]
 							],
 							"response" : "不好意思, 这周末我要跟我爸妈吃饭。",
-							"soundID" : ""
+							"soundID" : "hobbies-sorry-eating-with-family"
 						},
 						{
 							"answers" : [
@@ -236,7 +300,7 @@
 								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"]
 							],
 							"response" : "不好意思, 这周末我要跟我爸妈在家吃饭。",
-							"soundID" : ""
+							"soundID" : "hobbies-sorry-eating-with-family"
 						},
 						{
 							"answers" : [
@@ -245,7 +309,7 @@
 								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"]
 							],
 							"response" : "不好意思, 这周末我要跟我爸妈在家吃饭。",
-							"soundID" : ""
+							"soundID" : "hobbies-sorry-eating-with-family"
 						}
 					],
 					"correct" : false,
@@ -261,7 +325,7 @@
 						{
 							"answers" : ["我们周末去打麻将, 怎么样"],
 							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧! ",
-							"soundID" : ""
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
 						},
 						{
 							"answers" : [
@@ -270,7 +334,7 @@
 								["怎么样", "好吗"]
 							],
 							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧! ",
-							"soundID" : ""
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
 						},
 						{
 							"answers" : [
@@ -280,7 +344,7 @@
 								["怎么样", "好吗"]
 							],
 							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧!",
-							"soundID" : ""
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
 						},
 						{
 							"answers" : [
@@ -289,7 +353,7 @@
 								["打麻将", "玩麻将", "刷麻将"]
 							],
 							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧!",
-							"soundID" : ""
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
 						},
 						{
 							"answers" : [
@@ -298,7 +362,7 @@
 								["打麻将", "玩麻将", "刷麻将"]
 							],
 							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧!",
-							"soundID" : ""
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
 						}
 					],
 					"correct" : false,
@@ -314,12 +378,12 @@
 						{
 							"answers" : ["星期六, 怎么样"],
 							"response" : "星期六几点",
-							"soundID" : ""
+							"soundID" : "hobbies-saturday-what-time"
 						},
 						{
 							"answers" : ["星期六"],
 							"response" : "星期六几点",
-							"soundID" : ""
+							"soundID" : "hobbies-saturday-what-time"
 						}
 					],
 					"correct" : false,
@@ -335,12 +399,12 @@
 						{
 							"answers" : ["星期天, 怎么样"],
 							"response" : "星期天几点?",
-							"soundID" : ""
+							"soundID" : "hobbies-sunday-what-time"
 						},
 						{
 							"answers" : ["星期天"],
 							"response" : "星期天几点?",
-							"soundID" : ""
+							"soundID" : "hobbies-sunday-what-time"
 						}
 					],
 					"correct" : false,
@@ -356,12 +420,12 @@
 						{
 							"answers" : ["星期一, 怎么样"],
 							"response" : "星期一? 你不是说周末吗? ",
-							"soundID" : ""
+							"soundID" : "hobbies-monday-you-said-weekend"
 						},
 						{
 							"answers" : ["星期天"],
 							"response" : "星期一? 你不是说周末吗? ",
-							"soundID" : ""
+							"soundID" : "hobbies-monday-you-said-weekend"
 						}
 					],
 					"correct" : false,
@@ -377,12 +441,12 @@
 						{
 							"answers" : ["三点半, 怎么样"],
 							"response" : "三点半。。。 好啊!",
-							"soundID" : ""
+							"soundID" : "hobbies-three-thirty-ok"
 						},
 						{
 							"answers" : ["三点半", "3点半", "3点30分", "三点三十分", "三点三十"],
 							"response" : "三点半。。。 好啊!",
-							"soundID" : ""
+							"soundID" : "hobbies-three-thirty-ok"
 						}
 					],
 					"correct" : false,
@@ -398,12 +462,12 @@
 						{
 							"answers" : ["五点半, 怎么样"],
 							"response" : "五点半。。。可以。",
-							"soundID" : ""
+							"soundID" : "hobbies-five-thirty-ok"
 						},
 						{
 							"answers" : ["五点半", "5点半", "5点30分", "五点三十分", "五点三十"],
 							"response" : "五点半。。。可以。",
-							"soundID" : ""
+							"soundID" : "hobbies-five-thirty-ok"
 						}
 					],
 					"correct" : false,
@@ -419,12 +483,12 @@
 						{
 							"answers" : ["十点半, 怎么样"],
 							"response" : "晚上十点半还是早上十点半?",
-							"soundID" : ""
+							"soundID" : "hobbies-ten-thirty-at-night-or-morning"
 						},
 						{
 							"answers" : ["十点半", "10点半", "10点30分", "十点三十分", "十点三十"],
 							"response" : "晚上十点半还是早上十点半?",
-							"soundID" : ""
+							"soundID" : "hobbies-ten-thirty-at-night-or-morning"
 						}
 					],
 					"correct" : false,
@@ -440,12 +504,12 @@
 						{
 							"answers" : ["早上九点半, 好吗"],
 							"response" : "好啊！ 早睡早起, 身体好。",
-							"soundID" : ""
+							"soundID" : "hobbies-ok-early-to-rise"
 						},
 						{
 							"answers" : ["早上"],
 							"response" : "好啊！ 早睡早起, 身体好。",
-							"soundID" : ""
+							"soundID" : "hobbies-ok-early-to-rise"
 						}
 					],
 					"correct" : false,
@@ -461,12 +525,12 @@
 						{
 							"answers" : ["晚上十点半, 好吗"],
 							"response" : "十点半太晚了。我平常十点睡觉。",
-							"soundID" : ""
+							"soundID" : "hobbies-ten-thirty-too-late"
 						},
 						{
 							"answers" : ["晚上"],
 							"response" : "十点半太晚了。我平常十点睡觉。",
-							"soundID" : ""
+							"soundID" : "hobbies-ten-thirty-too-late"
 						}
 					],
 					"correct" : false,
@@ -482,12 +546,12 @@
 						{
 							"answers" : ["三点半, 怎么样"],
 							"response" : "三点半。。。 好啊!",
-							"soundID" : ""
+							"soundID" : "hobbies-three-thirty-ok"
 						},
 						{
 							"answers" : ["三点半", "3点半", "3点30分", "三点三十分", "三点三十"],
 							"response" : "三点半。。。 好啊!",
-							"soundID" : ""
+							"soundID" : "hobbies-three-thirty-ok"
 						}
 					],
 					"correct" : false,
@@ -503,12 +567,12 @@
 						{
 							"answers" : ["五点半, 怎么样"],
 							"response" : "五点半。。。可以。",
-							"soundID" : ""
+							"soundID" : "hobbies-five-thirty-ok"
 						},
 						{
 							"answers" : ["五点半", "5点半", "5点30分", "五点三十分", "五点三十"],
 							"response" : "五点半。。。可以。",
-							"soundID" : ""
+							"soundID" : "hobbies-five-thirty-ok"
 						}
 					],
 					"correct" : false,
@@ -524,12 +588,12 @@
 						{
 							"answers" : ["三点半见"],
 							"response" : "三点半见。",
-							"soundID" : ""
+							"soundID" : "hobbies-see-you-three-thirty"
 						},
 						{
 							"answers" : ["三点半见", "3点半见", "3点30分见", "三点三十分见", "三点三十见"],
 							"response" : "三点半见。",
-							"soundID" : ""
+							"soundID" : "hobbies-see-you-three-thirty"
 						}
 					],
 					"correct" : false,
@@ -545,12 +609,12 @@
 						{
 							"answers" : ["五点半见"],
 							"response" : "五点半见。",
-							"soundID" : ""
+							"soundID" : "hobbies-see-you-five-thirty"
 						},
 						{
 							"answers" : ["五点半见", "5点半见", "5点30分见", "五点三十分见", "五点三十见"],
 							"response" : "五点半见。",
-							"soundID" : ""
+							"soundID" : "hobbies-see-you-five-thirty"
 						}
 					],
 					"correct" : false,

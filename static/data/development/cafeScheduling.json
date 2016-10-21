@@ -164,11 +164,11 @@
 				},
 				{
 					"taskID" : 30,
-					"task" : "Respond to David's question: 星期几?",
+					"task" : "Suggest Saturday",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我姓"],
+							"answers" : ["星期六"],
 							"response" : "哦。",
 							"soundID" : ""
 						}
