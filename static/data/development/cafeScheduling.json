@@ -1,6 +1,6 @@
 {
-	"activityID": "introDavid",
-	"activityName": "Introduction - David",
+	"activityID": "cafeScheduling",
+	"activityName": "Scheduling everyone to go to the cafe",
 	"tags" : ["greetings", "introductions"],
 	"score" : 0,
 	"currentCharName" : "",
@@ -11,8 +11,7 @@
 	"assessmentMode": false,
 	"objectives" : 
 	[
-		"I can say hello and goodbye to someone my age or younger.", 
-		"I can introduce myself and provide basic personal information."
+		"I can invite and make plans with someone to do something or go somewhere."
 	],
 	"scenario" :
 	[	
@@ -20,8 +19,44 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "It's the first day of your summer program in Shanghai. There's an awkward looking student standing over there alone. It'd be nice for you to go greet him! ",
-			"next" : "end"
+			"text" : "Looks like David, ChenYang, and Alex are hanging out together. Wouldn't it be cool to grab coffee together some time?"
+		},
+		{
+			"name" : "David",
+			"image" : "characters/david/davidDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "你好",
+			"soundID" : "nihaoDavid"
+		},
+		{
+			"name" : "Alex",
+			"image" : "characters/alex/alexDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "好久不见!",
+			"soundID" : ""
+		},
+		{
+			"name" : "Chen Yang",
+			"image" : "characters/chenguang/chengDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "欢迎欢迎。",
+			"jumpToTasks" : true,
+			"soundID" : ""
+		},
+		{
+			"name" : "Alex",
+			"image" : "characters/alex/alexLaughing.png",
+			"imageLayer" : "blank.png",
+			"text" : "好啊!",
+			"soundID" : ""
+		},
+		{
+			"name" : "David",
+			"image" : "characters/alex/davidUncertain.png",
+			"imageLayer" : "blank.png",
+			"text" : "星期几?",
+			"soundID" : "",
+			"jumpTotasks" : true
 		}
 	],
 	"character" : 
@@ -48,7 +83,7 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "nihao",
+					"soundID" : "nihaoDavid",
 					"soundPath" : "david/nihao.ogg"
 				}
 			],
@@ -73,37 +108,17 @@
 			"currentTasks" : [
 				{
 					"taskID" : 10,
-					"task" : "Greet him.",
-					"taskLink" : "greeting",
+					"task" : "Greet them all.",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你好"],
-							"response" : "你好!",
-							"soundID" : "nihao"
+							"answers" : ["你们好"],
+							"response" : "",
+							"soundID" : ""
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
-					"tasksToQueue" : [],
-					"attemptedAnswers" : [],
-					"hintUsed" : false
-				},
-				{
-					"taskID" : 11,
-					"task" : "Ask him how he's doing",
-					"taskType" : "choice",
-					"taskLink" : "greeting",
-					"possibleAnswers" : 
-					[
-						{
-							"answers" : ["你好吗", "怎么样"],
-							"response" : "。。。还可以!",
-							"soundID" : "nihao"
-						}
-					],
-					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -113,24 +128,43 @@
 			[
 				{
 					"taskID" : 20,
-					"task" : "Ask him for his last name / surname",
+					"task" : "Ask them if they want to go drink/grab coffee this weekend",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["请问你贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
-							"response" : "我姓张。你呢?",
+							"answers" : ["你们周末想去喝咖啡吗"],
+							"response" : "",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你们周末", "周末你们"],
+								["要不要", "想不想"],
+								["去喝咖啡", "去咖啡馆", "去茶馆", "去喝茶"]
+							],
+							"response" : "星期几?",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你们周末", "周末你们"],
+								["想", "要"],
+								["去喝咖啡吗", "去咖啡馆吗", "去茶馆吗", "去喝茶吗"]
+							],
+							"response" : "星期几?",
 							"soundID" : ""
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : [21],
+					"emotion" : "blank.png",
+					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
-					"hintUsed" : false
+					"hintUsed" : false,
+					"jumpToScenarioIndex" : 4
 				},
 				{
-					"taskID" : 21,
-					"task" : "Respond to: 我姓张 你呢?",
+					"taskID" : 30,
+					"task" : "Respond to David's question: 星期几?",
 					"possibleAnswers" : 
 					[
 						{
@@ -141,17 +175,17 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : [22],
+					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
-					"taskID" : 22,
+					"taskID" : 40,
 					"task" : "Ask him what's his name ",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你叫什么名字","你的名字是什么", "你叫什么"],
+							"answers" : ["你叫什么名字"],
 							"response" : "我叫 David。你叫什么?",
 							"soundID" : ""
 						}

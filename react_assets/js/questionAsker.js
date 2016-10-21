@@ -249,7 +249,13 @@ var QuestionAsker = React.createClass({
 					if (that.state.sceneData.APTimeMode) {
 						that.setState({taskPause: true});
 					}
-				}, 3000)
+
+					// If after the task, it should jump back to the scene view, do so
+					if (currentTaskData.jumpToScenarioIndex) {
+						that.setState({scenarioIndex: currentTaskData.jumpToScenarioIndex})
+						that.changeScenarioMode();
+					}
+				}, 2000)
 				
 			/*--------------------------------------------
 			When user answers incorrectly
@@ -617,7 +623,8 @@ var QuestionAsker = React.createClass({
 		}
 	},
 	nextScenario: function() {
-		if (this.state.scenarioIndex === this.state.sceneData.scenario.length - 1) {
+		var scenarioIndex = this.state.scenarioIndex;
+		if (scenarioIndex === this.state.sceneData.scenario.length - 1 || this.state.sceneData.scenario[scenarioIndex].jumpToTasks === true) {
 			this.changeScenarioMode();
 		} else {
 			var newScenarioIndex = this.state.scenarioIndex + 1;
