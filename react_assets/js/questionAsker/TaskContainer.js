@@ -32,12 +32,14 @@ var TaskContainer = React.createClass({
 			}
 		);
 	},
-	handleMultipleChoiceSelection: function() {
-		checkAnswerMC();
+	handleMultipleChoiceSelection: function(taskIndex, choiceIndex) {
+		this.props.checkAnswerMC(taskIndex, choiceIndex);
+
+
 	},
 	render: function() {
 		var that = this;
-		
+
 		var taskObject = this.props.tasks;
 		var skipButtonIndex = -2;
 
@@ -51,7 +53,10 @@ var TaskContainer = React.createClass({
 						<Task 
 							key={possibleChoice.choiceText}
 							index={j}
+							taskIndex={i}
+							choiceIndex={j}
 							taskName={possibleChoice.choiceText}
+							possibleChoiceObject = {possibleChoice}
 							taskType={taskObject[i].taskType}
 							onSpeechInput = {that.handleSpeechInput}
 							onMultipleChoiceSelection = {that.handleMultipleChoiceSelection}

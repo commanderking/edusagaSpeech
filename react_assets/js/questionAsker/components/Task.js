@@ -27,7 +27,7 @@ var Task = React.createClass({
 		}
 
 		var activateMCcheck = function() {
-			console.log("hey");
+			that.props.onMultipleChoiceSelection(that.props.taskIndex, that.props.choiceIndex) 
 		}
 
 		// Change behavior of clicking task depending on whether it's a speech or multiple choice task

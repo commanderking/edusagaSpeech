@@ -328,8 +328,54 @@ var QuestionAsker = React.createClass({
 			});
 		}
 	},
-	checkAnswerMC: function() {
+	checkAnswerMC: function(taskIndex, choiceIndex) {
 		console.log("Checking multiple choice answer");
+		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
+		var allCurrentTasks = TaskController.getCurrentTasks(newSceneData); 
+
+		// 
+		console.log(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].response);
+		// If choice is correct,
+			// 1) Show text response
+			if (allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].correctAnswer === true) {
+				console.log("you're correct");
+
+			/*---------------------------------------------------------------
+			TODO: REFACTOR THIS WITH checkANSWER part 
+			---------------------------------------------------------------*/
+			// Play response voice
+			this.playSound(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].soundID);
+
+			// Store sound ID in current Sound ID if player wnats to repeat
+			newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
+
+			// Adjust character image
+			newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
+
+			// Show response text
+			var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;
+
+			// Mark question as corrrect
+			newSceneData.character.currentTasks[taskIndex].correct = true;
+
+			// Add coins 
+			this.addCoins(10);
+
+			this.setState({sceneData: newSceneData});
+
+			// Add point to correct answers and set state to correctAnswerState
+			this.setState({correctAnswerState: true, 
+							correctAnswers: this.state.correctAnswers +1,
+							currentDialog: newCurrentDialog,
+							lastDialogText: newCurrentDialog});
+
+
+			// 2) Play sound (if exists)
+			// 3) Remove task from currentTasks
+			// 4) Queue up next tasks (and likely jump to scenario)
+			// 5) 
+			}
+
 	},
 	checkSceneOver: function() {
 		// Logic for when scene is over
