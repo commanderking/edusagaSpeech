@@ -4,6 +4,7 @@
 @import url("font-awesome.min.css");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,900");
 @import url("https://fonts.googleapis.com/css?family=Biryani:400,700,900");
+//These pull in additional libraries I need to look up to understand, as well as the Google Fonts, which I am able to use.
 
 /*
 	Twenty by HTML5 UP
@@ -12,6 +13,7 @@
 */
 
 	@import "libs/skel";
+    //This refers to the framework itself.
 
 	@include skel-breakpoints((
 		wide: '(max-width: 1680px)',
@@ -20,6 +22,7 @@
 		narrower: '(max-width: 840px)',
 		mobile: '(max-width: 736px)'
 	));
+	//This defines when a responsive screen changes it's layout for various devices.
 
 	@include skel-layout((
 		reset: 'full',
@@ -27,7 +30,7 @@
 		grid: ( gutters: (50px, 50px) ),
 		conditionals: true,
 		containers: 100%,
-					//this is where I got the content box below banner to extend across the entire width, but while containing any content size!
+		//this is where I got the content box below banner to extend across the entire width, but while containing any content size!
 		breakpoints: (
 			wide: (
 				containers: 1200px,
@@ -52,10 +55,15 @@
 			)
 		)
 	));
+	//Though I haven't messed with this, this seems to be where the basic grids are defined for each device breakpoint.
+	//Need to look up: what does "true" mean here?
 
 	$pattern-background-size: 25em;
+	//This variable must be from a library. I can't find it anywhere. I looked in the libraries and it's not so, some other file?
 
 /* Basic */
+//This is the general layout from which most other information is inherited. I assume it's default is desktop.
+//this is where I have been doing most of my editing, but much further down.
 
 	body {
 		background: _palette(bg);
@@ -67,6 +75,7 @@
 			}
 		}
 	}
+    //I assume this has to do with the way the items appear on the screen. Beyond what I'm trying to do as yet.
 
 	body, input, select, textarea {
 		color: _palette(fg);
@@ -76,6 +85,7 @@
 		letter-spacing: 0.025em;
 		line-height: 1.75em;
 	}
+	//this defines several elements that share styling. I'm not terribly certain yet where these all each apply.
 
 	a {
 		@include vendor('transition', ('color 0.2s ease-in-out', 'border-color 0.2s ease-in-out', 'background-color 0.2s ease-in-out'));
@@ -1445,7 +1455,7 @@
 	}
 
 /* Mobile */
-
+{
 	@include breakpoint(mobile) {
 		//$pattern-background-size: cover;
 
@@ -1589,6 +1599,7 @@
 					padding: 0 1.5em;
 					margin-right: 0;
 					margin-left: 0;
+					//This is where I"m trying to rewrite the margins for mobile, but the inheritance overrides at 3em
 
 					header {
 						h2 {
