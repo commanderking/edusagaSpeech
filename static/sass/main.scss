@@ -667,27 +667,27 @@
 
 		nav {
 			letter-spacing: 0.075em;
-			display: inline-block;
+			//display: inline-block;
 			//position: fixed;
 			//top: 0;
 			//right: 0;
 			//left: 30em;
 			//top: -5em;
-			//position: absolute;
+			position: absolute;
 			//right: 3em;
 			//text-transform: uppercase;
 			//top: 0.75em;
 
 
 			ul {
-				border: solid 1px black;
+				border: 1px solid transparent;
 				display: inline-block;
 				//position: absolute;
 				//right: 0;
 				li {
 					display: inline-block;
 					margin-left: 1.5em;
-					border: solid 1px black;
+					border: solid 1px transparent;
 					font-family: 'Biryani', sans-serif;
 					//this refers to the top nav as a whole; it's a horizontal list
 
@@ -697,7 +697,7 @@
 					}
 
 					a {
-						border: solid 1px black;
+						border: solid 1px transparent;
 						color: inherit;
 						display: inline-block;
 						line-height: 1em;
@@ -766,7 +766,7 @@
 
 			nav {
 				right: 2.5em;
-				top: 1.75em;
+				top: 1em;
 
 				ul {
 					li {
@@ -1163,7 +1163,10 @@
 		/* Banner */
 
 			#banner {
-				background-size: $pattern-background-size, $pattern-background-size, auto, cover;
+				//background-size: $pattern-background-size, $pattern-background-size, auto, cover;
+				//I think the above is written for four separate images/files that the template referenced, but now I'm only using one.
+				background-size: cover;
+				background-position: 100% 50%;
 			}
 
 		/* Main */
@@ -1273,6 +1276,7 @@
 		/* Banner */
 
 			#banner {
+				//background-size:cover;
 				margin: 0;
 			}
 
@@ -1443,8 +1447,7 @@
 /* Mobile */
 
 	@include breakpoint(mobile) {
-
-		$pattern-background-size: 10em;
+		//$pattern-background-size: cover;
 
 		/* Basic */
 
@@ -1463,6 +1466,7 @@
 			}
 
 			p {
+				display: block;
 				text-align: justify;
 			}
 
@@ -1576,13 +1580,16 @@
 		/* Banner */
 
 			#banner {
-				background-size: $pattern-background-size, $pattern-background-size, auto, cover;
-				padding: 6em 0;
+				background-image:none;
+				//to remove the troublesome, not so necessary image from mobile
+			}
 
 				.inner {
 					background: none;
 					display: block;
 					padding: 0 1.5em;
+					margin-right: 0;
+					margin-left: 0;
 
 					header {
 						h2 {
