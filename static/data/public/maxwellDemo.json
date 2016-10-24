@@ -59,7 +59,8 @@
 			"name" : "Girl on Show",
 			"image" : "characters/voc/chenzitong.jpg",
 			"imageLayer" : "blank.png",
-			"text" : "各位老师好。我的名字叫陈梓童。"
+			"text" : "各位老师好。我的名字叫陈梓童。",
+			"soundID" : "my-name-is-chen-zi-tong"
 		},
 		{
 			"name" : "Max",
@@ -85,7 +86,8 @@
 			"name" : "Girl on Show",
 			"image" : "characters/voc/chenzitong.jpg",
 			"imageLayer" : "blank.png",
-			"text" : "我今年二十五岁。",
+			"text" : "我今年二十五岁，来自江苏南京。",
+			"soundID" : "im-25-from-nanjing",
 			"index" : 10
 		},
 		{
@@ -123,7 +125,6 @@
 			{
 				"default": "characters/maxwell/maxDefault.png",
 				"confused" : "characters/maxwell/maxConfused.png",
-				"confused" : "characters/maxwell/maxDefault.png",
 				"goodJob" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
 				"thumbsUpGoodJob" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
 				"thumbsUp" : "characters/maxwell/maxDefaultThumbsup.png",
@@ -137,12 +138,12 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "hi",
-					"soundPath" : "maxwell/hi.ogg"
+					"soundID" : "my-name-is-chen-zi-tong",
+					"soundPath" : "chenzitong/my-name-is-chen-zi-tong.ogg"
 				},
 				{
-					"soundID" : "henhao",
-					"soundPath" : "maxwell/henhao.ogg"
+					"soundID" : "im-25-from-nanjing",
+					"soundPath" : "chenzitong/im-25-from-nanjing.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -192,21 +193,21 @@
 					[
 						{
 							"choiceText" : "She asked the audience how they were",
-							"response" : "Oh, cool. 你好吗 means how are you!",
-							"soundID" : "good job",
+							"response" : "That doesn't seem right. Are you sure?",
+							"soundID" : "",
 							"correctAnswer" : false
 						},
 						{
 							"choiceText" : "She said she loves all of the judges.",
 							"response" : "Wait. what? Why would she say that?",
-							"soundID" : "whatyousay",
+							"soundID" : "",
 							"correctAnswer" : false
 
 						},
 						{
 							"choiceText" : "She said her name.",
-							"response" : "Oh really?",
-							"soundID" : "whatyousay",
+							"response" : "Oh really? What's her name?",
+							"soundID" : "",
 							"correctAnswer" : true
 						}
 					],
@@ -293,7 +294,7 @@
 					"tasksToQueue" : [50],
 					"attemptedAnswers" : [],
 					"hintUsed" : false,
-					"jumpToScenarioIndex": 9
+					"jumpToScenarioIndex": 12
 				},
 				{
 					"taskID" : 50,
@@ -312,8 +313,7 @@
 					"emotion" : "characters/maxwell/maxDefault.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
-					"hintUsed" : false,
-					"jumpToScenarioIndex": 9
+					"hintUsed" : false
 				}
 			],
 			"completedTasks" : []

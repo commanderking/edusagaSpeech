@@ -428,8 +428,23 @@ var QuestionAsker = React.createClass({
 					}
 				}, 10)
 
-			// 4) Queue up next tasks (and likely jump to scenario)
-			// 5) 
+			} else {				
+				// set image to confused
+				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
+
+				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
+
+				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;
+
+				// Play confused sound
+				this.playSound(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].soundID);
+
+				this.setState({
+					sceneData: newSceneData,
+					currentDialog: newCurrentDialog,
+					lastDialogText: newCurrentDialog
+				});
+
 			}
 
 	},

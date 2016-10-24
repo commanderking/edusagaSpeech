@@ -472,9 +472,22 @@
 						that.changeScenarioMode();
 					}
 				}, 10);
+			} else {
+				// set image to confused
+				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
 	
-				// 4) Queue up next tasks (and likely jump to scenario)
-				// 5) 
+				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
+	
+				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;
+	
+				// Play confused sound
+				this.playSound(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].soundID);
+	
+				this.setState({
+					sceneData: newSceneData,
+					currentDialog: newCurrentDialog,
+					lastDialogText: newCurrentDialog
+				});
 			}
 		},
 		checkSceneOver: function checkSceneOver() {
