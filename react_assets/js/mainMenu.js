@@ -27,6 +27,7 @@ var MainMenu = React.createClass({
 		var episodeListToReturn = episodeArray.map(function(scene, i) {
 			var link = scene.link + "?" + studentID;
 			var className = "episodeBlock activeScene-" + scene.assigned;
+			var characterImage = Constants.IMAGE_PATH + scene.characterImage;
 			var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 			var starIcon = scene.assigned ? <img src={starIconSrc} /> : null;
 
@@ -45,6 +46,8 @@ var MainMenu = React.createClass({
 						<li className={className}>
 							{starIcon}
 							<h3>{scene.name}</h3>
+							<img className="characterImage" src={characterImage} />
+
 							<p><b>Scenario:</b> {scene.scenario}</p>
 							<div><b>Can Do Statements:</b> <br /> {canDoStatements}</div>
 						</li>
@@ -75,7 +78,6 @@ var MainMenu = React.createClass({
 			this.state.teacherData.scenes.forEach(function(episode, i) {
 				// Generate array of tags
 				tagsSet.add(episode.tags[0]);
-				console.log(episode.tags[0]);
 				switch(episode.tags[0]) {
 					case "introduction":
 					case "greetings": 
@@ -118,27 +120,44 @@ var MainMenu = React.createClass({
 				return <div>Loading</div>
 		} else {
 			return (
-				<div className="container-fluid">
-					<h1>Episodes Available</h1>
-					<EpisodeTagList
-						header = "Introduction/Greetings"
-						episodeList = {introEpisodeList} />
-					<EpisodeTagList
-						header = "Family/Nationality"
-						episodeList = {familyNationalityEpisodeList} />
-					<EpisodeTagList
-						header = "Dates and Times"
-						episodeList = {dateTimeEpisodeList} />
-					<EpisodeTagList
-						header = "Likes and Dislikes, Inviting People"
-						episodeList = {likesDislikesEpisodeList} />
-					<EpisodeTagList
-						header = "Review"
-						episodeList = {reviewEpisodeList} />
-					<EpisodeTagList
-						header = "Additional"
-						episodeList = {otherEpisodeList} />
-				</div>	
+				<body className="index">
+					<div className="container-fluid">
+						<h2 className="menuTitle">Episodes Available</h2>
+						<EpisodeTagList
+							header = "Introduction/Greetings"
+							episodeList = {introEpisodeList} />
+
+						<EpisodeTagList
+							header = "Family/Nationality"
+							episodeList = {familyNationalityEpisodeList} />
+
+						<EpisodeTagList
+							header = "Dates and Times"
+							episodeList = {dateTimeEpisodeList} />
+
+						<EpisodeTagList
+							header = "Likes and Dislikes, Inviting People"
+							episodeList = {likesDislikesEpisodeList} />
+
+						<EpisodeTagList
+							header = "Review"
+							episodeList = {reviewEpisodeList} />
+
+						<EpisodeTagList
+							header = "Additional"
+							episodeList = {otherEpisodeList} />
+
+					</div>	
+      <script src="static/js/landingPage/jquery.min.js"></script>
+      <script src="static/js/landingPage/jquery.dropotron.min.js"></script>
+      <script src="static/js/landingPage/jquery.scrolly.min.js"></script>
+      <script src="static/js/landingPage/jquery.scrollgress.min.js"></script>
+      <script src="static/js/landingPage/skel.min.js"></script>
+      <script src="static/js/landingPage/util.js"></script>
+      <script src="static/js/landingPage/main.js"></script>
+
+  </body>
+
 			)
 		}
 	}

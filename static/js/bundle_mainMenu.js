@@ -79,6 +79,7 @@
 			var episodeListToReturn = episodeArray.map(function (scene, i) {
 				var link = scene.link + "?" + studentID;
 				var className = "episodeBlock activeScene-" + scene.assigned;
+				var characterImage = Constants.IMAGE_PATH + scene.characterImage;
 				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
 	
@@ -106,6 +107,7 @@
 							null,
 							scene.name
 						),
+						React.createElement('img', { className: 'characterImage', src: characterImage }),
 						React.createElement(
 							'p',
 							null,
@@ -158,7 +160,6 @@
 				this.state.teacherData.scenes.forEach(function (episode, i) {
 					// Generate array of tags
 					tagsSet.add(episode.tags[0]);
-					console.log(episode.tags[0]);
 					switch (episode.tags[0]) {
 						case "introduction":
 						case "greetings":
@@ -206,31 +207,42 @@
 				);
 			} else {
 				return React.createElement(
-					'div',
-					{ className: 'container-fluid' },
+					'body',
+					{ className: 'index' },
 					React.createElement(
-						'h1',
-						null,
-						'Episodes Available'
+						'div',
+						{ className: 'container-fluid' },
+						React.createElement(
+							'h2',
+							{ className: 'menuTitle' },
+							'Episodes Available'
+						),
+						React.createElement(EpisodeTagList, {
+							header: 'Introduction/Greetings',
+							episodeList: introEpisodeList }),
+						React.createElement(EpisodeTagList, {
+							header: 'Family/Nationality',
+							episodeList: familyNationalityEpisodeList }),
+						React.createElement(EpisodeTagList, {
+							header: 'Dates and Times',
+							episodeList: dateTimeEpisodeList }),
+						React.createElement(EpisodeTagList, {
+							header: 'Likes and Dislikes, Inviting People',
+							episodeList: likesDislikesEpisodeList }),
+						React.createElement(EpisodeTagList, {
+							header: 'Review',
+							episodeList: reviewEpisodeList }),
+						React.createElement(EpisodeTagList, {
+							header: 'Additional',
+							episodeList: otherEpisodeList })
 					),
-					React.createElement(EpisodeTagList, {
-						header: 'Introduction/Greetings',
-						episodeList: introEpisodeList }),
-					React.createElement(EpisodeTagList, {
-						header: 'Family/Nationality',
-						episodeList: familyNationalityEpisodeList }),
-					React.createElement(EpisodeTagList, {
-						header: 'Dates and Times',
-						episodeList: dateTimeEpisodeList }),
-					React.createElement(EpisodeTagList, {
-						header: 'Likes and Dislikes, Inviting People',
-						episodeList: likesDislikesEpisodeList }),
-					React.createElement(EpisodeTagList, {
-						header: 'Review',
-						episodeList: reviewEpisodeList }),
-					React.createElement(EpisodeTagList, {
-						header: 'Additional',
-						episodeList: otherEpisodeList })
+					React.createElement('script', { src: 'static/js/landingPage/jquery.min.js' }),
+					React.createElement('script', { src: 'static/js/landingPage/jquery.dropotron.min.js' }),
+					React.createElement('script', { src: 'static/js/landingPage/jquery.scrolly.min.js' }),
+					React.createElement('script', { src: 'static/js/landingPage/jquery.scrollgress.min.js' }),
+					React.createElement('script', { src: 'static/js/landingPage/skel.min.js' }),
+					React.createElement('script', { src: 'static/js/landingPage/util.js' }),
+					React.createElement('script', { src: 'static/js/landingPage/main.js' })
 				);
 			}
 		}
@@ -21817,27 +21829,60 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	
-	function EpisodeTagList(props) {
-		if (props.episodeList.length > 0) {
-			console.log(props.episodeList);
-			return React.createElement(
-				"div",
-				null,
-				React.createElement(
-					"h2",
+	var EpisodeTagList = React.createClass({
+		displayName: "EpisodeTagList",
+	
+		getInitialState: function getInitialState() {
+			return {
+				showMoreEpisodes: false
+			};
+		},
+		displayMoreEpisodes: function displayMoreEpisodes() {
+			this.setState({ showMoreEpisodes: true });
+			console.log(this.state.showMoreEpisodes);
+		},
+		render: function render() {
+			// Grab first three episodes of each topic
+			var firstThreeEpisodes = [];
+			for (var i = 0; i < 3; i++) {
+				if (this.props.episodeList[i]) {
+					firstThreeEpisodes.push(this.props.episodeList[i]);
+				}
+			}
+	
+			// Show See More button only if a category has more than three episodes and the see more episode button has not already been clicked
+			var seeMoreButton = this.props.episodeList.length > 3 && this.state.showMoreEpisodes === false ? React.createElement(
+				"button",
+				{ className: "buttonSeeMore",
+					onClick: this.displayMoreEpisodes },
+				"See More Episodes"
+			) : null;
+	
+			// Display 3 episodes or more episodes depending on showMoreEpisodes state
+			var episodesToDisplay = this.state.showMoreEpisodes ? this.props.episodeList : firstThreeEpisodes;
+	
+			// Only display the category if there are more than one episode present
+			if (this.props.episodeList.length > 0) {
+				return React.createElement(
+					"div",
 					null,
-					props.header
-				),
-				React.createElement(
-					"ul",
-					{ className: "scenarioList" },
-					props.episodeList
-				)
-			);
-		} else {
-			return null;
+					React.createElement(
+						"h2",
+						null,
+						this.props.header
+					),
+					React.createElement(
+						"ul",
+						{ className: "scenarioList" },
+						episodesToDisplay
+					),
+					seeMoreButton
+				);
+			} else {
+				return null;
+			}
 		}
-	}
+	});
 	
 	module.exports = EpisodeTagList;
 
