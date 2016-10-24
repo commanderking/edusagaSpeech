@@ -42,21 +42,27 @@
 			},
 			"emotions" : 
 			{
-				"default": "characters/alex/alexDefault.png",
-				"confused" : "characters/alex/alexConfused.png",
-				"sass" : "characters/alex/alexSass.png",
-				"laughing" : "characters/alex/alexLaughing.png",
-				"silhouette" : "characters/alex/alexSilhouette.png"
+				"default": "characters/maxwell/maxDefault.png",
+				"confused" : "characters/maxwell/maxConfused.png",
+				"goodJob" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
+				"thumbsUpGoodJob" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
+				"thumbsUp" : "characters/maxwell/maxDefaultThumbsup.png",
+				"distraught": "characters/maxwell/maxDistraught.png",
+				"excited" : "characters/maxwell/maxExcitedGreatJob.png",
+				"panic" : "characters/maxwell/maxPanic.png",
+				"maxSad" : "characters/maxwell/maxSad.png",
+				"maxSilhouette" : "characters/maxwell/maxSilhouette.png",
+				"maxWistfulGoodJob" : "characters/maxwell/maxWistfulGoodJob.png"
 			},
 			"sounds" : 
 			[
 				{
 					"soundID" : "hi",
-					"soundPath" : "alex/hi.ogg"
+					"soundPath" : "maxwell/hi.ogg"
 				},
 				{
 					"soundID" : "henhao",
-					"soundPath" : "alex/henhao.ogg"
+					"soundPath" : "maxwell/henhao.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -64,17 +70,17 @@
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : "alex/shenme.ogg"
+					"soundPath" : "maxwell/shenme.ogg"
 				}, 
 				{ 
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
-					"soundPath" : "alex/tingbudong.ogg"
+					"soundPath" : "maxwell/tingbudong.ogg"
 				}, 
 				{ 
 					"response": "不好意思, 我没听懂.",
 					"soundID" : "buhaoyisi",
-					"soundPath" : "alex/buhaoyisi.ogg"
+					"soundPath" : "maxwell/buhaoyisi.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -105,7 +111,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "characters/maxwell/maxwellDefault.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -140,7 +146,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "characters/maxwell/maxwellDefault.png",
 					"tasksToQueue" : [21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

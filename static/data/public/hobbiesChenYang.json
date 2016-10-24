@@ -50,6 +50,38 @@
 			},
 			"sounds" : 
 			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "chenyang/hi.ogg"
+				},
+				{
+					"soundID" : "mamahuhu",
+					"soundPath" : "chenyang/mamahuhu.ogg"
+				},
+				{
+					"soundID" : "hobbies-weekend-doing-not-much",
+					"soundPath" : "chenyang/hobbies-weekend-doing-not-much.ogg"
+				},
+				{
+					"soundID" : "hobbies-not-like-singing",
+					"soundPath" : "chenyang/hobbies-not-like-singing.ogg"
+				},
+				{
+					"soundID" : "hobbies-dance-not-liking",
+					"soundPath" : "chenyang/hobbies-dance-not-liking.ogg"
+				},
+				{
+					"soundID" : "hobbies-not-like-exercise",
+					"soundPath" : "chenyang/hobbies-not-like-exercise.ogg"
+				},
+				{
+					"soundID" : "hobbies-watch-tv-sometimes",
+					"soundPath" : "chenyang/hobbies-watch-tv-sometimes.ogg"
+				},
+				{
+					"soundID" : "zaijian-sad",
+					"soundPath" : "chenyang/zaijian(sad).ogg"
+				}
 			],
 			"confusedPhrases" : 
 			[
@@ -78,16 +110,16 @@
 						{
 							"answers" : ["你好"],
 							"response" : "你好",
-							"soundID" : ""
+							"soundID" : "nihao"
 						},
 						{
 							"answers" : ["怎么样", "你好吗"],
-							"response" : "不错",
-							"soundID" : ""
+							"response" : "马马虎虎",
+							"soundID" : "mamahuhu"
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "characters/chenguang/chengBored.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : []
 				}
@@ -102,7 +134,7 @@
 						{
 							"answers" : ["你周末喜欢做什么"],
 							"response" : "我周末啊? 我周末不做什么。睡觉, 学习。。。",
-							"soundID" : "hobbies-weekend-likes"
+							"soundID" : "hobbies-weekend-doing-not-much"
 						},
 						{
 							"answers" : [
@@ -110,7 +142,7 @@
 								["喜欢做什么", "爱做什么"]
 							],
 							"response" : "我周末啊? 我周末不做什么。睡觉, 学习。。。",
-							"soundID" : "hobbies-weekend-likes"
+							"soundID" : "hobbies-weekend-doing-not-much"
 						}
 					],
 					"correct" : false,
@@ -127,7 +159,7 @@
 						{
 							"answers" : ["你喜不喜欢唱歌", "你爱不爱唱歌"],
 							"response" : "我不是很喜欢唱歌。",
-							"soundID" : ""
+							"soundID" : "hobbies-not-like-singing"
 						},
 						{
 							"answers" : [
@@ -135,7 +167,7 @@
 								["唱歌吗"]
 							],
 							"response" : "我不是很喜欢唱歌。",
-							"soundID" : "",
+							"soundID" : "hobbies-not-like-singing",
 							"exceptions" : ["喜不喜欢", "爱不爱"]
 						}
 					],
@@ -153,7 +185,7 @@
 						{
 							"answers" : ["你喜不喜欢跳舞", "你爱不爱跳舞"],
 							"response" : "跳舞? 我不是很喜欢跳舞。",
-							"soundID" : "hobbies-weekend-likes"
+							"soundID" : "hobbies-dance-not-liking"
 						},
 						{
 							"answers" : [
@@ -161,7 +193,7 @@
 								["跳舞吗"]
 							],
 							"response" : "跳舞? 我不是很喜欢跳舞。",
-							"soundID" : "hobbies-weekend-likes",
+							"soundID" : "hobbies-dance-not-liking",
 							"exceptions" : ["喜不喜欢", "爱不爱"]
 						}
 					],
@@ -178,7 +210,7 @@
 						{
 							"answers" : ["你喜不喜欢运动"],
 							"response" : "我不是很喜欢运动。",
-							"soundID" : "hobbies-weekend-likes"
+							"soundID" : "hobbies-not-like-exercise"
 						},
 						{
 							"answers" : [
@@ -186,7 +218,7 @@
 								["打球", "运动"]
 							],
 							"response" : "我不是很喜欢运动。",
-							"soundID" : ""
+							"soundID" : "hobbies-not-like-exercise"
 						},
 						{
 							"answers" : [
@@ -194,7 +226,7 @@
 								["打球吗", "运动吗"]
 							],
 							"response" : "我不是很喜欢运动。",
-							"soundID" : "",
+							"soundID" : "hobbies-not-like-exercise",
 							"exceptions" : ["喜不喜欢", "爱不爱"]
 						}
 					],
@@ -211,7 +243,7 @@
 						{
 							"answers" : ["你喜不喜欢看电视"],
 							"response" : "我有时候看电视, 可是不是特别喜欢。",
-							"soundID" : ""
+							"soundID" : "hobbies-watch-tv-sometimes"
 						},
 						{
 							"answers" : [
@@ -219,7 +251,7 @@
 								["看电视"]
 							],
 							"response" : "我有时候看电视, 可是不是特别喜欢。",
-							"soundID" : ""
+							"soundID" : "hobbies-watch-tv-sometimes"
 						},
 						{
 							"answers" : [
@@ -227,7 +259,7 @@
 								["看电视吗", "看电视吗"]
 							],
 							"response" : "我有时候看电视, 可是不是特别喜欢。",
-							"soundID" : "",
+							"soundID" : "hobbies-watch-tv-sometimes",
 							"exceptions" : ["喜不喜欢", "爱不爱"]
 						}
 					],
@@ -246,7 +278,7 @@
 						{
 							"answers" : ["再见", "明天见"],
 							"response" : "再见",
-							"soundID" : ""
+							"soundID" : "zaijian-sad"
 						}
 					],
 					"correct" : false,

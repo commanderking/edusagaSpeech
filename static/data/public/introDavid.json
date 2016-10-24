@@ -50,7 +50,27 @@
 				{
 					"soundID" : "nihao",
 					"soundPath" : "david/nihao.ogg"
-				}
+				},
+				{
+					"soundID" : "haikeyi",
+					"soundPath" : "david/haikeyi.ogg"
+				},
+				{
+					"soundID" : "surname-zhang-you",
+					"soundPath" : "david/surname-zhang-you.ogg"
+				},
+				{
+					"soundID" : "oh2",
+					"soundPath" : "david/oh2.ogg"
+				},
+				{
+					"soundID" : "intro-david-your-name",
+					"soundPath" : "david/intro-david-your-name.ogg"
+				},
+				{
+					"soundID" : "intro-oh-nice-to-meet-you",
+					"soundPath" : "david/intro-oh-nice-to-meet-you.ogg"
+				}			
 			],
 			"confusedPhrases" : 
 			[
@@ -99,7 +119,7 @@
 						{
 							"answers" : ["你好吗", "怎么样"],
 							"response" : "。。。还可以!",
-							"soundID" : "nihao"
+							"soundID" : "haikeyi"
 						}
 					],
 					"correct" : false,
@@ -119,7 +139,7 @@
 						{
 							"answers" : ["请问你贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
 							"response" : "我姓张。你呢?",
-							"soundID" : ""
+							"soundID" : "surname-zhang-you"
 						}
 					],
 					"correct" : false,
@@ -136,7 +156,7 @@
 						{
 							"answers" : ["我姓"],
 							"response" : "哦。",
-							"soundID" : ""
+							"soundID" : "oh2"
 						}
 					],
 					"correct" : false,
@@ -153,7 +173,7 @@
 						{
 							"answers" : ["你叫什么名字","你的名字是什么", "你叫什么"],
 							"response" : "我叫 David。你叫什么?",
-							"soundID" : ""
+							"soundID" : "intro-david-your-name"
 						}
 					],
 					"correct" : false,
@@ -170,7 +190,7 @@
 						{
 							"answers" : ["我叫", "我是"],
 							"response" : "哦。 很高兴认识你。",
-							"soundID" : ""
+							"soundID" : "intro-oh-nice-to-meet-you"
 						}
 					],
 					"correct" : false,

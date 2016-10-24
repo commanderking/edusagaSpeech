@@ -51,6 +51,62 @@
 			},
 			"sounds" : 
 			[
+				{ 
+					"soundID" : "family-take-a-guess",
+					"soundPath" : "chenyang/family-take-a-guess.ogg"
+				}, 
+				{ 
+					"soundID" : "family-nope-try-again",
+					"soundPath" : "chenyang/family-nope-try-again.ogg"
+				}, 
+				{ 
+					"soundID" : "family-guessed-right",
+					"soundPath" : "chenyang/family-guessed-right.ogg"
+				},
+				{ 
+					"soundID" : "nationality-guess-right-dad-is-chinese-mom-not",
+					"soundPath" : "chenyang/nationality-guess-right-dad-is-chinese-mom-not.ogg"
+				},
+				{ 
+					"soundID" : "family-im-chinese",
+					"soundPath" : "chenyang/family-im-chinese.ogg"
+				}, 
+				{ 
+					"soundID" : "family-dad-chinese",
+					"soundPath" : "chenyang/family-dad-chinese.ogg"
+				}, 
+				{ 
+					"soundID" : "family-dad-chinese-mom-not",
+					"soundPath" : "chenyang/family-dad-chinese-mom-not.ogg"
+				},
+				{ 
+					"soundID" : "family-wont-tell-you-guess",
+					"soundPath" : "chenyang/family-wont-tell-you-guess.ogg"
+				}, 
+				{ 
+					"soundID" : "family-nope-guess-again",
+					"soundPath" : "chenyang/family-nope-guess-again.ogg"
+				}, 
+				{ 
+					"soundID" : "family-guess-right-canadian",
+					"soundPath" : "chenyang/family-guess-right-canadian.ogg"
+				},
+				{ 
+					"soundID" : "family-no-guess-no-tell",
+					"soundPath" : "chenyang/family-no-guess-no-tell.ogg"
+				}, 
+				{ 
+					"soundID" : "family-mom-doctor",
+					"soundPath" : "chenyang/family-mom-doctor.ogg"
+				},
+				{ 
+					"soundID" : "family-dad-teacher-bzz-got-to-go",
+					"soundPath" : "chenyang/family-dad-teacher-bzz-got-to-go.ogg"
+				},
+				{ 
+					"soundID" : "en",
+					"soundPath" : "chenyang/en.ogg"
+				}
 			],
 			"confusedPhrases" : 
 			[
@@ -79,7 +135,7 @@
 						{
 							"answers" : ["你是哪国人", "你是哪里人"],
 							"response" : "猜一猜吧!  Take a guess!",
-							"soundID" : ""
+							"soundID" : "family-take-a-guess"
 						}
 					],
 					"correct" : false,
@@ -99,7 +155,7 @@
 						{
 							"answers": ["你是不是美国人", "你是美国人吗"],
 							"response": "不是! 再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						}
 					],
 					"correct" : false,
@@ -117,7 +173,7 @@
 						{
 							"answers": ["你是不是中国人", "你是中国人吗"],
 							"response": "猜对了! 我是中国人。 我爸爸也是中国人，可是我妈妈不是中国人。",
-							"soundID": ""
+							"soundID": "family-guessed-right"
 						}
 					],
 					"correct" : false,
@@ -134,7 +190,7 @@
 						{
 							"answers": ["你是不是日本人", "你是日本人吗"],
 							"response": "不是! 再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						}
 					],
 					"correct" : false,
@@ -151,7 +207,7 @@
 						{
 							"answers": ["你是不是加拿大人", "你是加拿大人吗"],
 							"response": "不是! 再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						}
 					],
 					"correct" : false,
@@ -167,7 +223,15 @@
 						{
 							"answers": ["你妈妈是哪国人", "你妈妈是哪里人"],
 							"response": "我不告诉你! 猜一猜吧!",
-							"soundID": ""
+							"soundID": "family-wont-tell-you-guess"
+						},
+						{
+							"answers": [
+								["你的妈妈", "你的吗", "你妈", "你妈妈"],
+								["是哪国人", "是哪里人", "来自哪里", "从哪里来的"]
+							],
+							"response": "我不告诉你! 猜一猜吧!",
+							"soundID": "family-wont-tell-you-guess"
 						}
 					],
 					"correct" : false,
@@ -184,7 +248,7 @@
 						{
 							"answers": ["你妈妈是不是美国人"],
 							"response": "不是。再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						},
 						{
 							"answers": [
@@ -193,7 +257,7 @@
 								["美国人"]
 							],
 							"response": "不是。再猜吧!",
-							"soundID": "",
+							"soundID": "family-nope-guess-again",
 							"exceptions": ["吗"]
 						},
 						{
@@ -204,7 +268,7 @@
 								["吗"]
 							],
 							"response": "不是。再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						}
 					],
 					"correct" : false,
@@ -222,7 +286,7 @@
 						{
 							"answers": ["你妈妈是不是加拿大人"],
 							"response": "猜对了! 他是加拿大人! ",
-							"soundID": ""
+							"soundID": "family-guess-right-canadian"
 						},
 						{
 							"answers": [
@@ -231,7 +295,7 @@
 								["加拿大人"]
 							],
 							"response": "猜对了! 他是加拿大人!",
-							"soundID": "",
+							"soundID": "family-guess-right-canadian",
 							"exceptions": ["吗"]
 						},
 						{
@@ -242,7 +306,7 @@
 								["吗"]
 							],
 							"response": "猜对了! 他是加拿大人!",
-							"soundID": ""
+							"soundID": "family-guess-right-canadian"
 						}
 					],
 					"correct" : false,
@@ -259,7 +323,7 @@
 						{
 							"answers": ["你妈妈是不是日本人"],
 							"response": "不是。再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						},
 						{
 							"answers": [
@@ -268,7 +332,7 @@
 								["日本人"]
 							],
 							"response": "不是。再猜吧!",
-							"soundID": "",
+							"soundID": "family-nope-guess-again",
 							"exceptions": ["吗"]
 						},
 						{
@@ -279,7 +343,7 @@
 								["吗"]
 							],
 							"response": "不是。再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						}
 					],
 					"correct" : false,
@@ -296,7 +360,7 @@
 						{
 							"answers": ["你妈妈是不是英国人"],
 							"response": "不是！再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						},
 						{
 							"answers": [
@@ -305,7 +369,7 @@
 								["英国人"]
 							],
 							"response": "不是！再猜吧!",
-							"soundID": "",
+							"soundID": "family-nope-guess-again",
 							"exceptions": ["吗"]
 						},
 						{
@@ -316,7 +380,7 @@
 								["吗"]
 							],
 							"response": "不是！再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						}
 					],
 					"correct" : false,
@@ -333,7 +397,7 @@
 						{
 							"answers": ["你妈妈是不是法国人"],
 							"response": "不是！再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						},
 						{
 							"answers": [
@@ -342,7 +406,7 @@
 								["法国人"]
 							],
 							"response": "不是！再猜吧!",
-							"soundID": "",
+							"soundID": "family-nope-guess-again",
 							"exceptions": ["吗"]
 						},
 						{
@@ -353,7 +417,7 @@
 								["吗"]
 							],
 							"response": "不是！再猜吧!",
-							"soundID": ""
+							"soundID": "family-nope-guess-again"
 						}
 					],
 					"correct" : false,
@@ -370,7 +434,7 @@
 						{
 							"answers": ["我不猜"],
 							"response": "不猜就不告诉你!",
-							"soundID": ""
+							"soundID": "family-no-guess-no-tell"
 						}
 					],
 					"correct" : false,
@@ -385,8 +449,8 @@
 					[
 						{
 							"answers": ["你的妈妈做什么工作"],
-							"response": "他是一个医生。",
-							"soundID": ""
+							"response": "他是医生。",
+							"soundID": "family-mom-doctor"
 						},
 						{
 							"answers": [
@@ -394,8 +458,8 @@
 								["做什么"],
 								["工作", "事"]
 							],
-							"response": "他是一个医生。",
-							"soundID": ""
+							"response": "他是医生。",
+							"soundID": "family-mom-doctor"
 						},
 						{
 							"answers": [
@@ -404,8 +468,8 @@
 								["什么", "哪个", "哪一个"],
 								["行业"]
 							],
-							"response": "他是一个医生。",
-							"soundID": ""
+							"response": "他是医生。",
+							"soundID": "family-mom-doctor"
 						}
 					],
 					"correct" : false,
@@ -421,7 +485,7 @@
 						{
 							"answers": ["你的爸爸做什么工作"],
 							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见! ",
-							"soundID": ""
+							"soundID": "family-dad-teacher-bzz-got-to-go"
 						},
 						{
 							"answers": [
@@ -430,7 +494,7 @@
 								["工作", "事"]
 							],
 							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
-							"soundID": ""
+							"soundID": "family-dad-teacher-bzz-got-to-go"
 						},
 						{
 							"answers": [
@@ -440,7 +504,12 @@
 								["行业"]
 							],
 							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
-							"soundID": ""
+							"soundID": "family-dad-teacher-bzz-got-to-go"
+						},
+						{
+							"answers": ["你爸呢", "你爸爸呢"],
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
+							"soundID": "family-dad-teacher-bzz-got-to-go"
 						}
 					],
 					"correct" : false,
@@ -456,7 +525,7 @@
 						{
 							"answers": ["再见", "明天见"],
 							"response": "嗯",
-							"soundID": ""
+							"soundID": "en"
 						}
 					],
 					"correct" : false,

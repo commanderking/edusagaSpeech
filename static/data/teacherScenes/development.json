@@ -1,1 +1,1 @@
-{"scenes": []}
+{"scenes": [{"name": "Scheduling everyone to go to the cafe", "scenario": "Looks like David, ChenYang, and Alex are hanging out together. Wouldn't it be cool to grab coffee together some time?", "sequence": 0, "objectives": ["I can invite and make plans with someone to do something or go somewhere."], "tags": ["greetings", "introductions"], "link": "../cafeScheduling"}]}
