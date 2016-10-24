@@ -118,21 +118,21 @@
 					"possibleAnswers" : 
 					[
 						{
-							"choiceText" : "Hey there",
-							"response" : "Oh, cool. 你好吗 means how are you! ",
-							"soundID" : "good job",
+							"choiceText" : "Sure thing!",
+							"response" : "",
+							"soundID" : "",
 							"correctAnswer" : true
 						},
 						{
-							"choiceText" : "You're a jerk.",
+							"choiceText" : "No way.",
 							"response" : "What? Why are you calling me a jerk?",
 							"soundID" : "whatyousay",
 							"correctAnswer" : false
 
 						},
 						{
-							"choiceText" : "What do you mean",
-							"response" : "I'm not sure that's what it means",
+							"choiceText" : "Why?",
+							"response" : "I really want to know what they're saying! Please!",
 							"soundID" : "whatyousay",
 							"correctAnswer" : false
 						}
