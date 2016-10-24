@@ -33,6 +33,12 @@
 		},
 		{
 			"name" : "Max",
+			"image" : "characters/maxwell/maxExcitedGreatJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Great! Thanks so much!"
+		},
+		{
+			"name" : "Max",
 			"image" : "characters/maxwell/maxDefault.png",
 			"imageLayer" : "blank.png",
 			"text" : "Hey, if you want to listen along, visit this link: https://youtu.be/39rmwFLPB3k?t=48s"
@@ -50,27 +56,58 @@
 			"text" : "Oh hey! The girl is introducing herself. Listen closely. I need you to help me understand what she's saying!"
 		},
 		{
-			"name" : "Max",
+			"name" : "Girl on Show",
 			"image" : "characters/voc/chenzitong.jpg",
 			"imageLayer" : "blank.png",
-			"text" : "各位老师好。我的名字叫陈梓童。",
-			"jumpToTasks" : true
+			"text" : "各位老师好。我的名字叫陈梓童。"
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxPanic.jpg",
+			"image" : "characters/maxwell/maxPanic.png",
 			"imageLayer" : "blank.png",
 			"text" : "What did she just say?",
 			"jumpToTasks" : true
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxPanic.jpg",
+			"image" : "characters/maxwell/maxWistfulGoodJob.png",
 			"imageLayer" : "blank.png",
 			"text" : "Oh. So what's her name?",
 			"jumpToTasks" : true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefaultThumbsup.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh cool. Her name is Chén Zǐtóng. Let's see what she says next."
+		},
+		{
+			"name" : "Girl on Show",
+			"image" : "characters/voc/chenzitong.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "我今年二十五岁。",
+			"index" : 10
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxPanic.png",
+			"imageLayer" : "blank.png",
+			"text" : "What's she saying now?",
+			"jumpToTasks" : true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxWistfulGoodJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "25 huh? That's 5 years older than I am."
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxWistfulGoodJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "All right, I'm going to go eat some food now. Thanks for your help. Cya later!",
+			"jumpToTasks" : true
 		}
-
 	],
 	"character" : 
 		{
@@ -157,7 +194,7 @@
 							"choiceText" : "She asked the audience how they were",
 							"response" : "Oh, cool. 你好吗 means how are you!",
 							"soundID" : "good job",
-							"correctAnswer" : true
+							"correctAnswer" : false
 						},
 						{
 							"choiceText" : "She said she loves all of the judges.",
@@ -170,14 +207,113 @@
 							"choiceText" : "She said her name.",
 							"response" : "Oh really?",
 							"soundID" : "whatyousay",
+							"correctAnswer" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 8
+				},
+				{
+					"taskID" : 30,
+					"task" : "What's her name",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "Her name is  Míng zìjiào。",
+							"response" : "Are you sure? That doesn't sound like a name to me",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "Her name is  Chén zǐtóng。",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true
+
+						},
+						{
+							"choiceText" : "Her name is Lǎo shīhǎo",
+							"response" : "Doesn't that mean hello teachers? That can't be right.",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "Her name is Wǒ demíng",
+							"response" : "Are you sure? That doesn't sound like a name to me.",
+							"soundID" : "",
 							"correctAnswer" : false
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/maxwell/maxDefault.png",
-					"tasksToQueue" : [21],
+					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
-					"hintUsed" : false
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 9
+				},
+				{
+					"taskID" : 40,
+					"task" : "What's her age",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "She's 27 years old.",
+							"response" : "Wouldn't 27 mean she would have said qī?",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "She's 29 years old.",
+							"response" : "Wouldn't 29 mean she would have said jiǔ?",
+							"soundID" : "",
+							"correctAnswer" : false
+
+						},
+						{
+							"choiceText" : "She's 24 years old.",
+							"response" : "Wouldn't 24 mean she would have said sì?",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "She's 25 years old",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 9
+				},
+				{
+					"taskID" : 50,
+					"task" : "What's her age",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "Bye!",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 9
 				}
 			],
 			"completedTasks" : []
