@@ -193,8 +193,6 @@ var QuestionAsker = React.createClass({
 					// Push this task into the completedTasks
 					newSceneData.character.completedTasks.push(currentTaskData);
 
-
-
 					// Remove the task from the tasks array
 					if (currentTaskData.taskType !== undefined) {
 
@@ -329,49 +327,107 @@ var QuestionAsker = React.createClass({
 		}
 	},
 	checkAnswerMC: function(taskIndex, choiceIndex) {
+		var that = this;
 		console.log("Checking multiple choice answer");
 		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
-		var allCurrentTasks = TaskController.getCurrentTasks(newSceneData); 
+		var allCurrentTasks = TaskController.getCurrentTasks(newSceneData);
+		var currentTaskData = TaskController.getActiveTask(newSceneData, taskIndex);
 
-		// 
 		console.log(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].response);
 		// If choice is correct,
 			// 1) Show text response
 			if (allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].correctAnswer === true) {
 				console.log("you're correct");
 
-			/*---------------------------------------------------------------
-			TODO: REFACTOR THIS WITH checkANSWER part 
-			---------------------------------------------------------------*/
-			// Play response voice
-			this.playSound(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].soundID);
+				/*---------------------------------------------------------------
+				TODO: REFACTOR THIS WITH checkANSWER part 
+				---------------------------------------------------------------*/
+				// Play response voice
+				this.playSound(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].soundID);
 
-			// Store sound ID in current Sound ID if player wnats to repeat
-			newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
+				// Store sound ID in current Sound ID if player wnats to repeat
+				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
 
-			// Adjust character image
-			newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
+				// Adjust character image
+				newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
 
-			// Show response text
-			var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;
+				// Show response text
+				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;
 
-			// Mark question as corrrect
-			newSceneData.character.currentTasks[taskIndex].correct = true;
+				// Mark question as corrrect
+				newSceneData.character.currentTasks[taskIndex].correct = true;
 
-			// Add coins 
-			this.addCoins(10);
+				// Add coins 
+				this.addCoins(10);
 
-			this.setState({sceneData: newSceneData});
+				// this.setState({sceneData: newSceneData});
 
-			// Add point to correct answers and set state to correctAnswerState
-			this.setState({correctAnswerState: true, 
-							correctAnswers: this.state.correctAnswers +1,
-							currentDialog: newCurrentDialog,
-							lastDialogText: newCurrentDialog});
+				// Add point to correct answers and set state to correctAnswerState
+				this.setState({
+					sceneData: newSceneData,
+					correctAnswerState: true, 
+					correctAnswers: this.state.correctAnswers +1,
+					currentDialog: newCurrentDialog,
+					lastDialogText: newCurrentDialog
+				});
+
+				// 3) Remove task from currentTasks
+
+				setTimeout(function(){
+					// Turn off correct answer state
+					that.setState({correctAnswerState: false});
+					// Push this task into the completedTasks
+					newSceneData.character.completedTasks.push(currentTaskData);
+					console.log(newSceneData.character.completedTasks);
+
+					// Remove the task from the tasks array
+					if (currentTaskData.taskType !== undefined) {
 
 
-			// 2) Play sound (if exists)
-			// 3) Remove task from currentTasks
+						// If task is an "end" task, then end the scene by removing all other current tasks. 
+						if (currentTaskData.taskType === "end") {
+							console.log("scene should be over");
+							newSceneData.character.currentTasks = [];
+						} else if (currentTaskData.taskType === "multipleChoice") {
+							// Add task to completed tasks and then delete it from currentTasks
+							console.log("splicing");
+							newSceneData.character.currentTasks.splice(taskIndex, 1);	
+							console.log(newSceneData.character.currentTasks);						
+						}
+					} else {
+					}
+
+					// If task has a follow up task to queue, add that new task to the Task List
+					if (currentTaskData.tasksToQueue == null) {
+						// Do nothing
+					} else if (currentTaskData.tasksToQueue.length > 0) {
+						var currentTasks = newSceneData.character.currentTasks;
+						var tasksToQueueIDs = currentTaskData.tasksToQueue;
+						var queuedTasks = newSceneData.character.queuedTasks;
+
+						// Add tasks from the queue list to the current list
+						newSceneData.character.currentTasks = TaskController.addQueuedTasksToCurrentTasks(currentTasks, tasksToQueueIDs, queuedTasks) 
+						
+						// Get indexes of tasks from queue to remove
+						var indexesToRemove = TaskController.getIndexesToSpliceQueuedTasks(tasksToQueueIDs, queuedTasks)
+
+						// Remove tasks that are no longer in queue
+						newSceneData.character.queuedTasks = TaskController.removeTasksfromQueue(indexesToRemove, queuedTasks)
+					}
+
+					that.setState({sceneData: newSceneData}, that.checkSceneOver);
+
+					if (that.state.sceneData.APTimeMode) {
+						that.setState({taskPause: true});
+					}
+
+					// If after the task, it should jump back to the scene view, do so
+					if (currentTaskData.jumpToScenarioIndex) {
+						that.setState({scenarioIndex: currentTaskData.jumpToScenarioIndex})
+						that.changeScenarioMode();
+					}
+				}, 2000)
+
 			// 4) Queue up next tasks (and likely jump to scenario)
 			// 5) 
 			}

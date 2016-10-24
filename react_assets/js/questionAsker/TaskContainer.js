@@ -47,7 +47,6 @@ var TaskContainer = React.createClass({
 
 			// If multiple choice task, loop through possibleChoices and display each one as a choice
 			if (task.taskType === "multipleChoice") {
-				console.log("multipleChoice");
 				var multipleChoices = task.possibleAnswers.map(function(possibleChoice, j) {
 					return (
 						<Task 
@@ -71,7 +70,6 @@ var TaskContainer = React.createClass({
 							assessmentMode = {that.props.assessmentMode} />
 					)	
 				})
-				console.log(multipleChoices);
 				return multipleChoices;
 			} else {
 				return (

@@ -38,6 +38,7 @@ def buildEpisodeData(jsonPath, teacherName):
 		episodeContent['link'] = jsonPath.replace('static/data/' + teacherName, '..').replace('.json', '')
 		episodeContent['tags'] = d['tags']
 		episodeContent['objectives'] = d['objectives']
+		episodeContent['characterImage'] = d['currentImage']
 		try: 
 			episodeContent['sequence'] = d['sequence']
 		except:
