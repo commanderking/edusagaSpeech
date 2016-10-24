@@ -27,7 +27,9 @@
 			"name" : "???",
 			"image" : "characters/maxwell/maxDefault.png",
 			"imageLayer" : "blank.png",
-			"text" : "Oh! Hey there! I'm Maxwell. My Chinese isn't great, but I love watching Chinese TV shows. I'm watching one right now. Can you help me out?"
+			"text" : "Oh! Hey there! I'm Maxwell. My Chinese isn't great, but I love watching Chinese TV shows. I'm watching one right now. Can you help me out?",
+			"jumpToTasks" : true
+
 		}
 	],
 	"character" : 
@@ -44,6 +46,7 @@
 			{
 				"default": "characters/maxwell/maxDefault.png",
 				"confused" : "characters/maxwell/maxConfused.png",
+				"confused" : "characters/maxwell/maxDefault.png",
 				"goodJob" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
 				"thumbsUpGoodJob" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
 				"thumbsUp" : "characters/maxwell/maxDefaultThumbsup.png",
@@ -66,23 +69,7 @@
 				}
 			],
 			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "maxwell/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "maxwell/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "maxwell/buhaoyisi.ogg"
-				}
-			],
+			[],
 			"currentTasks" : [
 				{
 					"taskID" : 10,
@@ -111,22 +98,23 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/maxwell/maxwellDefault.png",
+					"emotion" : "characters/maxwell/maxDefault.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
-					"hintUsed" : false
+					"hintUsed" : false,
+					"jumpToScenarioIndex" : 1
 				}
 			],
 			"queuedTasks" : 
 			[
 				{
 					"taskID" : 20,
-					"task" : "What does 你好吗 mean ",
+					"task" : "What does yo mean ",
 					"taskType" : "multipleChoice",
 					"possibleAnswers" : 
 					[
 						{
-							"choiceText" : "Hey there",
+							"choiceText" : "Hey yo!",
 							"response" : "Oh, cool. 你好吗 means how are you! ",
 							"soundID" : "good job",
 							"correctAnswer" : true
@@ -146,7 +134,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/maxwell/maxwellDefault.png",
+					"emotion" : "characters/maxwell/maxDefault.png",
 					"tasksToQueue" : [21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
