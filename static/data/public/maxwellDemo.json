@@ -24,13 +24,53 @@
 			"text" : "Back in the dormitory! It's your roommate Maxwell! Looks like he's watching some show on TV."
 		},
 		{
-			"name" : "???",
+			"name" : "Max",
 			"image" : "characters/maxwell/maxDefault.png",
 			"imageLayer" : "blank.png",
-			"text" : "Oh! Hey there! I'm Maxwell. My Chinese isn't great, but I love watching Chinese TV shows. I'm watching one right now. Can you help me out?",
+			"text" : "Oh! Hey there! I'm Max! My Chinese isn't great, but I love watching Chinese TV shows. I'm watching one right now. Can you help me out?",
 			"jumpToTasks" : true
 
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "Hey, if you want to listen along, visit this link: https://youtu.be/39rmwFLPB3k?t=48s"
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxExcitedGreatJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh wow! It's fantastic! Are you sure you dont' want to listen?: https://youtu.be/39rmwFLPB3k?t=48s"
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDistraught.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh hey! The girl is introducing herself. Listen closely. I need you to help me understand what she's saying!"
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/voc/chenzitong.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "各位老师好。我的名字叫陈梓童。",
+			"jumpToTasks" : true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxPanic.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "What did she just say?",
+			"jumpToTasks" : true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxPanic.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "Oh. So what's her name?",
+			"jumpToTasks" : true
 		}
+
 	],
 	"character" : 
 		{
@@ -102,33 +142,33 @@
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false,
-					"jumpToScenarioIndex" : 1
+					"jumpToScenarioIndex" : 2
 				}
 			],
 			"queuedTasks" : 
 			[
 				{
 					"taskID" : 20,
-					"task" : "What does yo mean ",
+					"task" : "What did she just say?",
 					"taskType" : "multipleChoice",
 					"possibleAnswers" : 
 					[
 						{
-							"choiceText" : "Hey yo!",
-							"response" : "Oh, cool. 你好吗 means how are you! ",
+							"choiceText" : "She asked the audience how they were",
+							"response" : "Oh, cool. 你好吗 means how are you!",
 							"soundID" : "good job",
 							"correctAnswer" : true
 						},
 						{
-							"choiceText" : "You're a jerk.",
-							"response" : "What? Why are you calling me a jerk?",
+							"choiceText" : "She said she loves all of the judges.",
+							"response" : "Wait. what? Why would she say that?",
 							"soundID" : "whatyousay",
 							"correctAnswer" : false
 
 						},
 						{
-							"choiceText" : "What do you mean",
-							"response" : "I'm not sure that's what it means",
+							"choiceText" : "She said her name.",
+							"response" : "Oh really?",
 							"soundID" : "whatyousay",
 							"correctAnswer" : false
 						}
