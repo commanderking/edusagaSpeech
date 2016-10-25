@@ -471,7 +471,7 @@
 						that.setState({ scenarioIndex: currentTaskData.jumpToScenarioIndex });
 						that.changeScenarioMode();
 					}
-				}, 2000);
+				}, 10);
 	
 				// 4) Queue up next tasks (and likely jump to scenario)
 				// 5) 
