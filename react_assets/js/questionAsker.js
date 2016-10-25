@@ -53,6 +53,7 @@ var QuestionAsker = React.createClass({
 			// will blink
 			currentTaskIndex: -1,
 			currentDialog: "",
+			currentRewindSoundID: "",
 			lastDialogText: "",
 			voicePack: {},
 			coins: 0,
@@ -748,6 +749,12 @@ var QuestionAsker = React.createClass({
 			this.setState({scenarioIndex: newScenarioIndex});
 		}
 	},
+	playRewindScenarioSound: function() {
+		this.playSound(this.state.currentRewindSoundID);
+	},
+	setRewindScenarioSound: function(soundID) {
+		this.setState({currentRewindSoundID: soundID });
+	},
 	setCurrentTaskIndex: function(newIndex) {
 		this.setState({ currentTaskIndex: newIndex})
 	},
@@ -779,7 +786,9 @@ var QuestionAsker = React.createClass({
 						hintActive = {this.state.hintActive} 
 						onRepeat = {this.handleRepeat} 
 						nextScenario = {this.nextScenario}
-						assessmentMode = {sceneData.assessmentMode} 
+						setRewindScenarioSound = {this.setRewindScenarioSound}
+						playRewindScenarioSound = {this.playRewindScenarioSound}
+						assessmentMode = {sceneData.assessmentMode}
 						sceneComplete = {this.state.sceneComplete} />
 					<CharacterContainer 
 						scenarioOn = {this.state.scenarioOn}

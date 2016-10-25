@@ -1,10 +1,25 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var Constants = require('../helpers/Constants');
+var NextButton = require('./components/NextButton');
+var RewindButton = require('./components/RewindButton');
 
 //TODO: The dialog's name and text should be their own component
 
 var DialogContainer = React.createClass({
+	/*
+	componentDidUpdate: function() {
+		console.log("dialog updated");
+
+		// If the sound should be saved for later, do so
+		/*
+		if (this.props.scenarioData[this.props.scenarioIndex].saveSoundForRewind) {
+			this.props.setRewindScenarioSound(this.props.scenarioData[this.props.scenarioIndex].soundID);
+			console.log("sound saved");
+		}
+		
+	},
+*/
 	render: function() {
 		var dialogSlantSrc = Constants.IMAGE_PATH + "UI/dialogbox_slant.png" 
 		var textNameWrapper;
@@ -14,12 +29,14 @@ var DialogContainer = React.createClass({
 		var characterTextClass = "characterTextResponse";
 		var dialogDivClass = "characterDialogueDiv col-md-12 col-sm-12 col-xs-12";
 		var button = null;
+		var repeatButton = null;
 
 		// If it's assessment mode and there are no scenarios to show, no dialog is shown 
 		if (this.props.assessmentMode && this.props.scenarioOn === false) {
 			return null;
 		} else {
 			// Case 1: There's a scenario that's played; Change font size of text and get name from scenario
+			var that = this;
 			if (this.props.scenarioOn === true) {
 				characterName = this.props.scenarioData[this.props.scenarioIndex].name;
 				characterTextResponse = 
@@ -29,12 +46,11 @@ var DialogContainer = React.createClass({
 
 				// Play sound for scenario if exists
 				if (this.props.scenarioData[this.props.scenarioIndex].soundID) {
-					this.props.playSound(this.props.scenarioData[this.props.scenarioIndex].soundID);
+					setTimeout(function() { 
+						that.props.playSound(that.props.scenarioData[that.props.scenarioIndex].soundID);
+					}, 500);
 				}
-				// Display next Button
-				button = <button 
-						className="nextButton"
-						onClick={this.props.nextScenario} ><span className="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+
 			// Case 2: Hint's active; Name, Text should fade color and the div should invert colors
 			} else if(this.props.hintActive === true) {
 				dialogDivClass = "characterDialogueDiv dialogDivInverted col-md-12 col-sm-12 col-xs-12";
@@ -66,7 +82,16 @@ var DialogContainer = React.createClass({
 							{characterTextResponse}
 						</div>
 					</div>
-					{button}
+					<NextButton
+						nextScenario={this.props.nextScenario}
+						scenarioOn={this.props.scenarioOn} />
+					<RewindButton 
+						nextScenario={this.props.nextScenario}
+						scenarioData={this.props.scenarioData}
+						scenarioIndex={this.props.scenarioIndex} 
+						scenarioOn = {this.props.scenarioOn} 
+						setRewindScenarioSound = {this.props.setRewindScenarioSound}
+						playRewindScenarioSound = {this.props.playRewindScenarioSound}/>
 				</div>
 			)
 

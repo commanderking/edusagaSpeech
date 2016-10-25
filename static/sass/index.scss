@@ -107,7 +107,7 @@ html, body {
 	  position: absolute;
 	  height: 100%;
 	}
-	.nextButton {
+	.button {
 		font-size: 30px;
 		color: $lightBlue;
 		padding: 10px;
@@ -120,8 +120,6 @@ html, body {
 		background: -moz-radial-gradient(white 20%, #1C90CF); /* For Firefox 3.6 to 15 */
 		background: radial-gradient(white 20%, $yellow); /* Standard syntax */
 		position: absolute;
-		right: 0;
-		bottom: 0;
 		.glyphicon-play {
 			text-shadow: -2px 0 $darkBlue, 0 2px $darkBlue, 2px 0 $darkBlue, 0 -2px $darkBlue;
 
@@ -132,6 +130,17 @@ html, body {
 			background: -o-radial-gradient($lightBlue 20%, #1C90CF); /* For Opera 11.6 to 12.0 */
 			background: -moz-radial-gradient($lightBlue 20%, #1C90CF); /* For Firefox 3.6 to 15 */
 			background: radial-gradient($lightBlue 20%, #1C90CF); /* Standard syntax */
+		}
+	}
+	.nextButton {
+		right: 0;
+		bottom: 0;
+	}
+	.rewindButton {
+		right: 60px;
+		bottom: 0;
+		&:hover {
+			color: $yellow;
 		}
 	}
 }
