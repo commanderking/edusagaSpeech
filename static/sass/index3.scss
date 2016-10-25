@@ -20,6 +20,7 @@
 		normal: '(max-width: 1280px)',
 		narrow: '(max-width: 980px)',
 		narrower: '(max-width: 840px)',
+		//reflexive: '(max width: 60%)',
 		mobile: '(max-width: 736px)'
 	));
 	//This defines when a responsive screen changes it's layout for various devices.
@@ -109,6 +110,7 @@
 	}
 	//standard formatting for paragraphs, unordered lists, ordered lists, definition list, table, and blockquote selectors
 
+
 	h1, h2, h3, h4, h5, h6 {
 		font-family: 'Biryani', sans-serif;
 		color: inherit;
@@ -161,8 +163,14 @@
 		border-left: solid 0.5em _palette(border);
 		font-style: italic;
 		padding: 1em 0 1em 2em;
+
+		&.blocknarrow {
+			max-width: 20%;
+		}
 	}
 	//not in use currently
+
+
 
 /* Section/Article */
 
@@ -614,12 +622,15 @@
 /* Wrapper */
 
 	.wrapper {
-		margin-bottom: 5em;
+		margin-bottom: 0em;
 		padding: 5em;
 
 		&.style1 {
 			padding: 0;
 			background-color: _palette(one, bg);
+			padding-bottom: 5em;
+			padding-top: 1em;
+			//margin-bottom: 0em;
 		//	so close to changing the size of the green here wheeee
 		}
 
@@ -634,16 +645,30 @@
 			//margin-top: 0;
 			//margin-right: 0;
 			//margin-left: 0;
-			margin-bottom: 0;
+			//margin-bottom: 0;
 			//This is where I caused the two wrapper.style2 sections on the main page to have no space between them
 			//this margin-bottom: 0; bit overrides the parent .wrapper's margin-bottom: 5em; without rewriting all wrappers!
 			color: _palette(one, fg);
-			//so far this seems to apply to the first visible block below the banner - but I want it to extend the whole width.
 
+			&.major-image {
+				//display: inline-block;
+				position: absolute;
+				max-width: 60%;
+				max-height: 100%;
+			}
+
+			////Majorimage test as img
+			//&.majorimage {
+			//	img {
+			//		//display: inline-block;
+			//		position: absolute;
+			////		//max-width: 50%;
+			//	}
+			//}
 
 			.button {
 				&:hover {
-					background: rgba(255,255,255,0.15) !important;
+					background: rgba(255, 255, 255, 0.15) !important;
 				}
 
 				&.special {
@@ -657,8 +682,8 @@
 					}
 				}
 			}
-		}
 
+		}
 		&.style3 {
 			background: _palette(two, bg);
 			color: _palette(two, fg);
@@ -685,6 +710,7 @@
 			//.style2 and style5 are identical but for color. I bet there was a better way with nested alternate children!!
 		}
 	}
+
 
 /* Header */
 
@@ -825,6 +851,7 @@
 			nav {
 				right: 2.5em;
 				top: 1em;
+				//because it's alt, this is actually what affects the nav, I think, and maybe why I felt crazy.
 
 				ul {
 					li {
@@ -1012,6 +1039,7 @@
 			}
 		}
 	}
+
 
 /* Main */
 
