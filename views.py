@@ -76,10 +76,6 @@ def index(name="Index", activityName="index", teacher="jinlaoshi"):
 def index2(name="Index"):
 	return render_template('index2.html')
 
-@app.route('/index3')
-def index3(name="Index"):
-	return render_template('index3.html')
-
 #--------------------------------------------
 # E-mail this link and redirect to homepage to track with text
 # -------------------------------------------
