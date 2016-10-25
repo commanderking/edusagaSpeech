@@ -97,27 +97,34 @@
 			border-bottom-color: transparent;
 		}
 	}
+	//a is the selector for links. Most tutorials on plain css I see do not use the &, which I know has to do with variables.
 
 	strong, b {
-		font-weight: 400;
+		font-weight: 900;
 	}
+	//this defines what strong and bold look like, which is handy. I didn't realize I could define that.
 
 	p, ul, ol, dl, table, blockquote {
 		margin: 0 0 0 0;
 	}
+	//standard formatting for paragraphs, unordered lists, ordered lists, definition list, table, and blockquote selectors
 
 	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Biryani', sans-serif;
 		color: inherit;
-		font-weight: 300;
+		font-weight: 700;
 		line-height: 1.75em;
 		margin-bottom: 1em;
 		text-transform: uppercase;
+		//inheriting from body
 
 		a {
 			color: inherit;
 			text-decoration: none;
 			border: 0;
 		}
+	//	It's important to notice that there are almost no links that don't have some other class or selector specified.
+	//	The only link that changed when I toyed with this was the #logo
 	}
 
 	h2 {
@@ -141,18 +148,21 @@
 		position: relative;
 		top: -0.5em;
 	}
+	//above: superscript and subscript
 
 	hr {
 		border-top: solid 1px _palette(border);
 		border: 0;
 		margin-bottom: 1.5em;
 	}
+	//horizontal rule styling. This one has a one pixel border on top. Does the bottom not override it?
 
 	blockquote {
 		border-left: solid 0.5em _palette(border);
 		font-style: italic;
 		padding: 1em 0 1em 2em;
 	}
+	//not in use currently
 
 /* Section/Article */
 
@@ -162,28 +172,33 @@
 		}
 	}
 
+
 	header {
 		&.major {
 			padding-bottom: 2em;
 		}
 
-		&.special {
-			margin-bottom: 5em;
-			padding-top: 7em;
+		&.special{
+			margin-bottom: 4em;
+			padding-top: 1em;
 			position: relative;
 			text-align: center;
+			color: _palette(one, fg);
 
 			&:before,
 			&:after {
-				border-bottom: solid 1.5px;
-				border-top: solid 1.5px;
+				border-bottom: none;
+				border-top: none;
+				//I got rid of these lines for now but left them in case I want them back
 				content: '';
 				height: 7px;
 				opacity: 0.1;
+				//this affects two barely seen lines that I think used to go around the icon I turned off
 				position: absolute;
-				top: 1.75em;
-				width: 43%;
+				top: 0;
+				width: 100%;
 			}
+			//This simply automatically puts a styled quote into anything classified as header.special:after in html. Not currently in use.
 
 			&:before {
 				left: 0;
@@ -195,12 +210,15 @@
 
 			h2 {
 				margin-bottom: 0;
+				//font-size: 1.65em;
+				//added this in to alter size of JUST the first h2 below #banner, may not use it.
 			}
 
 			h2 + p {
 				margin-bottom: 0;
 				padding-top: 1.5em;
 			}
+			//is this possibly... a header2 followed immediately by a paragraph - when they are both children of the same parent.
 
 			.icon {
 				cursor: default;
@@ -417,6 +435,7 @@
 			li {
 				padding-left: 0.25em;
 			}
+			//li is a child of ol.default.... but not just ol?
 		}
 	}
 
@@ -490,6 +509,9 @@
 
 					&:first-child {
 						padding: 0;
+					//	buttons.vertical is a container around the other button in .inner which may serve as it's parent
+					//	may be important because the actually button.fit.scrolly is set to fit it's parent... which is this.
+					//	presumably, button.fit.scrolly could have just had it's own padding but here it is.
 					}
 				}
 			}
@@ -542,7 +564,7 @@
 		@include vendor('appearance', 'none');
 		@include vendor('transition', ('color 0.2s ease-in-out', 'border-color 0.2s ease-in-out', 'background-color 0.2s ease-in-out'));
 		background: none;
-		border: solid 1px;
+		border: solid 3px;
 		color: inherit;
 		cursor: pointer;
 		display: inline-block;
@@ -555,10 +577,14 @@
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
+		//this includes a LOT of the formatting for button.fit.scrolly, the button contained in .inner
+		//important to note: some other styling may come from it's parent buttons.vertical near line 501
 
 		&:hover {
 			background: rgba(188,202,206,0.15);
+			//this is where I can change the color of the button on hover
 			border-color: inherit;
+			//Initially it turns dark blue; from whence does it inherit?
 		}
 
 		&.special {
@@ -570,11 +596,13 @@
 				background: lighten(_palette(one, bg), 5) !important;
 				border-color: lighten(_palette(one, bg), 5) !important;
 			}
+		//	this hover-action is reserved for .button.special, not .button
 		}
 
 		&.fit {
-			width: 100%;
+			width:100%;
 		}
+		//the button in .inner is a.button.fit.scrolly  the fit literally just refers to it taking up 100% of the parent, which is a paragraph above it, I think.
 
 		&.small {
 			font-size: 0.7em;
@@ -591,6 +619,8 @@
 
 		&.style1 {
 			padding: 0;
+			background-color: _palette(one, bg);
+		//	so close to changing the size of the green here wheeee
 		}
 
 		&.style2 {
@@ -604,9 +634,12 @@
 			//margin-top: 0;
 			//margin-right: 0;
 			//margin-left: 0;
-			margin-bottom: 10em;
+			margin-bottom: 0;
+			//This is where I caused the two wrapper.style2 sections on the main page to have no space between them
+			//this margin-bottom: 0; bit overrides the parent .wrapper's margin-bottom: 5em; without rewriting all wrappers!
 			color: _palette(one, fg);
 			//so far this seems to apply to the first visible block below the banner - but I want it to extend the whole width.
+
 
 			.button {
 				&:hover {
@@ -635,6 +668,21 @@
 			background: _palette(two, bg);
 			color: _palette(two, fg);
 			padding: 4em;
+		}
+		&.style5 {
+			background-color: _palette(onepointfive, bg);
+			background-image: url('images/light-bl.svg'), url('images/light-br.svg');
+			background-position: bottom left, bottom right;
+			background-repeat: no-repeat, no-repeat;
+			background-size: $pattern-background-size, $pattern-background-size;
+			//width: 100%;
+			//height: 30em;
+			//margin-top: 0;
+			//margin-right: 0;
+			//margin-left: 0;
+			margin-bottom: 0;
+			color: _palette(onepointfive, fg);
+			//.style2 and style5 are identical but for color. I bet there was a better way with nested alternate children!!
 		}
 	}
 
@@ -961,7 +1009,8 @@
 	}
 
 	body.index #main {
-		padding-top: 5em;
+		padding-top: 3em;
+	//	this turned out to be, much to my surprise, where the space between #banner and the first header could be altered.
 	}
 
 /* CTA */
@@ -1597,8 +1646,8 @@
 					background: none;
 					display: block;
 					padding: 0 1.5em;
-					margin-right: 0;
-					margin-left: 0;
+					margin-right: .5em;
+					margin-left: .5em;
 					//This is where I"m trying to rewrite the margins for mobile, but the inheritance overrides at 3em
 
 					header {
