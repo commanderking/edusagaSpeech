@@ -6,7 +6,7 @@ var eslint = require('gulp-eslint');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
 
-gulp.task('default', ['styles', 'lint'], function() {
+gulp.task('default', ['styles'], function() {
   // place code for your default task here
 	gulp.watch('./static/sass/**/*.scss', ['styles']);
 	// gulp.watch('./static/js/**/*.scss', ['lint']);
@@ -16,6 +16,7 @@ gulp.task('default', ['styles', 'lint'], function() {
 	});
 	console.log("hello gulp!");
 });
+
 
 gulp.task('lint', function() {
 	return gulp.src(['./static/js/**/*.js'])

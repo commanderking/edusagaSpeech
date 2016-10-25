@@ -899,7 +899,7 @@
 	}
 
 	#banner {
-		background-image: url('https://s3.amazonaws.com/edusaga/assets/images/index/girlsComputerLearningHappy.jpeg');
+		// background-image: url('https://s3.amazonaws.com/edusaga/assets/images/index/girlsComputerLearningHappy.jpeg');
 		background-attachment: scroll, scroll, scroll, fixed;
 		background-color: _palette(three, bg);
 		//background-image: url('images/light-bl.svg'), url('images/light-br.svg'), url('images/overlay.png'), url('../../images/banner.jpg');
@@ -911,14 +911,45 @@
 		//background-size: $pattern-background-size, $pattern-background-size, auto, cover;
 		color: _palette(banner, fg);
 		cursor: default;
-		padding: 6em 0;
+		padding: 2.5em 0;
 		text-align: left;
 
 
-		//.main-image {
-		//	background-position: bottom left, bottom right, top left, top center;
-		//	background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-		//}
+		.main-image {
+			background-position: bottom left, bottom right, top left, top center;
+			background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+			position: absolute;
+			top: 0em;
+			width: 100%;
+			height: 625px;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		#carousel-example-generic {
+			position: absolute;
+			top: 0em;
+			width: 100%;
+			overflow: hidden;
+			height: 625px;
+			.left-carousel-control {
+				z-index: 10;
+			}
+			.right-carousel-control {
+				z-index: 10;
+			}
+		}
+		.carousel-inner {
+			overflow: visible;
+			.item {
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
 
 		.inner {
 			@include vendor('animation', 'reveal-banner 1s 0.25s ease-in-out');
@@ -929,11 +960,13 @@
 			display: inline-block;
 			opacity: 0;
 			padding: 3em;
-			margin-top: 0;
+			margin-top: 2.5em;
 			margin-right: 3em;
 			margin-left: 3em;
 			margin-bottom: 0;
 			text-align: left;
+			position: relative;
+			z-index: 10;
 			//since .inner is an inline-block element, it's justification is determined by it's parent, banner.
 			//changed #banner text align to left, changed .inner margin, changed .inner text-align
 
