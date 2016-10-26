@@ -51,7 +51,7 @@
 			"name" : "Max",
 			"image" : "characters/maxwell/maxExcitedGreatJob.png",
 			"imageLayer" : "blank.png",
-			"text" : "Oh wow! It's fantastic! Are you sure you don't want to listen? [[link]] what",
+			"text" : "Oh wow! It's fantastic! Are you sure you don't want to listen? [[link]]",
 			"link" : {
 				"text" : "View Video",
 				"url" : "https://youtu.be/39rmwFLPB3k?t=48s"
@@ -138,10 +138,10 @@
 			"name" : "Guy on Show",
 			"image" : "characters/voc/lian.jpg",
 			"imageLayer" : "blank.png",
-			"text" : "大家好。我叫李安",
-			"soundID" : "lian-im-21",
+			"text" : "Hello. 大家好。我叫李安。 我英文名字叫 Leon。",
+			"soundID" : "lian-my-name",
 			"saveSoundForRewind" : true,
-			"jumpToTasks" : true,
+			"rewindAvailable": true,
 			"index" : 15
 		},
 		{
@@ -149,17 +149,18 @@
 			"image" : "characters/maxwell/maxPanic.png",
 			"imageLayer" : "blank.png",
 			"text" : "His English name was Leon. What's his Chinese name?",
+			"rewindAvailable": true,
 			"jumpToTasks" : true
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxPanic.png",
+			"image" : "characters/maxwell/maxDefaultThumbsup.png",
 			"imageLayer" : "blank.png",
 			"text" : "Oh cool. It sounds just like his English name. Let's see what he says next."
 		},
 		{
 			"name" : "Judge on Show",
-			"image" : "characters/voc/halin.jpg",
+			"image" : "characters/voc/halin.png",
 			"imageLayer" : "blank.png",
 			"text" : "你几岁啊?",
 			"soundID": "halin-your-age",
@@ -174,7 +175,7 @@
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxPanic.png",
+			"image" : "characters/maxwell/maxDefaultThumbsup.png",
 			"imageLayer" : "blank.png",
 			"text" : "Seems right.",
 			"index" : 20
@@ -195,7 +196,7 @@
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxPanic.png",
+			"image" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
 			"imageLayer" : "blank.png",
 			"text" : "Cool! Well, that's all for this week. I'll see you later! Thanks for all your help!",
 			"jumpToTasks" : true
@@ -207,9 +208,9 @@
 			"language" : "zh-CN",
 			"location" : 
 			{
-				"nameEnglish" : "National Taiwan University",
-				"nameChinese" : "台大", 
-				"bg" : "bg/NTUniversity.jpg"
+				"nameEnglish" : "University Dorm",
+				"nameChinese" : "大学宿舍", 
+				"bg" : "bg/jiaoTongDorm.jpg"
 			},
 			"emotions" : 
 			{
@@ -249,7 +250,7 @@
 				},
 				{
 					"soundID" : "halin-your-age",
-					"soundPath" : "lian/lian-nationality.ogg"
+					"soundPath" : "lian/halin-your-age.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -440,7 +441,7 @@
 					"tasksToQueue" : [60],
 					"attemptedAnswers" : [],
 					"hintUsed" : false,
-					"jumpToScenarioIndex": 16
+					"jumpToScenarioIndex": 17
 				},
 				{
 					"taskID" : 60,
@@ -479,7 +480,7 @@
 					"tasksToQueue" : [70],
 					"attemptedAnswers" : [],
 					"hintUsed" : false,
-					"jumpToScenarioIndex": 16
+					"jumpToScenarioIndex": 20
 				},
 				{
 					"taskID" : 70,
@@ -488,7 +489,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"choiceText" : "He's 27'",
+							"choiceText" : "He's 27",
 							"response" : "I don't think that seems right.",
 							"soundID" : "I think he said yī, not qī。",
 							"correctAnswer" : false
@@ -497,7 +498,7 @@
 							"choiceText" : "He's 21.",
 							"response" : "",
 							"soundID" : "",
-							"correctAnswer" : false
+							"correctAnswer" : true
 
 						},
 						{
@@ -510,7 +511,7 @@
 							"choiceText" : "He's 31.",
 							"response" : "He doesn't look 31...",
 							"soundID" : "",
-							"correctAnswer" : true
+							"correctAnswer" : false
 						}
 					],
 					"correct" : false,
