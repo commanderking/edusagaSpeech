@@ -11,9 +11,6 @@ var TaskText = React.createClass({
 			Transitions.taskCorrect.taskText(node);
 		}
 	},
-	componentWillUnmount: function() {
-		console.log("unmounting");
-	},
 	render: function() {
 		// Text to display
 		var displayText;

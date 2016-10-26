@@ -379,7 +379,6 @@ var QuestionAsker = React.createClass({
 					that.setState({correctAnswerState: false});
 					// Push this task into the completedTasks
 					newSceneData.character.completedTasks.push(currentTaskData);
-					console.log(newSceneData.character.completedTasks);
 
 					// Remove the task from the tasks array
 					if (currentTaskData.taskType !== undefined) {
@@ -391,7 +390,6 @@ var QuestionAsker = React.createClass({
 							newSceneData.character.currentTasks = [];
 						} else if (currentTaskData.taskType === "multipleChoice") {
 							// Add task to completed tasks and then delete it from currentTasks
-							console.log("splicing");
 							newSceneData.character.currentTasks.splice(taskIndex, 1);	
 							console.log(newSceneData.character.currentTasks);						
 						}
@@ -742,11 +740,20 @@ var QuestionAsker = React.createClass({
 	},
 	nextScenario: function() {
 		var scenarioIndex = this.state.scenarioIndex;
+		var scenarioData = this.state.sceneData.scenario;
+		var storeRewindSound = function() {
+			if (scenarioData[this.state.scenarioIndex].saveSoundForRewind) {
+				this.setRewindScenarioSound(scenarioData[this.state.scenarioIndex].soundID);
+				console.log("sound saved");
+			}
+		}
+
 		if (scenarioIndex === this.state.sceneData.scenario.length - 1 || this.state.sceneData.scenario[scenarioIndex].jumpToTasks === true) {
 			this.changeScenarioMode();
 		} else {
 			var newScenarioIndex = this.state.scenarioIndex + 1;
-			this.setState({scenarioIndex: newScenarioIndex});
+			this.setState({scenarioIndex: newScenarioIndex}, storeRewindSound);
+		
 		}
 	},
 	playRewindScenarioSound: function() {
@@ -789,7 +796,8 @@ var QuestionAsker = React.createClass({
 						setRewindScenarioSound = {this.setRewindScenarioSound}
 						playRewindScenarioSound = {this.playRewindScenarioSound}
 						assessmentMode = {sceneData.assessmentMode}
-						sceneComplete = {this.state.sceneComplete} />
+						sceneComplete = {this.state.sceneComplete}
+						currentRewindSoundID = {this.state.currentRewindSoundID} />
 					<CharacterContainer 
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
