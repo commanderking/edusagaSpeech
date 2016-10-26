@@ -639,7 +639,7 @@
 			background-image: url('images/light-bl.svg'), url('images/light-br.svg');
 			background-position: bottom left, bottom right;
 			background-repeat: no-repeat, no-repeat;
-			background-size: $pattern-background-size, $pattern-background-size;
+			//background-size: $pattern-background-size, $pattern-background-size;
 			//width: 100%;
 			//height: 30em;
 			//margin-top: 0;
@@ -651,20 +651,11 @@
 			color: _palette(one, fg);
 
 			&.major-image {
-				//display: inline-block;
-				position: absolute;
-				max-width: 60%;
+				display: inline-block;
+				//position: absolute;
+				max-width: 20%;
 				max-height: 100%;
 			}
-
-			////Majorimage test as img
-			//&.majorimage {
-			//	img {
-			//		//display: inline-block;
-			//		position: absolute;
-			////		//max-width: 50%;
-			//	}
-			//}
 
 			.button {
 				&:hover {
