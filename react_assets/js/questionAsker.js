@@ -440,6 +440,10 @@ var QuestionAsker = React.createClass({
 				// Play confused sound
 				this.playSound(currentChoiceData.soundID);
 
+				// MC SPECIFIC - Remove the wrong selected from the current choices (possibleAnswers);
+				var newPossibleChoices = currentTaskData.possibleAnswers.splice(choiceIndex, 1);
+				newSceneData.character.currentTasks[taskIndex].possibleAnswers = currentTaskData.possibleAnswers;
+
 				this.setState({
 					sceneData: newSceneData,
 					currentDialog: newCurrentDialog,

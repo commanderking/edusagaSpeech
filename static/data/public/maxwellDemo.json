@@ -185,7 +185,9 @@
 			"image" : "characters/voc/lian.jpg",
 			"imageLayer" : "blank.png",
 			"text" : "我今年二十一岁。",
-			"soundID" : "lian-im-21"
+			"soundID" : "lian-im-21",
+			"rewindAvailable": true,
+			"saveSoundForRewind": true
 		},
 		{
 			"name" : "Max",
