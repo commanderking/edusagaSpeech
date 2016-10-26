@@ -650,22 +650,11 @@
 			//this margin-bottom: 0; bit overrides the parent .wrapper's margin-bottom: 5em; without rewriting all wrappers!
 			color: _palette(one, fg);
 
-			.blocknarrow {
-				display: inline-block;
-				max-width: 40%;
-			}
-
-			.major-image {
-				display: inline-block;
-				// position: absolute;
+			&.major-image {
+				//display: inline-block;
+				position: absolute;
 				max-width: 60%;
-				height: auto;
-				//max-height: 100%;
-
-				img {
-					width: 100%;
-					height: auto;
-				}
+				max-height: 100%;
 			}
 
 			////Majorimage test as img
