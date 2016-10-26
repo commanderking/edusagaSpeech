@@ -10,14 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5412198-3326-492a-8328-90ee9d138e30" name="Default" comment="Merge branch 'master' of https://github.com/commanderking/edusagaSpeech&#10;&#10;# Conflicts:&#10;#&#9;static/css/main.css&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index3.css" afterPath="$PROJECT_DIR$/static/css/index3.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/main.css" afterPath="$PROJECT_DIR$/static/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_dashboard.js" afterPath="$PROJECT_DIR$/static/js/bundle_dashboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_index.js" afterPath="$PROJECT_DIR$/static/js/bundle_index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_mainMenu.js" afterPath="$PROJECT_DIR$/static/js/bundle_mainMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" afterPath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/sass/index3.scss" afterPath="$PROJECT_DIR$/static/sass/index3.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack-stats.json" afterPath="$PROJECT_DIR$/webpack-stats.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index3.html" afterPath="$PROJECT_DIR$/templates/index3.html" />
     </list>
     <ignored path="edusagaSpeech.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,8 +36,8 @@
       <file leaf-file-name="index3.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+            <state relative-caret-position="179">
+              <caret line="149" column="21" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -52,8 +46,8 @@
       <file leaf-file-name="index3.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/sass/index3.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="665" column="50" selection-start-line="665" selection-start-column="50" selection-end-line="665" selection-end-column="50" />
+            <state relative-caret-position="170">
+              <caret line="161" column="10" selection-start-line="161" selection-start-column="4" selection-end-line="161" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -917,16 +911,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index3.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+        <state relative-caret-position="179">
+          <caret line="149" column="21" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/sass/index3.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="665" column="50" selection-start-line="665" selection-start-column="50" selection-end-line="665" selection-end-column="50" />
+        <state relative-caret-position="170">
+          <caret line="161" column="10" selection-start-line="161" selection-start-column="4" selection-end-line="161" selection-end-column="10" />
           <folding />
         </state>
       </provider>
