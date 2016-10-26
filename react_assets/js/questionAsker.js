@@ -331,16 +331,17 @@ var QuestionAsker = React.createClass({
 		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 		var allCurrentTasks = TaskController.getCurrentTasks(newSceneData);
 		var currentTaskData = TaskController.getActiveTask(newSceneData, taskIndex);
+		var currentChoiceData = allCurrentTasks[taskIndex].possibleAnswers[choiceIndex];
 
 		// If choice is correct,
 			// 1) Show text response
-			if (allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].correctAnswer === true) {
+			if (currentChoiceData.correctAnswer === true) {
 
 				/*---------------------------------------------------------------
 				TODO: REFACTOR THIS WITH checkANSWER part 
 				---------------------------------------------------------------*/
 				// Play response voice
-				this.playSound(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].soundID);
+				this.playSound(currentChoiceData.soundID);
 
 				// Store sound ID in current Sound ID if player wnats to repeat
 				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
@@ -355,7 +356,12 @@ var QuestionAsker = React.createClass({
 				newSceneData.character.currentTasks[taskIndex].correct = true;
 
 				// Add coins 
-				this.addCoins(10);
+				console.log(currentChoiceData.coins);
+				if (currentChoiceData.coins !== undefined) {
+					this.addCoins(currentChoiceData.coins);
+				} else {
+					this.addCoins(10);
+				}
 
 				// this.setState({sceneData: newSceneData});
 
@@ -432,7 +438,7 @@ var QuestionAsker = React.createClass({
 				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;
 
 				// Play confused sound
-				this.playSound(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].soundID);
+				this.playSound(currentChoiceData.soundID);
 
 				this.setState({
 					sceneData: newSceneData,

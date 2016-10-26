@@ -72,8 +72,7 @@ var DialogContainer = React.createClass({
 						<div className={characterNameClass}>
 							{characterName}
 						</div>
-						<div className={characterTextClass}
-							onClick={this.props.onRepeat}>
+						<div className={characterTextClass}>
 							{characterTextResponse}
 						</div>
 					</div>
