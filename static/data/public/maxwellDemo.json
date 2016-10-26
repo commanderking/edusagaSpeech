@@ -60,21 +60,25 @@
 			"image" : "characters/voc/chenzitong.jpg",
 			"imageLayer" : "blank.png",
 			"text" : "各位老师好。我的名字叫陈梓童。",
-			"soundID" : "my-name-is-chen-zi-tong"
+			"soundID" : "my-name-is-chen-zi-tong",
+			"rewindAvailable": true,
+			"saveSoundForRewind": true
 		},
 		{
 			"name" : "Max",
 			"image" : "characters/maxwell/maxPanic.png",
 			"imageLayer" : "blank.png",
 			"text" : "What did she just say?",
-			"jumpToTasks" : true
+			"jumpToTasks" : true,
+			"rewindAvailable": true
 		},
 		{
 			"name" : "Max",
 			"image" : "characters/maxwell/maxWistfulGoodJob.png",
 			"imageLayer" : "blank.png",
 			"text" : "Oh. So what's her name?",
-			"jumpToTasks" : true
+			"jumpToTasks" : true,
+			"rewindAvailable" : true
 		},
 		{
 			"name" : "Max",
@@ -163,7 +167,7 @@
 						},
 						{
 							"choiceText" : "No way.",
-							"response" : "What? Why are you calling me a jerk?",
+							"response" : "Come on! Please!",
 							"soundID" : "whatyousay",
 							"correctAnswer" : false
 
