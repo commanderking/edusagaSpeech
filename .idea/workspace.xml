@@ -10,19 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5412198-3326-492a-8328-90ee9d138e30" name="Default" comment="Merge branch 'master' of https://github.com/commanderking/edusagaSpeech&#10;&#10;# Conflicts:&#10;#&#9;static/css/main.css&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index3.css" afterPath="$PROJECT_DIR$/static/css/index3.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/main.css" afterPath="$PROJECT_DIR$/static/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_dashboard.js" afterPath="$PROJECT_DIR$/static/js/bundle_dashboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_index.js" afterPath="$PROJECT_DIR$/static/js/bundle_index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_mainMenu.js" afterPath="$PROJECT_DIR$/static/js/bundle_mainMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" afterPath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/sass/index3.scss" afterPath="$PROJECT_DIR$/static/sass/index3.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/sass/libs/_vars.scss" afterPath="$PROJECT_DIR$/static/sass/libs/_vars.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index2.html" afterPath="$PROJECT_DIR$/templates/index2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index3.html" afterPath="$PROJECT_DIR$/templates/index3.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack-stats.json" afterPath="$PROJECT_DIR$/webpack-stats.json" />
     </list>
     <ignored path="edusagaSpeech.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,21 +34,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index3.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index3.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="141" column="66" selection-start-line="140" selection-start-column="10" selection-end-line="141" selection-end-column="66" />
+            <state relative-caret-position="300">
+              <caret line="155" column="46" selection-start-line="155" selection-start-column="46" selection-end-line="155" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index3.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index3.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/sass/index3.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="652" column="12" selection-start-line="652" selection-start-column="12" selection-end-line="652" selection-end-column="12" />
+            <state relative-caret-position="335">
+              <caret line="679" column="57" selection-start-line="679" selection-start-column="57" selection-end-line="679" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -94,8 +84,8 @@
         <option value="$PROJECT_DIR$/static/sass/libs/_vars.scss" />
         <option value="$PROJECT_DIR$/static/sass/main.scss" />
         <option value="$PROJECT_DIR$/static/css/main.css" />
-        <option value="$PROJECT_DIR$/templates/index3.html" />
         <option value="$PROJECT_DIR$/static/sass/index3.scss" />
+        <option value="$PROJECT_DIR$/templates/index3.html" />
       </list>
     </option>
   </component>
@@ -924,18 +914,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/sass/index3.scss">
+    <entry file="file://$PROJECT_DIR$/templates/index3.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="652" column="12" selection-start-line="652" selection-start-column="12" selection-end-line="652" selection-end-column="12" />
+        <state relative-caret-position="300">
+          <caret line="155" column="46" selection-start-line="155" selection-start-column="46" selection-end-line="155" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index3.html">
+    <entry file="file://$PROJECT_DIR$/static/sass/index3.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="141" column="66" selection-start-line="140" selection-start-column="10" selection-end-line="141" selection-end-column="66" />
+        <state relative-caret-position="335">
+          <caret line="679" column="57" selection-start-line="679" selection-start-column="57" selection-end-line="679" selection-end-column="57" />
           <folding />
         </state>
       </provider>
