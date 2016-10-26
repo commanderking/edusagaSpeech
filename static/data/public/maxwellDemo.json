@@ -92,14 +92,17 @@
 			"imageLayer" : "blank.png",
 			"text" : "我今年二十五岁，来自江苏南京。",
 			"soundID" : "im-25-from-nanjing",
-			"index" : 10
+			"index" : 10,
+			"rewindAvailable": true,
+			"saveSoundForRewind": true
 		},
 		{
 			"name" : "Max",
 			"image" : "characters/maxwell/maxPanic.png",
 			"imageLayer" : "blank.png",
 			"text" : "What's she saying now?",
-			"jumpToTasks" : true
+			"jumpToTasks" : true,
+			"rewindAvailable": true
 		},
 		{
 			"name" : "Max",

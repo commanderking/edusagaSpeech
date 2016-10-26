@@ -7,19 +7,14 @@ var RewindButton = require('./components/RewindButton');
 //TODO: The dialog's name and text should be their own component
 
 var DialogContainer = React.createClass({
-	/*
-	componentDidUpdate: function() {
+
+	componentWillMount: function() {
 		console.log("dialog updated");
 
 		// If the sound should be saved for later, do so
-		/*
-		if (this.props.scenarioData[this.props.scenarioIndex].saveSoundForRewind) {
-			this.props.setRewindScenarioSound(this.props.scenarioData[this.props.scenarioIndex].soundID);
-			console.log("sound saved");
-		}
-		
+	
 	},
-*/
+
 	render: function() {
 		var dialogSlantSrc = Constants.IMAGE_PATH + "UI/dialogbox_slant.png" 
 		var textNameWrapper;
@@ -86,12 +81,15 @@ var DialogContainer = React.createClass({
 						nextScenario={this.props.nextScenario}
 						scenarioOn={this.props.scenarioOn} />
 					<RewindButton 
+						scenarioData={this.props.scenarioData}
+						scenarioIndex={this.props.scenarioIndex}
 						nextScenario={this.props.nextScenario}
 						scenarioData={this.props.scenarioData}
 						scenarioIndex={this.props.scenarioIndex} 
 						scenarioOn = {this.props.scenarioOn} 
 						setRewindScenarioSound = {this.props.setRewindScenarioSound}
-						playRewindScenarioSound = {this.props.playRewindScenarioSound}/>
+						playRewindScenarioSound = {this.props.playRewindScenarioSound}
+						currentRewindSoundID={this.props.currentRewindSoundID}/>
 				</div>
 			)
 
