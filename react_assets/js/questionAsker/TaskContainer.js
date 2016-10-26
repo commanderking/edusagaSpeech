@@ -34,8 +34,6 @@ var TaskContainer = React.createClass({
 	},
 	handleMultipleChoiceSelection: function(taskIndex, choiceIndex) {
 		this.props.checkAnswerMC(taskIndex, choiceIndex);
-
-
 	},
 	render: function() {
 		var that = this;
@@ -47,6 +45,7 @@ var TaskContainer = React.createClass({
 
 			// If multiple choice task, loop through possibleChoices and display each one as a choice
 			if (task.taskType === "multipleChoice") {
+				// Set the currentTaskIndex since only one task will be presented
 				var multipleChoices = task.possibleAnswers.map(function(possibleChoice, j) {
 					return (
 						<Task 

@@ -4,7 +4,7 @@ var PropTypes = React.PropTypes;
 
 var HintButton = React.createClass({
 	render: function() {
-		if (this.props.assessmentMode) {
+		if (this.props.assessmentMode || this.props.taskType === "multipleChoice") {
 			return null;
 		} else {
 			// Handling how to display each hint when hint is active or inactive

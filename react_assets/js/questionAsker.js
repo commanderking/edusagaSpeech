@@ -91,7 +91,6 @@ var QuestionAsker = React.createClass({
 				initializeLogData.setStudentID(studentID);
 			}
 			initializeLogData.setTeacherID(teacher);
-			console.log(initialLogData);
 
 			// Load all the sounds that are in the scene
 			that.initializeSounds();
@@ -329,16 +328,13 @@ var QuestionAsker = React.createClass({
 	},
 	checkAnswerMC: function(taskIndex, choiceIndex) {
 		var that = this;
-		console.log("Checking multiple choice answer");
 		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 		var allCurrentTasks = TaskController.getCurrentTasks(newSceneData);
 		var currentTaskData = TaskController.getActiveTask(newSceneData, taskIndex);
 
-		console.log(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].response);
 		// If choice is correct,
 			// 1) Show text response
 			if (allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].correctAnswer === true) {
-				console.log("you're correct");
 
 				/*---------------------------------------------------------------
 				TODO: REFACTOR THIS WITH checkANSWER part 
@@ -744,7 +740,6 @@ var QuestionAsker = React.createClass({
 		var storeRewindSound = function() {
 			if (scenarioData[this.state.scenarioIndex].saveSoundForRewind) {
 				this.setRewindScenarioSound(scenarioData[this.state.scenarioIndex].soundID);
-				console.log("sound saved");
 			}
 		}
 
@@ -755,6 +750,10 @@ var QuestionAsker = React.createClass({
 			this.setState({scenarioIndex: newScenarioIndex}, storeRewindSound);
 		
 		}
+	},
+	getCurrentScenarioObject: function() {
+		var scenarioData = this.state.sceneData.scenario;
+		return scenarioData[this.state.scenarioIndex];
 	},
 	playRewindScenarioSound: function() {
 		this.playSound(this.state.currentRewindSoundID);
@@ -771,6 +770,8 @@ var QuestionAsker = React.createClass({
 		if (!this.state.sceneData) {
 			return <div>Loading Scene</div>
 		} else {
+
+			var currentScenarioData = this.getCurrentScenarioObject();
 			// Timer appears if APTimeMode is on in sceneData
 			var timer = this.state.sceneData.APTimeMode === true ? <TimerContainer 
 																		taskPause = {this.state.taskPause}
@@ -861,9 +862,13 @@ var QuestionAsker = React.createClass({
 						activateRepeatMode = {this.activateRepeatMode}
 						taskLang = {sceneData.currentLanguage} 
 
-						// Give component ability to manipulate currentTaskIndex
+						// Give component ability to manipulate setCurrentTaskIndex
+						tasks = {this.state.sceneData.character.currentTasks}
 						currentTaskIndex = {this.state.currentTaskIndex} 
-						setCurrentTaskIndex = {this.setCurrentTaskIndex} />
+						setCurrentTaskIndex = {this.setCurrentTaskIndex} 
+
+						currentScenarioData = {currentScenarioData} />
+
 					<ResultsContainer 
 						sceneComplete = {this.state.sceneComplete} 
 						coins = {this.state.coins}

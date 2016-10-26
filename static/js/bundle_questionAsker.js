@@ -144,7 +144,6 @@
 					initializeLogData.setStudentID(studentID);
 				}
 				initializeLogData.setTeacherID(teacher);
-				console.log(initialLogData);
 	
 				// Load all the sounds that are in the scene
 				that.initializeSounds();
@@ -376,16 +375,13 @@
 		},
 		checkAnswerMC: function checkAnswerMC(taskIndex, choiceIndex) {
 			var that = this;
-			console.log("Checking multiple choice answer");
 			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 			var allCurrentTasks = _QuestionAskerHelper.TaskController.getCurrentTasks(newSceneData);
 			var currentTaskData = _QuestionAskerHelper.TaskController.getActiveTask(newSceneData, taskIndex);
 	
-			console.log(allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].response);
 			// If choice is correct,
 			// 1) Show text response
 			if (allCurrentTasks[taskIndex].possibleAnswers[choiceIndex].correctAnswer === true) {
-				console.log("you're correct");
 	
 				/*---------------------------------------------------------------
 	   TODO: REFACTOR THIS WITH checkANSWER part 
@@ -780,7 +776,6 @@
 			var storeRewindSound = function storeRewindSound() {
 				if (scenarioData[this.state.scenarioIndex].saveSoundForRewind) {
 					this.setRewindScenarioSound(scenarioData[this.state.scenarioIndex].soundID);
-					console.log("sound saved");
 				}
 			};
 	
@@ -790,6 +785,10 @@
 				var newScenarioIndex = this.state.scenarioIndex + 1;
 				this.setState({ scenarioIndex: newScenarioIndex }, storeRewindSound);
 			}
+		},
+		getCurrentScenarioObject: function getCurrentScenarioObject() {
+			var scenarioData = this.state.sceneData.scenario;
+			return scenarioData[this.state.scenarioIndex];
 		},
 		playRewindScenarioSound: function playRewindScenarioSound() {
 			this.playSound(this.state.currentRewindSoundID);
@@ -810,6 +809,8 @@
 					'Loading Scene'
 				);
 			} else {
+	
+				var currentScenarioData = this.getCurrentScenarioObject();
 				// Timer appears if APTimeMode is on in sceneData
 				var timer = this.state.sceneData.APTimeMode === true ? React.createElement(TimerContainer, {
 					taskPause: this.state.taskPause,
@@ -901,9 +902,12 @@
 						activateRepeatMode: this.activateRepeatMode,
 						taskLang: sceneData.currentLanguage
 	
-						// Give component ability to manipulate currentTaskIndex
-						, currentTaskIndex: this.state.currentTaskIndex,
-						setCurrentTaskIndex: this.setCurrentTaskIndex }),
+						// Give component ability to manipulate setCurrentTaskIndex
+						, tasks: this.state.sceneData.character.currentTasks,
+						currentTaskIndex: this.state.currentTaskIndex,
+						setCurrentTaskIndex: this.setCurrentTaskIndex,
+	
+						currentScenarioData: currentScenarioData }),
 					React.createElement(ResultsContainer, {
 						sceneComplete: this.state.sceneComplete,
 						coins: this.state.coins,
@@ -24187,37 +24191,21 @@
 	"use strict";
 	
 	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
 	
-	var RewindButton = React.createClass({
-		displayName: "RewindButton",
-	
-		componentWillUpdate: function componentWillUpdate() {
-			/*
-	  console.log("Component will update");
-	  console.log(this.props.scenarioData);
-	  console.log(this.props.scenarioData[this.props.scenarioIndex]);
-	  console.log(this.props.scenarioData[this.props.scenarioIndex].saveSoundForRewind);
-	  if (this.props.scenarioData[this.props.scenarioIndex].saveSoundForRewind) {
-	  	this.props.setRewindScenarioSound(this.props.scenarioData[this.props.scenarioIndex].soundID);
-	  	console.log("sound saved");
-	  }
-	  */
-	
-		},
-		render: function render() {
-			if (this.props.scenarioData[this.props.scenarioIndex].rewindAvailable) {
-				return React.createElement(
-					"button",
-					{
-						className: "button rewindButton",
-						onClick: this.props.playRewindScenarioSound },
-					React.createElement("span", { className: "glyphicon glyphicon-backward", "aria-hidden": "true" })
-				);
-			} else {
-				return null;
-			}
+	function RewindButton(props) {
+		if (props.scenarioData[props.scenarioIndex].rewindAvailable) {
+			return React.createElement(
+				"button",
+				{
+					className: "button rewindButton",
+					onClick: props.playRewindScenarioSound },
+				React.createElement("span", { className: "glyphicon glyphicon-backward", "aria-hidden": "true" })
+			);
+		} else {
+			return null;
 		}
-	});
+	}
 	
 	module.exports = RewindButton;
 
@@ -24277,6 +24265,7 @@
 	
 				// If multiple choice task, loop through possibleChoices and display each one as a choice
 				if (task.taskType === "multipleChoice") {
+					// Set the currentTaskIndex since only one task will be presented
 					var multipleChoices = task.possibleAnswers.map(function (possibleChoice, j) {
 						return React.createElement(Task, {
 							key: possibleChoice.choiceText,
@@ -24438,6 +24427,7 @@
 						correctAnswerState: this.props.correctAnswerState,
 						wrongAnswerState: this.props.wrongAnswerState }),
 					React.createElement(HintButton, {
+						taskType: this.props.taskType,
 						assessmentMode: this.props.assessmentMode,
 						hintActive: this.props.hintActive,
 						index: this.props.index,
@@ -25092,7 +25082,7 @@
 		render: function render() {
 			var _this = this;
 	
-			if (this.props.assessmentMode) {
+			if (this.props.assessmentMode || this.props.taskType === "multipleChoice") {
 				return null;
 			} else {
 				// Handling how to display each hint when hint is active or inactive
@@ -25227,9 +25217,11 @@
 							correctAnswerState: this.props.correctAnswerState,
 							micActive: this.props.micActive,
 							wrongAnswerState: this.props.wrongAnswerState,
+							tasks: this.props.tasks,
 							setCurrentTaskIndex: this.props.setCurrentTaskIndex,
 							askingForRepeat: this.props.askingForRepeat,
-							activateRepeatMode: this.props.activateRepeatMode }),
+							activateRepeatMode: this.props.activateRepeatMode,
+							currentScenarioData: this.props.currentScenarioData }),
 						React.createElement(SkipButton, {
 							scenarioOn: this.props.scenarioOn,
 							askingForRepeat: this.props.askingForRepeat,
@@ -25444,8 +25436,19 @@
 		render: function render() {
 			var _this = this;
 	
+			// If there's only one task and it's only mulitple choice,
+			// in general, multiple choice only appears in listening activities so 
+			// no need to ask for repeat
+			// Might need to be altered later
+			var multipleChoiceTask;
+			if (this.props.tasks.length === 1) {
+				this.props.tasks.forEach(function (task) {
+					multipleChoiceTask = task.taskType === "multipleChoice" ? true : false;
+				});
+			}
+	
 			var repeatImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonRepeatOn.png' : Constants.IMAGE_PATH + 'UI/buttonRepeat.png';
-			var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive || this.props.scenarioOn ? null : React.createElement('img', {
+			var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive || this.props.scenarioOn || multipleChoiceTask ? null : React.createElement('img', {
 				className: ' button repeatButton',
 				src: repeatImgSrc,
 				onMouseOver: this.mouseOver,
