@@ -54,12 +54,13 @@ var Task = React.createClass({
 						correctAnswerState={this.props.correctAnswerState}
 						wrongAnswerState = {this.props.wrongAnswerState} />
 					<HintButton 
-						assessmentMode= {this.props.assessmentMode}
-						hintActive= {this.props.hintActive}
-						index = {this.props.index}
-						currentHintIndex= {this.props.currentHintIndex}
-						onDisableHint= {this.props.onDisableHint}
-						onHintClick= {this.props.onHintClick} />
+						taskType={this.props.taskType}
+						assessmentMode={this.props.assessmentMode}
+						hintActive={this.props.hintActive}
+						index={this.props.index}
+						currentHintIndex={this.props.currentHintIndex}
+						onDisableHint={this.props.onDisableHint}
+						onHintClick={this.props.onHintClick} />
 
 				</div>
 			</li>

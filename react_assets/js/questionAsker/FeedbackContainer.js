@@ -39,9 +39,11 @@ var FeedbackContainer = React.createClass({
 							correctAnswerState = {this.props.correctAnswerState}
 							micActive = {this.props.micActive} 
 							wrongAnswerState = {this.props.wrongAnswerState}
+							tasks = {this.props.tasks}
 							setCurrentTaskIndex = {this.props.setCurrentTaskIndex} 
 							askingForRepeat = {this.props.askingForRepeat} 
-							activateRepeatMode = {this.props.activateRepeatMode} />
+							activateRepeatMode = {this.props.activateRepeatMode} 
+							currentScenarioData = {this.props.currentScenarioData} />
 						<SkipButton 
 							scenarioOn = {this.props.scenarioOn}
 							askingForRepeat = {this.props.askingForRepeat} 

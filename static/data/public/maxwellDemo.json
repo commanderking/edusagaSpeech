@@ -114,6 +114,30 @@
 			"name" : "Max",
 			"image" : "characters/maxwell/maxWistfulGoodJob.png",
 			"imageLayer" : "blank.png",
+			"text" : "Oh, the next contestant is coming on. Listen to his singing here if you want: "
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxExcitedGreatJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh, the next contestant is coming on. Listen to his singing here if you want: "
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxExcitedGreatJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Wow. What a great performance. Oh, he's introducing himself. Help me out here! "
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/voc/lian.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "大家好。我叫李安"
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxWistfulGoodJob.png",
+			"imageLayer" : "blank.png",
 			"text" : "All right, I'm going to go eat some food now. Thanks for your help. Cya later!",
 			"jumpToTasks" : true
 		}
@@ -166,7 +190,8 @@
 							"choiceText" : "Sure thing!",
 							"response" : "",
 							"soundID" : "",
-							"correctAnswer" : true
+							"correctAnswer" : true,
+							"coins" : 0
 						},
 						{
 							"choiceText" : "No way.",
@@ -313,7 +338,8 @@
 							"choiceText" : "Bye!",
 							"response" : "",
 							"soundID" : "",
-							"correctAnswer" : true
+							"correctAnswer" : true,
+							"coins" : 0
 						}
 					],
 					"correct" : false,

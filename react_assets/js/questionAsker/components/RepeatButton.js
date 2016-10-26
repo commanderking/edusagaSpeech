@@ -38,8 +38,20 @@ var RepeatButton = React.createClass({
 		this.setState({hover: false});
 	},
 	render: function() {
+		// If there's only one task and it's only mulitple choice,
+		// in general, multiple choice only appears in listening activities so 
+		// no need to ask for repeat
+		// Might need to be altered later
+		var multipleChoiceTask;
+		if (this.props.tasks.length === 1) {
+			this.props.tasks.forEach(function(task) {
+				multipleChoiceTask = task.taskType === "multipleChoice" ? true : false;
+			})			
+		}
+
 		var repeatImgSrc = this.state.hover ? Constants.IMAGE_PATH + 'UI/buttonRepeatOn.png' : Constants.IMAGE_PATH + 'UI/buttonRepeat.png';
 		var repeatButton = this.props.correctAnswerState || this.props.micActive || this.props.wrongAnswerState || this.props.hintActive || this.props.scenarioOn
+							|| multipleChoiceTask
 			? null : <img 
 					className=" button repeatButton" 
 					src={repeatImgSrc} 
