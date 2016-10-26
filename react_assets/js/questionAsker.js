@@ -794,6 +794,7 @@ var QuestionAsker = React.createClass({
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {sceneData.scenario}
 						scenarioIndex = {this.state.scenarioIndex}
+						currentScenarioData = {currentScenarioData}
 						playSound = {this.playSound}
 						charName={this.state.sceneData.character.name}
 						currentDialog = {this.state.currentDialog} 

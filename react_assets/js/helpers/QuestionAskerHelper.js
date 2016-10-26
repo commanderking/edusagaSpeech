@@ -264,10 +264,6 @@ export var SpeechChecker = {
 	}
 }
 
-// Replace text in Dialog Container with the appropriate link
-export var replaceTextWithLink = function(textToParse) {
-}
-
 export var currentTasks = [
 		{
 			"taskID" : 2,

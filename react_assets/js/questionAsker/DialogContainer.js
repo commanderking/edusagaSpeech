@@ -7,14 +7,6 @@ var RewindButton = require('./components/RewindButton');
 //TODO: The dialog's name and text should be their own component
 
 var DialogContainer = React.createClass({
-
-	componentWillMount: function() {
-		console.log("dialog updated");
-
-		// If the sound should be saved for later, do so
-	
-	},
-
 	render: function() {
 		var dialogSlantSrc = Constants.IMAGE_PATH + "UI/dialogbox_slant.png" 
 		var textNameWrapper;
@@ -32,12 +24,26 @@ var DialogContainer = React.createClass({
 		} else {
 			// Case 1: There's a scenario that's played; Change font size of text and get name from scenario
 			var that = this;
+			var currentScenarioData = this.props.currentScenarioData;
 			if (this.props.scenarioOn === true) {
-				characterName = this.props.scenarioData[this.props.scenarioIndex].name;
-				characterTextResponse = 
-				(<p className="scenarioText"> 
-					{this.props.scenarioData[this.props.scenarioIndex].text}
-				</p>)
+				characterName = currentScenarioData.name;
+
+				// If there's a link, split the text (only works with one link) and then render;
+				if (currentScenarioData.link) {
+					var parsedResponseArray = currentScenarioData.text.split("[[link]]");
+					var linkText = currentScenarioData.link.text;
+					var linkURL = currentScenarioData.link.url;
+					console.log(parsedResponseArray);
+					characterTextResponse = 
+					(<p className="scenarioText">
+							{parsedResponseArray[0]} <a href={linkURL} target="_blank">{linkText}</a> {parsedResponseArray[1]}
+						</p>)
+				} else {
+					characterTextResponse = 
+					(<p className="scenarioText"> 
+						{this.props.scenarioData[this.props.scenarioIndex].text}
+					</p>)
+				}
 
 				// Play sound for scenario if exists
 				if (this.props.scenarioData[this.props.scenarioIndex].soundID) {

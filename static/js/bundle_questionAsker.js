@@ -55,12 +55,12 @@
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var CharacterContainer = __webpack_require__(/*! ./questionAsker/CharacterContainer */ 180);
 	var DialogContainer = __webpack_require__(/*! ./questionAsker/DialogContainer */ 190);
-	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 193);
-	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 204);
-	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 205);
-	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 214);
-	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 221);
-	var TimerContainer = __webpack_require__(/*! ./questionAsker/TimerContainer */ 222);
+	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 191);
+	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 202);
+	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 203);
+	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 212);
+	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 219);
+	var TimerContainer = __webpack_require__(/*! ./questionAsker/TimerContainer */ 220);
 	
 	var Constants = __webpack_require__(/*! ./helpers/Constants.js */ 177);
 	
@@ -834,6 +834,7 @@
 					, { scenarioOn: this.state.scenarioOn,
 						scenarioData: sceneData.scenario,
 						scenarioIndex: this.state.scenarioIndex,
+						currentScenarioData: currentScenarioData,
 						playSound: this.playSound,
 						charName: this.state.sceneData.character.name,
 						currentDialog: this.state.currentDialog,
@@ -22871,9 +22872,6 @@
 		}
 	};
 	
-	// Replace text in Dialog Container with the appropriate link
-	var replaceTextWithLink = exports.replaceTextWithLink = function replaceTextWithLink(textToParse) {};
-	
 	var currentTasks = exports.currentTasks = [{
 		"taskID": 2,
 		"task": "Ask how he's doing",
@@ -24047,20 +24045,13 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../helpers/Constants */ 177);
-	var NextButton = __webpack_require__(/*! ./components/NextButton */ 191);
-	var RewindButton = __webpack_require__(/*! ./components/RewindButton */ 192);
+	var NextButton = __webpack_require__(/*! ./components/NextButton */ 221);
+	var RewindButton = __webpack_require__(/*! ./components/RewindButton */ 222);
 	
 	//TODO: The dialog's name and text should be their own component
 	
 	var DialogContainer = React.createClass({
 		displayName: 'DialogContainer',
-	
-	
-		componentWillMount: function componentWillMount() {
-			console.log("dialog updated");
-	
-			// If the sound should be saved for later, do so
-		},
 	
 		render: function render() {
 			var dialogSlantSrc = Constants.IMAGE_PATH + "UI/dialogbox_slant.png";
@@ -24081,13 +24072,36 @@
 	
 				// Case 1: There's a scenario that's played; Change font size of text and get name from scenario
 				var that = this;
+				var currentScenarioData = this.props.currentScenarioData;
 				if (this.props.scenarioOn === true) {
-					characterName = this.props.scenarioData[this.props.scenarioIndex].name;
-					characterTextResponse = React.createElement(
-						'p',
-						{ className: 'scenarioText' },
-						this.props.scenarioData[this.props.scenarioIndex].text
-					);
+					characterName = currentScenarioData.name;
+	
+					// If there's a link, split the text (only works with one link) and then render;
+					if (currentScenarioData.link) {
+						var parsedResponseArray = currentScenarioData.text.split("[[link]]");
+						var linkText = currentScenarioData.link.text;
+						var linkURL = currentScenarioData.link.url;
+						console.log(parsedResponseArray);
+						characterTextResponse = React.createElement(
+							'p',
+							{ className: 'scenarioText' },
+							parsedResponseArray[0],
+							' ',
+							React.createElement(
+								'a',
+								{ href: linkURL, target: '_blank' },
+								linkText
+							),
+							' ',
+							parsedResponseArray[1]
+						);
+					} else {
+						characterTextResponse = React.createElement(
+							'p',
+							{ className: 'scenarioText' },
+							this.props.scenarioData[this.props.scenarioIndex].text
+						);
+					}
 	
 					// Play sound for scenario if exists
 					if (this.props.scenarioData[this.props.scenarioIndex].soundID) {
@@ -24162,63 +24176,6 @@
 
 /***/ },
 /* 191 */
-/*!****************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/NextButton.js ***!
-  \****************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	
-	function NextButton(props) {
-	
-		if (props.scenarioOn === true) {
-			return React.createElement(
-				"button",
-				{
-					className: "button nextButton",
-					onClick: props.nextScenario },
-				React.createElement("span", { className: "glyphicon glyphicon-play", "aria-hidden": "true" })
-			);
-		} else {
-			return null;
-		}
-	}
-	
-	module.exports = NextButton;
-
-/***/ },
-/* 192 */
-/*!******************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/RewindButton.js ***!
-  \******************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	
-	function RewindButton(props) {
-		if (props.scenarioData[props.scenarioIndex].rewindAvailable) {
-			return React.createElement(
-				"button",
-				{
-					className: "button rewindButton",
-					onClick: props.playRewindScenarioSound },
-				React.createElement("span", { className: "glyphicon glyphicon-backward", "aria-hidden": "true" })
-			);
-		} else {
-			return null;
-		}
-	}
-	
-	module.exports = RewindButton;
-
-/***/ },
-/* 193 */
 /*!********************************************************!*\
   !*** ./react_assets/js/questionAsker/TaskContainer.js ***!
   \********************************************************/
@@ -24227,11 +24184,11 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var Task = __webpack_require__(/*! ./components/Task */ 194);
+	var Task = __webpack_require__(/*! ./components/Task */ 192);
 	var PropTypes = React.PropTypes;
 	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 175);
-	var TaskIcon = __webpack_require__(/*! ./components/TaskIcon */ 195);
-	var TaskText = __webpack_require__(/*! ./components/TaskText */ 202);
+	var TaskIcon = __webpack_require__(/*! ./components/TaskIcon */ 193);
+	var TaskText = __webpack_require__(/*! ./components/TaskText */ 200);
 	
 	var TaskContainer = React.createClass({
 		displayName: 'TaskContainer',
@@ -24367,7 +24324,7 @@
 	module.exports = TaskContainer;
 
 /***/ },
-/* 194 */
+/* 192 */
 /*!**********************************************************!*\
   !*** ./react_assets/js/questionAsker/components/Task.js ***!
   \**********************************************************/
@@ -24377,9 +24334,9 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var TaskIcon = __webpack_require__(/*! ./TaskIcon */ 195);
-	var TaskText = __webpack_require__(/*! ./TaskText */ 202);
-	var HintButton = __webpack_require__(/*! ./HintButton */ 203);
+	var TaskIcon = __webpack_require__(/*! ./TaskIcon */ 193);
+	var TaskText = __webpack_require__(/*! ./TaskText */ 200);
+	var HintButton = __webpack_require__(/*! ./HintButton */ 201);
 	
 	var Task = React.createClass({
 		displayName: 'Task',
@@ -24450,7 +24407,7 @@
 	module.exports = Task;
 
 /***/ },
-/* 195 */
+/* 193 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/TaskIcon.js ***!
   \**************************************************************/
@@ -24459,9 +24416,9 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 196);
-	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 197);
-	var TransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 201);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 194);
+	var TransitionsCSS = __webpack_require__(/*! ../../../../static/css/transitions.css */ 195);
+	var TransitionGroup = __webpack_require__(/*! react-addons-transition-group */ 199);
 	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 177);
 	
 	var TaskIcon = React.createClass({
@@ -24577,7 +24534,7 @@
 	module.exports = TaskIcon;
 
 /***/ },
-/* 196 */
+/* 194 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/TaskIconImage.js ***!
   \*******************************************************************/
@@ -24652,7 +24609,7 @@
 	module.exports = TaskIconImage;
 
 /***/ },
-/* 197 */
+/* 195 */
 /*!************************************!*\
   !*** ./static/css/transitions.css ***!
   \************************************/
@@ -24661,10 +24618,10 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./../../~/css-loader!./transitions.css */ 198);
+	var content = __webpack_require__(/*! !./../../~/css-loader!./transitions.css */ 196);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 200)(content, {});
+	var update = __webpack_require__(/*! ./../../~/style-loader/addStyles.js */ 198)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -24681,13 +24638,13 @@
 	}
 
 /***/ },
-/* 198 */
+/* 196 */
 /*!***************************************************!*\
   !*** ./~/css-loader!./static/css/transitions.css ***!
   \***************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 199)();
+	exports = module.exports = __webpack_require__(/*! ./../../~/css-loader/lib/css-base.js */ 197)();
 	// imports
 	
 	
@@ -24698,7 +24655,7 @@
 
 
 /***/ },
-/* 199 */
+/* 197 */
 /*!**************************************!*\
   !*** ./~/css-loader/lib/css-base.js ***!
   \**************************************/
@@ -24757,7 +24714,7 @@
 
 
 /***/ },
-/* 200 */
+/* 198 */
 /*!*************************************!*\
   !*** ./~/style-loader/addStyles.js ***!
   \*************************************/
@@ -25012,7 +24969,7 @@
 
 
 /***/ },
-/* 201 */
+/* 199 */
 /*!**************************************************!*\
   !*** ./~/react-addons-transition-group/index.js ***!
   \**************************************************/
@@ -25021,7 +24978,7 @@
 	module.exports = __webpack_require__(/*! react/lib/ReactTransitionGroup */ 183);
 
 /***/ },
-/* 202 */
+/* 200 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/TaskText.js ***!
   \**************************************************************/
@@ -25073,7 +25030,7 @@
 	module.exports = TaskText;
 
 /***/ },
-/* 203 */
+/* 201 */
 /*!****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/HintButton.js ***!
   \****************************************************************/
@@ -25127,7 +25084,7 @@
 	module.exports = HintButton;
 
 /***/ },
-/* 204 */
+/* 202 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/BackgroundImageContainer.js ***!
   \*******************************************************************/
@@ -25161,7 +25118,7 @@
 	module.exports = BackgroundImageContainer;
 
 /***/ },
-/* 205 */
+/* 203 */
 /*!************************************************************!*\
   !*** ./react_assets/js/questionAsker/FeedbackContainer.js ***!
   \************************************************************/
@@ -25170,13 +25127,13 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 206);
-	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 207);
-	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 208);
-	var RepeatButton = __webpack_require__(/*! ./components/RepeatButton */ 209);
-	var SkipButton = __webpack_require__(/*! ./components/SkipButton */ 210);
-	var MiriIconText = __webpack_require__(/*! ./components/MiriIconText */ 211);
-	var MiriFeedback = __webpack_require__(/*! ./components/MiriFeedback */ 212);
+	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 204);
+	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 205);
+	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 206);
+	var RepeatButton = __webpack_require__(/*! ./components/RepeatButton */ 207);
+	var SkipButton = __webpack_require__(/*! ./components/SkipButton */ 208);
+	var MiriIconText = __webpack_require__(/*! ./components/MiriIconText */ 209);
+	var MiriFeedback = __webpack_require__(/*! ./components/MiriFeedback */ 210);
 	
 	var FeedbackContainer = React.createClass({
 		displayName: 'FeedbackContainer',
@@ -25247,7 +25204,7 @@
 	module.exports = FeedbackContainer;
 
 /***/ },
-/* 206 */
+/* 204 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/SpeechableSpan.js ***!
   \********************************************************************/
@@ -25270,7 +25227,7 @@
 	module.exports = SpeechableSpan;
 
 /***/ },
-/* 207 */
+/* 205 */
 /*!***************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/CoinMeter.js ***!
   \***************************************************************/
@@ -25299,7 +25256,7 @@
 	module.exports = CoinMeter;
 
 /***/ },
-/* 208 */
+/* 206 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/HintIcon.js ***!
   \**************************************************************/
@@ -25309,7 +25266,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 177);
-	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 196);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 194);
 	
 	var HintIcon = React.createClass({
 		displayName: 'HintIcon',
@@ -25394,7 +25351,7 @@
 	module.exports = HintIcon;
 
 /***/ },
-/* 209 */
+/* 207 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/RepeatButton.js ***!
   \******************************************************************/
@@ -25480,7 +25437,7 @@
 	module.exports = RepeatButton;
 
 /***/ },
-/* 210 */
+/* 208 */
 /*!****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/SkipButton.js ***!
   \****************************************************************/
@@ -25530,7 +25487,7 @@
 	module.exports = SkipButton;
 
 /***/ },
-/* 211 */
+/* 209 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/MiriIconText.js ***!
   \******************************************************************/
@@ -25540,8 +25497,8 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 206);
-	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 196);
+	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 204);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 194);
 	
 	function MiriIconText(props) {
 		var hintTemplateText;
@@ -25654,7 +25611,7 @@
 	module.exports = MiriIconText;
 
 /***/ },
-/* 212 */
+/* 210 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/MiriFeedback.js ***!
   \******************************************************************/
@@ -25665,11 +25622,11 @@
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var HintIcon = __webpack_require__(/*! ./HintIcon */ 208);
-	var MiriIconText = __webpack_require__(/*! ./MiriIconText */ 211);
-	var MiriIcon = __webpack_require__(/*! ./MiriIcon */ 213);
-	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 206);
-	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 196);
+	var HintIcon = __webpack_require__(/*! ./HintIcon */ 206);
+	var MiriIconText = __webpack_require__(/*! ./MiriIconText */ 209);
+	var MiriIcon = __webpack_require__(/*! ./MiriIcon */ 211);
+	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 204);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 194);
 	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 177);
 	
 	var MiriFeedback = React.createClass({
@@ -25784,7 +25741,7 @@
 	module.exports = MiriFeedback;
 
 /***/ },
-/* 213 */
+/* 211 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
   \**************************************************************/
@@ -25808,7 +25765,7 @@
 	module.exports = MiriIcon;
 
 /***/ },
-/* 214 */
+/* 212 */
 /*!***********************************************************!*\
   !*** ./react_assets/js/questionAsker/ResultsContainer.js ***!
   \***********************************************************/
@@ -25818,7 +25775,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsBase = __webpack_require__(/*! ./components/ResultsBase */ 215);
+	var ResultsBase = __webpack_require__(/*! ./components/ResultsBase */ 213);
 	
 	var ResultsContainer = React.createClass({
 		displayName: 'ResultsContainer',
@@ -25851,7 +25808,7 @@
 	module.exports = ResultsContainer;
 
 /***/ },
-/* 215 */
+/* 213 */
 /*!*****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsBase.js ***!
   \*****************************************************************/
@@ -25861,9 +25818,9 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsHeader = __webpack_require__(/*! ./ResultsHeader */ 216);
-	var ResultsSideBar = __webpack_require__(/*! ./ResultsSideBar */ 218);
-	var ResultsTasks = __webpack_require__(/*! ./ResultsTasks */ 219);
+	var ResultsHeader = __webpack_require__(/*! ./ResultsHeader */ 214);
+	var ResultsSideBar = __webpack_require__(/*! ./ResultsSideBar */ 216);
+	var ResultsTasks = __webpack_require__(/*! ./ResultsTasks */ 217);
 	
 	var ResultsBase = React.createClass({
 		displayName: 'ResultsBase',
@@ -25896,7 +25853,7 @@
 	module.exports = ResultsBase;
 
 /***/ },
-/* 216 */
+/* 214 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsHeader.js ***!
   \*******************************************************************/
@@ -25907,7 +25864,7 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 177);
-	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 217);
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 215);
 	
 	function ResultsHeader(props) {
 		var miriIconSrc = Constants.IMAGE_PATH + "miri/icons/Miri_Icon_Yay.png";
@@ -25932,7 +25889,7 @@
 	module.exports = ResultsHeader;
 
 /***/ },
-/* 217 */
+/* 215 */
 /*!************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsCharProfile.js ***!
   \************************************************************************/
@@ -25992,7 +25949,7 @@
 	module.exports = ResultsCharProfile;
 
 /***/ },
-/* 218 */
+/* 216 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsSideBar.js ***!
   \********************************************************************/
@@ -26086,7 +26043,7 @@
 	module.exports = ResultsSideBar;
 
 /***/ },
-/* 219 */
+/* 217 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsTasks.js ***!
   \******************************************************************/
@@ -26096,8 +26053,8 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 217);
-	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 220);
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 215);
+	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 218);
 	
 	var ResultsTasks = React.createClass({
 		displayName: 'ResultsTasks',
@@ -26154,7 +26111,7 @@
 	module.exports = ResultsTasks;
 
 /***/ },
-/* 220 */
+/* 218 */
 /*!**************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsCompletedTask.js ***!
   \**************************************************************************/
@@ -26185,7 +26142,7 @@
 	module.exports = ResultsCompletedTask;
 
 /***/ },
-/* 221 */
+/* 219 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/SpeechSynth.js ***!
   \************************************************/
@@ -26235,7 +26192,7 @@
 	module.exports = speechSynth;
 
 /***/ },
-/* 222 */
+/* 220 */
 /*!*********************************************************!*\
   !*** ./react_assets/js/questionAsker/TimerContainer.js ***!
   \*********************************************************/
@@ -26267,6 +26224,63 @@
 	});
 	
 	module.exports = TimerContainer;
+
+/***/ },
+/* 221 */
+/*!****************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/NextButton.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function NextButton(props) {
+	
+		if (props.scenarioOn === true) {
+			return React.createElement(
+				"button",
+				{
+					className: "button nextButton",
+					onClick: props.nextScenario },
+				React.createElement("span", { className: "glyphicon glyphicon-play", "aria-hidden": "true" })
+			);
+		} else {
+			return null;
+		}
+	}
+	
+	module.exports = NextButton;
+
+/***/ },
+/* 222 */
+/*!******************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/RewindButton.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function RewindButton(props) {
+		if (props.scenarioData[props.scenarioIndex].rewindAvailable) {
+			return React.createElement(
+				"button",
+				{
+					className: "button rewindButton",
+					onClick: props.playRewindScenarioSound },
+				React.createElement("span", { className: "glyphicon glyphicon-backward", "aria-hidden": "true" })
+			);
+		} else {
+			return null;
+		}
+	}
+	
+	module.exports = RewindButton;
 
 /***/ }
 /******/ ]);
