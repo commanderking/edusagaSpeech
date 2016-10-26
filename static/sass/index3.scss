@@ -657,6 +657,21 @@
 				max-height: 100%;
 			}
 
+			.blocknarrow {
+				display: inline-block;
+				max-width: 30%;
+			}
+
+			.major-image {
+				display: inline-block;
+				width: 70%;
+
+				img {
+					width: 100%;
+					height: auto;
+				}
+			}
+
 			.button {
 				&:hover {
 					background: rgba(255, 255, 255, 0.15) !important;
