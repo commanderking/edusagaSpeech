@@ -89,7 +89,7 @@
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxDefaultThumbsup.png",
+			"image" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
 			"imageLayer" : "blank.png",
 			"text" : "Oh cool. Her name is Chén Zǐtóng. Let's see what she says next."
 		},
@@ -163,7 +163,8 @@
 			"imageLayer" : "blank.png",
 			"text" : "你几岁啊?",
 			"soundID": "halin-your-age",
-			"saveSoundForRewind" : true
+			"saveSoundForRewind" : true,
+			"rewindAvailable": true
 		},
 		{
 			"name" : "Max",
@@ -219,7 +220,6 @@
 				"confused" : "characters/maxwell/maxConfused.png",
 				"goodJob" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
 				"thumbsUpGoodJob" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
-				"thumbsUp" : "characters/maxwell/maxDefaultThumbsup.png",
 				"distraught": "characters/maxwell/maxDistraught.png",
 				"excited" : "characters/maxwell/maxExcitedGreatJob.png",
 				"panic" : "characters/maxwell/maxPanic.png",

@@ -38,13 +38,47 @@ var Dashboard = React.createClass({
 					}
 					else if (studentAlreadyEntered === false) {
 						// Add to the array
+						var studentIDUpperCase = studentResponse.studentID.toUpperCase();
 						activityData.push({
-							"studentID" : studentResponse.studentID,
+							"studentID" : studentIDUpperCase,
 							"activityID" : "",
 							"score" : studentResponse.score,
 							"allTaskData" : studentResponse.allTaskData
 						});
 					}
+
+					var reA = /[^a-zA-Z]/g;
+					var reN = /[^0-9]/g;
+					function sortStudentID(a,b) {
+						console.log(a);
+						a = String(a.studentID);
+						b = String(b.studentID);
+						console.log(a);
+						console.log(b);
+
+						var aA = a.replace(reA, "");
+						var bA = b.replace(reA, "");
+						if(aA === bA) {
+					    	var aN = parseInt(a.replace(reN, ""), 10);
+					    	var bN = parseInt(b.replace(reN, ""), 10);
+					    	return aN === bN ? 0 : aN > bN ? 1 : -1;
+					    } else {
+					        return aA > bA ? 1 : -1;
+					    }
+					}
+
+					activityData.sort(sortStudentID);
+
+					/*
+					activityData.sort(function(a,b) {
+						if (a.studentID < b.studentID) {
+							return -1;
+						} else if (a.studentID > b.studentID) {
+							return 1;
+						}
+						return 0;
+					})
+*/
 				})
 				that.setState({activityData: activityData});
 			})
@@ -57,7 +91,6 @@ var Dashboard = React.createClass({
 		if (this.state.activityData === null) {
 			return null;
 		} else {
-			
 			var studentActivityData = this.state.activityData.map(function(student, i) {
 				return (
 					<tr key={i}>
@@ -146,7 +179,8 @@ var Dashboard = React.createClass({
 							</tr>
 							{studentActivityData}
 						</tbody>
-					</table>			
+					</table>
+
 					<h1>Activity Data!</h1>
 					<table className="table table-striped">
 						<tbody>
@@ -157,6 +191,7 @@ var Dashboard = React.createClass({
 							{studentActivityData}
 						</tbody>
 					</table>
+
 					<h1>Student Activity Data - Individual!</h1>
 					<table className="table table-striped">
 						<tbody>

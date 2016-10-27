@@ -1,0 +1,869 @@
+[{
+	"teacherID": "lilaoshi",
+	"studentID": "A16 ",
+	"score": 15,
+	"possibleScore": 0,
+	"time": 470,
+	"allTaskData": [{
+		"taskID": 1,
+		"task": "Greet her",
+		"correct": true,
+		"attemptedAnswers": ["你好"]
+	}, {
+		"taskID": 2,
+		"task": "Introduce your name",
+		"correct": true,
+		"attemptedAnswers": ["我叫杨振宁"]
+	}, {
+		"taskID": 3,
+		"task": "Ask her for her name",
+		"correct": true,
+		"attemptedAnswers": ["你叫什么名字"]
+	}, {
+		"taskID": 23,
+		"task": "Ask what grade she is in",
+		"correct": true,
+		"attemptedAnswers": ["你上几年级"]
+	}, {
+		"taskID": 4,
+		"task": "Tell her you are also in 9th grade",
+		"correct": true,
+		"attemptedAnswers": ["我也九年级"]
+	}, {
+		"taskID": 5,
+		"task": "Ask how many family members she has",
+		"correct": true,
+		"attemptedAnswers": ["你家有几个人"]
+	}, {
+		"taskID": 6,
+		"task": "Ask which grade her older brother is in",
+		"correct": true,
+		"attemptedAnswers": ["你的哥哥上几年级"]
+	}, {
+		"taskID": 8,
+		"task": "Ask how old her younger sister is",
+		"correct": true,
+		"attemptedAnswers": ["你的妹妹是", "你的妹妹几岁"]
+	}, {
+		"taskID": 9,
+		"task": "Respond to her compliment",
+		"correct": true,
+		"attemptedAnswers": ["哪里哪里"]
+	}, {
+		"taskID": 10,
+		"task": "Ask her how her English is",
+		"correct": true,
+		"attemptedAnswers": ["你的n车好吗", "你的n u好不好", "你的英语好吗"]
+	}, {
+		"taskID": 11,
+		"task": "Ask what classes she takes this year",
+		"correct": false,
+		"attemptedAnswers": ["今年你可什么", "今年你上课什么"]
+	}, {
+		"taskID": 24,
+		"task": "Tell her you do not study French, but speak a little",
+		"correct": false,
+		"attemptedAnswers": ["我不说发油", "我不说发一个我会说一点"]
+	}, {
+		"taskID": 12,
+		"task": "Respond to her question.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 13,
+		"task": "Tell her your Chinese teacher is Ms. Zhang.",
+		"correct": true,
+		"attemptedAnswers": ["我的中文", "我的中文老师是张老师"]
+	}, {
+		"taskID": 14,
+		"task": "Tell her she is a good teacher.",
+		"correct": false,
+		"attemptedAnswers": ["张老师是韩巢", "他是很好玩的事", "他是很好"]
+	}, {
+		"taskID": 15,
+		"task": "Ask what hobbies she has",
+		"correct": false,
+		"attemptedAnswers": ["你喜欢什么"]
+	}, {
+		"taskID": 16,
+		"task": "Tell her you also like sports.",
+		"correct": true,
+		"attemptedAnswers": ["我也喜欢你东", "我也喜欢运动"]
+	}, {
+		"taskID": 17,
+		"task": "Tell her you also like watching TV and movies",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 18,
+		"task": "Ask what sport she likes best.",
+		"correct": true,
+		"attemptedAnswers": ["你最喜欢什么运动"]
+	}, {
+		"taskID": 19,
+		"task": "Tell her you play it very well",
+		"correct": true,
+		"attemptedAnswers": ["我的苹果很好"]
+	}, {
+		"taskID": 20,
+		"task": "Ask if she wants to play ping pong with you this afternoon",
+		"correct": false,
+		"attemptedAnswers": ["下午的", "下午你打乒乓球吗", "下午和你打乒乓球吗"]
+	}, {
+		"taskID": 21,
+		"task": "Tell her 3:15.",
+		"correct": true,
+		"attemptedAnswers": ["三点一刻"]
+	}, {
+		"taskID": 22,
+		"task": "Respond appropriately!",
+		"correct": false,
+		"attemptedAnswers": ["开江", "夏威胁论"]
+	}],
+	"activityID": "A1",
+	"activityName": "Pre-assessment - Chinese 1"
+}, {
+	"teacherID": "lilaoshi",
+	"studentID": "a11 ",
+	"score": 0,
+	"possibleScore": 0,
+	"time": 510,
+	"allTaskData": [{
+		"taskID": 1,
+		"task": "Greet her",
+		"correct": false,
+		"attemptedAnswers": ["嘿嘿嘿"]
+	}, {
+		"taskID": 2,
+		"task": "Introduce your name",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 3,
+		"task": "Ask her for her name",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 23,
+		"task": "Ask what grade she is in",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 4,
+		"task": "Tell her you are also in 9th grade",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 5,
+		"task": "Ask how many family members she has",
+		"correct": false,
+		"attemptedAnswers": ["那你加油加油"]
+	}, {
+		"taskID": 6,
+		"task": "Ask which grade her older brother is in",
+		"correct": false,
+		"attemptedAnswers": ["那个该今年级"]
+	}, {
+		"taskID": 8,
+		"task": "Ask how old her younger sister is",
+		"correct": false,
+		"attemptedAnswers": ["你妹妹"]
+	}, {
+		"taskID": 9,
+		"task": "Respond to her compliment",
+		"correct": false,
+		"attemptedAnswers": ["学校"]
+	}, {
+		"taskID": 10,
+		"task": "Ask her how her English is",
+		"correct": false,
+		"attemptedAnswers": ["vmware下好不好"]
+	}, {
+		"taskID": 11,
+		"task": "Ask what classes she takes this year",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 24,
+		"task": "Tell her you do not study French, but speak a little",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 12,
+		"task": "Respond to her question.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 13,
+		"task": "Tell her your Chinese teacher is Ms. Zhang.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 14,
+		"task": "Tell her she is a good teacher.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 15,
+		"task": "Ask what hobbies she has",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 16,
+		"task": "Tell her you also like sports.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 17,
+		"task": "Tell her you also like watching TV and movies",
+		"correct": false,
+		"attemptedAnswers": ["我喜欢", "我喜欢cancer"]
+	}, {
+		"taskID": 18,
+		"task": "Ask what sport she likes best.",
+		"correct": false,
+		"attemptedAnswers": ["你喜欢唱歌吗", "你喜欢"]
+	}, {
+		"taskID": 19,
+		"task": "Tell her you play it very well",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 20,
+		"task": "Ask if she wants to play ping pong with you this afternoon",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 21,
+		"task": "Tell her 3:15.",
+		"correct": false,
+		"attemptedAnswers": ["3dmax"]
+	}, {
+		"taskID": 22,
+		"task": "Respond appropriately!",
+		"correct": false,
+		"attemptedAnswers": []
+	}],
+	"activityID": "A1",
+	"activityName": "Pre-assessment - Chinese 1"
+}, {
+	"teacherID": "lilaoshi",
+	"studentID": "A10 ",
+	"score": 10,
+	"possibleScore": 0,
+	"time": 538,
+	"allTaskData": [{
+		"taskID": 1,
+		"task": "Greet her",
+		"correct": true,
+		"attemptedAnswers": ["你好"]
+	}, {
+		"taskID": 2,
+		"task": "Introduce your name",
+		"correct": true,
+		"attemptedAnswers": ["国家的签名", "我叫你姐妹"]
+	}, {
+		"taskID": 3,
+		"task": "Ask her for her name",
+		"correct": true,
+		"attemptedAnswers": ["你叫什么名字"]
+	}, {
+		"taskID": 23,
+		"task": "Ask what grade she is in",
+		"correct": true,
+		"attemptedAnswers": ["你上几年级"]
+	}, {
+		"taskID": 4,
+		"task": "Tell her you are also in 9th grade",
+		"correct": false,
+		"attemptedAnswers": ["我也想九年级", "我想你也九年级"]
+	}, {
+		"taskID": 5,
+		"task": "Ask how many family members she has",
+		"correct": false,
+		"attemptedAnswers": ["我也想今年结", "我也想你几年级"]
+	}, {
+		"taskID": 6,
+		"task": "Ask which grade her older brother is in",
+		"correct": true,
+		"attemptedAnswers": ["你的哥哥", "hackathon几年级", "你的哥哥上几年级"]
+	}, {
+		"taskID": 8,
+		"task": "Ask how old her younger sister is",
+		"correct": true,
+		"attemptedAnswers": ["你的妹妹几岁"]
+	}, {
+		"taskID": 9,
+		"task": "Respond to her compliment",
+		"correct": false,
+		"attemptedAnswers": ["price"]
+	}, {
+		"taskID": 10,
+		"task": "Ask her how her English is",
+		"correct": true,
+		"attemptedAnswers": ["你说英语好不好"]
+	}, {
+		"taskID": 11,
+		"task": "Ask what classes she takes this year",
+		"correct": false,
+		"attemptedAnswers": ["我不知道"]
+	}, {
+		"taskID": 24,
+		"task": "Tell her you do not study French, but speak a little",
+		"correct": false,
+		"attemptedAnswers": ["我不学法语"]
+	}, {
+		"taskID": 12,
+		"task": "Respond to her question.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 13,
+		"task": "Tell her your Chinese teacher is Ms. Zhang.",
+		"correct": false,
+		"attemptedAnswers": ["我的我的中文老师", "学校"]
+	}, {
+		"taskID": 14,
+		"task": "Tell her she is a good teacher.",
+		"correct": false,
+		"attemptedAnswers": ["他是好老师", "porsche"]
+	}, {
+		"taskID": 15,
+		"task": "Ask what hobbies she has",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 16,
+		"task": "Tell her you also like sports.",
+		"correct": true,
+		"attemptedAnswers": ["我也喜欢运动"]
+	}, {
+		"taskID": 17,
+		"task": "Tell her you also like watching TV and movies",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 18,
+		"task": "Ask what sport she likes best.",
+		"correct": true,
+		"attemptedAnswers": ["你最喜欢什么运动"]
+	}, {
+		"taskID": 19,
+		"task": "Tell her you play it very well",
+		"correct": false,
+		"attemptedAnswers": ["我打乒乓球发行"]
+	}, {
+		"taskID": 20,
+		"task": "Ask if she wants to play ping pong with you this afternoon",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 21,
+		"task": "Tell her 3:15.",
+		"correct": true,
+		"attemptedAnswers": ["选择三点一刻"]
+	}, {
+		"taskID": 22,
+		"task": "Respond appropriately!",
+		"correct": false,
+		"attemptedAnswers": ["学生呢", "谢谢你"]
+	}],
+	"activityID": "A1",
+	"activityName": "Pre-assessment - Chinese 1"
+}, {
+	"teacherID": "lilaoshi",
+	"studentID": "A17 ",
+	"score": 16,
+	"possibleScore": 0,
+	"time": 589,
+	"allTaskData": [{
+		"taskID": 1,
+		"task": "Greet her",
+		"correct": true,
+		"attemptedAnswers": ["你好"]
+	}, {
+		"taskID": 2,
+		"task": "Introduce your name",
+		"correct": true,
+		"attemptedAnswers": ["我叫张海军"]
+	}, {
+		"taskID": 3,
+		"task": "Ask her for her name",
+		"correct": true,
+		"attemptedAnswers": ["你叫什么名字"]
+	}, {
+		"taskID": 23,
+		"task": "Ask what grade she is in",
+		"correct": true,
+		"attemptedAnswers": ["你上几年级"]
+	}, {
+		"taskID": 4,
+		"task": "Tell her you are also in 9th grade",
+		"correct": true,
+		"attemptedAnswers": ["我也上九年级"]
+	}, {
+		"taskID": 5,
+		"task": "Ask how many family members she has",
+		"correct": true,
+		"attemptedAnswers": ["你叫什么", "你家有几个人"]
+	}, {
+		"taskID": 6,
+		"task": "Ask which grade her older brother is in",
+		"correct": true,
+		"attemptedAnswers": ["你对哥哥上", "你的哥哥上几年级"]
+	}, {
+		"taskID": 8,
+		"task": "Ask how old her younger sister is",
+		"correct": true,
+		"attemptedAnswers": ["你的妹妹", "你的妹妹几岁"]
+	}, {
+		"taskID": 9,
+		"task": "Respond to her compliment",
+		"correct": true,
+		"attemptedAnswers": ["谢谢"]
+	}, {
+		"taskID": 10,
+		"task": "Ask her how her English is",
+		"correct": true,
+		"attemptedAnswers": ["你对英文怎么样"]
+	}, {
+		"taskID": 11,
+		"task": "Ask what classes she takes this year",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 24,
+		"task": "Tell her you do not study French, but speak a little",
+		"correct": false,
+		"attemptedAnswers": ["我不是我不是法语可是我会说一点", "我不是法语可是", "我不是法语可是我"]
+	}, {
+		"taskID": 12,
+		"task": "Respond to her question.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 13,
+		"task": "Tell her your Chinese teacher is Ms. Zhang.",
+		"correct": true,
+		"attemptedAnswers": ["我的中文老师是张老师"]
+	}, {
+		"taskID": 14,
+		"task": "Tell her she is a good teacher.",
+		"correct": false,
+		"attemptedAnswers": ["他是好老师", "我的老师很好", "他是好老师"]
+	}, {
+		"taskID": 15,
+		"task": "Ask what hobbies she has",
+		"correct": false,
+		"attemptedAnswers": ["你做什么"]
+	}, {
+		"taskID": 16,
+		"task": "Tell her you also like sports.",
+		"correct": true,
+		"attemptedAnswers": ["我也喜欢运动"]
+	}, {
+		"taskID": 17,
+		"task": "Tell her you also like watching TV and movies",
+		"correct": false,
+		"attemptedAnswers": ["我也喜欢看电视和看", "我也喜欢看", "我也喜欢看电视盒看电影"]
+	}, {
+		"taskID": 18,
+		"task": "Ask what sport she likes best.",
+		"correct": true,
+		"attemptedAnswers": ["你最喜欢什么什么运动"]
+	}, {
+		"taskID": 19,
+		"task": "Tell her you play it very well",
+		"correct": true,
+		"attemptedAnswers": ["我打乒乓球打得很好"]
+	}, {
+		"taskID": 20,
+		"task": "Ask if she wants to play ping pong with you this afternoon",
+		"correct": false,
+		"attemptedAnswers": ["你打不打你", "这个上午你"]
+	}, {
+		"taskID": 21,
+		"task": "Tell her 3:15.",
+		"correct": true,
+		"attemptedAnswers": ["酸碱", "三点一刻"]
+	}, {
+		"taskID": 22,
+		"task": "Respond appropriately!",
+		"correct": true,
+		"attemptedAnswers": ["下午见"]
+	}],
+	"activityID": "A1",
+	"activityName": "Pre-assessment - Chinese 1"
+}, {
+	"teacherID": "lilaoshi",
+	"studentID": "A8 ",
+	"score": 11,
+	"possibleScore": 0,
+	"time": 650,
+	"allTaskData": [{
+		"taskID": 1,
+		"task": "Greet her",
+		"correct": true,
+		"attemptedAnswers": ["你好"]
+	}, {
+		"taskID": 2,
+		"task": "Introduce your name",
+		"correct": true,
+		"attemptedAnswers": ["我叫柯南被你呢"]
+	}, {
+		"taskID": 3,
+		"task": "Ask her for her name",
+		"correct": true,
+		"attemptedAnswers": ["你叫什么名字"]
+	}, {
+		"taskID": 23,
+		"task": "Ask what grade she is in",
+		"correct": true,
+		"attemptedAnswers": ["你上几年级"]
+	}, {
+		"taskID": 4,
+		"task": "Tell her you are also in 9th grade",
+		"correct": false,
+		"attemptedAnswers": ["我也想你九年轻", "荷叶上九年级"]
+	}, {
+		"taskID": 5,
+		"task": "Ask how many family members she has",
+		"correct": true,
+		"attemptedAnswers": ["你家有几个人"]
+	}, {
+		"taskID": 6,
+		"task": "Ask which grade her older brother is in",
+		"correct": false,
+		"attemptedAnswers": ["你的哥哥想九年的纪念集", "你这个给上几年级", "你这个该上几年级"]
+	}, {
+		"taskID": 8,
+		"task": "Ask how old her younger sister is",
+		"correct": true,
+		"attemptedAnswers": ["你妹妹几岁"]
+	}, {
+		"taskID": 9,
+		"task": "Respond to her compliment",
+		"correct": true,
+		"attemptedAnswers": ["哪里哪里"]
+	}, {
+		"taskID": 10,
+		"task": "Ask her how her English is",
+		"correct": false,
+		"attemptedAnswers": ["你的英国", "你的英语好"]
+	}, {
+		"taskID": 11,
+		"task": "Ask what classes she takes this year",
+		"correct": false,
+		"attemptedAnswers": ["你上什么课", "你想整顿可能"]
+	}, {
+		"taskID": 24,
+		"task": "Tell her you do not study French, but speak a little",
+		"correct": false,
+		"attemptedAnswers": ["我不会说法语吗"]
+	}, {
+		"taskID": 12,
+		"task": "Respond to her question.",
+		"correct": false,
+		"attemptedAnswers": ["我不会说法语", "我不"]
+	}, {
+		"taskID": 13,
+		"task": "Tell her your Chinese teacher is Ms. Zhang.",
+		"correct": true,
+		"attemptedAnswers": ["我的中文老师是张老师"]
+	}, {
+		"taskID": 14,
+		"task": "Tell her she is a good teacher.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 15,
+		"task": "Ask what hobbies she has",
+		"correct": true,
+		"attemptedAnswers": ["你喜欢做什么"]
+	}, {
+		"taskID": 16,
+		"task": "Tell her you also like sports.",
+		"correct": true,
+		"attemptedAnswers": ["我也喜欢你英雄", "我也喜欢运动"]
+	}, {
+		"taskID": 17,
+		"task": "Tell her you also like watching TV and movies",
+		"correct": false,
+		"attemptedAnswers": ["我也喜欢看坚持", "我也喜欢看电池"]
+	}, {
+		"taskID": 18,
+		"task": "Ask what sport she likes best.",
+		"correct": false,
+		"attemptedAnswers": ["你最喜欢运动", "你最喜欢什么蚊症", "你最喜欢什么温度"]
+	}, {
+		"taskID": 19,
+		"task": "Tell her you play it very well",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 20,
+		"task": "Ask if she wants to play ping pong with you this afternoon",
+		"correct": false,
+		"attemptedAnswers": ["你好", "你和我一起走", "打乒乓球跳舞"]
+	}, {
+		"taskID": 21,
+		"task": "Tell her 3:15.",
+		"correct": true,
+		"attemptedAnswers": ["三点一刻"]
+	}, {
+		"taskID": 22,
+		"task": "Respond appropriately!",
+		"correct": false,
+		"attemptedAnswers": ["好了", "番号", "海淘"]
+	}],
+	"activityID": "A1",
+	"activityName": "Pre-assessment - Chinese 1"
+}, {
+	"teacherID": "lilaoshi",
+	"studentID": "A9 ",
+	"score": 12,
+	"possibleScore": 0,
+	"time": 594,
+	"allTaskData": [{
+		"taskID": 1,
+		"task": "Greet her",
+		"correct": true,
+		"attemptedAnswers": ["你好"]
+	}, {
+		"taskID": 2,
+		"task": "Introduce your name",
+		"correct": true,
+		"attemptedAnswers": ["我叫阿拉丁"]
+	}, {
+		"taskID": 3,
+		"task": "Ask her for her name",
+		"correct": true,
+		"attemptedAnswers": ["你叫什么名字"]
+	}, {
+		"taskID": 23,
+		"task": "Ask what grade she is in",
+		"correct": true,
+		"attemptedAnswers": ["你上几年级了"]
+	}, {
+		"taskID": 4,
+		"task": "Tell her you are also in 9th grade",
+		"correct": true,
+		"attemptedAnswers": ["我也上九年级"]
+	}, {
+		"taskID": 5,
+		"task": "Ask how many family members she has",
+		"correct": true,
+		"attemptedAnswers": ["你家有几个人"]
+	}, {
+		"taskID": 6,
+		"task": "Ask which grade her older brother is in",
+		"correct": false,
+		"attemptedAnswers": ["我哥哥的年龄", "我爱你的那个伤口", "你有哥哥三级片下载"]
+	}, {
+		"taskID": 8,
+		"task": "Ask how old her younger sister is",
+		"correct": true,
+		"attemptedAnswers": ["你的妹妹几岁"]
+	}, {
+		"taskID": 9,
+		"task": "Respond to her compliment",
+		"correct": true,
+		"attemptedAnswers": ["哪里哪里"]
+	}, {
+		"taskID": 10,
+		"task": "Ask her how her English is",
+		"correct": true,
+		"attemptedAnswers": ["你的英文好吗"]
+	}, {
+		"taskID": 11,
+		"task": "Ask what classes she takes this year",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 24,
+		"task": "Tell her you do not study French, but speak a little",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 12,
+		"task": "Respond to her question.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 13,
+		"task": "Tell her your Chinese teacher is Ms. Zhang.",
+		"correct": false,
+		"attemptedAnswers": ["我要中文", "我的骄傲", "我的中文老师"]
+	}, {
+		"taskID": 14,
+		"task": "Tell her she is a good teacher.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 15,
+		"task": "Ask what hobbies she has",
+		"correct": true,
+		"attemptedAnswers": ["你喜欢做什么"]
+	}, {
+		"taskID": 16,
+		"task": "Tell her you also like sports.",
+		"correct": true,
+		"attemptedAnswers": ["80我也喜欢你的", "我也喜欢运动"]
+	}, {
+		"taskID": 17,
+		"task": "Tell her you also like watching TV and movies",
+		"correct": false,
+		"attemptedAnswers": ["我喜欢看", "我喜欢看电影"]
+	}, {
+		"taskID": 18,
+		"task": "Ask what sport she likes best.",
+		"correct": true,
+		"attemptedAnswers": ["你最喜欢什么", "你最喜欢什么运动"]
+	}, {
+		"taskID": 19,
+		"task": "Tell her you play it very well",
+		"correct": false,
+		"attemptedAnswers": ["我打开发", "我打乒乓球", "我打的飞行小孩喜欢"]
+	}, {
+		"taskID": 20,
+		"task": "Ask if she wants to play ping pong with you this afternoon",
+		"correct": false,
+		"attemptedAnswers": ["你下午", "下午你和我打乒乓什么"]
+	}, {
+		"taskID": 21,
+		"task": "Tell her 3:15.",
+		"correct": false,
+		"attemptedAnswers": ["三剑客", "中台演我还是打电话说好吗"]
+	}, {
+		"taskID": 22,
+		"task": "Respond appropriately!",
+		"correct": false,
+		"attemptedAnswers": ["请再说一遍"]
+	}],
+	"activityID": "A1",
+	"activityName": "Pre-assessment - Chinese 1"
+}, {
+	"teacherID": "lilaoshi",
+	"studentID": "B0 ",
+	"score": 21,
+	"possibleScore": 0,
+	"time": 274,
+	"allTaskData": [{
+		"taskID": 1,
+		"task": "Greet her",
+		"correct": true,
+		"attemptedAnswers": ["你怎么样"]
+	}, {
+		"taskID": 2,
+		"task": "Introduce your name",
+		"correct": true,
+		"attemptedAnswers": ["我叫李维"]
+	}, {
+		"taskID": 3,
+		"task": "Ask her for her name",
+		"correct": true,
+		"attemptedAnswers": ["你叫什么名字"]
+	}, {
+		"taskID": 23,
+		"task": "Ask what grade she is in",
+		"correct": true,
+		"attemptedAnswers": ["你上几年级"]
+	}, {
+		"taskID": 4,
+		"task": "Tell her you are also in 9th grade",
+		"correct": true,
+		"attemptedAnswers": ["我也上九年级"]
+	}, {
+		"taskID": 5,
+		"task": "Ask how many family members she has",
+		"correct": true,
+		"attemptedAnswers": ["你家有几个人"]
+	}, {
+		"taskID": 6,
+		"task": "Ask which grade her older brother is in",
+		"correct": true,
+		"attemptedAnswers": ["你哥哥上几年级"]
+	}, {
+		"taskID": 8,
+		"task": "Ask how old her younger sister is",
+		"correct": true,
+		"attemptedAnswers": ["你的妹妹几岁"]
+	}, {
+		"taskID": 9,
+		"task": "Respond to her compliment",
+		"correct": true,
+		"attemptedAnswers": ["哪里哪里"]
+	}, {
+		"taskID": 10,
+		"task": "Ask her how her English is",
+		"correct": true,
+		"attemptedAnswers": ["你的英文怎么样"]
+	}, {
+		"taskID": 11,
+		"task": "Ask what classes she takes this year",
+		"correct": true,
+		"attemptedAnswers": ["你今年上什么课"]
+	}, {
+		"taskID": 24,
+		"task": "Tell her you do not study French, but speak a little",
+		"correct": false,
+		"attemptedAnswers": ["我不", "我不学法语"]
+	}, {
+		"taskID": 12,
+		"task": "Respond to her question.",
+		"correct": false,
+		"attemptedAnswers": []
+	}, {
+		"taskID": 13,
+		"task": "Tell her your Chinese teacher is Ms. Zhang.",
+		"correct": true,
+		"attemptedAnswers": ["我的中文老师是张老师"]
+	}, {
+		"taskID": 14,
+		"task": "Tell her she is a good teacher.",
+		"correct": true,
+		"attemptedAnswers": ["他是一个好老师"]
+	}, {
+		"taskID": 15,
+		"task": "Ask what hobbies she has",
+		"correct": true,
+		"attemptedAnswers": ["你喜欢做什么"]
+	}, {
+		"taskID": 16,
+		"task": "Tell her you also like sports.",
+		"correct": true,
+		"attemptedAnswers": ["我也喜欢运动"]
+	}, {
+		"taskID": 17,
+		"task": "Tell her you also like watching TV and movies",
+		"correct": true,
+		"attemptedAnswers": ["我还喜欢看电视和电影"]
+	}, {
+		"taskID": 18,
+		"task": "Ask what sport she likes best.",
+		"correct": true,
+		"attemptedAnswers": ["你最喜欢什么运动"]
+	}, {
+		"taskID": 19,
+		"task": "Tell her you play it very well",
+		"correct": true,
+		"attemptedAnswers": ["不打得很好"]
+	}, {
+		"taskID": 20,
+		"task": "Ask if she wants to play ping pong with you this afternoon",
+		"correct": true,
+		"attemptedAnswers": ["今天下午你想和我一起打乒乓球吗"]
+	}, {
+		"taskID": 21,
+		"task": "Tell her 3:15.",
+		"correct": true,
+		"attemptedAnswers": ["三点一刻怎么样"]
+	}, {
+		"taskID": 22,
+		"task": "Respond appropriately!",
+		"correct": true,
+		"attemptedAnswers": ["好再见"]
+	}],
+	"activityID": "A1",
+	"activityName": "Pre-assessment - Chinese 1"
+}]
