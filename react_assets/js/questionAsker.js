@@ -54,6 +54,7 @@ var QuestionAsker = React.createClass({
 			currentTaskIndex: -1,
 			currentDialog: "",
 			currentRewindSoundID: "",
+			rewindSoundIScenarioIndex: "",
 			lastDialogText: "",
 			voicePack: {},
 			coins: 0,
@@ -747,6 +748,7 @@ var QuestionAsker = React.createClass({
 	nextScenario: function() {
 		var scenarioIndex = this.state.scenarioIndex;
 		var scenarioData = this.state.sceneData.scenario;
+
 		var storeRewindSound = function() {
 			if (scenarioData[this.state.scenarioIndex].saveSoundForRewind) {
 				this.setRewindScenarioSound(scenarioData[this.state.scenarioIndex].soundID);

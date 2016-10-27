@@ -108,6 +108,7 @@
 				currentTaskIndex: -1,
 				currentDialog: "",
 				currentRewindSoundID: "",
+				rewindSoundIScenarioIndex: "",
 				lastDialogText: "",
 				voicePack: {},
 				coins: 0,
@@ -783,6 +784,7 @@
 		nextScenario: function nextScenario() {
 			var scenarioIndex = this.state.scenarioIndex;
 			var scenarioData = this.state.sceneData.scenario;
+	
 			var storeRewindSound = function storeRewindSound() {
 				if (scenarioData[this.state.scenarioIndex].saveSoundForRewind) {
 					this.setRewindScenarioSound(scenarioData[this.state.scenarioIndex].soundID);
