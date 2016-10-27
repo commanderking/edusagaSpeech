@@ -54,6 +54,7 @@ var QuestionAsker = React.createClass({
 			currentTaskIndex: -1,
 			currentDialog: "",
 			currentRewindSoundID: "",
+			rewindSoundIScenarioIndex: "",
 			lastDialogText: "",
 			voicePack: {},
 			coins: 0,
@@ -379,8 +380,10 @@ var QuestionAsker = React.createClass({
 				setTimeout(function(){
 					// Turn off correct answer state
 					that.setState({correctAnswerState: false});
-					// Push this task into the completedTasks
-					newSceneData.character.completedTasks.push(currentTaskData);
+					// Push this task into the completedTasks IF COINS WERE EARNED
+					if (currentChoiceData.coins !== 0) {
+						newSceneData.character.completedTasks.push(currentTaskData);
+					}
 
 					// Remove the task from the tasks array
 					if (currentTaskData.taskType !== undefined) {
@@ -747,6 +750,7 @@ var QuestionAsker = React.createClass({
 	nextScenario: function() {
 		var scenarioIndex = this.state.scenarioIndex;
 		var scenarioData = this.state.sceneData.scenario;
+
 		var storeRewindSound = function() {
 			if (scenarioData[this.state.scenarioIndex].saveSoundForRewind) {
 				this.setRewindScenarioSound(scenarioData[this.state.scenarioIndex].soundID);

@@ -12,8 +12,7 @@
 	"assessmentMode": false,
 	"objectives" : 
 	[
-		"I can say hello and goodbye to someone my age or younger.", 
-		"I can respond to an introduction."
+		"I can understand when people introduce themselves."
 	],
 	"scenario" :
 	[	
@@ -82,7 +81,7 @@
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxWistfulGoodJob.png",
+			"image" : "characters/maxwell/maxWistfulRightAnswer.png",
 			"imageLayer" : "blank.png",
 			"text" : "Oh. So what's her name?",
 			"jumpToTasks" : true,
@@ -106,7 +105,7 @@
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxPanic.png",
+			"image" : "characters/maxwell/maxDistraught.png",
 			"imageLayer" : "blank.png",
 			"text" : "What's she saying now?",
 			"jumpToTasks" : true,
@@ -114,13 +113,13 @@
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxWistfulGoodJob.png",
+			"image" : "characters/maxwell/maxWistfulRightAnswer.png",
 			"imageLayer" : "blank.png",
 			"text" : "25 huh? That's 5 years older than I am."
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxWistfulGoodJob.png",
+			"image" : "characters/maxwell/maxDefault.png",
 			"imageLayer" : "blank.png",
 			"text" : "Oh, the next contestant is coming on. Listen to his singing [[link]] if you want. ",
 			"link" : {
@@ -154,7 +153,7 @@
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxDefaultThumbsup.png",
+			"image" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
 			"imageLayer" : "blank.png",
 			"text" : "Oh cool. It sounds just like his English name. Let's see what he says next."
 		},
@@ -175,7 +174,7 @@
 		},
 		{
 			"name" : "Max",
-			"image" : "characters/maxwell/maxDefaultThumbsup.png",
+			"image" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
 			"imageLayer" : "blank.png",
 			"text" : "Seems right.",
 			"index" : 20
