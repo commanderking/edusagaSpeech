@@ -162,6 +162,7 @@
 	blockquote {
 		border-left: solid 0.5em _palette(border);
 		font-style: italic;
+		font-weight: 300;
 		padding: 1em 0 1em 2em;
 	}
 	//not in use currently
@@ -171,7 +172,7 @@
 		//display: inline-block;
 		img {
 			text-align: center;
-			max-width: 80%;
+			max-width: 90%;
 		}
 			p {
 			max-width: 20%;
@@ -642,10 +643,12 @@
 		padding: 5em;
 
 		&.style1 {
-			padding: 0;
-			background-color: _palette(one, bg);
-			padding-bottom: 5em;
 			padding-top: 1em;
+			padding-right: 3em;
+			padding-left: 3em;
+			padding-bottom: 2em;
+			background-color: _palette(one, bg);
+			color: _palette(one, fg);
 			//margin-bottom: 0em;
 			//	so close to changing the size of the green here wheeee
 		}
@@ -1000,7 +1003,10 @@
 		//background-size: $pattern-background-size, $pattern-background-size, auto, cover;
 		color: _palette(banner, fg);
 		cursor: default;
-		padding: 2.5em 0;
+		padding-top: 2.5em;
+		padding-right: 0;
+		padding-left: 0;
+		padding-bottom: 0;
 		text-align: left;
 
 
@@ -1033,10 +1039,15 @@
 		.carousel-inner {
 			overflow: visible;
 			.item {
-				img {
-					width: 100%;
-					height: 100%;
+				.inner-item {
+					vertical-align: middle;
+					img {
+						width: 100%;
+						height: 100%;
+						//background-position: center;
+					}
 				}
+
 			}
 		}
 
@@ -1048,11 +1059,11 @@
 			color: _palette(banner, inner-fg);
 			display: inline-block;
 			opacity: 0;
-			padding: 3em;
+			padding: 2em;
 			margin-top: 2.5em;
 			margin-right: 3em;
 			margin-left: 3em;
-			margin-bottom: 2.5em;
+			margin-bottom: 1em;
 			text-align: left;
 			position: relative;
 			z-index: 10;
