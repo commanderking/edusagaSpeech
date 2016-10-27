@@ -163,12 +163,22 @@
 		border-left: solid 0.5em _palette(border);
 		font-style: italic;
 		padding: 1em 0 1em 2em;
-
-		&.blocknarrow {
-			max-width: 20%;
-		}
 	}
 	//not in use currently
+
+	#main-logo {
+		z-index: 1000;
+		//display: inline-block;
+		max-width: 20%;
+		img {
+			text-align: center;
+			max-width: 80%;
+		}
+			p {
+			max-width: 20%;
+				}
+
+	}
 
 
 
@@ -187,8 +197,8 @@
 		}
 
 		&.special{
-			margin-bottom: 4em;
-			padding-top: 1em;
+			margin-bottom: 3em;
+			padding-top: 1em !important;
 			position: relative;
 			text-align: center;
 			color: _palette(one, fg);
@@ -413,6 +423,12 @@
 					background: lighten(_palette(dribbble, bg), 4);
 				}
 			}
+
+			&.fa-cubes {
+				display: block;
+				padding: 5em;
+
+			}
 		}
 
 		&.featured {
@@ -571,8 +587,9 @@
 	.button {
 		@include vendor('appearance', 'none');
 		@include vendor('transition', ('color 0.2s ease-in-out', 'border-color 0.2s ease-in-out', 'background-color 0.2s ease-in-out'));
-		background: none;
+		background-color: orange;
 		border: solid 3px;
+		border-radius: 1em;
 		color: inherit;
 		cursor: pointer;
 		display: inline-block;
@@ -631,7 +648,7 @@
 			padding-bottom: 5em;
 			padding-top: 1em;
 			//margin-bottom: 0em;
-		//	so close to changing the size of the green here wheeee
+			//	so close to changing the size of the green here wheeee
 		}
 
 		&.style2 {
@@ -650,13 +667,6 @@
 			//this margin-bottom: 0; bit overrides the parent .wrapper's margin-bottom: 5em; without rewriting all wrappers!
 			color: _palette(one, fg);
 
-			&.major-image {
-				display: inline-block;
-				//position: absolute;
-				max-width: 20%;
-				max-height: 100%;
-			}
-
 			.blocknarrow {
 				display: inline-block;
 				max-width: 30%;
@@ -664,8 +674,71 @@
 
 			.major-image {
 				display: inline-block;
-				width: 70%;
+				width: 100%;
+				//text-align: right;
+				img {
+					width: 70%;
+					height: auto;
+				}
 
+			}
+
+			.button {
+				&:hover {
+					background: rgba(255, 255, 255, 0.15) !important;
+				}
+
+				&.special {
+					background: _palette(one, fg);
+					border-color: _palette(one, fg);
+					color: _palette(one, bg) !important;
+
+					&:hover {
+						border-color: inherit !important;
+						color: _palette(one, fg) !important;
+					}
+				}
+			}
+
+		}
+
+		&.style3 {
+			background: _palette(two, bg);
+			color: _palette(two, fg);
+		}
+
+		&.style4 {
+			background: _palette(two, bg);
+			color: _palette(two, fg);
+			padding: 4em;
+		}
+
+		&.style5 {
+			//background-color: _palette(one, bg);
+			background-image: url('images/light-bl.svg'), url('images/light-br.svg');
+			background-position: bottom left, bottom right;
+			background-repeat: no-repeat, no-repeat;
+			//background-size: $pattern-background-size, $pattern-background-size;
+			//width: 100%;
+			//height: 30em;
+			//margin-top: 0;
+			//margin-right: 0;
+			//margin-left: 0;
+			//margin-bottom: 0;
+			//This is where I caused the two wrapper.style2 sections on the main page to have no space between them
+			//this margin-bottom: 0; bit overrides the parent .wrapper's margin-bottom: 5em; without rewriting all wrappers!
+			color: _palette(one, fg);
+
+
+			.blocknarrow {
+				display: inline-block;
+				max-width: 25%;
+			}
+
+			.major-image {
+				display: inline-block;
+				width: 70%;
+				text-align: right;
 				img {
 					width: 100%;
 					height: auto;
@@ -690,51 +763,34 @@
 			}
 
 		}
-		&.style3 {
-			background: _palette(two, bg);
-			color: _palette(two, fg);
-		}
-
-		&.style4 {
-			background: _palette(two, bg);
-			color: _palette(two, fg);
-			padding: 4em;
-		}
-		&.style5 {
-			//background-color: _palette(onepointfive, bg);
-			background-image: url('images/light-bl.svg'), url('images/light-br.svg');
-			background-position: bottom left, bottom right;
-			background-repeat: no-repeat, no-repeat;
-			background-size: $pattern-background-size, $pattern-background-size;
-			//width: 100%;
-			//height: 30em;
-			//margin-top: 0;
-			//margin-right: 0;
-			//margin-left: 0;
-			margin-bottom: 0;
-			// color: _palette(onepointfive, fg);
-			//.style2 and style5 are identical but for color. I bet there was a better way with nested alternate children!!
-		}
 	}
-
-
 /* Header */
 
 	@include keyframes('reveal-header') {
 		0% { top: -5em; }
 		100% { top: 0; }
 	}
+	//#logo {
+	//	display: inline-block;
+	//	font-family: 'Biryani', sans-serif;
+	//	width: 10%;
+    //
+	//}
+
 	#logo {
 		display: inline-block;
-		font-family: 'Biryani', sans-serif;
-		//border: solid 1px black;
+		width: 20%;
+			img {
+				width: 15%;
+				height: auto;
 
+			}
 	}
 	#header {
 		background: _palette(header, bg);
 		opacity: .5;
 		box-shadow: 0 1px 2px 0 rgba(0,0,0,0.075);
-		color: _palette(header, fg);
+		color: _palette(header, bg);
 		cursor: default;
 		font-size: 0.8em;
 		left: 0;
@@ -765,7 +821,8 @@
 			//top: -5em;
 			position: absolute;
 			//right: 3em;
-			//text-transform: uppercase;
+			text-transform: uppercase;
+			font-size: 1em;
 			//top: 0.75em;
 
 
@@ -845,18 +902,18 @@
 
 		&.alt {
 			@include vendor('animation', 'none');
-			background: _palette(header, alt-bg);
+			background: _palette(header, bg);
 			box-shadow: none;
-			color: _palette(header, alt-fg);
+			color: _palette(header, fg);
 			padding-top: 1em;
 			padding-right: 2.5em;
 			padding-left: 2.5em;
-			padding-bottom: 1em;
+			padding-bottom: 0;
 			position: absolute;
 
 			nav {
 				right: 2.5em;
-				top: 1em;
+				top: .75em;
 				//because it's alt, this is actually what affects the nav, I think, and maybe why I felt crazy.
 
 				ul {
@@ -996,7 +1053,7 @@
 			margin-top: 2.5em;
 			margin-right: 3em;
 			margin-left: 3em;
-			margin-bottom: 0;
+			margin-bottom: 2.5em;
 			text-align: left;
 			position: relative;
 			z-index: 10;
@@ -1007,11 +1064,11 @@
 
 			header {
 				display: inline-block;
-				border-bottom: solid 2px;
 				border-top-width: 2px;
 				border-top-style: solid;
 				margin: 0 0 2em 0;
 				padding: 3px 0 3px 0;
+
 
 				h2 {
 					border-bottom: solid 5px;
