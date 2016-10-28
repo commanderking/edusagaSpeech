@@ -173,7 +173,7 @@
 						{
 							"answers": ["你是不是中国人", "你是中国人吗"],
 							"response": "猜对了! 我是中国人。 我爸爸也是中国人，可是我妈妈不是中国人。",
-							"soundID": "family-guessed-right"
+							"soundID": "nationality-guess-right-dad-is-chinese-mom-not"
 						}
 					],
 					"correct" : false,
@@ -484,7 +484,7 @@
 					[
 						{
 							"answers": ["你的爸爸做什么工作"],
-							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见! ",
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸来接我了. 明天见! ",
 							"soundID": "family-dad-teacher-bzz-got-to-go"
 						},
 						{
@@ -493,7 +493,7 @@
 								["做什么"],
 								["工作", "事"]
 							],
-							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸来接我了. 明天见!",
 							"soundID": "family-dad-teacher-bzz-got-to-go"
 						},
 						{
@@ -503,12 +503,12 @@
 								["什么", "哪个", "哪一个"],
 								["行业"]
 							],
-							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸来接我了. 明天见!",
 							"soundID": "family-dad-teacher-bzz-got-to-go"
 						},
 						{
 							"answers": ["你爸呢", "你爸爸呢"],
-							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸爸来接我了. 明天见!",
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸来接我了. 明天见!",
 							"soundID": "family-dad-teacher-bzz-got-to-go"
 						}
 					],

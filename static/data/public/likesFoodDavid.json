@@ -112,6 +112,11 @@
 							"answers" : ["你好"],
 							"response" : "你好!",
 							"soundID" : "nihao"
+						},
+						{
+							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+							"response": "非常好",
+							"soundID": "feichanghao"
 						}
 					],
 					"correct" : false,
@@ -129,7 +134,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢吃美国菜吗", "你喜欢美国菜吗"],
+							"answers" : ["你喜欢吃美国菜吗", "你喜欢美国菜吗", "美国菜呢"],
 							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
 							"soundID" : "likes-american-food"
 						},
@@ -160,7 +165,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢吃日本菜吗", "你喜欢日本菜吗"],
+							"answers" : ["你喜欢吃日本菜吗", "你喜欢日本菜吗", "日本菜呢"],
 							"response" : "我喜欢吃日本菜! 我爱吃寿司...",
 							"soundID" : "likes-japanese-food"
 						},
@@ -191,7 +196,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢吃韩国菜吗", "你喜欢韩国菜吗"],
+							"answers" : ["你喜欢吃韩国菜吗", "你喜欢韩国菜吗", "韩国菜呢"],
 							"response" : "韩国菜。。。 我不喜欢吃韩国菜。太辣了。",
 							"soundID" : "dislikes-korean-food"
 						},
@@ -224,7 +229,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢吃中国菜吗", "你喜欢中国菜吗"],
+							"answers" : ["你喜欢吃中国菜吗", "你喜欢中国菜吗", "中国菜呢"],
 							"response" : "我爱吃中国菜!!! 你喜欢吃中国菜吗?",
 							"soundID" : "likes-chinese-food-do-you"
 						},
@@ -256,7 +261,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢吃越南菜吗", "你喜欢越南菜吗"],
+							"answers" : ["你喜欢吃越南菜吗", "你喜欢越南菜吗", "越南菜呢"],
 							"response" : "越南菜...还可以吧. 我很喜欢吃 Pho.",
 							"soundID" : "likes-vietnamese-ok"
 						},
@@ -289,7 +294,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["你喜欢吃墨西哥菜吗", "你喜欢墨西哥菜吗"],
+							"answers" : ["你喜欢吃墨西哥菜吗", "你喜欢墨西哥菜吗", "墨西哥菜呢"],
 							"response" : "墨西哥菜很好吃啊! 你呢？ 你喜不喜欢吃墨西哥菜?",
 							"soundID" : "likes-mexican-food"
 						},

@@ -149,7 +149,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -174,7 +174,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [41],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
