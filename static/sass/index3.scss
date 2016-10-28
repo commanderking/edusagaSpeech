@@ -475,6 +475,7 @@
 
 		&.icons {
 			cursor: default;
+			margin-bottom: 25px;
 
 			li {
 				display: inline-block;
@@ -649,6 +650,8 @@
 			padding-bottom: 2em;
 			background-color: _palette(one, bg);
 			color: _palette(one, fg);
+			width: 100%;
+			margin-bottom: 0em;
 			//margin-bottom: 0em;
 			//	so close to changing the size of the green here wheeee
 		}
@@ -659,7 +662,7 @@
 			background-position: bottom left, bottom right;
 			background-repeat: no-repeat, no-repeat;
 			//background-size: $pattern-background-size, $pattern-background-size;
-			//width: 100%;
+			width: 100%;
 			//height: 30em;
 			//margin-top: 0;
 			//margin-right: 0;
@@ -702,11 +705,18 @@
 				}
 			}
 
+			// For character images 
+			#charImage {
+				display: inline-block;
+				width: 32%;
+			}
+
 		}
 
 		&.style3 {
 			background: _palette(two, bg);
 			color: _palette(two, fg);
+			width: 100%;
 		}
 
 		&.style4 {
@@ -726,7 +736,9 @@
 			//margin-top: 0;
 			//margin-right: 0;
 			//margin-left: 0;
-			//margin-bottom: 0;
+			margin-bottom: 0;
+			padding-bottom: 0em;
+			padding-top: 1em;
 			//This is where I caused the two wrapper.style2 sections on the main page to have no space between them
 			//this margin-bottom: 0; bit overrides the parent .wrapper's margin-bottom: 5em; without rewriting all wrappers!
 			color: _palette(one, fg);
@@ -734,7 +746,8 @@
 
 			.blocknarrow {
 				display: inline-block;
-				max-width: 25%;
+				max-width: 30%;
+				vertical-align: top;
 			}
 
 			.major-image {
@@ -762,6 +775,10 @@
 						color: _palette(one, fg) !important;
 					}
 				}
+			}
+
+			#charImage {
+				display: inline-block;
 			}
 
 		}
@@ -1008,6 +1025,7 @@
 		padding-left: 0;
 		padding-bottom: 0;
 		text-align: left;
+		position: relative;
 
 
 		.main-image {
@@ -1028,7 +1046,7 @@
 			top: 0em;
 			width: 100%;
 			overflow: hidden;
-			height: 625px;
+			height: 100%;
 			.left-carousel-control {
 				z-index: 10;
 			}
@@ -1038,14 +1056,22 @@
 		}
 		.carousel-inner {
 			overflow: visible;
+			height: 100%;
 			.item {
+				height: 100%;
 				.inner-item {
 					vertical-align: middle;
 					img {
 						width: 100%;
-						height: 100%;
+						height: 50%;
+						vertical-align: middle;
 						//background-position: center;
 					}
+				}
+				.helper {
+				    display: inline-block;
+				    height: 100%;
+				    vertical-align: middle;
 				}
 
 			}
@@ -1124,6 +1150,7 @@
 		background-repeat: no-repeat;
 		background-size: $pattern-background-size;
 		padding: 7em 0;
+		padding-bottom: 0;
 
 		> :last-child {
 			margin-bottom: 0;
