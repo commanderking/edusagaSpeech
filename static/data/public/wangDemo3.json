@@ -175,7 +175,7 @@
 				},
 				{
 					"taskID" : 30,
-					"task" : "Ask him when his sister's birthday is",
+					"task" : "Ask him when his YOUNGER sister's birthday is",
 					"possibleAnswers" : 
 					[
 						{

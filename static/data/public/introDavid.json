@@ -123,7 +123,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -160,7 +160,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [22],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -188,7 +188,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我叫", "我是"],
+							"answers" : ["我叫", "我是", "我的名字叫", "我的名字是"],
 							"response" : "哦。 很高兴认识你。",
 							"soundID" : "intro-oh-nice-to-meet-you"
 						}
