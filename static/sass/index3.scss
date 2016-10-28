@@ -1502,6 +1502,22 @@
 			#banner {
 				//background-size:cover;
 				margin: 0;
+				padding-bottom: 5px;
+				#carousel-example-generic {
+					display: none
+				}
+				.inner {
+					max-width: 100%;
+					#main-logo {
+						width: 100%;
+						img {
+							width: 50%;
+						}
+					}
+					footer {
+						margin-bottom: 10px;
+					}
+				}
 			}
 
 		/* Wrapper */
