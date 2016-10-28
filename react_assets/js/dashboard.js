@@ -66,19 +66,7 @@ var Dashboard = React.createClass({
 					        return aA > bA ? 1 : -1;
 					    }
 					}
-
 					activityData.sort(sortStudentID);
-
-					/*
-					activityData.sort(function(a,b) {
-						if (a.studentID < b.studentID) {
-							return -1;
-						} else if (a.studentID > b.studentID) {
-							return 1;
-						}
-						return 0;
-					})
-*/
 				})
 				that.setState({activityData: activityData});
 			})
@@ -110,22 +98,45 @@ var Dashboard = React.createClass({
 
 
 			// Create task data based on one student's activity data
-			var taskDataForIndividualStudent = this.state.activityData[0].allTaskData.map(function(task, i) {
-				var attemptedAnswersString = task.attemptedAnswers.map(function(answer, i) {
-					return answer + ", "; 
-				});
-				var taskCorrect = task.correct ? <span className="glyphicon glyphicon-ok" aria-hidden="true"></span> :
-												<span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+
+			// Create task data for all students and their individual activity data
+			var taskDataForAllIndvidiualStudents = this.state.activityData.map(function(student, i){
+				var taskDataForIndividualStudent = that.state.activityData[i].allTaskData.map(function(task, j) {
+					var attemptedAnswersString = task.attemptedAnswers.map(function(answer, i) {
+						return answer + ", "; 
+					});
+					var taskCorrect = task.correct ? <span className="glyphicon glyphicon-ok" aria-hidden="true"></span> :
+													<span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					return (
+						<tr key={j}>
+							<td>{task.task}</td>
+							<td>{taskCorrect}</td>
+							<td>0</td>
+							<td>{task.attemptedAnswers.length}</td>
+							<td>{attemptedAnswersString}</td>
+						</tr>
+					)
+				})
 				return (
-					<tr key={i}>
-						<td>{task.task}</td>
-						<td>{taskCorrect}</td>
-						<td>0</td>
-						<td>{task.attemptedAnswers.length}</td>
-						<td>{attemptedAnswersString}</td>
-					</tr>
+					<div key={i}> 
+						<h1>{student.studentID}</h1>
+						<table className="table table-striped">
+							<tbody>
+								<tr>
+									<th>Task</th>
+									<th>Correct</th>
+									<th>Hint Used</th>
+									<th>Attempts</th>
+									<th>Attempted Phrases</th>
+								</tr>
+								{taskDataForIndividualStudent}
+							</tbody>
+						</table>
+					</div>
 				)
-			})
+
+			});
+
 
 			/*--------------------------------------------
 			Create task data based on aggregate student data
@@ -192,19 +203,7 @@ var Dashboard = React.createClass({
 						</tbody>
 					</table>
 
-					<h1>Student Activity Data - Individual!</h1>
-					<table className="table table-striped">
-						<tbody>
-							<tr>
-								<th>Task</th>
-								<th>Correct</th>
-								<th>Hint Used</th>
-								<th>Attempts</th>
-								<th>Attempted Phrases</th>
-							</tr>
-							{taskDataForIndividualStudent}
-						</tbody>
-					</table>
+					{taskDataForAllIndvidiualStudents}
 					<h1>Student Activity Data - Aggregate!</h1>
 					<table className="table table-striped">
 						<tbody>

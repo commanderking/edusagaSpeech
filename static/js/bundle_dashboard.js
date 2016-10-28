@@ -117,19 +117,7 @@
 							return aA > bA ? 1 : -1;
 						}
 					}
-	
 					activityData.sort(sortStudentID);
-	
-					/*
-	    activityData.sort(function(a,b) {
-	    	if (a.studentID < b.studentID) {
-	    		return -1;
-	    	} else if (a.studentID > b.studentID) {
-	    		return 1;
-	    	}
-	    	return 0;
-	    })
-	    */
 				});
 				that.setState({ activityData: activityData });
 			});
@@ -170,38 +158,89 @@
 				console.log(avg);
 	
 				// Create task data based on one student's activity data
-				var taskDataForIndividualStudent = this.state.activityData[0].allTaskData.map(function (task, i) {
-					var attemptedAnswersString = task.attemptedAnswers.map(function (answer, i) {
-						return answer + ", ";
+	
+				// Create task data for all students and their individual activity data
+				var taskDataForAllIndvidiualStudents = this.state.activityData.map(function (student, i) {
+					var taskDataForIndividualStudent = that.state.activityData[i].allTaskData.map(function (task, j) {
+						var attemptedAnswersString = task.attemptedAnswers.map(function (answer, i) {
+							return answer + ", ";
+						});
+						var taskCorrect = task.correct ? React.createElement('span', { className: 'glyphicon glyphicon-ok', 'aria-hidden': 'true' }) : React.createElement('span', { className: 'glyphicon glyphicon-remove', 'aria-hidden': 'true' });
+						return React.createElement(
+							'tr',
+							{ key: j },
+							React.createElement(
+								'td',
+								null,
+								task.task
+							),
+							React.createElement(
+								'td',
+								null,
+								taskCorrect
+							),
+							React.createElement(
+								'td',
+								null,
+								'0'
+							),
+							React.createElement(
+								'td',
+								null,
+								task.attemptedAnswers.length
+							),
+							React.createElement(
+								'td',
+								null,
+								attemptedAnswersString
+							)
+						);
 					});
-					var taskCorrect = task.correct ? React.createElement('span', { className: 'glyphicon glyphicon-ok', 'aria-hidden': 'true' }) : React.createElement('span', { className: 'glyphicon glyphicon-remove', 'aria-hidden': 'true' });
 					return React.createElement(
-						'tr',
+						'div',
 						{ key: i },
 						React.createElement(
-							'td',
+							'h1',
 							null,
-							task.task
+							student.studentID
 						),
 						React.createElement(
-							'td',
-							null,
-							taskCorrect
-						),
-						React.createElement(
-							'td',
-							null,
-							'0'
-						),
-						React.createElement(
-							'td',
-							null,
-							task.attemptedAnswers.length
-						),
-						React.createElement(
-							'td',
-							null,
-							attemptedAnswersString
+							'table',
+							{ className: 'table table-striped' },
+							React.createElement(
+								'tbody',
+								null,
+								React.createElement(
+									'tr',
+									null,
+									React.createElement(
+										'th',
+										null,
+										'Task'
+									),
+									React.createElement(
+										'th',
+										null,
+										'Correct'
+									),
+									React.createElement(
+										'th',
+										null,
+										'Hint Used'
+									),
+									React.createElement(
+										'th',
+										null,
+										'Attempts'
+									),
+									React.createElement(
+										'th',
+										null,
+										'Attempted Phrases'
+									)
+								),
+								taskDataForIndividualStudent
+							)
 						)
 					);
 				});
@@ -328,49 +367,7 @@
 							studentActivityData
 						)
 					),
-					React.createElement(
-						'h1',
-						null,
-						'Student Activity Data - Individual!'
-					),
-					React.createElement(
-						'table',
-						{ className: 'table table-striped' },
-						React.createElement(
-							'tbody',
-							null,
-							React.createElement(
-								'tr',
-								null,
-								React.createElement(
-									'th',
-									null,
-									'Task'
-								),
-								React.createElement(
-									'th',
-									null,
-									'Correct'
-								),
-								React.createElement(
-									'th',
-									null,
-									'Hint Used'
-								),
-								React.createElement(
-									'th',
-									null,
-									'Attempts'
-								),
-								React.createElement(
-									'th',
-									null,
-									'Attempted Phrases'
-								)
-							),
-							taskDataForIndividualStudent
-						)
-					),
+					taskDataForAllIndvidiualStudents,
 					React.createElement(
 						'h1',
 						null,
