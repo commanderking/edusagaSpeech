@@ -68,6 +68,7 @@
 
 	body {
 		background: _palette(bg);
+		height: 100vh;
 
 		&.is-loading {
 			*, *:before, *:after {
@@ -1060,10 +1061,11 @@
 			.item {
 				height: 100%;
 				.inner-item {
+					height: 100%;
 					vertical-align: middle;
 					img {
 						width: 100%;
-						height: 50%;
+						height: 110%;
 						vertical-align: middle;
 						//background-position: center;
 					}
