@@ -19,8 +19,8 @@
 
 // Palette.
 	$palette: (
-		bg:				#59658D,
-		fg:				#7c8081,
+		bg:				#fff,
+		fg:				#3D6673,
 		border:			transparentize(#7c8081, 0.8),
 
 		header: (
@@ -43,13 +43,13 @@
 		),
 
 		one: (
-			bg:			#83d3c9,
+			bg:			#38C6F3,
 			fg:			#fff
 						//This is for that first visible block below the banner
 		),
 
 		onepointfive: (
-			bg:			none,
+			bg:			#3D6673,
 			fg:			#fff
 						//This is for the second one I hacked in there. I bet this is ugly!
 		),
