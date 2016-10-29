@@ -1073,7 +1073,8 @@
 			top: 0em;
 			width: 100%;
 			overflow: hidden;
-			height: 120%;
+			height: 100%;
+			// should be 120% based on Mel's requests, but covers div below if so
 			.left-carousel-control {
 				z-index: 10;
 			}
@@ -1177,7 +1178,7 @@
 		background-position: top left, top right, bottom left, bottom right;
 		background-repeat: no-repeat;
 		background-size: $pattern-background-size;
-		padding: 7em 0;
+		padding: 0 0;
 		padding-bottom: 0;
 
 		> :last-child {
@@ -1219,6 +1220,89 @@
 
 		header {
 			margin-bottom: 2em;
+		}
+
+		form {
+			padding: 30px;
+			.form-group {
+				width: 80%;
+				color: black;
+				max-width: 300px;
+				min-width: 100px;
+				margin: auto;
+				text-align: center;
+				input {
+					width: 100%;
+					background-color: white;
+					height: 57px;
+					border: solid 3px;
+					border-radius: 1em;
+					color: inherit;
+					cursor: pointer;
+					display: inline-block;
+					font-size: 0.8em;
+					font-weight: 900;
+					letter-spacing: 2px;
+					min-width: 15em;
+					padding: 0 0.75em;
+					line-height: 3.75em;
+
+				}
+			}
+			button {
+					@include vendor('appearance', 'none');
+					@include vendor('transition', ('color 0.2s ease-in-out', 'border-color 0.2s ease-in-out', 'background-color 0.2s ease-in-out'));
+					background-color: orange;
+					border: solid 3px;
+					border-radius: 1em;
+					color: inherit;
+					cursor: pointer;
+					display: inline-block;
+					font-size: 0.8em;
+					font-weight: 900;
+					letter-spacing: 2px;
+					min-width: 12em;
+					padding: 0 0.75em;
+					line-height: 3.75em;
+					text-align: center;
+					text-decoration: none;
+					text-transform: uppercase;
+					margin: auto;
+					//this includes a LOT of the formatting for button.fit.scrolly, the button contained in .inner
+					//important to note: some other styling may come from it's parent buttons.vertical near line 501
+
+					&:hover {
+						background: rgba(188,202,206,0.15);
+						//this is where I can change the color of the button on hover
+						border-color: inherit;
+						//Initially it turns dark blue; from whence does it inherit?
+					}
+
+					&.special {
+						background-color: orange;
+						//border-color: _palette(one, bg);
+						color: _palette(one, fg) !important;
+						//on initial load, the button in the upper right is orange. But on reload it reverts to green, even though above, the inherited color still seems to be orange.
+
+
+						&:hover {
+							background: lighten(_palette(one, bg), 5) !important;
+							border-color: lighten(_palette(one, bg), 5) !important;
+						}
+					//	this hover-action is reserved for .button.special, not .button
+					}
+
+					&.fit {
+						width:100%;
+					}
+					//the button in .inner is a.button.fit.scrolly  the fit literally just refers to it taking up 100% of the parent, which is a paragraph above it, I think.
+
+					&.small {
+						font-size: 0.7em;
+						min-width: 14em;
+						padding: 0.5em 0;
+					}
+				}
 		}
 	}
 
