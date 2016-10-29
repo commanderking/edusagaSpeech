@@ -1503,6 +1503,10 @@
 				//I think the above is written for four separate images/files that the template referenced, but now I'm only using one.
 				background-size: cover;
 				background-position: 100% 50%;
+
+				footer {
+					width: 50%;
+				}
 			}
 
 		/* Main */
