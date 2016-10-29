@@ -70,7 +70,7 @@ def index(name="Index", activityName="index", teacher="jinlaoshi"):
 		userID = session['userID']
 	except:
 		userID = uuid.uuid4()
-	return render_template('index.html', name=name, activityName=activityName, teacher=teacher, userID=userID)
+	return render_template('index3.html', name=name, activityName=activityName, teacher=teacher, userID=userID)
 
 @app.route('/test')
 def index2(name="Index"):
