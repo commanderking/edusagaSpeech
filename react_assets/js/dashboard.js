@@ -118,9 +118,9 @@ var Dashboard = React.createClass({
 					)
 				})
 				return (
-					<div key={i}> 
-						<h1>{student.studentID}</h1>
-						<table className="table table-striped">
+					<div className="individualTaskResults" key={i}> 
+						<h2>{student.studentID}</h2>
+						<table className="individualTaskTable table table-striped">
 							<tbody>
 								<tr>
 									<th>Task</th>
@@ -164,13 +164,22 @@ var Dashboard = React.createClass({
 				})
 				taskObject.totalCorrect = taskCorrectTally;
 				taskObject.totalStudents = totalStudents;
-				taskObject.percentageCorrect = Math.floor(taskCorrectTally/totalStudents * 100) + "%";
+				taskObject.percentageInteger = Math.floor(taskCorrectTally/totalStudents * 100);
+				taskObject.percentageCorrect = taskObject.percentageInteger + "%";
 				return taskObject;
 			});
 
 			var taskDataAggregateTable = taskDataAggregate.map(function(taskObject, i) {
+				var classColor;
+				if (taskObject.percentageInteger >= 80) {
+					classColor = "green";
+				} else if (taskObject.percentageInteger >=60) {
+					classColor = "yellow"
+				} else {
+					classColor = "red"
+				}
 				return (
-					<tr key={i}>
+					<tr key={i} className={classColor}>
 						<td>{taskObject.taskText}</td>
 						<td>{taskObject.totalCorrect} / {taskObject.totalStudents} ({taskObject.percentageCorrect})</td>
 						<td>0</td>
@@ -180,20 +189,9 @@ var Dashboard = React.createClass({
 			})
 
 			return (
-				<div>
-					<h1>Average Score </h1>
-					<table className="table table-striped">
-						<tbody>
-							<tr>
-								<th>Student ID</th>
-								<th>Activity 1</th>
-							</tr>
-							{studentActivityData}
-						</tbody>
-					</table>
-
+				<div className="resultsContainer">
 					<h1>Activity Data!</h1>
-					<table className="table table-striped">
+					<table className="averageScoreTable table table-striped">
 						<tbody>
 							<tr>
 								<th>Student ID</th>
@@ -203,9 +201,8 @@ var Dashboard = React.createClass({
 						</tbody>
 					</table>
 
-					{taskDataForAllIndvidiualStudents}
-					<h1>Student Activity Data - Aggregate!</h1>
-					<table className="table table-striped">
+					<h1>Student Performance on Each Task - Activity 1</h1>
+					<table className="taskTable table table-striped">
 						<tbody>
 							<tr>
 								<th>Task</th>
@@ -216,6 +213,10 @@ var Dashboard = React.createClass({
 							{taskDataAggregateTable}
 						</tbody>
 					</table>
+
+					<h1>Individual Data for Students</h1>
+					{taskDataForAllIndvidiualStudents}
+
 				</div>
 			)
 		}

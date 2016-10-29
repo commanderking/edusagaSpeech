@@ -1,0 +1,45 @@
+
+// Row colors to highlight good, ok, poor performance
+$greenSuccess: #77dd77;
+$yellowOk: #fdfd96;
+$redNeedsImprovement: #FF6961;
+
+.resultsContainer {
+	padding: 20px;
+	text-align: center;
+	table {
+		margin: auto;
+		th {
+			text-align: left;
+		}
+	}
+}
+
+
+.averageScoreTable {
+	width: 35%;
+	text-align: center;
+	th {
+		text-align: center;
+	}
+}
+
+.taskTable {
+	width: 70%;
+}
+
+.individualTaskTable {
+	width: 70%;
+}
+
+tbody {
+	.red {
+		background-color: $redNeedsImprovement;
+	}
+	.green {
+		background-color: $greenSuccess;
+	}
+	.yellow {
+		background-color: $yellowOk;
+	}
+}

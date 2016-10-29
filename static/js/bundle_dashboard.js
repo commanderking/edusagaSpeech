@@ -198,15 +198,15 @@
 					});
 					return React.createElement(
 						'div',
-						{ key: i },
+						{ className: 'individualTaskResults', key: i },
 						React.createElement(
-							'h1',
+							'h2',
 							null,
 							student.studentID
 						),
 						React.createElement(
 							'table',
-							{ className: 'table table-striped' },
+							{ className: 'individualTaskTable table table-striped' },
 							React.createElement(
 								'tbody',
 								null,
@@ -271,14 +271,23 @@
 					});
 					taskObject.totalCorrect = taskCorrectTally;
 					taskObject.totalStudents = totalStudents;
-					taskObject.percentageCorrect = Math.floor(taskCorrectTally / totalStudents * 100) + "%";
+					taskObject.percentageInteger = Math.floor(taskCorrectTally / totalStudents * 100);
+					taskObject.percentageCorrect = taskObject.percentageInteger + "%";
 					return taskObject;
 				});
 	
 				var taskDataAggregateTable = taskDataAggregate.map(function (taskObject, i) {
+					var classColor;
+					if (taskObject.percentageInteger >= 80) {
+						classColor = "green";
+					} else if (taskObject.percentageInteger >= 60) {
+						classColor = "yellow";
+					} else {
+						classColor = "red";
+					}
 					return React.createElement(
 						'tr',
-						{ key: i },
+						{ key: i, className: classColor },
 						React.createElement(
 							'td',
 							null,
@@ -309,35 +318,7 @@
 	
 				return React.createElement(
 					'div',
-					null,
-					React.createElement(
-						'h1',
-						null,
-						'Average Score '
-					),
-					React.createElement(
-						'table',
-						{ className: 'table table-striped' },
-						React.createElement(
-							'tbody',
-							null,
-							React.createElement(
-								'tr',
-								null,
-								React.createElement(
-									'th',
-									null,
-									'Student ID'
-								),
-								React.createElement(
-									'th',
-									null,
-									'Activity 1'
-								)
-							),
-							studentActivityData
-						)
-					),
+					{ className: 'resultsContainer' },
 					React.createElement(
 						'h1',
 						null,
@@ -345,7 +326,7 @@
 					),
 					React.createElement(
 						'table',
-						{ className: 'table table-striped' },
+						{ className: 'averageScoreTable table table-striped' },
 						React.createElement(
 							'tbody',
 							null,
@@ -367,15 +348,14 @@
 							studentActivityData
 						)
 					),
-					taskDataForAllIndvidiualStudents,
 					React.createElement(
 						'h1',
 						null,
-						'Student Activity Data - Aggregate!'
+						'Student Performance on Each Task - Activity 1'
 					),
 					React.createElement(
 						'table',
-						{ className: 'table table-striped' },
+						{ className: 'taskTable table table-striped' },
 						React.createElement(
 							'tbody',
 							null,
@@ -405,7 +385,13 @@
 							),
 							taskDataAggregateTable
 						)
-					)
+					),
+					React.createElement(
+						'h1',
+						null,
+						'Individual Data for Students'
+					),
+					taskDataForAllIndvidiualStudents
 				);
 			}
 		}
