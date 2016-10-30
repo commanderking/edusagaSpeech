@@ -10,15 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5412198-3326-492a-8328-90ee9d138e30" name="Default" comment="Merge branch 'master' of https://github.com/commanderking/edusagaSpeech&#10;&#10;# Conflicts:&#10;#&#9;static/css/main.css&#10;">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index3.css" afterPath="$PROJECT_DIR$/static/css/index3.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/main.css" afterPath="$PROJECT_DIR$/static/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_dashboard.js" afterPath="$PROJECT_DIR$/static/js/bundle_dashboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_index.js" afterPath="$PROJECT_DIR$/static/js/bundle_index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_mainMenu.js" afterPath="$PROJECT_DIR$/static/js/bundle_mainMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" afterPath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/sass/index3.scss" afterPath="$PROJECT_DIR$/static/sass/index3.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/sass/libs/_vars.scss" afterPath="$PROJECT_DIR$/static/sass/libs/_vars.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index3.html" afterPath="$PROJECT_DIR$/templates/index3.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack-stats.json" afterPath="$PROJECT_DIR$/webpack-stats.json" />
     </list>
@@ -42,22 +36,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index3.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index3.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="151" column="42" selection-start-line="151" selection-start-column="42" selection-end-line="151" selection-end-column="42" />
+            <state relative-caret-position="240">
+              <caret line="362" column="15" selection-start-line="362" selection-start-column="15" selection-end-line="365" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index3.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index3.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/sass/index3.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="1070" column="17" selection-start-line="1070" selection-start-column="9" selection-end-line="1070" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="463">
+              <caret line="1174" column="0" selection-start-line="1174" selection-start-column="0" selection-end-line="1174" selection-end-column="0" />
+              <folding>
+                <marker date="1477747615000" expanded="true" signature="16471:17048" ph="{...}" />
+                <marker date="1477747615000" expanded="true" signature="16732:16826" ph="{...}" />
+                <marker date="1477747615000" expanded="true" signature="16793:16821" ph="{...}" />
+                <marker date="1477747615000" expanded="true" signature="16834:17048" ph="{...}" />
+                <marker date="1477747615000" expanded="true" signature="31908:31914" ph="{...}" />
+                <marker date="1477747615000" expanded="true" signature="31908:34991" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -91,9 +92,9 @@
         <option value="$PROJECT_DIR$/templates/index2.html" />
         <option value="$PROJECT_DIR$/static/sass/main.scss" />
         <option value="$PROJECT_DIR$/static/css/main.css" />
-        <option value="$PROJECT_DIR$/templates/index3.html" />
         <option value="$PROJECT_DIR$/static/sass/libs/_vars.scss" />
         <option value="$PROJECT_DIR$/static/sass/index3.scss" />
+        <option value="$PROJECT_DIR$/templates/index3.html" />
       </list>
     </option>
   </component>
@@ -905,14 +906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="151" column="42" selection-start-line="151" selection-start-column="42" selection-end-line="151" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/sass/libs/_vars.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
@@ -923,8 +916,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/sass/index3.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="1070" column="17" selection-start-line="1070" selection-start-column="9" selection-end-line="1070" selection-end-column="17" />
+        <state relative-caret-position="463">
+          <caret line="1174" column="0" selection-start-line="1174" selection-start-column="0" selection-end-line="1174" selection-end-column="0" />
+          <folding>
+            <marker date="1477747615000" expanded="true" signature="16471:17048" ph="{...}" />
+            <marker date="1477747615000" expanded="true" signature="16732:16826" ph="{...}" />
+            <marker date="1477747615000" expanded="true" signature="16793:16821" ph="{...}" />
+            <marker date="1477747615000" expanded="true" signature="16834:17048" ph="{...}" />
+            <marker date="1477747615000" expanded="true" signature="31908:31914" ph="{...}" />
+            <marker date="1477747615000" expanded="true" signature="31908:34991" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="362" column="15" selection-start-line="362" selection-start-column="15" selection-end-line="365" selection-end-column="22" />
           <folding />
         </state>
       </provider>
