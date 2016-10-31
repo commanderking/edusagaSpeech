@@ -59,13 +59,29 @@
 			return {
 				gradebookData: {},
 				taskData: {},
-				activityData: null
+				activityData: null,
+				totalScore: 0
 			};
+		},
+		scoreToColor: function scoreToColor(score, maxScore) {
+			var decimalScore = score / maxScore;
+			if (decimalScore >= .80) {
+				return "green";
+			} else if (decimalScore >= .60) {
+				return "yellow";
+			} else if (decimalScore >= .40) {
+				return "orange";
+			} else {
+				return "red";
+			}
 		},
 		loadDashboard: function loadDashboard() {
 			var that = this;
 			// Get all JSON for all activities in the teacher's data folder
 			$.getJSON("/static/data/" + teacher + "/studentData/" + "sampleData.json", function (data) {}).success(function (data) {
+				// Check total possible score based on length of task array
+				var totalPossibleScore = data[0].allTaskData.length;
+	
 				// Narrow all entries to one entry / student
 				var activityData = [];
 				data.forEach(function (studentResponse, i) {
@@ -101,11 +117,8 @@
 					var reA = /[^a-zA-Z]/g;
 					var reN = /[^0-9]/g;
 					function sortStudentID(a, b) {
-						console.log(a);
 						a = String(a.studentID);
 						b = String(b.studentID);
-						console.log(a);
-						console.log(b);
 	
 						var aA = a.replace(reA, "");
 						var bA = b.replace(reA, "");
@@ -119,7 +132,8 @@
 					}
 					activityData.sort(sortStudentID);
 				});
-				that.setState({ activityData: activityData });
+				that.setState({ activityData: activityData,
+					totalScore: totalPossibleScore });
 			});
 		},
 		componentDidMount: function componentDidMount() {
@@ -131,9 +145,16 @@
 				return null;
 			} else {
 				var studentActivityData = this.state.activityData.map(function (student, i) {
+					console.log(student.score);
+					var color = that.scoreToColor(student.score, that.state.totalScore);
+	
+					var percentageInteger = Math.floor(student.score / that.state.totalScore * 100);
+	
+					var displayScore = student.score + " / " + that.state.totalScore + " (" + percentageInteger + "%)";
+	
 					return React.createElement(
 						'tr',
-						{ key: i },
+						{ id: color, key: i },
 						React.createElement(
 							'td',
 							null,
@@ -142,7 +163,7 @@
 						React.createElement(
 							'td',
 							null,
-							student.score
+							displayScore
 						)
 					);
 				});
@@ -155,7 +176,6 @@
 					return a + b;
 				});
 				var avg = sum / scoreArray.length;
-				console.log(avg);
 	
 				// Create task data based on one student's activity data
 	
@@ -282,12 +302,14 @@
 						classColor = "green";
 					} else if (taskObject.percentageInteger >= 60) {
 						classColor = "yellow";
+					} else if (taskObject.percentageInteger >= 40) {
+						classColor = "orange";
 					} else {
 						classColor = "red";
 					}
 					return React.createElement(
 						'tr',
-						{ key: i, className: classColor },
+						{ key: i, id: classColor },
 						React.createElement(
 							'td',
 							null,
