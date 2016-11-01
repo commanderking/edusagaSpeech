@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-
+var StudentGradebook = require('./dashboard/components/StudentGradebook');
+var ActivitySummary = require('./dashboard/components/ActivitySummary');
+var ActivitySummaryStudent = require('./dashboard/components/ActivitySummaryStudent');
 var Dashboard = React.createClass({
 	getInitialState: function() {
 		return {
@@ -63,6 +65,7 @@ var Dashboard = React.createClass({
 						});
 					}
 
+					// Comparing alphanumeric IDs and then sort
 					var reA = /[^a-zA-Z]/g;
 					var reN = /[^0-9]/g;
 					function sortStudentID(a,b) {
@@ -93,152 +96,28 @@ var Dashboard = React.createClass({
 		if (this.state.activityData === null) {
 			return null;
 		} else {
-			var studentActivityData = this.state.activityData.map(function(student, i) {
-				console.log(student.score);
-				var color = that.scoreToColor(student.score, that.state.totalScore);
-
-				var percentageInteger = Math.floor(student.score/that.state.totalScore * 100);
-
-				var displayScore = student.score + " / " + that.state.totalScore + " (" + percentageInteger + "%)";
-
-				return (
-					<tr id={color} key={i}>
-						<td>{student.studentID}</td>
-						<td>{displayScore}</td>
-					</tr>
-				)
-			})
-
+			//TODO: Implement display of summary of information
+			/*
 			// Summary metrics for activity (Average)
 			var scoreArray = this.state.activityData.map(function(student, i) {
 				return student.score;
 			})
 			var sum = scoreArray.reduce(function(a,b) { return a + b});
 			var avg = sum / scoreArray.length;
-
-
-			// Create task data based on one student's activity data
-
-			// Create task data for all students and their individual activity data
-			var taskDataForAllIndvidiualStudents = this.state.activityData.map(function(student, i){
-				var taskDataForIndividualStudent = that.state.activityData[i].allTaskData.map(function(task, j) {
-					var attemptedAnswersString = task.attemptedAnswers.map(function(answer, i) {
-						return answer + ", "; 
-					});
-					var taskCorrect = task.correct ? <span className="glyphicon glyphicon-ok" aria-hidden="true"></span> :
-													<span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					return (
-						<tr key={j}>
-							<td>{task.task}</td>
-							<td>{taskCorrect}</td>
-							<td>0</td>
-							<td>{task.attemptedAnswers.length}</td>
-							<td>{attemptedAnswersString}</td>
-						</tr>
-					)
-				})
-				return (
-					<div className="individualTaskResults" key={i}> 
-						<h2>{student.studentID}</h2>
-						<table className="individualTaskTable table table-striped">
-							<tbody>
-								<tr>
-									<th>Task</th>
-									<th>Correct</th>
-									<th>Hint Used</th>
-									<th>Attempts</th>
-									<th>Attempted Phrases</th>
-								</tr>
-								{taskDataForIndividualStudent}
-							</tbody>
-						</table>
-					</div>
-				)
-
-			});
-
-
-			/*--------------------------------------------
-			Create task data based on aggregate student data
-			--------------------------------------------*/
-
-			// First get all possible taskIDs
-			var taskIDArray = this.state.activityData[0].allTaskData.map(function(task,i) {
-				return {
-					"taskID" : task.taskID, 
-					"taskText" : task.task};
-			})
-
-			var taskDataAggregate = taskIDArray.map(function(taskObject, i) {
-				var taskCorrectTally = 0;
-				var totalStudents = 0;
-				// Loop over all the students
-				that.state.activityData.map(function(student) {
-					totalStudents += 1;
-					// Loop over the student's answers, find matching task, see if task was correct
-					var studentTask = student.allTaskData.map(function(thisTask) {
-						if (thisTask.taskID === taskObject.taskID) {
-							taskCorrectTally = thisTask.correct ? taskCorrectTally + 1 : taskCorrectTally
-						}
-					})
-				})
-				taskObject.totalCorrect = taskCorrectTally;
-				taskObject.totalStudents = totalStudents;
-				taskObject.percentageInteger = Math.floor(taskCorrectTally/totalStudents * 100);
-				taskObject.percentageCorrect = taskObject.percentageInteger + "%";
-				return taskObject;
-			});
-
-			var taskDataAggregateTable = taskDataAggregate.map(function(taskObject, i) {
-				var classColor;
-				if (taskObject.percentageInteger >= 80) {
-					classColor = "green";
-				} else if (taskObject.percentageInteger >=60) {
-					classColor = "yellow";
-				} else if (taskObject.percentageInteger >=40){
-					classColor = "orange";
-				} else {
-					classColor = "red";
-				}
-				return (
-					<tr key={i} id={classColor}>
-						<td>{taskObject.taskText}</td>
-						<td>{taskObject.totalCorrect} / {taskObject.totalStudents} ({taskObject.percentageCorrect})</td>
-						<td>0</td>
-						<td>0</td>
-					</tr>
-				)
-			})
-
+			*/
 			return (
 				<div className="resultsContainer">
-					<h1>Activity Data!</h1>
-					<table className="averageScoreTable table table-striped">
-						<tbody>
-							<tr>
-								<th>Student ID</th>
-								<th>Activity 1: {this.state.activityData.activityName}</th>
-							</tr>
-							{studentActivityData}
-						</tbody>
-					</table>
+					<StudentGradebook 
+						activityData={this.state.activityData}
+						totalScore={this.state.totalScore}
+						scoreToColor={this.scoreToColor}/> 
 
-					<h1>Student Performance on Each Task - Activity 1</h1>
-					<table className="taskTable table table-striped">
-						<tbody>
-							<tr>
-								<th>Task</th>
-								<th>% Correct</th>
-								<th>% Used Hints</th>
-								<th>% Skipped</th>
-							</tr>
-							{taskDataAggregateTable}
-						</tbody>
-					</table>
+					<ActivitySummary 
+						activityData={this.state.activityData}
+						scoreToColor={this.scoreToColor} />
 
-					<h1>Individual Data for Students</h1>
-					{taskDataForAllIndvidiualStudents}
-
+					<ActivitySummaryStudent
+						activityData={this.state.activityData}/>
 				</div>
 			)
 		}

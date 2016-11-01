@@ -51,7 +51,9 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
-	
+	var StudentGradebook = __webpack_require__(/*! ./dashboard/components/StudentGradebook */ 224);
+	var ActivitySummary = __webpack_require__(/*! ./dashboard/components/ActivitySummary */ 225);
+	var ActivitySummaryStudent = __webpack_require__(/*! ./dashboard/components/ActivitySummaryStudent */ 226);
 	var Dashboard = React.createClass({
 		displayName: 'Dashboard',
 	
@@ -114,6 +116,7 @@
 						});
 					}
 	
+					// Comparing alphanumeric IDs and then sort
 					var reA = /[^a-zA-Z]/g;
 					var reN = /[^0-9]/g;
 					function sortStudentID(a, b) {
@@ -144,276 +147,27 @@
 			if (this.state.activityData === null) {
 				return null;
 			} else {
-				var studentActivityData = this.state.activityData.map(function (student, i) {
-					console.log(student.score);
-					var color = that.scoreToColor(student.score, that.state.totalScore);
-	
-					var percentageInteger = Math.floor(student.score / that.state.totalScore * 100);
-	
-					var displayScore = student.score + " / " + that.state.totalScore + " (" + percentageInteger + "%)";
-	
-					return React.createElement(
-						'tr',
-						{ id: color, key: i },
-						React.createElement(
-							'td',
-							null,
-							student.studentID
-						),
-						React.createElement(
-							'td',
-							null,
-							displayScore
-						)
-					);
-				});
-	
-				// Summary metrics for activity (Average)
-				var scoreArray = this.state.activityData.map(function (student, i) {
-					return student.score;
-				});
-				var sum = scoreArray.reduce(function (a, b) {
-					return a + b;
-				});
-				var avg = sum / scoreArray.length;
-	
-				// Create task data based on one student's activity data
-	
-				// Create task data for all students and their individual activity data
-				var taskDataForAllIndvidiualStudents = this.state.activityData.map(function (student, i) {
-					var taskDataForIndividualStudent = that.state.activityData[i].allTaskData.map(function (task, j) {
-						var attemptedAnswersString = task.attemptedAnswers.map(function (answer, i) {
-							return answer + ", ";
-						});
-						var taskCorrect = task.correct ? React.createElement('span', { className: 'glyphicon glyphicon-ok', 'aria-hidden': 'true' }) : React.createElement('span', { className: 'glyphicon glyphicon-remove', 'aria-hidden': 'true' });
-						return React.createElement(
-							'tr',
-							{ key: j },
-							React.createElement(
-								'td',
-								null,
-								task.task
-							),
-							React.createElement(
-								'td',
-								null,
-								taskCorrect
-							),
-							React.createElement(
-								'td',
-								null,
-								'0'
-							),
-							React.createElement(
-								'td',
-								null,
-								task.attemptedAnswers.length
-							),
-							React.createElement(
-								'td',
-								null,
-								attemptedAnswersString
-							)
-						);
-					});
-					return React.createElement(
-						'div',
-						{ className: 'individualTaskResults', key: i },
-						React.createElement(
-							'h2',
-							null,
-							student.studentID
-						),
-						React.createElement(
-							'table',
-							{ className: 'individualTaskTable table table-striped' },
-							React.createElement(
-								'tbody',
-								null,
-								React.createElement(
-									'tr',
-									null,
-									React.createElement(
-										'th',
-										null,
-										'Task'
-									),
-									React.createElement(
-										'th',
-										null,
-										'Correct'
-									),
-									React.createElement(
-										'th',
-										null,
-										'Hint Used'
-									),
-									React.createElement(
-										'th',
-										null,
-										'Attempts'
-									),
-									React.createElement(
-										'th',
-										null,
-										'Attempted Phrases'
-									)
-								),
-								taskDataForIndividualStudent
-							)
-						)
-					);
-				});
-	
-				/*--------------------------------------------
-	   Create task data based on aggregate student data
-	   --------------------------------------------*/
-	
-				// First get all possible taskIDs
-				var taskIDArray = this.state.activityData[0].allTaskData.map(function (task, i) {
-					return {
-						"taskID": task.taskID,
-						"taskText": task.task };
-				});
-	
-				var taskDataAggregate = taskIDArray.map(function (taskObject, i) {
-					var taskCorrectTally = 0;
-					var totalStudents = 0;
-					// Loop over all the students
-					that.state.activityData.map(function (student) {
-						totalStudents += 1;
-						// Loop over the student's answers, find matching task, see if task was correct
-						var studentTask = student.allTaskData.map(function (thisTask) {
-							if (thisTask.taskID === taskObject.taskID) {
-								taskCorrectTally = thisTask.correct ? taskCorrectTally + 1 : taskCorrectTally;
-							}
-						});
-					});
-					taskObject.totalCorrect = taskCorrectTally;
-					taskObject.totalStudents = totalStudents;
-					taskObject.percentageInteger = Math.floor(taskCorrectTally / totalStudents * 100);
-					taskObject.percentageCorrect = taskObject.percentageInteger + "%";
-					return taskObject;
-				});
-	
-				var taskDataAggregateTable = taskDataAggregate.map(function (taskObject, i) {
-					var classColor;
-					if (taskObject.percentageInteger >= 80) {
-						classColor = "green";
-					} else if (taskObject.percentageInteger >= 60) {
-						classColor = "yellow";
-					} else if (taskObject.percentageInteger >= 40) {
-						classColor = "orange";
-					} else {
-						classColor = "red";
-					}
-					return React.createElement(
-						'tr',
-						{ key: i, id: classColor },
-						React.createElement(
-							'td',
-							null,
-							taskObject.taskText
-						),
-						React.createElement(
-							'td',
-							null,
-							taskObject.totalCorrect,
-							' / ',
-							taskObject.totalStudents,
-							' (',
-							taskObject.percentageCorrect,
-							')'
-						),
-						React.createElement(
-							'td',
-							null,
-							'0'
-						),
-						React.createElement(
-							'td',
-							null,
-							'0'
-						)
-					);
-				});
-	
+				//TODO: Implement display of summary of information
+				/*
+	   // Summary metrics for activity (Average)
+	   var scoreArray = this.state.activityData.map(function(student, i) {
+	   	return student.score;
+	   })
+	   var sum = scoreArray.reduce(function(a,b) { return a + b});
+	   var avg = sum / scoreArray.length;
+	   */
 				return React.createElement(
 					'div',
 					{ className: 'resultsContainer' },
-					React.createElement(
-						'h1',
-						null,
-						'Activity Data!'
-					),
-					React.createElement(
-						'table',
-						{ className: 'averageScoreTable table table-striped' },
-						React.createElement(
-							'tbody',
-							null,
-							React.createElement(
-								'tr',
-								null,
-								React.createElement(
-									'th',
-									null,
-									'Student ID'
-								),
-								React.createElement(
-									'th',
-									null,
-									'Activity 1: ',
-									this.state.activityData.activityName
-								)
-							),
-							studentActivityData
-						)
-					),
-					React.createElement(
-						'h1',
-						null,
-						'Student Performance on Each Task - Activity 1'
-					),
-					React.createElement(
-						'table',
-						{ className: 'taskTable table table-striped' },
-						React.createElement(
-							'tbody',
-							null,
-							React.createElement(
-								'tr',
-								null,
-								React.createElement(
-									'th',
-									null,
-									'Task'
-								),
-								React.createElement(
-									'th',
-									null,
-									'% Correct'
-								),
-								React.createElement(
-									'th',
-									null,
-									'% Used Hints'
-								),
-								React.createElement(
-									'th',
-									null,
-									'% Skipped'
-								)
-							),
-							taskDataAggregateTable
-						)
-					),
-					React.createElement(
-						'h1',
-						null,
-						'Individual Data for Students'
-					),
-					taskDataForAllIndvidiualStudents
+					React.createElement(StudentGradebook, {
+						activityData: this.state.activityData,
+						totalScore: this.state.totalScore,
+						scoreToColor: this.scoreToColor }),
+					React.createElement(ActivitySummary, {
+						activityData: this.state.activityData,
+						scoreToColor: this.scoreToColor }),
+					React.createElement(ActivitySummaryStudent, {
+						activityData: this.state.activityData })
 				);
 			}
 		}
@@ -21967,6 +21721,368 @@
 	var ReactMount = __webpack_require__(/*! ./ReactMount */ 164);
 	
 	module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ },
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */
+/*!******************************************************************!*\
+  !*** ./react_assets/js/dashboard/components/StudentGradebook.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function ActivityGradeBook(props) {
+		if (props.activityData === null) {
+			return null;
+		} else {
+			var studentActivityData = props.activityData.map(function (student, i) {
+				var color = props.scoreToColor(student.score, props.totalScore);
+				var percentageInteger = Math.floor(student.score / props.totalScore * 100);
+				var displayScore = student.score + " / " + props.totalScore + " (" + percentageInteger + "%)";
+				return React.createElement(
+					"tr",
+					{ id: color, key: i },
+					React.createElement(
+						"td",
+						null,
+						student.studentID
+					),
+					React.createElement(
+						"td",
+						null,
+						displayScore
+					)
+				);
+			});
+		}
+	
+		return React.createElement(
+			"div",
+			null,
+			React.createElement(
+				"h1",
+				null,
+				"Activity Data!"
+			),
+			React.createElement(
+				"table",
+				{ className: "averageScoreTable table table-striped" },
+				React.createElement(
+					"tbody",
+					null,
+					React.createElement(
+						"tr",
+						null,
+						React.createElement(
+							"th",
+							null,
+							"Student ID"
+						),
+						React.createElement(
+							"th",
+							null,
+							"Activity 1: ",
+							props.activityData.activityName
+						)
+					),
+					studentActivityData
+				)
+			)
+		);
+	}
+	
+	module.exports = ActivityGradeBook;
+
+/***/ },
+/* 225 */
+/*!*****************************************************************!*\
+  !*** ./react_assets/js/dashboard/components/ActivitySummary.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function ActivitySummary(props) {
+		/*--------------------------------------------
+	 Create task data based on aggregate student data
+	 --------------------------------------------*/
+	
+		// First get all possible taskIDs
+		var taskIDArray = props.activityData[0].allTaskData.map(function (task, i) {
+			return {
+				"taskID": task.taskID,
+				"taskText": task.task };
+		});
+	
+		var taskDataAggregate = taskIDArray.map(function (taskObject, i) {
+			var taskCorrectTally = 0;
+			var totalStudents = 0;
+			// Loop over all the students
+			props.activityData.map(function (student) {
+				totalStudents += 1;
+				// Loop over the student's answers, find matching task, see if task was correct
+				var studentTask = student.allTaskData.map(function (thisTask) {
+					if (thisTask.taskID === taskObject.taskID) {
+						taskCorrectTally = thisTask.correct ? taskCorrectTally + 1 : taskCorrectTally;
+					}
+				});
+			});
+			taskObject.totalCorrect = taskCorrectTally;
+			taskObject.totalStudents = totalStudents;
+			taskObject.percentageInteger = Math.floor(taskCorrectTally / totalStudents * 100);
+			taskObject.percentageCorrect = taskObject.percentageInteger + "%";
+			return taskObject;
+		});
+	
+		var taskDataAggregateTable = taskDataAggregate.map(function (taskObject, i) {
+	
+			var classColor = props.scoreToColor(taskObject.totalCorrect, taskObject.totalStudents);
+	
+			return React.createElement(
+				"tr",
+				{ key: i, id: classColor },
+				React.createElement(
+					"td",
+					null,
+					taskObject.taskText
+				),
+				React.createElement(
+					"td",
+					null,
+					taskObject.totalCorrect,
+					" / ",
+					taskObject.totalStudents,
+					" (",
+					taskObject.percentageCorrect,
+					")"
+				),
+				React.createElement(
+					"td",
+					null,
+					"0"
+				),
+				React.createElement(
+					"td",
+					null,
+					"0"
+				)
+			);
+		});
+		return React.createElement(
+			"div",
+			null,
+			React.createElement(
+				"h1",
+				null,
+				"Student Performance on Each Task - Activity 1"
+			),
+			React.createElement(
+				"table",
+				{ className: "taskTable table table-striped" },
+				React.createElement(
+					"tbody",
+					null,
+					React.createElement(
+						"tr",
+						null,
+						React.createElement(
+							"th",
+							null,
+							"Task"
+						),
+						React.createElement(
+							"th",
+							null,
+							"% Correct"
+						),
+						React.createElement(
+							"th",
+							null,
+							"% Used Hints"
+						),
+						React.createElement(
+							"th",
+							null,
+							"% Skipped"
+						)
+					),
+					taskDataAggregateTable
+				)
+			)
+		);
+	}
+	
+	module.exports = ActivitySummary;
+
+/***/ },
+/* 226 */
+/*!************************************************************************!*\
+  !*** ./react_assets/js/dashboard/components/ActivitySummaryStudent.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function ActivitySummaryStudent(props) {
+		// Create task data for all students and their individual activity data
+		var taskDataForAllIndvidiualStudents = props.activityData.map(function (student, i) {
+			var taskDataForIndividualStudent = props.activityData[i].allTaskData.map(function (task, j) {
+				var attemptedAnswersString = task.attemptedAnswers.map(function (answer, i) {
+					return answer + ", ";
+				});
+				var taskCorrect = task.correct ? React.createElement("span", { className: "glyphicon glyphicon-ok", "aria-hidden": "true" }) : React.createElement("span", { className: "glyphicon glyphicon-remove", "aria-hidden": "true" });
+				return React.createElement(
+					"tr",
+					{ key: j },
+					React.createElement(
+						"td",
+						null,
+						task.task
+					),
+					React.createElement(
+						"td",
+						null,
+						taskCorrect
+					),
+					React.createElement(
+						"td",
+						null,
+						"0"
+					),
+					React.createElement(
+						"td",
+						null,
+						task.attemptedAnswers.length
+					),
+					React.createElement(
+						"td",
+						null,
+						attemptedAnswersString
+					)
+				);
+			});
+			return React.createElement(
+				"div",
+				{ className: "individualTaskResults", key: i },
+				React.createElement(
+					"h2",
+					null,
+					student.studentID
+				),
+				React.createElement(
+					"table",
+					{ className: "individualTaskTable table table-striped" },
+					React.createElement(
+						"tbody",
+						null,
+						React.createElement(
+							"tr",
+							null,
+							React.createElement(
+								"th",
+								null,
+								"Task"
+							),
+							React.createElement(
+								"th",
+								null,
+								"Correct"
+							),
+							React.createElement(
+								"th",
+								null,
+								"Hint Used"
+							),
+							React.createElement(
+								"th",
+								null,
+								"Attempts"
+							),
+							React.createElement(
+								"th",
+								null,
+								"Attempted Phrases"
+							)
+						),
+						taskDataForIndividualStudent
+					)
+				)
+			);
+		});
+		return React.createElement(
+			"div",
+			null,
+			React.createElement(
+				"h1",
+				null,
+				"Individual Data for Students"
+			),
+			taskDataForAllIndvidiualStudents
+		);
+	}
+	
+	module.exports = ActivitySummaryStudent;
 
 /***/ }
 /******/ ]);
