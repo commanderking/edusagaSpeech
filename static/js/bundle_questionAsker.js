@@ -61,6 +61,7 @@
 	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 214);
 	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 221);
 	var TimerContainer = __webpack_require__(/*! ./questionAsker/TimerContainer */ 222);
+	var PracticeContainer = __webpack_require__(/*! ./questionAsker/PracticeContainer.js */ 227);
 	
 	var Constants = __webpack_require__(/*! ./helpers/Constants.js */ 177);
 	
@@ -96,6 +97,7 @@
 			return {
 				sceneData: undefined,
 				scenarioOn: true,
+				practiceMode: true,
 				scenarioIndex: 0,
 				hintActive: false,
 	
@@ -22488,8 +22490,224 @@
 
 /***/ },
 /* 172 */,
-/* 173 */,
-/* 174 */,
+/* 173 */
+/*!*******************************************************!*\
+  !*** ./react_assets/js/containers/HeaderContainer.js ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	
+	var HeaderContainer = React.createClass({
+		displayName: "HeaderContainer",
+	
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "header" },
+				React.createElement(
+					"div",
+					{ className: "titleDiv" },
+					React.createElement(
+						"p",
+						{ className: "title" },
+						"Food"
+					),
+					React.createElement(
+						"p",
+						{ className: "type" },
+						"Vocabulary"
+					)
+				)
+			);
+		}
+	});
+	
+	module.exports = HeaderContainer;
+
+/***/ },
+/* 174 */
+/*!******************************************************!*\
+  !*** ./react_assets/js/containers/InputContainer.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 175);
+	
+	var MicContainer = React.createClass({
+		displayName: 'MicContainer',
+	
+		render: function render() {
+			var className = "btn btn-info micWrap micActive-" + this.props.micActive;
+			var micFunction;
+			if (this.props.micActive) {
+				micFunction = this.props.onMicDeactivate;
+			} else {
+				micFunction = this.props.onMicActivate;
+			}
+			return React.createElement(
+				'div',
+				{ className: 'micDiv' },
+				React.createElement(
+					'button',
+					{ id: 'mic', className: className, onClick: micFunction },
+					React.createElement('span', { className: 'icon-mic' })
+				)
+			);
+		}
+	});
+	
+	function FeedbackComponent(props) {
+		// Determine what symbol to show (check or X next to Your answer)
+		var className = "";
+		var triesClassName;
+		// If word is already correct
+		if (props.wordCorrect === true) {
+			className = "glyphicon glyphicon glyphicon-ok";
+			triesClassName = "hidden";
+		} else if (props.wordCorrect === false) {
+			className = "glyphicon glyphicon glyphicon-remove";
+			triesClassName = "tries";
+		} else {
+			// rightWrongSlot = "hidden";
+			triesClassName = "hidden";
+		}
+	
+		// If already correct, show correct answer in box
+		return React.createElement(
+			'div',
+			{ className: 'inputDiv' },
+			React.createElement(
+				'h3',
+				null,
+				'Your answer: '
+			),
+			React.createElement(
+				'div',
+				{ className: 'wrapper' },
+				React.createElement(
+					'div',
+					{ className: 'answerSlot' },
+					React.createElement(
+						'span',
+						null,
+						props.lastAnswer
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'rightWrongSlot' },
+					React.createElement('span', { className: className, 'aria-hidden': 'true' })
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'triesGiveUp' },
+				React.createElement(
+					'p',
+					{ className: triesClassName },
+					'Tries: ',
+					props.tries
+				)
+			)
+		);
+	}
+	
+	function ScoreComponent(props) {
+		return React.createElement(
+			'div',
+			{ className: 'scoreboard' },
+			React.createElement(
+				'h3',
+				null,
+				'Score'
+			),
+			React.createElement(
+				'p',
+				{ className: 'score' },
+				React.createElement(
+					'span',
+					{ className: 'numerator' },
+					props.score,
+					' '
+				),
+				React.createElement(
+					'span',
+					{ className: 'denominator' },
+					'/',
+					props.vocabList.length
+				)
+			)
+		);
+	}
+	
+	var InputContainer = React.createClass({
+		displayName: 'InputContainer',
+	
+		getInitialState: function getInitialState() {
+			return {
+				userAnswer: '',
+				micActive: false
+			};
+		},
+		handleUserAnswer: function handleUserAnswer() {
+			var that = this;
+			var possibleAnswers = this.props.vocabList[this.props.currentWordIndex].name;
+	
+			SpeechRecognition.activateSpeech(possibleAnswers, this.props.lang).then(function (userAnswer) {
+				// Need to set var here, otherwise loses it in setState
+				console.log(userAnswer);
+				var answer = userAnswer;
+				if (userAnswer !== null) {
+					console.log("This is user's answer " + answer);
+					that.setState({
+						userAnswer: userAnswer,
+						micActive: false
+					}, that.props.checkAnswer(userAnswer));
+				}
+				that.handleMicDeactivate();
+			});
+		},
+		handleMicActivate: function handleMicActivate() {
+			this.setState({
+				micActive: true
+			});
+			console.log(SpeechRecognition);
+			//SpeechRecognition.checkBrowser();
+			this.handleUserAnswer();
+		},
+		handleMicDeactivate: function handleMicDeactivate() {
+			this.setState({
+				micActive: false
+			});
+		},
+		render: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'inputWrapper' },
+				React.createElement(MicContainer, {
+					micActive: this.state.micActive,
+					onMicActivate: this.handleMicActivate,
+					onMicDeactivate: this.handleMicDeactivate }),
+				React.createElement(FeedbackComponent, {
+					lastAnswer: this.props.lastAnswer,
+					wordCorrect: this.props.wordCorrect,
+					tries: this.props.tries }),
+				React.createElement(ScoreComponent, {
+					score: this.props.score,
+					vocabList: this.props.vocabList })
+			);
+		}
+	});
+	
+	module.exports = InputContainer;
+
+/***/ },
 /* 175 */
 /*!******************************************************!*\
   !*** ./react_assets/js/helpers/SpeechRecognition.js ***!
@@ -22586,7 +22804,64 @@
 	module.exports = speechHelper;
 
 /***/ },
-/* 176 */,
+/* 176 */
+/*!******************************************************!*\
+  !*** ./react_assets/js/containers/ImageContainer.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	
+	var ImageContainer = React.createClass({
+		displayName: "ImageContainer",
+	
+		nextVocab: function nextVocab() {
+			var index = this.props.currentWordIndex;
+			// If at end of Vocab list, loop back, otherwise move to next one
+			if (index >= this.props.vocabList.length - 1) {
+				index = 0;
+			} else {
+				index++;
+			}
+			this.props.onImageChange(index);
+		},
+		previousVocab: function previousVocab() {
+			var index = this.props.currentWordIndex;
+			if (index <= 0) {
+				index = this.props.vocabList.length - 1;
+			} else {
+				index--;
+			}
+			this.props.onImageChange(index);
+		},
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "foodWrapper" },
+				React.createElement(
+					"div",
+					{ className: "leftArrow arrow", onClick: this.previousVocab },
+					React.createElement("span", { className: "glyphicon glyphicon glyphicon-triangle-left", "aria-hidden": "true" })
+				),
+				React.createElement(
+					"div",
+					{ className: "imageWrapper" },
+					React.createElement("img", { src: this.props.currentImage })
+				),
+				React.createElement(
+					"div",
+					{ className: "rightArrow arrow", onClick: this.nextVocab },
+					React.createElement("span", { className: "glyphicon glyphicon-triangle-right", "aria-hidden": "true" })
+				)
+			);
+		}
+	});
+	
+	module.exports = ImageContainer;
+
+/***/ },
 /* 177 */
 /*!**********************************************!*\
   !*** ./react_assets/js/helpers/Constants.js ***!
@@ -26289,6 +26564,233 @@
 	});
 	
 	module.exports = TimerContainer;
+
+/***/ },
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */
+/*!************************************************************!*\
+  !*** ./react_assets/js/questionAsker/PracticeContainer.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var HeaderContainer = __webpack_require__(/*! ../containers/HeaderContainer.js */ 173);
+	var InputContainer = __webpack_require__(/*! ../containers/InputContainer.js */ 174);
+	var ImageContainer = __webpack_require__(/*! ../containers/ImageContainer */ 176);
+	var PracticeMic = __webpack_require__(/*! ./components/PracticeMic */ 228);
+	var PracticeDoneButton = __webpack_require__(/*! ./components/PracticeDoneButton */ 229);
+	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition.js */ 175);
+	
+	var PracticeContainer = React.createClass({
+		displayName: 'PracticeContainer',
+	
+		getInitialState: function getInitialState() {
+			return {
+				vocabData: {
+					'currentWordIndex': 0,
+					'lastAnswer': "",
+					'score': 0,
+					'lang': 'zh-CN',
+					'list': [{
+						'name': ['牛肉面', "面条"],
+						'imgURL': 'http://image82.360doc.com/DownloadImg/2015/02/1709/50263666_2.jpg',
+						'correct': null,
+						'tries': 0
+					}, {
+						'name': ['炒饭', '蛋炒饭', '虾仁炒饭'],
+						'imgURL': 'http://www.51dayaji.com/wp-content/uploads/2014/11/%E7%82%92%E9%A5%AD%E7%9A%84%E5%81%9A%E6%B3%953.jpg',
+						'correct': null,
+						'tries': 0
+					}, {
+						'name': ['汉堡', '汉堡包'],
+						'imgURL': 'http://science-all.com/images/wallpapers/hamburger/hamburger-6.PNG',
+						'correct': null,
+						'tries': 0
+					}, {
+						'name': ['寿司'],
+						'imgURL': 'https://img.grouponcdn.com/deal/fmPws6o2uTweCftZu7yj/p4-2048x1229/v1/c700x420.jpg',
+						'correct': null,
+						'tries': 0
+					}, {
+						'name': ['薯条', '炸薯条'],
+						'imgURL': 'http://ali.xinshipu.cn/20140121/original/1390268120219.jpg',
+						'correct': null,
+						'tries': 0
+					}, {
+						'name': ['冰淇淋'],
+						'imgURL': 'http://www.americasdairyland.com/assets/images/EWC/Ice-Cream-Hdr.jpg',
+						'correct': null,
+						'tries': 0
+					}]
+				},
+				micActive: false,
+				userAnswer: ""
+	
+			};
+		},
+		handleImageChange: function handleImageChange(newIndex) {
+			var newVocabData = this.state.vocabData;
+			newVocabData.currentWordIndex = newIndex;
+	
+			// Reset text based on if student already guessed the answer correctly before
+			if (newVocabData.list[newIndex].correct) {
+				newVocabData.lastAnswer = newVocabData.list[newIndex].name;
+			} else {
+				newVocabData.lastAnswer = "";
+			}
+	
+			this.setState({
+				vocabData: newVocabData
+			});
+		},
+		handleUserAnswer: function handleUserAnswer() {
+			var that = this;
+			console.log(this.state.vocabData);
+	
+			var possibleAnswers = this.state.vocabData.list[this.state.vocabData.currentWordIndex].name;
+	
+			SpeechRecognition.activateSpeech(possibleAnswers, this.state.vocabData.lang).then(function (userAnswer) {
+				// Need to set var here, otherwise loses it in setState
+				console.log(userAnswer);
+				var answer = userAnswer;
+				if (userAnswer !== null) {
+					console.log("This is user's answer " + answer);
+					that.setState({
+						userAnswer: userAnswer,
+						micActive: false
+					}, that.props.checkAnswer(userAnswer));
+				}
+				that.handleMicDeactivate();
+			});
+		},
+		handleMicActivate: function handleMicActivate() {
+			this.setState({
+				micActive: true
+			});
+			console.log(SpeechRecognition);
+			//SpeechRecognition.checkBrowser();
+			this.handleUserAnswer();
+		},
+		handleMicDeactivate: function handleMicDeactivate() {
+			this.setState({
+				micActive: false
+			});
+		},
+		checkAnswer: function checkAnswer(userAnswer) {
+			var newVocabData = this.state.vocabData;
+			var index = this.state.vocabData.currentWordIndex;
+	
+			// If correct, update info
+			var correctAnswer = false;
+			newVocabData.list[index].name.forEach(function (possibleWord) {
+				if (userAnswer === possibleWord) {
+					correctAnswer = true;
+				}
+			});
+			if (correctAnswer) {
+				newVocabData.list[index].correct = true;
+				newVocabData.score += 1;
+			} else {
+				newVocabData.list[index].correct = false;
+				newVocabData.list[index].tries += 1;
+			}
+			// Store their guess as the most recent guess
+			newVocabData.lastAnswer = userAnswer;
+			this.setState({
+				vocabData: newVocabData
+			});
+			console.log(this.state.vocabData);
+		},
+		render: function render() {
+			var currentWordIndex = this.state.vocabData.currentWordIndex;
+			var vocabList = this.state.vocabData.list;
+			return React.createElement(
+				'div',
+				{ className: 'practiceContainer' },
+				React.createElement(HeaderContainer, null),
+				React.createElement(ImageContainer, {
+					currentWordIndex: currentWordIndex,
+					currentImage: this.state.vocabData.list[currentWordIndex].imgURL,
+					vocabList: vocabList,
+					onImageChange: this.handleImageChange }),
+				React.createElement(
+					'div',
+					{ className: 'practiceFooter' },
+					React.createElement(PracticeMic, {
+						micActive: this.state.micActive,
+						onMicActivate: this.handleMicActivate,
+						onMicDeactivate: this.handleMicDeactivate }),
+					React.createElement(PracticeDoneButton, null)
+				)
+			);
+		}
+	});
+	
+	module.exports = PracticeContainer;
+
+/***/ },
+/* 228 */
+/*!*****************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/PracticeMic.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	var PracticeMic = React.createClass({
+		displayName: "PracticeMic",
+	
+		render: function render() {
+			var className = "btn btn-info micWrap micActive-" + this.props.micActive;
+			var micFunction;
+			if (this.props.micActive) {
+				micFunction = this.props.onMicDeactivate;
+			} else {
+				micFunction = this.props.onMicActivate;
+			}
+			return React.createElement(
+				"div",
+				{ className: "micDiv" },
+				React.createElement(
+					"button",
+					{ id: "mic", className: className, onClick: micFunction },
+					React.createElement("span", { className: "icon-mic" })
+				)
+			);
+		}
+	});
+	
+	module.exports = PracticeMic;
+
+/***/ },
+/* 229 */
+/*!************************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/PracticeDoneButton.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function PracticeDoneButton(props) {
+		return React.createElement(
+			"button",
+			{ className: "btn btn-info btn-lg btn-practice-done" },
+			"Done Practice"
+		);
+	}
+	
+	module.exports = PracticeDoneButton;
 
 /***/ }
 /******/ ]);

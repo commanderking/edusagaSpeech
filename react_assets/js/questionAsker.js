@@ -8,6 +8,7 @@ var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var ResultsContainer = require('./questionAsker/ResultsContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TimerContainer = require('./questionAsker/TimerContainer');
+var PracticeContainer = require('./questionAsker/PracticeContainer.js');
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
 const Constants = require('./helpers/Constants.js');
 
@@ -42,6 +43,7 @@ var QuestionAsker = React.createClass({
 		return {
 			sceneData: undefined,
 			scenarioOn: true,
+			practiceMode: true,
 			scenarioIndex: 0,
 			hintActive: false,
 

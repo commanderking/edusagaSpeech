@@ -4204,7 +4204,7 @@
 			var vocabList = this.state.vocabData.list;
 			return React.createElement(
 				'div',
-				null,
+				{ className: 'practiceContainer' },
 				React.createElement(HeaderContainer, null),
 				React.createElement(ImageContainer, {
 					currentWordIndex: currentWordIndex,
@@ -4302,6 +4302,7 @@
 	function FeedbackComponent(props) {
 		// Determine what symbol to show (check or X next to Your answer)
 		var className = "";
+		var triesClassName;
 		// If word is already correct
 		if (props.wordCorrect === true) {
 			className = "glyphicon glyphicon glyphicon-ok";
@@ -4310,7 +4311,7 @@
 			className = "glyphicon glyphicon glyphicon-remove";
 			triesClassName = "tries";
 		} else {
-			rightWrongSlot = "hidden";
+			// rightWrongSlot = "hidden";
 			triesClassName = "hidden";
 		}
 	

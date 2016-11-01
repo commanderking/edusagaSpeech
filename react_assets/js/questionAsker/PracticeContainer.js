@@ -1,9 +1,12 @@
 var React = require('react');
-var HeaderContainer = require('./containers/HeaderContainer.js');
-var InputContainer = require('./containers/InputContainer.js');
-var ImageContainer = require('./containers/ImageContainer.js');
+var HeaderContainer = require('../containers/HeaderContainer.js');
+var InputContainer = require('../containers/InputContainer.js');
+var ImageContainer = require('../containers/ImageContainer');
+var PracticeMic = require('./components/PracticeMic');
+var PracticeDoneButton = require('./components/PracticeDoneButton');
+var SpeechRecognition = require('../helpers/SpeechRecognition.js');
 
-module.exports = React.createClass({
+var PracticeContainer = React.createClass({
 	getInitialState: function() {
 		return {
 			vocabData: {
@@ -50,7 +53,10 @@ module.exports = React.createClass({
 						'tries' : 0
 					}
 				]
-			}
+			},
+			micActive: false,
+			userAnswer: ""
+
 		}
 	},
 	handleImageChange: function(newIndex) {
@@ -67,6 +73,49 @@ module.exports = React.createClass({
 		this.setState (
 			{
 				vocabData: newVocabData
+			}
+		)
+	},
+	handleUserAnswer: function() {
+		var that = this;
+		console.log(this.state.vocabData);
+
+		var possibleAnswers = this.state.vocabData.list[this.state.vocabData.currentWordIndex].name;
+
+		SpeechRecognition.activateSpeech(possibleAnswers, this.state.vocabData.lang)
+			.then(function(userAnswer) {
+				// Need to set var here, otherwise loses it in setState
+				console.log(userAnswer);
+				var answer = userAnswer;
+				if (userAnswer !== null) {
+					console.log("This is user's answer " + answer);
+					that.setState(
+						{
+							userAnswer: userAnswer,
+							micActive: false
+						},
+						that.props.checkAnswer(userAnswer)		
+					)
+				}
+				that.handleMicDeactivate();
+
+			}
+		);
+	},
+	handleMicActivate: function() {
+		this.setState(
+			{
+				micActive: true
+			}
+		);
+		console.log(SpeechRecognition);
+		//SpeechRecognition.checkBrowser();
+		this.handleUserAnswer();
+	},
+	handleMicDeactivate: function() {
+		this.setState(
+			{
+				micActive: false
 			}
 		)
 	},
@@ -103,23 +152,23 @@ module.exports = React.createClass({
         return (
        		<div className="practiceContainer">
 	       		<HeaderContainer />
-	       		<ImageContainer 
-	       			currentWordIndex = {currentWordIndex}
-	       			currentImage = {this.state.vocabData.list[currentWordIndex].imgURL}
-	       			vocabList = {vocabList} 
-	       			onImageChange = {this.handleImageChange} />
-	       		<InputContainer 
-	       			vocabList = {vocabList} 
-	       			currentWordIndex = {currentWordIndex} 
-	       			lang = {this.state.vocabData.lang}
-	       			checkAnswer = {this.checkAnswer} 
-	       			score = {this.state.vocabData.score}
-	       			lastAnswer = {this.state.vocabData.lastAnswer}
-	       			wordCorrect = {vocabList[currentWordIndex].correct} 
-	       			tries = {vocabList[currentWordIndex].tries} />
+				<ImageContainer 
+					currentWordIndex = {currentWordIndex}
+					currentImage = {this.state.vocabData.list[currentWordIndex].imgURL}
+					vocabList = {vocabList} 
+					onImageChange = {this.handleImageChange} />
 
+				<div className="practiceFooter">
+		       		<PracticeMic 
+		       			micActive={this.state.micActive}
+		       			onMicActivate={this.handleMicActivate}
+		       			onMicDeactivate={this.handleMicDeactivate}/>
+		       		<PracticeDoneButton />
+		       	</div>
 	       	</div>
        	)
 
    }
 })
+
+module.exports = PracticeContainer;

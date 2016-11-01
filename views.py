@@ -196,6 +196,10 @@ def demoVocab1(name="Vocab1"):
 def demoVocab2(name="Vocab2"):
 	return render_template("demoVocab2.html", name=name)
 
+@app.route('/demoVocab3')
+def demoVocab3(name="Vocab3"):
+	return render_template("reactTest.html", name=name)
+
 @app.route('/video/')
 def videoRedirect(name="Video Redirect"):
 	trackVisitorWithText("Watched video ")
