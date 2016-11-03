@@ -819,6 +819,9 @@
 		setCurrentTaskIndex: function setCurrentTaskIndex(newIndex) {
 			this.setState({ currentTaskIndex: newIndex });
 		},
+		changePracticeMode: function changePracticeMode() {
+			this.setState({ practiceMode: !this.state.practiceMode });
+		},
 		render: function render() {
 			var sceneData = this.state.sceneData;
 	
@@ -844,7 +847,8 @@
 						bgImage: this.state.sceneData.character.location.bg,
 						hintActive: this.state.hintActive }),
 					React.createElement(PracticeContainer, {
-						practiceMode: this.state.practiceMode }),
+						practiceMode: this.state.practiceMode,
+						changePracticeMode: this.changePracticeMode }),
 					React.createElement(DialogContainer
 					// Variables related to display scenario text and playing sounds
 					, { scenarioOn: this.state.scenarioOn,
@@ -26589,8 +26593,8 @@
 	var InputContainer = __webpack_require__(/*! ../containers/InputContainer.js */ 177);
 	var ImageContainer = __webpack_require__(/*! ../containers/ImageContainer */ 179);
 	var PracticeHeader = __webpack_require__(/*! ./components/PracticeHeader */ 227);
-	var PracticeFooter = __webpack_require__(/*! ./components/PracticeFooter */ 233);
-	var PracticeFlashCard = __webpack_require__(/*! ./components/PracticeFlashCard */ 230);
+	var PracticeFooter = __webpack_require__(/*! ./components/PracticeFooter */ 228);
+	var PracticeFlashCard = __webpack_require__(/*! ./components/PracticeFlashCard */ 231);
 	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition.js */ 178);
 	
 	var PracticeContainer = React.createClass({
@@ -26639,15 +26643,13 @@
 			} else {
 				newVocabData.lastAnswer = "";
 			}
-	
-			this.setState({
-				vocabData: newVocabData
-			});
+			this.setState({ vocabData: newVocabData });
 		},
 		setNewIndex: function setNewIndex(newIndex) {
 			var newVocabData = this.state.vocabData;
 			newVocabData.currentWordIndex = newIndex;
-			this.setState({ vocabData: newVocabData });
+			this.setState({ vocabData: newVocabData, userAnswer: "" });
+			// Reset userAnswer
 		},
 		handleUserAnswer: function handleUserAnswer() {
 			var that = this;
@@ -26664,7 +26666,7 @@
 					that.setState({
 						userAnswer: userAnswer,
 						micActive: false
-					}, that.props.checkAnswer(userAnswer));
+					}, that.checkAnswer(userAnswer));
 				}
 				that.handleMicDeactivate();
 			});
@@ -26682,11 +26684,12 @@
 	
 			// If correct, update info
 			var correctAnswer = false;
-			newVocabData.list[index].name.forEach(function (possibleWord) {
-				if (userAnswer === possibleWord) {
-					correctAnswer = true;
-				}
-			});
+	
+			var answer = newVocabData.list[index].answer;
+			if (userAnswer === answer) {
+				correctAnswer = true;
+			}
+	
 			if (correctAnswer) {
 				newVocabData.list[index].correct = true;
 				newVocabData.score += 1;
@@ -26701,15 +26704,13 @@
 			});
 		},
 		changePinyinDisplay: function changePinyinDisplay() {
-			this.setState({ showPinyin: !this.state.showPinyin }, console.log(this.state.showPinyin));
-			console.log(this.state.showPinyin);
+			this.setState({ showPinyin: !this.state.showPinyin });
 		},
 		render: function render() {
 			if (this.props.practiceMode) {
 				var currentWordIndex = this.state.vocabData.currentWordIndex;
 				var vocabList = this.state.vocabData.list;
 				var currentWordObject = vocabList[currentWordIndex];
-				console.log(currentWordObject);
 				return React.createElement(
 					'div',
 					{ className: 'practiceContainer' },
@@ -26721,11 +26722,13 @@
 						currentWordObject: currentWordObject,
 						setNewIndex: this.setNewIndex,
 						changePinyinDisplay: this.changePinyinDisplay,
-						showPinyin: this.state.showPinyin }),
+						showPinyin: this.state.showPinyin,
+						userAnswer: this.state.userAnswer }),
 					React.createElement(PracticeFooter, {
 						micActive: this.state.micActive,
 						onMicActivate: this.handleMicActivate,
-						onMicDeactivate: this.handleMicDeactivate })
+						onMicDeactivate: this.handleMicDeactivate,
+						changePracticeMode: this.props.changePracticeMode })
 				);
 			} else {
 				return null;
@@ -26736,7 +26739,8 @@
 	module.exports = PracticeContainer;
 	
 	PracticeContainer.propTypes = {
-		practiceMode: PropTypes.bool.isRequired
+		practiceMode: PropTypes.bool.isRequired,
+		changePracticeMode: PropTypes.func.isRequired
 	};
 
 /***/ },
@@ -26776,6 +26780,43 @@
 
 /***/ },
 /* 228 */
+/*!********************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/PracticeFooter.js ***!
+  \********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var PracticeMic = __webpack_require__(/*! ./PracticeMic */ 229);
+	var PracticeDoneButton = __webpack_require__(/*! ./PracticeDoneButton */ 230);
+	
+	function PracticeFooter(props) {
+		return React.createElement(
+			'div',
+			{ className: 'practiceFooter' },
+			React.createElement(PracticeMic, {
+				micActive: props.micActive,
+				onMicActivate: props.onMicActivate,
+				onMicDeactivate: props.onMicDeactivate }),
+			React.createElement(PracticeDoneButton, {
+				changePracticeMode: props.changePracticeMode })
+		);
+	}
+	
+	module.exports = PracticeFooter;
+	
+	PracticeFooter.propTypes = {
+		micActive: PropTypes.bool.isRequired,
+		onMicActivate: PropTypes.func.isRequired,
+		onMicDeactivate: PropTypes.func.isRequired,
+		changePracticeMode: PropTypes.func.isRequired
+	
+	};
+
+/***/ },
+/* 229 */
 /*!*****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/PracticeMic.js ***!
   \*****************************************************************/
@@ -26791,13 +26832,13 @@
 	
 		render: function render() {
 			var className = "btn btn-info micWrap micActive-" + this.props.micActive;
-			var micFunction = this.props.micActive ? this.props.onMicDeactivate : this.props.onMicActivate;
-			/*
-	  if (this.props.micActive) {
-	  	micFunction = this.props.onMicDeactivate;
-	  } else {
-	  	micFunction = this.props.onMicActivate;
-	  }*/
+			// var micFunction = this.props.micActive ? this.props.onMicDeactivate : this.props.onMicActivate;
+			var micFunction;
+			if (this.props.micActive) {
+				micFunction = this.props.onMicDeactivate;
+			} else {
+				micFunction = this.props.onMicActivate;
+			}
 			return React.createElement(
 				"div",
 				{ className: "micDiv" },
@@ -26811,9 +26852,15 @@
 	});
 	
 	module.exports = PracticeMic;
+	
+	PracticeMic.propTypes = {
+		onMicDeactivate: PropTypes.func.isRequired,
+		onMicActivate: PropTypes.func.isRequired
+	
+	};
 
 /***/ },
-/* 229 */
+/* 230 */
 /*!************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/PracticeDoneButton.js ***!
   \************************************************************************/
@@ -26827,15 +26874,21 @@
 	function PracticeDoneButton(props) {
 		return React.createElement(
 			"button",
-			{ className: "btn btn-info btn-lg btn-practice-done" },
+			{
+				className: "btn btn-info btn-lg btn-practice-done",
+				onClick: props.changePracticeMode },
 			"Done Practice"
 		);
 	}
 	
 	module.exports = PracticeDoneButton;
+	
+	PracticeDoneButton.propTypes = {
+		changePracticeMode: PropTypes.func.isRequired
+	};
 
 /***/ },
-/* 230 */
+/* 231 */
 /*!***********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/PracticeFlashCard.js ***!
   \***********************************************************************/
@@ -26845,8 +26898,8 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var FlashCardHeader = __webpack_require__(/*! ./FlashCardHeader */ 231);
-	var FlashCardContent = __webpack_require__(/*! ./FlashCardContent */ 232);
+	var FlashCardHeader = __webpack_require__(/*! ./FlashCardHeader */ 232);
+	var FlashCardContent = __webpack_require__(/*! ./FlashCardContent */ 233);
 	
 	var PracticeFlashCard = React.createClass({
 		displayName: 'PracticeFlashCard',
@@ -26854,30 +26907,15 @@
 		nextVocab: function nextVocab() {
 			var index = this.props.currentWordIndex;
 			// If at end of Vocab list, loop back, otherwise move to next one
-			var newIndex = index >= this.props.vocabList.length - 1 ? 0 : index++;
-			/*
-	  if (index >= this.props.vocabList.length - 1) {
-	  	index = 0;
-	  } else {
-	  	index++;
-	  }
-	  */
-			this.props.setNewIndex(index);
+			var newIndex = index >= this.props.vocabList.length - 1 ? 0 : index + 1;
+			this.props.setNewIndex(newIndex);
 		},
 		previousVocab: function previousVocab() {
 			var index = this.props.currentWordIndex;
-			var newIndex = index <= 0 ? this.props.vocabList.length - 1 : index--;
-			/*
-	  if (index <= 0 ) {
-	  	index = this.props.vocabList.length - 1;
-	  } else {
-	  	index--;
-	  }
-	  */
-			this.props.setNewIndex(index);
+			var newIndex = index <= 0 ? this.props.vocabList.length - 1 : index - 1;
+			this.props.setNewIndex(newIndex);
 		},
 		render: function render() {
-			console.log(this.props.currentWordIndex);
 			return React.createElement(
 				'div',
 				{ className: 'flashCardWrapper' },
@@ -26892,7 +26930,8 @@
 				React.createElement(FlashCardContent, {
 					currentWordObject: this.props.currentWordObject,
 					changePinyinDisplay: this.props.changePinyinDisplay,
-					showPinyin: this.props.showPinyin }),
+					showPinyin: this.props.showPinyin,
+					userAnswer: this.props.userAnswer }),
 				React.createElement(
 					'div',
 					{ className: 'rightArrow arrow', onClick: this.nextVocab },
@@ -26907,11 +26946,12 @@
 	PracticeFlashCard.propTypes = {
 		currentWordObject: PropTypes.object.isRequired,
 		changePinyinDisplay: PropTypes.func.isRequired,
-		showPinyin: PropTypes.bool.isRequired
+		showPinyin: PropTypes.bool.isRequired,
+		userAnswer: PropTypes.string.isRequired
 	};
 
 /***/ },
-/* 231 */
+/* 232 */
 /*!*********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/FlashCardHeader.js ***!
   \*********************************************************************/
@@ -26953,7 +26993,7 @@
 	};
 
 /***/ },
-/* 232 */
+/* 233 */
 /*!**********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/FlashCardContent.js ***!
   \**********************************************************************/
@@ -26966,25 +27006,40 @@
 	
 	function FlashCardContent(props) {
 		// Control over whether to display pinyin or not
-		console.log(props.showPinyin);
 		var pinyinDisplay = props.showPinyin ? React.createElement(
 			"p",
 			{ className: "pinyinPrompt" },
 			props.currentWordObject.pinyin
 		) : null;
+	
+		// If answer already correct, display a match
+		var userAnswerDisplay = props.currentWordObject.correct ? props.currentWordObject.answer : props.userAnswer !== "" ? props.userAnswer : null;
+	
+		var characterPromptClass = props.currentWordObject.correct ? "characterPrompt flashCardCharacters correctGreenBG" : "characterPrompt flashCardCharacters";
+	
+		var userInputClass = props.currentWordObject.correct ? "userInputCharacters flashCardCharacters correctGreenBG" : "userInputCharacters flashCardCharacters";
+	
 		return React.createElement(
 			"div",
 			{ className: "flashCardComparison" },
 			React.createElement(
-				"h2",
-				{ className: "characterPrompt flashCardCharacters" },
-				props.currentWordObject.answer
+				"div",
+				null,
+				React.createElement(
+					"h2",
+					{ className: characterPromptClass },
+					props.currentWordObject.answer
+				)
 			),
 			pinyinDisplay,
 			React.createElement(
-				"h2",
-				{ className: "userInputCharacters flashCardCharacters" },
-				"你好"
+				"div",
+				null,
+				React.createElement(
+					"h2",
+					{ className: userInputClass },
+					userAnswerDisplay
+				)
 			)
 		);
 	}
@@ -26993,42 +27048,8 @@
 	
 	FlashCardContent.propTypes = {
 		currentWordObject: PropTypes.object.isRequired,
-		showPinyin: PropTypes.bool.isRequired
-	};
-
-/***/ },
-/* 233 */
-/*!********************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/PracticeFooter.js ***!
-  \********************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	var PracticeMic = __webpack_require__(/*! ./PracticeMic */ 228);
-	var PracticeDoneButton = __webpack_require__(/*! ./PracticeDoneButton */ 229);
-	
-	function PracticeFooter(props) {
-		return React.createElement(
-			'div',
-			{ className: 'practiceFooter' },
-			React.createElement(PracticeMic, {
-				micActive: props.micActive,
-				onMicActivate: props.handleMicActivate,
-				onMicDeactivate: props.handleMicDeactivate }),
-			React.createElement(PracticeDoneButton, null)
-		);
-	}
-	
-	module.exports = PracticeFooter;
-	
-	PracticeFooter.propTypes = {
-		micActive: PropTypes.bool.isRequired,
-		onMicActivate: PropTypes.func.isRequired,
-		onMicDeactivate: PropTypes.func.isRequired
-	
+		showPinyin: PropTypes.bool.isRequired,
+		userAnswer: PropTypes.string.isRequired
 	};
 
 /***/ }

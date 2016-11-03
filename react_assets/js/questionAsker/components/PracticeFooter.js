@@ -8,9 +8,10 @@ function PracticeFooter (props) {
 		<div className="practiceFooter">
 			<PracticeMic 
 				micActive={props.micActive}
-				onMicActivate={props.handleMicActivate}
-				onMicDeactivate={props.handleMicDeactivate}/>
-			<PracticeDoneButton />
+				onMicActivate={props.onMicActivate}
+				onMicDeactivate={props.onMicDeactivate}/>
+			<PracticeDoneButton 
+				changePracticeMode={props.changePracticeMode}/>
        	</div>
 	)
 }
@@ -20,6 +21,7 @@ module.exports = PracticeFooter;
 PracticeFooter.propTypes = {
 	micActive: PropTypes.bool.isRequired,
 	onMicActivate: PropTypes.func.isRequired,
-	onMicDeactivate: PropTypes.func.isRequired
+	onMicDeactivate: PropTypes.func.isRequired,
+	changePracticeMode: PropTypes.func.isRequired
 
 }

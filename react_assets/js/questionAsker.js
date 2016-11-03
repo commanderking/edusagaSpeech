@@ -784,6 +784,9 @@ var QuestionAsker = React.createClass({
 	setCurrentTaskIndex: function(newIndex) {
 		this.setState({ currentTaskIndex: newIndex})
 	},
+	changePracticeMode: function() {
+		this.setState({ practiceMode: !this.state.practiceMode});
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
 
@@ -804,7 +807,8 @@ var QuestionAsker = React.createClass({
 						bgImage={this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
 					<PracticeContainer 
-						practiceMode={this.state.practiceMode}/>
+						practiceMode={this.state.practiceMode} 
+						changePracticeMode={this.changePracticeMode}/>
 					<DialogContainer
 						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}

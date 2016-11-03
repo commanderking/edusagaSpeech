@@ -57,17 +57,14 @@ var PracticeContainer = React.createClass({
 		} else {
 			newVocabData.lastAnswer = ""
 		}
-
-		this.setState (
-			{
-				vocabData: newVocabData
-			}
-		)
+		this.setState ({vocabData: newVocabData});
 	},
 	setNewIndex: function(newIndex) {
 		var newVocabData = this.state.vocabData;
 		newVocabData.currentWordIndex = newIndex;
-		this.setState({vocabData: newVocabData});
+		this.setState({vocabData: newVocabData, userAnswer: ""});
+		// Reset userAnswer
+
 	},
 	handleUserAnswer: function() {
 		var that = this;
@@ -87,11 +84,10 @@ var PracticeContainer = React.createClass({
 							userAnswer: userAnswer,
 							micActive: false
 						},
-						that.props.checkAnswer(userAnswer)		
+						that.checkAnswer(userAnswer)		
 					)
 				}
 				that.handleMicDeactivate();
-
 			}
 		);
 	},
@@ -108,11 +104,12 @@ var PracticeContainer = React.createClass({
 
 		// If correct, update info
 		var correctAnswer = false;
-		newVocabData.list[index].name.forEach(function(possibleWord) {
-			if (userAnswer === possibleWord) {
-				correctAnswer = true;
-			}
-		})
+
+		var answer = newVocabData.list[index].answer;
+		if (userAnswer === answer) {
+			correctAnswer = true;
+		}
+
 		if (correctAnswer) {
 			newVocabData.list[index].correct = true;
 			newVocabData.score +=1;
@@ -124,20 +121,18 @@ var PracticeContainer = React.createClass({
 		newVocabData.lastAnswer = userAnswer;
 		this.setState (
 			{
-				vocabData: newVocabData
+				vocabData: newVocabData,
 			}
 		)
 	},
 	changePinyinDisplay: function() {
-		this.setState({showPinyin: !this.state.showPinyin}, console.log(this.state.showPinyin));
-		console.log(this.state.showPinyin);
+		this.setState({showPinyin: !this.state.showPinyin});
 	},
     render: function(){
 		if (this.props.practiceMode) {
 			var currentWordIndex = this.state.vocabData.currentWordIndex;
 			var vocabList = this.state.vocabData.list;
 			var currentWordObject = vocabList[currentWordIndex];
-			console.log(currentWordObject);
 			return (
 				<div className="practiceContainer">
 					<PracticeHeader 
@@ -148,11 +143,13 @@ var PracticeContainer = React.createClass({
 		       			currentWordObject={currentWordObject} 
 		       			setNewIndex={this.setNewIndex} 
 		       			changePinyinDisplay={this.changePinyinDisplay}
-		       			showPinyin={this.state.showPinyin}/>
+		       			showPinyin={this.state.showPinyin}
+		       			userAnswer={this.state.userAnswer}/>
 		       		<PracticeFooter 
 		       			micActive={this.state.micActive}
 		       			onMicActivate={this.handleMicActivate}
-		       			onMicDeactivate={this.handleMicDeactivate} />
+		       			onMicDeactivate={this.handleMicDeactivate} 
+		       			changePracticeMode={this.props.changePracticeMode}/>
 		       	</div>
 	       	)   		
     	} else {
@@ -166,5 +163,6 @@ var PracticeContainer = React.createClass({
 module.exports = PracticeContainer;
 
 PracticeContainer.propTypes = {
-	practiceMode: PropTypes.bool.isRequired
+	practiceMode: PropTypes.bool.isRequired,
+	changePracticeMode: PropTypes.func.isRequired
 }

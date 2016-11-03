@@ -8,6 +8,8 @@ $yellow : #F3EC29;
 $disabledTextColor: #7DBEE4;
 $disabledDivBGColor: #90D3F3;
 $darkPink: #ED1B7F;
+$pastelGreen: #77dd77;
+$pastelRed: #ff6961;
 
 $mobileWidth: 480px;
 $tabletWidth: 768px;
@@ -1203,6 +1205,8 @@ $themeYellow: #FDD870;
 		text-align: center;
 		.flashCardCharacters {
 			margin-bottom: 0px;
+			padding: 5px;
+			display: inline-block;
 		}
 		.userInputCharacters {
 			margin-top: 0px;
@@ -1250,6 +1254,10 @@ $themeYellow: #FDD870;
 			width: 100%;
 		}
 	}
+}
+
+.correctGreenBG {
+	background-color: $pastelGreen;
 }
 
 .practiceFooter {
