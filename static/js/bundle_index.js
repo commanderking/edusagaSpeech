@@ -51,7 +51,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var App = __webpack_require__(/*! ./app */ 172);
+	var App = __webpack_require__(/*! ./app */ 175);
 	
 	ReactDOM.render(React.createElement(App, null), document.getElementById('react-app'));
 
@@ -4102,7 +4102,7 @@
 
 /***/ },
 
-/***/ 172:
+/***/ 175:
 /*!********************************!*\
   !*** ./react_assets/js/app.js ***!
   \********************************/
@@ -4111,9 +4111,9 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var HeaderContainer = __webpack_require__(/*! ./containers/HeaderContainer.js */ 173);
-	var InputContainer = __webpack_require__(/*! ./containers/InputContainer.js */ 174);
-	var ImageContainer = __webpack_require__(/*! ./containers/ImageContainer.js */ 176);
+	var HeaderContainer = __webpack_require__(/*! ./containers/HeaderContainer.js */ 176);
+	var InputContainer = __webpack_require__(/*! ./containers/InputContainer.js */ 177);
+	var ImageContainer = __webpack_require__(/*! ./containers/ImageContainer.js */ 179);
 	
 	module.exports = React.createClass({
 		displayName: 'exports',
@@ -4226,7 +4226,7 @@
 
 /***/ },
 
-/***/ 173:
+/***/ 176:
 /*!*******************************************************!*\
   !*** ./react_assets/js/containers/HeaderContainer.js ***!
   \*******************************************************/
@@ -4265,7 +4265,7 @@
 
 /***/ },
 
-/***/ 174:
+/***/ 177:
 /*!******************************************************!*\
   !*** ./react_assets/js/containers/InputContainer.js ***!
   \******************************************************/
@@ -4274,7 +4274,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 175);
+	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 178);
 	
 	var MicContainer = React.createClass({
 		displayName: 'MicContainer',
@@ -4446,7 +4446,7 @@
 
 /***/ },
 
-/***/ 175:
+/***/ 178:
 /*!******************************************************!*\
   !*** ./react_assets/js/helpers/SpeechRecognition.js ***!
   \******************************************************/
@@ -4543,7 +4543,7 @@
 
 /***/ },
 
-/***/ 176:
+/***/ 179:
 /*!******************************************************!*\
   !*** ./react_assets/js/containers/ImageContainer.js ***!
   \******************************************************/

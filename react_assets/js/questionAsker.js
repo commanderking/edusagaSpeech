@@ -43,7 +43,7 @@ var QuestionAsker = React.createClass({
 		return {
 			sceneData: undefined,
 			scenarioOn: true,
-			practiceMode: true,
+			practiceMode: false,
 			scenarioIndex: 0,
 			hintActive: false,
 
@@ -80,10 +80,14 @@ var QuestionAsker = React.createClass({
 		$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function(data) {})
 			.success(function(data) {
 				that.resetScene();
+				console.log(data.practiceModeStart);
+				var practiceModeStartOn = data.practiceModeStart ? true : false
 				that.setState({
 					sceneData: data,
-					currentDialog: data.initialTaskDialog
+					currentDialog: data.initialTaskDialog,
+					practiceMode: practiceModeStartOn
 				});
+
 			/*----------------------------------
 			 One time setting of initial log Data
 			 ----------------------------------*/
@@ -799,6 +803,8 @@ var QuestionAsker = React.createClass({
 					<BackgroundImageContainer
 						bgImage={this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
+					<PracticeContainer 
+						practiceMode={this.state.practiceMode}/>
 					<DialogContainer
 						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}
@@ -885,7 +891,6 @@ var QuestionAsker = React.createClass({
 						setCurrentTaskIndex = {this.setCurrentTaskIndex} 
 
 						currentScenarioData = {currentScenarioData} />
-
 					<ResultsContainer 
 						sceneComplete = {this.state.sceneComplete} 
 						coins = {this.state.coins}

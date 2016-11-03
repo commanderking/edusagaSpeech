@@ -1,9 +1,11 @@
 var React = require('react');
+var PropTypes = React.PropTypes;
 var HeaderContainer = require('../containers/HeaderContainer.js');
 var InputContainer = require('../containers/InputContainer.js');
 var ImageContainer = require('../containers/ImageContainer');
-var PracticeMic = require('./components/PracticeMic');
-var PracticeDoneButton = require('./components/PracticeDoneButton');
+var PracticeHeader = require('./components/PracticeHeader');
+var PracticeFooter = require('./components/PracticeFooter');
+var PracticeFlashCard = require('./components/PracticeFlashCard');
 var SpeechRecognition = require('../helpers/SpeechRecognition.js');
 
 var PracticeContainer = React.createClass({
@@ -17,45 +19,31 @@ var PracticeContainer = React.createClass({
 				'list' :
 				[
 					{
-						'name' : ['牛肉面', "面条"],
-						'imgURL' : 'http://image82.360doc.com/DownloadImg/2015/02/1709/50263666_2.jpg',
-						'correct' : null,
+						'task' : 'Say Hi ',
+						'answer' : "你好",
+						'pinyin' : 'nǐ hǎo',
+						'correct' : false,
 						'tries': 0
 					},
 					{
-						'name' : ['炒饭', '蛋炒饭', '虾仁炒饭'],
-						'imgURL' : 'http://www.51dayaji.com/wp-content/uploads/2014/11/%E7%82%92%E9%A5%AD%E7%9A%84%E5%81%9A%E6%B3%953.jpg',
-						'correct' : null,
+						'task' : "Ask how they're doing (Method 1)",
+						'answer' : "怎么样",
+						'pinyin' : 'zěnme yàng',
+						'correct' : false,
 						'tries' : 0
 					},
 					{
-						'name' : ['汉堡', '汉堡包'],
-						'imgURL' : 'http://science-all.com/images/wallpapers/hamburger/hamburger-6.PNG',
-						'correct' : null,
-						'tries' : 0
-					},
-					{
-						'name' : ['寿司'],
-						'imgURL' : 'https://img.grouponcdn.com/deal/fmPws6o2uTweCftZu7yj/p4-2048x1229/v1/c700x420.jpg',
-						'correct' : null,
-						'tries' : 0
-					},
-					{
-						'name' : ['薯条', '炸薯条'],
-						'imgURL' : 'http://ali.xinshipu.cn/20140121/original/1390268120219.jpg',
-						'correct' : null,
-						'tries' : 0
-					},
-					{
-						'name' : ['冰淇淋'],
-						'imgURL' : 'http://www.americasdairyland.com/assets/images/EWC/Ice-Cream-Hdr.jpg',
-						'correct' : null,
+						'task' : "Ask how they're doing (Method 2)",
+						'answer' : '你好吗',
+						'pinyin' : 'nǐ hǎo ma',
+						'correct' : false,
 						'tries' : 0
 					}
 				]
 			},
 			micActive: false,
-			userAnswer: ""
+			userAnswer: "",
+			showPinyin: false
 
 		}
 	},
@@ -65,7 +53,7 @@ var PracticeContainer = React.createClass({
 
 		// Reset text based on if student already guessed the answer correctly before
 		if (newVocabData.list[newIndex].correct) {
-			newVocabData.lastAnswer = newVocabData.list[newIndex].name;
+			newVocabData.lastAnswer = newVocabData.list[newIndex].answer;
 		} else {
 			newVocabData.lastAnswer = ""
 		}
@@ -76,11 +64,16 @@ var PracticeContainer = React.createClass({
 			}
 		)
 	},
+	setNewIndex: function(newIndex) {
+		var newVocabData = this.state.vocabData;
+		newVocabData.currentWordIndex = newIndex;
+		this.setState({vocabData: newVocabData});
+	},
 	handleUserAnswer: function() {
 		var that = this;
 		console.log(this.state.vocabData);
 
-		var possibleAnswers = this.state.vocabData.list[this.state.vocabData.currentWordIndex].name;
+		var possibleAnswers = this.state.vocabData.list[this.state.vocabData.currentWordIndex].answer;
 
 		SpeechRecognition.activateSpeech(possibleAnswers, this.state.vocabData.lang)
 			.then(function(userAnswer) {
@@ -103,21 +96,11 @@ var PracticeContainer = React.createClass({
 		);
 	},
 	handleMicActivate: function() {
-		this.setState(
-			{
-				micActive: true
-			}
-		);
-		console.log(SpeechRecognition);
-		//SpeechRecognition.checkBrowser();
+		this.setState({micActive: true});
 		this.handleUserAnswer();
 	},
 	handleMicDeactivate: function() {
-		this.setState(
-			{
-				micActive: false
-			}
-		)
+		this.setState({micActive: false});
 	},
 	checkAnswer: function(userAnswer) {
 		var newVocabData = this.state.vocabData;
@@ -144,31 +127,44 @@ var PracticeContainer = React.createClass({
 				vocabData: newVocabData
 			}
 		)
-		console.log(this.state.vocabData);
+	},
+	changePinyinDisplay: function() {
+		this.setState({showPinyin: !this.state.showPinyin}, console.log(this.state.showPinyin));
+		console.log(this.state.showPinyin);
 	},
     render: function(){
-   		var currentWordIndex = this.state.vocabData.currentWordIndex;
-   		var vocabList = this.state.vocabData.list;
-        return (
-       		<div className="practiceContainer">
-	       		<HeaderContainer />
-				<ImageContainer 
-					currentWordIndex = {currentWordIndex}
-					currentImage = {this.state.vocabData.list[currentWordIndex].imgURL}
-					vocabList = {vocabList} 
-					onImageChange = {this.handleImageChange} />
-
-				<div className="practiceFooter">
-		       		<PracticeMic 
+		if (this.props.practiceMode) {
+			var currentWordIndex = this.state.vocabData.currentWordIndex;
+			var vocabList = this.state.vocabData.list;
+			var currentWordObject = vocabList[currentWordIndex];
+			console.log(currentWordObject);
+			return (
+				<div className="practiceContainer">
+					<PracticeHeader 
+						currentWordObject={currentWordObject}/>
+		       		<PracticeFlashCard
+		       			currentWordIndex={currentWordIndex}
+		       			vocabList={vocabList}
+		       			currentWordObject={currentWordObject} 
+		       			setNewIndex={this.setNewIndex} 
+		       			changePinyinDisplay={this.changePinyinDisplay}
+		       			showPinyin={this.state.showPinyin}/>
+		       		<PracticeFooter 
 		       			micActive={this.state.micActive}
 		       			onMicActivate={this.handleMicActivate}
-		       			onMicDeactivate={this.handleMicDeactivate}/>
-		       		<PracticeDoneButton />
+		       			onMicDeactivate={this.handleMicDeactivate} />
 		       	</div>
-	       	</div>
-       	)
+	       	)   		
+    	} else {
+    		return null;
+    	}
+
 
    }
 })
 
 module.exports = PracticeContainer;
+
+PracticeContainer.propTypes = {
+	practiceMode: PropTypes.bool.isRequired
+}

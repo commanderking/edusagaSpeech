@@ -51,9 +51,9 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
-	var StudentGradebook = __webpack_require__(/*! ./dashboard/components/StudentGradebook */ 224);
-	var ActivitySummary = __webpack_require__(/*! ./dashboard/components/ActivitySummary */ 225);
-	var ActivitySummaryStudent = __webpack_require__(/*! ./dashboard/components/ActivitySummaryStudent */ 226);
+	var StudentGradebook = __webpack_require__(/*! ./dashboard/components/StudentGradebook */ 172);
+	var ActivitySummary = __webpack_require__(/*! ./dashboard/components/ActivitySummary */ 173);
+	var ActivitySummaryStudent = __webpack_require__(/*! ./dashboard/components/ActivitySummaryStudent */ 174);
 	var Dashboard = React.createClass({
 		displayName: 'Dashboard',
 	
@@ -21723,59 +21723,7 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 172 */,
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */
+/* 172 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/dashboard/components/StudentGradebook.js ***!
   \******************************************************************/
@@ -21849,7 +21797,7 @@
 	module.exports = ActivityGradeBook;
 
 /***/ },
-/* 225 */
+/* 173 */
 /*!*****************************************************************!*\
   !*** ./react_assets/js/dashboard/components/ActivitySummary.js ***!
   \*****************************************************************/
@@ -21973,7 +21921,7 @@
 	module.exports = ActivitySummary;
 
 /***/ },
-/* 226 */
+/* 174 */
 /*!************************************************************************!*\
   !*** ./react_assets/js/dashboard/components/ActivitySummaryStudent.js ***!
   \************************************************************************/

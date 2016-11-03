@@ -9,6 +9,7 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
+	"practiceModeStart": true,
 	"objectives": 
 	[
 		"I can introduce myself and provide basic personal information.",
