@@ -98,7 +98,7 @@
 				sceneData: undefined,
 				scenarioOn: true,
 				practiceMode: false,
-				practiceAvailable: false,
+				practiceAvailable: true,
 				scenarioIndex: 0,
 				hintActive: false,
 	
@@ -635,7 +635,7 @@
 				miriIconSrc: "miri/icons/Miri_Icon_default.png"
 			});
 		},
-		handleHintAudio: function handleHintAudio(hintAudioToPlay) {
+		playSpeechSynth: function playSpeechSynth(hintAudioToPlay) {
 			SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 		},
 		changeScenarioMode: function changeScenarioMode() {
@@ -852,7 +852,8 @@
 						hintActive: this.state.hintActive }),
 					React.createElement(PracticeContainer, {
 						practiceMode: this.state.practiceMode,
-						changePracticeMode: this.changePracticeMode }),
+						changePracticeMode: this.changePracticeMode,
+						playSpeechSynth: this.playSpeechSynth }),
 					React.createElement(DialogContainer
 					// Variables related to display scenario text and playing sounds
 					, { scenarioOn: this.state.scenarioOn,
@@ -914,7 +915,7 @@
 						locationTextEnglish: this.state.sceneData.character.location.nameEnglish,
 						locationTextChinese: this.state.sceneData.character.location.nameChinese,
 						hintActive: this.state.hintActive,
-						onHintAudio: this.handleHintAudio,
+						onHintAudio: this.playSpeechSynth,
 						coins: this.state.coins,
 						answerFeedbackActive: this.state.answerFeedbackActive,
 						feedbackText: this.state.feedbackText,
@@ -26737,7 +26738,8 @@
 						setNewIndex: this.setNewIndex,
 						changePinyinDisplay: this.changePinyinDisplay,
 						showPinyin: this.state.showPinyin,
-						userAnswer: this.state.userAnswer }),
+						userAnswer: this.state.userAnswer,
+						playSpeechSynth: this.props.playSpeechSynth }),
 					React.createElement(PracticeFooter, {
 						micActive: this.state.micActive,
 						onMicActivate: this.handleMicActivate,
@@ -26754,7 +26756,8 @@
 	
 	PracticeContainer.propTypes = {
 		practiceMode: PropTypes.bool.isRequired,
-		changePracticeMode: PropTypes.func.isRequired
+		changePracticeMode: PropTypes.func.isRequired,
+		playSpeechSynth: PropTypes.func.isRequired
 	};
 
 /***/ },
@@ -26940,7 +26943,8 @@
 				),
 				React.createElement(FlashCardHeader, {
 					currentWordObject: this.props.currentWordObject,
-					changePinyinDisplay: this.props.changePinyinDisplay }),
+					changePinyinDisplay: this.props.changePinyinDisplay,
+					playSpeechSynth: this.props.playSpeechSynth }),
 				React.createElement(FlashCardContent, {
 					currentWordObject: this.props.currentWordObject,
 					changePinyinDisplay: this.props.changePinyinDisplay,
@@ -26961,7 +26965,8 @@
 		currentWordObject: PropTypes.object.isRequired,
 		changePinyinDisplay: PropTypes.func.isRequired,
 		showPinyin: PropTypes.bool.isRequired,
-		userAnswer: PropTypes.string.isRequired
+		userAnswer: PropTypes.string.isRequired,
+		playSpeechSynth: PropTypes.func.isRequired
 	};
 
 /***/ },
@@ -26997,7 +27002,9 @@
 					'Show Pinyin'
 				)
 			),
-			React.createElement(PracticeAudioButton, null)
+			React.createElement(PracticeAudioButton, {
+				playSpeechSynth: props.playSpeechSynth,
+				currentWord: props.currentWordObject.answer })
 		);
 	}
 	
@@ -27005,7 +27012,8 @@
 	
 	FlashCardHeader.propTypes = {
 		changePinyinDisplay: PropTypes.func.isRequired,
-		currentWordObject: PropTypes.object.isRequired
+		currentWordObject: PropTypes.object.isRequired,
+		playSpeechSynth: PropTypes.func.isRequired
 	};
 
 /***/ },
@@ -27120,17 +27128,21 @@
 	function PracticeAudioButton(props) {
 		return React.createElement(
 			"button",
-			{ className: "button practiceAudioButton" },
-			React.createElement("span", { className: "glyphicon glyphicon-volume-up", "aria-hidden": "true" }),
-			React.createElement(
-				"span",
-				{ className: "toolTipText" },
-				"Practice"
-			)
+			{
+				className: "button practiceAudioButton",
+				onClick: function onClick() {
+					return props.playSpeechSynth(props.currentWord);
+				} },
+			React.createElement("span", { className: "glyphicon glyphicon-volume-up", "aria-hidden": "true" })
 		);
 	}
 	
 	module.exports = PracticeAudioButton;
+	
+	PracticeAudioButton.propTypes = {
+		playSpeechSynth: PropTypes.func.isRequired,
+		currentWord: PropTypes.string.isRequired
+	};
 
 /***/ }
 /******/ ]);

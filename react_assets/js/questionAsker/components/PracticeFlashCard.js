@@ -23,7 +23,8 @@ var PracticeFlashCard = React.createClass({
 				</div>
 				<FlashCardHeader 
 					currentWordObject={this.props.currentWordObject}
-					changePinyinDisplay={this.props.changePinyinDisplay}/>
+					changePinyinDisplay={this.props.changePinyinDisplay}
+					playSpeechSynth={this.props.playSpeechSynth}/>
 				<FlashCardContent 
 					currentWordObject={this.props.currentWordObject}
 					changePinyinDisplay={this.props.changePinyinDisplay}
@@ -43,5 +44,6 @@ PracticeFlashCard.propTypes = {
 	currentWordObject: PropTypes.object.isRequired,
 	changePinyinDisplay: PropTypes.func.isRequired,
 	showPinyin: PropTypes.bool.isRequired,
-	userAnswer: PropTypes.string.isRequired
+	userAnswer: PropTypes.string.isRequired,
+	playSpeechSynth: PropTypes.func.isRequired
 }

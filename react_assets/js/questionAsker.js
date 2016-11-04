@@ -44,7 +44,7 @@ var QuestionAsker = React.createClass({
 			sceneData: undefined,
 			scenarioOn: true,
 			practiceMode: false,
-			practiceAvailable: false,
+			practiceAvailable: true,
 			scenarioIndex: 0,
 			hintActive: false,
 
@@ -596,7 +596,7 @@ var QuestionAsker = React.createClass({
 			miriIconSrc: "miri/icons/Miri_Icon_default.png"
 		})
 	},
-	handleHintAudio: function(hintAudioToPlay) {
+	playSpeechSynth: function(hintAudioToPlay) {
 		SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 	},
 	changeScenarioMode: function() {
@@ -812,7 +812,8 @@ var QuestionAsker = React.createClass({
 						hintActive = {this.state.hintActive} />
 					<PracticeContainer 
 						practiceMode = {this.state.practiceMode} 
-						changePracticeMode = {this.changePracticeMode}/>
+						changePracticeMode = {this.changePracticeMode}
+						playSpeechSynth = {this.playSpeechSynth}/>
 					<DialogContainer
 						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}
@@ -874,7 +875,7 @@ var QuestionAsker = React.createClass({
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
 						hintActive = {this.state.hintActive} 
-						onHintAudio = {this.handleHintAudio}
+						onHintAudio = {this.playSpeechSynth}
 						coins = {this.state.coins} 
 						answerFeedbackActive = {this.state.answerFeedbackActive}
 						feedbackText = {this.state.feedbackText} 

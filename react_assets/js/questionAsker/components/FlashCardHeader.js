@@ -12,7 +12,9 @@ function FlashCardHeader (props) {
 			 			Show Pinyin
 			 		</label>
 			</div>
-			<PracticeAudioButton />
+			<PracticeAudioButton 
+				playSpeechSynth={props.playSpeechSynth}
+				currentWord={props.currentWordObject.answer}/>
 		</div>
 	)
 }
@@ -21,5 +23,6 @@ module.exports = FlashCardHeader;
 
 FlashCardHeader.propTypes = {
 	changePinyinDisplay: PropTypes.func.isRequired,
-	currentWordObject: PropTypes.object.isRequired
+	currentWordObject: PropTypes.object.isRequired,
+	playSpeechSynth: PropTypes.func.isRequired
 }

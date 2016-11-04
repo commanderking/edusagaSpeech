@@ -921,9 +921,9 @@
 		//}
 
 		.inner {
-			@include vendor('animation', 'reveal-banner 1s 0.25s ease-in-out');
+			@include vendor('animation', 'reveal-banner 0.25s 0.25s ease-in-out');
 			@include vendor('animation-fill-mode', 'forwards');
-			background: transparentize(_palette(banner, inner-bg), 0.25);
+			background: transparentize(_palette(banner, inner-bg), 0.1);
 			border-radius: 25px;
 			color: _palette(banner, inner-fg);
 			display: inline-block;

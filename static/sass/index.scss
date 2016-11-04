@@ -1077,7 +1077,7 @@ Timer Container
 Practice Container 
 --------------------------------------------*/
 
-$bgColorDefault: #61B3DB;
+$headerBlue: #61B3DB;
 $themeLightBlue: #C4DBEF;
 $themeYellow: #FDD870;
 
@@ -1099,7 +1099,7 @@ $themeYellow: #FDD870;
 .practiceHeader {
 	width: 100%;
 	height: 50px;
-	background-color: $bgColorDefault;
+	background-color: $headerBlue;
 	padding: 0px;
 	margin: 0px;
 	font-size: 35px;
@@ -1121,9 +1121,6 @@ $themeYellow: #FDD870;
 			color: $themeYellow;
 		}
 	}
-	.task {
-
-	}
 }
 
 .flashCardWrapper {
@@ -1135,6 +1132,24 @@ $themeYellow: #FDD870;
 	margin-top: 20px;
 	padding: 1%;
 	position: relative;
+
+	.flashCardHeader {
+		.practiceAudioButton {
+			width: 25px;
+			height: 25px;
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			border-radius: 25px;
+			border: 1px solid $headerBlue;
+			color: $headerBlue;
+			background-color: white;
+			&:hover {
+				background-color: $headerBlue;
+				color: white;
+			}
+		}
+	}
 	.pinyinCheckBox {
 		position: absolute;
 		right: 5px;
@@ -1222,7 +1237,7 @@ $themeYellow: #FDD870;
 		    min-width: 150px;
 		    min-height: 150px;
 		    border-radius: 50%;
-		    background: $bgColorDefault;
+		    background: $headerBlue;
 		    z-index: 1;
 		    padding: 1%;
 		    span {

@@ -144,7 +144,8 @@ var PracticeContainer = React.createClass({
 		       			setNewIndex={this.setNewIndex} 
 		       			changePinyinDisplay={this.changePinyinDisplay}
 		       			showPinyin={this.state.showPinyin}
-		       			userAnswer={this.state.userAnswer}/>
+		       			userAnswer={this.state.userAnswer}
+		       			playSpeechSynth={this.props.playSpeechSynth}/>
 		       		<PracticeFooter 
 		       			micActive={this.state.micActive}
 		       			onMicActivate={this.handleMicActivate}
@@ -164,5 +165,6 @@ module.exports = PracticeContainer;
 
 PracticeContainer.propTypes = {
 	practiceMode: PropTypes.bool.isRequired,
-	changePracticeMode: PropTypes.func.isRequired
+	changePracticeMode: PropTypes.func.isRequired,
+	playSpeechSynth: PropTypes.func.isRequired
 }
