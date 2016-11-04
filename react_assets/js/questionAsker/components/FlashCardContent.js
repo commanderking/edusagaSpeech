@@ -11,7 +11,8 @@ function FlashCardContent (props) {
 	var characterPromptClass = props.currentWordObject.correct ? "characterPrompt flashCardCharacters correctGreenBG" :
 		"characterPrompt flashCardCharacters";
 
-	var userInputClass = props.currentWordObject.correct ? "userInputCharacters flashCardCharacters correctGreenBG" :
+	var userInputClass = props.currentWordObject.correct ? "userInputCharacters flashCardCharacters correctGreenBG" : 
+		props.userAnswer !== "" ? "userInputCharacters flashCardCharacters wrongRedBG" :
 		"userInputCharacters flashCardCharacters";
 
 	return (

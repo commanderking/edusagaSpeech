@@ -1,5 +1,6 @@
 var React = require('react')
 var PropTypes = React.PropTypes;
+var PracticeAudioButton = require('./PracticeAudioButton');
 
 function FlashCardHeader (props) {
 	return (
@@ -11,6 +12,7 @@ function FlashCardHeader (props) {
 			 			Show Pinyin
 			 		</label>
 			</div>
+			<PracticeAudioButton />
 		</div>
 	)
 }

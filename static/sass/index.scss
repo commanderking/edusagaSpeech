@@ -49,13 +49,27 @@ html, body {
 	height: 100%;
 }
 
-
+/*--------------------------------------------------------
+Shared elements 
+--------------------------------------------------------*/
 
 .verticalCenter {
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
 }
+
+.toolTipText {
+	visibility: hidden;
+	position: absolute;
+	background-color: $yellow;
+	padding: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 5px;
+	color: $darkBlue;
+}
+
 
 // Currently only used in viewHelper.js to "fade" elements
 .black {
@@ -657,16 +671,6 @@ CSS Related to Task List
 				visibility: visible;
 			}
 
-			.toolTipText {
-				visibility: hidden;
-				position: absolute;
-				background-color: $yellow;
-				padding: 5px;
-				font-size: 20px;
-				font-weight: bold;
-				border-radius: 5px;
-				color: $darkBlue;
-			}
 
 			.repeatButtonDiv .toolTipText {
 				right: 200px;
@@ -791,82 +795,6 @@ CSS Related to Task List
 	border: 2px solid black;
 	border-radius: 10px;
 	color: white;
-}
-
-/*----------------------------------------
-Robo Help Window 
-----------------------------------------*/
-
-.helpWindow {
-	position: absolute;
-	width: 40%;
-	height: 90%;
-	left: 0;
-	.roboImageWrapper {
-		position: absolute;
-		top: 35%;
-		right: 0;
-		width: 220px;
-		height: 300px;
-		.roboImage {
-			height: 100%;
-			width: 100%;
-		}
-		.roboSpeakIcon {
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			margin-left: -50px;
-			margin-bottom: -50px;
-			width: 100px;
-			height: 100px;
-			opacity: 0.8;
-			&:hover {
-				opacity: 0.9;
-			},
-			&:active {
-				opacity: 1.0;
-			}
-		}
-	}
-
-	.roboHelpTextWrapper {
-		top: 5%;
-		height: 35%;
-		min-height: 150px;
-		min-width: 80%;
-		position: absolute;
-		margin-left:20%;
-		border: 5px solid $darkBlue;
-		text-align: center;
-		.header {
-			width: 100%;
-			background-color: $darkBlue;
-			h3 {
-				margin: 0;
-				color: $yellow;
-				padding: 5px;
-			}
-
-			.glyphicon {
-				position: absolute;
-				right: 0;
-				color: $borderBlue;
-				font-size: 15px;
-				line-height: 25px;
-				padding: 5px;
-			}
-		}
-		p {
-			padding: 15px;
-			color: $darkBlue;
-		}
-		.helpText {
-			font-size: 20px;
-			padding-top: 0;
-			padding-bottom: 0;
-		}
-	}
 }
 
 .menuContainer {
@@ -1153,6 +1081,21 @@ $bgColorDefault: #61B3DB;
 $themeLightBlue: #C4DBEF;
 $themeYellow: #FDD870;
 
+.practiceStartButton {
+	position: absolute;
+	bottom: 0px;
+	right: 60px;
+	.toolTipText {
+		line-height:20px;
+		top: -33px;
+		left: -30px;
+	}
+}
+.practiceStartButton:hover .toolTipText {
+	visibility: visible;
+}
+
+
 .practiceHeader {
 	width: 100%;
 	height: 50px;
@@ -1258,6 +1201,10 @@ $themeYellow: #FDD870;
 
 .correctGreenBG {
 	background-color: $pastelGreen;
+}
+
+.wrongRedBG {
+	background-color: $pastelRed;
 }
 
 .practiceFooter {

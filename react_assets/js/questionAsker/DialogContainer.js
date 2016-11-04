@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var Constants = require('../helpers/Constants');
 var NextButton = require('./components/NextButton');
 var RewindButton = require('./components/RewindButton');
+var PracticeStartButton = require('./components/PracticeStartButton');
 
 //TODO: The dialog's name and text should be their own component
 
@@ -82,6 +83,9 @@ var DialogContainer = React.createClass({
 							{characterTextResponse}
 						</div>
 					</div>
+					<PracticeStartButton
+						changePracticeMode={this.props.changePracticeMode} 
+						practiceAvailable = {this.props.practiceAvailable}/>
 					<NextButton
 						nextScenario={this.props.nextScenario}
 						scenarioOn={this.props.scenarioOn} />
@@ -111,7 +115,10 @@ DialogContainer.propTypes = {
 	hintActive: PropTypes.bool.isRequired,
 	onRepeat: PropTypes.func.isRequired,
 	nextScenario: PropTypes.func.isRequired,
-	assessmentMode: PropTypes.bool.isRequired
+	assessmentMode: PropTypes.bool.isRequired,
+	changePracticeMode: PropTypes.func.isRequired,
+	practiceAvailable: PropTypes.bool.isRequired,
+	turnOffPracticeOption: PropTypes.func.isRequired
 }
 
 module.exports = DialogContainer;	

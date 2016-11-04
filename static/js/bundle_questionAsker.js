@@ -98,6 +98,7 @@
 				sceneData: undefined,
 				scenarioOn: true,
 				practiceMode: false,
+				practiceAvailable: false,
 				scenarioIndex: 0,
 				hintActive: false,
 	
@@ -822,6 +823,9 @@
 		changePracticeMode: function changePracticeMode() {
 			this.setState({ practiceMode: !this.state.practiceMode });
 		},
+		turnOffPracticeOption: function turnOffPracticeOption() {
+			this.setState({ practiceAvailable: false });
+		},
 		render: function render() {
 			var sceneData = this.state.sceneData;
 	
@@ -865,7 +869,10 @@
 						playRewindScenarioSound: this.playRewindScenarioSound,
 						assessmentMode: sceneData.assessmentMode,
 						sceneComplete: this.state.sceneComplete,
-						currentRewindSoundID: this.state.currentRewindSoundID }),
+						currentRewindSoundID: this.state.currentRewindSoundID,
+						changePracticeMode: this.changePracticeMode,
+						practiceAvailable: this.state.practiceAvailable,
+						turnOffPracticeOption: this.turnOffPracticeOption }),
 					React.createElement(CharacterContainer, {
 						scenarioOn: this.state.scenarioOn,
 						scenarioData: this.state.sceneData.scenario,
@@ -24343,6 +24350,7 @@
 	var Constants = __webpack_require__(/*! ../helpers/Constants */ 180);
 	var NextButton = __webpack_require__(/*! ./components/NextButton */ 194);
 	var RewindButton = __webpack_require__(/*! ./components/RewindButton */ 195);
+	var PracticeStartButton = __webpack_require__(/*! ./components/PracticeStartButton */ 234);
 	
 	//TODO: The dialog's name and text should be their own component
 	
@@ -24443,6 +24451,9 @@
 							characterTextResponse
 						)
 					),
+					React.createElement(PracticeStartButton, {
+						changePracticeMode: this.props.changePracticeMode,
+						practiceAvailable: this.props.practiceAvailable }),
 					React.createElement(NextButton, {
 						nextScenario: this.props.nextScenario,
 						scenarioOn: this.props.scenarioOn }),
@@ -24465,7 +24476,10 @@
 		hintActive: PropTypes.bool.isRequired,
 		onRepeat: PropTypes.func.isRequired,
 		nextScenario: PropTypes.func.isRequired,
-		assessmentMode: PropTypes.bool.isRequired
+		assessmentMode: PropTypes.bool.isRequired,
+		changePracticeMode: PropTypes.func.isRequired,
+		practiceAvailable: PropTypes.bool.isRequired,
+		turnOffPracticeOption: PropTypes.func.isRequired
 	};
 	
 	module.exports = DialogContainer;
@@ -26957,31 +26971,33 @@
   \*********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var PracticeAudioButton = __webpack_require__(/*! ./PracticeAudioButton */ 235);
 	
 	function FlashCardHeader(props) {
 		return React.createElement(
-			"div",
-			{ className: "flashCardHeader" },
+			'div',
+			{ className: 'flashCardHeader' },
 			React.createElement(
-				"h3",
+				'h3',
 				null,
-				"Task: ",
+				'Task: ',
 				props.currentWordObject.task
 			),
 			React.createElement(
-				"div",
-				{ className: "checkbox pinyinCheckBox" },
+				'div',
+				{ className: 'checkbox pinyinCheckBox' },
 				React.createElement(
-					"label",
+					'label',
 					null,
-					React.createElement("input", { type: "checkbox", onClick: props.changePinyinDisplay, value: "" }),
-					"Show Pinyin"
+					React.createElement('input', { type: 'checkbox', onClick: props.changePinyinDisplay, value: '' }),
+					'Show Pinyin'
 				)
-			)
+			),
+			React.createElement(PracticeAudioButton, null)
 		);
 	}
 	
@@ -27017,7 +27033,7 @@
 	
 		var characterPromptClass = props.currentWordObject.correct ? "characterPrompt flashCardCharacters correctGreenBG" : "characterPrompt flashCardCharacters";
 	
-		var userInputClass = props.currentWordObject.correct ? "userInputCharacters flashCardCharacters correctGreenBG" : "userInputCharacters flashCardCharacters";
+		var userInputClass = props.currentWordObject.correct ? "userInputCharacters flashCardCharacters correctGreenBG" : props.userAnswer !== "" ? "userInputCharacters flashCardCharacters wrongRedBG" : "userInputCharacters flashCardCharacters";
 	
 		return React.createElement(
 			"div",
@@ -27051,6 +27067,70 @@
 		showPinyin: PropTypes.bool.isRequired,
 		userAnswer: PropTypes.string.isRequired
 	};
+
+/***/ },
+/* 234 */
+/*!*************************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/PracticeStartButton.js ***!
+  \*************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function PracticeStartButton(props) {
+		if (props.practiceAvailable) {
+			return React.createElement(
+				"button",
+				{
+					className: "button practiceStartButton",
+					onClick: props.changePracticeMode },
+				React.createElement("span", { className: "glyphicon glyphicon-record", "aria-hidden": "true" }),
+				React.createElement(
+					"span",
+					{ className: "toolTipText" },
+					"Practice"
+				)
+			);
+		} else {
+			return null;
+		}
+	}
+	
+	module.exports = PracticeStartButton;
+	
+	PracticeStartButton.propTypes = {
+		practiceAvailable: PropTypes.bool.isRequired
+	};
+
+/***/ },
+/* 235 */
+/*!*************************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/PracticeAudioButton.js ***!
+  \*************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function PracticeAudioButton(props) {
+		return React.createElement(
+			"button",
+			{ className: "button practiceAudioButton" },
+			React.createElement("span", { className: "glyphicon glyphicon-volume-up", "aria-hidden": "true" }),
+			React.createElement(
+				"span",
+				{ className: "toolTipText" },
+				"Practice"
+			)
+		);
+	}
+	
+	module.exports = PracticeAudioButton;
 
 /***/ }
 /******/ ]);

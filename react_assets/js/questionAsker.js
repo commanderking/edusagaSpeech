@@ -44,6 +44,7 @@ var QuestionAsker = React.createClass({
 			sceneData: undefined,
 			scenarioOn: true,
 			practiceMode: false,
+			practiceAvailable: false,
 			scenarioIndex: 0,
 			hintActive: false,
 
@@ -787,6 +788,9 @@ var QuestionAsker = React.createClass({
 	changePracticeMode: function() {
 		this.setState({ practiceMode: !this.state.practiceMode});
 	},
+	turnOffPracticeOption: function() {
+		this.setState({practiceAvailable: false});
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
 
@@ -804,11 +808,11 @@ var QuestionAsker = React.createClass({
 			return (
 				<div className="gameWrapper col-md-12 col-sm-12 col-xs-12">
 					<BackgroundImageContainer
-						bgImage={this.state.sceneData.character.location.bg}
+						bgImage = {this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
 					<PracticeContainer 
-						practiceMode={this.state.practiceMode} 
-						changePracticeMode={this.changePracticeMode}/>
+						practiceMode = {this.state.practiceMode} 
+						changePracticeMode = {this.changePracticeMode}/>
 					<DialogContainer
 						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}
@@ -825,7 +829,10 @@ var QuestionAsker = React.createClass({
 						playRewindScenarioSound = {this.playRewindScenarioSound}
 						assessmentMode = {sceneData.assessmentMode}
 						sceneComplete = {this.state.sceneComplete}
-						currentRewindSoundID = {this.state.currentRewindSoundID} />
+						currentRewindSoundID = {this.state.currentRewindSoundID} 
+						changePracticeMode = {this.changePracticeMode}
+						practiceAvailable = {this.state.practiceAvailable}
+						turnOffPracticeOption={this.turnOffPracticeOption}/>
 					<CharacterContainer 
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
