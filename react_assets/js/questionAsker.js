@@ -44,7 +44,7 @@ var QuestionAsker = React.createClass({
 			sceneData: undefined,
 			scenarioOn: true,
 			practiceMode: false,
-			practiceAvailable: true,
+			practiceAvailable: false,
 			scenarioIndex: 0,
 			hintActive: false,
 
@@ -82,11 +82,13 @@ var QuestionAsker = React.createClass({
 			.success(function(data) {
 				that.resetScene();
 				console.log(data.practiceModeStart);
-				var practiceModeStartOn = data.practiceModeStart ? true : false
+
+				var practiceAvailable = data.practice !== undefined ? true : false;
+				console.log("Practice available " + practiceAvailable);
 				that.setState({
 					sceneData: data,
 					currentDialog: data.initialTaskDialog,
-					practiceMode: practiceModeStartOn
+					practiceAvailable: practiceAvailable
 				});
 
 			/*----------------------------------
@@ -811,6 +813,7 @@ var QuestionAsker = React.createClass({
 						bgImage = {this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
 					<PracticeContainer 
+						vocabList = {this.state.sceneData.practice}
 						practiceMode = {this.state.practiceMode} 
 						changePracticeMode = {this.changePracticeMode}
 						playSpeechSynth = {this.playSpeechSynth}/>

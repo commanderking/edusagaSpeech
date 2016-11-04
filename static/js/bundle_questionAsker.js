@@ -98,7 +98,7 @@
 				sceneData: undefined,
 				scenarioOn: true,
 				practiceMode: false,
-				practiceAvailable: true,
+				practiceAvailable: false,
 				scenarioIndex: 0,
 				hintActive: false,
 	
@@ -135,11 +135,13 @@
 			$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function (data) {}).success(function (data) {
 				that.resetScene();
 				console.log(data.practiceModeStart);
-				var practiceModeStartOn = data.practiceModeStart ? true : false;
+	
+				var practiceAvailable = data.practice !== undefined ? true : false;
+				console.log("Practice available " + practiceAvailable);
 				that.setState({
 					sceneData: data,
 					currentDialog: data.initialTaskDialog,
-					practiceMode: practiceModeStartOn
+					practiceAvailable: practiceAvailable
 				});
 	
 				/*----------------------------------
@@ -851,6 +853,7 @@
 						bgImage: this.state.sceneData.character.location.bg,
 						hintActive: this.state.hintActive }),
 					React.createElement(PracticeContainer, {
+						vocabList: this.state.sceneData.practice,
 						practiceMode: this.state.practiceMode,
 						changePracticeMode: this.changePracticeMode,
 						playSpeechSynth: this.playSpeechSynth }),
@@ -26645,8 +26648,10 @@
 				micActive: false,
 				userAnswer: "",
 				showPinyin: false
-	
 			};
+		},
+		componentWillMount: function componentWillMount() {
+			this.setState({ vocabData: this.props.vocabList }, console.log(this.state.vocabData));
 		},
 		handleImageChange: function handleImageChange(newIndex) {
 			var newVocabData = this.state.vocabData;
@@ -27089,6 +27094,7 @@
 	var PropTypes = React.PropTypes;
 	
 	function PracticeStartButton(props) {
+		console.log(props.practiceAvailable);
 		if (props.practiceAvailable) {
 			return React.createElement(
 				"button",

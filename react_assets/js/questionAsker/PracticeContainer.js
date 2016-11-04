@@ -44,8 +44,10 @@ var PracticeContainer = React.createClass({
 			micActive: false,
 			userAnswer: "",
 			showPinyin: false
-
 		}
+	},
+	componentWillMount: function() {
+		this.setState({vocabData: this.props.vocabList}, console.log(this.state.vocabData));
 	},
 	handleImageChange: function(newIndex) {
 		var newVocabData = this.state.vocabData;
