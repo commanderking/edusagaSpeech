@@ -833,7 +833,8 @@ var QuestionAsker = React.createClass({
 						playRewindScenarioSound = {this.playRewindScenarioSound}
 						assessmentMode = {sceneData.assessmentMode}
 						sceneComplete = {this.state.sceneComplete}
-						currentRewindSoundID = {this.state.currentRewindSoundID} 
+						currentRewindSoundID = {this.state.currentRewindSoundID}
+						practiceMode = {this.state.practiceMode} 
 						changePracticeMode = {this.changePracticeMode}
 						practiceAvailable = {this.state.practiceAvailable}
 						turnOffPracticeOption={this.turnOffPracticeOption}/>
@@ -846,7 +847,8 @@ var QuestionAsker = React.createClass({
 						hintActive = {this.state.hintActive} 
 						correctAnswerState = {this.state.correctAnswerState} 
 						wrongAnswerState = {this.state.wrongAnswerState} 
-						sceneComplete = {this.state.sceneComplete} />
+						sceneComplete = {this.state.sceneComplete}
+						practiceMode = {this.state.practiceMode} />
 					<TaskContainer
 						scenarioOn = {this.state.scenarioOn}
 						tasks = {this.state.sceneData.character.currentTasks}
@@ -905,7 +907,9 @@ var QuestionAsker = React.createClass({
 						currentTaskIndex = {this.state.currentTaskIndex} 
 						setCurrentTaskIndex = {this.setCurrentTaskIndex} 
 
-						currentScenarioData = {currentScenarioData} />
+						currentScenarioData = {currentScenarioData} 
+
+						practiceMode = {this.state.practiceMode}/>
 					<ResultsContainer 
 						sceneComplete = {this.state.sceneComplete} 
 						coins = {this.state.coins}

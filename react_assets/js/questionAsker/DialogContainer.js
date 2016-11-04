@@ -72,6 +72,9 @@ var DialogContainer = React.createClass({
 				characterName = "";
 				characterTextResponse = "";
 			}
+			// If practice Mode, hide entire div
+			if (this.props.practiceMode) {return null;}
+
 			return (
 				<div className={dialogDivClass}>
 					<img className="dialogSlantPiece" src={dialogSlantSrc}/>
@@ -118,7 +121,8 @@ DialogContainer.propTypes = {
 	assessmentMode: PropTypes.bool.isRequired,
 	changePracticeMode: PropTypes.func.isRequired,
 	practiceAvailable: PropTypes.bool.isRequired,
-	turnOffPracticeOption: PropTypes.func.isRequired
+	turnOffPracticeOption: PropTypes.func.isRequired,
+	practiceMode: PropTypes.bool.isRequired
 }
 
 module.exports = DialogContainer;	

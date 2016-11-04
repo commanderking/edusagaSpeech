@@ -874,6 +874,7 @@
 						assessmentMode: sceneData.assessmentMode,
 						sceneComplete: this.state.sceneComplete,
 						currentRewindSoundID: this.state.currentRewindSoundID,
+						practiceMode: this.state.practiceMode,
 						changePracticeMode: this.changePracticeMode,
 						practiceAvailable: this.state.practiceAvailable,
 						turnOffPracticeOption: this.turnOffPracticeOption }),
@@ -886,7 +887,8 @@
 						hintActive: this.state.hintActive,
 						correctAnswerState: this.state.correctAnswerState,
 						wrongAnswerState: this.state.wrongAnswerState,
-						sceneComplete: this.state.sceneComplete }),
+						sceneComplete: this.state.sceneComplete,
+						practiceMode: this.state.practiceMode }),
 					React.createElement(TaskContainer, {
 						scenarioOn: this.state.scenarioOn,
 						tasks: this.state.sceneData.character.currentTasks,
@@ -945,7 +947,9 @@
 						currentTaskIndex: this.state.currentTaskIndex,
 						setCurrentTaskIndex: this.setCurrentTaskIndex,
 	
-						currentScenarioData: currentScenarioData }),
+						currentScenarioData: currentScenarioData,
+	
+						practiceMode: this.state.practiceMode }),
 					React.createElement(ResultsContainer, {
 						sceneComplete: this.state.sceneComplete,
 						coins: this.state.coins,
@@ -23316,6 +23320,10 @@
 			var silhouetteSrc = Constants.IMAGE_PATH + this.props.silhouette;
 			var scenarioImage = Constants.IMAGE_PATH + scenarioData[scenarioIndex].image;
 			var scenarioImageLayer = Constants.IMAGE_PATH + scenarioData[scenarioIndex].imageLayer;
+			console.log(this.props.practiceMode);
+			if (this.props.practiceMode) {
+				return null;
+			}
 	
 			if (this.props.sceneComplete === true) {
 				return null;
@@ -23359,7 +23367,8 @@
 		scenarioIndex: PropTypes.number.isRequired,
 		charImage: PropTypes.string.isRequired,
 		correctAnswerState: PropTypes.bool.isRequired,
-		wrongAnswerState: PropTypes.bool.isRequired
+		wrongAnswerState: PropTypes.bool.isRequired,
+		practiceMode: PropTypes.bool.isRequired
 	};
 	
 	module.exports = CharacterContainer;
@@ -24437,6 +24446,11 @@
 					characterName = "";
 					characterTextResponse = "";
 				}
+				// If practice Mode, hide entire div
+				if (this.props.practiceMode) {
+					return null;
+				}
+	
 				return React.createElement(
 					'div',
 					{ className: dialogDivClass },
@@ -24483,7 +24497,8 @@
 		assessmentMode: PropTypes.bool.isRequired,
 		changePracticeMode: PropTypes.func.isRequired,
 		practiceAvailable: PropTypes.bool.isRequired,
-		turnOffPracticeOption: PropTypes.func.isRequired
+		turnOffPracticeOption: PropTypes.func.isRequired,
+		practiceMode: PropTypes.bool.isRequired
 	};
 	
 	module.exports = DialogContainer;
@@ -25498,6 +25513,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
 	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 209);
 	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 210);
 	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 211);
@@ -25510,6 +25526,9 @@
 		displayName: 'FeedbackContainer',
 	
 		render: function render() {
+			if (this.props.practiceMode) {
+				return null;
+			}
 			return React.createElement(
 				'div',
 				{ className: 'bottomNavBar' },
@@ -25573,6 +25592,10 @@
 	});
 	
 	module.exports = FeedbackContainer;
+	
+	FeedbackContainer.propTypes = {
+		practiceMode: PropTypes.bool.isRequired
+	};
 
 /***/ },
 /* 209 */

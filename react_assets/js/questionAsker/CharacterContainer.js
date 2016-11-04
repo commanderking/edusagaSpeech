@@ -13,10 +13,10 @@ var CharacterContainer = React.createClass({
 		var silhouetteSrc = Constants.IMAGE_PATH + this.props.silhouette;
 		var scenarioImage = Constants.IMAGE_PATH + scenarioData[scenarioIndex].image; 
 		var scenarioImageLayer = Constants.IMAGE_PATH + scenarioData[scenarioIndex].imageLayer;
+		console.log(this.props.practiceMode);
+		if (this.props.practiceMode) {return null;}
 
-		if (this.props.sceneComplete === true) {
-			return null;
-		} 
+		if (this.props.sceneComplete === true) {return null;} 
 
 		if (this.props.scenarioOn === true) {
 			charImageDiv =
@@ -60,7 +60,8 @@ CharacterContainer.propTypes = {
 	scenarioIndex: PropTypes.number.isRequired,
 	charImage: PropTypes.string.isRequired,
 	correctAnswerState: PropTypes.bool.isRequired,
-	wrongAnswerState: PropTypes.bool.isRequired
+	wrongAnswerState: PropTypes.bool.isRequired,
+	practiceMode: PropTypes.bool.isRequired
 }
 
 
