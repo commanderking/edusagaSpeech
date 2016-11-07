@@ -236,7 +236,7 @@
 					[
 						{
 							"text" : "Doesn't it start with",
-							"text" : "你叫",
+							"speechableText" : "你叫",
 							"postText" : "?",
 							"coins" : 5
 						},

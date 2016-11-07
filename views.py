@@ -1,5 +1,7 @@
 from flask import Flask, request, redirect, render_template, render_template_string, url_for, jsonify, session
 from flask_user import login_required, UserManager, SQLAlchemyAdapter
+from flask_login import current_user
+
 
 import boto3, json, simplejson, urlparse, datetime
 
@@ -61,7 +63,18 @@ def trackVisitorEvent(eventText):
 	except: 
 		pass
 
+@app.route('/testDatabase')
+def testDatabase(name="test"):
+	newEpisode = Episodes('introDavid') 
+	db.session.add(newEpisode)
+	db.session.commit()
 
+	currentEpisode = Episodes.query.first()
+	print currentEpisode
+	print currentEpisode.episodeJSONFileName
+	print current_user.username
+
+	return render_template('questionAsker.html', teacher="public", activityName=currentEpisode.episodeJSONFileName)
 
 @app.route('/')
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
@@ -72,14 +85,6 @@ def index(name="Index", activityName="index", teacher="jinlaoshi"):
 		userID = uuid.uuid4()
 	return render_template('index3.html', name=name, activityName=activityName, teacher=teacher, userID=userID)
 
-@app.route('/test')
-def index2(name="Index"):
-	return render_template('index2.html')
-
-@app.route('/index3')
-def index3(name="Index"):
-	return render_template('index3.html')
-
 #--------------------------------------------
 # E-mail this link and redirect to homepage to track with text
 # -------------------------------------------
@@ -88,6 +93,15 @@ def home(name="Home"):
 	session['userID'] = trackVisitorEvent('Visited Main Page')
 	print session['userID']
 	return redirect(url_for('index'))
+
+@app.route('/<username>')
+@login_required
+def teacherPage(username):
+	user = TeacherUser.query.filter_by(username=username).first()
+	if user == None:
+		return redirect(url_for('index'))
+	else:
+		return render_template('index3.html', username=username)
 
 @app.route('/<teacher>/home/')
 def teacherHome(teacher):
@@ -101,7 +115,6 @@ def teacherHome(teacher):
 
 @app.route('/public/home/')
 def publicHome():
-
 	# Check for any new episodes and update JSON to reflect any new files in the public folder
 	episodeData = json.dumps(getAllEpisodeData("public"), ensure_ascii=False).encode('utf8')
 	print episodeData;
@@ -165,7 +178,6 @@ def members_page():
             <p><a href={{ url_for('members_page') }}>Members page</a> (login required)</p>
         {% endblock %}
         """)
-
 
 
 #------------------------------------------------

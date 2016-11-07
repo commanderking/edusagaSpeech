@@ -37,6 +37,16 @@ class TeacherUser(db.Model, UserMixin):
     # user_types are: teacher, student, general
     # user_type = db.Column(db.String(100), nullable=False,server_default='general')
 
+class Episodes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    episodeJSONFileName = db.Column(db.String(30), nullable=False, unique=True)
+    episodeAssigned = db.Column(db.Boolean(), nullable=False, default=False)
+
+    def __init__(self, episodeJSONFileName):
+        self.episodeJSONFileName = episodeJSONFileName
+    def __repr__(self):
+        return '<id {}>'.format(self.id)
+
 class TestModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(30), nullable = False)
