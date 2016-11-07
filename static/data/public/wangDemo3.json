@@ -40,7 +40,7 @@
 			{
 				"task" : "Ask someone when their birthday is",
 				"answer" : "你的生日几月几号？",
-				"pinyin" : "wǒ jiào",
+				"pinyin" : "Nǐ de shēngrì jǐ yuè jǐ hào?",
 				"correct" : false,
 				"tries" : 0
 			},
