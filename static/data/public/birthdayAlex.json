@@ -23,6 +23,78 @@
 			"text" : "I wonder when Alex's birthday is. It would be a shame to miss her or her family member's birthdays."
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say Birthday",
+				"answer" : "生日",
+				"pinyin" : "shēngrì",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask which date",
+				"answer" : "几月几号",
+				"pinyin" : "jǐ yuè jǐ hào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask which day someone's birthday is",
+				"answer" : "你的生日几月几号",
+				"pinyin" : "nǐ de shēngrì jǐ yuè jǐ hào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'this year'",
+				"answer" : "今年",
+				"pinyin" : "jīnnián",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask how old someone is",
+				"answer" : "你多大",
+				"pinyin" : "nǐ duōdà",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask how old someone is (this year)",
+				"answer" : "你今年多大",
+				"pinyin" : "nǐ jīnnián duōdà",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "younger sister",
+				"answer" : "妹妹",
+				"pinyin" : "mèimei",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "old brother",
+				"answer" : "哥哥",
+				"pinyin" : "gēgē",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask how old someone's older brother is",
+				"answer" : "你哥哥的生日几月几号",
+				"pinyin" : "nǐ gēgē de shēngrì jǐ yuè jǐ hào",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "Alex",

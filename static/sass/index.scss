@@ -70,6 +70,10 @@ Shared elements
 	color: $darkBlue;
 }
 
+button {
+	outline: none;
+}
+
 
 // Currently only used in viewHelper.js to "fade" elements
 .black {
@@ -1170,6 +1174,11 @@ $themeYellow: #FDD870;
 			margin-top: 0px;
 			border-bottom: 1px solid black;
 			display: inline-block;
+		}
+		.pinyinPrompt {
+			letter-spacing: 2px;
+			word-spacing: 5px;
+			margin: 0px;
 		}
 	}
 

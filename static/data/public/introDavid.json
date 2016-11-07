@@ -24,6 +24,50 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say Hi ",
+				"answer" : "你好",
+				"pinyin" : "nǐ hǎo",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Introduce your name",
+				"answer" : "我叫",
+				"pinyin" : "wǒ jiào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for someone's name",
+				"answer" : "你叫什么名字",
+				"pinyin" : "nǐ jiào shénme míngzì",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for someone's surname/last name",
+				"answer" : "你贵姓",
+				"pinyin" : "nǐ guìxìng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for someone's surname/last name (polite)",
+				"answer" : "请问您贵姓",
+				"pinyin" : "qǐngwèn nín guìxìng",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",
@@ -137,7 +181,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["请问你贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
+							"answers" : ["请问你贵姓", "请问您贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
 							"response" : "我姓张。你呢?",
 							"soundID" : "surname-zhang-you"
 						}

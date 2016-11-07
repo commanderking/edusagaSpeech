@@ -25,6 +25,71 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Ask for someone's nationality",
+				"answer" : "你是哪国人",
+				"pinyin" : "nǐ shì nǎ guórén",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say Chinese / Chinese person",
+				"answer" : "中国人",
+				"pinyin" : "zhōngguó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say American / American Person",
+				"answer" : "美国人",
+				"pinyin" : "měiguó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say Japanese / Japanese Person",
+				"answer" : "日本人",
+				"pinyin" : "rìběn rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for someone's surname/last name (polite)",
+				"answer" : "加拿大人",
+				"pinyin" : "jiānádà rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for the nationality of someone's mom",
+				"answer" : "你的妈妈是哪国人",
+				"pinyin" : "nǐ de māmā shì nǎ guó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask if someoone's dad is Chinese (method 1)",
+				"answer" : "你的爸爸是中国人吗",
+				"pinyin" : "nǐ de bàba shì zhōngguó rén ma",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask if someoone's dad is Chinese (method 2)",
+				"answer" : "你的爸爸是不是中国人",
+				"pinyin" : "nǐ de bàba shì bùshì zhōngguó rén",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "Chen Yang",
@@ -327,7 +392,7 @@
 						},
 						{
 							"answers": [
-								["他", "你的妈妈", "你妈妈", "你妈"],
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
 								["是不是"],
 								["日本人"]
 							],
@@ -337,7 +402,7 @@
 						},
 						{
 							"answers": [
-								["他", "你的妈妈", "你妈妈", "你妈"],
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
 								["是"],
 								["日本人"],
 								["吗"]
@@ -364,7 +429,7 @@
 						},
 						{
 							"answers": [
-								["他", "你的妈妈", "你妈妈", "你妈"],
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
 								["是不是"],
 								["英国人"]
 							],
@@ -374,7 +439,7 @@
 						},
 						{
 							"answers": [
-								["他", "你的妈妈", "你妈妈", "你妈"],
+								["他","她", "你的妈妈", "你妈妈", "你妈"],
 								["是"],
 								["英国人"],
 								["吗"]
@@ -401,7 +466,7 @@
 						},
 						{
 							"answers": [
-								["他", "你的妈妈", "你妈妈", "你妈"],
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
 								["是不是"],
 								["法国人"]
 							],
@@ -411,7 +476,7 @@
 						},
 						{
 							"answers": [
-								["他", "你的妈妈", "你妈妈", "你妈"],
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
 								["是"],
 								["法国人"],
 								["吗"]

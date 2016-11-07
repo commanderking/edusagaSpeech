@@ -26,6 +26,57 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Ask for someone's nationality",
+				"answer" : "你是哪国人",
+				"pinyin" : "Nǐ shì nǎ guórén",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'American / American Person'",
+				"answer" : "美国人",
+				"pinyin" : "měiguó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'I'm American'",
+				"answer" : "我是美国人",
+				"pinyin" : "wǒ shì měiguó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'I'm not American'",
+				"answer" : "我不是美国人",
+				"pinyin" : "wǒ bùshì měiguó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone what job they do",
+				"answer" : "你做什么工作",
+				"pinyin" : "nǐ zuò shénme gōngzuò",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone what their dad does for work",
+				"answer" : "你的爸爸做什么工作",
+				"pinyin" : "nǐ de bàba zuò shénme gōngzuò",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",
