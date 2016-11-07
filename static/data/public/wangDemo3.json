@@ -23,6 +23,36 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'birthday'",
+				"answer" : "生日",
+				"pinyin" : "shēngrì",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone when their birthday is",
+				"answer" : "你的生日几月几号？",
+				"pinyin" : "wǒ jiào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone when their younger sister's birthday is",
+				"answer" : "你妹妹的生日几月几号？",
+				"pinyin" : "nǐ mèimei de shēngrì jǐ yuè jǐ hào?",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",

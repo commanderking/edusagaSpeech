@@ -26759,7 +26759,7 @@
 			// If correct, update info
 			var correctAnswer = false;
 	
-			var answer = newVocabData.list[index].answer.replace(/[.,。，\/#?!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s/g, '');
+			var answer = newVocabData.list[index].answer.replace(/[.,。，\/#?？。!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s/g, '');
 			console.log(answer);
 	
 			if (userAnswer === answer) {

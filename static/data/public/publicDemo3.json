@@ -25,6 +25,86 @@
 			"text" : "Lets' try to get to know Alex and her family a little bit better."
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Ask how many family members someone has",
+				"answer" : "你家有几口人？",
+				"pinyin" : "Nǐ jiā yǒu jǐ kǒu rén",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'older brother'",
+				"answer" : "哥哥",
+				"pinyin" : "gēgē",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'younger brother'",
+				"answer" : "弟弟",
+				"pinyin" : "dìdì",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'older sister'",
+				"answer" : "姐姐",
+				"pinyin" : "jiějiě",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say' younger sister'",
+				"answer" : "妹妹",
+				"pinyin" : "mèimei",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'siblings'",
+				"answer" : "兄弟姐妹",
+				"pinyin" : "xiōngdì jiěmèi",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'mom'",
+				"answer" : "妈妈",
+				"pinyin" : "māmā",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'dad'",
+				"answer" : "爸爸",
+				"pinyin" : "bàba",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone for their nationality",
+				"answer" : "你是哪国人？",
+				"pinyin" : "nǐ shì nǎ guórén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone for their dad's nationality",
+				"answer" : "你的爸爸是哪国人？",
+				"pinyin" : "nǐ de bàba shì nǎ guórén",
+				"correct" : false,
+				"tries" : 0
+			}
+
+		]
+	},
 	"character" : 
 		{
 			"name" : "Alex",

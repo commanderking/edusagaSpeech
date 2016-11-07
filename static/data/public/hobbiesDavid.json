@@ -25,6 +25,85 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'Weekend'",
+				"answer" : "周末",
+				"pinyin" : "zhōumò",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask what someone likes to do",
+				"answer" : "你喜欢做什么？",
+				"pinyin" : "nǐ xǐhuān zuò shénme",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone what they like to do on the weekend",
+				"answer" : "你周末喜欢做什么？",
+				"pinyin" : "nǐ zhōumò xǐhuān zuò shénme",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say you also like something",
+				"answer" : "我也喜欢",
+				"pinyin" : "wǒ yě xǐhuān。。。",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'basketball'",
+				"answer" : "打篮球",
+				"pinyin" : "dǎ lánqiú",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'watch movies'",
+				"answer" : "看电影",
+				"pinyin" : "kàn diànyǐng",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'sing'",
+				"answer" : "唱歌",
+				"pinyin" : "chànggē",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask 'What time tomorrow?'",
+				"answer" : "明天几点?",
+				"pinyin" : "míngtiān jǐ diǎn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say that you're busy tomorrow",
+				"answer" : "我明天有事。",
+				"pinyin" : "wǒ míngtiān yǒushì",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'Day after tomorrow'",
+				"answer" : "后天",
+				"pinyin" : "hòutiān",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",
