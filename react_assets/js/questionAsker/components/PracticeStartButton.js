@@ -2,7 +2,6 @@ var React = require('react')
 var PropTypes = React.PropTypes;
 
 function PracticeStartButton (props) {
-	console.log(props.practiceAvailable);
 	if (props.practiceAvailable) {
 		return (
 			<button 

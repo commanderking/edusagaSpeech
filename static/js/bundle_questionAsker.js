@@ -127,7 +127,8 @@
 				sceneComplete: false,
 				taskPause: false,
 				timeRemaining: 20,
-				repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"]
+				repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
+				speechSynthPlaying: false
 			};
 		},
 		loadSceneData: function loadSceneData() {
@@ -638,7 +639,15 @@
 			});
 		},
 		playSpeechSynth: function playSpeechSynth(hintAudioToPlay) {
-			SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
+			var that = this;
+			// Prevent audio from playing multiple times if clicked twice by accident in short period
+			if (this.state.speechSynthPlaying === false) {
+				that.setState({ speechSynthPlaying: true });
+				var utterance = SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
+				utterance.onend = function (event) {
+					that.setState({ speechSynthPlaying: false });
+				};
+			}
 		},
 		changeScenarioMode: function changeScenarioMode() {
 			var newScenarioState = !this.state.scenarioOn;
@@ -24572,7 +24581,6 @@
 	var PropTypes = React.PropTypes;
 	
 	function PracticeStartButton(props) {
-		console.log(props.practiceAvailable);
 		if (props.practiceAvailable) {
 			return React.createElement(
 				"button",
@@ -26085,22 +26093,7 @@
 		},
 		// Prevent repetitive clicking on Speechable Span for repeat
 		handleHintAudioClick: function handleHintAudioClick(textToSay) {
-			console.log(textToSay);
-			console.log("handling audio click");
-			var that = this;
-	
-			// Disable clicking on hint to play voice
-			this.setState({ hintClickDisable: true });
-	
-			// PLay audio from hint
 			this.props.onHintAudio(textToSay);
-	
-			// Disable clicking on hint for some time before re-enabling
-			setTimeout(function () {
-				that.setState({
-					hintClickDisable: false
-				});
-			}, 1000);
 		},
 		cancelRepeatOnClick: function cancelRepeatOnClick() {
 			// This does nothing
@@ -26615,8 +26608,9 @@
 			var utterThis = new SpeechSynthesisUtterance(textToSay);
 			utterThis.voice = voicePack;
 			utterThis.rate = 0.8;
-			console.log(utterThis.voice);
+			// console.log(utterThis.voice);
 			window.speechSynthesis.speak(utterThis);
+			return utterThis;
 		}
 	};
 	

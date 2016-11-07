@@ -73,7 +73,8 @@ var QuestionAsker = React.createClass({
 			sceneComplete: false,
 			taskPause: false,
 			timeRemaining: 20,
-			repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"]
+			repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
+			speechSynthPlaying: false
 		}
 	},
 	loadSceneData: function() {
@@ -599,7 +600,15 @@ var QuestionAsker = React.createClass({
 		})
 	},
 	playSpeechSynth: function(hintAudioToPlay) {
-		SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
+		var that = this;
+		// Prevent audio from playing multiple times if clicked twice by accident in short period
+		if (this.state.speechSynthPlaying === false) {
+			that.setState({speechSynthPlaying: true});
+			var utterance = SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
+			utterance.onend = function(event) {
+				that.setState({speechSynthPlaying: false});
+			}
+		}
 	},
 	changeScenarioMode: function() {
 		var newScenarioState = !this.state.scenarioOn;

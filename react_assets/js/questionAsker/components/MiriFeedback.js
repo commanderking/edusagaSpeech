@@ -29,22 +29,7 @@ var MiriFeedback = React.createClass({
 	},
 	// Prevent repetitive clicking on Speechable Span for repeat
 	handleHintAudioClick: function(textToSay) {
-		console.log(textToSay);
-		console.log("handling audio click");
-		var that = this;
-
-		// Disable clicking on hint to play voice
-		this.setState({ hintClickDisable: true })
-
-		// PLay audio from hint
 		this.props.onHintAudio(textToSay);
-
-		// Disable clicking on hint for some time before re-enabling
-		setTimeout(function(){
-			that.setState({
-				hintClickDisable: false
-			})
-		}, 1000)
 	},
 	cancelRepeatOnClick: function() {
 		// This does nothing
