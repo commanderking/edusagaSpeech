@@ -1,12 +1,27 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-
+var StudentGradebook = require('./dashboard/components/StudentGradebook');
+var ActivitySummary = require('./dashboard/components/ActivitySummary');
+var ActivitySummaryStudent = require('./dashboard/components/ActivitySummaryStudent');
 var Dashboard = React.createClass({
 	getInitialState: function() {
 		return {
 			gradebookData : {},
 			taskData: {},
-			activityData: null
+			activityData: null,
+			totalScore: 0,
+		}
+	},
+	scoreToColor: function(score, maxScore) {
+		var decimalScore = score/maxScore
+		if (decimalScore >= .80) {
+			return "green";
+		} else if (decimalScore >= .60) {
+			return "yellow";
+		} else if (decimalScore >= .40) {
+			return "orange";
+		} else {
+			return "red";
 		}
 	},
 	loadDashboard: function() {
@@ -14,6 +29,9 @@ var Dashboard = React.createClass({
 		// Get all JSON for all activities in the teacher's data folder
 		$.getJSON("/static/data/" + teacher + "/studentData/" + "sampleData.json", function(data) {})
 			.success(function(data) {
+				// Check total possible score based on length of task array
+				var totalPossibleScore = data[0].allTaskData.length;
+
 				// Narrow all entries to one entry / student
 				var activityData = []
 				data.forEach(function(studentResponse, i) {
@@ -47,14 +65,12 @@ var Dashboard = React.createClass({
 						});
 					}
 
+					// Comparing alphanumeric IDs and then sort
 					var reA = /[^a-zA-Z]/g;
 					var reN = /[^0-9]/g;
 					function sortStudentID(a,b) {
-						console.log(a);
 						a = String(a.studentID);
 						b = String(b.studentID);
-						console.log(a);
-						console.log(b);
 
 						var aA = a.replace(reA, "");
 						var bA = b.replace(reA, "");
@@ -68,7 +84,8 @@ var Dashboard = React.createClass({
 					}
 					activityData.sort(sortStudentID);
 				})
-				that.setState({activityData: activityData});
+				that.setState({activityData: activityData,
+								totalScore: totalPossibleScore });
 			})
 	},
 	componentDidMount: function() {
@@ -79,144 +96,28 @@ var Dashboard = React.createClass({
 		if (this.state.activityData === null) {
 			return null;
 		} else {
-			var studentActivityData = this.state.activityData.map(function(student, i) {
-				return (
-					<tr key={i}>
-						<td>{student.studentID}</td>
-						<td>{student.score}</td>
-					</tr>
-				)
-			})
-
+			//TODO: Implement display of summary of information
+			/*
 			// Summary metrics for activity (Average)
 			var scoreArray = this.state.activityData.map(function(student, i) {
 				return student.score;
 			})
 			var sum = scoreArray.reduce(function(a,b) { return a + b});
 			var avg = sum / scoreArray.length;
-			console.log(avg);
-
-
-			// Create task data based on one student's activity data
-
-			// Create task data for all students and their individual activity data
-			var taskDataForAllIndvidiualStudents = this.state.activityData.map(function(student, i){
-				var taskDataForIndividualStudent = that.state.activityData[i].allTaskData.map(function(task, j) {
-					var attemptedAnswersString = task.attemptedAnswers.map(function(answer, i) {
-						return answer + ", "; 
-					});
-					var taskCorrect = task.correct ? <span className="glyphicon glyphicon-ok" aria-hidden="true"></span> :
-													<span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
-					return (
-						<tr key={j}>
-							<td>{task.task}</td>
-							<td>{taskCorrect}</td>
-							<td>0</td>
-							<td>{task.attemptedAnswers.length}</td>
-							<td>{attemptedAnswersString}</td>
-						</tr>
-					)
-				})
-				return (
-					<div className="individualTaskResults" key={i}> 
-						<h2>{student.studentID}</h2>
-						<table className="individualTaskTable table table-striped">
-							<tbody>
-								<tr>
-									<th>Task</th>
-									<th>Correct</th>
-									<th>Hint Used</th>
-									<th>Attempts</th>
-									<th>Attempted Phrases</th>
-								</tr>
-								{taskDataForIndividualStudent}
-							</tbody>
-						</table>
-					</div>
-				)
-
-			});
-
-
-			/*--------------------------------------------
-			Create task data based on aggregate student data
-			--------------------------------------------*/
-
-			// First get all possible taskIDs
-			var taskIDArray = this.state.activityData[0].allTaskData.map(function(task,i) {
-				return {
-					"taskID" : task.taskID, 
-					"taskText" : task.task};
-			})
-
-			var taskDataAggregate = taskIDArray.map(function(taskObject, i) {
-				var taskCorrectTally = 0;
-				var totalStudents = 0;
-				// Loop over all the students
-				that.state.activityData.map(function(student) {
-					totalStudents += 1;
-					// Loop over the student's answers, find matching task, see if task was correct
-					var studentTask = student.allTaskData.map(function(thisTask) {
-						if (thisTask.taskID === taskObject.taskID) {
-							taskCorrectTally = thisTask.correct ? taskCorrectTally + 1 : taskCorrectTally
-						}
-					})
-				})
-				taskObject.totalCorrect = taskCorrectTally;
-				taskObject.totalStudents = totalStudents;
-				taskObject.percentageInteger = Math.floor(taskCorrectTally/totalStudents * 100);
-				taskObject.percentageCorrect = taskObject.percentageInteger + "%";
-				return taskObject;
-			});
-
-			var taskDataAggregateTable = taskDataAggregate.map(function(taskObject, i) {
-				var classColor;
-				if (taskObject.percentageInteger >= 80) {
-					classColor = "green";
-				} else if (taskObject.percentageInteger >=60) {
-					classColor = "yellow"
-				} else {
-					classColor = "red"
-				}
-				return (
-					<tr key={i} className={classColor}>
-						<td>{taskObject.taskText}</td>
-						<td>{taskObject.totalCorrect} / {taskObject.totalStudents} ({taskObject.percentageCorrect})</td>
-						<td>0</td>
-						<td>0</td>
-					</tr>
-				)
-			})
-
+			*/
 			return (
 				<div className="resultsContainer">
-					<h1>Activity Data!</h1>
-					<table className="averageScoreTable table table-striped">
-						<tbody>
-							<tr>
-								<th>Student ID</th>
-								<th>Activity 1: {this.state.activityData.activityName}</th>
-							</tr>
-							{studentActivityData}
-						</tbody>
-					</table>
+					<StudentGradebook 
+						activityData={this.state.activityData}
+						totalScore={this.state.totalScore}
+						scoreToColor={this.scoreToColor}/> 
 
-					<h1>Student Performance on Each Task - Activity 1</h1>
-					<table className="taskTable table table-striped">
-						<tbody>
-							<tr>
-								<th>Task</th>
-								<th>% Correct</th>
-								<th>% Used Hints</th>
-								<th>% Skipped</th>
-							</tr>
-							{taskDataAggregateTable}
-						</tbody>
-					</table>
+					<ActivitySummary 
+						activityData={this.state.activityData}
+						scoreToColor={this.scoreToColor} />
 
-					<h1>Individual Data for Students</h1>
-					{taskDataForAllIndvidiualStudents}
-
+					<ActivitySummaryStudent
+						activityData={this.state.activityData}/>
 				</div>
 			)
 		}

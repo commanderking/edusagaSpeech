@@ -13,10 +13,9 @@ var CharacterContainer = React.createClass({
 		var silhouetteSrc = Constants.IMAGE_PATH + this.props.silhouette;
 		var scenarioImage = Constants.IMAGE_PATH + scenarioData[scenarioIndex].image; 
 		var scenarioImageLayer = Constants.IMAGE_PATH + scenarioData[scenarioIndex].imageLayer;
+		if (this.props.practiceMode) {return null;}
 
-		if (this.props.sceneComplete === true) {
-			return null;
-		} 
+		if (this.props.sceneComplete === true) {return null;} 
 
 		if (this.props.scenarioOn === true) {
 			charImageDiv =
@@ -31,7 +30,7 @@ var CharacterContainer = React.createClass({
 			(
 				<div className="characterImageDiv">
 					<img className="charImage" src={silhouetteSrc} />
-				</div>				
+				</div>
 			)
 		}
 			else {
@@ -60,7 +59,8 @@ CharacterContainer.propTypes = {
 	scenarioIndex: PropTypes.number.isRequired,
 	charImage: PropTypes.string.isRequired,
 	correctAnswerState: PropTypes.bool.isRequired,
-	wrongAnswerState: PropTypes.bool.isRequired
+	wrongAnswerState: PropTypes.bool.isRequired,
+	practiceMode: PropTypes.bool.isRequired
 }
 
 

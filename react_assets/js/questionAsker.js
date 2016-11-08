@@ -8,6 +8,7 @@ var FeedbackContainer = require('./questionAsker/FeedbackContainer');
 var ResultsContainer = require('./questionAsker/ResultsContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TimerContainer = require('./questionAsker/TimerContainer');
+var PracticeContainer = require('./questionAsker/PracticeContainer.js');
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
 const Constants = require('./helpers/Constants.js');
 
@@ -42,6 +43,8 @@ var QuestionAsker = React.createClass({
 		return {
 			sceneData: undefined,
 			scenarioOn: true,
+			practiceMode: false,
+			practiceAvailable: false,
 			scenarioIndex: 0,
 			hintActive: false,
 
@@ -70,7 +73,8 @@ var QuestionAsker = React.createClass({
 			sceneComplete: false,
 			taskPause: false,
 			timeRemaining: 20,
-			repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"]
+			repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
+			speechSynthPlaying: false
 		}
 	},
 	loadSceneData: function() {
@@ -78,10 +82,16 @@ var QuestionAsker = React.createClass({
 		$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function(data) {})
 			.success(function(data) {
 				that.resetScene();
+				console.log(data.practiceModeStart);
+
+				var practiceAvailable = data.practice !== undefined ? true : false;
+				console.log("Practice available " + practiceAvailable);
 				that.setState({
 					sceneData: data,
-					currentDialog: data.initialTaskDialog
+					currentDialog: data.initialTaskDialog,
+					practiceAvailable: practiceAvailable
 				});
+
 			/*----------------------------------
 			 One time setting of initial log Data
 			 ----------------------------------*/
@@ -589,8 +599,16 @@ var QuestionAsker = React.createClass({
 			miriIconSrc: "miri/icons/Miri_Icon_default.png"
 		})
 	},
-	handleHintAudio: function(hintAudioToPlay) {
-		SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
+	playSpeechSynth: function(hintAudioToPlay) {
+		var that = this;
+		// Prevent audio from playing multiple times if clicked twice by accident in short period
+		if (this.state.speechSynthPlaying === false) {
+			that.setState({speechSynthPlaying: true});
+			var utterance = SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
+			utterance.onend = function(event) {
+				that.setState({speechSynthPlaying: false});
+			}
+		}
 	},
 	changeScenarioMode: function() {
 		var newScenarioState = !this.state.scenarioOn;
@@ -778,6 +796,12 @@ var QuestionAsker = React.createClass({
 	setCurrentTaskIndex: function(newIndex) {
 		this.setState({ currentTaskIndex: newIndex})
 	},
+	changePracticeMode: function() {
+		this.setState({ practiceMode: !this.state.practiceMode});
+	},
+	turnOffPracticeOption: function() {
+		this.setState({practiceAvailable: false});
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
 
@@ -795,8 +819,13 @@ var QuestionAsker = React.createClass({
 			return (
 				<div className="gameWrapper col-md-12 col-sm-12 col-xs-12">
 					<BackgroundImageContainer
-						bgImage={this.state.sceneData.character.location.bg}
+						bgImage = {this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
+					<PracticeContainer 
+						vocabList = {this.state.sceneData.practice}
+						practiceMode = {this.state.practiceMode} 
+						changePracticeMode = {this.changePracticeMode}
+						playSpeechSynth = {this.playSpeechSynth}/>
 					<DialogContainer
 						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}
@@ -813,7 +842,11 @@ var QuestionAsker = React.createClass({
 						playRewindScenarioSound = {this.playRewindScenarioSound}
 						assessmentMode = {sceneData.assessmentMode}
 						sceneComplete = {this.state.sceneComplete}
-						currentRewindSoundID = {this.state.currentRewindSoundID} />
+						currentRewindSoundID = {this.state.currentRewindSoundID}
+						practiceMode = {this.state.practiceMode} 
+						changePracticeMode = {this.changePracticeMode}
+						practiceAvailable = {this.state.practiceAvailable}
+						turnOffPracticeOption={this.turnOffPracticeOption}/>
 					<CharacterContainer 
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
@@ -823,7 +856,8 @@ var QuestionAsker = React.createClass({
 						hintActive = {this.state.hintActive} 
 						correctAnswerState = {this.state.correctAnswerState} 
 						wrongAnswerState = {this.state.wrongAnswerState} 
-						sceneComplete = {this.state.sceneComplete} />
+						sceneComplete = {this.state.sceneComplete}
+						practiceMode = {this.state.practiceMode} />
 					<TaskContainer
 						scenarioOn = {this.state.scenarioOn}
 						tasks = {this.state.sceneData.character.currentTasks}
@@ -855,7 +889,7 @@ var QuestionAsker = React.createClass({
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
 						hintActive = {this.state.hintActive} 
-						onHintAudio = {this.handleHintAudio}
+						onHintAudio = {this.playSpeechSynth}
 						coins = {this.state.coins} 
 						answerFeedbackActive = {this.state.answerFeedbackActive}
 						feedbackText = {this.state.feedbackText} 
@@ -882,8 +916,9 @@ var QuestionAsker = React.createClass({
 						currentTaskIndex = {this.state.currentTaskIndex} 
 						setCurrentTaskIndex = {this.setCurrentTaskIndex} 
 
-						currentScenarioData = {currentScenarioData} />
+						currentScenarioData = {currentScenarioData} 
 
+						practiceMode = {this.state.practiceMode}/>
 					<ResultsContainer 
 						sceneComplete = {this.state.sceneComplete} 
 						coins = {this.state.coins}

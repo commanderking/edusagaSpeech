@@ -51,7 +51,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var App = __webpack_require__(/*! ./app */ 172);
+	var App = __webpack_require__(/*! ./app */ 175);
 	
 	ReactDOM.render(React.createElement(App, null), document.getElementById('react-app'));
 
@@ -4365,7 +4365,7 @@
 
 /***/ },
 
-/***/ 172:
+/***/ 175:
 /*!********************************!*\
   !*** ./react_assets/js/app.js ***!
   \********************************/
@@ -4374,9 +4374,9 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var HeaderContainer = __webpack_require__(/*! ./containers/HeaderContainer.js */ 173);
-	var InputContainer = __webpack_require__(/*! ./containers/InputContainer.js */ 174);
-	var ImageContainer = __webpack_require__(/*! ./containers/ImageContainer.js */ 176);
+	var HeaderContainer = __webpack_require__(/*! ./containers/HeaderContainer.js */ 176);
+	var InputContainer = __webpack_require__(/*! ./containers/InputContainer.js */ 177);
+	var ImageContainer = __webpack_require__(/*! ./containers/ImageContainer.js */ 179);
 	
 	module.exports = React.createClass({
 		displayName: 'exports',
@@ -4467,7 +4467,7 @@
 			var vocabList = this.state.vocabData.list;
 			return React.createElement(
 				'div',
-				null,
+				{ className: 'practiceContainer' },
 				React.createElement(HeaderContainer, null),
 				React.createElement(ImageContainer, {
 					currentWordIndex: currentWordIndex,
@@ -4489,7 +4489,7 @@
 
 /***/ },
 
-/***/ 173:
+/***/ 176:
 /*!*******************************************************!*\
   !*** ./react_assets/js/containers/HeaderContainer.js ***!
   \*******************************************************/
@@ -4528,7 +4528,7 @@
 
 /***/ },
 
-/***/ 174:
+/***/ 177:
 /*!******************************************************!*\
   !*** ./react_assets/js/containers/InputContainer.js ***!
   \******************************************************/
@@ -4537,7 +4537,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 175);
+	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 178);
 	
 	var MicContainer = React.createClass({
 		displayName: 'MicContainer',
@@ -4565,6 +4565,7 @@
 	function FeedbackComponent(props) {
 		// Determine what symbol to show (check or X next to Your answer)
 		var className = "";
+		var triesClassName;
 		// If word is already correct
 		if (props.wordCorrect === true) {
 			className = "glyphicon glyphicon glyphicon-ok";
@@ -4573,7 +4574,7 @@
 			className = "glyphicon glyphicon glyphicon-remove";
 			triesClassName = "tries";
 		} else {
-			rightWrongSlot = "hidden";
+			// rightWrongSlot = "hidden";
 			triesClassName = "hidden";
 		}
 	
@@ -4708,7 +4709,7 @@
 
 /***/ },
 
-/***/ 175:
+/***/ 178:
 /*!******************************************************!*\
   !*** ./react_assets/js/helpers/SpeechRecognition.js ***!
   \******************************************************/
@@ -4805,7 +4806,7 @@
 
 /***/ },
 
-/***/ 176:
+/***/ 179:
 /*!******************************************************!*\
   !*** ./react_assets/js/containers/ImageContainer.js ***!
   \******************************************************/

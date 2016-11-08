@@ -32,8 +32,9 @@ var speechSynth = {
 		var utterThis = new SpeechSynthesisUtterance(textToSay);
 		utterThis.voice = voicePack;
 		utterThis.rate = 0.8;
-		console.log(utterThis.voice);
+		// console.log(utterThis.voice);
 		window.speechSynthesis.speak(utterThis);
+		return utterThis;
 
 	}
 };

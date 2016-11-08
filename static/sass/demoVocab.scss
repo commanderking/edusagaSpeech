@@ -2,6 +2,16 @@ $bgColorDefault: #61B3DB;
 $themeLightBlue: #C4DBEF;
 $themeYellow: #FDD870;
 
+.practiceContainer {
+	position: absolute;
+	width: 80%;
+	top: 10%;
+	height: 90%;
+	left: 10%;
+	background-color: white;
+	z-index: 100;
+}
+
 .faded {
 	opacity: 0.5;
 }

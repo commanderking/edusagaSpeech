@@ -32,6 +32,36 @@
 			"soundID" : "nihao"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say Hi ",
+				"answer" : "你好",
+				"pinyin" : "nǐ hǎo",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Introduce your name",
+				"answer" : "我叫",
+				"pinyin" : "Wǒ jiào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Introduce your last name (Ex. 王 Wáng)",
+				"answer" : "我姓王",
+				"pinyin" : "Wǒ xìng Wáng",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "Alex",

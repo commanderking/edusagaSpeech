@@ -24,6 +24,71 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Ask someone what they like to do on the weekend",
+				"answer" : "你周末喜欢做什么",
+				"pinyin" : "nǐ zhōumò xǐhuān zuò shénme",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'play mahjong'",
+				"answer" : "打麻将",
+				"pinyin" : "dǎ májiàng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'play badminton'",
+				"answer" : "打羽毛球",
+				"pinyin" : "dǎ yǔmáoqiú",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask 'What's badminton?'",
+				"answer" : "打羽毛球是什么?",
+				"pinyin" : "dǎ yǔmáoqiú shì shénme",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone if they like playing badminton (method 1)",
+				"answer" : "你喜欢打羽毛球吗？",
+				"pinyin" : "nǐ xǐhuān dǎ yǔmáoqiú ma",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone if they like playing badminton (method 2)",
+				"answer" : "你喜不喜欢打羽毛球？",
+				"pinyin" : "nǐ xǐ bù xǐhuān dǎ yǔmáoqiú",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say that you need to go (method 1)",
+				"answer" : "我要回家了",
+				"pinyin" : "wǒ yào huíjiāle",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say that you need to go (method 2)",
+				"answer" : "我得走了",
+				"pinyin" : "wǒ déi zǒule",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" :
 		{
 			"name" : "David",

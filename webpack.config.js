@@ -10,6 +10,7 @@ module.exports = {
     "questionAsker": './react_assets/js/questionAsker',
     "mainMenu": './react_assets/js/mainMenu',
     "dashboard": './react_assets/js/dashboard.js',
+    "teacherHome": './react_assets/js/teacherHome.js'
   },
   output: {
       path: path.resolve('./static/js/'),

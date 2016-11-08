@@ -25,6 +25,64 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Fried Rice",
+				"answer" : "炒饭",
+				"pinyin" : "chǎofàn",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Hamburger",
+				"answer" : "汉堡",
+				"pinyin" : "hànbǎo",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "French Fries",
+				"answer" : "薯条",
+				"pinyin" : "shǔ tiáo",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Beef Noodles",
+				"answer" : "牛肉面",
+				"pinyin" : "niúròu miàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask if someone has beef noodles",
+				"answer" : "你有没有牛肉面？",
+				"pinyin" : "nǐ yǒu méiyǒu niúròu miàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Order a hamburger (method 1)",
+				"answer" : "我要一个汉堡。",
+				"pinyin" : "wǒ yào yīgè hànbǎo",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Order a hamburger (method 2)",
+				"answer" : "来一个汉堡。",
+				"pinyin" : "lái yīgè hànbǎo",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "Tina",

@@ -23,6 +23,78 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'wake up/get out of bed'",
+				"answer" : "起床",
+				"pinyin" : "qǐchuáng",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'sleep'",
+				"answer" : "睡觉",
+				"pinyin" : "shuìjiào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'go home'",
+				"answer" : "回家",
+				"pinyin" : "huí jiā",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'morning'",
+				"answer" : "早上",
+				"pinyin" : "zǎoshang",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'night'",
+				"answer" : "晚上",
+				"pinyin" : "wǎnshàng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '3 o'clock'",
+				"answer" : "三点",
+				"pinyin" : "sān diǎn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '6 o'clock in the morning'",
+				"answer" : "早上六点",
+				"pinyin" : "zǎoshang liù diǎn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '9:30 at night'",
+				"answer" : "晚上九点半",
+				"pinyin" : "wǎnshàng jiǔ diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'I sleep at 9:30 at night'",
+				"answer" : "我晚上九点半睡觉",
+				"pinyin" : "wǒ wǎnshàng jiǔ diǎn bàn shuìjiào",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",

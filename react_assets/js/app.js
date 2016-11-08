@@ -101,7 +101,7 @@ module.exports = React.createClass({
    		var currentWordIndex = this.state.vocabData.currentWordIndex;
    		var vocabList = this.state.vocabData.list;
         return (
-       		<div>
+       		<div className="practiceContainer">
 	       		<HeaderContainer />
 	       		<ImageContainer 
 	       			currentWordIndex = {currentWordIndex}

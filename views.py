@@ -1,5 +1,7 @@
 from flask import Flask, request, redirect, render_template, render_template_string, url_for, jsonify, session
 from flask_user import login_required, UserManager, SQLAlchemyAdapter
+from flask_login import current_user
+
 
 import boto3, json, simplejson, urlparse, datetime
 
@@ -61,7 +63,18 @@ def trackVisitorEvent(eventText):
 	except: 
 		pass
 
+@app.route('/testDatabase')
+def testDatabase(name="test"):
+	newEpisode = Episodes('introDavid') 
+	db.session.add(newEpisode)
+	db.session.commit()
 
+	currentEpisode = Episodes.query.first()
+	print currentEpisode
+	print currentEpisode.episodeJSONFileName
+	print current_user.username
+
+	return render_template('questionAsker.html', teacher="public", activityName=currentEpisode.episodeJSONFileName)
 
 @app.route('/')
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
@@ -72,14 +85,6 @@ def index(name="Index", activityName="index", teacher="jinlaoshi"):
 		userID = uuid.uuid4()
 	return render_template('index3.html', name=name, activityName=activityName, teacher=teacher, userID=userID)
 
-@app.route('/test')
-def index2(name="Index"):
-	return render_template('index2.html')
-
-@app.route('/index3')
-def index3(name="Index"):
-	return render_template('index3.html')
-
 #--------------------------------------------
 # E-mail this link and redirect to homepage to track with text
 # -------------------------------------------
@@ -89,19 +94,27 @@ def home(name="Home"):
 	print session['userID']
 	return redirect(url_for('index'))
 
+@app.route('/<username>')
+@login_required
+def teacherPage(username):
+	user = TeacherUser.query.filter_by(username=username).first()
+	if user == None:
+		return redirect(url_for('index'))
+	else:
+		return render_template('teacherHome.html', username=username)
+
 @app.route('/<teacher>/home/')
 def teacherHome(teacher):
 	studentID = request.args.get('studentID')
 	if studentID == None:
 		return redirect(url_for("login", teacher=teacher))
-	else: 
+	else:
 		episode = getAllEpisodeData(teacher)
 		print episode
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
 
 @app.route('/public/home/')
 def publicHome():
-
 	# Check for any new episodes and update JSON to reflect any new files in the public folder
 	episodeData = json.dumps(getAllEpisodeData("public"), ensure_ascii=False).encode('utf8')
 	print episodeData;
@@ -167,7 +180,6 @@ def members_page():
         """)
 
 
-
 #------------------------------------------------
 # Links from old emails that redirect to their new version
 #------------------------------------------------
@@ -195,6 +207,10 @@ def demoVocab1(name="Vocab1"):
 @app.route('/demoVocab2')
 def demoVocab2(name="Vocab2"):
 	return render_template("demoVocab2.html", name=name)
+
+@app.route('/demoVocab3')
+def demoVocab3(name="Vocab3"):
+	return render_template("reactTest.html", name=name)
 
 @app.route('/video/')
 def videoRedirect(name="Video Redirect"):

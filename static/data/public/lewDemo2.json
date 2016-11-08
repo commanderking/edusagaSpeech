@@ -23,6 +23,57 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'Taiwan'",
+				"answer" : "台湾",
+				"pinyin" : "táiwān",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone what they ate",
+				"answer" : "你吃了什么？",
+				"pinyin" : "nǐ chīle shénme",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone where they went",
+				"answer" : "你去了哪里？",
+				"pinyin" : "nǐ qùle nǎlǐ",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'Taipei 101 (a Taiwan skyscraper)'",
+				"answer" : "台北101",
+				"pinyin" : "táiběi yī líng yī",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone if they watched movies (method 1)",
+				"answer" : "你看了电影吗？",
+				"pinyin" : "nǐ kànle diànyǐng ma?",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone if they watched movies (method 2)",
+				"answer" : "你看电影了，没有？",
+				"pinyin" : "nǐ kàn diànyǐngle, méiyǒu?",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",
@@ -273,6 +324,15 @@
 								["去看", "找"],
 								["你的朋友了", "朋友了"],
 								["没有"]
+							],
+							"response": "啊。。。 没有。 他们都很忙，所以没有时间。",
+							"soundID" : "taiwan-ahno-busy-notime"
+						},
+						{
+							"answers": 	[
+								["有没有"],
+								["跟", "和"],
+								["朋友见面", "朋友打交道"]
 							],
 							"response": "啊。。。 没有。 他们都很忙，所以没有时间。",
 							"soundID" : "taiwan-ahno-busy-notime"

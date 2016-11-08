@@ -23,6 +23,7 @@ var MicContainer = React.createClass({
 function FeedbackComponent (props) {
 	// Determine what symbol to show (check or X next to Your answer)
 	var className = "";
+	var triesClassName;
 	// If word is already correct
 	if (props.wordCorrect === true) {
 		className = "glyphicon glyphicon glyphicon-ok";
@@ -31,7 +32,7 @@ function FeedbackComponent (props) {
 		className = "glyphicon glyphicon glyphicon-remove";
 		triesClassName = "tries";
 	} else {
-		rightWrongSlot = "hidden";
+		// rightWrongSlot = "hidden";
 		triesClassName = "hidden";
 	}
 

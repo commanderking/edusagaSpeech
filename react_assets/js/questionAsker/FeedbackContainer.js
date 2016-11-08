@@ -1,4 +1,5 @@
 var React = require('react');
+var PropTypes = React.PropTypes;
 var SpeechableSpan = require('./components/SpeechableSpan');
 var CoinMeter = require('./components/CoinMeter');
 var HintIcon = require('./components/HintIcon');
@@ -9,6 +10,7 @@ var MiriFeedback = require('./components/MiriFeedback');
 
 var FeedbackContainer = React.createClass({
 	render: function() {
+		if (this.props.practiceMode) {return null;}
 		return (
 			<div className ="bottomNavBar">
 				<div className="row-fluid">
@@ -60,3 +62,7 @@ var FeedbackContainer = React.createClass({
 });
 
 module.exports = FeedbackContainer;	
+
+FeedbackContainer.propTypes = {
+	practiceMode: PropTypes.bool.isRequired
+}

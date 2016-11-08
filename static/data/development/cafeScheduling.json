@@ -57,6 +57,28 @@
 			"text" : "星期几?",
 			"soundID" : "",
 			"jumpTotasks" : true
+		},
+		{
+			"name" : "Chen Yang",
+			"image" : "characters/chenyang/chengDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "星期天, 没问题。",
+			"soundID" : ""
+		},
+		{
+			"name" : "Alex",
+			"image" : "characters/alex/alexLaughing.png",
+			"imageLayer" : "blank.png",
+			"text" : "好啊",
+			"soundID" : ""
+		},
+		{
+			"name" : "David",
+			"image" : "characters/david/davidLaughing.png",
+			"imageLayer" : "blank.png",
+			"text" : "太好了! 星期天几点?",
+			"soundID" : "",
+			"jumptoTasks" : true
 		}
 	],
 	"character" : 
@@ -157,7 +179,7 @@
 					],
 					"correct" : false,
 					"emotion" : "blank.png",
-					"tasksToQueue" : [30],
+					"tasksToQueue" : [30, 31],
 					"attemptedAnswers" : [],
 					"hintUsed" : false,
 					"jumpToScenarioIndex" : 4
@@ -169,19 +191,55 @@
 					[
 						{
 							"answers" : ["星期六"],
-							"response" : "哦。",
+							"response" : "哎呀。 我星期六有事。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"task" : "Suggest Sunday",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期天", "星期日", "礼拜天", "周日"],
+							"response" : "",
 							"soundID" : ""
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidLaughing.png",
-					"tasksToQueue" : [30],
+					"tasksToQueue" : [40, 41, 42],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex" : 5
+
+				},
+				{
+					"taskID" : 40,
+					"task" : "Tell them 9:30 in the morning",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["早上九点半"],
+							"response" : "我叫 David。你叫什么?",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
-					"taskID" : 40,
-					"task" : "Ask him what's his name ",
+					"taskID" : 41,
+					"task" : "Tell them 9:30 in the morning",
 					"possibleAnswers" : 
 					[
 						{
@@ -192,27 +250,27 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/david/davidDefault.png",
-					"tasksToQueue" : [23],
+					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
-					"taskID" : 23,
-					"task" : "Respond to his question: 你叫什么?",
+					"taskID" : 42,
+					"task" : "Tell them 9:30 in the morning",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我叫", "我是"],
-							"response" : "哦。 很高兴认识你。",
+							"answers" : ["你叫什么名字"],
+							"response" : "我叫 David。你叫什么?",
 							"soundID" : ""
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
-				}		
+				},	
 			],
 			"completedTasks" : []
 		}

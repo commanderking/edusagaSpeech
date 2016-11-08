@@ -24,6 +24,106 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Invite someone to go shopping",
+				"answer" : "我们去逛街，好吗？",
+				"pinyin" : "wǒmen qù guàngjiē, hǎo ma?",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'badminton'",
+				"answer" : "打羽毛球",
+				"pinyin" : "dǎ yǔmáoqiú",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'go to eat'",
+				"answer" : "去吃饭",
+				"pinyin" : "qù chīfàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'play mahjong'",
+				"answer" : "打麻将",
+				"pinyin" : "dǎ májiàng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'saturday'",
+				"answer" : "星期六",
+				"pinyin" : "xīngqí liù",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'Sunday'",
+				"answer" : "星期天",
+				"pinyin" : "xīngqí tiān",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'Monday'",
+				"answer" : "星期一",
+				"pinyin" : "xīngqí yī",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '3:30'",
+				"answer" : "三点半",
+				"pinyin" : "sān diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '5:30'",
+				"answer" : "五点半",
+				"pinyin" : "wǔ diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '10:30'",
+				"answer" : "十点半",
+				"pinyin" : "shí diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'morning'",
+				"answer" : "早上",
+				"pinyin" : "zǎoshang",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'night'",
+				"answer" : "晚上",
+				"pinyin" : "wǎnshàng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '5:30 in the morning'",
+				"answer" : "早上五点半",
+				"pinyin" : "zǎoshang wǔ diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "Chen Yang",

@@ -26,6 +26,78 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'Friday'",
+				"answer" : "你好",
+				"pinyin" : "nǐ hǎo",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'Saturday'",
+				"answer" : "我叫",
+				"pinyin" : "wǒ jiào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'Sunday'",
+				"answer" : "你叫什么名字",
+				"pinyin" : "nǐ jiào shénme míngzì",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'weekend'",
+				"answer" : "你贵姓",
+				"pinyin" : "nǐ guìxìng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask if someone is busy on the weekend",
+				"answer" : "请问您贵姓",
+				"pinyin" : "qǐngwèn nín guìxìng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask if someone is busy on Sunday",
+				"answer" : "你星期天忙不忙?",
+				"pinyin" : "nǐ hǎo",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Invite someone to eat with you on Sunday",
+				"answer" : "我星期天请你吃饭，怎么样？",
+				"pinyin" : "wǒ jiào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone if they want to eat Chinese food (method 1)",
+				"answer" : "我们吃中国菜，好吗？",
+				"pinyin" : "nǐ jiào shénme míngzì",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone if they want to eat Chinese food (method 2)",
+				"answer" : "你想不想吃中国菜?",
+				"pinyin" : "nǐ guìxìng",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",
@@ -350,7 +422,7 @@
 				},
 				{
 					"taskID" : 40,
-					"task" : "Ask him how he feels about eating Chinese food",
+					"task" : "Ask him if he wants to eat Chinese food",
 					"taskType" : "choice",
 					"taskLink" : "choiceFoodType",
 					"possibleAnswers" : 
@@ -393,7 +465,7 @@
 				},
 				{
 					"taskID" : 41,
-					"task" : "Ask him how he feels about eating Korean food",
+					"task" : "Ask him if he wants to eat Korean food",
 					"taskLink" : "choiceFoodType",
 					"possibleAnswers" : 
 					[
@@ -435,7 +507,7 @@
 				},
 				{
 					"taskID" : 42,
-					"task" : "Ask him how he feels about eating Mexican food",
+					"task" : "Ask him if he wants to eat Mexican food",
 					"taskType" : "choice",
 					"taskLink" : "choiceFoodType",
 					"possibleAnswers" : 
