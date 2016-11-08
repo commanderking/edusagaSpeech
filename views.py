@@ -101,14 +101,14 @@ def teacherPage(username):
 	if user == None:
 		return redirect(url_for('index'))
 	else:
-		return render_template('index3.html', username=username)
+		return render_template('teacherHome.html', username=username)
 
 @app.route('/<teacher>/home/')
 def teacherHome(teacher):
 	studentID = request.args.get('studentID')
 	if studentID == None:
 		return redirect(url_for("login", teacher=teacher))
-	else: 
+	else:
 		episode = getAllEpisodeData(teacher)
 		print episode
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
