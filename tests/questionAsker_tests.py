@@ -1,7 +1,9 @@
 from flask import Flask
 from flask_testing import TestCase
 import unittest
-from main import app, db
+from web import app, db
+from models import *
+
 
 class MyTest(TestCase):
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/edusagaspeech"
@@ -17,6 +19,7 @@ class MyTest(TestCase):
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+
 class AddEpisodes(MyTest):
     def test_add_episode(self):
 		newEpisode = Episodes('introDavid') 
@@ -26,6 +29,3 @@ class AddEpisodes(MyTest):
 		assert newEpisode in db.session
 		response = self.client.get("/")
 		assert user in db.session
-
-if __name__ == '__main__':
-    unittest.main()
