@@ -1,7 +1,5 @@
 var React = require('react');
 var TaskIconImage = require('./TaskIconImage');
-var TransitionsCSS = require('../../../../static/css/transitions.css');
-var TransitionGroup = require('react-addons-transition-group');
 var Constants = require('../../helpers/Constants.js');
 
 var TaskIcon = React.createClass({
