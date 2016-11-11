@@ -25930,7 +25930,7 @@
 		return React.createElement(
 			'div',
 			{ className: 'resultsHeader' },
-			React.createElement('img', { className: 'resultsImage', src: resultsSrc }),
+			React.createElement('img', { className: 'headerImageTextSlanted', src: resultsSrc }),
 			React.createElement(
 				'div',
 				{ className: 'miriIcon' },
@@ -26416,6 +26416,17 @@
 		changePinyinDisplay: function changePinyinDisplay() {
 			this.setState({ showPinyin: !this.state.showPinyin });
 		},
+		nextVocab: function nextVocab() {
+			var index = this.state.vocabData.currentWordIndex;
+			// If at end of Vocab list, loop back, otherwise move to next one
+			var newIndex = index >= this.state.vocabData.list.length - 1 ? 0 : index + 1;
+			this.setNewIndex(newIndex);
+		},
+		previousVocab: function previousVocab() {
+			var index = this.state.vocabData.currentWordIndex;
+			var newIndex = index <= 0 ? this.state.vocabData.list.length - 1 : index - 1;
+			this.setNewIndex(newIndex);
+		},
 		render: function render() {
 			if (this.props.practiceMode) {
 				var currentWordIndex = this.state.vocabData.currentWordIndex;
@@ -26426,20 +26437,28 @@
 					{ className: 'practiceContainer' },
 					React.createElement(PracticeHeader, {
 						currentWordObject: currentWordObject }),
-					React.createElement(PracticeFlashCard, {
-						currentWordIndex: currentWordIndex,
-						vocabList: vocabList,
-						currentWordObject: currentWordObject,
-						setNewIndex: this.setNewIndex,
-						changePinyinDisplay: this.changePinyinDisplay,
-						showPinyin: this.state.showPinyin,
-						userAnswer: this.state.userAnswer,
-						playSpeechSynth: this.props.playSpeechSynth }),
-					React.createElement(PracticeFooter, {
-						micActive: this.state.micActive,
-						onMicActivate: this.handleMicActivate,
-						onMicDeactivate: this.handleMicDeactivate,
-						changePracticeMode: this.props.changePracticeMode })
+					React.createElement(
+						'div',
+						{ className: 'practiceInner' },
+						React.createElement(PracticeFlashCard, {
+							currentWordIndex: currentWordIndex,
+							vocabList: vocabList,
+							currentWordObject: currentWordObject,
+							setNewIndex: this.setNewIndex,
+							showPinyin: this.state.showPinyin,
+							userAnswer: this.state.userAnswer,
+							playSpeechSynth: this.props.playSpeechSynth }),
+						React.createElement(PracticeFooter, {
+							micActive: this.state.micActive,
+							onMicActivate: this.handleMicActivate,
+							onMicDeactivate: this.handleMicDeactivate,
+							changePracticeMode: this.props.changePracticeMode,
+							playSpeechSynth: this.props.playSpeechSynth,
+							currentWordObject: currentWordObject,
+							changePinyinDisplay: this.changePinyinDisplay,
+							previousVocab: this.previousVocab,
+							nextVocab: this.nextVocab })
+					)
 				);
 			} else {
 				return null;
@@ -26462,28 +26481,27 @@
   \********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 180);
 	
 	function PracticeHeader(props) {
+		var headerImage = Constants.IMAGE_PATH + "UI/titleResults.png";
 		return React.createElement(
-			"div",
-			{ className: "practiceHeader" },
+			'div',
+			{ className: 'practiceHeader' },
+			React.createElement('img', { className: 'headerImageTextSlanted customSlant', src: headerImage }),
 			React.createElement(
-				"div",
-				{ className: "titleDiv" },
-				React.createElement(
-					"p",
-					{ className: "title" },
-					"Food"
-				),
-				React.createElement(
-					"p",
-					{ className: "type" },
-					"Vocabulary"
-				)
+				'p',
+				{ className: 'description' },
+				'Practice what you\'re going to say next'
+			),
+			React.createElement(
+				'div',
+				{ className: 'glyphiconWrapper' },
+				React.createElement('span', { className: 'glyphicon glyphicon-record', 'aria-hidden': 'true' })
 			)
 		);
 	}
@@ -26503,15 +26521,36 @@
 	var PropTypes = React.PropTypes;
 	var PracticeMic = __webpack_require__(/*! ./PracticeMic */ 230);
 	var PracticeDoneButton = __webpack_require__(/*! ./PracticeDoneButton */ 231);
+	var PracticeAudioButton = __webpack_require__(/*! ./PracticeAudioButton */ 234);
+	var ShowPinyinButton = __webpack_require__(/*! ./ShowPinyinButton */ 236);
 	
 	function PracticeFooter(props) {
 		return React.createElement(
 			'div',
 			{ className: 'practiceFooter' },
-			React.createElement(PracticeMic, {
-				micActive: props.micActive,
-				onMicActivate: props.onMicActivate,
-				onMicDeactivate: props.onMicDeactivate }),
+			React.createElement(
+				'div',
+				{ className: 'practiceButtonsWrapper' },
+				React.createElement(
+					'div',
+					{ className: 'leftArrow arrow', onClick: props.previousVocab },
+					React.createElement('span', { className: 'glyphicon glyphicon glyphicon-triangle-left', 'aria-hidden': 'true' })
+				),
+				React.createElement(PracticeAudioButton, {
+					playSpeechSynth: props.playSpeechSynth,
+					currentWord: props.currentWordObject.answer }),
+				React.createElement(PracticeMic, {
+					micActive: props.micActive,
+					onMicActivate: props.onMicActivate,
+					onMicDeactivate: props.onMicDeactivate }),
+				React.createElement(ShowPinyinButton, {
+					changePinyinDisplay: props.changePinyinDisplay }),
+				React.createElement(
+					'div',
+					{ className: 'rightArrow arrow', onClick: props.nextVocab },
+					React.createElement('span', { className: 'glyphicon glyphicon-triangle-right', 'aria-hidden': 'true' })
+				)
+			),
 			React.createElement(PracticeDoneButton, {
 				changePracticeMode: props.changePracticeMode })
 		);
@@ -26523,7 +26562,12 @@
 		micActive: PropTypes.bool.isRequired,
 		onMicActivate: PropTypes.func.isRequired,
 		onMicDeactivate: PropTypes.func.isRequired,
-		changePracticeMode: PropTypes.func.isRequired
+		changePracticeMode: PropTypes.func.isRequired,
+		playSpeechSynth: PropTypes.func.isRequired,
+		currentWordObject: PropTypes.object.isRequired,
+		changePinyinDisplay: PropTypes.func.isRequired,
+		previousVocab: PropTypes.func.isRequired,
+		nextVocab: PropTypes.func.isRequired
 	
 	};
 
@@ -26589,7 +26633,7 @@
 			{
 				className: "btn btn-info btn-lg btn-practice-done",
 				onClick: props.changePracticeMode },
-			"Done Practice"
+			"Done!"
 		);
 	}
 	
@@ -26616,40 +26660,18 @@
 	var PracticeFlashCard = React.createClass({
 		displayName: 'PracticeFlashCard',
 	
-		nextVocab: function nextVocab() {
-			var index = this.props.currentWordIndex;
-			// If at end of Vocab list, loop back, otherwise move to next one
-			var newIndex = index >= this.props.vocabList.length - 1 ? 0 : index + 1;
-			this.props.setNewIndex(newIndex);
-		},
-		previousVocab: function previousVocab() {
-			var index = this.props.currentWordIndex;
-			var newIndex = index <= 0 ? this.props.vocabList.length - 1 : index - 1;
-			this.props.setNewIndex(newIndex);
-		},
 		render: function render() {
 			return React.createElement(
 				'div',
 				{ className: 'flashCardWrapper' },
-				React.createElement(
-					'div',
-					{ className: 'leftArrow arrow', onClick: this.previousVocab },
-					React.createElement('span', { className: 'glyphicon glyphicon glyphicon-triangle-left', 'aria-hidden': 'true' })
-				),
 				React.createElement(FlashCardHeader, {
 					currentWordObject: this.props.currentWordObject,
-					changePinyinDisplay: this.props.changePinyinDisplay,
 					playSpeechSynth: this.props.playSpeechSynth }),
 				React.createElement(FlashCardContent, {
 					currentWordObject: this.props.currentWordObject,
 					changePinyinDisplay: this.props.changePinyinDisplay,
 					showPinyin: this.props.showPinyin,
-					userAnswer: this.props.userAnswer }),
-				React.createElement(
-					'div',
-					{ className: 'rightArrow arrow', onClick: this.nextVocab },
-					React.createElement('span', { className: 'glyphicon glyphicon-triangle-right', 'aria-hidden': 'true' })
-				)
+					userAnswer: this.props.userAnswer })
 			);
 		}
 	});
@@ -26658,7 +26680,6 @@
 	
 	PracticeFlashCard.propTypes = {
 		currentWordObject: PropTypes.object.isRequired,
-		changePinyinDisplay: PropTypes.func.isRequired,
 		showPinyin: PropTypes.bool.isRequired,
 		userAnswer: PropTypes.string.isRequired,
 		playSpeechSynth: PropTypes.func.isRequired
@@ -26682,34 +26703,17 @@
 			'div',
 			{ className: 'flashCardHeader' },
 			React.createElement(
-				'h3',
+				'h1',
 				null,
 				'Task: ',
 				props.currentWordObject.task
-			),
-			React.createElement(
-				'div',
-				{ className: 'checkbox pinyinCheckBox' },
-				React.createElement(
-					'label',
-					null,
-					React.createElement('input', { type: 'checkbox', onClick: props.changePinyinDisplay, value: '' }),
-					'Show Pinyin'
-				)
-			),
-			React.createElement(PracticeAudioButton, {
-				playSpeechSynth: props.playSpeechSynth,
-				currentWord: props.currentWordObject.answer })
+			)
 		);
 	}
 	
 	module.exports = FlashCardHeader;
 	
-	FlashCardHeader.propTypes = {
-		changePinyinDisplay: PropTypes.func.isRequired,
-		currentWordObject: PropTypes.object.isRequired,
-		playSpeechSynth: PropTypes.func.isRequired
-	};
+	FlashCardHeader.propTypes = {};
 
 /***/ },
 /* 234 */
@@ -26727,7 +26731,7 @@
 		return React.createElement(
 			"button",
 			{
-				className: "button practiceAudioButton",
+				className: "button btn-round-small",
 				onClick: function onClick() {
 					return props.playSpeechSynth(props.currentWord);
 				} },
@@ -26801,6 +26805,30 @@
 		showPinyin: PropTypes.bool.isRequired,
 		userAnswer: PropTypes.string.isRequired
 	};
+
+/***/ },
+/* 236 */
+/*!**********************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ShowPinyinButton.js ***!
+  \**********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function ShowPinyinButton(props) {
+		return React.createElement(
+			"button",
+			{
+				className: "btn-round-small",
+				onClick: props.changePinyinDisplay },
+			"Show Pinyin"
+		);
+	}
+	
+	module.exports = ShowPinyinButton;
 
 /***/ }
 /******/ ]);

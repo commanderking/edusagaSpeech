@@ -9,7 +9,7 @@ function ResultsHeader (props) {
 	var resultsSrc = Constants.IMAGE_PATH + "UI/titleResults.png";
 	return (
 		<div className="resultsHeader">
-			<img className="resultsImage" src={resultsSrc} />
+			<img className="headerImageTextSlanted" src={resultsSrc} />
 			<div className="miriIcon">
 				<img src={miriIconSrc} />
 			</div>

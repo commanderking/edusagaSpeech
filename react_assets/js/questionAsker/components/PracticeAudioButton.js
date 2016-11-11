@@ -4,7 +4,7 @@ var PropTypes = React.PropTypes;
 function PracticeAudioButton (props) {
 	return (
 		<button 
-			className="button practiceAudioButton"
+			className="button btn-round-small"
 			onClick={() => props.playSpeechSynth(props.currentWord)}>
 			<span className="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
 		</button>

@@ -132,6 +132,17 @@ var PracticeContainer = React.createClass({
 	changePinyinDisplay: function() {
 		this.setState({showPinyin: !this.state.showPinyin});
 	},
+	nextVocab: function() {
+		var index = this.state.vocabData.currentWordIndex;
+		// If at end of Vocab list, loop back, otherwise move to next one
+		var newIndex = index >= this.state.vocabData.list.length -1 ? 0 : index+1;
+		this.setNewIndex(newIndex);
+	},
+	previousVocab: function() {
+		var index = this.state.vocabData.currentWordIndex;
+		var newIndex = index <= 0 ? this.state.vocabData.list.length - 1 : index-1;
+		this.setNewIndex(newIndex);
+	},
     render: function(){
 		if (this.props.practiceMode) {
 			var currentWordIndex = this.state.vocabData.currentWordIndex;
@@ -141,20 +152,26 @@ var PracticeContainer = React.createClass({
 				<div className="practiceContainer">
 					<PracticeHeader 
 						currentWordObject={currentWordObject}/>
-		       		<PracticeFlashCard
-		       			currentWordIndex={currentWordIndex}
-		       			vocabList={vocabList}
-		       			currentWordObject={currentWordObject} 
-		       			setNewIndex={this.setNewIndex} 
-		       			changePinyinDisplay={this.changePinyinDisplay}
-		       			showPinyin={this.state.showPinyin}
-		       			userAnswer={this.state.userAnswer}
-		       			playSpeechSynth={this.props.playSpeechSynth}/>
-		       		<PracticeFooter 
-		       			micActive={this.state.micActive}
-		       			onMicActivate={this.handleMicActivate}
-		       			onMicDeactivate={this.handleMicDeactivate} 
-		       			changePracticeMode={this.props.changePracticeMode}/>
+					<div className="practiceInner">
+			       		<PracticeFlashCard
+			       			currentWordIndex={currentWordIndex}
+			       			vocabList={vocabList}
+			       			currentWordObject={currentWordObject} 
+			       			setNewIndex={this.setNewIndex} 
+			       			showPinyin={this.state.showPinyin}
+			       			userAnswer={this.state.userAnswer}
+			       			playSpeechSynth={this.props.playSpeechSynth}/>
+			       		<PracticeFooter 
+			       			micActive={this.state.micActive}
+			       			onMicActivate={this.handleMicActivate}
+			       			onMicDeactivate={this.handleMicDeactivate} 
+			       			changePracticeMode={this.props.changePracticeMode}
+			       			playSpeechSynth={this.props.playSpeechSynth}
+			       			currentWordObject={currentWordObject}
+			       			changePinyinDisplay={this.changePinyinDisplay}
+			       			previousVocab={this.previousVocab}
+			       			nextVocab={this.nextVocab} />
+			    	</div>
 		       	</div>
 	       	)   		
     	} else {

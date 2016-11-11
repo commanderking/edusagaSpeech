@@ -6,7 +6,7 @@ function PracticeDoneButton (props) {
 		<button 
 			className="btn btn-info btn-lg btn-practice-done"
 			onClick={props.changePracticeMode}>
-				Done Practice
+				Done!
 		</button>
 	)
 }
