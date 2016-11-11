@@ -1,0 +1,505 @@
+{
+	"activityID": "publicDemo",
+	"activityName": "Review of Chinese 1",
+	"tags" : ["review", "nationality", "time", "hobbies", "introduction"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/david/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"practiceModeStart": true,
+	"objectives": 
+	[
+		"I can introduce myself and provide basic personal information.",
+		"I can ask questions about what other people like.",
+		"I can answer questions about what I like and dislike."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Welcome to Shanghai Airport! Looks like your there's a fellow student who's waiting to be picked up. Why don't you head over and chat with him?",
+			"next" : "end"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say Hi ",
+				"answer" : "你好",
+				"pinyin" : "nǐ hǎo",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask how they're doing (Method 1)",
+				"answer" : "怎么样",
+				"pinyin" : "zěnme yàng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask how they're doing (Method 2)",
+				"answer" : "你好吗",
+				"pinyin" : "nǐ hǎo ma",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Shanghai Airport",
+				"nameChinese" : "上海机场", 
+				"bg" : "bg/shanghaiAirport.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png",
+				"silhouette" : "characters/david/davidSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下"],
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "david/feichanghao.ogg"
+				},
+				{
+					"soundID" : "wojiao",
+					"soundPath" : "david/wojiao.ogg"
+				},
+				{
+					"soundID" : "nationality",
+					"soundPath" : "david/nationality.ogg"
+				},
+				{
+					"soundID" : "age",
+					"soundPath" : "david/age.ogg"
+				},
+				{
+					"soundID" : "foodLikes",
+					"soundPath" : "david/foodLikes.ogg"
+				},
+				{
+					"soundID" : "zhenbang",
+					"soundPath" : "david/zhenbang.ogg"
+				},
+				{
+					"soundID" : "zhende",
+					"soundPath" : "david/zhende.ogg"		
+				},
+				{
+					"soundID" : "favoriteDrink",
+					"soundPath" : "david/favoriteDrink.ogg"
+				},
+				{
+					"soundID" : "sportsLikes",
+					"soundPath" : "david/sportsLikes.ogg"			
+				},
+				{
+					"soundID" : "seasonLikes",
+					"soundPath" : "david/seasonLikes.ogg"
+				},
+				{
+					"soundID" : "gotoSchool",
+					"soundPath" : "david/gotoSchool.ogg"
+				},
+				{
+					"soundID" : "zodiac",
+					"soundPath" : "david/zodiac.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet him",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好", "你早", "早安"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [2],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 2,
+					"task" : "Ask how he's doing",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+							"response": "非常好",
+							"soundID": "feichanghao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [3,4],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 3,
+					"task" : "Ask for name", 
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["你叫什么名字", "你叫什么", "你的名字是什么", "你是谁", "你的中文名字叫什么"],
+							"response": "我叫张大伟.",
+							"soundID" : "wojiao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
+				},
+				{
+					"taskID" : 4,
+					"task" : "Ask for nationality", 
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你是哪国人"],
+							"response" : "我是中国人.",
+							"soundID" : "nationality"
+						},
+						{
+							"answers" : [
+								["你"],
+								["是"],
+								["哪国人", "哪里人", "哪里来的"]
+							],
+							"response" : "我是中国人.",
+							"soundID" : "nationality"
+						},
+						{
+							"answers" : [
+								["你"],
+								["从"],
+								["哪里来"]
+							],
+							"response" : "我是中国人.",
+							"soundID" : "nationality"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [5],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
+				}, 
+				{
+					"taskID" : 5,
+					"task" : "Ask for age", 
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["你多大了", "你几岁", "你多大", "年纪多大", "今年多大了"],
+							"response" : "我十六岁.",
+							"soundID" : "age"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"soundPath" : "david/age.ogg",
+					"tasksToQueue" : [6,7],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
+				},
+				{
+					"taskID" : 6,
+					"task" : "Ask how he gets to school",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你怎么去上学"],
+							"response" : "我平常走路去上学.",
+							"soundID" : "gotoSchool"
+						},
+						{
+							"answers" : [
+								["你", "您"],
+								["怎么", "如何"],
+								["上学", "去学校", "上课"] 
+							],
+							"response" : "我平常走路去上学.",
+							"soundID" : "gotoSchool"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
+				},
+				{
+					"taskID" : 7,
+					"task" : "Ask for his Zodiac",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你属什么", "你属什么生肖"],
+							"response" : "我属龙.",
+							"soundID" : "zodiac"
+						}, 
+						{
+							"answers" : [
+								["你"],
+								["属"],
+								["什么", "吗"]
+							],
+							"response" : "我属龙.",
+							"soundID" : "zodiac"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [8],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
+				},
+				{
+					"taskID" : 8,
+					"task" : "Ask what he likes to eat",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : [ "你最喜欢吃什么"],
+							"response" : "我喜欢吃牛肉面和汤圆.",
+							"soundID" : "foodLikes"
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜欢", "爱"],
+								["吃"],
+								["什么"]
+							],
+							"response" : "我喜欢吃牛肉面和汤圆.",
+							"soundID" : "foodLikes"
+						}
+					],
+					"correct" : false,
+					"soundPath" : "david/foodLikes.ogg",
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [9, 10],
+					"attemptedAnswers" : [],
+					"hintUsed" : false					
+				},
+				{
+					"taskID" : 9,
+					"task" : "Share that I like to eat beef noodle soup",
+					"taskType" : "choice",
+					"taskLink" : "choiceLikeDislike",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["我也喜欢吃牛肉面"],
+							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
+							"soundID" : "zhenbang"
+						},
+						{
+							"answers": [
+								["我"],
+								["也喜欢", "喜欢", "爱"],
+								["吃"],
+								["牛肉面"]
+							],
+							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
+							"soundID" : "zhenbang"
+						},
+						{
+							"answers": [
+								["牛肉面"],
+								["好吃"]
+							],
+							"response" : "哦! 真棒! 我们应该一起吃牛肉面!",
+							"soundID" : "zhenbang"
+						}
+					],
+					"exceptions" : ["不喜欢"],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png", 
+					"tasksToQueue" : [11],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
+				},
+				{
+					"taskID" : 10,
+					"task" : "Share that I don't like beef noodle soup",
+					"taskType" : "choice",
+					"taskLink" : "choiceLikeDislike",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我不喜欢吃牛肉面"],
+							"response" : "真的吗? 牛肉面非常好吃!",
+							"soundID" : "zhende"
+						},
+						{
+							"answers" : [
+								["我"],
+								["不喜欢"],
+								["牛肉面"]
+							],
+							"response" : "真的吗? 牛肉面非常好吃!",
+							"soundID" : "zhende"
+						},
+						{
+							"answers" : [
+								["牛肉面"],
+								["不好吃", "难吃"]
+							],
+							"response" : "真的吗? 牛肉面非常好吃!",
+							"soundID" : "zhende"
+						}
+					],
+					"correct" : false,
+					"soundPath" : "david/zhende.ogg",
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [11],
+					"attemptedAnswers" : [],
+					"hintUsed" : false		
+				}, 
+				{
+					"taskID" : 11,
+					"task" : "Ask what is his favorite drink",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你最喜欢喝什么", "你最喜欢什么饮料", "你喜欢喝什么"],
+							"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
+							"soundID" : "favoriteDrink"
+						},
+						{
+							"answers" : [
+								["你"],
+								["最喜欢", "喜欢"],
+								["喝"],
+								["什么", "哪些饮料", "哪一些饮料", "哪种饮料"]
+
+							],
+							"response" : "我最喜欢喝可乐! Mmm... 可乐很好喝",
+							"soundID" : "favoriteDrink"	
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [12, 13],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
+				},
+				{
+					"taskID" : 12,
+					"task" : "Ask what is his favorite sport",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你最喜欢什么运动"],
+							"response" : "我最喜欢打篮球和打乒乓球!",
+							"soundID" : "sportsLikes"
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜欢", "最喜欢"],
+								["什么", "哪些", "那一些", "打什么"],
+								["运动", "体育", "球赛", "球"]
+							],
+							"response" : "我最喜欢打篮球和打乒乓球!",
+							"soundID" : "sportsLikes"
+
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false				
+				},
+				{
+					"taskID" : 13,
+					"task" : "Ask what season he likes",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你最喜欢什么季节"],
+							"response" : "我最喜欢春天, 可是我不喜欢冬天",
+							"soundID" : "seasonLikes"
+						},
+						{
+							"answers" : [
+								["你"],
+								["最喜欢", "喜欢"],
+								["什么", "哪个", "哪一个"],
+								["季节"]
+							],
+							"response" : "我最喜欢春天, 可是我不喜欢冬天",
+							"soundID" : "seasonLikes"
+						}
+					],
+					"exceptions" : ["不喜欢"],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false	
+				}
+			],
+			"completedTasks" : []
+		}
+}

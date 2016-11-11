@@ -1,0 +1,331 @@
+{
+	"activityID": "orderingFood",
+	"activityName": "Ordering Food at a Fast Food Restaurant",
+	"tags" : ["food"],
+	"sequence" : 300,
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/tina/tinaDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"scenarioIndex": 0,
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can order a meal."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Hey! It's a fast food restaurant. Weren't you really craving some burgers and fried rice? I don't know if they even serve fried rice, but it doesn't hurt to ask!",
+			"next" : "end"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Fried Rice",
+				"answer" : "炒饭",
+				"pinyin" : "chǎofàn",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Hamburger",
+				"answer" : "汉堡",
+				"pinyin" : "hànbǎo",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "French Fries",
+				"answer" : "薯条",
+				"pinyin" : "shǔ tiáo",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Beef Noodles",
+				"answer" : "牛肉面",
+				"pinyin" : "niúròu miàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask if someone has beef noodles",
+				"answer" : "你有没有牛肉面？",
+				"pinyin" : "nǐ yǒu méiyǒu niúròu miàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Order a hamburger (method 1)",
+				"answer" : "我要一个汉堡。",
+				"pinyin" : "wǒ yào yīgè hànbǎo",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Order a hamburger (method 2)",
+				"answer" : "来一个汉堡。",
+				"pinyin" : "lái yīgè hànbǎo",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "Tina",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Fast Food Restaurant",
+				"nameChinese" : "快餐店", 
+				"bg" : "bg/fastfoodRestaurant.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/tina/tinaDefault.png",
+				"ordering" : "characters/tina/tinaOrdering.png",
+				"confused" : "characters/tina/tinaConfused.png",
+				"silhouette" : "characters/tina/tinaSilhouette1.png"
+			},
+			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "tina/nihao.ogg"
+				},
+				{
+					"soundID" : "noFriedRice",
+					"soundPath" : "tina/noFriedRice.ogg"
+				},
+				{
+					"soundID" : "onlyBurgersAndFries",
+					"soundPath" : "tina/onlyBurgersAndFries.ogg"
+				},
+				{
+					"soundID" : "hamburgerOrder",
+					"soundPath" : "tina/hamburgerOrder.ogg"
+				},
+				{
+					"soundID" : "frenchFriesOrder",
+					"soundPath" : "tina/frenchFriesOrder.ogg"
+				},
+				{
+					"soundID" : "welcome",
+					"soundPath" : "tina/welcome.ogg"
+				},
+				{
+					"soundID" : "bye",
+					"soundPath" : "tina/bye.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "tina/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "tina/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "tina/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet the cashier",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "今天怎么样", "今天好吗", "今天过得怎么样"],
+							"response" : "不错!",
+							"soundID" : "bucuo"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [2],
+					"attemptedAnswers" : []
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 2,
+					"task" : "Ask whether they have fried rice",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你们有没有炒饭" ],
+							"response": "不好意思, 我们没有炒饭.",
+							"soundID": "noFriedRice"
+						},
+						{
+							"answers": [
+								["有没有", "卖不卖"], 
+								["炒饭"]
+							],
+							"response": "不好意思, 我们没有炒饭.",
+							"soundID": "noFriedRice"
+						},
+						{
+							"answers": [
+								["卖", "有"], 
+								["炒饭"],
+								["吗"]
+
+							],
+							"response": "不好意思, 我们没有炒饭.",
+							"soundID": "noFriedRice"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [3],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 3,
+					"task" : "Ask whether they have beef noodles", 
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["你有没有牛肉面", "你们有没有牛肉面", "我们买牛肉面吗", "你有牛肉面吗", "你们有牛肉面吗"],
+							"response": "不好意思, 我们只有汉堡和薯条.",
+							"soundID" : "onlyBurgersAndFries"
+						},
+						{
+							"answers": 	[
+								["有没有", "卖不卖"], 
+								["牛肉面"]
+							],
+							"response": "不好意思, 我们只有汉堡和薯条.",
+							"soundID" : "onlyBurgersAndFries"
+						},
+						{
+							"answers": [
+								["卖", "有"], 
+								["炒饭"],
+								["吗"]
+
+							],
+							"response": "不好意思, 我们只有汉堡和薯条.",
+							"soundID" : "onlyBurgersAndFries"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [4,5],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 4,
+					"task" : "Order a hamburger", 
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我要一个汉堡"],
+							"response" : "好, 来一个汉堡!.",
+							"soundID" : "hamburgerOrder"
+						},
+						{
+							"answers" : [
+								["要", "来", "给我", "想要"],
+								["一个", "一份", "个", "份"],
+								["汉堡", "汉堡包"]
+							],
+							"response" : "好, 来一个汉堡!.",
+							"soundID" : "hamburgerOrder"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaOrdering.png",
+					"tasksToQueue" : [5],
+					"attemptedAnswers" : []
+				}, 
+				{
+					"taskID" : 5,
+					"task" : "Order french fries", 
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["我要一个薯条", "我要薯条", "给我一个薯条", "给我薯条", "来一个薯条", "来个薯条"],
+							"response" : "好的, 来一个薯条!",
+							"soundID" : "frenchFriesOrder"
+						},
+						{
+							"answers" : [
+								["要", "给我", "想要"],
+								["一个", "一份", "个", "份", "盘"],
+								["薯条"]
+							],
+							"response" : "好的, 来一个薯条!",
+							"soundID" : "frenchFriesOrder"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaOrdering.png",
+					"tasksToQueue" : [6],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 6,
+					"task" : "Thank the cashier",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["谢谢", "感谢"],
+							"response" : "不谢!",
+							"soundID" : "welcome"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [7],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 7,
+					"task" : "Say goodbye!",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["再见", "再见了", "拜拜"],
+							"response" : "再见!",
+							"soundID" : "bye"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				}
+			],
+			"completedTasks" : []
+		}
+}

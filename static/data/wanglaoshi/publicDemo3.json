@@ -1,0 +1,396 @@
+{
+	"activityID": "PD3",
+	"activityName": "Learning about Alex's Family!",
+	"tags" : ["family", "nationality"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/alex/alexDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"scenarioIndex": 0,
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can ask and say someone’s nationality.",
+		"I can introduce myself and provide basic personal information.",
+		"I can say ask about someone’s family."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Lets' try to get to know Alex and her family a little bit better."
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Ask how many family members someone has",
+				"answer" : "你家有几口人？",
+				"pinyin" : "Nǐ jiā yǒu jǐ kǒu rén",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'older brother'",
+				"answer" : "哥哥",
+				"pinyin" : "gēgē",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'younger brother'",
+				"answer" : "弟弟",
+				"pinyin" : "dìdì",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'older sister'",
+				"answer" : "姐姐",
+				"pinyin" : "jiějiě",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say' younger sister'",
+				"answer" : "妹妹",
+				"pinyin" : "mèimei",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'siblings'",
+				"answer" : "兄弟姐妹",
+				"pinyin" : "xiōngdì jiěmèi",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'mom'",
+				"answer" : "妈妈",
+				"pinyin" : "māmā",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'dad'",
+				"answer" : "爸爸",
+				"pinyin" : "bàba",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone for their nationality",
+				"answer" : "你是哪国人？",
+				"pinyin" : "nǐ shì nǎ guórén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone for their dad's nationality",
+				"answer" : "你的爸爸是哪国人？",
+				"pinyin" : "nǐ de bàba shì nǎ guórén",
+				"correct" : false,
+				"tries" : 0
+			}
+
+		]
+	},
+	"character" : 
+		{
+			"name" : "Alex",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "University Park",
+				"nameChinese" : "大学公园", 
+				"bg" : "bg/jiaoTongStatue.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/alex/alexDefault.png",
+				"confused" : "characters/alex/alexConfused.png",
+				"sass" : "characters/alex/alexSass.png",
+				"laughing" : "characters/alex/alexLaughing.png",
+				"silhouette" : "characters/alex/alexSilhouette.png"
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "hi",
+					"soundPath" : "alex/hi.ogg"
+				},
+				{
+					"soundID" : "bucuo",
+					"soundPath" : "alex/bucuo.ogg"
+				},
+				{
+					"soundID" : "family-five-people",
+					"soundPath" : "alex/family-five-people.ogg"
+				},
+				{
+					"soundID" : "family-one-brother-one-sister",
+					"soundPath" : "alex/family-one-brother-one-sister.ogg"
+				},
+				{
+					"soundID" : "family-im-american-parents-not",
+					"soundPath" : "alex/family-im-american-parents-not.ogg"
+				},
+				{
+					"soundID" : "family-dad-chinese-from-shanghai",
+					"soundPath" : "alex/family-dad-chinese-from-shanghai.ogg"
+				},
+				{
+					"soundID" : "family-mom-singaporean",
+					"soundPath" : "alex/family-mom-singaporean.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "alex/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "alex/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "alex/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet her or ask how she's doing",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "hi"
+						},
+						{
+							"answers" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "今天好吗", "今天过得怎么样"],
+							"response" : "不错!",
+							"soundID" : "bucuo"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [6],
+					"attemptedAnswers" : []
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 6,
+					"task" : "Ask how many family members she has",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的家有幾口人"],
+							"response" : "我家有五口人。",
+							"soundID" : "family-five-people"
+						},
+						{
+							"answers" : [
+								["你的家", "你家"],
+								["有几口人", "有几个人"]
+							],
+							"response" : "我家有五口人。",
+							"soundID" : "family-five-people"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [7,8,9],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 7,
+					"task" : "Ask if she has an older brother",
+					"taskType" : "choice",
+					"taskLink" : "siblings",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你有没有哥哥"],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "family-one-brother-one-sister"
+						},
+						{
+							"answers" : [
+								["你有没有"],
+								["哥哥", "一个哥哥", "个哥哥"]
+							],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "family-one-brother-one-sister"
+						},
+						{
+							"answers" : [
+								["你有"],
+								["哥哥吗", "一个哥哥吗", "个哥哥吗"]
+							],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "family-one-brother-one-sister"
+						}			
+					],
+					"exceptions" : ["我", "他"],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [10],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 8,
+					"task" : "Ask whether she has a younger sister",	
+					"taskType" : "choice",
+					"taskLink" : "siblings",				
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你有没有妹妹"],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "family-one-brother-one-sister"
+						},
+						{
+							"answers" : [
+								["你有没有"],
+								["妹妹", "一个妹妹", "个妹妹"]
+							],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "family-one-brother-one-sister"
+						},
+						{
+							"answers" : [
+								["你有"],
+								["妹妹吗", "一个妹妹吗", "个妹妹吗"]
+							],
+							"response" : "我有一个哥哥和一个妹妹!",
+							"soundID" : "family-one-brother-one-sister"
+						}	
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [10],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 9,
+					"task" : "Ask whether she has any siblings",	
+					"taskType" : "choice",
+					"taskLink" : "siblings",				
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你有没有兄弟姐妹", "你有兄弟姐妹吗"],
+							"response" : "我有一個哥哥和一個妹妹",
+							"soundID" : "family-one-brother-one-sister"
+						},
+						{
+							"answers" : [
+								["你有没有"],
+								["兄弟姐妹", "哥哥弟弟", "姐姐妹妹"]
+							],
+							"response" : "我有一個哥哥和一個妹妹",
+							"soundID" : "family-one-brother-one-sister"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [10],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 10,
+					"task" : "Ask Alex for her nationality",	
+					"taskType" : "choice",
+					"taskLink" : "siblings",				
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你是哪国人"],
+							"response" : "我是美国人, 可是我爸妈不是美国人。",
+							"soundID" : "family-im-american-parents-not"
+						},
+						{
+							"answers" : [
+								["你"],
+								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
+							],
+							"response" : "我是美国人, 可是我爸妈不是美国人。",
+							"soundID" : "family-im-american-parents-not"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [11, 12],
+					"attemptedAnswers" : []
+				},			
+				{
+					"taskID" : 11,
+					"task" : "Ask her for her dad's nationality",					
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的爸爸是哪国人"],
+							"response" : "我的爸爸是中国人。他来自上海。",
+							"soundID" : "family-dad-chinese-from-shanghai"
+						},
+						{
+							"answers" : [
+								["你爸爸", "你爸", "你的爸爸", "你的爸"],
+								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
+							],
+							"response" : "我的爸爸是中国人。他来自上海。",
+							"soundID" : "family-dad-chinese-from-shanghai"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},	
+				{
+					"taskID" : 12,
+					"task" : "Ask her for her mom's nationality",					
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你的妈妈是哪国人"],
+							"response" : "我的妈妈是新加坡人。",
+							"soundID" : "family-mom-singaporean"
+						},
+						{
+							"answers" : [
+								["你妈妈", "你妈", "你的妈妈", "你的妈"],
+								["是哪里人", "是哪国人", "来自哪里", "从哪里来"]
+							],
+							"response" : "我的妈妈是新加坡人。",
+							"soundID" : "family-mom-singaporean"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/alex/alexDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				}
+			],
+			"completedTasks" : []
+		}
+}

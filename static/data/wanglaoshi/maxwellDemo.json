@@ -1,0 +1,548 @@
+{
+	"activityID": "introMax",
+	"activityName": "Introduction - Maxwell",
+	"tags" : ["greetings", "introductions"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/maxwell/maxDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"scenarioIndex": 0,
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can understand when people introduce themselves."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Back in the dormitory! It's your roommate Maxwell! Looks like he's watching some show on TV."
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh! Hey there! I'm Max! My Chinese isn't great, but I love watching Chinese TV shows. I'm watching one right now. Can you help me out?",
+			"jumpToTasks" : true
+
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxExcitedGreatJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Great! Thanks so much!"
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "Hey, if you want to listen along, visit this [[link]]!",
+			"link" : {
+				"text" : "link",
+				"url" : "https://youtu.be/39rmwFLPB3k?t=48s"
+			}
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxExcitedGreatJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh wow! It's fantastic! Are you sure you don't want to listen? [[link]]",
+			"link" : {
+				"text" : "View Video",
+				"url" : "https://youtu.be/39rmwFLPB3k?t=48s"
+			}
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDistraught.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh hey! The girl is introducing herself. Listen closely. I need you to help me understand what she's saying!"
+		},
+		{
+			"name" : "Girl on Show",
+			"image" : "characters/voc/chenzitong.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "各位老师好。我的名字叫陈梓童。",
+			"soundID" : "my-name-is-chen-zi-tong",
+			"rewindAvailable": true,
+			"saveSoundForRewind": true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxPanic.png",
+			"imageLayer" : "blank.png",
+			"text" : "What did she just say?",
+			"jumpToTasks" : true,
+			"rewindAvailable": true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxWistfulRightAnswer.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh. So what's her name?",
+			"jumpToTasks" : true,
+			"rewindAvailable" : true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh cool. Her name is Chén Zǐtóng. Let's see what she says next."
+		},
+		{
+			"name" : "Girl on Show",
+			"image" : "characters/voc/chenzitong.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "我今年二十五岁，来自江苏南京。",
+			"soundID" : "im-25-from-nanjing",
+			"index" : 10,
+			"rewindAvailable": true,
+			"saveSoundForRewind": true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDistraught.png",
+			"imageLayer" : "blank.png",
+			"text" : "What's she saying now?",
+			"jumpToTasks" : true,
+			"rewindAvailable": true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxWistfulRightAnswer.png",
+			"imageLayer" : "blank.png",
+			"text" : "25 huh? That's 5 years older than I am."
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh, the next contestant is coming on. Listen to his singing [[link]] if you want. ",
+			"link" : {
+				"text" : "here",
+				"url" : "https://youtu.be/iM-aIDyTpCs"
+			}
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxExcitedGreatJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Wow. What a great performance. Oh, he's introducing himself. Help me out here! "
+		},
+		{
+			"name" : "Guy on Show",
+			"image" : "characters/voc/lian.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "Hello. 大家好。我叫李安。 我英文名字叫 Leon。",
+			"soundID" : "lian-my-name",
+			"saveSoundForRewind" : true,
+			"rewindAvailable": true,
+			"index" : 15
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxPanic.png",
+			"imageLayer" : "blank.png",
+			"text" : "His English name was Leon. What's his Chinese name?",
+			"rewindAvailable": true,
+			"jumpToTasks" : true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Oh cool. It sounds just like his English name. Let's see what he says next."
+		},
+		{
+			"name" : "Judge on Show",
+			"image" : "characters/voc/halin.png",
+			"imageLayer" : "blank.png",
+			"text" : "你几岁啊?",
+			"soundID": "halin-your-age",
+			"saveSoundForRewind" : true,
+			"rewindAvailable": true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxPanic.png",
+			"imageLayer" : "blank.png",
+			"text" : "What did the judge ask him?",
+			"jumpToTasks" : true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Seems right.",
+			"index" : 20
+		},
+		{
+			"name" : "Guy on Show",
+			"image" : "characters/voc/lian.jpg",
+			"imageLayer" : "blank.png",
+			"text" : "我今年二十一岁。",
+			"soundID" : "lian-im-21",
+			"rewindAvailable": true,
+			"saveSoundForRewind": true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxPanic.png",
+			"imageLayer" : "blank.png",
+			"text" : "So how old is he?",
+			"jumpToTasks" : true
+		},
+		{
+			"name" : "Max",
+			"image" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
+			"imageLayer" : "blank.png",
+			"text" : "Cool! Well, that's all for this week. I'll see you later! Thanks for all your help!",
+			"jumpToTasks" : true
+		}
+	],
+	"character" : 
+		{
+			"name" : "Max",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "University Dorm",
+				"nameChinese" : "大学宿舍", 
+				"bg" : "bg/jiaoTongDorm.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/maxwell/maxDefault.png",
+				"confused" : "characters/maxwell/maxConfused.png",
+				"goodJob" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
+				"thumbsUpGoodJob" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
+				"distraught": "characters/maxwell/maxDistraught.png",
+				"excited" : "characters/maxwell/maxExcitedGreatJob.png",
+				"panic" : "characters/maxwell/maxPanic.png",
+				"maxSad" : "characters/maxwell/maxSad.png",
+				"maxSilhouette" : "characters/maxwell/maxSilhouette.png",
+				"maxWistfulGoodJob" : "characters/maxwell/maxWistfulGoodJob.png"
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "my-name-is-chen-zi-tong",
+					"soundPath" : "chenzitong/my-name-is-chen-zi-tong.ogg"
+				},
+				{
+					"soundID" : "im-25-from-nanjing",
+					"soundPath" : "chenzitong/im-25-from-nanjing.ogg"
+				},
+				{
+					"soundID" : "lian-my-name",
+					"soundPath" : "lian/lian-my-name.ogg"
+				},
+				{
+					"soundID" : "lian-nationality",
+					"soundPath" : "lian/lian-nationality.ogg"
+				},
+				{
+					"soundID" : "lian-im-21",
+					"soundPath" : "lian/lian-im-21.ogg"
+				},
+				{
+					"soundID" : "halin-your-age",
+					"soundPath" : "lian/halin-your-age.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Can you help?",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "Sure thing!",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true,
+							"coins" : 0
+						},
+						{
+							"choiceText" : "No way.",
+							"response" : "Come on! Please!",
+							"soundID" : "whatyousay",
+							"correctAnswer" : false
+
+						},
+						{
+							"choiceText" : "Why?",
+							"response" : "I really want to know what they're saying! Please!",
+							"soundID" : "whatyousay",
+							"correctAnswer" : false
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex" : 2
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "What did she just say?",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "She asked the audience how they were",
+							"response" : "That doesn't seem right. Are you sure?",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "She said she loves all of the judges.",
+							"response" : "Wait. what? Why would she say that?",
+							"soundID" : "",
+							"correctAnswer" : false
+
+						},
+						{
+							"choiceText" : "She said her name.",
+							"response" : "Oh really? What's her name?",
+							"soundID" : "",
+							"correctAnswer" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 8
+				},
+				{
+					"taskID" : 30,
+					"task" : "What's her name",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "Her name is  Míng zìjiào。",
+							"response" : "Are you sure? That doesn't sound like a name to me",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "Her name is  Chén zǐtóng。",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true
+
+						},
+						{
+							"choiceText" : "Her name is Lǎo shīhǎo",
+							"response" : "Doesn't that mean hello teachers? That can't be right.",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "Her name is Wǒ demíng",
+							"response" : "Are you sure? That doesn't sound like a name to me.",
+							"soundID" : "",
+							"correctAnswer" : false
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [40],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 9
+				},
+				{
+					"taskID" : 40,
+					"task" : "What's her age",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "She's 27 years old.",
+							"response" : "Wouldn't 27 mean she would have said qī?",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "She's 29 years old.",
+							"response" : "Wouldn't 29 mean she would have said jiǔ?",
+							"soundID" : "",
+							"correctAnswer" : false
+
+						},
+						{
+							"choiceText" : "She's 24 years old.",
+							"response" : "Wouldn't 24 mean she would have said sì?",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "She's 25 years old",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 12
+				},
+				{
+					"taskID" : 50,
+					"task" : "What's his Chinese name?",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "He's called Lǐ Ān",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true
+						},
+						{
+							"choiceText" : "He's called Lǐ Ēn",
+							"response" : "That doesn't quite sound like what he said.",
+							"soundID" : "",
+							"correctAnswer" : false
+
+						},
+						{
+							"choiceText" : "He's called Xī Ān",
+							"response" : "That doesn't sound correct.",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "He's called Xī Ēn",
+							"response" : "That doesn't quite sound like what he said.",
+							"soundID" : "",
+							"correctAnswer" : false
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [60],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 17
+				},
+				{
+					"taskID" : 60,
+					"task" : "What did the judge ask",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "He asked him for his nationality.",
+							"response" : "I don't think that seems right.",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "He asked him to say his name again.",
+							"response" : "Are you sure?",
+							"soundID" : "",
+							"correctAnswer" : false
+
+						},
+						{
+							"choiceText" : "He asked how long he has been singing.",
+							"response" : "Really?",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "He asked for his age.",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [70],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 20
+				},
+				{
+					"taskID" : 70,
+					"task" : "How old is he?",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "He's 27",
+							"response" : "I don't think that seems right.",
+							"soundID" : "I think he said yī, not qī。",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "He's 21.",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true
+
+						},
+						{
+							"choiceText" : "He's 37.",
+							"response" : "Really? That seems too old for him.",
+							"soundID" : "",
+							"correctAnswer" : false
+						},
+						{
+							"choiceText" : "He's 31.",
+							"response" : "He doesn't look 31...",
+							"soundID" : "",
+							"correctAnswer" : false
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [100],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex": 23
+				},
+				{
+					"taskID" : 100,
+					"task" : "Saying bye",
+					"taskType" : "multipleChoice",
+					"possibleAnswers" : 
+					[
+						{
+							"choiceText" : "Bye!",
+							"response" : "",
+							"soundID" : "",
+							"correctAnswer" : true,
+							"coins" : 0
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/maxwell/maxDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}
