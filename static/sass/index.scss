@@ -1204,6 +1204,7 @@ $themeYellow: #FDD870;
 		text-align: center;
 		.flashCardCharacters {
 			margin-bottom: 0px;
+			margin-top: 5px;
 			padding: 5px;
 			display: inline-block;
 		}
@@ -1257,6 +1258,9 @@ $themeYellow: #FDD870;
 		    	font-size: 5em;
 		    	width: 100%;
 		    	height: 100%;
+		    }
+		    &:hover {
+		    	background: $themeLightBlue;
 		    }
 		}
 		.micWrap {
