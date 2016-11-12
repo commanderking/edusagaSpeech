@@ -70,6 +70,19 @@ Shared elements
 	color: $darkBlue;
 }
 
+.headerImageTextSlanted {
+	position: absolute;
+	width: 150px;
+	height: auto;
+	top: 20px;
+	left: -10px;
+    -webkit-transform: rotate(-15deg); /* Safari and Chrome */
+    -moz-transform: rotate(-15deg);   /* Firefox */
+    -ms-transform: rotate(-15deg);   /* IE 9 */
+    -o-transform: rotate(-15deg);   /* Opera */
+    transform: rotate(-15deg);
+}
+
 button {
 	outline: none;
 }
@@ -841,18 +854,6 @@ CSS Related to Task List
 	.resultsHeader {
 		height: 18%;
 		max-height: 80px;
-		.resultsImage {
-			position: absolute;
-			width: 150px;
-			height: auto;
-			top: 20px;
-			left: -10px;
-		    -webkit-transform: rotate(-15deg); /* Safari and Chrome */
-		    -moz-transform: rotate(-15deg);   /* Firefox */
-		    -ms-transform: rotate(-15deg);   /* IE 9 */
-		    -o-transform: rotate(-15deg);   /* Opera */
-		    transform: rotate(-15deg);
-		}
 		.resultsCharProfile {
 			position: absolute;
 			top: 10px;
@@ -1100,67 +1101,103 @@ $themeYellow: #FDD870;
 }
 
 
+
+.practiceContainer {
+	position: absolute;
+	width: 80%;
+	top: 10%;
+	height: 90%;
+	left: 10%;
+	background-color: $headerBlue;
+	z-index: 100;
+	border-radius: 25px 25px 0px 0px;
+}
 .practiceHeader {
+	border-radius: 25px 25px 0px 0px;
 	width: 100%;
-	height: 50px;
+	height: 10%;
+	min-height: 75px;
 	background-color: $headerBlue;
 	padding: 0px;
 	margin: 0px;
 	font-size: 35px;
 	line-height: 50px;
-	.titleDiv {
-		height: 100%;
-		width: 100%;
-		line-height: 50px;
-		.title {
-			margin-left: 2%;
-			margin-right: 1%;
-			display: inline-block;
+	text-align: center;
+
+	.description {
+		display: inline-block;
+		font-size: 20px;
+		text-align: center;
+		font-style: italic;
+		color: white;
+	}
+	.glyphiconWrapper {
+		position: absolute;
+		right: 50px;
+		top: -25px;
+		border-radius: 75px;
+		width: 100px;
+		height: 100px;
+		padding: 7px;
+		text-align: center;
+		background-color: $headerBlue;
+		.glyphicon {
+			font-size: 80px;
+			display: inline;
 			vertical-align: middle;
-			color: white;
 		}
-		.type {
-			display: inline-block;
-			vertical-align: middle;
-			color: $themeYellow;
-		}
+
+	}
+	.customSlant {
+	    -webkit-transform: rotate(0deg); /* Safari and Chrome */
+	    -moz-transform: rotate(0deg);   /* Firefox */
+	    -ms-transform: rotate(0deg);   /* IE 9 */
+	    -o-transform: rotate(0deg);   /* Opera */
+	    transform: rotate(0deg);
+	    width: 200px;
+	    left:-15px;
+	    top: -10px;
+	    z-index: 10;
 	}
 }
 
+.practiceInner {
+	background-color: white;
+	border-radius: 10px;
+	height: 75%;
+	width: 90%;
+	margin: auto;
+	position: relative;
+
+}
+
 .flashCardWrapper {
-	width: 60%;
-	border: 1px solid black;
+	width: 80%;
 	margin: auto;
 	height: 50%;
 	min-height: 240px;
-	margin-top: 20px;
 	padding: 1%;
 	position: relative;
 
-	.flashCardHeader {
-		.practiceAudioButton {
-			width: 25px;
-			height: 25px;
-			position: absolute;
-			top: 10px;
-			left: 10px;
-			border-radius: 25px;
-			border: 1px solid $headerBlue;
-			color: $headerBlue;
-			background-color: white;
-			&:hover {
-				background-color: $headerBlue;
-				color: white;
-			}
-		}
-	}
 	.pinyinCheckBox {
 		position: absolute;
 		right: 5px;
 		top: 0px;
 	}
-	h3 {
+	h1 {
 		text-align: center;
+		font-weight: bold;
+		font-size: 35px;
+
+		@include tablet {
+			font-size:30px;
+		}
+		@include mobile {
+			font-size: 25px;
+		}
+		@include mobilePortrait {
+			font-size: 20px;
+		}
 	}
 
 	.flashCardComparison {
@@ -1180,38 +1217,6 @@ $themeYellow: #FDD870;
 			word-spacing: 5px;
 			margin: 0px;
 		}
-	}
-
-	.arrow {
-		text-align: center;
-		width: 50px;
-		line-height: 50px;
-		position: absolute;
-		span {
-			background-color: $themeYellow;
-			color: white;
-			padding-top : 5px;
-			padding-bottom: 5px;
-			padding-left: 5px;
-			border-radius: 5px;
-			display: inline-block;
-			font-size:25px;
-			padding: 10px;
-			&:hover {
-				background-color: $themeLightBlue;
-				color: $themeYellow;
-				cursor: pointer;
-			}
-		}
-
-	}
-	.leftArrow {
-		left: -50px;
-		top: 95px;
-	}
-	.rightArrow {
-		right: -50px;
-		top: 95px;
 	}
 	.imageWrapper {
 		width: 66%;
@@ -1237,14 +1242,13 @@ $themeYellow: #FDD870;
 	bottom: 5px;
 	.micDiv {
 		text-align: center;
-		width: 200px;
 		height: auto;
 		text-align: center;
 		margin: auto;
+		margin-bottom: 10px;
+		display: inline-block;
 		#mic {
 			margin: auto;
-		    min-width: 150px;
-		    min-height: 150px;
 		    border-radius: 50%;
 		    background: $headerBlue;
 		    z-index: 1;
@@ -1256,26 +1260,83 @@ $themeYellow: #FDD870;
 		    }
 		}
 		.micWrap {
-			width: 10vw;
-			height: 10vw;
+			width: 100px;
+			height: 100px;
 			padding: 3%;
 		}
 		.micActive-true {
-			border: 7px solid red;
+			border: 3px solid red;
 			span {
 				color: red
 			}
 		}
 		.micActive-false {
-		    border: 10px solid $themeLightBlue;
+		    border: 3px solid $themeLightBlue;
 		    span {
 		    	color: $themeYellow;
 		    }
 		}
 	}
 	.btn-practice-done {
-		position: absolute;
-		right: 5px;
-		bottom: 0px;
+		margin: auto;
+		display: block;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		min-width: 100px;
+		background-color: $headerBlue;
+
 	}
+}
+
+.practiceButtonsWrapper {
+	text-align: center;
+}
+
+.btn-round-small {
+	width: 50px;
+	height: 50px;
+	top: 10px;
+	left: 10px;
+	border-radius: 25px;
+	border: 1px solid $headerBlue;
+	color: $headerBlue;
+	background-color: white;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	margin-right: 10px;
+	&:hover {
+		background-color: $headerBlue;
+		color: white;
+	}
+	.glyphicon {
+		font-size: 30px;
+	}	
+}
+
+
+.arrow {
+	text-align: center;
+	width: 50px;
+	line-height: 50px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	margin-right: 10px;
+	span {
+		color: $headerBlue;
+		padding-top : 5px;
+		padding-bottom: 5px;
+		padding-left: 5px;
+		border-radius: 5px;
+		display: inline-block;
+		font-size:25px;
+		padding: 10px;
+		&:hover {
+			background-color: $headerBlue;
+			color: $themeYellow;
+			cursor: pointer;
+		}
+	}
+
 }

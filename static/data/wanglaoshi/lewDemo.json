@@ -1,0 +1,270 @@
+{
+	"activityID": "L1",
+	"activityName": "Answering questions about your trip to Toronto",
+	"tags" : ["activities", "past"], 
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/david/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can answer questions about what I am doing and what I did."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Welcome back from your trip to Toronto! Your friend David has picked you up at the airport and wants to hear all about what you did!",
+			"next" : "end"
+		}
+	],
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Shanghai Airport",
+				"nameChinese" : "上海机场", 
+				"bg" : "bg/shanghaiAirport.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png",
+				"silhouette" : "characters/david/davidSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "david/feichanghao.ogg"
+				},
+				{
+					"soundID" : "toronto-hi-longtime-howis",
+					"soundPath" : "david/toronto-hi-longtime-howis.ogg"
+				},
+				{
+					"soundID" : "poutine-really-poutineQuestion",
+					"soundPath" : "david/poutine-really-poutineQuestion.ogg"
+				},
+				{
+					"soundID" : "poutine-great-poutineQuestion",
+					"soundPath" : "david/poutine-great-poutineQuestion.ogg"
+				},
+				{
+					"soundID" : "toronto-good-CNTower",
+					"soundPath" : "david/toronto-good-CNTower.ogg"
+				},
+				{
+					"soundID" : "toronto-really-poutineGood-CNTower",
+					"soundPath" : "david/toronto-really-poutineGood-CNTower.ogg"
+				},
+				{
+					"soundID" : "toronto-good-raptorsBasketball",
+					"soundPath" : "david/toronto-good-raptorsBasketball.ogg"
+				},
+				{
+					"soundID" : "toronto-pity-raptorsBasketball",
+					"soundPath" : "david/toronto-pity-raptorsBasketball.ogg"
+				},
+				{
+					"soundID" : "toronto-good-planeMovies",
+					"soundPath" : "david/toronto-good-planeMovies.ogg"
+				},
+				{
+					"soundID" : "toronto-pity-planeMovies",
+					"soundPath" : "david/toronto-pity-planeMovies.ogg"
+				},
+				{
+					"soundID" : "toronto-really-goHome",
+					"soundPath" : "david/toronto-really-goHome.ogg"
+				},
+				{
+					"soundID" : "toronto-good-goHome",
+					"soundPath" : "david/toronto-good-goHome.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet him",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好", "你早", "早安", "怎么样", "你好吗"],
+							"response" : "嘿! 好久不见! Toronto 怎么样? ",
+							"soundID" : "toronto-hi-longtime-howis"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [2],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 2,
+					"task" : "Answer his question about Toronto",
+					"resultsTaskText" : "Answer question about how was Toronto",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["Toronto 很好啊", "很好", "非常好", "好玩", "不错", "挺好", "不可思议"],
+							"response": "太好了! 你在 Toronto 吃 poutine 了没有?",
+							"soundID" : "poutine-great-poutineQuestion"
+						},
+						{
+							"answers": 	["还可以", "马马虎虎"],
+							"response": "是吗? 你在 Toronto 吃 poutine 了没有?",
+							"soundID" : "poutine-really-poutineQuestion"
+						},
+						{
+							"answers": 	["不怎么样", "不好", "不好玩", "没意思"],
+							"response": "是吗? 你在 Toronto 吃 poutine 了没有？",
+							"soundID" : "poutine-really-poutineQuestion"							
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [3],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 3,
+					"task" : "Answer his question about poutine.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我吃了", "吃了", "有吃", "我有"],
+							"response": "哦! 不错! 我挺喜欢吃poutine 的。那你去了 CN Tower 吗？",
+							"soundID" : "toronto-good-CNTower"
+						},
+						{
+							"answers": 	["没吃", "没有吃", "没有"],
+							"response": "真的吗? 听说他们的 poutine 挺好吃的。那你去了 CN Tower 吗？",
+							"soundID" : "toronto-really-poutineGood-CNTower"
+						}
+					],
+					"exceptions" : ["没吃了", "不吃了", "有没有"],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [4],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 4,
+					"task" : "Answer his question about CN Tower.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我去了", "我有去", "去了"],
+							"response": "很好! 那你看了 Toronto Raptors 打篮球吗? ",
+							"soundID" : "toronto-good-raptorsBasketball"
+						},
+						{
+							"answers": 	["没去", "没有去", "没有"],
+							"response": "真可惜。那你看了 Toronto Raptors 打篮球吗? ",
+							"soundID" : "toronto-pity-raptorsBasketball"
+						}
+					],
+					"exceptions" : ["有没有", "没去了"],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [5],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 5,
+					"task" : "Answer his question about the Toronto Raptors.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我看了他们打篮球", "看了", "我有看"],
+							"response": "啊, 很好。 在飞机上你看了电影吗?",
+							"soundID" : "toronto-good-planeMovies"
+						},
+						{
+							"answers": 	["我没看他们打篮球", "没看", "没有看"],
+							"response": "啊，真可惜。 在飞机上你看了电影吗?",
+							"soundID" : "toronto-pity-planeMovies"
+						}
+					],
+					"exceptions" : ["有没有", "没看了"],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [6],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 6,
+					"task" : "Answer his question about 看电影",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我看了电影", "看了电影", "我有看", "看了" ],
+							"response": "真好! 来， 你一定很累了。 我们快回家吧。",
+							"soundID" : "toronto-good-goHome"
+						},
+						{
+							"answers": 	["电影很好看"],
+							"response": "真好! 来， 你一定很累了。 我们快回家吧。",
+							"soundID" : "toronto-good-goHome"
+						},
+						{
+							"answers": 	["我没有看电影", "没有看", "没看"],
+							"response": "真的吗? 来， 你一定很累了。 我们快回家吧。",
+							"soundID" : "toronto-really-goHome"
+						}
+					],
+					"exceptions" : ["有没有", "没看了"],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}

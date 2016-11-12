@@ -6,3 +6,5 @@ eventslog/
 *.pyc
 .DS_Store
 *.js.map
+geckodriver.log
+*.log

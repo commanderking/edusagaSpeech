@@ -1,7 +1,7 @@
 {
 	"activityID": "cafeScheduling",
 	"activityName": "Scheduling everyone to go to the cafe",
-	"tags" : ["date", "time"],
+	"tags" : ["greetings", "introductions"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidUncertain.png",

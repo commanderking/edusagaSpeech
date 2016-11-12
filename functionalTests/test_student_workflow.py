@@ -8,7 +8,7 @@ from flask_testing import LiveServerTestCase
 class SubscribeTest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.PhantomJS()
 
 	def switch_to_new_window(self, text_in_title):
 		retries = 60
@@ -20,12 +20,13 @@ class SubscribeTest(unittest.TestCase):
 			retries -= 1
 			time.sleep(0.5)
 		self.fail('could not find window')
-
+    '''
     def test_demo_pages_propery_load(self):
         driver = self.driver
         driver.get("http://localhost:3000/public/home")
-        driver.implicitly_wait(3)
-        header_text = driver.find_element_by_tag_name("h1").text
+        driver.implicitly_wait(5)
+        header_text = driver.find_element_by_tag_name("h2").text
+        print header_text
         self.assertIn("Episodes Available", header_text)
 
         # Check one teacher page
@@ -37,9 +38,8 @@ class SubscribeTest(unittest.TestCase):
 
         scenario_text = driver.find_element_by_class_name("scenarioText")
         self.assertIn("Welcome back from your trip to Toronto! Your friend David has picked you up at the airport and wants to hear all about what you did!", scenario_text)
-
-
-    def search_in_python_org(self):
+    '''
+    def test_in_python_org(self):
         driver = self.driver
         driver.get("http://localhost:3000")
         self.assertIn("EduSaga", driver.title)
@@ -47,17 +47,14 @@ class SubscribeTest(unittest.TestCase):
         elem.send_keys("this.would.never.be.an.email.would.it.at.games@whatever.com")
         elem.send_keys(Keys.RETURN)
       	driver.implicitly_wait(3)
-      	self.switch_to_new_window('EduSaga Subscription List')
-
+        driver.switch_to_window(driver.window_handles[-1])
         header = driver.find_element_by_class_name('masthead')
 
-        print header
-
-        assertIn("EduSaga Subscription List", header)
-
+        print(header)
+        self.assertIn("EduSaga Subscription List", header)
 
     def tearDown(self):
-        self.driver.close()
+        self.driver.quit()
 
 if __name__ == "__main__":
     unittest.main()

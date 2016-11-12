@@ -1,0 +1,604 @@
+{
+	"activityID": "F1",
+	"activityName": "Learning about Chen Yang's Family",
+	"tags" : ["family", "nationality", "careers"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/chenguang/chengDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives": 
+	[
+		"I can ask for someone's nationality", 
+		"I can ask about someone's family.",
+		"I can ask about other people's professions."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Try to get to know Chen Yang a little better by learning about her family.",
+			"next" : "end"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Ask for someone's nationality",
+				"answer" : "你是哪国人",
+				"pinyin" : "nǐ shì nǎ guórén",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say Chinese / Chinese person",
+				"answer" : "中国人",
+				"pinyin" : "zhōngguó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say American / American Person",
+				"answer" : "美国人",
+				"pinyin" : "měiguó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say Japanese / Japanese Person",
+				"answer" : "日本人",
+				"pinyin" : "rìběn rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for someone's surname/last name (polite)",
+				"answer" : "加拿大人",
+				"pinyin" : "jiānádà rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for the nationality of someone's mom",
+				"answer" : "你的妈妈是哪国人",
+				"pinyin" : "nǐ de māmā shì nǎ guó rén",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask if someoone's dad is Chinese (method 1)",
+				"answer" : "你的爸爸是中国人吗",
+				"pinyin" : "nǐ de bàba shì zhōngguó rén ma",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask if someoone's dad is Chinese (method 2)",
+				"answer" : "你的爸爸是不是中国人",
+				"pinyin" : "nǐ de bàba shì bùshì zhōngguó rén",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "Chen Yang",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "University Library",
+				"nameChinese" : "大学图书馆", 
+				"bg" : "bg/jiaoTongLibrary.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/chenguang/chengDefault.png",
+				"uncertain" : "characters/chenguang/chengGoodJob.png",
+				"laughing" : "characters/chenguang/chengGreatJob.png",
+				"laughing2" : "characters/chenguang/chengSpeaking.png",
+				"smiling" : "characters/chenguang/chengGoodJob.png",
+				"confused" : "characters/chenguang/chengConfused.png",
+				"wistful" : "characters/chenguang/chengWistful.png",
+				"silhouette" : "characters/chenguang/chengSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{ 
+					"soundID" : "family-take-a-guess",
+					"soundPath" : "chenyang/family-take-a-guess.ogg"
+				}, 
+				{ 
+					"soundID" : "family-nope-try-again",
+					"soundPath" : "chenyang/family-nope-try-again.ogg"
+				}, 
+				{ 
+					"soundID" : "family-guessed-right",
+					"soundPath" : "chenyang/family-guessed-right.ogg"
+				},
+				{ 
+					"soundID" : "nationality-guess-right-dad-is-chinese-mom-not",
+					"soundPath" : "chenyang/nationality-guess-right-dad-is-chinese-mom-not.ogg"
+				},
+				{ 
+					"soundID" : "family-im-chinese",
+					"soundPath" : "chenyang/family-im-chinese.ogg"
+				}, 
+				{ 
+					"soundID" : "family-dad-chinese",
+					"soundPath" : "chenyang/family-dad-chinese.ogg"
+				}, 
+				{ 
+					"soundID" : "family-dad-chinese-mom-not",
+					"soundPath" : "chenyang/family-dad-chinese-mom-not.ogg"
+				},
+				{ 
+					"soundID" : "family-wont-tell-you-guess",
+					"soundPath" : "chenyang/family-wont-tell-you-guess.ogg"
+				}, 
+				{ 
+					"soundID" : "family-nope-guess-again",
+					"soundPath" : "chenyang/family-nope-guess-again.ogg"
+				}, 
+				{ 
+					"soundID" : "family-guess-right-canadian",
+					"soundPath" : "chenyang/family-guess-right-canadian.ogg"
+				},
+				{ 
+					"soundID" : "family-no-guess-no-tell",
+					"soundPath" : "chenyang/family-no-guess-no-tell.ogg"
+				}, 
+				{ 
+					"soundID" : "family-mom-doctor",
+					"soundPath" : "chenyang/family-mom-doctor.ogg"
+				},
+				{ 
+					"soundID" : "family-dad-teacher-bzz-got-to-go",
+					"soundPath" : "chenyang/family-dad-teacher-bzz-got-to-go.ogg"
+				},
+				{ 
+					"soundID" : "en",
+					"soundPath" : "chenyang/en.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "chenyang/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "chenyang/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "chenyang/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Ask her for her nationality.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你是哪国人", "你是哪里人"],
+							"response" : "猜一猜吧!  Take a guess!",
+							"soundID" : "family-take-a-guess"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [20, 21, 22, 23],
+					"attemptedAnswers" : []
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Ask if she is American",
+					"taskLink" : "choiceChenYangNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你是不是美国人", "你是美国人吗"],
+							"response": "不是! 再猜吧!",
+							"soundID": "family-nope-guess-again"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 21,
+					"task" : "Ask if she's Chinese",
+					"taskType" : "choice",
+					"taskLink" : "choiceChenYangNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你是不是中国人", "你是中国人吗"],
+							"response": "猜对了! 我是中国人。 我爸爸也是中国人，可是我妈妈不是中国人。",
+							"soundID": "nationality-guess-right-dad-is-chinese-mom-not"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 22,
+					"task" : "Ask if she's Japanese",
+					"taskLink" : "choiceChenYangNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你是不是日本人", "你是日本人吗"],
+							"response": "不是! 再猜吧!",
+							"soundID": "family-nope-guess-again"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 23,
+					"task" : "Ask if she's Canadian",
+					"taskLink" : "choiceChenYangNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你是不是加拿大人", "你是加拿大人吗"],
+							"response": "不是! 再猜吧!",
+							"soundID": "family-nope-guess-again"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask for her mom's nationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你妈妈是哪国人", "你妈妈是哪里人"],
+							"response": "我不告诉你! 猜一猜吧!",
+							"soundID": "family-wont-tell-you-guess"
+						},
+						{
+							"answers": [
+								["你的妈妈", "你的吗", "你妈", "你妈妈"],
+								["是哪国人", "是哪里人", "来自哪里", "从哪里来的"]
+							],
+							"response": "我不告诉你! 猜一猜吧!",
+							"soundID": "family-wont-tell-you-guess"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [40, 42, 44, 46],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 40,
+					"task" : "Ask if she's American",
+					"taskLink" : "choiceChenYangMomNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你妈妈是不是美国人"],
+							"response": "不是。再猜吧!",
+							"soundID": "family-nope-guess-again"
+						},
+						{
+							"answers": [
+								["他", "你的妈妈", "你妈妈", "你妈"],
+								["是不是"],
+								["美国人"]
+							],
+							"response": "不是。再猜吧!",
+							"soundID": "family-nope-guess-again",
+							"exceptions": ["吗"]
+						},
+						{
+							"answers": [
+								["他", "你的妈妈", "你妈妈", "你妈"],
+								["是"],
+								["美国人"],
+								["吗"]
+							],
+							"response": "不是。再猜吧!",
+							"soundID": "family-nope-guess-again"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [41],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 41,
+					"task" : "Ask if she's Canadian",
+					"taskType" : "choice",
+					"taskLink" : "choiceChenYangMomNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你妈妈是不是加拿大人"],
+							"response": "猜对了! 他是加拿大人! ",
+							"soundID": "family-guess-right-canadian"
+						},
+						{
+							"answers": [
+								["他", "你的妈妈", "你妈妈", "你妈"],
+								["是不是"],
+								["加拿大人"]
+							],
+							"response": "猜对了! 他是加拿大人!",
+							"soundID": "family-guess-right-canadian",
+							"exceptions": ["吗"]
+						},
+						{
+							"answers": [
+								["他", "你的妈妈", "你妈妈", "你妈"],
+								["是"],
+								["加拿大人"],
+								["吗"]
+							],
+							"response": "猜对了! 他是加拿大人!",
+							"soundID": "family-guess-right-canadian"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 42,
+					"task" : "Ask if she's Japanese",
+					"taskLink" : "choiceChenYangMomNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你妈妈是不是日本人"],
+							"response": "不是。再猜吧!",
+							"soundID": "family-nope-guess-again"
+						},
+						{
+							"answers": [
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
+								["是不是"],
+								["日本人"]
+							],
+							"response": "不是。再猜吧!",
+							"soundID": "family-nope-guess-again",
+							"exceptions": ["吗"]
+						},
+						{
+							"answers": [
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
+								["是"],
+								["日本人"],
+								["吗"]
+							],
+							"response": "不是。再猜吧!",
+							"soundID": "family-nope-guess-again"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 44,
+					"task" : "Ask if she's British",
+					"taskLink" : "choiceChenYangMomNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你妈妈是不是英国人"],
+							"response": "不是！再猜吧!",
+							"soundID": "family-nope-guess-again"
+						},
+						{
+							"answers": [
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
+								["是不是"],
+								["英国人"]
+							],
+							"response": "不是！再猜吧!",
+							"soundID": "family-nope-guess-again",
+							"exceptions": ["吗"]
+						},
+						{
+							"answers": [
+								["他","她", "你的妈妈", "你妈妈", "你妈"],
+								["是"],
+								["英国人"],
+								["吗"]
+							],
+							"response": "不是！再猜吧!",
+							"soundID": "family-nope-guess-again"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [45],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 45,
+					"task" : "Ask if she's French",
+					"taskLink" : "choiceChenYangMomNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你妈妈是不是法国人"],
+							"response": "不是！再猜吧!",
+							"soundID": "family-nope-guess-again"
+						},
+						{
+							"answers": [
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
+								["是不是"],
+								["法国人"]
+							],
+							"response": "不是！再猜吧!",
+							"soundID": "family-nope-guess-again",
+							"exceptions": ["吗"]
+						},
+						{
+							"answers": [
+								["他", "她", "你的妈妈", "你妈妈", "你妈"],
+								["是"],
+								["法国人"],
+								["吗"]
+							],
+							"response": "不是！再猜吧!",
+							"soundID": "family-nope-guess-again"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 46,
+					"task" : "Say you won't guess (我不猜 - Wǒ bù cāi)",
+					"taskLink" : "choiceChenYangMomNationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["我不猜"],
+							"response": "不猜就不告诉你!",
+							"soundID": "family-no-guess-no-tell"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 50,
+					"task" : "Ask what her mom does for work",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你的妈妈做什么工作"],
+							"response": "他是医生。",
+							"soundID": "family-mom-doctor"
+						},
+						{
+							"answers": [
+								["你妈妈", "你的妈妈", "他", "她"],
+								["做什么"],
+								["工作", "事"]
+							],
+							"response": "他是医生。",
+							"soundID": "family-mom-doctor"
+						},
+						{
+							"answers": [
+								["你妈妈", "你的妈妈", "他", "她"],
+								["从事"],
+								["什么", "哪个", "哪一个"],
+								["行业"]
+							],
+							"response": "他是医生。",
+							"soundID": "family-mom-doctor"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengDefault.png",
+					"tasksToQueue" : [51],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 51,
+					"task" : "Ask what her dad does for work",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你的爸爸做什么工作"],
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸来接我了. 明天见! ",
+							"soundID": "family-dad-teacher-bzz-got-to-go"
+						},
+						{
+							"answers": [
+								["你爸爸", "你的爸爸", "他"],
+								["做什么"],
+								["工作", "事"]
+							],
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸来接我了. 明天见!",
+							"soundID": "family-dad-teacher-bzz-got-to-go"
+						},
+						{
+							"answers": [
+								["你爸爸", "你的爸爸", "他"],
+								["从事"],
+								["什么", "哪个", "哪一个"],
+								["行业"]
+							],
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸来接我了. 明天见!",
+							"soundID": "family-dad-teacher-bzz-got-to-go"
+						},
+						{
+							"answers": ["你爸呢", "你爸爸呢"],
+							"response": "我的爸爸是个老师。。。 啊! 不好意思, 我爸来接我了. 明天见!",
+							"soundID": "family-dad-teacher-bzz-got-to-go"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengDefault.png",
+					"tasksToQueue" : [60],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 60,
+					"task" : "Respond appropriately.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["再见", "明天见"],
+							"response": "嗯",
+							"soundID": "en"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				}
+			],
+			"completedTasks" : []
+		}
+}

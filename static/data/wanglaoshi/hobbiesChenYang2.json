@@ -1,0 +1,779 @@
+{
+	"activityID": "CY1",
+	"activityName": "Asking about Chen Yang's Hobbies (Part 2)",
+	"tags" : ["hobbies", "date", "time"],
+	"sequence" : 210,
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/chenguang/chengDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can invite and make plans with someone to do something or go somewhere."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Now that you've talked to David about what Chen Yang likes (you do remember, right?), let's see if we can invite her to do one of those activities on the weekend.",
+			"next" : "end"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Invite someone to go shopping",
+				"answer" : "我们去逛街，好吗？",
+				"pinyin" : "wǒmen qù guàngjiē, hǎo ma?",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'badminton'",
+				"answer" : "打羽毛球",
+				"pinyin" : "dǎ yǔmáoqiú",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'go to eat'",
+				"answer" : "去吃饭",
+				"pinyin" : "qù chīfàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'play mahjong'",
+				"answer" : "打麻将",
+				"pinyin" : "dǎ májiàng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'saturday'",
+				"answer" : "星期六",
+				"pinyin" : "xīngqí liù",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'Sunday'",
+				"answer" : "星期天",
+				"pinyin" : "xīngqí tiān",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'Monday'",
+				"answer" : "星期一",
+				"pinyin" : "xīngqí yī",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '3:30'",
+				"answer" : "三点半",
+				"pinyin" : "sān diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '5:30'",
+				"answer" : "五点半",
+				"pinyin" : "wǔ diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '10:30'",
+				"answer" : "十点半",
+				"pinyin" : "shí diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'morning'",
+				"answer" : "早上",
+				"pinyin" : "zǎoshang",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'night'",
+				"answer" : "晚上",
+				"pinyin" : "wǎnshàng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say '5:30 in the morning'",
+				"answer" : "早上五点半",
+				"pinyin" : "zǎoshang wǔ diǎn bàn",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "Chen Yang",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "University Library",
+				"nameChinese" : "大学图书馆", 
+				"bg" : "bg/jiaoTongLibrary.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/chenguang/chengDefault.png",
+				"uncertain" : "characters/chenguang/chengGoodJob.png",
+				"laughing" : "characters/chenguang/chengGreatJob.png",
+				"laughing2" : "characters/chenguang/chengSpeaking.png",
+				"smiling" : "characters/chenguang/chengGoodJob.png",
+				"confused" : "characters/chenguang/chengConfused.png",
+				"wistful" : "characters/chenguang/chengWistful.png",
+				"silhouette" : "characters/chenguang/chengSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "chenyang/hi.ogg"
+				},
+				{
+					"soundID" : "haikeyi",
+					"soundPath" : "chenyang/haikeyi.ogg"
+				},
+				{
+					"soundID" : "hobbies-dislike-shopping",
+					"soundPath" : "chenyang/hobbies-dislike-shopping.ogg"
+				},
+				{
+					"soundID" : "hobbies-badminton-when",
+					"soundPath" : "chenyang/hobbies-badminton-when.ogg"
+				},
+				{
+					"soundID" : "hobbies-sorry-eating-with-family",
+					"soundPath" : "chenyang/hobbies-sorry-eating-with-family.ogg"
+				},
+				{
+					"soundID" : "hobbies-like-mahjong-not-this-weekend",
+					"soundPath" : "chenyang/hobbies-like-mahjong-not-this-weekend.ogg"
+				},
+				{
+					"soundID" : "hobbies-saturday-what-time",
+					"soundPath" : "chenyang/hobbies-saturday-what-time.ogg"
+				},
+				{
+					"soundID" : "hobbies-sunday-what-time",
+					"soundPath" : "chenyang/hobbies-sunday-what-time.ogg"
+				},
+				{
+					"soundID" : "hobbies-monday-you-said-weekend",
+					"soundPath" : "chenyang/hobbies-monday-you-said-weekend.ogg"
+				},
+				{
+					"soundID" : "hobbies-three-thirty-ok",
+					"soundPath" : "chenyang/hobbies-three-thirty-ok.ogg"
+				},
+				{
+					"soundID" : "hobbies-five-thirty-ok",
+					"soundPath" : "chenyang/hobbies-five-thirty-ok.ogg"
+				},
+				{
+					"soundID" : "hobbies-ten-thirty-at-night-or-morning",
+					"soundPath" : "chenyang/hobbies-ten-thirty-at-night-or-morning.ogg"
+				},
+				{
+					"soundID" : "hobbies-ok-early-to-rise",
+					"soundPath" : "chenyang/hobbies-ok-early-to-rise.ogg"
+				},
+				{
+					"soundID" : "hobbies-ten-thirty-too-late",
+					"soundPath" : "chenyang/hobbies-ten-thirty-too-late.ogg"
+				},
+				{
+					"soundID" : "hobbies-see-you-three-thirty",
+					"soundPath" : "chenyang/hobbies-see-you-three-thirty.ogg"
+				},
+				{
+					"soundID" : "hobbies-see-you-five-thirty",
+					"soundPath" : "chenyang/hobbies-see-you-five-thirty.ogg"
+				},
+				{
+					"soundID" : "zaijian",
+					"soundPath" : "chenyang/zaijian(sad).ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "chenyang/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "chenyang/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "chenyang/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet her.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好",
+							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["怎么样", "你好吗"],
+							"response" : "还可以",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [20,21,22,23],
+					"attemptedAnswers" : []
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Invite her to go shopping this weekend",
+					"taskLink" :"activity",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我们周末去逛街, 怎么样"],
+							"response" : "不好意思。。。我不是很喜欢逛街。",
+							"soundID" : "hobbies-dislike-shopping"
+						},
+						{
+							"answers" : [
+								["我们周末", "周末我们", "这周末"],
+								["逛街", "买衣服", "买东西"],
+								["怎么样", "好吗"]
+							],
+							"response" : "不好意思。。。我不是很喜欢逛街。",
+							"soundID" : "hobbies-dislike-shopping"
+						},
+						{
+							"answers" : [
+								["我周末", "周末我", "这周末"],
+								["请你", "跟你"],
+								["逛街", "买衣服", "买东西"],
+								["怎么样", "好吗"]
+							],
+							"response" : "不好意思。。。我不是很喜欢逛街。",
+							"soundID" : "hobbies-dislike-shopping"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你", "这周末"],
+								["要不要", "想不想"],
+								["逛街", "买衣服", "买东西"]
+							],
+							"response" : "不好意思。。。我不是很喜欢逛街。",
+							"soundID" : "hobbies-dislike-shopping"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你", "这周末"],
+								["要", "想"],
+								["逛街", "买衣服", "买东西"]
+							],
+							"response" : "不好意思。。。我不是很喜欢逛街。",
+							"soundID" : "hobbies-dislike-shopping"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengBored.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+					{
+					"taskID" : 21,
+					"task" : "Invite her to play badminton this weekend",
+					"taskType" : "choice",
+					"taskLink" :"activity",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我们周末去打羽毛球, 怎么样"],
+							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+							"soundID" : "hobbies-badminton-when"
+						},
+						{
+							"answers" : [
+								["我们周末", "周末我们", "我们这周末"],
+								["打羽毛球", "玩羽毛球"],
+								["怎么样", "好吗"]
+							],
+							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+							"soundID" : "hobbies-badminton-when"
+						},
+						{
+							"answers" : [
+								["我周末", "周末我", "我们这周末"],
+								["请你", "跟你"],
+								["打羽毛球", "玩羽毛球"],
+								["怎么样", "好吗"]
+							],
+							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+							"soundID" : "hobbies-badminton-when"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你", "这周末"],
+								["要不要", "想不想"],
+								["打羽毛球", "玩羽毛球"]
+							],
+							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+							"soundID" : "hobbies-badminton-when"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你", "这周末"],
+								["要", "想"],
+								["打羽毛球", "玩羽毛球"]
+							],
+							"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+							"soundID" : "hobbies-badminton-when"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [31, 32, 33],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 22,
+					"task" : "Invite her to go eat this weekend",
+					"taskLink" :"activity",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我周末请你吃饭, 怎么样"],
+							"response" : "不好意思, 这周末我要跟我爸妈吃饭。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我们周末", "周末我们", "我们这周末"],
+								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"],
+								["怎么样", "好吗"]
+							],
+							"response" : "不好意思, 这周末我要跟我爸妈吃饭。",
+							"soundID" : "hobbies-sorry-eating-with-family"
+						},
+						{
+							"answers" : [
+								["我周末", "周末我", "这周末"],
+								["请你", "跟你"],
+								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"],
+								["怎么样", "好吗"]
+							],
+							"response" : "不好意思, 这周末我要跟我爸妈吃饭。",
+							"soundID" : "hobbies-sorry-eating-with-family"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你", "这周末"],
+								["要不要", "想不想"],
+								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"]
+							],
+							"response" : "不好意思, 这周末我要跟我爸妈在家吃饭。",
+							"soundID" : "hobbies-sorry-eating-with-family"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你", "这周末"],
+								["要", "想"],
+								["去吃饭", "吃午饭", "吃晚饭", "吃早饭"]
+							],
+							"response" : "不好意思, 这周末我要跟我爸妈在家吃饭。",
+							"soundID" : "hobbies-sorry-eating-with-family"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengConfused.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 23,
+					"task" : "Invite her to play Mahjong this weekend",
+					"taskLink" :"activity",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我们周末去打麻将, 怎么样"],
+							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧! ",
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
+						},
+						{
+							"answers" : [
+								["我们周末", "周末我们", "我们这周末"],
+								["打麻将", "玩麻将", "刷麻将"],
+								["怎么样", "好吗"]
+							],
+							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧! ",
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
+						},
+						{
+							"answers" : [
+								["我周末", "周末我", "这周末"],
+								["请你", "跟你"],
+								["打麻将", "玩麻将", "刷麻将"],
+								["怎么样", "好吗"]
+							],
+							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧!",
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你", "这周末"],
+								["要不要", "想不想"],
+								["打麻将", "玩麻将", "刷麻将"]
+							],
+							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧!",
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
+						},
+						{
+							"answers" : [
+								["你周末", "周末你", "这周末"],
+								["要", "想"],
+								["打麻将", "玩麻将", "刷麻将"]
+							],
+							"response" : "我是很喜欢打麻将，可是我这周末不想打。 下一次吧!",
+							"soundID" : "hobbies-like-mahjong-not-this-weekend"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 31,
+					"task" : "Tell her Saturday.",
+					"taskType" : "choice",
+					"taskLink" : "dayOfTheWeek",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期六, 怎么样"],
+							"response" : "星期六几点?",
+							"soundID" : "hobbies-saturday-what-time"
+						},
+						{
+							"answers" : ["星期六"],
+							"response" : "星期六几点?",
+							"soundID" : "hobbies-saturday-what-time"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [41, 42, 43],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 32,
+					"task" : "Tell her Sunday.",
+					"taskType" : "choice",
+					"taskLink" : "dayOfTheWeek",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期天, 怎么样"],
+							"response" : "星期天几点?",
+							"soundID" : "hobbies-sunday-what-time"
+						},
+						{
+							"answers" : ["星期天"],
+							"response" : "星期天几点?",
+							"soundID" : "hobbies-sunday-what-time"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [41, 42, 43],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 33,
+					"task" : "Tell her Monday.",
+					"taskLink" : "dayOfTheWeek",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["星期一, 怎么样"],
+							"response" : "星期一? 你不是说周末吗? ",
+							"soundID" : "hobbies-monday-you-said-weekend"
+						},
+						{
+							"answers" : ["星期一"],
+							"response" : "星期一? 你不是说周末吗? ",
+							"soundID" : "hobbies-monday-you-said-weekend"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengConfused.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 41,
+					"task" : "Tell her at 3:30",
+					"taskType" :"choice",
+					"taskLink" : "time",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["三点半, 怎么样"],
+							"response" : "三点半。。。 好啊!",
+							"soundID" : "hobbies-three-thirty-ok"
+						},
+						{
+							"answers" : ["三点半", "3点半", "3点30分", "三点三十分", "三点三十"],
+							"response" : "三点半。。。 好啊!",
+							"soundID" : "hobbies-three-thirty-ok"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [74],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 42,
+					"task" : "Tell her at 5:30",
+					"taskType" : "choice",
+					"taskLink" : "time",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["五点半, 怎么样"],
+							"response" : "五点半。。。可以。",
+							"soundID" : "hobbies-five-thirty-ok"
+						},
+						{
+							"answers" : ["五点半", "5点半", "5点30分", "五点三十分", "五点三十"],
+							"response" : "五点半。。。可以。",
+							"soundID" : "hobbies-five-thirty-ok"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [75],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 43,
+					"task" : "Tell her at 10:30",
+					"taskType" : "choice",
+					"taskLink" : "time",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["十点半, 怎么样"],
+							"response" : "晚上十点半还是早上十点半?",
+							"soundID" : "hobbies-ten-thirty-at-night-or-morning"
+						},
+						{
+							"answers" : ["十点半", "10点半", "10点30分", "十点三十分", "十点三十"],
+							"response" : "晚上十点半还是早上十点半?",
+							"soundID" : "hobbies-ten-thirty-at-night-or-morning"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengConfused.png",
+					"tasksToQueue" : [53,54],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 53,
+					"task" : "Tell her in the morning.",
+					"taskType" : "choice",
+					"taskLink" : "time",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["早上九点半, 好吗"],
+							"response" : "好啊！ 早睡早起, 身体好。",
+							"soundID" : "hobbies-ok-early-to-rise"
+						},
+						{
+							"answers" : ["早上"],
+							"response" : "好啊！ 早睡早起, 身体好。",
+							"soundID" : "hobbies-ok-early-to-rise"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [76],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 54,
+					"task" : "Tell her at night.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["晚上十点半, 好吗"],
+							"response" : "十点半太晚了。我平常十点睡觉。",
+							"soundID" : "hobbies-ten-thirty-too-late"
+						},
+						{
+							"answers" : ["晚上"],
+							"response" : "十点半太晚了。我平常十点睡觉。",
+							"soundID" : "hobbies-ten-thirty-too-late"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengWistful.png",
+					"tasksToQueue" : [64, 65],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 64,
+					"task" : "Tell her at 3:30",
+					"taskType" : "choice",
+					"taskLink" : "time",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["三点半, 怎么样"],
+							"response" : "三点半。。。 好啊!",
+							"soundID" : "hobbies-three-thirty-ok"
+						},
+						{
+							"answers" : ["三点半", "3点半", "3点30分", "三点三十分", "三点三十"],
+							"response" : "三点半。。。 好啊!",
+							"soundID" : "hobbies-three-thirty-ok"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [74],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 65,
+					"task" : "Tell her at 5:30",
+					"taskType" : "choice",
+					"taskLink" : "time",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["五点半, 怎么样"],
+							"response" : "五点半。。。可以。",
+							"soundID" : "hobbies-five-thirty-ok"
+						},
+						{
+							"answers" : ["五点半", "5点半", "5点30分", "五点三十分", "五点三十"],
+							"response" : "五点半。。。可以。",
+							"soundID" : "hobbies-five-thirty-ok"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [75],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 74,
+					"task" : "Say you'll see her at 3:30.",
+					"taskType" : "choice",
+					"taskLink" : "goodbye",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["三点半见"],
+							"response" : "三点半见。",
+							"soundID" : "hobbies-see-you-three-thirty"
+						},
+						{
+							"answers" : ["三点半见", "3点半见", "3点30分见", "三点三十分见", "三点三十见"],
+							"response" : "三点半见。",
+							"soundID" : "hobbies-see-you-three-thirty"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengDefault.png",
+					"tasksToQueue" : [74],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 75,
+					"task" : "Tell her you'll see her at 5:30.",
+					"taskType" : "choice",
+					"taskLink" : "goodbye",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["五点半见"],
+							"response" : "五点半见。",
+							"soundID" : "hobbies-see-you-five-thirty"
+						},
+						{
+							"answers" : ["五点半见", "5点半见", "5点30分见", "五点三十分见", "五点三十见"],
+							"response" : "五点半见。",
+							"soundID" : "hobbies-see-you-five-thirty"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [75],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 76,
+					"task" : "Say goodbye!",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["再见"],
+							"response" : "再见",
+							"soundID" : "zaijian"
+						},
+						{
+							"answers" : ["五点半见", "5点半见", "5点30分见", "五点三十分见", "五点三十见"],
+							"response" : "五点半见。",
+							"soundID" : "zaijian"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				}
+			],
+			"completedTasks" : []
+		}
+}

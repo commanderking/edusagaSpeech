@@ -23,6 +23,36 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'birthday'",
+				"answer" : "生日",
+				"pinyin" : "shēngrì",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone when their birthday is",
+				"answer" : "你的生日几月几号？",
+				"pinyin" : "Nǐ de shēngrì jǐ yuè jǐ hào?",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask someone when their younger sister's birthday is",
+				"answer" : "你妹妹的生日几月几号？",
+				"pinyin" : "nǐ mèimei de shēngrì jǐ yuè jǐ hào?",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",
@@ -31,7 +61,7 @@
 			{
 				"nameEnglish" : "Fuxing Park",
 				"nameChinese" : "复兴公园", 
-				"bg" : "bg/shitang.jpg"
+				"bg" : "bg/fuXingPark.jpg"
 			},
 			"emotions" : 
 			{
@@ -110,9 +140,8 @@
 						},
 						{
 							"answers" : [
-								["你"],
-								["生日"],
-								["几月几号"]
+								["你生日", "你的生日"],
+								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
 							],
 							"response" : "我的生日三月二十九号。 你的生日几月几号?",
 							"soundID" : "birthday-mybirthday-whataboutyou"
@@ -176,7 +205,7 @@
 				},
 				{
 					"taskID" : 30,
-					"task" : "Ask him when his sister's birthday is",
+					"task" : "Ask him when his YOUNGER sister's birthday is",
 					"possibleAnswers" : 
 					[
 						{

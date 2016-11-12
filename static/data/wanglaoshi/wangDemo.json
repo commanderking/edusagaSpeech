@@ -23,15 +23,73 @@
 			"next" : "end"
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'wake up/get out of bed'",
+				"answer" : "起床",
+				"pinyin" : "qǐchuáng",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'sleep'",
+				"answer" : "睡觉",
+				"pinyin" : "shuìjiào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'morning'",
+				"answer" : "早上",
+				"pinyin" : "zǎoshang",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'night'",
+				"answer" : "晚上",
+				"pinyin" : "wǎnshàng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'right now'",
+				"answer" : "现在",
+				"pinyin" : "xiànzài",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask what time is it right now",
+				"answer" : "现在几点",
+				"pinyin" : "xiànzài jǐ diǎn",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask what time someone sleeps at night",
+				"answer" : "你晚上几点睡觉？",
+				"pinyin" : "nǐ wǎnshàng jǐ diǎn shuìjiào",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",
 			"language" : "zh-CN",
 			"location" : 
 			{
-				"nameEnglish" : "Cafeteria",
-				"nameChinese" : "食堂", 
-				"bg" : "bg/shitang.jpg"
+				"nameEnglish" : "大学走道",
+				"nameChinese" : "University Walkway", 
+				"bg" : "bg/jiaoTongUniversity2.jpg"
 			},
 			"emotions" : 
 			{
@@ -149,7 +207,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "characters/david/davidDefault.png",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -160,21 +218,13 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers": 	["现在几点"],
+							"answers": 	["现在几点", "几点了"],
 							"response": "现在三点半... 哎呀! 已经三点半了啊! 我得去跟朋友打篮球。再见! ",
-							"soundID" : "time-threethirty-gottogo"
-						},
-						{
-							"answers": 	[
-								["现在"],
-								["几点"]
-							],
-							"response": "现在三点半... 哎呀! 已经三点半了啊! 我得去跟朋友打篮球。",
 							"soundID" : "time-threethirty-gottogo"
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [41],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

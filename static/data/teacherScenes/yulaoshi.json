@@ -1,14 +1,1 @@
-{
-	"username" : "yulaoshi",
-	"name" : "老師",
-	"scenes" : [
-		{
-			"name" : "Meeting David",
-			"scenario" : "There's a fellow student hanging out at the school cafeteria. Let's meet him!",
-			"grammar" : "你叫什么名字?, 你住在哪里?, 你的电话号码...",
-			"link" : "../demo",
-			"image" : "",
-			"assigned" : true
-		}
-	]
-}
+{"scenes": [{"name": "Review of Basic Questions", "scenario": "There's a fellow student hanging out at the school cafeteria. Let's meet him!", "tags": ["review", "nationality", "location", "family"], "objectives": ["I can say or write something about the members of my family and ask about someone’s family.", "I can ask and say a home address and e-mail address.", "I can ask and say someone’s nationality."], "sequence": 0, "characterImage": "characters/david/davidDefault.png", "link": "../demo"}]}
