@@ -61,7 +61,7 @@
 				"tries" : 0
 			},
 			{
-				"task" : "Ask for someone's surname/last name (polite)",
+				"task" : "Say Canadian / Candian person",
 				"answer" : "加拿大人",
 				"pinyin" : "jiānádà rén",
 				"correct" : false,
