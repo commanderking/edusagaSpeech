@@ -11,36 +11,7 @@ var SpeechRecognition = require('../helpers/SpeechRecognition.js');
 var PracticeContainer = React.createClass({
 	getInitialState: function() {
 		return {
-			vocabData: {
-				'currentWordIndex' : 0,
-				'lastAnswer' : "",
-				'score' : 0,
-				'lang' : 'zh-CN',
-				'list' :
-				[
-					{
-						'task' : 'Say Hi ',
-						'answer' : "你好",
-						'pinyin' : 'nǐ hǎo',
-						'correct' : false,
-						'tries': 0
-					},
-					{
-						'task' : "Ask how they're doing (Method 1)",
-						'answer' : "怎么样",
-						'pinyin' : 'zěnme yàng',
-						'correct' : false,
-						'tries' : 0
-					},
-					{
-						'task' : "Ask how they're doing (Method 2)",
-						'answer' : '你好吗',
-						'pinyin' : 'nǐ hǎo ma',
-						'correct' : false,
-						'tries' : 0
-					}
-				]
-			},
+			vocabData: {},
 			micActive: false,
 			userAnswer: "",
 			showPinyin: false

@@ -2,23 +2,13 @@ from web import db
 from sqlalchemy.dialects.postgresql import JSON
 from flask_user import UserMixin
 
-class Teacher(db.Model):
-    __tablename__ = 'teachers'
 
-    id = db.Column(db.Integer, primary_key=True)
-    firstName = db.Column(db.String(30), nullable = False)
-    lastName = db.Column(db.String(30), nullable = False)
-    email = db.Column(db.String(50), nullable = False)
+episodes = db.Table('episodes',
+    db.Column('episode_id', db.Integer, db.ForeignKey('episode.id')),
+    db.Column('teacher_id', db.Integer, db.ForeignKey('teacher.id'))
+)
 
-    def __init__(self, firstName, lastName, email):
-        self.firstName = firstName
-        self.lastName = lastName
-        self.email = email
-
-    def __repr__(self):
-        return '<id {}>'.format(self.id)
-
-class TeacherUser(db.Model, UserMixin):
+class Teacher(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
 
     # User authentication information
@@ -37,7 +27,11 @@ class TeacherUser(db.Model, UserMixin):
     # user_types are: teacher, student, general
     # user_type = db.Column(db.String(100), nullable=False,server_default='general')
 
-class Episodes(db.Model):
+
+    episodes = db.relationship('Episode', secondary=episodes,
+        backref=db.backref('teachers', lazy='dynamic'))
+
+class Episode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     episodeJSONFileName = db.Column(db.String(30), nullable=False, unique=True)
     episodeAssigned = db.Column(db.Boolean(), nullable=False, default=False)
@@ -46,6 +40,7 @@ class Episodes(db.Model):
         self.episodeJSONFileName = episodeJSONFileName
     def __repr__(self):
         return '<id {}>'.format(self.id)
+
 
 class TestModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
