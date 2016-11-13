@@ -22,10 +22,12 @@ class MyTest(TestCase):
 
 class AddEpisodes(MyTest):
     def test_add_episode(self):
+        teacher = Teacher(username="CoolTeacher", password="mypassword", email="haha@mgmail.com")
+        db.session.add(teacher)
 		newEpisode = Episodes('introDavid') 
 		db.session.add(newEpisode)
 		db.session.commit()
 
+        assert teacher in db.session
 		assert newEpisode in db.session
-		response = self.client.get("/")
-		assert user in db.session
+

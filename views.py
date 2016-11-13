@@ -14,7 +14,7 @@ import sys, os, uuid
 from web import app
 from models import *
 
-db_adapter = SQLAlchemyAdapter(db, TeacherUser)        # Register the User model
+db_adapter = SQLAlchemyAdapter(db, Teacher)        # Register the User model
 user_manager = UserManager(db_adapter, app)     # Initialize Flask-User
 
 def trackVisitorWithText(textMessage): 
@@ -65,16 +65,29 @@ def trackVisitorEvent(eventText):
 
 @app.route('/testDatabase')
 def testDatabase(name="test"):
-	newEpisode = Episodes('introDavid') 
+	newEpisode = Episode('introDavid') 
 	db.session.add(newEpisode)
 	db.session.commit()
 
-	currentEpisode = Episodes.query.first()
+	currentEpisode = Episode.query.first()
 	print currentEpisode
 	print currentEpisode.episodeJSONFileName
-	print current_user.username
+	teacher = Teacher.query.first()
+	print teacher
+	print teacher.username
+
+	currentEpisode.teachers.append(teacher)
+	db.session.commit()
+
+	for teacher in currentEpisode.teachers: 
+		print teacher.username
+
+	for episode in teacher.episodes:
+		print episode.episodeJSONFileName
+
 
 	return render_template('questionAsker.html', teacher="public", activityName=currentEpisode.episodeJSONFileName)
+
 
 @app.route('/')
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
@@ -97,10 +110,14 @@ def home(name="Home"):
 @app.route('/<username>')
 @login_required
 def teacherPage(username):
-	user = TeacherUser.query.filter_by(username=username).first()
 	if user == None:
 		return redirect(url_for('index'))
 	else:
+		user = Teacher.query.filter_by(username=username).first()
+		for episode in user.episodes:
+			print episode.episodeJSONFileName
+		# episodes = Episode.query.filter_by()
+
 		return render_template('teacherHome.html', username=username)
 
 @app.route('/<teacher>/home/')

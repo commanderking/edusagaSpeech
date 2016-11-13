@@ -56,12 +56,12 @@
 	var CharacterContainer = __webpack_require__(/*! ./questionAsker/CharacterContainer */ 183);
 	var DialogContainer = __webpack_require__(/*! ./questionAsker/DialogContainer */ 193);
 	var TaskContainer = __webpack_require__(/*! ./questionAsker/TaskContainer */ 197);
-	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 208);
-	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 209);
-	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 218);
-	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 225);
-	var TimerContainer = __webpack_require__(/*! ./questionAsker/TimerContainer */ 226);
-	var PracticeContainer = __webpack_require__(/*! ./questionAsker/PracticeContainer.js */ 227);
+	var BackgroundImageContainer = __webpack_require__(/*! ./questionAsker/BackgroundImageContainer */ 203);
+	var FeedbackContainer = __webpack_require__(/*! ./questionAsker/FeedbackContainer */ 204);
+	var ResultsContainer = __webpack_require__(/*! ./questionAsker/ResultsContainer */ 213);
+	var SpeechSynth = __webpack_require__(/*! ./helpers/SpeechSynth */ 220);
+	var TimerContainer = __webpack_require__(/*! ./questionAsker/TimerContainer */ 221);
+	var PracticeContainer = __webpack_require__(/*! ./questionAsker/PracticeContainer.js */ 222);
 	
 	var Constants = __webpack_require__(/*! ./helpers/Constants.js */ 180);
 	
@@ -24619,7 +24619,7 @@
 	var PropTypes = React.PropTypes;
 	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition */ 178);
 	var TaskIcon = __webpack_require__(/*! ./components/TaskIcon */ 199);
-	var TaskText = __webpack_require__(/*! ./components/TaskText */ 206);
+	var TaskText = __webpack_require__(/*! ./components/TaskText */ 201);
 	
 	var TaskContainer = React.createClass({
 		displayName: 'TaskContainer',
@@ -24766,8 +24766,8 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var TaskIcon = __webpack_require__(/*! ./TaskIcon */ 199);
-	var TaskText = __webpack_require__(/*! ./TaskText */ 206);
-	var HintButton = __webpack_require__(/*! ./HintButton */ 207);
+	var TaskText = __webpack_require__(/*! ./TaskText */ 201);
+	var HintButton = __webpack_require__(/*! ./HintButton */ 202);
 	
 	var Task = React.createClass({
 		displayName: 'Task',
@@ -25038,12 +25038,7 @@
 	module.exports = TaskIconImage;
 
 /***/ },
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */
+/* 201 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/TaskText.js ***!
   \**************************************************************/
@@ -25095,7 +25090,7 @@
 	module.exports = TaskText;
 
 /***/ },
-/* 207 */
+/* 202 */
 /*!****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/HintButton.js ***!
   \****************************************************************/
@@ -25149,7 +25144,7 @@
 	module.exports = HintButton;
 
 /***/ },
-/* 208 */
+/* 203 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/BackgroundImageContainer.js ***!
   \*******************************************************************/
@@ -25183,7 +25178,7 @@
 	module.exports = BackgroundImageContainer;
 
 /***/ },
-/* 209 */
+/* 204 */
 /*!************************************************************!*\
   !*** ./react_assets/js/questionAsker/FeedbackContainer.js ***!
   \************************************************************/
@@ -25193,13 +25188,13 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 210);
-	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 211);
-	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 212);
-	var RepeatButton = __webpack_require__(/*! ./components/RepeatButton */ 213);
-	var SkipButton = __webpack_require__(/*! ./components/SkipButton */ 214);
-	var MiriIconText = __webpack_require__(/*! ./components/MiriIconText */ 215);
-	var MiriFeedback = __webpack_require__(/*! ./components/MiriFeedback */ 216);
+	var SpeechableSpan = __webpack_require__(/*! ./components/SpeechableSpan */ 205);
+	var CoinMeter = __webpack_require__(/*! ./components/CoinMeter */ 206);
+	var HintIcon = __webpack_require__(/*! ./components/HintIcon */ 207);
+	var RepeatButton = __webpack_require__(/*! ./components/RepeatButton */ 208);
+	var SkipButton = __webpack_require__(/*! ./components/SkipButton */ 209);
+	var MiriIconText = __webpack_require__(/*! ./components/MiriIconText */ 210);
+	var MiriFeedback = __webpack_require__(/*! ./components/MiriFeedback */ 211);
 	
 	var FeedbackContainer = React.createClass({
 		displayName: 'FeedbackContainer',
@@ -25277,7 +25272,7 @@
 	};
 
 /***/ },
-/* 210 */
+/* 205 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/SpeechableSpan.js ***!
   \********************************************************************/
@@ -25300,7 +25295,7 @@
 	module.exports = SpeechableSpan;
 
 /***/ },
-/* 211 */
+/* 206 */
 /*!***************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/CoinMeter.js ***!
   \***************************************************************/
@@ -25329,7 +25324,7 @@
 	module.exports = CoinMeter;
 
 /***/ },
-/* 212 */
+/* 207 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/HintIcon.js ***!
   \**************************************************************/
@@ -25424,7 +25419,7 @@
 	module.exports = HintIcon;
 
 /***/ },
-/* 213 */
+/* 208 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/RepeatButton.js ***!
   \******************************************************************/
@@ -25510,7 +25505,7 @@
 	module.exports = RepeatButton;
 
 /***/ },
-/* 214 */
+/* 209 */
 /*!****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/SkipButton.js ***!
   \****************************************************************/
@@ -25560,7 +25555,7 @@
 	module.exports = SkipButton;
 
 /***/ },
-/* 215 */
+/* 210 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/MiriIconText.js ***!
   \******************************************************************/
@@ -25570,7 +25565,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 210);
+	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 205);
 	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 200);
 	
 	function MiriIconText(props) {
@@ -25684,7 +25679,7 @@
 	module.exports = MiriIconText;
 
 /***/ },
-/* 216 */
+/* 211 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/MiriFeedback.js ***!
   \******************************************************************/
@@ -25695,10 +25690,10 @@
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var React = __webpack_require__(/*! react */ 1);
-	var HintIcon = __webpack_require__(/*! ./HintIcon */ 212);
-	var MiriIconText = __webpack_require__(/*! ./MiriIconText */ 215);
-	var MiriIcon = __webpack_require__(/*! ./MiriIcon */ 217);
-	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 210);
+	var HintIcon = __webpack_require__(/*! ./HintIcon */ 207);
+	var MiriIconText = __webpack_require__(/*! ./MiriIconText */ 210);
+	var MiriIcon = __webpack_require__(/*! ./MiriIcon */ 212);
+	var SpeechableSpan = __webpack_require__(/*! ./SpeechableSpan */ 205);
 	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 200);
 	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 180);
 	
@@ -25799,7 +25794,7 @@
 	module.exports = MiriFeedback;
 
 /***/ },
-/* 217 */
+/* 212 */
 /*!**************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/MiriIcon.js ***!
   \**************************************************************/
@@ -25823,7 +25818,7 @@
 	module.exports = MiriIcon;
 
 /***/ },
-/* 218 */
+/* 213 */
 /*!***********************************************************!*\
   !*** ./react_assets/js/questionAsker/ResultsContainer.js ***!
   \***********************************************************/
@@ -25833,7 +25828,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsBase = __webpack_require__(/*! ./components/ResultsBase */ 219);
+	var ResultsBase = __webpack_require__(/*! ./components/ResultsBase */ 214);
 	
 	var ResultsContainer = React.createClass({
 		displayName: 'ResultsContainer',
@@ -25866,7 +25861,7 @@
 	module.exports = ResultsContainer;
 
 /***/ },
-/* 219 */
+/* 214 */
 /*!*****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsBase.js ***!
   \*****************************************************************/
@@ -25876,9 +25871,9 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsHeader = __webpack_require__(/*! ./ResultsHeader */ 220);
-	var ResultsSideBar = __webpack_require__(/*! ./ResultsSideBar */ 222);
-	var ResultsTasks = __webpack_require__(/*! ./ResultsTasks */ 223);
+	var ResultsHeader = __webpack_require__(/*! ./ResultsHeader */ 215);
+	var ResultsSideBar = __webpack_require__(/*! ./ResultsSideBar */ 217);
+	var ResultsTasks = __webpack_require__(/*! ./ResultsTasks */ 218);
 	
 	var ResultsBase = React.createClass({
 		displayName: 'ResultsBase',
@@ -25911,7 +25906,7 @@
 	module.exports = ResultsBase;
 
 /***/ },
-/* 220 */
+/* 215 */
 /*!*******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsHeader.js ***!
   \*******************************************************************/
@@ -25922,7 +25917,7 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 180);
-	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 221);
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 216);
 	
 	function ResultsHeader(props) {
 		var miriIconSrc = Constants.IMAGE_PATH + "miri/icons/Miri_Icon_Yay.png";
@@ -25947,7 +25942,7 @@
 	module.exports = ResultsHeader;
 
 /***/ },
-/* 221 */
+/* 216 */
 /*!************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsCharProfile.js ***!
   \************************************************************************/
@@ -26007,7 +26002,7 @@
 	module.exports = ResultsCharProfile;
 
 /***/ },
-/* 222 */
+/* 217 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsSideBar.js ***!
   \********************************************************************/
@@ -26101,7 +26096,7 @@
 	module.exports = ResultsSideBar;
 
 /***/ },
-/* 223 */
+/* 218 */
 /*!******************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsTasks.js ***!
   \******************************************************************/
@@ -26111,8 +26106,8 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 221);
-	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 224);
+	var ResultsCharProfile = __webpack_require__(/*! ./ResultsCharProfile */ 216);
+	var ResultsCompletedTask = __webpack_require__(/*! ./ResultsCompletedTask */ 219);
 	
 	var ResultsTasks = React.createClass({
 		displayName: 'ResultsTasks',
@@ -26169,7 +26164,7 @@
 	module.exports = ResultsTasks;
 
 /***/ },
-/* 224 */
+/* 219 */
 /*!**************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/ResultsCompletedTask.js ***!
   \**************************************************************************/
@@ -26200,7 +26195,7 @@
 	module.exports = ResultsCompletedTask;
 
 /***/ },
-/* 225 */
+/* 220 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/SpeechSynth.js ***!
   \************************************************/
@@ -26251,7 +26246,7 @@
 	module.exports = speechSynth;
 
 /***/ },
-/* 226 */
+/* 221 */
 /*!*********************************************************!*\
   !*** ./react_assets/js/questionAsker/TimerContainer.js ***!
   \*********************************************************/
@@ -26285,7 +26280,7 @@
 	module.exports = TimerContainer;
 
 /***/ },
-/* 227 */
+/* 222 */
 /*!************************************************************!*\
   !*** ./react_assets/js/questionAsker/PracticeContainer.js ***!
   \************************************************************/
@@ -26298,9 +26293,9 @@
 	var HeaderContainer = __webpack_require__(/*! ../containers/HeaderContainer.js */ 176);
 	var InputContainer = __webpack_require__(/*! ../containers/InputContainer.js */ 177);
 	var ImageContainer = __webpack_require__(/*! ../containers/ImageContainer */ 179);
-	var PracticeHeader = __webpack_require__(/*! ./components/PracticeHeader */ 228);
-	var PracticeFooter = __webpack_require__(/*! ./components/PracticeFooter */ 229);
-	var PracticeFlashCard = __webpack_require__(/*! ./components/PracticeFlashCard */ 232);
+	var PracticeHeader = __webpack_require__(/*! ./components/PracticeHeader */ 223);
+	var PracticeFooter = __webpack_require__(/*! ./components/PracticeFooter */ 224);
+	var PracticeFlashCard = __webpack_require__(/*! ./components/PracticeFlashCard */ 229);
 	var SpeechRecognition = __webpack_require__(/*! ../helpers/SpeechRecognition.js */ 178);
 	
 	var PracticeContainer = React.createClass({
@@ -26475,7 +26470,7 @@
 	};
 
 /***/ },
-/* 228 */
+/* 223 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/PracticeHeader.js ***!
   \********************************************************************/
@@ -26509,7 +26504,7 @@
 	module.exports = PracticeHeader;
 
 /***/ },
-/* 229 */
+/* 224 */
 /*!********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/PracticeFooter.js ***!
   \********************************************************************/
@@ -26519,10 +26514,10 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var PracticeMic = __webpack_require__(/*! ./PracticeMic */ 230);
-	var PracticeDoneButton = __webpack_require__(/*! ./PracticeDoneButton */ 231);
-	var PracticeAudioButton = __webpack_require__(/*! ./PracticeAudioButton */ 234);
-	var ShowPinyinButton = __webpack_require__(/*! ./ShowPinyinButton */ 236);
+	var PracticeMic = __webpack_require__(/*! ./PracticeMic */ 225);
+	var PracticeDoneButton = __webpack_require__(/*! ./PracticeDoneButton */ 226);
+	var PracticeAudioButton = __webpack_require__(/*! ./PracticeAudioButton */ 227);
+	var ShowPinyinButton = __webpack_require__(/*! ./ShowPinyinButton */ 228);
 	
 	function PracticeFooter(props) {
 		return React.createElement(
@@ -26572,7 +26567,7 @@
 	};
 
 /***/ },
-/* 230 */
+/* 225 */
 /*!*****************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/PracticeMic.js ***!
   \*****************************************************************/
@@ -26616,7 +26611,7 @@
 	};
 
 /***/ },
-/* 231 */
+/* 226 */
 /*!************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/PracticeDoneButton.js ***!
   \************************************************************************/
@@ -26644,79 +26639,7 @@
 	};
 
 /***/ },
-/* 232 */
-/*!***********************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/PracticeFlashCard.js ***!
-  \***********************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	var FlashCardHeader = __webpack_require__(/*! ./FlashCardHeader */ 233);
-	var FlashCardContent = __webpack_require__(/*! ./FlashCardContent */ 235);
-	
-	var PracticeFlashCard = React.createClass({
-		displayName: 'PracticeFlashCard',
-	
-		render: function render() {
-			return React.createElement(
-				'div',
-				{ className: 'flashCardWrapper' },
-				React.createElement(FlashCardHeader, {
-					currentWordObject: this.props.currentWordObject,
-					playSpeechSynth: this.props.playSpeechSynth }),
-				React.createElement(FlashCardContent, {
-					currentWordObject: this.props.currentWordObject,
-					changePinyinDisplay: this.props.changePinyinDisplay,
-					showPinyin: this.props.showPinyin,
-					userAnswer: this.props.userAnswer })
-			);
-		}
-	});
-	
-	module.exports = PracticeFlashCard;
-	
-	PracticeFlashCard.propTypes = {
-		currentWordObject: PropTypes.object.isRequired,
-		showPinyin: PropTypes.bool.isRequired,
-		userAnswer: PropTypes.string.isRequired,
-		playSpeechSynth: PropTypes.func.isRequired
-	};
-
-/***/ },
-/* 233 */
-/*!*********************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/FlashCardHeader.js ***!
-  \*********************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	var PracticeAudioButton = __webpack_require__(/*! ./PracticeAudioButton */ 234);
-	
-	function FlashCardHeader(props) {
-		return React.createElement(
-			'div',
-			{ className: 'flashCardHeader' },
-			React.createElement(
-				'h1',
-				null,
-				'Task: ',
-				props.currentWordObject.task
-			)
-		);
-	}
-	
-	module.exports = FlashCardHeader;
-	
-	FlashCardHeader.propTypes = {};
-
-/***/ },
-/* 234 */
+/* 227 */
 /*!*************************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/PracticeAudioButton.js ***!
   \*************************************************************************/
@@ -26747,7 +26670,103 @@
 	};
 
 /***/ },
-/* 235 */
+/* 228 */
+/*!**********************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/ShowPinyinButton.js ***!
+  \**********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function ShowPinyinButton(props) {
+		return React.createElement(
+			"button",
+			{
+				className: "btn-round-small",
+				onClick: props.changePinyinDisplay },
+			"Show Pinyin"
+		);
+	}
+	
+	module.exports = ShowPinyinButton;
+
+/***/ },
+/* 229 */
+/*!***********************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/PracticeFlashCard.js ***!
+  \***********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var FlashCardHeader = __webpack_require__(/*! ./FlashCardHeader */ 230);
+	var FlashCardContent = __webpack_require__(/*! ./FlashCardContent */ 231);
+	
+	var PracticeFlashCard = React.createClass({
+		displayName: 'PracticeFlashCard',
+	
+		render: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'flashCardWrapper' },
+				React.createElement(FlashCardHeader, {
+					currentWordObject: this.props.currentWordObject,
+					playSpeechSynth: this.props.playSpeechSynth }),
+				React.createElement(FlashCardContent, {
+					currentWordObject: this.props.currentWordObject,
+					changePinyinDisplay: this.props.changePinyinDisplay,
+					showPinyin: this.props.showPinyin,
+					userAnswer: this.props.userAnswer })
+			);
+		}
+	});
+	
+	module.exports = PracticeFlashCard;
+	
+	PracticeFlashCard.propTypes = {
+		currentWordObject: PropTypes.object.isRequired,
+		showPinyin: PropTypes.bool.isRequired,
+		userAnswer: PropTypes.string.isRequired,
+		playSpeechSynth: PropTypes.func.isRequired
+	};
+
+/***/ },
+/* 230 */
+/*!*********************************************************************!*\
+  !*** ./react_assets/js/questionAsker/components/FlashCardHeader.js ***!
+  \*********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	var PracticeAudioButton = __webpack_require__(/*! ./PracticeAudioButton */ 227);
+	
+	function FlashCardHeader(props) {
+		return React.createElement(
+			'div',
+			{ className: 'flashCardHeader' },
+			React.createElement(
+				'h1',
+				null,
+				'Task: ',
+				props.currentWordObject.task
+			)
+		);
+	}
+	
+	module.exports = FlashCardHeader;
+	
+	FlashCardHeader.propTypes = {};
+
+/***/ },
+/* 231 */
 /*!**********************************************************************!*\
   !*** ./react_assets/js/questionAsker/components/FlashCardContent.js ***!
   \**********************************************************************/
@@ -26805,30 +26824,6 @@
 		showPinyin: PropTypes.bool.isRequired,
 		userAnswer: PropTypes.string.isRequired
 	};
-
-/***/ },
-/* 236 */
-/*!**********************************************************************!*\
-  !*** ./react_assets/js/questionAsker/components/ShowPinyinButton.js ***!
-  \**********************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	
-	function ShowPinyinButton(props) {
-		return React.createElement(
-			"button",
-			{
-				className: "btn-round-small",
-				onClick: props.changePinyinDisplay },
-			"Show Pinyin"
-		);
-	}
-	
-	module.exports = ShowPinyinButton;
 
 /***/ }
 /******/ ]);
