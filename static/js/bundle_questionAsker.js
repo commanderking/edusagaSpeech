@@ -26303,31 +26303,7 @@
 	
 		getInitialState: function getInitialState() {
 			return {
-				vocabData: {
-					'currentWordIndex': 0,
-					'lastAnswer': "",
-					'score': 0,
-					'lang': 'zh-CN',
-					'list': [{
-						'task': 'Say Hi ',
-						'answer': "你好",
-						'pinyin': 'nǐ hǎo',
-						'correct': false,
-						'tries': 0
-					}, {
-						'task': "Ask how they're doing (Method 1)",
-						'answer': "怎么样",
-						'pinyin': 'zěnme yàng',
-						'correct': false,
-						'tries': 0
-					}, {
-						'task': "Ask how they're doing (Method 2)",
-						'answer': '你好吗',
-						'pinyin': 'nǐ hǎo ma',
-						'correct': false,
-						'tries': 0
-					}]
-				},
+				vocabData: {},
 				micActive: false,
 				userAnswer: "",
 				showPinyin: false
@@ -26786,32 +26762,48 @@
 		) : null;
 	
 		// If answer already correct, display a match
-		var userAnswerDisplay = props.currentWordObject.correct ? props.currentWordObject.answer : props.userAnswer !== "" ? props.userAnswer : null;
+		var userAnswerDisplay = props.currentWordObject.correct ? props.currentWordObject.answer : props.userAnswer !== "" ? props.userAnswer : "...";
 	
-		var characterPromptClass = props.currentWordObject.correct ? "characterPrompt flashCardCharacters correctGreenBG" : "characterPrompt flashCardCharacters";
-	
-		var userInputClass = props.currentWordObject.correct ? "userInputCharacters flashCardCharacters correctGreenBG" : props.userAnswer !== "" ? "userInputCharacters flashCardCharacters wrongRedBG" : "userInputCharacters flashCardCharacters";
+		var color = props.currentWordObject.correct ? "inline-block correctGreenBG" : props.userAnswer !== "" ? "inline-block wrongRedBG" : "inline-block";
 	
 		return React.createElement(
 			"div",
 			{ className: "flashCardComparison" },
 			React.createElement(
 				"div",
-				null,
+				{ className: "textWrapper" },
 				React.createElement(
 					"h2",
-					{ className: characterPromptClass },
-					props.currentWordObject.answer
+					{ className: "textLabel" },
+					"Say:"
+				),
+				React.createElement(
+					"h2",
+					{ className: "characterPrompt flashCardCharacters" },
+					React.createElement(
+						"div",
+						{ className: color },
+						props.currentWordObject.answer
+					)
 				)
 			),
 			pinyinDisplay,
 			React.createElement(
 				"div",
-				null,
+				{ className: "textWrapper" },
 				React.createElement(
 					"h2",
-					{ className: userInputClass },
-					userAnswerDisplay
+					{ className: "textLabel" },
+					"You said:"
+				),
+				React.createElement(
+					"h2",
+					{ className: "userInputcharacters flashCardCharacters" },
+					React.createElement(
+						"div",
+						{ className: color },
+						userAnswerDisplay
+					)
 				)
 			)
 		);

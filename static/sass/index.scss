@@ -70,6 +70,10 @@ Shared elements
 	color: $darkBlue;
 }
 
+.inline-block {
+	display: inline-block;
+}
+
 .headerImageTextSlanted {
 	position: absolute;
 	width: 150px;
@@ -1202,21 +1206,36 @@ $themeYellow: #FDD870;
 
 	.flashCardComparison {
 		text-align: center;
+		width: 100%;
+		.textWrapper {
+			width: 100%;
+		}
+		.textLabel {
+			display: inline-block;
+			width: 45%;
+			text-align:right;
+			font-style: italic;
+			margin: 0px;
+			margin-right: 5px;
+		}
 		.flashCardCharacters {
 			margin-bottom: 0px;
 			margin-top: 5px;
 			padding: 5px;
 			display: inline-block;
+			width: 50%;
+			text-align: left;
 		}
 		.userInputCharacters {
 			margin-top: 0px;
-			border-bottom: 1px solid black;
 			display: inline-block;
 		}
 		.pinyinPrompt {
 			letter-spacing: 2px;
 			word-spacing: 5px;
 			margin: 0px;
+			margin-left: 50%;
+			text-align: left;
 		}
 	}
 	.imageWrapper {
