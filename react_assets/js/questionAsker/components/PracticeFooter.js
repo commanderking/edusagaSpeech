@@ -15,13 +15,15 @@ function PracticeFooter (props) {
 				</div>
 				<PracticeAudioButton 
 					playSpeechSynth={props.playSpeechSynth}
-					currentWord={props.currentWordObject.answer}/>
+					currentWord={props.currentWordObject.answer}
+					speechSynthPlaying={props.speechSynthPlaying}/>
 				<PracticeMic 
 					micActive={props.micActive}
 					onMicActivate={props.onMicActivate}
 					onMicDeactivate={props.onMicDeactivate}/>
 				<ShowPinyinButton 
-					changePinyinDisplay={props.changePinyinDisplay}/>
+					changePinyinDisplay={props.changePinyinDisplay}
+					showPinyin={props.showPinyin}/>
 				<div className="rightArrow arrow" onClick={props.nextVocab}>
 					<span className="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 				</div>
@@ -42,7 +44,9 @@ PracticeFooter.propTypes = {
 	playSpeechSynth: PropTypes.func.isRequired,
 	currentWordObject: PropTypes.object.isRequired,
 	changePinyinDisplay: PropTypes.func.isRequired,
+	showPinyin: PropTypes.bool.isRequired,
 	previousVocab: PropTypes.func.isRequired,
-	nextVocab: PropTypes.func.isRequired
+	nextVocab: PropTypes.func.isRequired,
+	speechSynthPlaying: PropTypes.bool.isRequired
 
 }

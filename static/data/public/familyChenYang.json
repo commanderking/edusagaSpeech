@@ -75,14 +75,14 @@
 				"tries" : 0
 			},
 			{
-				"task" : "Ask if someoone's dad is Chinese (method 1)",
+				"task" : "Ask if someone's dad is Chinese (method 1)",
 				"answer" : "你的爸爸是中国人吗",
 				"pinyin" : "nǐ de bàba shì zhōngguó rén ma",
 				"correct" : false,
 				"tries" : 0
 			},
 			{
-				"task" : "Ask if someoone's dad is Chinese (method 2)",
+				"task" : "Ask if someone's dad is Chinese (method 2)",
 				"answer" : "你的爸爸是不是中国人",
 				"pinyin" : "nǐ de bàba shì bùshì zhōngguó rén",
 				"correct" : false,

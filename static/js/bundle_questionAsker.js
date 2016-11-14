@@ -865,7 +865,8 @@
 						vocabList: this.state.sceneData.practice,
 						practiceMode: this.state.practiceMode,
 						changePracticeMode: this.changePracticeMode,
-						playSpeechSynth: this.playSpeechSynth }),
+						playSpeechSynth: this.playSpeechSynth,
+						speechSynthPlaying: this.state.speechSynthPlaying }),
 					React.createElement(DialogContainer
 					// Variables related to display scenario text and playing sounds
 					, { scenarioOn: this.state.scenarioOn,
@@ -24921,7 +24922,7 @@
 				{
 					className: "button practiceStartButton",
 					onClick: props.changePracticeMode },
-				React.createElement("span", { className: "glyphicon glyphicon-record", "aria-hidden": "true" }),
+				React.createElement("i", { className: "fa fa-bolt", "aria-hidden": "true" }),
 				React.createElement(
 					"span",
 					{ className: "toolTipText" },
@@ -25193,7 +25194,6 @@
 			// Default TaskIcon image when nothing is being recorded or answered
 			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 			var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
-			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 			var imgCoins = Constants.IMAGE_PATH + "UI/Icon_10coins_flat_nostar-01.png";
 			var imgQuestion = Constants.IMAGE_PATH + "UI/Icon_Questionmark-01.png";
 			var imgRepeat = Constants.IMAGE_PATH + "UI/buttonRepeatOn.png";
@@ -26761,8 +26761,10 @@
 							playSpeechSynth: this.props.playSpeechSynth,
 							currentWordObject: currentWordObject,
 							changePinyinDisplay: this.changePinyinDisplay,
+							showPinyin: this.state.showPinyin,
 							previousVocab: this.previousVocab,
-							nextVocab: this.nextVocab })
+							nextVocab: this.nextVocab,
+							speechSynthPlaying: this.props.speechSynthPlaying })
 					)
 				);
 			} else {
@@ -26776,7 +26778,8 @@
 	PracticeContainer.propTypes = {
 		practiceMode: PropTypes.bool.isRequired,
 		changePracticeMode: PropTypes.func.isRequired,
-		playSpeechSynth: PropTypes.func.isRequired
+		playSpeechSynth: PropTypes.func.isRequired,
+		speechSynthPlaying: PropTypes.bool.isRequired
 	};
 
 /***/ },
@@ -26793,7 +26796,7 @@
 	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 180);
 	
 	function PracticeHeader(props) {
-		var headerImage = Constants.IMAGE_PATH + "UI/titleResults.png";
+		var headerImage = Constants.IMAGE_PATH + "UI/titlePractice.png";
 		return React.createElement(
 			'div',
 			{ className: 'practiceHeader' },
@@ -26807,6 +26810,11 @@
 				'div',
 				{ className: 'glyphiconWrapper' },
 				React.createElement('span', { className: 'glyphicon glyphicon-record', 'aria-hidden': 'true' })
+			),
+			React.createElement(
+				'div',
+				{ className: 'glyphiconWrapper' },
+				React.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' })
 			)
 		);
 	}
@@ -26843,13 +26851,15 @@
 				),
 				React.createElement(PracticeAudioButton, {
 					playSpeechSynth: props.playSpeechSynth,
-					currentWord: props.currentWordObject.answer }),
+					currentWord: props.currentWordObject.answer,
+					speechSynthPlaying: props.speechSynthPlaying }),
 				React.createElement(PracticeMic, {
 					micActive: props.micActive,
 					onMicActivate: props.onMicActivate,
 					onMicDeactivate: props.onMicDeactivate }),
 				React.createElement(ShowPinyinButton, {
-					changePinyinDisplay: props.changePinyinDisplay }),
+					changePinyinDisplay: props.changePinyinDisplay,
+					showPinyin: props.showPinyin }),
 				React.createElement(
 					'div',
 					{ className: 'rightArrow arrow', onClick: props.nextVocab },
@@ -26871,8 +26881,10 @@
 		playSpeechSynth: PropTypes.func.isRequired,
 		currentWordObject: PropTypes.object.isRequired,
 		changePinyinDisplay: PropTypes.func.isRequired,
+		showPinyin: PropTypes.bool.isRequired,
 		previousVocab: PropTypes.func.isRequired,
-		nextVocab: PropTypes.func.isRequired
+		nextVocab: PropTypes.func.isRequired,
+		speechSynthPlaying: PropTypes.bool.isRequired
 	
 	};
 
@@ -26883,30 +26895,54 @@
   \*****************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
+	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 180);
+	var TaskIconImage = __webpack_require__(/*! ./TaskIconImage */ 200);
 	
 	var PracticeMic = React.createClass({
-		displayName: "PracticeMic",
+		displayName: 'PracticeMic',
 	
 		render: function render() {
+			console.log("is mic active? " + this.props.micActive);
 			var className = "btn btn-info micWrap micActive-" + this.props.micActive;
 			// var micFunction = this.props.micActive ? this.props.onMicDeactivate : this.props.onMicActivate;
 			var micFunction;
-			if (this.props.micActive) {
+	
+			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
+			var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
+			var taskIconImage;
+	
+			if (this.props.micActive === true) {
 				micFunction = this.props.onMicDeactivate;
+				taskIconImage = React.createElement(
+					'div',
+					null,
+					React.createElement(TaskIconImage, {
+						keyToAttach: 'iconStar',
+						imageSrc: imgStar,
+						transition: 'activateTaskStar' }),
+					React.createElement(TaskIconImage, {
+						keyToAttach: 'iconMic',
+						imageSrc: imgMic,
+						transition: 'activateTaskMic' })
+				);
 			} else {
 				micFunction = this.props.onMicActivate;
+				taskIconImage = React.createElement(TaskIconImage, {
+					keyToAttach: 'iconMic',
+					imageSrc: imgMic,
+					transition: 'none' });
 			}
 			return React.createElement(
-				"div",
-				{ className: "micDiv" },
+				'div',
+				{ className: 'micDiv' },
 				React.createElement(
-					"button",
-					{ id: "mic", className: className, onClick: micFunction },
-					React.createElement("span", { className: "icon-mic" })
+					'button',
+					{ id: 'mic', className: className, onClick: micFunction },
+					taskIconImage
 				)
 			);
 		}
@@ -26919,6 +26955,16 @@
 		onMicActivate: PropTypes.func.isRequired
 	
 	};
+	
+	/* Old return
+			return (
+				<div className="micDiv">
+					<button id="mic" className={className} onClick={micFunction}>
+						<span className='icon-mic'></span>
+					</button>
+				</div>		
+			)
+	*/
 
 /***/ },
 /* 226 */
@@ -26961,22 +27007,35 @@
 	var PropTypes = React.PropTypes;
 	
 	function PracticeAudioButton(props) {
-		return React.createElement(
-			"button",
-			{
-				className: "button btn-round-small",
-				onClick: function onClick() {
-					return props.playSpeechSynth(props.currentWord);
-				} },
-			React.createElement("span", { className: "glyphicon glyphicon-volume-up", "aria-hidden": "true" })
-		);
+		if (props.speechSynthPlaying) {
+			return React.createElement(
+				"button",
+				{
+					className: "button btn-round-small btn-round-small-active",
+					onClick: function onClick() {
+						return props.playSpeechSynth(props.currentWord);
+					} },
+				React.createElement("span", { className: "glyphicon glyphicon-volume-up", "aria-hidden": "true" })
+			);
+		} else {
+			return React.createElement(
+				"button",
+				{
+					className: "button btn-round-small btn-round-small-inactive",
+					onClick: function onClick() {
+						return props.playSpeechSynth(props.currentWord);
+					} },
+				React.createElement("span", { className: "glyphicon glyphicon-volume-up", "aria-hidden": "true" })
+			);
+		}
 	}
 	
 	module.exports = PracticeAudioButton;
 	
 	PracticeAudioButton.propTypes = {
 		playSpeechSynth: PropTypes.func.isRequired,
-		currentWord: PropTypes.string.isRequired
+		currentWord: PropTypes.string.isRequired,
+		speechSynthPlaying: PropTypes.bool.isRequired
 	};
 
 /***/ },
@@ -26992,16 +27051,31 @@
 	var PropTypes = React.PropTypes;
 	
 	function ShowPinyinButton(props) {
-		return React.createElement(
-			"button",
-			{
-				className: "btn-round-small",
-				onClick: props.changePinyinDisplay },
-			"Show Pinyin"
-		);
+		console.log(props.showPinyin);
+		if (props.showPinyin) {
+			return React.createElement(
+				"button",
+				{
+					className: "btn-round-small showPinyinText btn-round-small-active",
+					onClick: props.changePinyinDisplay },
+				"Show Pinyin"
+			);
+		} else {
+			return React.createElement(
+				"button",
+				{
+					className: "btn-round-small showPinyinText btn-round-small-inactive",
+					onClick: props.changePinyinDisplay },
+				"Show Pinyin"
+			);
+		}
 	}
 	
 	module.exports = ShowPinyinButton;
+	
+	ShowPinyinButton.PropTypes = {
+		showPinyin: PropTypes.bool.isRequired
+	};
 
 /***/ },
 /* 229 */
@@ -27052,20 +27126,18 @@
   \*********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
-	var PracticeAudioButton = __webpack_require__(/*! ./PracticeAudioButton */ 227);
 	
 	function FlashCardHeader(props) {
 		return React.createElement(
-			'div',
-			{ className: 'flashCardHeader' },
+			"div",
+			{ className: "flashCardHeader" },
 			React.createElement(
-				'h1',
+				"h1",
 				null,
-				'Task: ',
 				props.currentWordObject.task
 			)
 		);

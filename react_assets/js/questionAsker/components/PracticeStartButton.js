@@ -7,7 +7,7 @@ function PracticeStartButton (props) {
 			<button 
 				className="button practiceStartButton"
 				onClick={props.changePracticeMode}>
-				<span className="glyphicon glyphicon-record" aria-hidden="true"></span>
+				<i className="fa fa-bolt" aria-hidden="true"></i>
 				<span className="toolTipText">Practice</span>
 			</button>
 		)		

@@ -4,7 +4,7 @@ const Constants = require('../../helpers/Constants.js');
 
 
 function PracticeHeader (props) {
-	var headerImage = Constants.IMAGE_PATH + "UI/titleResults.png";
+	var headerImage = Constants.IMAGE_PATH + "UI/titlePractice.png";
 	return (
 		<div className="practiceHeader">
 			<img className="headerImageTextSlanted customSlant" src={headerImage} />
@@ -15,6 +15,10 @@ function PracticeHeader (props) {
 			<div className="glyphiconWrapper">
 				<span className="glyphicon glyphicon-record" aria-hidden="true"></span>
 			</div>
+			<div className="glyphiconWrapper">
+				<i className="fa fa-bolt" aria-hidden="true"></i>
+			</div>
+
 		</div>
 	)
 }
