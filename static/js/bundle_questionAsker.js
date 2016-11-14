@@ -26462,7 +26462,7 @@
 	var Constants = __webpack_require__(/*! ../../helpers/Constants.js */ 180);
 	
 	function PracticeHeader(props) {
-		var headerImage = Constants.IMAGE_PATH + "UI/titleResults.png";
+		var headerImage = Constants.IMAGE_PATH + "UI/titlePractice.png";
 		return React.createElement(
 			'div',
 			{ className: 'practiceHeader' },

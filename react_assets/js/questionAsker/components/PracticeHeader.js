@@ -4,7 +4,7 @@ const Constants = require('../../helpers/Constants.js');
 
 
 function PracticeHeader (props) {
-	var headerImage = Constants.IMAGE_PATH + "UI/titleResults.png";
+	var headerImage = Constants.IMAGE_PATH + "UI/titlePractice.png";
 	return (
 		<div className="practiceHeader">
 			<img className="headerImageTextSlanted customSlant" src={headerImage} />
