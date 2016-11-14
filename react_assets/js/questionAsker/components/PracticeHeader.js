@@ -15,6 +15,10 @@ function PracticeHeader (props) {
 			<div className="glyphiconWrapper">
 				<span className="glyphicon glyphicon-record" aria-hidden="true"></span>
 			</div>
+			<div className="glyphiconWrapper">
+				<i className="fa fa-bolt" aria-hidden="true"></i>
+			</div>
+
 		</div>
 	)
 }

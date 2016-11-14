@@ -7,7 +7,6 @@ var TaskIcon = React.createClass({
 		// Default TaskIcon image when nothing is being recorded or answered
 		var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 		var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
-		var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 		var imgCoins = Constants.IMAGE_PATH + "UI/Icon_10coins_flat_nostar-01.png";
 		var imgQuestion = Constants.IMAGE_PATH + "UI/Icon_Questionmark-01.png";
 		var imgRepeat = Constants.IMAGE_PATH + "UI/buttonRepeatOn.png";

@@ -1093,6 +1093,7 @@ $themeYellow: #FDD870;
 .practiceStartButton {
 	position: absolute;
 	bottom: 0px;
+	width: 50px;
 	right: 60px;
 	.toolTipText {
 		line-height:20px;
@@ -1147,9 +1148,10 @@ $themeYellow: #FDD870;
 		height: 100px;
 		padding: 7px;
 		text-align: center;
-		background-color: $headerBlue;
-		.glyphicon {
-			font-size: 80px;
+		border: 7px solid $headerBlue;
+		background-color: gray;
+		.fa-bolt {
+			font-size: 70px;
 			display: inline;
 			vertical-align: middle;
 		}
@@ -1278,6 +1280,15 @@ $themeYellow: #FDD870;
 		    background: $headerBlue;
 		    z-index: 1;
 		    padding: 1%;
+		    position: relative;
+		    outline: none;
+		    img {
+		    	position: absolute;
+		    	left: 0;
+		    	top: 0;
+		    	width: 100%;
+		    	height:100%;
+		    }
 		    span {
 		    	font-size: 5em;
 		    	width: 100%;
@@ -1319,13 +1330,13 @@ $themeYellow: #FDD870;
 			color: $themeYellow;
 			cursor: pointer;
 		}
-//true-false for "done" button
-	.btn-practice-done-true {
+
+	.btn-practice-done-active {
 		background-color: $themeYellow;
-		color: $headerblue;
+		color: $headerBlue;
 	}
 
-	.btn-practice-done-false {
+	.btn-practice-done-inactive {
 		background-color: $headerBlue;
 		color: white;
 	}
@@ -1350,22 +1361,30 @@ $themeYellow: #FDD870;
 		background-color: $headerBlue;
 		color: white;
 	}
-	//adding active state for pinyin and speaking buttons. Stay active for entire phrase for the listen button, till unclicked for Pinyin.
-	.btn-round-small-true {
-		background-color: $themeYellow;
-		color: $headerblue;
-	}
-
-	.btn-round-small-false {
-		border: 1px solid $headerBlue;
-		color: $headerBlue;
-		background-color: white;
-	}
 
 	}
 	.glyphicon {
 		font-size: 30px;
 	}	
+}
+
+//adding active state for pinyin and speaking buttons. Stay active for entire phrase for the listen button, till unclicked for Pinyin.
+.btn-round-small-active {
+	border: 1px solid $themeYellow;
+	background-color: $themeYellow;
+	color: $headerBlue;
+	&:hover {
+		cursor: default;
+		border: 1px solid $themeYellow;
+		background-color: $themeYellow;
+		color: $headerBlue;
+	}
+}
+
+.btn-round-small-inactive {
+	border: 1px solid $headerBlue;
+	color: $headerBlue;
+	background-color: white;
 }
 
 
@@ -1394,7 +1413,7 @@ $themeYellow: #FDD870;
 	//adding active state for arrow buttons on click
 	.arrow-true {
 		background-color: $themeYellow;
-		color: $headerblue;
+		color: $headerBlue;
 	}
 	.arrow-false {
 		color: $headerBlue;

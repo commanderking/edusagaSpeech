@@ -825,7 +825,8 @@ var QuestionAsker = React.createClass({
 						vocabList = {this.state.sceneData.practice}
 						practiceMode = {this.state.practiceMode} 
 						changePracticeMode = {this.changePracticeMode}
-						playSpeechSynth = {this.playSpeechSynth}/>
+						playSpeechSynth = {this.playSpeechSynth}
+						speechSynthPlaying = {this.state.speechSynthPlaying}/>
 					<DialogContainer
 						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}
