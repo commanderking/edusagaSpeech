@@ -6,13 +6,13 @@ function ShowPinyinButton (props) {
 	if (props.showPinyin) {
 		return (
 			<button 
-				className="btn-round-small btn-round-small-active"
+				className="btn-round-small showPinyinText btn-round-small-active"
 				onClick={props.changePinyinDisplay}>Show Pinyin</button>
 		)		
 	} else {
 		return (
 			<button 
-				className="btn-round-small btn-round-small-inactive"
+				className="btn-round-small showPinyinText btn-round-small-inactive"
 				onClick={props.changePinyinDisplay}>Show Pinyin</button>
 		)		
 	}

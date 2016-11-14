@@ -26722,7 +26722,7 @@
 			return React.createElement(
 				"button",
 				{
-					className: "btn-round-small btn-round-small-active",
+					className: "btn-round-small showPinyinText btn-round-small-active",
 					onClick: props.changePinyinDisplay },
 				"Show Pinyin"
 			);
@@ -26730,7 +26730,7 @@
 			return React.createElement(
 				"button",
 				{
-					className: "btn-round-small btn-round-small-inactive",
+					className: "btn-round-small showPinyinText btn-round-small-inactive",
 					onClick: props.changePinyinDisplay },
 				"Show Pinyin"
 			);
