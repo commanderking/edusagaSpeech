@@ -82,7 +82,7 @@
 				"tries" : 0
 			},
 			{
-				"task" : "Ask if someoone's dad is Chinese (method 2)",
+				"task" : "Ask if someone's dad is Chinese (method 2)",
 				"answer" : "你的爸爸是不是中国人",
 				"pinyin" : "nǐ de bàba shì bùshì zhōngguó rén",
 				"correct" : false,
