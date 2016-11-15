@@ -2,7 +2,6 @@ var React = require('react')
 var PropTypes = React.PropTypes;
 
 function ShowPinyinButton (props) {
-	console.log(props.showPinyin);
 	if (props.showPinyin) {
 		return (
 			<button 

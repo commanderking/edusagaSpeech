@@ -22752,7 +22752,7 @@
   \******************************************************/
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	var speechHelper = {
 		checkBrowser: function checkBrowser() {
@@ -22764,7 +22764,12 @@
 				alert("Sorry, the browser does not support Web Speech. Please use Google Chrome for Speech Access.");
 			}
 		},
+		removeEventHandlers: function removeEventHandlers() {
+			$(".taskDiv, .coinIcon, #mic").off();
+			console.log("event handler removed");
+		},
 		activateSpeech: function activateSpeech(possibleAnswers, lang) {
+			var that = this;
 			return new Promise(function (resolve, reject) {
 	
 				var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -22811,6 +22816,8 @@
 	
 				// If user clicks task again, the task should cancel
 				$(".taskDiv, .coinIcon, #mic").click(function () {
+					that.removeEventHandlers();
+					console.log("canceled");
 					recognition.abort();
 				});
 	
@@ -22825,6 +22832,7 @@
 				}, 200);
 	
 				recognition.onspeechend = function () {
+					that.removeEventHandlers();
 					recognition.stop();
 				}, recognition.onerror = function (event) {
 					console.log("Error " + event.error);
@@ -22835,11 +22843,6 @@
 			});
 		}
 	};
-	
-	/*
-	function(resolve, reject) {
-		resolve("What is going on?");
-	}*/
 	
 	module.exports = speechHelper;
 
@@ -26342,13 +26345,16 @@
 				// Need to set var here, otherwise loses it in setState
 				console.log(userAnswer);
 				var answer = userAnswer;
-				if (userAnswer !== null) {
-					console.log("This is user's answer " + answer);
-					that.setState({
-						userAnswer: userAnswer,
-						micActive: false
-					}, that.checkAnswer(userAnswer));
+				console.log("User Ansewr is:" + userAnswer);
+	
+				// Case where user cancels their answer, SpeechRecognition.js gives back "Cancel Speech", don't save that if that's the case
+				if (userAnswer === "Cancel Speech") {
+					userAnswer = "";
 				}
+				that.setState({
+					userAnswer: userAnswer,
+					micActive: false
+				}, that.checkAnswer(userAnswer));
 				that.handleMicDeactivate();
 			});
 		},
@@ -26362,10 +26368,9 @@
 		checkAnswer: function checkAnswer(userAnswer) {
 			var newVocabData = this.state.vocabData;
 			var index = this.state.vocabData.currentWordIndex;
-	
-			// If correct, update info
 			var correctAnswer = false;
 	
+			// Remove any punctuation marks when checking answer
 			var answer = newVocabData.list[index].answer.replace(/[.,。，\/#?？。!$%\^&\*;:{}=\-_`~()]/g, "").replace(/\s/g, '');
 			console.log(answer);
 	
@@ -26380,11 +26385,9 @@
 				newVocabData.list[index].correct = false;
 				newVocabData.list[index].tries += 1;
 			}
-			// Store their guess as the most recent guess
+	
 			newVocabData.lastAnswer = userAnswer;
-			this.setState({
-				vocabData: newVocabData
-			});
+			this.setState({ vocabData: newVocabData });
 		},
 		changePinyinDisplay: function changePinyinDisplay() {
 			this.setState({ showPinyin: !this.state.showPinyin });
@@ -26574,7 +26577,6 @@
 		displayName: 'PracticeMic',
 	
 		render: function render() {
-			console.log("is mic active? " + this.props.micActive);
 			var className = "btn btn-info micWrap micActive-" + this.props.micActive;
 			// var micFunction = this.props.micActive ? this.props.onMicDeactivate : this.props.onMicActivate;
 			var micFunction;
@@ -26617,16 +26619,6 @@
 		onMicActivate: PropTypes.func.isRequired
 	
 	};
-	
-	/* Old return
-			return (
-				<div className="micDiv">
-					<button id="mic" className={className} onClick={micFunction}>
-						<span className='icon-mic'></span>
-					</button>
-				</div>		
-			)
-	*/
 
 /***/ },
 /* 226 */
@@ -26713,7 +26705,6 @@
 	var PropTypes = React.PropTypes;
 	
 	function ShowPinyinButton(props) {
-		console.log(props.showPinyin);
 		if (props.showPinyin) {
 			return React.createElement(
 				"button",

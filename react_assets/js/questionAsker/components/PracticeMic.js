@@ -5,7 +5,6 @@ var TaskIconImage = require('./TaskIconImage');
 
 var PracticeMic = React.createClass({
 	render: function() {
-		console.log("is mic active? " + this.props.micActive);
 		var className = "btn btn-info micWrap micActive-" + this.props.micActive;
 		// var micFunction = this.props.micActive ? this.props.onMicDeactivate : this.props.onMicActivate;
 		var micFunction;
@@ -44,13 +43,3 @@ PracticeMic.propTypes = {
 	onMicActivate:PropTypes.func.isRequired
 
 }
-
-/* Old return
-		return (
-			<div className="micDiv">
-				<button id="mic" className={className} onClick={micFunction}>
-					<span className='icon-mic'></span>
-				</button>
-			</div>		
-		)
-*/
