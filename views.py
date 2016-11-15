@@ -88,7 +88,6 @@ def testDatabase(name="test"):
 	for episode in teacher.episodes:
 		print episode.episodeJSONFileName
 
-
 	return render_template('questionAsker.html', teacher="public", activityName=currentEpisode.episodeJSONFileName)
 
 
