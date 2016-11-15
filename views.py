@@ -122,9 +122,14 @@ def teacherPage(username):
 		print current_user.email
 		print current_user
 		print current_user.is_authenticated
+		'''
 		episodeArray = []
 		for episode in user.episodes:
 			episodeArray.append(episode.episodeJSONFileName)
+		'''
+
+		# For now user dummy array to test
+		episodeArray = ["introAlex", "introDavid"]
 
 		episodeArray = json.dumps(episodeArray, ensure_ascii=False).encode('utf8')
 		print episodeArray
