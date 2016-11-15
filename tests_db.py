@@ -5,13 +5,17 @@ from main import app, db
 from models import *
 from flask.ext.login import current_user
 
-class TestSetup(TestCase):
+from flask.ext.fixtures import FixturesMixin
+
+class TestSetup(TestCase, FixturesMixin):
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/edusagaspeech"
     TESTING = True
 
     def create_app(self):
+
         app = Flask(__name__)
         app.config['TESTING'] = True
+
         return app
     def setUp(self):
         pass
@@ -19,25 +23,8 @@ class TestSetup(TestCase):
         db.session.remove()
 
 class AddUser(TestSetup): 
-    '''
-    id = db.Column(db.Integer, primary_key=True)
 
-    # User authentication information
-    username = db.Column(db.String(50), nullable=False, unique=True)
-    password = db.Column(db.String(255), nullable=False, server_default='')
-    reset_password_token = db.Column(db.String(100), nullable=False, server_default='')
 
-    # User email information
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    confirmed_at = db.Column(db.DateTime())
-
-    # User information
-    active = db.Column('is_active', db.Boolean(), nullable=False, server_default='0')
-    first_name = db.Column(db.String(100), nullable=False, server_default='')
-    last_name = db.Column(db.String(100), nullable=False, server_default='')
-    # user_types are: teacher, student, general
-    # user_type = db.Column(db.String(100), nullable=False,server_default='general')
-    '''
 
     def test_adding_user(self):
         newTeacher = Teacher(username="cooldude", password="mypassword", email="myemail@gmail.com")

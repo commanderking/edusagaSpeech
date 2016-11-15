@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 var Constants = require('../helpers/Constants');
 var EpisodeTagList = require('./EpisodeTagLists');
 
-var MainMenu = React.createClass({
+var MainMenuContainer = React.createClass({
 	getInitialState: function() {
 		return {
 			teacherData: null
@@ -11,10 +11,24 @@ var MainMenu = React.createClass({
 	},
 	loadSceneData: function() {
 		var that = this;
-		$.getJSON("/static/data/teacherScenes/" + teacher + ".json", function(data) {})
-			.success(function(data) {
-				that.setState({teacherData: data});
-			});
+
+		// If teacher is undefined, that means this is being loaded from a place where the
+		// teacher should be public to see public episodes
+		if (teacher === undefined) {
+			var teacher = "public";
+		}
+
+		// if props are received that means we should display a special set of episodes based on props 
+		// else, load all the episodes that are public
+
+		if (this.props.teacherEpisodes) {
+			this.setState({teacherData: this.props.teacherEpisodes});
+		} else {
+			$.getJSON("/static/data/teacherScenes/" + teacher + ".json", function(data) {})
+				.success(function(data) {
+					that.setState({teacherData: data});
+				});
+		}
 	},
 	sortEpisodeArraybySequence: function(episodeArray) {
 		return episodeArray.sort(function(a,b) {
@@ -24,6 +38,9 @@ var MainMenu = React.createClass({
 		})
 	},
 	generateDOMfromEpisodesArray: function(episodeArray) {
+		if (studentID === undefined) {
+			var studentID = '';
+		}
 		var episodeListToReturn = episodeArray.map(function(scene, i) {
 			var link = scene.link + "?" + studentID;
 			var className = "episodeBlock activeScene-" + scene.assigned;
@@ -120,7 +137,6 @@ var MainMenu = React.createClass({
 				return <div>Loading</div>
 		} else {
 			return (
-				<body className="index">
 					<div className="container-fluid">
 						<h2 className="menuTitle">Episodes Available</h2>
 						<EpisodeTagList
@@ -148,19 +164,10 @@ var MainMenu = React.createClass({
 							episodeList = {otherEpisodeList} />
 
 					</div>	
-      <script src="static/js/landingPage/jquery.min.js"></script>
-      <script src="static/js/landingPage/jquery.dropotron.min.js"></script>
-      <script src="static/js/landingPage/jquery.scrolly.min.js"></script>
-      <script src="static/js/landingPage/jquery.scrollgress.min.js"></script>
-      <script src="static/js/landingPage/skel.min.js"></script>
-      <script src="static/js/landingPage/util.js"></script>
-      <script src="static/js/landingPage/main.js"></script>
-
-  </body>
 
 			)
 		}
 	}
 });
 
-ReactDOM.render(<MainMenu />, document.getElementById('app'));
+module.exports = MainMenuContainer;

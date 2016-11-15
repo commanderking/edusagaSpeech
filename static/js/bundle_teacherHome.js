@@ -51,16 +51,18 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
+	var MainMenuContainer = __webpack_require__(/*! ./mainMenu/MainMenuContainer */ 232);
 	
 	var TeacherHome = React.createClass({
 		displayName: 'TeacherHome',
 	
 		render: function render() {
+			console.log(episodeArray["scenes"][0]);
 			return React.createElement(
 				'div',
 				null,
+				'Welcome ',
 				username,
-				episodeArray,
 				React.createElement(
 					'div',
 					{ className: 'episodes' },
@@ -69,12 +71,20 @@
 						null,
 						'My episodes'
 					),
+					React.createElement(MainMenuContainer, {
+						title: 'My Episodes',
+						teacherEpisodes: episodeArray }),
 					React.createElement(
 						'button',
 						{ className: 'viewPublicEpisodes' },
 						'View Public Episodes'
 					),
-					React.createElement('div', { id: '#app' })
+					React.createElement(
+						'h1',
+						null,
+						'Public Episodes'
+					),
+					React.createElement(MainMenuContainer, null)
 				),
 				React.createElement(
 					'div',
@@ -21636,6 +21646,366 @@
 	var ReactMount = __webpack_require__(/*! ./ReactMount */ 164);
 	
 	module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ },
+/* 172 */,
+/* 173 */,
+/* 174 */,
+/* 175 */,
+/* 176 */,
+/* 177 */,
+/* 178 */,
+/* 179 */,
+/* 180 */
+/*!**********************************************!*\
+  !*** ./react_assets/js/helpers/Constants.js ***!
+  \**********************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var IMAGE_PATH = "https://s3.amazonaws.com/edusaga/assets/images/";
+	var SOUND_PATH = "https://s3.amazonaws.com/edusaga/assets/audio/";
+	
+	module.exports = {
+		IMAGE_PATH: IMAGE_PATH,
+		SOUND_PATH: SOUND_PATH
+	};
+
+/***/ },
+/* 181 */
+/*!*****************************************************!*\
+  !*** ./react_assets/js/mainMenu/EpisodeTagLists.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	var EpisodeTagList = React.createClass({
+		displayName: "EpisodeTagList",
+	
+		getInitialState: function getInitialState() {
+			return {
+				showMoreEpisodes: false
+			};
+		},
+		displayMoreEpisodes: function displayMoreEpisodes() {
+			this.setState({ showMoreEpisodes: true });
+			console.log(this.state.showMoreEpisodes);
+		},
+		render: function render() {
+			// Grab first three episodes of each topic
+			var firstThreeEpisodes = [];
+			for (var i = 0; i < 3; i++) {
+				if (this.props.episodeList[i]) {
+					firstThreeEpisodes.push(this.props.episodeList[i]);
+				}
+			}
+	
+			// Show See More button only if a category has more than three episodes and the see more episode button has not already been clicked
+			var seeMoreButton = this.props.episodeList.length > 3 && this.state.showMoreEpisodes === false ? React.createElement(
+				"button",
+				{ className: "buttonSeeMore",
+					onClick: this.displayMoreEpisodes },
+				"See More Episodes"
+			) : null;
+	
+			// Display 3 episodes or more episodes depending on showMoreEpisodes state
+			var episodesToDisplay = this.state.showMoreEpisodes ? this.props.episodeList : firstThreeEpisodes;
+	
+			// Only display the category if there are more than one episode present
+			if (this.props.episodeList.length > 0) {
+				return React.createElement(
+					"div",
+					null,
+					React.createElement(
+						"h2",
+						null,
+						this.props.header
+					),
+					React.createElement(
+						"ul",
+						{ className: "scenarioList" },
+						episodesToDisplay
+					),
+					seeMoreButton
+				);
+			} else {
+				return null;
+			}
+		}
+	});
+	
+	module.exports = EpisodeTagList;
+
+/***/ },
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */
+/*!*******************************************************!*\
+  !*** ./react_assets/js/mainMenu/MainMenuContainer.js ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
+	var Constants = __webpack_require__(/*! ../helpers/Constants */ 180);
+	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 181);
+	
+	var MainMenuContainer = React.createClass({
+		displayName: 'MainMenuContainer',
+	
+		getInitialState: function getInitialState() {
+			return {
+				teacherData: null
+			};
+		},
+		loadSceneData: function loadSceneData() {
+			var that = this;
+	
+			// If teacher is undefined, that means this is being loaded from a place where the
+			// teacher should be public to see public episodes
+			if (teacher === undefined) {
+				var teacher = "public";
+			}
+	
+			// if props are received that means we should display a special set of episodes based on props 
+			// else, load all the episodes that are public
+	
+			if (this.props.teacherEpisodes) {
+				this.setState({ teacherData: this.props.teacherEpisodes });
+			} else {
+				$.getJSON("/static/data/teacherScenes/" + teacher + ".json", function (data) {}).success(function (data) {
+					that.setState({ teacherData: data });
+				});
+			}
+		},
+		sortEpisodeArraybySequence: function sortEpisodeArraybySequence(episodeArray) {
+			return episodeArray.sort(function (a, b) {
+				var x = a["sequence"];
+				var y = b["sequence"];
+				return x < y ? -1 : x > y ? 1 : 0;
+			});
+		},
+		generateDOMfromEpisodesArray: function generateDOMfromEpisodesArray(episodeArray) {
+			if (studentID === undefined) {
+				var studentID = '';
+			}
+			var episodeListToReturn = episodeArray.map(function (scene, i) {
+				var link = scene.link + "?" + studentID;
+				var className = "episodeBlock activeScene-" + scene.assigned;
+				var characterImage = Constants.IMAGE_PATH + scene.characterImage;
+				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
+				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
+	
+				// Loop through can do statements for each episode to prepare DOM elements
+				var canDoStatements = scene.objectives.map(function (objective, i) {
+					var reactKey = "objective" + i;
+					return React.createElement(
+						'li',
+						{ key: reactKey },
+						objective
+					);
+				});
+	
+				return React.createElement(
+					'a',
+					{ href: link,
+						key: i,
+						'data-index': i },
+					React.createElement(
+						'li',
+						{ className: className },
+						starIcon,
+						React.createElement(
+							'h3',
+							null,
+							scene.name
+						),
+						React.createElement('img', { className: 'characterImage', src: characterImage }),
+						React.createElement(
+							'p',
+							null,
+							React.createElement(
+								'b',
+								null,
+								'Scenario:'
+							),
+							' ',
+							scene.scenario
+						),
+						React.createElement(
+							'div',
+							null,
+							React.createElement(
+								'b',
+								null,
+								'Can Do Statements:'
+							),
+							' ',
+							React.createElement('br', null),
+							' ',
+							canDoStatements
+						)
+					)
+				);
+			});
+			return episodeListToReturn;
+		},
+		componentDidMount: function componentDidMount() {
+			this.loadSceneData();
+		},
+		render: function render() {
+	
+			var scenes;
+	
+			// Create link for each scene that should be available to student
+			var tagsSet = new Set();
+			if (this.state.teacherData) {
+				var that = this;
+				// Divide teacherData into subcategories
+	
+				var introEpisodes = [];
+				var familyNationalityEpisodes = [];
+				var dateTimeEpisodes = [];
+				var likesDislikesEpisodes = [];
+				var reviewEpisodes = [];
+				var otherEpisodes = [];
+	
+				this.state.teacherData.scenes.forEach(function (episode, i) {
+					// Generate array of tags
+					tagsSet.add(episode.tags[0]);
+					switch (episode.tags[0]) {
+						case "introduction":
+						case "greetings":
+							introEpisodes.push(episode);
+							break;
+						case "family":
+						case "nationality":
+							familyNationalityEpisodes.push(episode);
+							break;
+						case "date":
+						case "time":
+							dateTimeEpisodes.push(episode);
+							break;
+						case "hobbies":
+						case "food":
+							likesDislikesEpisodes.push(episode);
+							break;
+						case "review":
+							reviewEpisodes.push(episode);
+							break;
+						case "activities":
+							otherEpisodes.push(episode);
+							break;
+						default:
+							break;
+					}
+				});
+	
+				// Sort array by sequence and then generate DOM elements to display
+				var introEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(introEpisodes));
+				var familyNationalityEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(familyNationalityEpisodes));
+				var dateTimeEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(dateTimeEpisodes));
+				var likesDislikesEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(likesDislikesEpisodes));
+				var reviewEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(reviewEpisodes));
+				var otherEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(otherEpisodes));
+			} else {
+				scenes = "Nothing!";
+			}
+	
+			if (!this.state.teacherData) {
+				return React.createElement(
+					'div',
+					null,
+					'Loading'
+				);
+			} else {
+				return React.createElement(
+					'div',
+					{ className: 'container-fluid' },
+					React.createElement(
+						'h2',
+						{ className: 'menuTitle' },
+						'Episodes Available'
+					),
+					React.createElement(EpisodeTagList, {
+						header: 'Introduction/Greetings',
+						episodeList: introEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Family/Nationality',
+						episodeList: familyNationalityEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Dates and Times',
+						episodeList: dateTimeEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Likes and Dislikes, Inviting People',
+						episodeList: likesDislikesEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Review',
+						episodeList: reviewEpisodeList }),
+					React.createElement(EpisodeTagList, {
+						header: 'Additional',
+						episodeList: otherEpisodeList })
+				);
+			}
+		}
+	});
+	
+	module.exports = MainMenuContainer;
 
 /***/ }
 /******/ ]);

@@ -5,8 +5,8 @@ from flask_login import current_user
 
 import boto3, json, simplejson, urlparse, datetime
 
-from glob import glob
 from loadJson import getAllEpisodeData
+from loadJson2 import getTeacherEpisodes
 
 #For Heroku Logging
 import sys, os, uuid
@@ -80,6 +80,7 @@ def testDatabase(name="test"):
 	print teacher.username
 
 	currentEpisode.teachers.append(teacher)
+	newEpisode2.teachers.append(teacher)
 	db.session.commit()
 
 	for teacher in currentEpisode.teachers: 
@@ -129,15 +130,16 @@ def teacherPage(username):
 		'''
 
 		# For now user dummy array to test
-		episodeArray = ["introAlex", "introDavid"]
+		episodeArray = getTeacherEpisodes(username)
+		#episodeArray = ['introAlex', 'introDavid']
 
-		episodeArray = json.dumps(episodeArray, ensure_ascii=False).encode('utf8')
+		# episodeArray = json.dumps(episodeArray, ensure_ascii=False).encode('utf8')
 		print episodeArray
 
 
 		# episodes = Episode.query.filter_by()
 
-		return render_template('teacherHome.html', username=username, episodeArray=episodeArray)
+		return render_template('teacherHome.html', public="public", username=username, episodeArray=episodeArray)
 
 @app.route('/<teacher>/home/')
 def teacherHome(teacher):
