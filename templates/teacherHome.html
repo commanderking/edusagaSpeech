@@ -14,7 +14,15 @@
 <body>
     <div id="teacherHome"></div>
     <script>
-    	var username = "{{ username }}"
+    	var username = "{{ username }}";
+    	var episodeArray = "{{episodeArray}}";
+    	console.log(episodeArray);
+    	console.log(episodeArray.split('&#34;').join('"').toString());
+    	episodeArray = episodeArray.split('&#34;').join('"').toString();
+    	console.log(JSON.parse(episodeArray));
+    	episodeArray = JSON.parse(episodeArray);
+
+    	 //"{{ episodeArray }}";
     </script>
     <script src="/static/js/bundle_teacherHome.js"></script>
 </body>

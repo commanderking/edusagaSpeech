@@ -60,6 +60,7 @@
 				'div',
 				null,
 				username,
+				episodeArray,
 				React.createElement('div', { className: 'episodes' }),
 				React.createElement('div', { className: 'vocabLists' })
 			);

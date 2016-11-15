@@ -67,6 +67,9 @@ def trackVisitorEvent(eventText):
 def testDatabase(name="test"):
 	newEpisode = Episode('introDavid') 
 	db.session.add(newEpisode)
+
+	newEpisode2 = Episode('introAlex')
+	db.session.add(newEpisode2)
 	db.session.commit()
 
 	currentEpisode = Episode.query.first()
@@ -110,15 +113,27 @@ def home(name="Home"):
 @app.route('/<username>')
 @login_required
 def teacherPage(username):
-	if user == None:
+	# Make sure only the teacher with this username can see the page
+	if current_user.username != username:
 		return redirect(url_for('index'))
 	else:
 		user = Teacher.query.filter_by(username=username).first()
+		print user.username
+		print current_user.username
+		print current_user.email
+		print current_user
+		print current_user.is_authenticated
+		episodeArray = []
 		for episode in user.episodes:
-			print episode.episodeJSONFileName
+			episodeArray.append(episode.episodeJSONFileName)
+
+		episodeArray = json.dumps(episodeArray, ensure_ascii=False).encode('utf8')
+		print episodeArray
+
+
 		# episodes = Episode.query.filter_by()
 
-		return render_template('teacherHome.html', username=username)
+		return render_template('teacherHome.html', username=username, episodeArray=episodeArray)
 
 @app.route('/<teacher>/home/')
 def teacherHome(teacher):

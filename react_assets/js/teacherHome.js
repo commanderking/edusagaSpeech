@@ -6,7 +6,9 @@ var TeacherHome = React.createClass({
 		return (
 			<div>
 				{username}
+				{episodeArray}
 				<div className="episodes">
+
 				</div>
 				<div className="vocabLists">
 				</div>

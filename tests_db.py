@@ -2,7 +2,7 @@ from flask import Flask
 from flask_testing import TestCase
 import unittest
 from main import app, db
-from models import Episodes, TeacherUser
+from models import *
 from flask.ext.login import current_user
 
 class TestSetup(TestCase):
@@ -39,9 +39,9 @@ class AddUser(TestSetup):
     # user_type = db.Column(db.String(100), nullable=False,server_default='general')
     '''
 
-    newTeacher = TeacherUser(username="yaoguais", password="mypassword", email="myemail@gmail.com")
+    newTeacher = Teacher(username="cooldude", password="mypassword", email="myemail@gmail.com")
 
-    #self.assertTrue(current_user.name == 'Joe')
+    #self.assertTrue(current_user.username == 'cooldude')
     #self.assertFalse(current_user.is_anonymous())
     db.session.add(newTeacher)
     db.session.commit()
@@ -55,11 +55,11 @@ class AddUser(TestSetup):
 
 class AddEpisodes(TestSetup):
     def test_add_episode(self):
-        newEpisode = Episodes('introDavid')
+        newEpisode = Episode('introJohn')
         db.session.add(newEpisode)
         db.session.commit()
-        badEpisode = Episodes('introAlex')
-        tooLongEpisode = Episodes('this episode length is way too long and should not be added to the database')
+        badEpisode = Episode('introAlex')
+        tooLongEpisode = Episode('this episode length is way too long and should not be added to the database')
         assert newEpisode in db.session
         assert badEpisode not in db.session
         assert tooLongEpisode not in db.session
