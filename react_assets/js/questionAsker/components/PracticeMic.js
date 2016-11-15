@@ -17,21 +17,15 @@ var PracticeMic = React.createClass({
 		if (this.props.micActive === true) {
 			micFunction = this.props.onMicDeactivate;
 			taskIconImage = <div>
+							<span className='icon-mic'></span>
 							<TaskIconImage 
 								keyToAttach="iconStar" 
 								imageSrc={imgStar}
 								transition = "activateTaskStar"/>
-							<TaskIconImage 
-								keyToAttach="iconMic" 
-								imageSrc={imgMic}
-								transition ="activateTaskMic"/>
 							</div>
 		} else {
 			micFunction = this.props.onMicActivate;
-			taskIconImage = <TaskIconImage 
-								keyToAttach="iconMic" 
-								imageSrc={imgMic}
-								transition = "none"/>
+			taskIconImage = <span className='icon-mic'></span>
 		}
 		return (
 			<div className="micDiv">
