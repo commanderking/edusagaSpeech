@@ -4510,7 +4510,7 @@
 				},
 	
 				// If user clicks task again, the task should cancel
-				$(".taskDiv, .coinIcon").click(function () {
+				$(".taskDiv, .coinIcon, #mic").click(function () {
 					recognition.abort();
 				});
 	
@@ -4528,6 +4528,8 @@
 					recognition.stop();
 				}, recognition.onerror = function (event) {
 					console.log("Error " + event.error);
+					// Cancel Speech text is used by other functions to determine how to behave
+					// If change here, need to change in questionAsker.js (handleRepeat and checkAnswer)
 					resolve("Cancel Speech");
 				};
 			});
