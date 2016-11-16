@@ -8,7 +8,12 @@ var speechHelper = {
 			alert("Sorry, the browser does not support Web Speech. Please use Google Chrome for Speech Access.");
 		}
 	},
+	removeEventHandlers: function() {
+		$(".taskDiv, .coinIcon, #mic").off();
+		console.log("event handler removed");
+	},
 	activateSpeech: function(possibleAnswers, lang) {
+		var that = this;
 		return new Promise( function (resolve, reject) {
 
 			var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -55,7 +60,9 @@ var speechHelper = {
 			},
 
 			// If user clicks task again, the task should cancel
-			$(".taskDiv, .coinIcon").click(function() {
+			$(".taskDiv, .coinIcon, #mic").click(function() {
+				that.removeEventHandlers();
+				console.log("canceled");
 				recognition.abort();
 			})
 
@@ -70,21 +77,19 @@ var speechHelper = {
 			}, 200);
 
 			recognition.onspeechend = function() {
+				that.removeEventHandlers();
 				recognition.stop();
 			},
 
 			recognition.onerror = function(event) {
 				console.log("Error " + event.error);
+				// Cancel Speech text is used by other functions to determine how to behave
+				// If change here, need to change in questionAsker.js (handleRepeat and checkAnswer)
 				resolve("Cancel Speech");
 			}
 		});
 	}
 }
-
-	/*
-	function(resolve, reject) {
-		resolve("What is going on?");
-	}*/
 
 
 module.exports = speechHelper;

@@ -1,0 +1,41 @@
+[
+	{
+		"table" : "teacher",
+		"records": [{
+			"id": 1,
+			"username" : "jinlaoshi",
+			"first_name" : "Jeff",
+			"last_name" : "King",
+			"password" : "MyPassword1",
+			"email" : "testemail@gmail.com"
+		}]
+	},
+	{
+		"table" : "episode",
+		"records": [
+		{
+			"id" : 1,
+			"episodeJSONFileName": "introAlex",
+			"episodeAssigned" : false
+		},
+		{
+			"id" : 2,
+			"episodeJSONFileName": "introDavid",
+			"epsiodeAssigned" : false
+		}
+		]
+	},
+	{
+		"table" : "episodes",
+		"records" : [
+		{
+			"episode_id": 1,
+			"teacher_id" : 1
+		},
+		{
+			"episode_id": 2,
+			"teacher_id": 1
+		}
+		]
+	}
+]

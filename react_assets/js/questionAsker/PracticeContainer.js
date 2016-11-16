@@ -50,16 +50,19 @@ var PracticeContainer = React.createClass({
 				// Need to set var here, otherwise loses it in setState
 				console.log(userAnswer);
 				var answer = userAnswer;
-				if (userAnswer !== null) {
-					console.log("This is user's answer " + answer);
-					that.setState(
-						{
-							userAnswer: userAnswer,
-							micActive: false
-						},
-						that.checkAnswer(userAnswer)		
-					)
+				console.log("User Ansewr is:" + userAnswer)
+
+				// Case where user cancels their answer, SpeechRecognition.js gives back "Cancel Speech", don't save that if that's the case
+				if (userAnswer === "Cancel Speech") {
+					userAnswer = "";
 				}
+				that.setState(
+					{
+						userAnswer: userAnswer,
+						micActive: false
+					},
+					that.checkAnswer(userAnswer)
+				);
 				that.handleMicDeactivate();
 			}
 		);
@@ -74,10 +77,9 @@ var PracticeContainer = React.createClass({
 	checkAnswer: function(userAnswer) {
 		var newVocabData = this.state.vocabData;
 		var index = this.state.vocabData.currentWordIndex;
-
-		// If correct, update info
 		var correctAnswer = false;
 
+		// Remove any punctuation marks when checking answer
 		var answer = newVocabData.list[index].answer.replace(/[.,。，\/#?？。!$%\^&\*;:{}=\-_`~()]/g,"").replace(/\s/g, '');
 		console.log(answer);
 
@@ -92,13 +94,9 @@ var PracticeContainer = React.createClass({
 			newVocabData.list[index].correct = false;
 			newVocabData.list[index].tries += 1;
 		}
-		// Store their guess as the most recent guess
+
 		newVocabData.lastAnswer = userAnswer;
-		this.setState (
-			{
-				vocabData: newVocabData,
-			}
-		)
+		this.setState ({vocabData: newVocabData});
 	},
 	changePinyinDisplay: function() {
 		this.setState({showPinyin: !this.state.showPinyin});

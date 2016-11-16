@@ -1,10 +1,15 @@
 import json, os
 from glob import glob
 
+
 def getAllEpisodeData(teacherName):
 	sceneMenuDataStructure = {}
 	sceneMenuData = []
 	json_dir_name = "static/data/" + teacherName
+
+	# Pull all episodes that a teacher has from the database
+	# iterate through them, for each one look in the public folder and find the scenes
+	# return the data that was built
 
 	json_pattern = os.path.join(json_dir_name, '*.json')
 	file_list = glob(json_pattern)
@@ -23,7 +28,7 @@ def getAllEpisodeData(teacherName):
 	newFile = open("static/data/teacherScenes/" + teacherName +  ".json", "w")
 	newFile.write("%s\n" % sceneMenuDataStructure)
 	newFile.close()
-
+	print sceneMenuDataStructure
 	return sceneMenuData
 
 def buildEpisodeData(jsonPath, teacherName): 
