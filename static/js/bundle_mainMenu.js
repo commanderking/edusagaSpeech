@@ -21783,7 +21783,7 @@
 				var teacher = "public";
 			}
 	
-			// if props are received that means we should display a special set of episodes based on props 
+			// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
 			// else, load all the episodes that are public
 	
 			if (this.props.teacherEpisodes) {
@@ -21870,7 +21870,6 @@
 			this.loadSceneData();
 		},
 		render: function render() {
-	
 			var scenes;
 	
 			// Create link for each scene that should be available to student
@@ -21928,6 +21927,12 @@
 				scenes = "Nothing!";
 			}
 	
+			// Check for title text passed through as props
+			var title = "Episodes Available";
+			if (this.props.title) {
+				title = this.props.title;
+			}
+	
 			if (!this.state.teacherData) {
 				return React.createElement(
 					'div',
@@ -21941,7 +21946,7 @@
 					React.createElement(
 						'h2',
 						{ className: 'menuTitle' },
-						'Episodes Available'
+						title
 					),
 					React.createElement(EpisodeTagList, {
 						header: 'Introduction/Greetings',

@@ -1,0 +1,31 @@
+
+// same div as container-fluid (bootstrap), use for modification to container-fluid
+#teacherHome {
+	padding: 0;
+}
+
+.navBar {
+	display: inline-block;
+	width: 20%;
+	vertical-align: top;
+	padding: 0px;
+	margin-top: 3em;
+
+	li {
+		list-style-type: none;
+		width: 100%;
+		padding: 5px;
+		font-size: 1.3em;
+		color: lightgray;
+		&:hover {
+			cursor: pointer;
+			color: white;
+		}
+
+	}
+}
+
+.content {
+	display: inline-block;
+	width: 80%;
+}

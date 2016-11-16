@@ -18,7 +18,7 @@ var MainMenuContainer = React.createClass({
 			var teacher = "public";
 		}
 
-		// if props are received that means we should display a special set of episodes based on props 
+		// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
 		// else, load all the episodes that are public
 
 		if (this.props.teacherEpisodes) {
@@ -29,6 +29,7 @@ var MainMenuContainer = React.createClass({
 					that.setState({teacherData: data});
 				});
 		}
+
 	},
 	sortEpisodeArraybySequence: function(episodeArray) {
 		return episodeArray.sort(function(a,b) {
@@ -76,7 +77,6 @@ var MainMenuContainer = React.createClass({
 		this.loadSceneData();
 	},
 	render: function() {
-
 		var scenes;
 
 		// Create link for each scene that should be available to student
@@ -133,12 +133,18 @@ var MainMenuContainer = React.createClass({
 
 		} else { scenes = "Nothing!"; }
 
+		// Check for title text passed through as props
+		var title = "Episodes Available"
+		if (this.props.title) {
+			title = this.props.title 
+		}
+
 		if (!this.state.teacherData) {
 				return <div>Loading</div>
 		} else {
 			return (
 					<div className="container-fluid">
-						<h2 className="menuTitle">Episodes Available</h2>
+						<h2 className="menuTitle">{title}</h2>
 						<EpisodeTagList
 							header = "Introduction/Greetings"
 							episodeList = {introEpisodeList} />

@@ -136,7 +136,6 @@ def teacherPage(username):
 		# episodeArray = json.dumps(episodeArray, ensure_ascii=False).encode('utf8')
 		print episodeArray
 
-
 		# episodes = Episode.query.filter_by()
 
 		return render_template('teacherHome.html', public="public", username=username, episodeArray=episodeArray)

@@ -12,9 +12,6 @@ def getTeacherEpisodes(username):
 
 	# Grab teacher
 	teacher = Teacher.query.filter_by(username=username).first()
-	print teacher.username
-	print teacher.id
-	print teacher.episodes
 
 	for episode in teacher.episodes:
 		episodeName = Episode.query.filter_by(id=episode.id).first().episodeJSONFileName
@@ -36,14 +33,15 @@ def buildEpisodeData(jsonPath, teacherName):
 		d = json.load(episodeJSON)
 
 		# Add activity name
+		episodeContent['id'] = d['activityID']
 		episodeContent['name'] = d['activityName']
 		episodeContent['scenario'] = d['scenario'][0]['text']
-		episodeContent['link'] = jsonPath.replace('static/data/' + teacherName, '..').replace('.json', '')
+		episodeContent['link'] = jsonPath.replace('static/data/public', teacherName).replace('.json', '')
 		episodeContent['tags'] = d['tags']
 		episodeContent['objectives'] = d['objectives']
 		episodeContent['characterImage'] = d['currentImage']
 
-		try: 
+		try:
 			episodeContent['sequence'] = d['sequence']
 		except:
 			episodeContent['sequence'] = 0
