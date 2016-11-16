@@ -1113,9 +1113,13 @@ $themeYellow: #FDD870;
 	top: 10%;
 	height: 90%;
 	left: 10%;
-	background-color: $headerBlue;
 	z-index: 100;
 	border-radius: 25px 25px 0px 0px;
+	background: -webkit-linear-gradient(bottom, $headerBlue, $greenBlue, $lightBlue); /* For Safari 5.1 to 6.0 */
+	background-image: -o-linear-gradient(bottom, $headerBlue, $greenBlue, $lightBlue);
+	background-image: -moz-linear-gradient(bottom, $headerBlue, $greenBlue, $lightBlue); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to bottom, $headerBlue, $greenBlue, $lightBlue); /* Standard syntax */
+
 }
 .practiceHeader {
 	border-radius: 25px 25px 0px 0px;
@@ -1123,7 +1127,6 @@ $themeYellow: #FDD870;
 	height: 10%;
 	min-height: 75px;
 	background-color: $headerBlue;
-	padding-top: .25em;
 	padding-right: 5em;
 	padding-left: 5em;
 	padding-bottom: 0;
@@ -1138,6 +1141,7 @@ $themeYellow: #FDD870;
 		text-align: right;
 		font-style: italic;
 		color: white;
+		margin-top: .5em;
 	}
 	.glyphiconWrapper {
 		position: absolute;
@@ -1149,11 +1153,12 @@ $themeYellow: #FDD870;
 		padding: 7px;
 		text-align: center;
 		border: 7px solid $headerBlue;
-		background-color: gray;
+		background-color: $lightBlue;
 		.fa-bolt {
 			font-size: 70px;
 			display: inline;
 			vertical-align: middle;
+			color: $themeYellow;
 		}
 
 	}
@@ -1163,7 +1168,7 @@ $themeYellow: #FDD870;
 	    -ms-transform: rotate(0deg);   /* IE 9 */
 	    -o-transform: rotate(0deg);   /* Opera */
 	    transform: rotate(0deg);
-	    width: 200px;
+	    width: 7em;
 	    left:-15px;
 	    top: -10px;
 	    z-index: 10;
@@ -1397,10 +1402,6 @@ $themeYellow: #FDD870;
 	margin-left: 10px;
 	margin-right: 10px;
 	span {
-
-		padding-top : 5px;
-		padding-bottom: 5px;
-		padding-left: 5px;
 		border-radius: 5px;
 		display: inline-block;
 		font-size:25px;
