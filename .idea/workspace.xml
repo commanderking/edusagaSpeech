@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5412198-3326-492a-8328-90ee9d138e30" name="Default" comment="Merge branch 'master' of https://github.com/commanderking/edusagaSpeech&#10;&#10;# Conflicts:&#10;#&#9;static/css/main.css&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index.css" afterPath="$PROJECT_DIR$/static/css/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index3.css" afterPath="$PROJECT_DIR$/static/css/index3.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/main.css" afterPath="$PROJECT_DIR$/static/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_dashboard.js" afterPath="$PROJECT_DIR$/static/js/bundle_dashboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_index.js" afterPath="$PROJECT_DIR$/static/js/bundle_index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_mainMenu.js" afterPath="$PROJECT_DIR$/static/js/bundle_mainMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" afterPath="$PROJECT_DIR$/static/js/bundle_questionAsker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_teacherHome.js" afterPath="$PROJECT_DIR$/static/js/bundle_teacherHome.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/sass/index.scss" afterPath="$PROJECT_DIR$/static/sass/index.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack-stats.json" afterPath="$PROJECT_DIR$/webpack-stats.json" />
     </list>
     <ignored path="edusagaSpeech.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,8 +28,8 @@
       <file leaf-file-name="index.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/sass/index.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-237">
-              <caret line="1023" column="13" selection-start-line="1023" selection-start-column="9" selection-end-line="1023" selection-end-column="13" />
+            <state relative-caret-position="228">
+              <caret line="400" column="20" selection-start-line="400" selection-start-column="20" selection-end-line="400" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -836,8 +828,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/sass/index.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-237">
-          <caret line="1023" column="13" selection-start-line="1023" selection-start-column="9" selection-end-line="1023" selection-end-column="13" />
+        <state relative-caret-position="228">
+          <caret line="400" column="20" selection-start-line="400" selection-start-column="20" selection-end-line="400" selection-end-column="20" />
           <folding />
         </state>
       </provider>

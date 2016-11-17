@@ -398,7 +398,7 @@ CSS Related to Task List
 	width: 57%;
 	position: absolute;
 	right: 3%;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .combinedTaskList::-webkit-scrollbar {
@@ -446,7 +446,7 @@ CSS Related to Task List
 	.taskText {
 		text-align: center;
 		font-weight: bold;
-		font-size: 18px;
+		font-size: 28px;
 		line-height: 44px;
 
 	}
