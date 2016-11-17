@@ -139,27 +139,28 @@ button {
 	width: 100%;
 	height: 25%;
 	position: absolute;
-	
+
 	.dialogSlantPiece {
 	  position: absolute;
 	  height: 100%;
 	}
 	.button {
-		font-size: 30px;
+		font-size: 25px;
 		color: $lightBlue;
 		padding: 10px;
 		line-height: 60px;
 		border-radius: 10px;
-		border: 1px solid $darkerBlue;
+		border: 1.5px solid $darkBlue;
+		//this seems pretty straightforward, yet no change?
 		background-color: $yellow;
-		background: -webkit-radial-gradient(white 20%, $yellow); /* Safari 5.1 to 6.0 */
-		background: -o-radial-gradient(white 20%, #1C90CF); /* For Opera 11.6 to 12.0 */
-		background: -moz-radial-gradient(white 20%, #1C90CF); /* For Firefox 3.6 to 15 */
-		background: radial-gradient(white 20%, $yellow); /* Standard syntax */
+		background: -webkit-radial-gradient(white 15%, $themeYellow); /* Safari 5.1 to 6.0 */
+		background: -o-radial-gradient(white 15%, $themeYellow); /* For Opera 11.6 to 12.0 */
+		background: -moz-radial-gradient(white 15%, $themeYellow); /* For Firefox 3.6 to 15 */
+		background: radial-gradient(white 15%, $themeYellow); /* Standard syntax */
 		position: absolute;
+		//why does turning this off affect the slant piece?
 		.glyphicon-play {
 			text-shadow: -2px 0 $darkBlue, 0 2px $darkBlue, 2px 0 $darkBlue, 0 -2px $darkBlue;
-
 		}
 		&:hover {
 			background-color: $lightBlue;
@@ -169,9 +170,26 @@ button {
 			background: radial-gradient($lightBlue 20%, #1C90CF); /* Standard syntax */
 		}
 	}
+
+	.practiceStartButton {
+	//position: absolute;
+	//width: 50px;
+	//don't like this, makes it unscalable? different from how the next button is handled, too?
+	bottom: .25em;
+	right: .5em;
+	.toolTipText {
+		line-height: 20px;
+		top: -33px;
+		left: -30px;
+	}
+}
+	.practiceStartButton:hover .toolTipText {
+		visibility: visible;
+	}
+
 	.nextButton {
-		right: 0;
-		bottom: 0;
+		right: 3em;
+		bottom: .25em;
 	}
 	.rewindButton {
 		right: 60px;
@@ -212,6 +230,7 @@ button {
 		padding: 0px 2px;
 		font-weight: bold;
 		color: yellow;
+		text-transform: uppercase;
 	}
 
 	.characterNameDivDisabled {
@@ -224,12 +243,12 @@ button {
 		border-top-left-radius: 10px;
 		border-bottom-right-radius: 10px;
 		border-bottom-left-radius: 10px;
-		width: 100%;
+		width: 95%;
 		min-height: 20%;
 		font-size: 24px;
 		color: white;
 		.scenarioText {
-			font-size: 20px;
+			font-size: 23px;
 
 			a {
 				color: lightPink;
@@ -379,14 +398,14 @@ CSS Related to Task List
 	width: 57%;
 	position: absolute;
 	right: 3%;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .combinedTaskList::-webkit-scrollbar {
 	display: none;
-	// width: 1em;
-	// background-color: darkgrey;
-	// outline: 1px solid slategrey;
+	//width: 1em;
+	//background-color: darkgrey;
+	//outline: 1px solid slategrey;
 }
 
 .taskList {
@@ -427,8 +446,9 @@ CSS Related to Task List
 	.taskText {
 		text-align: center;
 		font-weight: bold;
-		font-size: 18px;
+		font-size: 28px;
 		line-height: 44px;
+
 	}
 
 	.repeatOnDiv {
@@ -582,7 +602,7 @@ CSS Related to Task List
 }
 
 .btn-skip {
-	margin-left: 15px;
+	margin: 1.5px;
 	font-size: 1.5vw;
 	font-weight: bold;
 	border-radius: 15px;
@@ -649,6 +669,7 @@ CSS Related to Task List
 					height: 100px;
 					width: 100px;
 					top: -30px;
+					z-index: 10000;
 					position: absolute;
 				}
 			}
@@ -681,7 +702,12 @@ CSS Related to Task List
 				cursor: pointer;		
 			}
 			.repeatButton {
-				right: 200px;
+				//display: inline-block;
+				right: 10em;
+				margin-top: 0;
+				margin-right: 1em;
+				margin-left: 1em;
+				margin-bottom: 0;
 			}
 
 			.repeatButtonDiv:hover .toolTipText {
@@ -694,16 +720,21 @@ CSS Related to Task List
 
 
 			.repeatButtonDiv .toolTipText {
-				right: 200px;
+				right: 6em;
 				top: -40px;
 			}
 
 			.skipButtonDiv .toolTipText {
 				top: -40px;
-				right: 150px;
+				right: 11em;
 			}
 			.skipButton {
-				right: 150px;		
+				//display: inline-block;
+				right: 14em;
+				margin-top: 0;
+				margin-right: 1em;
+				margin-left: 1em;
+				margin-bottom: 0;
 			}
 
 			.miriIcon {
@@ -715,7 +746,7 @@ CSS Related to Task List
 				z-index: 6;
 			}
 			.miriGlow {
-				box-shadow: 0 0 20px $yellow, inset 0 0 100px $yellow;
+				box-shadow: 0 0 20px white, inset 0 0 100px white;
 				-webkit-animation: pulse 2s linear 1s infinite;
 				border-radius: 50px 
 			}
@@ -1090,20 +1121,7 @@ $headerBlue: #61B3DB;
 $themeLightBlue: #C4DBEF;
 $themeYellow: #FDD870;
 
-.practiceStartButton {
-	position: absolute;
-	bottom: 0px;
-	width: 50px;
-	right: 60px;
-	.toolTipText {
-		line-height:20px;
-		top: -33px;
-		left: -30px;
-	}
-}
-.practiceStartButton:hover .toolTipText {
-	visibility: visible;
-}
+
 
 
 
@@ -1113,9 +1131,13 @@ $themeYellow: #FDD870;
 	top: 10%;
 	height: 90%;
 	left: 10%;
-	background-color: $headerBlue;
 	z-index: 100;
 	border-radius: 25px 25px 0px 0px;
+	background: -webkit-linear-gradient(bottom, $headerBlue, $greenBlue, $lightBlue); /* For Safari 5.1 to 6.0 */
+	background-image: -o-linear-gradient(bottom, $headerBlue, $greenBlue, $lightBlue);
+	background-image: -moz-linear-gradient(bottom, $headerBlue, $greenBlue, $lightBlue); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to bottom, $headerBlue, $greenBlue, $lightBlue); /* Standard syntax */
+
 }
 .practiceHeader {
 	border-radius: 25px 25px 0px 0px;
@@ -1123,7 +1145,6 @@ $themeYellow: #FDD870;
 	height: 10%;
 	min-height: 75px;
 	background-color: $headerBlue;
-	padding-top: .25em;
 	padding-right: 5em;
 	padding-left: 5em;
 	padding-bottom: 0;
@@ -1138,6 +1159,7 @@ $themeYellow: #FDD870;
 		text-align: right;
 		font-style: italic;
 		color: white;
+		margin-top: .5em;
 	}
 	.glyphiconWrapper {
 		position: absolute;
@@ -1149,11 +1171,12 @@ $themeYellow: #FDD870;
 		padding: 7px;
 		text-align: center;
 		border: 7px solid $headerBlue;
-		background-color: gray;
+		background-color: $lightBlue;
 		.fa-bolt {
 			font-size: 70px;
 			display: inline;
 			vertical-align: middle;
+			color: $themeYellow;
 		}
 
 	}
@@ -1163,7 +1186,7 @@ $themeYellow: #FDD870;
 	    -ms-transform: rotate(0deg);   /* IE 9 */
 	    -o-transform: rotate(0deg);   /* Opera */
 	    transform: rotate(0deg);
-	    width: 200px;
+	    width: 7em;
 	    left:-15px;
 	    top: -10px;
 	    z-index: 10;
@@ -1403,10 +1426,6 @@ $themeYellow: #FDD870;
 	margin-left: 10px;
 	margin-right: 10px;
 	span {
-
-		padding-top : 5px;
-		padding-bottom: 5px;
-		padding-left: 5px;
 		border-radius: 5px;
 		display: inline-block;
 		font-size:25px;
