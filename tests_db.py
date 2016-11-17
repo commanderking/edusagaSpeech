@@ -24,8 +24,6 @@ class TestSetup(TestCase, FixturesMixin):
 
 class AddUser(TestSetup): 
 
-
-
     def test_adding_user(self):
         newTeacher = Teacher(username="cooldude", password="mypassword", email="myemail@gmail.com")
 
@@ -57,21 +55,24 @@ class AddEpisodes(TestSetup):
 
     def test_episode_teacher_Relationship(self):
         newTeacher = Teacher(username="teacher1", password="mypassword", email="teacheremail@gmail.com")
+        newTeacher2 = Teacher(username="teacher2", password="mypassword", email="teacher2email@gmail.com")
         newEpisode = Episode('testEpisode')
         newEpisode2 = Episode('testEpisode2')
 
+
         db.session.add(newTeacher)
+        db.session.add(newTeacher2)
         db.session.add(newEpisode)
         db.session.add(newEpisode2)
-        db.session.commit()
 
         assert newTeacher in db.session
+        assert newTeacher2 in db.session
         assert newEpisode in db.session
         assert newEpisode2 in db.session
 
         newEpisode.teachers.append(newTeacher)
+        newEpisode.teachers.append(newTeacher2)
         newEpisode2.teachers.append(newTeacher)
-        db.session.commit()
 
         testTeacher = Teacher.query.filter_by(username="teacher1").first()
         self.assertEqual(testTeacher.username, "teacher1")
@@ -84,15 +85,32 @@ class AddEpisodes(TestSetup):
         teacherLength = 0;
         for teacher in newEpisode.teachers:
             teacherLength += 1
-        self.assertEqual(teacherLength, 1)
+        self.assertEqual(teacherLength, 2)
+
+
+        ### Test removing specific episode and link from teacher
+        for episode in newTeacher.episodes:
+            print episode.episodeJSONFileName
+            print episode.id
+
+        episodesSharedAmongTeachers = Episode.query.filter_by(episodeJSONFileName='testEpisode').all()
+        print "Episodes Shared" + str(episodesSharedAmongTeachers)
+
+        self.assertEqual(len(newTeacher2.episodes), 1)
+
+        newTeacher2.episodes.remove(newEpisode)
+
+        self.assertEqual(len(newTeacher2.episodes), 0)
+        print newTeacher2.episodes
+
+        #testTeacher.episodes.remove(newEpisode)
+
 
         db.session.delete(newTeacher)
+        db.session.delete(newTeacher2)
         db.session.delete(newEpisode)
         db.session.delete(newEpisode2)
 
-        db.session.commit()
-
-        assert newTeacher not in db.session
 
 if __name__ == '__main__':
     unittest.main()

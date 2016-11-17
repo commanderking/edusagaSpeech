@@ -33,7 +33,7 @@ class Teacher(db.Model, UserMixin):
 
 class Episode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    episodeJSONFileName = db.Column(db.String(30), nullable=False, unique=True)
+    episodeJSONFileName = db.Column(db.String(30), nullable=False)
     episodeAssigned = db.Column(db.Boolean(), nullable=False, default=False)
 
     def __init__(self, episodeJSONFileName):

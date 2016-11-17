@@ -311,7 +311,23 @@ def postAddEpisode(username):
 		newEpisode.teachers.append(teacher)
 		db.session.commit()
 		
-		return redirect(url_for("index"))
+		return json.dumps({'success': 'true'}, 200, {'ContentType': 'application/json'})
+
+@app.route('/<username>/removeEpisode', methods=['POST'])
+def deleteEpisode(username):
+	if (current_user.username == username):
+		episodeName = request.get_data()
+
+		teacher = Teacher.query.filter_by(username=username).first()
+		print teacher
+		episodeToDelete = Episode.query.filter_by(episodeJSONFileName=episodeName).first()
+		print episodeToDelete
+
+        teacher.episodes.remove(episodeToDelete)
+        db.session.commit()
+
+        return "Ok"
+
 
 if __name__ == '__main__':
 	app.run(debug=True)

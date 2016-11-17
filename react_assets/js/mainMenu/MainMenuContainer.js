@@ -6,41 +6,50 @@ var EpisodeTagList = require('./EpisodeTagLists');
 var MainMenuContainer = React.createClass({
 	getInitialState: function() {
 		return {
-			teacherData: null
+			teacherEpisodeData: null
 		}
 	},
 	loadSceneData: function() {
 		var that = this;
 
-		// If teacher is undefined, that means this is being loaded from a place where the
-		// teacher should be public to see public episodes
-		if (teacher === undefined) {
-			var teacher = "public";
-		}
-
 		// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
 		// else, load all the episodes that are public
-
 		if (this.props.teacherEpisodes) {
-			this.setState({teacherData: this.props.teacherEpisodes});
+			this.setState({teacherEpisodeData: this.props.teacherEpisodes});
 		} else {
-			$.getJSON("/static/data/teacherScenes/" + teacher + ".json", function(data) {})
+			$.getJSON("/static/data/teacherScenes/public.json", function(data) {})
 				.success(function(data) {
-					that.setState({teacherData: data});
+					that.setState({teacherEpisodeData: data});
 				});
 		}
 
 	},
-	addEpisode: function(episodeID) {
-		var username = this.props.teacher;
+	addEpisode: function(episodeName) {
+		var username = this.props.teacherUsername;
 		var postURL = username + "/addEpisode";
 		console.log(postURL)
 		$.ajax({
 			url: postURL,
 			type: "POST",
-			data: episodeID, 
+			data: episodeName, 
+			dataType: "string",
+		})
+			.done(function(msg){
+				console.log("hey");
+				alert(msg);
+			});
+	},
+	removeEpisode: function(episodeName, episodeArrayIndex) {
+		var username = this.props.teacherUsername;
+		console.log(username);
+		var postURL = username + "/removeEpisode";
+		$.ajax({
+			url: postURL,
+			type: "POST",
+			data: episodeName, 
 			dataType: "string"
 		});
+
 	},
 	sortEpisodeArraybySequence: function(episodeArray) {
 		return episodeArray.sort(function(a,b) {
@@ -71,11 +80,18 @@ var MainMenuContainer = React.createClass({
 				)
 			})
 
-			// If it's a teacher viewing page through teacher home, display adding of episode and assigning.
-			var addButton = that.props.teacher ? 
+			// If it's the publicDisplay, allow user to add the episode to their library
+			var addButton = that.props.publicDisplay ? 
 				<button onClick={() => that.addEpisode(scene.id)} className="btn btn-info">
 					<span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
 				</button> : null;
+
+			// If passed teacherEpisodes, that means these episodes are already in teacher database
+			// As a result, display the remove episode button
+			var removeButton = that.props.teacherEpisodes && that.props.teacherUsername ?
+				<button onClick={() => that.removeEpisode(scene.id, i)} className="btn btn-info">
+					<span className="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
+				</button> : null;	
 
 			return (
 					<div className="episodeBlockWrapper">
@@ -94,6 +110,7 @@ var MainMenuContainer = React.createClass({
 								Play
 							</a>
 							{addButton}
+							{removeButton}
 						</div>
 					</div>)
 		});
@@ -107,9 +124,9 @@ var MainMenuContainer = React.createClass({
 
 		// Create link for each scene that should be available to student
 		var tagsSet = new Set();
-		if (this.state.teacherData) {
+		if (this.state.teacherEpisodeData) {
 			var that = this;
-			// Divide teacherData into subcategories
+			// Divide teacherEpisodeData into subcategories
 
 			var introEpisodes = [];
 			var familyNationalityEpisodes = [];
@@ -118,7 +135,7 @@ var MainMenuContainer = React.createClass({
 			var reviewEpisodes = [];
 			var otherEpisodes = [];
 
-			this.state.teacherData.scenes.forEach(function(episode, i) {
+			this.state.teacherEpisodeData.scenes.forEach(function(episode, i) {
 				// Generate array of tags
 				tagsSet.add(episode.tags[0]);
 				switch(episode.tags[0]) {
@@ -165,7 +182,7 @@ var MainMenuContainer = React.createClass({
 			title = this.props.title 
 		}
 
-		if (!this.state.teacherData) {
+		if (!this.state.teacherEpisodeData) {
 				return <div>Loading</div>
 		} else {
 			return (

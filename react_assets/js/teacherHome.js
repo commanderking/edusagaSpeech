@@ -26,12 +26,14 @@ var TeacherHome = React.createClass({
 			case "My Episodes": 
 				content = <MainMenuContainer title="My Episodes" 
 						teacherEpisodes={episodeArray} 
+						teacherUsername={this.state.username}
 						key="myEpisodes"/>
 				break;
 			case "Public Episodes":
 				content = <MainMenuContainer 
 							title="Public Episodes"
-							teacher={this.state.username}
+							teacherUsername={this.state.username}
+							publicDisplay={true}
 							key="publicEpisodes" />
 				break;
 			case "Vocab Lists":
