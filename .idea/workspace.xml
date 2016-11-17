@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e5412198-3326-492a-8328-90ee9d138e30" name="Default" comment="Merge branch 'master' of https://github.com/commanderking/edusagaSpeech&#10;&#10;# Conflicts:&#10;#&#9;static/css/main.css&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index.css" afterPath="$PROJECT_DIR$/static/css/index.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index3.css" afterPath="$PROJECT_DIR$/static/css/index3.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/main.css" afterPath="$PROJECT_DIR$/static/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/bundle_teacherHome.js" afterPath="$PROJECT_DIR$/static/js/bundle_teacherHome.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/sass/index.scss" afterPath="$PROJECT_DIR$/static/sass/index.scss" />
     </list>
     <ignored path="edusagaSpeech.iws" />
@@ -28,8 +32,8 @@
       <file leaf-file-name="index.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/sass/index.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="400" column="20" selection-start-line="400" selection-start-column="20" selection-end-line="400" selection-end-column="20" />
+            <state relative-caret-position="183">
+              <caret line="903" column="18" selection-start-line="903" selection-start-column="18" selection-end-line="903" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -207,7 +211,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="SearchEverywhereHistoryKey" value="terminal&#9;ACTION&#9;ActivateTerminalToolWindow&#10;.gitignore&#9;FILE&#9;file:///Users/Beabrave/PyCharmProjects/edusagaSpeech/node_modules/browser-sync/node_modules/browser-sync-ui/node_modules/weinre/node_modules/express/node_modules/mkdirp/.gitignore.rej&#10;ignore&#9;FILE&#9;file:///Users/Beabrave/PyCharmProjects/edusagaSpeech/node_modules/gulp-eslint/node_modules/eslint/lib/ignored-paths.js&#10;index.html&#9;FILE&#9;file:///Users/Beabrave/PyCharmProjects/edusagaSpeech/templates/index.html&#10;palette&#9;null&#9;null&#10;$pattern-background-size&#9;null&#9;null&#10;taskDiv&#9;null&#9;null&#10;charactername&#9;null&#9;null&#10;characterna&#9;null&#9;null&#10;coin&#9;FILE&#9;file:///Users/Beabrave/PyCharmProjects/edusagaSpeech/venv/lib/python2.7/site-packages/awscli/examples/ecs/list-container-instances.rst&#10;icon&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="taskIconDiv&#9;null&#9;null&#10;terminal&#9;ACTION&#9;ActivateTerminalToolWindow&#10;.gitignore&#9;FILE&#9;file:///Users/Beabrave/PyCharmProjects/edusagaSpeech/node_modules/browser-sync/node_modules/browser-sync-ui/node_modules/weinre/node_modules/express/node_modules/mkdirp/.gitignore.rej&#10;ignore&#9;FILE&#9;file:///Users/Beabrave/PyCharmProjects/edusagaSpeech/node_modules/gulp-eslint/node_modules/eslint/lib/ignored-paths.js&#10;index.html&#9;FILE&#9;file:///Users/Beabrave/PyCharmProjects/edusagaSpeech/templates/index.html&#10;palette&#9;null&#9;null&#10;$pattern-background-size&#9;null&#9;null&#10;taskDiv&#9;null&#9;null&#10;charactername&#9;null&#9;null&#10;characterna&#9;null&#9;null&#10;coin&#9;FILE&#9;file:///Users/Beabrave/PyCharmProjects/edusagaSpeech/venv/lib/python2.7/site-packages/awscli/examples/ecs/list-container-instances.rst&#10;icon&#9;null&#9;null" />
     <property name="FullScreen" value="true" />
   </component>
   <component name="RunManager">
@@ -422,6 +426,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -828,8 +835,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/sass/index.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="400" column="20" selection-start-line="400" selection-start-column="20" selection-end-line="400" selection-end-column="20" />
+        <state relative-caret-position="183">
+          <caret line="903" column="18" selection-start-line="903" selection-start-column="18" selection-end-line="903" selection-end-column="18" />
           <folding />
         </state>
       </provider>
