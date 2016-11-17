@@ -52,49 +52,97 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 34);
 	var MainMenuContainer = __webpack_require__(/*! ./mainMenu/MainMenuContainer */ 180);
+	var NavBarButton = __webpack_require__(/*! ./teacherHome/NavBarButton */ 233);
 	
 	var TeacherHome = React.createClass({
 		displayName: 'TeacherHome',
 	
+		getInitialState: function getInitialState() {
+			return {
+				username: null,
+				currentContent: "My Episodes"
+				// refreshData forces menu Container to call loadSceneData
+				// Otherwise, episode data will only be loaded on mounting and my episode and public episode page look the same
+			};
+		},
+		changeContent: function changeContent(newContent) {
+			this.setState({ currentContent: newContent });
+		},
+		componentDidMount: function componentDidMount() {
+			if (username) {
+				this.setState({ username: username });
+			}
+		},
 		render: function render() {
-			console.log(episodeArray["scenes"][0]);
+			var content;
+			switch (this.state.currentContent) {
+				case "My Episodes":
+					content = React.createElement(MainMenuContainer, { title: 'My Episodes',
+						teacherEpisodes: episodeArray,
+						key: 'myEpisodes' });
+					break;
+				case "Public Episodes":
+					content = React.createElement(MainMenuContainer, {
+						title: 'Public Episodes',
+						teacher: this.state.username,
+						key: 'publicEpisodes' });
+					break;
+				case "Vocab Lists":
+					content = React.createElement(
+						'div',
+						{ className: 'vocabLists' },
+						React.createElement(
+							'h1',
+							null,
+							'My Vocab Lists'
+						),
+						React.createElement('button', { className: 'viewPublicEpisodes' })
+					);
+					break;
+				default:
+					content = React.createElement(
+						'h1',
+						null,
+						'Nothing to see! '
+					);
+					break;
+			}
+	
 			return React.createElement(
 				'div',
 				null,
-				'Welcome ',
-				username,
 				React.createElement(
 					'div',
-					{ className: 'episodes' },
+					{ className: 'header' },
 					React.createElement(
-						'h1',
+						'h2',
 						null,
-						'My episodes'
-					),
-					React.createElement(MainMenuContainer, {
-						title: 'My Episodes',
-						teacherEpisodes: episodeArray }),
+						'Welcome ',
+						username
+					)
+				),
+				React.createElement(
+					'ul',
+					{ className: 'navBar' },
+					React.createElement(NavBarButton, {
+						text: 'My Episodes',
+						clickFunction: this.changeContent }),
+					React.createElement(NavBarButton, {
+						text: 'Public Episodes',
+						clickFunction: this.changeContent }),
+					React.createElement(NavBarButton, {
+						text: 'Vocab Lists',
+						clickFunction: this.changeContent }),
 					React.createElement(
-						'button',
-						{ className: 'viewPublicEpisodes' },
-						'View Public Episodes'
-					),
-					React.createElement(
-						'h1',
+						'li',
 						null,
-						'Public Episodes'
-					),
-					React.createElement(MainMenuContainer, null)
+						'Create Vocab List'
+					)
 				),
 				React.createElement(
 					'div',
-					{ className: 'vocabLists' },
-					React.createElement(
-						'h1',
-						null,
-						'My Vocab Lists'
-					),
-					React.createElement('button', { className: 'viewPublicEpisodes' })
+					{ className: 'content' },
+					content
 				)
 			);
 		}
@@ -22020,7 +22068,7 @@
 				var teacher = "public";
 			}
 	
-			// if props are received that means we should display a special set of episodes based on props 
+			// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
 			// else, load all the episodes that are public
 	
 			if (this.props.teacherEpisodes) {
@@ -22031,6 +22079,17 @@
 				});
 			}
 		},
+		addEpisode: function addEpisode(episodeID) {
+			var username = this.props.teacher;
+			var postURL = username + "/addEpisode";
+			console.log(postURL);
+			$.ajax({
+				url: postURL,
+				type: "POST",
+				data: episodeID,
+				dataType: "string"
+			});
+		},
 		sortEpisodeArraybySequence: function sortEpisodeArraybySequence(episodeArray) {
 			return episodeArray.sort(function (a, b) {
 				var x = a["sequence"];
@@ -22039,6 +22098,7 @@
 			});
 		},
 		generateDOMfromEpisodesArray: function generateDOMfromEpisodesArray(episodeArray) {
+			var that = this;
 			if (studentID === undefined) {
 				var studentID = '';
 			}
@@ -22048,6 +22108,8 @@
 				var characterImage = Constants.IMAGE_PATH + scene.characterImage;
 				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
+	
+				console.log(scene.id);
 	
 				// Loop through can do statements for each episode to prepare DOM elements
 				var canDoStatements = scene.objectives.map(function (objective, i) {
@@ -22059,11 +22121,19 @@
 					);
 				});
 	
+				// If it's a teacher viewing page through teacher home, display adding of episode and assigning.
+				var addButton = that.props.teacher ? React.createElement(
+					'button',
+					{ onClick: function onClick() {
+							return that.addEpisode(scene.id);
+						}, className: 'btn btn-info' },
+					React.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' }),
+					' Add'
+				) : null;
+	
 				return React.createElement(
-					'a',
-					{ href: link,
-						key: i,
-						'data-index': i },
+					'div',
+					{ className: 'episodeBlockWrapper' },
 					React.createElement(
 						'li',
 						{ className: className },
@@ -22098,6 +22168,18 @@
 							' ',
 							canDoStatements
 						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'buttonLine' },
+						React.createElement(
+							'a',
+							{ href: link, className: 'btn btn-info',
+								id: scene.id, key: i, 'data-index': i },
+							React.createElement('span', { className: 'glyphicon glyphicon-play', 'aria-hidden': 'true' }),
+							'Play'
+						),
+						addButton
 					)
 				);
 			});
@@ -22107,7 +22189,6 @@
 			this.loadSceneData();
 		},
 		render: function render() {
-	
 			var scenes;
 	
 			// Create link for each scene that should be available to student
@@ -22165,6 +22246,12 @@
 				scenes = "Nothing!";
 			}
 	
+			// Check for title text passed through as props
+			var title = "Episodes Available";
+			if (this.props.title) {
+				title = this.props.title;
+			}
+	
 			if (!this.state.teacherData) {
 				return React.createElement(
 					'div',
@@ -22178,7 +22265,7 @@
 					React.createElement(
 						'h2',
 						{ className: 'menuTitle' },
-						'Episodes Available'
+						title
 					),
 					React.createElement(EpisodeTagList, {
 						header: 'Introduction/Greetings',
@@ -22290,6 +22377,85 @@
 	});
 	
 	module.exports = EpisodeTagList;
+
+/***/ },
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */
+/*!*****************************************************!*\
+  !*** ./react_assets/js/teacherHome/NavBarButton.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function NavBarButton(props) {
+		return React.createElement(
+			'li',
+			{ onClick: function onClick() {
+					return props.clickFunction(props.text);
+				} },
+			props.text
+		);
+	}
+	
+	module.exports = NavBarButton;
+	
+	NavBarButton.PropTypes = {
+		text: PropTypes.string.isRequired,
+		clickFunction: PropTypes.func.isRequred
+	};
 
 /***/ }
 /******/ ]);
