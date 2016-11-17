@@ -10,6 +10,9 @@ $disabledDivBGColor: #90D3F3;
 $darkPink: #ED1B7F;
 $pastelGreen: #77dd77;
 $pastelRed: #ff6961;
+$headerBlue: #61B3DB;
+$themeLightBlue: #C4DBEF;
+$themeYellow: #FDD870;
 
 $mobileWidth: 480px;
 $tabletWidth: 768px;
@@ -446,7 +449,7 @@ CSS Related to Task List
 	.taskText {
 		text-align: center;
 		font-weight: bold;
-		font-size: 28px;
+		font-size: 18px;
 		line-height: 44px;
 
 	}
@@ -509,8 +512,6 @@ CSS Related to Task List
 	color: $darkerBlue;
 	background-color: #38C6F3;
 	background-image: none;
-	.taskText {
-	}
 }
 
 .taskDivDisabled {
@@ -1116,13 +1117,6 @@ Timer Container
 /*--------------------------------------------
 Practice Container 
 --------------------------------------------*/
-
-$headerBlue: #61B3DB;
-$themeLightBlue: #C4DBEF;
-$themeYellow: #FDD870;
-
-
-
 
 
 .practiceContainer {
