@@ -30,6 +30,12 @@
 	.activeScene-true {
 		background-color: yellow;
 	}
+	
+	.episodeBlockWrapper {
+		display: inline-block;
+		position: relative;
+	}
+
 	.episodeBlock {
 		position: relative;
 		opacity: 0.8;
@@ -37,7 +43,7 @@
 		vertical-align: top;
 		display: inline-block;
 		width: 315px;
-		height: 315px;
+		height: 350px;
 		margin-left: 20px;
 		margin-right: 20px;
 		margin-bottom: 40px;
@@ -94,6 +100,16 @@
 	}
 	a {
 		border-bottom: none;
+	}
+	.buttonLine {
+		position: absolute;
+		bottom: 3.5em;
+		left: 2.5em;
+	}
+
+	.btn {
+		line-height: 18px;
+		margin-right: 0.5em;
 	}
 }
 

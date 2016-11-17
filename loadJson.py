@@ -37,6 +37,7 @@ def buildEpisodeData(jsonPath, teacherName):
 		d = json.load(episodeJSON)
 
 		# Add activity name
+		episodeContent['id'] = jsonPath.replace('static/data/public/', '').replace('.json', '')
 		episodeContent['name'] = d['activityName']
 		episodeContent['scenario'] = d['scenario'][0]['text']
 		episodeContent['link'] = jsonPath.replace('static/data/' + teacherName, '..').replace('.json', '')

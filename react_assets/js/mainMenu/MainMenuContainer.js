@@ -31,6 +31,17 @@ var MainMenuContainer = React.createClass({
 		}
 
 	},
+	addEpisode: function(episodeID) {
+		var username = this.props.teacher;
+		var postURL = username + "/addEpisode";
+		console.log(postURL)
+		$.ajax({
+			url: postURL,
+			type: "POST",
+			data: episodeID, 
+			dataType: "string"
+		});
+	},
 	sortEpisodeArraybySequence: function(episodeArray) {
 		return episodeArray.sort(function(a,b) {
 			var x = a["sequence"];
@@ -39,6 +50,7 @@ var MainMenuContainer = React.createClass({
 		})
 	},
 	generateDOMfromEpisodesArray: function(episodeArray) {
+		var that = this;
 		if (studentID === undefined) {
 			var studentID = '';
 		}
@@ -49,6 +61,7 @@ var MainMenuContainer = React.createClass({
 			var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 			var starIcon = scene.assigned ? <img src={starIconSrc} /> : null;
 
+			console.log(scene.id);
 
 			// Loop through can do statements for each episode to prepare DOM elements
 			var canDoStatements = scene.objectives.map(function(objective, i) {
@@ -58,9 +71,14 @@ var MainMenuContainer = React.createClass({
 				)
 			})
 
-			return (<a href={link}
-						key={i}
-						data-index={i}>
+			// If it's a teacher viewing page through teacher home, display adding of episode and assigning.
+			var addButton = that.props.teacher ? 
+				<button onClick={() => that.addEpisode(scene.id)} className="btn btn-info">
+					<span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+				</button> : null;
+
+			return (
+					<div className="episodeBlockWrapper">
 						<li className={className}>
 							{starIcon}
 							<h3>{scene.name}</h3>
@@ -69,7 +87,15 @@ var MainMenuContainer = React.createClass({
 							<p><b>Scenario:</b> {scene.scenario}</p>
 							<div><b>Can Do Statements:</b> <br /> {canDoStatements}</div>
 						</li>
-					</a>)
+						<div className="buttonLine">
+							<a href={link} className="btn btn-info"
+								id={scene.id} key={i} data-index={i}>
+								<span className="glyphicon glyphicon-play" aria-hidden="true"></span>
+								Play
+							</a>
+							{addButton}
+						</div>
+					</div>)
 		});
 		return episodeListToReturn;
 	},

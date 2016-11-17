@@ -63,6 +63,12 @@ def trackVisitorEvent(eventText):
 	except: 
 		pass
 
+@app.route('/test')
+def test():
+	print current_user.username
+	return render_template("index3.html")
+
+
 @app.route('/testDatabase')
 def testDatabase(name="test"):
 	newEpisode = Episode('introDavid') 
@@ -218,24 +224,8 @@ def members_page():
 
 
 #------------------------------------------------
-# Links from old emails that redirect to their new version
+# Vocab Tests
 #------------------------------------------------
-
-@app.route('/demo/')
-def demo(name="Chinese"):
-	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
-
-@app.route('/demoChinese/')
-def demoChinese(name="Chinese"):
-	return redirect(url_for('teacherScene', teacher="public", activityName="publicDemo"))
-
-@app.route('/demoChinese2')
-def demoChinese2(name="Chinese2"):
-	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo2"))
-
-@app.route('/demoChinese3')
-def demoChinese3(name="Chinese3"):
-	return redirect(url_for('teacherScene', teacher="jinlaoshi", activityName="demo3"))
 
 @app.route('/demoVocab1')
 def demoVocab1(name="Vocab1"):
@@ -306,6 +296,22 @@ def logSpeechResponse():
 	queue = sqs.get_queue_by_name(QueueName='svc-edusaga-speech-response')
 	response = queue.send_message(MessageBody=content)
 	return 'Success'
+
+
+@app.route('/<username>/addEpisode', methods=['POST'])
+def postAddEpisode(username):
+	if (current_user.username == username):
+		episodeName = request.get_data()
+
+		newEpisode = Episode(episodeName)
+		db.session.add(newEpisode)
+		db.session.commit()
+		teacher = Teacher.query.filter_by(username=username).first()
+
+		newEpisode.teachers.append(teacher)
+		db.session.commit()
+		
+		return redirect(url_for("index"))
 
 if __name__ == '__main__':
 	app.run(debug=True)

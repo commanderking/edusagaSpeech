@@ -14,13 +14,11 @@ var TeacherHome = React.createClass({
 	},
 	changeContent: function(newContent) {
 		this.setState({ currentContent: newContent});
-		console.log(newContent);
 	},
 	componentDidMount: function() {
 		if (username) {
 			this.setState({username: username});
 		}
-		console.log(username);
 	},
 	render: function() {
 		var content;

@@ -67,13 +67,11 @@
 		},
 		changeContent: function changeContent(newContent) {
 			this.setState({ currentContent: newContent });
-			console.log(newContent);
 		},
 		componentDidMount: function componentDidMount() {
 			if (username) {
 				this.setState({ username: username });
 			}
-			console.log(username);
 		},
 		render: function render() {
 			var content;
@@ -21883,6 +21881,17 @@
 				});
 			}
 		},
+		addEpisode: function addEpisode(episodeID) {
+			var username = this.props.teacher;
+			var postURL = username + "/addEpisode";
+			console.log(postURL);
+			$.ajax({
+				url: postURL,
+				type: "POST",
+				data: episodeID,
+				dataType: "string"
+			});
+		},
 		sortEpisodeArraybySequence: function sortEpisodeArraybySequence(episodeArray) {
 			return episodeArray.sort(function (a, b) {
 				var x = a["sequence"];
@@ -21891,6 +21900,7 @@
 			});
 		},
 		generateDOMfromEpisodesArray: function generateDOMfromEpisodesArray(episodeArray) {
+			var that = this;
 			if (studentID === undefined) {
 				var studentID = '';
 			}
@@ -21900,6 +21910,8 @@
 				var characterImage = Constants.IMAGE_PATH + scene.characterImage;
 				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
+	
+				console.log(scene.id);
 	
 				// Loop through can do statements for each episode to prepare DOM elements
 				var canDoStatements = scene.objectives.map(function (objective, i) {
@@ -21911,11 +21923,19 @@
 					);
 				});
 	
+				// If it's a teacher viewing page through teacher home, display adding of episode and assigning.
+				var addButton = that.props.teacher ? React.createElement(
+					'button',
+					{ onClick: function onClick() {
+							return that.addEpisode(scene.id);
+						}, className: 'btn btn-info' },
+					React.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' }),
+					' Add'
+				) : null;
+	
 				return React.createElement(
-					'a',
-					{ href: link,
-						key: i,
-						'data-index': i },
+					'div',
+					{ className: 'episodeBlockWrapper' },
 					React.createElement(
 						'li',
 						{ className: className },
@@ -21950,6 +21970,18 @@
 							' ',
 							canDoStatements
 						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'buttonLine' },
+						React.createElement(
+							'a',
+							{ href: link, className: 'btn btn-info',
+								id: scene.id, key: i, 'data-index': i },
+							React.createElement('span', { className: 'glyphicon glyphicon-play', 'aria-hidden': 'true' }),
+							'Play'
+						),
+						addButton
 					)
 				);
 			});
