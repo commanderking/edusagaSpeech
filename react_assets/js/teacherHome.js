@@ -15,13 +15,19 @@ var TeacherHome = React.createClass({
 	changeContent: function(newContent) {
 		this.setState({ currentContent: newContent});
 	},
-	componentDidMount: function() {
+	componentWillMount: function() {
+		console.log("Will mount " + username);
+		// This username variable is passed from teacherHome.html
 		if (username) {
-			this.setState({username: username});
+			this.setState({username:username})
 		}
+	},
+	componentDidMount: function() {
+		console.log(username);
 	},
 	render: function() {
 		var content;
+		console.log(content);
 		switch(this.state.currentContent) {
 			case "My Episodes": 
 				content = <MainMenuContainer title="My Episodes" 

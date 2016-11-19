@@ -15,10 +15,34 @@ var MainMenuContainer = React.createClass({
 		// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
 		// else, load all the episodes that are public
 		if (this.props.teacherEpisodes) {
-			this.setState({teacherEpisodeData: this.props.teacherEpisodes});
+			/*this.setState({teacherEpisodeData: this.props.teacherEpisodes});*/
+			var username = this.props.teacherUsername;
+			$.ajax({
+				url: username + "/getEpisodes",
+				type: "POST",
+				data: username,
+				dataType: "json"
+
+			}).done(function(result){
+				console.log("Done");
+				console.log(result.success);
+				console.log(result);
+
+				if (result.success === true) {
+					var parsedScenes = result["teacherEpisodeData"].scenes.replace('"[{', "[{").replace('}]"', '}]');
+					result.teacherEpisodeData.scenes = JSON.parse(parsedScenes);
+					that.setState({teacherEpisodeData: result.teacherEpisodeData});
+				}
+			});
 		} else {
-			$.getJSON("/static/data/teacherScenes/public.json", function(data) {})
+			// teacher defined when passed from views.py to mainMenu.html
+			// it will be undefined when loaded from teacherHome
+			if (teacher === undefined) {
+				var teacher = "public";
+			}
+			$.getJSON("/static/data/teacherScenes/"+ teacher + ".json", function(data) {})
 				.success(function(data) {
+					console.log(data);
 					that.setState({teacherEpisodeData: data});
 				});
 		}
@@ -32,14 +56,19 @@ var MainMenuContainer = React.createClass({
 			url: postURL,
 			type: "POST",
 			data: episodeName, 
-			dataType: "string",
+			dataType: "json",
 		})
-			.done(function(msg){
-				console.log("hey");
-				alert(msg);
+			.done(function(result){
+				if (result["success"] === true) {
+					console.log(result.episodeArray["scenes"]);
+					var parsedEpisodeArray = JSON.parse(result.episodeArray["scenes"]);	
+					var newTeacherEpisodeData = {"scenes": parsedEpisodeArray};
+					console.log(newTeacherEpisodeData);
+				}
 			});
 	},
 	removeEpisode: function(episodeName, episodeArrayIndex) {
+		var that = this;
 		var username = this.props.teacherUsername;
 		console.log(username);
 		var postURL = username + "/removeEpisode";
@@ -47,9 +76,17 @@ var MainMenuContainer = React.createClass({
 			url: postURL,
 			type: "POST",
 			data: episodeName, 
-			dataType: "string"
-		});
+			dataType: "json"
+		}).done(function(result){
+			if (result["success"] = true) {
+				console.log("Remove successful");
+				var newTeacherEpisodeData = JSON.parse(JSON.stringify(that.state.teacherEpisodeData));
+				console.log(newTeacherEpisodeData);
+				newTeacherEpisodeData.scenes.splice(episodeArrayIndex,1);
+				that.setState({teacherEpisodeData: newTeacherEpisodeData});
+			}
 
+		});	
 	},
 	sortEpisodeArraybySequence: function(episodeArray) {
 		return episodeArray.sort(function(a,b) {
@@ -69,8 +106,6 @@ var MainMenuContainer = React.createClass({
 			var characterImage = Constants.IMAGE_PATH + scene.characterImage;
 			var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 			var starIcon = scene.assigned ? <img src={starIconSrc} /> : null;
-
-			console.log(scene.id);
 
 			// Loop through can do statements for each episode to prepare DOM elements
 			var canDoStatements = scene.objectives.map(function(objective, i) {
@@ -117,6 +152,7 @@ var MainMenuContainer = React.createClass({
 		return episodeListToReturn;
 	},
 	componentDidMount: function() {
+		console.log(this.props);
 		this.loadSceneData();
 	},
 	render: function() {

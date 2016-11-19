@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, render_template, render_template_string, url_for, jsonify, session
 from flask_user import login_required, UserManager, SQLAlchemyAdapter
 from flask_login import current_user
-
+from sqlalchemy import exc
 
 import boto3, json, simplejson, urlparse, datetime
 
@@ -71,12 +71,23 @@ def test():
 
 @app.route('/testDatabase')
 def testDatabase(name="test"):
-	newEpisode = Episode('introDavid') 
-	db.session.add(newEpisode)
+	if Episode.query.filter_by(episodeJSONFileName='introDavid').first():
+		print "It's already in here!"
+		newEpisode = Episode.query.filter_by(episodeJSONFileName='introDavid').first()
+	else: 
+		newEpisode = Episode('introDavid')
+		db.session.add(newEpisode)	
+		db.session.commit()
 
-	newEpisode2 = Episode('introAlex')
-	db.session.add(newEpisode2)
-	db.session.commit()
+	if Episode.query.filter_by(episodeJSONFileName='introAlex').first():
+		print "It's already in here"
+		newEpisode2 = Episode.query.filter_by(episodeJSONFileName='introAlex').first()
+	else: 
+		newEpisode2 = Episode('introAlex')
+		db.session.add(newEpisode2)
+		db.session.commit()
+
+
 
 	currentEpisode = Episode.query.first()
 	print currentEpisode
@@ -303,15 +314,23 @@ def postAddEpisode(username):
 	if (current_user.username == username):
 		episodeName = request.get_data()
 
-		newEpisode = Episode(episodeName)
-		db.session.add(newEpisode)
-		db.session.commit()
-		teacher = Teacher.query.filter_by(username=username).first()
+		#TODO: For now, if the episode has not been added to databaes for whatever reason, add it in during this time
+		# In most cases, the episode should already be in the database and all that's required is a link
+		if Episode.query.filter_by(episodeJSONFileName=episodeName).first():
+			print "Episode already in database"
+			newEpisode=Episode.query.filter_by(episodeJSONFileName=episodeName).first()
+		else: 
+			newEpisode = Episode(episodeName)
+			db.session.add(newEpisode)
+			db.session.commit()
 
+		teacher = Teacher.query.filter_by(username=username).first()
 		newEpisode.teachers.append(teacher)
 		db.session.commit()
+
+		newEpisodeArray = getTeacherEpisodes(username)
 		
-		return json.dumps({'success': 'true'}, 200, {'ContentType': 'application/json'})
+		return json.dumps({'success': True, 'episodeArray': newEpisodeArray}, 200, {'ContentType': 'application/json'})
 
 @app.route('/<username>/removeEpisode', methods=['POST'])
 def deleteEpisode(username):
@@ -326,8 +345,16 @@ def deleteEpisode(username):
         teacher.episodes.remove(episodeToDelete)
         db.session.commit()
 
-        return "Ok"
+        newEpisodeArray = getTeacherEpisodes(username)
 
+        return json.dumps({'success': True, 'episodeArray' : newEpisodeArray}, 200, {'ContentType': 'application.json'})
+
+@app.route('/<username>/getEpisodes', methods=['POST'])
+def getEpisodes(username):
+	if (current_user.username == username):
+		#episodeArray = getTeacherEpisodes(username)
+		teacherEpisodeData = getTeacherEpisodes(username)
+		return json.dumps({'success': True, 'teacherEpisodeData' : teacherEpisodeData}, 200, {'ContentType': 'application.json'})
 
 if __name__ == '__main__':
 	app.run(debug=True)

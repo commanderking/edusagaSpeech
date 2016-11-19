@@ -1,13 +1,15 @@
 from web import db
 from sqlalchemy.dialects.postgresql import JSON
+from sqlalchemy import UniqueConstraint
 from flask_user import UserMixin
 
 
 episodes = db.Table('episodes',
     db.Column('episode_id', db.Integer, db.ForeignKey('episode.id')),
-    db.Column('teacher_id', db.Integer, db.ForeignKey('teacher.id'))
+    db.Column('teacher_id', db.Integer, db.ForeignKey('teacher.id')),
+    db.Column('episode_assigned', db.Boolean(), nullable=False, default=False),
+    UniqueConstraint('episode_id', 'teacher_id', name='episode_teacher_id')
 )
-
 class Teacher(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -33,8 +35,7 @@ class Teacher(db.Model, UserMixin):
 
 class Episode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    episodeJSONFileName = db.Column(db.String(30), nullable=False)
-    episodeAssigned = db.Column(db.Boolean(), nullable=False, default=False)
+    episodeJSONFileName = db.Column(db.String(30), nullable=False, unique=True)
 
     def __init__(self, episodeJSONFileName):
         self.episodeJSONFileName = episodeJSONFileName
