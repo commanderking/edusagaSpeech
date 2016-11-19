@@ -56,8 +56,11 @@
 	var MainMenu = React.createClass({
 		displayName: 'MainMenu',
 	
+		// username is passed down from mainMenu.html
+		// TODO: Make it less hacky and set username to state OR query databse for current user
 		render: function render() {
-			return React.createElement(MainMenuContainer, null);
+			return React.createElement(MainMenuContainer, {
+				teacherUsername: username });
 		}
 	});
 	
@@ -21643,6 +21646,7 @@
 	
 			// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
 			// else, load all the episodes that are public
+			console.log(this.props.teacherEpisodes);
 			if (this.props.teacherEpisodes) {
 				/*this.setState({teacherEpisodeData: this.props.teacherEpisodes});*/
 				var username = this.props.teacherUsername;
@@ -21666,10 +21670,11 @@
 			} else {
 				// teacher defined when passed from views.py to mainMenu.html
 				// it will be undefined when loaded from teacherHome
+				console.log(that.props.teacherUsername);
 				if (teacher === undefined) {
 					var teacher = "public";
 				}
-				$.getJSON("/static/data/teacherScenes/" + teacher + ".json", function (data) {}).success(function (data) {
+				$.getJSON("/static/data/teacherScenes/" + that.props.teacherUsername + ".json", function (data) {}).success(function (data) {
 					console.log(data);
 					that.setState({ teacherEpisodeData: data });
 				});
@@ -21686,10 +21691,8 @@
 				dataType: "json"
 			}).done(function (result) {
 				if (result["success"] === true) {
-					console.log(result.episodeArray["scenes"]);
 					var parsedEpisodeArray = JSON.parse(result.episodeArray["scenes"]);
 					var newTeacherEpisodeData = { "scenes": parsedEpisodeArray };
-					console.log(newTeacherEpisodeData);
 				}
 			});
 		},

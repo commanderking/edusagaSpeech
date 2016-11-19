@@ -17,7 +17,8 @@
 	<div id="app">
 	</div>
 	<script>
-		var teacher = "{{ teacher }}";
+		var username = "{{ teacher }}";
+		console.log("teacher on mainMenu.html is " + username);
 		// web.py passes in a parameter from login page of studentID
 		// this studentID value is used in the React app of mainMenu.js to keep the studentID in the URL of the link
 		var studentID = "studentID={{ studentID }}";
