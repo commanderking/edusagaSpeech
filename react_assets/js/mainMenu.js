@@ -4,7 +4,7 @@ var MainMenuContainer = require('./mainMenu/MainMenuContainer');
 
 var MainMenu = React.createClass({
 	// username is passed down from mainMenu.html
-	// TODO: Make it less hacky and set username to state OR query databse for current user
+	// TODO: Make it less hacky and set username to state OR query databse for current username
 	render: function() {
 		return (
 			<MainMenuContainer 
