@@ -311,11 +311,14 @@ def logSpeechResponse():
 
 @app.route('/<username>/addEpisode', methods=['POST'])
 def postAddEpisode(username):
-	if (current_user.username == username):
+	print username
+	print current_user.username
+	if (current_user.is_authenticated):
+		# Gets the string name of file from ajax in MainMeunContainer.js
 		episodeName = request.get_data()
 
 		#TODO: For now, if the episode has not been added to databaes for whatever reason, add it in during this time
-		# In most cases, the episode should already be in the database and all that's required is a link
+		# In most cases, the episode should already be in the database
 		if Episode.query.filter_by(episodeJSONFileName=episodeName).first():
 			print "Episode already in database"
 			newEpisode=Episode.query.filter_by(episodeJSONFileName=episodeName).first()
@@ -324,20 +327,20 @@ def postAddEpisode(username):
 			db.session.add(newEpisode)
 			db.session.commit()
 
-		teacher = Teacher.query.filter_by(username=username).first()
+		teacher = Teacher.query.filter_by(username=current_user.username).first()
 		newEpisode.teachers.append(teacher)
 		db.session.commit()
 
-		newEpisodeArray = getTeacherEpisodes(username)
+		newEpisodeArray = getTeacherEpisodes(current_user.username)
 		
 		return json.dumps({'success': True, 'episodeArray': newEpisodeArray}, 200, {'ContentType': 'application/json'})
 
 @app.route('/<username>/removeEpisode', methods=['POST'])
 def deleteEpisode(username):
-	if (current_user.username == username):
+	if (current_user.is_authenticated):
 		episodeName = request.get_data()
 
-		teacher = Teacher.query.filter_by(username=username).first()
+		teacher = Teacher.query.filter_by(username=current_user.username).first()
 		print teacher
 		episodeToDelete = Episode.query.filter_by(episodeJSONFileName=episodeName).first()
 		print episodeToDelete
@@ -345,16 +348,18 @@ def deleteEpisode(username):
         teacher.episodes.remove(episodeToDelete)
         db.session.commit()
 
-        newEpisodeArray = getTeacherEpisodes(username)
+        newEpisodeArray = getTeacherEpisodes(current_user.username)
 
         return json.dumps({'success': True, 'episodeArray' : newEpisodeArray}, 200, {'ContentType': 'application.json'})
 
 @app.route('/<username>/getEpisodes', methods=['POST'])
 def getEpisodes(username):
-	if (current_user.username == username):
+	if (current_user.is_authenticated):
 		#episodeArray = getTeacherEpisodes(username)
-		teacherEpisodeData = getTeacherEpisodes(username)
+		teacherEpisodeData = getTeacherEpisodes(current_user.username)
 		return json.dumps({'success': True, 'teacherEpisodeData' : teacherEpisodeData}, 200, {'ContentType': 'application.json'})
+	else: 
+		return json.dumps({'success': True, 'teacherEpisodeData' : []}, 200, {'ContentType': 'application.json'})
 
 if __name__ == '__main__':
 	app.run(debug=True)

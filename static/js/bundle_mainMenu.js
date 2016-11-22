@@ -56,12 +56,12 @@
 	var MainMenu = React.createClass({
 		displayName: 'MainMenu',
 	
-		// username is passed down from mainMenu.html
-		// TODO: Make it less hacky and set username to state OR query databse for current username
-		// Try to update main menu
+	
+		// This page is generally only called when accessed from a public page (loads mainMenu.html)
+		// As a result, it should display the public version of the site
 		render: function render() {
 			return React.createElement(MainMenuContainer, {
-				teacherUsername: username });
+				publicDisplay: true });
 		}
 	});
 	
@@ -21647,44 +21647,38 @@
 	
 			// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
 			// else, load all the episodes that are public
-			console.log(this.props.teacherEpisodes);
-			if (this.props.teacherEpisodes) {
-				/*this.setState({teacherEpisodeData: this.props.teacherEpisodes});*/
+			if (this.props.publicDisplay === false) {
 				var username = this.props.teacherUsername;
 				$.ajax({
-					url: username + "/getEpisodes",
+					url: "/" + username + "/getEpisodes",
 					type: "POST",
 					data: username,
 					dataType: "json"
 	
 				}).done(function (result) {
-					console.log("Done");
-					console.log(result.success);
-					console.log(result);
-	
+					// Try to parse scenes return fromed views.py
+					// If can't, that means that the user does not exist in database
+					// so just return empty episodes
 					if (result.success === true) {
-						var parsedScenes = result["teacherEpisodeData"].scenes.replace('"[{', "[{").replace('}]"', '}]');
-						result.teacherEpisodeData.scenes = JSON.parse(parsedScenes);
+						try {
+							var parsedScenes = result["teacherEpisodeData"].scenes.replace('"[{', "[{").replace('}]"', '}]');
+							result.teacherEpisodeData.scenes = JSON.parse(parsedScenes);
+						} catch (err) {
+							result.teacherEpisodeData.scenes = [];
+						}
 						that.setState({ teacherEpisodeData: result.teacherEpisodeData });
 					}
 				});
 			} else {
-				// teacher defined when passed from views.py to mainMenu.html
-				// it will be undefined when loaded from teacherHome
-				console.log(that.props.teacherUsername);
-				if (teacher === undefined) {
-					var teacher = "public";
-				}
-				$.getJSON("/static/data/teacherScenes/" + that.props.teacherUsername + ".json", function (data) {}).success(function (data) {
-					console.log(data);
+				$.getJSON("/static/data/teacherScenes/public.json", function (data) {}).success(function (data) {
 					that.setState({ teacherEpisodeData: data });
 				});
 			}
 		},
-		addEpisode: function addEpisode(episodeName) {
+		addEpisode: function addEpisode(episodeName, episodeArrayIndex) {
+			var that = this;
 			var username = this.props.teacherUsername;
 			var postURL = username + "/addEpisode";
-			console.log(postURL);
 			$.ajax({
 				url: postURL,
 				type: "POST",
@@ -21694,13 +21688,19 @@
 				if (result["success"] === true) {
 					var parsedEpisodeArray = JSON.parse(result.episodeArray["scenes"]);
 					var newTeacherEpisodeData = { "scenes": parsedEpisodeArray };
+	
+					// Remove the episode from display
+					var newTeacherEpisodeData = JSON.parse(JSON.stringify(that.state.teacherEpisodeData));
+					newTeacherEpisodeData.scenes.splice(episodeArrayIndex, 1);
+					that.setState({ teacherEpisodeData: newTeacherEpisodeData });
 				}
 			});
+	
+			// Remove the episode from the display;
 		},
 		removeEpisode: function removeEpisode(episodeName, episodeArrayIndex) {
 			var that = this;
 			var username = this.props.teacherUsername;
-			console.log(username);
 			var postURL = username + "/removeEpisode";
 			$.ajax({
 				url: postURL,
@@ -21709,9 +21709,7 @@
 				dataType: "json"
 			}).done(function (result) {
 				if (result["success"] = true) {
-					console.log("Remove successful");
 					var newTeacherEpisodeData = JSON.parse(JSON.stringify(that.state.teacherEpisodeData));
-					console.log(newTeacherEpisodeData);
 					newTeacherEpisodeData.scenes.splice(episodeArrayIndex, 1);
 					that.setState({ teacherEpisodeData: newTeacherEpisodeData });
 				}
@@ -21730,6 +21728,10 @@
 				var studentID = '';
 			}
 			var episodeListToReturn = episodeArray.map(function (scene, i) {
+				// We are passed a sorted array based on topic;
+				// But in render function, we store the originalArrayIndex and store it in object
+				var originalIndex = scene.originalArrayIndex;
+	
 				var link = scene.link + "?" + studentID;
 				var className = "episodeBlock activeScene-" + scene.assigned;
 				var characterImage = Constants.IMAGE_PATH + scene.characterImage;
@@ -21737,8 +21739,8 @@
 				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
 	
 				// Loop through can do statements for each episode to prepare DOM elements
-				var canDoStatements = scene.objectives.map(function (objective, i) {
-					var reactKey = "objective" + i;
+				var canDoStatements = scene.objectives.map(function (objective, j) {
+					var reactKey = "objective" + j;
 					return React.createElement(
 						'li',
 						{ key: reactKey },
@@ -21746,11 +21748,12 @@
 					);
 				});
 	
-				// If it's the publicDisplay, allow user to add the episode to their library
-				var addButton = that.props.publicDisplay ? React.createElement(
+				// If it's the publicDisplay and the user is loggedin, allow user to add the episode to their library
+				// Otherwise, it's the public display, and add functionality should not be there
+				var addButton = that.props.publicDisplay && that.props.username !== undefined ? React.createElement(
 					'button',
 					{ onClick: function onClick() {
-							return that.addEpisode(scene.id);
+							return that.addEpisode(scene.id, originalIndex);
 						}, className: 'btn btn-info' },
 					React.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' }),
 					' Add'
@@ -21758,18 +21761,18 @@
 	
 				// If passed teacherEpisodes, that means these episodes are already in teacher database
 				// As a result, display the remove episode button
-				var removeButton = that.props.teacherEpisodes && that.props.teacherUsername ? React.createElement(
+				var removeButton = !that.props.publicDisplay ? React.createElement(
 					'button',
 					{ onClick: function onClick() {
-							return that.removeEpisode(scene.id, i);
-						}, className: 'btn btn-info' },
+							return that.removeEpisode(scene.id, originalIndex);
+						}, className: 'btn btn-info', 'data-index': originalIndex },
 					React.createElement('span', { className: 'glyphicon glyphicon-remove', 'aria-hidden': 'true' }),
 					' Remove'
 				) : null;
 	
 				return React.createElement(
 					'div',
-					{ className: 'episodeBlockWrapper' },
+					{ key: originalIndex, className: 'episodeBlockWrapper' },
 					React.createElement(
 						'li',
 						{ className: className },
@@ -21811,7 +21814,7 @@
 						React.createElement(
 							'a',
 							{ href: link, className: 'btn btn-info',
-								id: scene.id, key: i, 'data-index': i },
+								id: scene.id, key: originalIndex, 'data-index': originalIndex },
 							React.createElement('span', { className: 'glyphicon glyphicon-play', 'aria-hidden': 'true' }),
 							'Play'
 						),
@@ -21823,7 +21826,6 @@
 			return episodeListToReturn;
 		},
 		componentDidMount: function componentDidMount() {
-			console.log(this.props);
 			this.loadSceneData();
 		},
 		render: function render() {
@@ -21842,9 +21844,12 @@
 				var reviewEpisodes = [];
 				var otherEpisodes = [];
 	
-				this.state.teacherEpisodeData.scenes.forEach(function (episode, i) {
-					// Generate array of tags
+				this.state.teacherEpisodeData.scenes.forEach(function (episode, arrayIndex) {
+					// Add the tags to the set; use set to avoid repeats
 					tagsSet.add(episode.tags[0]);
+	
+					episode.originalArrayIndex = arrayIndex;
+	
 					switch (episode.tags[0]) {
 						case "introduction":
 						case "greetings":
@@ -21859,6 +21864,7 @@
 							dateTimeEpisodes.push(episode);
 							break;
 						case "hobbies":
+							break;
 						case "food":
 							likesDislikesEpisodes.push(episode);
 							break;

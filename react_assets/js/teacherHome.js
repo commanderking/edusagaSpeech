@@ -16,23 +16,18 @@ var TeacherHome = React.createClass({
 		this.setState({ currentContent: newContent});
 	},
 	componentWillMount: function() {
-		console.log("Will mount " + username);
 		// This username variable is passed from teacherHome.html
 		if (username) {
 			this.setState({username:username})
 		}
 	},
-	componentDidMount: function() {
-		console.log(username);
-	},
 	render: function() {
 		var content;
-		console.log(content);
 		switch(this.state.currentContent) {
 			case "My Episodes": 
 				content = <MainMenuContainer title="My Episodes" 
-						teacherEpisodes={episodeArray} 
 						teacherUsername={this.state.username}
+						publicDisplay={false}
 						key="myEpisodes"/>
 				break;
 			case "Public Episodes":

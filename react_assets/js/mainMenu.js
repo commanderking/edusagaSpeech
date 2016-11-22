@@ -3,13 +3,13 @@ var ReactDOM = require('react-dom');
 var MainMenuContainer = require('./mainMenu/MainMenuContainer');
 
 var MainMenu = React.createClass({
-	// username is passed down from mainMenu.html
-	// TODO: Make it less hacky and set username to state OR query databse for current username
-	// Try to update main menu
+
+	// This page is generally only called when accessed from a public page (loads mainMenu.html)
+	// As a result, it should display the public version of the site
 	render: function() {
 		return (
 			<MainMenuContainer 
-				teacherUsername={username}/>
+				publicDisplay={true}/>
 		)
 	}
 });
