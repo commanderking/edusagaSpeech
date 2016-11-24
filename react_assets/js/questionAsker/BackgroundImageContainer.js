@@ -1,5 +1,6 @@
 var React = require('react');
 var Constants = require('../helpers/Constants.js');
+var PropTypes = React.PropTypes;
 
 var BackgroundImageContainer = React.createClass({
 	render: function() {
@@ -13,8 +14,13 @@ var BackgroundImageContainer = React.createClass({
 				{fadedDiv}
 			</div>
 		)
-
 	}
 });
 
 module.exports = BackgroundImageContainer;
+
+BackgroundImageContainer.PropTypes = {
+	scenarioOn: PropTypes.bool.isRequired,
+	bgImage: PropTypes.string.isRequired,
+	hintActive: PropTypes.bool.isRequired
+}

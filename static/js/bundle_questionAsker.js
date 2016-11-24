@@ -25161,6 +25161,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var Constants = __webpack_require__(/*! ../helpers/Constants.js */ 181);
+	var PropTypes = React.PropTypes;
 	
 	var BackgroundImageContainer = React.createClass({
 		displayName: 'BackgroundImageContainer',
@@ -25180,6 +25181,12 @@
 	});
 	
 	module.exports = BackgroundImageContainer;
+	
+	BackgroundImageContainer.PropTypes = {
+		scenarioOn: PropTypes.bool.isRequired,
+		bgImage: PropTypes.string.isRequired,
+		hintActive: PropTypes.bool.isRequired
+	};
 
 /***/ },
 /* 205 */
