@@ -859,6 +859,7 @@
 					'div',
 					{ className: 'gameWrapper col-md-12 col-sm-12 col-xs-12' },
 					React.createElement(BackgroundImageContainer, {
+						scenarioOn: this.state.scenarioOn,
 						bgImage: this.state.sceneData.character.location.bg,
 						hintActive: this.state.hintActive }),
 					React.createElement(PracticeContainer, {
@@ -25166,16 +25167,13 @@
 	
 		render: function render() {
 			var bgImageSrc = Constants.IMAGE_PATH + this.props.bgImage;
-			var fadedDiv;
-			if (this.props.hintActive) {
-				fadedDiv = React.createElement('div', { className: 'bgFadeOverlay' });
-			} else {
-				fadedDiv = React.createElement('div', null);
-			}
+			var fadedDiv = this.props.hintActive ? React.createElement('div', { className: 'bgFadeOverlay' }) : null;
+			var imageClass = this.props.scenarioOn ? "sceneBG" : "sceneBG sceneBG-fade";
+	
 			return React.createElement(
 				'div',
 				null,
-				React.createElement('img', { className: 'sceneBG', src: bgImageSrc }),
+				React.createElement('img', { className: imageClass, src: bgImageSrc }),
 				fadedDiv
 			);
 		}

@@ -819,6 +819,7 @@ var QuestionAsker = React.createClass({
 			return (
 				<div className="gameWrapper col-md-12 col-sm-12 col-xs-12">
 					<BackgroundImageContainer
+						scenarioOn = {this.state.scenarioOn}
 						bgImage = {this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
 					<PracticeContainer 
