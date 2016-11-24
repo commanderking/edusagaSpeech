@@ -17,6 +17,7 @@ from models import *
 db_adapter = SQLAlchemyAdapter(db, Teacher)        # Register the User model
 user_manager = UserManager(db_adapter, app)     # Initialize Flask-User
 
+
 def trackVisitorWithText(textMessage): 
 	current_url = request.url
 	parsed = urlparse.urlparse(current_url)
@@ -62,6 +63,10 @@ def trackVisitorEvent(eventText):
 		return userID
 	except: 
 		pass
+
+@app.route('/.well-known/acme-challenge/Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4')
+def certbot():
+	return 'Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q';
 
 @app.route('/test')
 def test():
