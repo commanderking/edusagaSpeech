@@ -18,11 +18,9 @@
     <script>
     	var username = "{{ username }}";
     	var episodeArray = "{{episodeArray}}";
-        console.log(episodeArray);
 
     	episodeArray = episodeArray.split('&#34;').join('"').toString();
         episodeArray = episodeArray.split('&#39;').join("'").toString().replace("'scenes'", '"scenes"').replace("'[{", '[{').replace("}]'", "}]");
-        console.log(episodeArray)
     	episodeArray = JSON.parse(episodeArray);
 
     	 //"{{ episodeArray }}";

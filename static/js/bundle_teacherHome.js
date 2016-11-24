@@ -21728,6 +21728,25 @@
 				teacherEpisodeData: null
 			};
 		},
+		getTeacherEpisodes: function getTeacherEpisodes(teacherUsername, doneCallback) {
+			$.ajax({
+				url: "/" + teacherUsername + "/getEpisodes",
+				type: "POST",
+				data: teacherUsername,
+				dataType: "json"
+	
+			}).done(function (result) {
+				if (result.success === true) {
+					try {
+						var parsedScenes = result["teacherEpisodeData"].scenes.replace('"[{', "[{").replace('}]"', '}]');
+						result.teacherEpisodeData.scenes = JSON.parse(parsedScenes);
+					} catch (err) {
+						result.teacherEpisodeData.scenes = [];
+					}
+					doneCallback(result.teacherEpisodeData);
+				}
+			});
+		},
 		loadSceneData: function loadSceneData() {
 			var that = this;
 	
@@ -21735,29 +21754,43 @@
 			// else, load all the episodes that are public
 			if (this.props.publicDisplay === false) {
 				var username = this.props.teacherUsername;
-				$.ajax({
-					url: "/" + username + "/getEpisodes",
-					type: "POST",
-					data: username,
-					dataType: "json"
 	
-				}).done(function (result) {
-					// Try to parse scenes return fromed views.py
-					// If can't, that means that the user does not exist in database
-					// so just return empty episodes
-					if (result.success === true) {
-						try {
-							var parsedScenes = result["teacherEpisodeData"].scenes.replace('"[{', "[{").replace('}]"', '}]');
-							result.teacherEpisodeData.scenes = JSON.parse(parsedScenes);
-						} catch (err) {
-							result.teacherEpisodeData.scenes = [];
-						}
-						that.setState({ teacherEpisodeData: result.teacherEpisodeData });
-					}
-				});
+				// Test javascript
+				var setEpisodeData = function setEpisodeData(episodeData) {
+					that.setState({ teacherEpisodeData: episodeData });
+				};
+				that.getTeacherEpisodes(username, setEpisodeData);
 			} else {
 				$.getJSON("/static/data/teacherScenes/public.json", function (data) {}).success(function (data) {
-					that.setState({ teacherEpisodeData: data });
+					// Function to feed into getTeacherEpisode callback (only relevant for teacher's page)
+					// This is different in that the episodeData fed in is not important, it should be set to public
+	
+					var setEpisodeData = function setEpisodeData(episodeData) {
+	
+						// filteredEpisodes includes public episodes the teacher does not already have
+						var filteredEpisodes = data.scenes.filter(function (episodePublic, i) {
+							var episodeFound = false;
+							episodeData.scenes.forEach(function (episodeDataEpisode, j) {
+								if (episodeDataEpisode.id === episodePublic.id) {
+									episodeFound = true;
+								}
+							});
+							// If teacher has episode, do not return it to the publicly viewed array
+							return episodeFound ? false : true;
+						});
+						// Create newEpisodeData data structure to set as teacherEpisodeData
+						var newEpisodeData = {};
+						newEpisodeData.scenes = filteredEpisodes;
+						that.setState({ teacherEpisodeData: newEpisodeData });
+					};
+	
+					// teacherUsername undefined if coming from public version of site
+					// lets viewers see all publicly available episodes
+					if (that.props.teacherUsername === undefined) {
+						that.setState({ teacherEpisodeData: data });
+					} else {
+						that.getTeacherEpisodes(that.props.teacherUsername, setEpisodeData);
+					}
 				});
 			}
 		},
@@ -21781,8 +21814,6 @@
 					that.setState({ teacherEpisodeData: newTeacherEpisodeData });
 				}
 			});
-	
-			// Remove the episode from the display;
 		},
 		removeEpisode: function removeEpisode(episodeName, episodeArrayIndex) {
 			var that = this;
@@ -21813,8 +21844,10 @@
 			if (studentID === undefined) {
 				var studentID = '';
 			}
+	
 			var episodeListToReturn = episodeArray.map(function (scene, i) {
 				// We are passed a sorted array based on topic;
+				// I.e. Introduction: [0,1,2], Family: [0,1,2,3,4] --> [0,1,2,3,4,5,6,7]
 				// But in render function, we store the originalArrayIndex and store it in object
 				var originalIndex = scene.originalArrayIndex;
 	
@@ -21836,7 +21869,7 @@
 	
 				// If it's the publicDisplay and the user is loggedin, allow user to add the episode to their library
 				// Otherwise, it's the public display, and add functionality should not be there
-				var addButton = that.props.publicDisplay && that.props.username !== undefined ? React.createElement(
+				var addButton = that.props.publicDisplay && that.props.teacherUsername !== undefined ? React.createElement(
 					'button',
 					{ onClick: function onClick() {
 							return that.addEpisode(scene.id, originalIndex);
