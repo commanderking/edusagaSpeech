@@ -66,7 +66,7 @@ def trackVisitorEvent(eventText):
 
 @app.route('/.well-known/acme-challenge/Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4')
 def certbot():
-	return 'Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q';
+	return 'Bjqobf4gSkBgZUw6OyE66QjvSg6yRl8U9hEfc4YFVm4.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
 
 @app.route('/test')
 def test():
