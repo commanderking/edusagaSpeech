@@ -68,6 +68,11 @@ def trackVisitorEvent(eventText):
 def certbot():
 	return 'vT9mS-YOftc0lR5Zj5KgJyVkbTqZrpo6UkveSM9bPKY.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
 
+@app.route('/.well-known/acme-challenge/NQCUjwFGF0qGVXpwRO0hjuovUgcKgQtOL06EnWgJh68')
+def certbot2():
+	return 'NQCUjwFGF0qGVXpwRO0hjuovUgcKgQtOL06EnWgJh68.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+
+
 @app.route('/test')
 def test():
 	print current_user.username
