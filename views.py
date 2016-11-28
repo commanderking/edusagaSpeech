@@ -28,7 +28,7 @@ def trackVisitorWithText(textMessage):
 		userID = textMessage + str(urlparse.parse_qs(parsed.query)['p'][0])
 		# Ensure it's a set 
 		print len(userID)
-		if len(userID) < 10: 
+		if len(userID) < 10:
 			client = boto3.client('sns', region_name ='us-east-1')
 			response = client.publish( 
 				TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
