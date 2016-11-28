@@ -64,15 +64,6 @@ def trackVisitorEvent(eventText):
 	except: 
 		pass
 
-@app.route('/.well-known/acme-challenge/vT9mS-YOftc0lR5Zj5KgJyVkbTqZrpo6UkveSM9bPKY')
-def certbot():
-	return 'vT9mS-YOftc0lR5Zj5KgJyVkbTqZrpo6UkveSM9bPKY.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
-
-@app.route('/.well-known/acme-challenge/NQCUjwFGF0qGVXpwRO0hjuovUgcKgQtOL06EnWgJh68')
-def certbot2():
-	return 'NQCUjwFGF0qGVXpwRO0hjuovUgcKgQtOL06EnWgJh68.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
-
-
 @app.route('/test')
 def test():
 	print current_user.username
@@ -353,6 +344,17 @@ def getEpisodes(username):
 		return json.dumps({'success': True, 'teacherEpisodeData' : teacherEpisodeData}, 200, {'ContentType': 'application.json'})
 	else: 
 		return json.dumps({'success': True, 'teacherEpisodeData' : []}, 200, {'ContentType': 'application.json'})
+
+# Reference for SSL Let's Encrypt renewal. Need two links for www.edusaga.com and edusaga.com
+'''
+@app.route('/.well-known/acme-challenge/vT9mS-YOftc0lR5Zj5KgJyVkbTqZrpo6UkveSM9bPKY')
+def certbot():
+	return 'vT9mS-YOftc0lR5Zj5KgJyVkbTqZrpo6UkveSM9bPKY.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+
+@app.route('/.well-known/acme-challenge/NQCUjwFGF0qGVXpwRO0hjuovUgcKgQtOL06EnWgJh68')
+def certbot2():
+	return 'NQCUjwFGF0qGVXpwRO0hjuovUgcKgQtOL06EnWgJh68.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+'''
 
 if __name__ == '__main__':
 	app.run(debug=True)
