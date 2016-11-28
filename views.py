@@ -64,9 +64,9 @@ def trackVisitorEvent(eventText):
 	except: 
 		pass
 
-@app.route('/.well-known/acme-challenge/hq4tAATwUvHk_p0dR--o4sbD3LVVPOa704U6qRXut0Q')
+@app.route('/.well-known/acme-challenge/iRVuOTsXYkmE171h8NZWsbiDI_hT9kYl1n5_HFUL1VE')
 def certbot():
-	return 'hq4tAATwUvHk_p0dR--o4sbD3LVVPOa704U6qRXut0Q.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+	return 'iRVuOTsXYkmE171h8NZWsbiDI_hT9kYl1n5_HFUL1VE.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
 
 @app.route('/test')
 def test():
