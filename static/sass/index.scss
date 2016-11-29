@@ -1056,11 +1056,11 @@ CSS Related to Task List
 			background: -moz-linear-gradient($borderBlue 50%, $greenBlue); /* For Firefox 3.6 to 15 */
 			background: linear-gradient($borderBlue 50%, $greenBlue); /* Standard syntax */
 			border-radius: 150px;
-			width: 18em;
-			height: 18em;
+			width: 15em;
+			height: 15em;
 			img {
 				margin-top: 15%;
-				width: 10em;
+				width: 8em;
 				height: auto;
 				//box-shadow: 20px 20px 70px white, inset 40px 40px 75px white;
 				-webkit-animation: pulse 2s linear 1s infinite;
@@ -1075,7 +1075,7 @@ CSS Related to Task List
 		h4 {
 			color: white;
 			font-weight: 100;
-			margin-top: 2em;
+			margin-top: 1em;
 			margin-bottom: 1em;
 		}
 		.buttonContainer {
