@@ -1022,6 +1022,9 @@ CSS Related to Task List
 				color: $lightBlue;
 				background: $borderBlue;
 				border-radius: 2em;
+				&:hover {
+					cursor: pointer;
+				}
 			}
 			.text {
 				font-size: 20px;

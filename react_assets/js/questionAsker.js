@@ -808,7 +808,7 @@ var QuestionAsker = React.createClass({
 		// if index is same as currentResultsTaskAnswer, they want to close current hint
 		console.log(index);
 		console.log(this.state.showResultTaskAnswerIndex);
-		if (index === this.state.showResultTaskAnswerIndex) {
+		if (index === this.state.showResultTaskAnswerIndex && this.state.showResultTaskAnswer === true) {
 			this.setState({
 				showResultTaskAnswer: false
 			})
