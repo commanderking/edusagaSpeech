@@ -6,6 +6,8 @@ var ResultsCompletedTask = require('./ResultsCompletedTask');
 var ResultsTasks = React.createClass({
 	render: function() {
 		// Function to render all completed tasks
+		console.log(this);
+		var that = this;
 		var completedTasks = this.props.completedTasks;
 		var d = new Date();
 		var date = d.getMonth() + 1 + "月" + d.getDate() + "日" + d.getFullYear() + "年";
@@ -17,7 +19,12 @@ var ResultsTasks = React.createClass({
 						taskText={task.task}
 						taskCorrect = {task.correct}
 						attemptedAnswers = {task.attemptedAnswers}
-						possibleCorrectAnswers = {task.possibleAnswers[0].answers} />)
+						possibleCorrectAnswers = {task.possibleAnswers[0].answers}
+						showResultTaskAnswer = {that.props.showResultTaskAnswer}
+						changeResultsTaskAnswers = {that.props.changeResultsTaskAnswers}
+						showResultTaskAnswerIndex = {that.props.showResultTaskAnswerIndex} 
+						playSpeechSynth = {that.props.playSpeechSynth}
+						speechSynthPlaying = {that.props.speechSynthPlaying}/>)
 		})
 
 		return (
@@ -36,7 +43,9 @@ var ResultsTasks = React.createClass({
 });
 
 ResultsTasks.propTypes = {
-	completedTasks: PropTypes.array.isRequired
+	completedTasks: PropTypes.array.isRequired,
+	showResultTaskAnswer: PropTypes.bool.isRequired,
+	changeResultsTaskAnswers: PropTypes.func.isRequired
 }
 
 module.exports = ResultsTasks;

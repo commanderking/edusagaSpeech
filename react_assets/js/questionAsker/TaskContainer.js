@@ -125,7 +125,7 @@ var TaskContainer = React.createClass({
 TaskContainer.propTypes = {
 	scenarioOn: PropTypes.bool.isRequired,
 	tasks: PropTypes.array.isRequired,
-	assessmentMode: PropTypes.bool.isRequired,
+	assessmentMode: PropTypes.bool.isRequired
 }
 
 module.exports = TaskContainer;

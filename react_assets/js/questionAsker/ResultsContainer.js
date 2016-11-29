@@ -21,7 +21,9 @@ ResultsContainer.propTypes = {
 	sceneComplete: PropTypes.bool.isRequired,
 	loadSceneData: PropTypes.func.isRequired,
 	completedTasks: PropTypes.array.isRequired,
-	charProfilePic: PropTypes.string.isRequired
+	charProfilePic: PropTypes.string.isRequired,
+	showResultTaskAnswer: PropTypes.bool.isRequired,
+	changeResultsTaskAnswers: PropTypes.func.isRequired
 }
 
 module.exports = ResultsContainer;

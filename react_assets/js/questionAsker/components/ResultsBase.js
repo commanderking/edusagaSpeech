@@ -16,9 +16,14 @@ var ResultsBase = React.createClass({
 					possibleCoins = {this.props.possibleCoins}/>
 				<div className="divSideBarContainer">
 					<ResultsTasks 
-						completedTasks = {this.props.completedTasks} 
+						completedTasks = {this.props.completedTasks}
+						showResultTaskAnswer = {this.props.showResultTaskAnswer}
+						changeResultsTaskAnswers = {this.props.changeResultsTaskAnswers}
 						locationEnglish = {this.props.locationEnglish} 
-						locationChinese = {this.props.locationChinese} />
+						locationChinese = {this.props.locationChinese}
+						showResultTaskAnswerIndex = {this.props.showResultTaskAnswerIndex}
+						playSpeechSynth = {this.props.playSpeechSynth}
+						speechSynthPlaying = {this.props.speechSynthPlaying} />
 					<ResultsSideBar 
 						loadSceneData = {this.props.loadSceneData} 
 						coins = {this.props.coins} 
@@ -30,3 +35,8 @@ var ResultsBase = React.createClass({
 });
 
 module.exports = ResultsBase;
+
+ResultsBase.propTypes = {
+	showResultTaskAnswer: PropTypes.bool.isRequired,
+	changeResultsTaskAnswers: PropTypes.func.isRequired
+}

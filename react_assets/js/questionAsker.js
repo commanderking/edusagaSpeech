@@ -74,7 +74,9 @@ var QuestionAsker = React.createClass({
 			taskPause: false,
 			timeRemaining: 20,
 			repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
-			speechSynthPlaying: false
+			speechSynthPlaying: false,
+			showResultTaskAnswer: false, 
+			showResultTaskAnswerIndex: null
 		}
 	},
 	loadSceneData: function() {
@@ -802,6 +804,23 @@ var QuestionAsker = React.createClass({
 	turnOffPracticeOption: function() {
 		this.setState({practiceAvailable: false});
 	},
+	changeResultsTaskAnswers: function(index) {
+		// if index is same as currentResultsTaskAnswer, they want to close current hint
+		console.log(index);
+		console.log(this.state.showResultTaskAnswerIndex);
+		if (index === this.state.showResultTaskAnswerIndex) {
+			this.setState({
+				showResultTaskAnswer: false
+			})
+		} 
+		// Case where they're clicking the show answer for another task or clicking help for first time
+		else {
+			this.setState({
+				showResultTaskAnswer: true,
+				showResultTaskAnswerIndex: index		
+			})
+		}
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
 
@@ -927,6 +946,12 @@ var QuestionAsker = React.createClass({
 						possibleCoins = {this.state.possibleCoins}
 						loadSceneData = {this.loadSceneData} 
 						completedTasks = {sceneData.character.completedTasks}
+						showResultTaskAnswer = {this.state.showResultTaskAnswer}
+						changeResultsTaskAnswers = {this.changeResultsTaskAnswers}
+						showResultTaskAnswerIndex = {this.state.showResultTaskAnswerIndex}
+						playSpeechSynth = {this.playSpeechSynth}
+						speechSynthPlaying = {this.state.speechSynthPlaying}
+
 						charName = {sceneData.character.name}
 						charProfilePic = {sceneData.character.emotions.default}
 						locationEnglish = {sceneData.character.location.nameEnglish}

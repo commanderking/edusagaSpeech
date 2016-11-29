@@ -995,6 +995,7 @@ CSS Related to Task List
 			width: 100%;
 			padding-bottom: 4px;
 			line-height: 2.5em;
+			position: relative;
 			.glyphicon {
 				font-size: 20px;
 				color: gray;
@@ -1015,10 +1016,30 @@ CSS Related to Task List
 			    -o-transform: rotate(-20deg);   /* Opera */
 			    transform: rotate(-20deg);
 			}
+			.glyphicon-menu-down {
+				position: absolute;
+				right: 0em;
+				color: $lightBlue;
+				background: $borderBlue;
+				border-radius: 2em;
+			}
 			.text {
 				font-size: 20px;
 				display: inline-block;
 				color: $borderBlue;
+			}
+			div {
+				margin-left: 25px;
+			}
+			.answerDescription {
+				font-size: 18px;
+				color: $borderBlue;
+			}
+			.speechableSpan {
+				color: #EA338B;
+				border-bottom: 1px solid #EA338B;
+				cursor: pointer;
+				font-size: 18px;
 			}
 		}
 	}
