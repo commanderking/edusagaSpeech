@@ -60,9 +60,9 @@
 		getInitialState: function getInitialState() {
 			return {
 				username: null,
-				currentContent: "My Episodes"
-				// refreshData forces menu Container to call loadSceneData
-				// Otherwise, episode data will only be loaded on mounting and my episode and public episode page look the same
+				currentContent: "Assigned Episodes",
+				flashMessageVisible: false,
+				flashMessageContent: null
 			};
 		},
 		changeContent: function changeContent(newContent) {
@@ -74,13 +74,26 @@
 				this.setState({ username: username });
 			}
 		},
+		activateFlashMessage: function activateFlashMessage(message) {
+			this.setState({
+				flashMessageVisible: true,
+				flashMessageContent: message
+			});
+		},
+		deactivateFlashMessage: function deactivateFlashMessage(message) {
+			this.setState({
+				flashMessageVisible: false
+			});
+		},
 		render: function render() {
 			var content;
 			switch (this.state.currentContent) {
-				case "My Episodes":
-					content = React.createElement(MainMenuContainer, { title: 'My Episodes',
+				case "Assigned Episodes":
+					content = React.createElement(MainMenuContainer, { title: 'Assigned Episodes',
 						teacherUsername: this.state.username,
 						publicDisplay: false,
+						activateFlashMessage: this.activateFlashMessage,
+						changeContent: this.changeContent,
 						key: 'myEpisodes' });
 					break;
 				case "Public Episodes":
@@ -88,6 +101,7 @@
 						title: 'Public Episodes',
 						teacherUsername: this.state.username,
 						publicDisplay: true,
+						activateFlashMessage: this.activateFlashMessage,
 						key: 'publicEpisodes' });
 					break;
 				case "Vocab Lists":
@@ -104,12 +118,26 @@
 					break;
 				default:
 					content = React.createElement(
-						'h1',
-						null,
-						'Nothing to see! '
+						'div',
+						{ className: 'container-fluid' },
+						React.createElement(
+							'h1',
+							null,
+							'No Episodes Assigned'
+						)
 					);
 					break;
 			}
+			var flashMessage = this.state.flashMessageVisible ? React.createElement(
+				'div',
+				{ onClick: this.deactivateFlashMessage },
+				React.createElement(
+					'span',
+					null,
+					this.state.flashMessageContent
+				),
+				React.createElement('span', { className: 'glyphicon glyphicon-remove', 'aria-hidden': 'true' })
+			) : null;
 	
 			return React.createElement(
 				'div',
@@ -122,13 +150,14 @@
 						null,
 						'Welcome ',
 						username
-					)
+					),
+					flashMessage
 				),
 				React.createElement(
 					'ul',
 					{ className: 'navBar' },
 					React.createElement(NavBarButton, {
-						text: 'My Episodes',
+						text: 'Assigned Episodes',
 						clickFunction: this.changeContent }),
 					React.createElement(NavBarButton, {
 						text: 'Public Episodes',
@@ -21717,6 +21746,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
+	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../helpers/Constants */ 181);
 	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 182);
 	
@@ -21808,10 +21838,13 @@
 					var parsedEpisodeArray = JSON.parse(result.episodeArray["scenes"]);
 					var newTeacherEpisodeData = { "scenes": parsedEpisodeArray };
 	
-					// Remove the episode from display
+					// Remove the episode from public display
 					var newTeacherEpisodeData = JSON.parse(JSON.stringify(that.state.teacherEpisodeData));
 					newTeacherEpisodeData.scenes.splice(episodeArrayIndex, 1);
 					that.setState({ teacherEpisodeData: newTeacherEpisodeData });
+				}
+				if (that.props.activateFlashMessage) {
+					that.props.activateFlashMessage("Episode Added!");
 				}
 			});
 		},
@@ -21830,8 +21863,12 @@
 					newTeacherEpisodeData.scenes.splice(episodeArrayIndex, 1);
 					that.setState({ teacherEpisodeData: newTeacherEpisodeData });
 				}
+				if (that.props.activateFlashMessage) {
+					that.props.activateFlashMessage("Episode removed!");
+				}
 			});
 		},
+		// Sort episodes based on the sequence number in the JSON file
 		sortEpisodeArraybySequence: function sortEpisodeArraybySequence(episodeArray) {
 			return episodeArray.sort(function (a, b) {
 				var x = a["sequence"];
@@ -21875,7 +21912,7 @@
 							return that.addEpisode(scene.id, originalIndex);
 						}, className: 'btn btn-info' },
 					React.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' }),
-					' Add'
+					' Assign'
 				) : null;
 	
 				// If passed teacherEpisodes, that means these episodes are already in teacher database
@@ -21886,7 +21923,7 @@
 							return that.removeEpisode(scene.id, originalIndex);
 						}, className: 'btn btn-info', 'data-index': originalIndex },
 					React.createElement('span', { className: 'glyphicon glyphicon-remove', 'aria-hidden': 'true' }),
-					' Remove'
+					' Unassign'
 				) : null;
 	
 				return React.createElement(
@@ -21948,6 +21985,8 @@
 			this.loadSceneData();
 		},
 		render: function render() {
+			var _this = this;
+	
 			var scenes;
 	
 			// Create link for each scene that should be available to student
@@ -22021,6 +22060,25 @@
 					null,
 					'Loading'
 				);
+			} else if (this.state.teacherEpisodeData.scenes.length === 0) {
+				return React.createElement(
+					'div',
+					{ className: 'container-fluid' },
+					React.createElement(
+						'h2',
+						{ className: 'menuTitle' },
+						'No Episodes Added Yet'
+					),
+					React.createElement(
+						'button',
+						{
+							className: 'btn btn-info btn-add-episodes',
+							onClick: function onClick() {
+								return _this.props.changeContent("Public Episodes");
+							} },
+						'Add New Episodes'
+					)
+				);
 			} else {
 				return React.createElement(
 					'div',
@@ -22054,6 +22112,10 @@
 	});
 	
 	module.exports = MainMenuContainer;
+	
+	MainMenuContainer.propTypes = {
+		changeContent: PropTypes.func
+	};
 
 /***/ },
 /* 181 */

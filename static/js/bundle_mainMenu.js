@@ -21631,6 +21631,7 @@
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
+	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../helpers/Constants */ 181);
 	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 182);
 	
@@ -21722,10 +21723,13 @@
 					var parsedEpisodeArray = JSON.parse(result.episodeArray["scenes"]);
 					var newTeacherEpisodeData = { "scenes": parsedEpisodeArray };
 	
-					// Remove the episode from display
+					// Remove the episode from public display
 					var newTeacherEpisodeData = JSON.parse(JSON.stringify(that.state.teacherEpisodeData));
 					newTeacherEpisodeData.scenes.splice(episodeArrayIndex, 1);
 					that.setState({ teacherEpisodeData: newTeacherEpisodeData });
+				}
+				if (that.props.activateFlashMessage) {
+					that.props.activateFlashMessage("Episode Added!");
 				}
 			});
 		},
@@ -21744,8 +21748,12 @@
 					newTeacherEpisodeData.scenes.splice(episodeArrayIndex, 1);
 					that.setState({ teacherEpisodeData: newTeacherEpisodeData });
 				}
+				if (that.props.activateFlashMessage) {
+					that.props.activateFlashMessage("Episode removed!");
+				}
 			});
 		},
+		// Sort episodes based on the sequence number in the JSON file
 		sortEpisodeArraybySequence: function sortEpisodeArraybySequence(episodeArray) {
 			return episodeArray.sort(function (a, b) {
 				var x = a["sequence"];
@@ -21789,7 +21797,7 @@
 							return that.addEpisode(scene.id, originalIndex);
 						}, className: 'btn btn-info' },
 					React.createElement('span', { className: 'glyphicon glyphicon-plus', 'aria-hidden': 'true' }),
-					' Add'
+					' Assign'
 				) : null;
 	
 				// If passed teacherEpisodes, that means these episodes are already in teacher database
@@ -21800,7 +21808,7 @@
 							return that.removeEpisode(scene.id, originalIndex);
 						}, className: 'btn btn-info', 'data-index': originalIndex },
 					React.createElement('span', { className: 'glyphicon glyphicon-remove', 'aria-hidden': 'true' }),
-					' Remove'
+					' Unassign'
 				) : null;
 	
 				return React.createElement(
@@ -21862,6 +21870,8 @@
 			this.loadSceneData();
 		},
 		render: function render() {
+			var _this = this;
+	
 			var scenes;
 	
 			// Create link for each scene that should be available to student
@@ -21935,6 +21945,25 @@
 					null,
 					'Loading'
 				);
+			} else if (this.state.teacherEpisodeData.scenes.length === 0) {
+				return React.createElement(
+					'div',
+					{ className: 'container-fluid' },
+					React.createElement(
+						'h2',
+						{ className: 'menuTitle' },
+						'No Episodes Added Yet'
+					),
+					React.createElement(
+						'button',
+						{
+							className: 'btn btn-info btn-add-episodes',
+							onClick: function onClick() {
+								return _this.props.changeContent("Public Episodes");
+							} },
+						'Add New Episodes'
+					)
+				);
 			} else {
 				return React.createElement(
 					'div',
@@ -21968,6 +21997,10 @@
 	});
 	
 	module.exports = MainMenuContainer;
+	
+	MainMenuContainer.propTypes = {
+		changeContent: PropTypes.func
+	};
 
 /***/ },
 /* 181 */

@@ -7,9 +7,9 @@ var TeacherHome = React.createClass({
 	getInitialState: function() {
 		return {
 			username: null,
-			currentContent: "My Episodes"
-			// refreshData forces menu Container to call loadSceneData
-			// Otherwise, episode data will only be loaded on mounting and my episode and public episode page look the same
+			currentContent: "Assigned Episodes",
+			flashMessageVisible: false,
+			flashMessageContent: null
 		}
 	},
 	changeContent: function(newContent) {
@@ -21,13 +21,26 @@ var TeacherHome = React.createClass({
 			this.setState({username:username})
 		}
 	},
+	activateFlashMessage: function(message) {
+		this.setState({
+			flashMessageVisible: true,
+			flashMessageContent: message
+		});
+	},
+	deactivateFlashMessage: function(message) {
+		this.setState({
+			flashMessageVisible: false
+		})
+	},
 	render: function() {
 		var content;
 		switch(this.state.currentContent) {
-			case "My Episodes": 
-				content = <MainMenuContainer title="My Episodes" 
+			case "Assigned Episodes": 
+				content = <MainMenuContainer title="Assigned Episodes" 
 						teacherUsername={this.state.username}
 						publicDisplay={false}
+						activateFlashMessage={this.activateFlashMessage}
+						changeContent={this.changeContent}
 						key="myEpisodes"/>
 				break;
 			case "Public Episodes":
@@ -35,6 +48,7 @@ var TeacherHome = React.createClass({
 							title="Public Episodes"
 							teacherUsername={this.state.username}
 							publicDisplay={true}
+							activateFlashMessage={this.activateFlashMessage}
 							key="publicEpisodes" />
 				break;
 			case "Vocab Lists":
@@ -44,18 +58,26 @@ var TeacherHome = React.createClass({
 					</div>;
 				break;
 			default:
-				content = <h1>Nothing to see! </h1>
+				content = <div className="container-fluid">
+							<h1>No Episodes Assigned</h1>
+						</div>
 				break;
 		}
+		var flashMessage = this.state.flashMessageVisible ?
+			<div onClick={this.deactivateFlashMessage}>
+				<span>{this.state.flashMessageContent}</span>
+				<span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			</div> : null
 
 		return (
 			<div>
 				<div className="header">
 					<h2>Welcome {username}</h2>
+					{flashMessage}
 				</div>
 				<ul className="navBar">
 					<NavBarButton 
-						text="My Episodes"
+						text="Assigned Episodes"
 						clickFunction={this.changeContent} />
 					<NavBarButton 
 						text="Public Episodes"

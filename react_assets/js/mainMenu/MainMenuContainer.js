@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var PropTypes = React.PropTypes;
 var Constants = require('../helpers/Constants');
 var EpisodeTagList = require('./EpisodeTagLists');
 
@@ -91,11 +92,15 @@ var MainMenuContainer = React.createClass({
 					var parsedEpisodeArray = JSON.parse(result.episodeArray["scenes"]);	
 					var newTeacherEpisodeData = {"scenes": parsedEpisodeArray};
 
-					// Remove the episode from display
+					// Remove the episode from public display
 					var newTeacherEpisodeData = JSON.parse(JSON.stringify(that.state.teacherEpisodeData));
 					newTeacherEpisodeData.scenes.splice(episodeArrayIndex,1);
 					that.setState({teacherEpisodeData: newTeacherEpisodeData});
 				}
+				if (that.props.activateFlashMessage) {
+					that.props.activateFlashMessage("Episode Added!");
+				}
+
 			});
 	},
 	removeEpisode: function(episodeName, episodeArrayIndex) {
@@ -113,9 +118,13 @@ var MainMenuContainer = React.createClass({
 				newTeacherEpisodeData.scenes.splice(episodeArrayIndex,1);
 				that.setState({teacherEpisodeData: newTeacherEpisodeData});
 			}
+			if (that.props.activateFlashMessage) {
+				that.props.activateFlashMessage("Episode removed!");
+			}
 
 		});	
 	},
+	// Sort episodes based on the sequence number in the JSON file
 	sortEpisodeArraybySequence: function(episodeArray) {
 		return episodeArray.sort(function(a,b) {
 			var x = a["sequence"];
@@ -153,14 +162,14 @@ var MainMenuContainer = React.createClass({
 			// Otherwise, it's the public display, and add functionality should not be there
 			var addButton = that.props.publicDisplay && that.props.teacherUsername !== undefined ? 
 				<button onClick={() => that.addEpisode(scene.id, originalIndex)} className="btn btn-info">
-					<span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+					<span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Assign
 				</button> : null;
 
 			// If passed teacherEpisodes, that means these episodes are already in teacher database
 			// As a result, display the remove episode button
 			var removeButton = !that.props.publicDisplay ?
 				<button onClick={() => that.removeEpisode(scene.id, originalIndex)} className="btn btn-info" data-index={originalIndex}>
-					<span className="glyphicon glyphicon-remove" aria-hidden="true"></span> Remove
+					<span className="glyphicon glyphicon-remove" aria-hidden="true"></span> Unassign
 				</button> : null;	
 
 			return (
@@ -257,7 +266,16 @@ var MainMenuContainer = React.createClass({
 		}
 
 		if (!this.state.teacherEpisodeData) {
-				return <div>Loading</div>
+			return <div>Loading</div>
+		} else if (this.state.teacherEpisodeData.scenes.length === 0) {
+			return (<div className="container-fluid">
+						<h2 className="menuTitle">No Episodes Added Yet</h2>
+							<button 
+								className="btn btn-info btn-add-episodes"
+								onClick={() => this.props.changeContent("Public Episodes")}>
+								Add New Episodes
+							</button>
+					</div>)
 		} else {
 			return (
 					<div className="container-fluid">
@@ -294,3 +312,7 @@ var MainMenuContainer = React.createClass({
 });
 
 module.exports = MainMenuContainer;
+
+MainMenuContainer.propTypes = {
+	changeContent : PropTypes.func
+}
