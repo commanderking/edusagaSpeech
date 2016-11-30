@@ -60,8 +60,12 @@
 		// This page is generally only called when accessed from a public page (loads mainMenu.html)
 		// As a result, it should display the public version of the site
 		render: function render() {
-			return React.createElement(MainMenuContainer, {
-				publicDisplay: true });
+			if (username !== "public") {
+				return React.createElement(MainMenuContainer, { publicDisplay: false });
+			} else {
+				return React.createElement(MainMenuContainer, {
+					publicDisplay: true });
+			}
 		}
 	});
 	
@@ -21669,8 +21673,7 @@
 			// else, load all the episodes that are public
 			if (this.props.publicDisplay === false) {
 				var username = this.props.teacherUsername;
-	
-				// Test javascript
+				console.log(username);
 				var setEpisodeData = function setEpisodeData(episodeData) {
 					that.setState({ teacherEpisodeData: episodeData });
 				};

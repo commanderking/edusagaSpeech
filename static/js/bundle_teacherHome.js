@@ -21784,8 +21784,7 @@
 			// else, load all the episodes that are public
 			if (this.props.publicDisplay === false) {
 				var username = this.props.teacherUsername;
-	
-				// Test javascript
+				console.log(username);
 				var setEpisodeData = function setEpisodeData(episodeData) {
 					that.setState({ teacherEpisodeData: episodeData });
 				};

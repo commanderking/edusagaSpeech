@@ -88,8 +88,6 @@ def testDatabase(name="test"):
 		db.session.add(newEpisode2)
 		db.session.commit()
 
-
-
 	currentEpisode = Episode.query.first()
 	print currentEpisode
 	print currentEpisode.episodeJSONFileName
@@ -150,6 +148,15 @@ def teacherHome(teacher):
 		episode = getAllEpisodeData(teacher)
 		print episode
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+
+@app.route('/<teacher>/student')
+def studentHome(teacher):
+	print teacher
+	# Pull episodes from database for teacher
+	# Add authentication for student and that student belongs to teacher page
+	teacherEpisodeData = json.dumps(getTeacherEpisodes(teacher), ensure_ascii=False).encode('utf8')
+	print teacherEpisodeData
+	return render_template('mainMenu.html', teacher=teacher, episodeData=teacherEpisodeData)
 
 @app.route('/public/home/')
 def publicHome():

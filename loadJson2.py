@@ -13,6 +13,7 @@ def getTeacherEpisodes(username):
 	# Grab teacher
 	teacher = Teacher.query.filter_by(username=username).first()
 
+	print teacher.username
 	for episode in teacher.episodes:
 		episodeName = Episode.query.filter_by(id=episode.id).first().episodeJSONFileName
 		episodeName = str(json_dir_name + episodeName + ".json")

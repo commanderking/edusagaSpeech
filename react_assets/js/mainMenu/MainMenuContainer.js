@@ -36,8 +36,7 @@ var MainMenuContainer = React.createClass({
 		// else, load all the episodes that are public
 		if (this.props.publicDisplay === false) {
 			var username = this.props.teacherUsername;
-
-			// Test javascript
+			console.log(username);
 			var setEpisodeData = function(episodeData) {
 				that.setState({teacherEpisodeData: episodeData});
 			};
