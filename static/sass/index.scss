@@ -756,12 +756,13 @@ CSS Related to Task List
 				right: 3%;
 				height: 100%;
 				min-height: 100px;
-				z-index: 6;
+				z-index: 20;
 			}
 			.miriGlow {
 				box-shadow: 0 0 20px white, inset 0 0 100px white;
 				-webkit-animation: pulse 2s linear 1s infinite;
-				border-radius: 50px 
+				border-radius: 50px
+
 			}
 			.hintDiv {
 				position: absolute;
@@ -772,7 +773,7 @@ CSS Related to Task List
 				background-color: $invertedBlue;
 				border-top-left-radius: 25px;
 				border-bottom-left-radius: 25px;
-				z-index: 5;
+				z-index: 7;
 
 				.hintIcon {
 					height:50px;
@@ -788,6 +789,7 @@ CSS Related to Task List
 					}
 				}
 				.suggestNewPhraseButton {
+					display: none;
 					height: 50px;
 					width: 50px;
 					top: -5px;
