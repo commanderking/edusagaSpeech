@@ -49,15 +49,32 @@ class AddRoles(TestSetup):
         db.session.add(newTeacher)
         db.session.commit()
 
-        print "in try"
-        newTeacher.roles.append(newRole)
 
+        newTeacher.roles.append(newRole)
         testTeacher = Teacher.query.filter(Teacher.roles.any(name="student")).first()
         self.assertEqual(testTeacher.username, "cooldude2")
 
         db.session.delete(newRole)
         db.session.delete(newTeacher)
         db.session.commit()
+
+        assert newRole not in db.session
+
+'''
+class AddTeacherWithRole(TestSetup):
+    def test_adding_role_with_form(self):
+        newRole = Role(name="student")
+        db.session.add(newRole)
+        db.session.commit()
+
+
+        newTeacher = Teacher(username="teacherWithRole", password="mypassword", email="teacherWithRole@gmail.com", roles="teacher")
+        self.assertEqual(newTeacher.roles.name, "teacherWithRole")
+
+        db.session.delete(newRole)
+        db.session.delete(newTeacher)
+        db.session.commit()
+'''
 
 class AddEpisodes(TestSetup):
     def test_add_episode(self):

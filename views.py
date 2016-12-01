@@ -64,50 +64,6 @@ def trackVisitorEvent(eventText):
 	except: 
 		pass
 
-@app.route('/test')
-def test():
-	print current_user.username
-	return render_template("index3.html")
-
-
-@app.route('/testDatabase')
-def testDatabase(name="test"):
-	if Episode.query.filter_by(episodeJSONFileName='introDavid').first():
-		print "It's already in here!"
-		newEpisode = Episode.query.filter_by(episodeJSONFileName='introDavid').first()
-	else: 
-		newEpisode = Episode('introDavid')
-		db.session.add(newEpisode)	
-		db.session.commit()
-
-	if Episode.query.filter_by(episodeJSONFileName='introAlex').first():
-		print "It's already in here"
-		newEpisode2 = Episode.query.filter_by(episodeJSONFileName='introAlex').first()
-	else: 
-		newEpisode2 = Episode('introAlex')
-		db.session.add(newEpisode2)
-		db.session.commit()
-
-	currentEpisode = Episode.query.first()
-	print currentEpisode
-	print currentEpisode.episodeJSONFileName
-	teacher = Teacher.query.first()
-	print teacher
-	print teacher.username
-
-	currentEpisode.teachers.append(teacher)
-	newEpisode2.teachers.append(teacher)
-	db.session.commit()
-
-	for teacher in currentEpisode.teachers: 
-		print teacher.username
-
-	for episode in teacher.episodes:
-		print episode.episodeJSONFileName
-
-	return render_template('questionAsker.html', teacher="public", activityName=currentEpisode.episodeJSONFileName)
-
-
 @app.route('/')
 def index(name="Index", activityName="index", teacher="jinlaoshi"):
 	# If no user ID generate a random one
@@ -126,7 +82,7 @@ def home(name="Home"):
 	print session['userID']
 	return redirect(url_for('index'))
 
-@app.route('/<username>')
+@app.route('/teacher/<username>')
 @login_required
 def teacherPage(username):
 	# Make sure only the teacher with this username can see the page
@@ -139,15 +95,21 @@ def teacherPage(username):
 		print episodeArray
 		return render_template('teacherHome.html', public="public", username=username, episodeArray=episodeArray)
 
-@app.route('/<teacher>/home/')
+@app.route('/teacher/<teacher>/home/')
 def teacherHome(teacher):
 	studentID = request.args.get('studentID')
-	if studentID == None:
+	if teacher == "public": 
+		studentID = request.args.get('studentID')
+		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+	elif studentID == None:
 		return redirect(url_for("login", teacher=teacher))
 	else:
-		episode = getAllEpisodeData(teacher)
-		print episode
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+
+
+@app.route('/public/home/')
+def publicHome2():
+	return redirect(url_for('teacherHome', teacher="public"))
 
 @app.route('/<teacher>/student')
 def studentHome(teacher):
@@ -158,17 +120,7 @@ def studentHome(teacher):
 	print teacherEpisodeData
 	return render_template('mainMenu.html', teacher=teacher, episodeData=teacherEpisodeData)
 
-@app.route('/public/home/')
-def publicHome():
-	# Check for any new episodes and update JSON to reflect any new files in the public folder
-	episodeData = json.dumps(getAllEpisodeData("public"), ensure_ascii=False).encode('utf8')
-	trackVisitorEvent("Visited See More Episodes")
-	studentID = request.args.get('studentID')
-	teacher = "public"
-	return render_template('mainMenu.html', teacher=teacher, studentID=studentID, episodeData=episodeData)
-
-
-@app.route('/<teacher>/login', methods=['GET', 'POST'])
+@app.route('/teacher/<teacher>/login', methods=['GET', 'POST'])
 def login(teacher):
 	if request.method == 'POST':
 		studentID = request.form.get("studentID")
@@ -176,11 +128,11 @@ def login(teacher):
 	else: 
 		return render_template("login.html")
 
-@app.route('/<teacher>/dashboard')
+@app.route('/teacher/<teacher>/dashboard')
 def teacherDashboard(teacher):
 	return render_template("dashboard.html", teacher=teacher)
 
-@app.route('/<teacher>/<activityName>')
+@app.route('/teacher/<teacher>/<activityName>')
 def teacherScene(teacher, activityName):
 	if (os.path.isdir('./static/data/' + teacher) & os.path.isfile('./static/data/' + teacher + '/' + activityName + '.json')):
 		try:
@@ -197,16 +149,12 @@ def teacherScene(teacher, activityName):
 
 # The Home page is accessible to anyone
 @app.route('/signup')
-def home_page():
-    return render_template_string("""
-        {% extends "base.html" %}
-        {% block content %}
-            <h2>Home page</h2>
-            <p>This page can be accessed by anyone.</p><br/>
-            <p><a href={{ url_for('home_page') }}>Home page</a> (anyone)</p>
-            <p><a href={{ url_for('members_page') }}>Members page</a> (login required)</p>
-        {% endblock %}
-        """)
+def signup():
+    return redirect(url_for('user.register'))
+
+@app.route('/login')
+def userLogin():
+	return redirect(url_for('user.login'))
 
 # The Members page is only accessible to authenticated users
 @app.route('/members')
@@ -349,17 +297,6 @@ def getEpisodes(username):
 		return json.dumps({'success': True, 'teacherEpisodeData' : teacherEpisodeData}, 200, {'ContentType': 'application.json'})
 	else: 
 		return json.dumps({'success': True, 'teacherEpisodeData' : []}, 200, {'ContentType': 'application.json'})
-
-# Reference for SSL Let's Encrypt renewal. Need two links for www.edusaga.com and edusaga.com
-'''
-@app.route('/.well-known/acme-challenge/vT9mS-YOftc0lR5Zj5KgJyVkbTqZrpo6UkveSM9bPKY')
-def certbot():
-	return 'vT9mS-YOftc0lR5Zj5KgJyVkbTqZrpo6UkveSM9bPKY.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
-
-@app.route('/.well-known/acme-challenge/NQCUjwFGF0qGVXpwRO0hjuovUgcKgQtOL06EnWgJh68')
-def certbot2():
-	return 'NQCUjwFGF0qGVXpwRO0hjuovUgcKgQtOL06EnWgJh68.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
-'''
 
 if __name__ == '__main__':
 	app.run(debug=True)

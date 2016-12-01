@@ -3,7 +3,6 @@
 {% block content %}
 {% from "flask_user/_macros.html" import render_field, render_submit_field %}
 <h1>{%trans%}Sign up{%endtrans%}</h1>
-
 <form action="" method="POST" novalidate formnovalidate class="form" role="form">
     {{ form.hidden_tag() }}
 
