@@ -37,6 +37,28 @@ class AddUser(TestSetup):
 
         assert newTeacher not in db.session
 
+class AddRoles(TestSetup):
+    def test_adding_role(self):
+        newRole = Role(name="student")
+        db.session.add(newRole)
+        db.session.commit()
+
+        assert newRole in db.session
+
+        newTeacher = Teacher(username="cooldude2", password="mypassword", email="myemail2@gmail.com")
+        db.session.add(newTeacher)
+        db.session.commit()
+
+        print "in try"
+        newTeacher.roles.append(newRole)
+
+        testTeacher = Teacher.query.filter(Teacher.roles.any(name="student")).first()
+        self.assertEqual(testTeacher.username, "cooldude2")
+
+        db.session.delete(newRole)
+        db.session.delete(newTeacher)
+        db.session.commit()
+
 class AddEpisodes(TestSetup):
     def test_add_episode(self):
         newEpisode = Episode('introJohn')
@@ -73,6 +95,9 @@ class AddEpisodes(TestSetup):
         newEpisode.teachers.append(newTeacher)
         newEpisode.teachers.append(newTeacher2)
         newEpisode2.teachers.append(newTeacher)
+
+        print "episode2 teachers"
+        print newEpisode2.teachers
 
         testTeacher = Teacher.query.filter_by(username="teacher1").first()
         self.assertEqual(testTeacher.username, "teacher1")

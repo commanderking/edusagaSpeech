@@ -29,9 +29,19 @@ class Teacher(db.Model, UserMixin):
     # user_types are: teacher, student, general
     # user_type = db.Column(db.String(100), nullable=False,server_default='general')
 
-
+    roles = db.relationship('Role', secondary='user_roles',
+        backref=db.backref('teachers', lazy='dynamic'))
     episodes = db.relationship('Episode', secondary=episodes,
         backref=db.backref('teachers', lazy='dynamic'))
+
+class Role(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+
+class UserRoles(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    teacher_id = db.Column(db.Integer(), db.ForeignKey('teacher.id', ondelete='CASCADE'))
+    role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 
 class Episode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
