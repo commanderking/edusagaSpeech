@@ -45,14 +45,14 @@ class AddRoles(TestSetup):
 
         assert newRole in db.session
 
-        newTeacher = Teacher(username="cooldude2", password="mypassword", email="myemail2@gmail.com")
+        newTeacher = Teacher(username="coolteacher", password="mypassword", email="myemail2@gmail.com")
         db.session.add(newTeacher)
         db.session.commit()
 
 
         newTeacher.roles.append(newRole)
         testTeacher = Teacher.query.filter(Teacher.roles.any(name="teacher")).first()
-        self.assertEqual(testTeacher.username, "cooldude2")
+        self.assertEqual(testTeacher.username, "coolteacher")
 
         db.session.delete(newRole)
         db.session.delete(newTeacher)
@@ -60,29 +60,23 @@ class AddRoles(TestSetup):
 
         assert newRole not in db.session
 
+        # Check adding the student role
         newRole2 = Role(name="student")
+        db.session.add(newRole2)
         newTeacher = Teacher(username="coolstudent", password="studentpassword", email="coolstudent@gmail.com")
         newTeacher.roles.append(newRole2)
-        #self.assertEqual(newTeacher.roles.name, "student")
+        db.session.add(newTeacher)
+        db.session.commit()
+
+        for role in newTeacher.roles:
+            self.assertEqual(role.name, "student")
 
         testTeacher = Teacher.query.filter_by(username="coolstudent").first()
-        self.assertEqual(testTeacher.roles.name, "coolstudent") 
+        self.assertEqual(testTeacher.roles[0].name, "student")
 
-'''
-class AddTeacherWithRole(TestSetup):
-    def test_adding_role_with_form(self):
-        newRole = Role(name="student")
-        db.session.add(newRole)
-        db.session.commit()
-
-
-        newTeacher = Teacher(username="teacherWithRole", password="mypassword", email="teacherWithRole@gmail.com", roles="teacher")
-        self.assertEqual(newTeacher.roles.name, "teacherWithRole")
-
-        db.session.delete(newRole)
+        db.session.delete(newRole2)
         db.session.delete(newTeacher)
         db.session.commit()
-'''
 
 class AddEpisodes(TestSetup):
     def test_add_episode(self):
