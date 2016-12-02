@@ -39,7 +39,7 @@ class AddUser(TestSetup):
 
 class AddRoles(TestSetup):
     def test_adding_role(self):
-        newRole = Role(name="student")
+        newRole = Role(name="teacher")
         db.session.add(newRole)
         db.session.commit()
 
@@ -51,7 +51,7 @@ class AddRoles(TestSetup):
 
 
         newTeacher.roles.append(newRole)
-        testTeacher = Teacher.query.filter(Teacher.roles.any(name="student")).first()
+        testTeacher = Teacher.query.filter(Teacher.roles.any(name="teacher")).first()
         self.assertEqual(testTeacher.username, "cooldude2")
 
         db.session.delete(newRole)
@@ -59,6 +59,14 @@ class AddRoles(TestSetup):
         db.session.commit()
 
         assert newRole not in db.session
+
+        newRole2 = Role(name="student")
+        newTeacher = Teacher(username="coolstudent", password="studentpassword", email="coolstudent@gmail.com")
+        newTeacher.roles.append(newRole2)
+        #self.assertEqual(newTeacher.roles.name, "student")
+
+        testTeacher = Teacher.query.filter_by(username="coolstudent").first()
+        self.assertEqual(testTeacher.roles.name, "coolstudent") 
 
 '''
 class AddTeacherWithRole(TestSetup):
