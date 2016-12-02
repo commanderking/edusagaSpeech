@@ -107,11 +107,6 @@ def teacherHome(teacher):
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
 	else:
 		return render_template('teacherHome.html', teacher=teacher, studentID=studentID)
-	'''
-	elif studentID == None:
-		return redirect(url_for("login", teacher=teacher))
-	'''
-
 
 @app.route('/public/home/')
 def publicHome2():
