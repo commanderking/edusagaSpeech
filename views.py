@@ -65,13 +65,17 @@ def trackVisitorEvent(eventText):
 		pass
 
 @app.route('/')
-def index(name="Index", activityName="index", teacher="jinlaoshi"):
+def index(name="Index"):
 	# If no user ID generate a random one
 	try: 
 		userID = session['userID']
 	except:
 		userID = uuid.uuid4()
-	return render_template('index3.html', name=name, activityName=activityName, teacher=teacher, userID=userID)
+
+	if current_user.is_authenticated:
+		return redirect(url_for("teacherHome", teacher=current_user.username))
+	else: 
+		return render_template('index3.html', name=name, userID=userID)
 
 #--------------------------------------------
 # E-mail this link and redirect to homepage to track with text
@@ -101,10 +105,12 @@ def teacherHome(teacher):
 	if teacher == "public": 
 		studentID = request.args.get('studentID')
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+	else:
+		return render_template('teacherHome.html', teacher=teacher, studentID=studentID)
+	'''
 	elif studentID == None:
 		return redirect(url_for("login", teacher=teacher))
-	else:
-		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
+	'''
 
 
 @app.route('/public/home/')
@@ -170,22 +176,6 @@ def members_page():
         {% endblock %}
         """)
 
-
-#------------------------------------------------
-# Vocab Tests
-#------------------------------------------------
-
-@app.route('/demoVocab1')
-def demoVocab1(name="Vocab1"):
-	return render_template("demoVocab1.html", name=name)
-
-@app.route('/demoVocab2')
-def demoVocab2(name="Vocab2"):
-	return render_template("demoVocab2.html", name=name)
-
-@app.route('/demoVocab3')
-def demoVocab3(name="Vocab3"):
-	return render_template("reactTest.html", name=name)
 
 @app.route('/video/')
 def videoRedirect(name="Video Redirect"):
