@@ -5,7 +5,7 @@ from sqlalchemy import exc
 
 import boto3, json, simplejson, urlparse, datetime
 
-from loadJson import getAllEpisodeData
+from loadJson import getAllPublicEpisodeData
 from loadJson2 import getTeacherEpisodes
 
 #For Heroku Logging
@@ -133,19 +133,17 @@ def login(teacher):
 def teacherDashboard(teacher):
 	return render_template("dashboard.html", teacher=teacher)
 
-@app.route('/teacher/<teacher>/<activityName>')
-def teacherScene(teacher, activityName):
-	if (os.path.isdir('./static/data/' + teacher) & os.path.isfile('./static/data/' + teacher + '/' + activityName + '.json')):
-		try:
-			studentID = request.args['studentID']
-		except: 
-			studentID = ""
-		textToTrack = "Visited " + activityName + " "
-		trackVisitorEvent("Visited " + activityName + " Page")
+@app.route('/teacher/<teacher>/episode/<episodeName>')
+def teacherScene(teacher, episodeName):
+	try:
+		studentID = request.args['studentID']
+	except: 
+		studentID = ""
+	textToTrack = "Visited " + episodeName + " "
+	trackVisitorEvent("Visited " + episodeName + " Page")
 
-		return render_template("questionAsker.html", activityName=activityName, teacher=teacher, studentID=studentID)
-	else:
-		return redirect(url_for('teacherHome', teacher=teacher))
+	return render_template("questionAsker.html", episodeName=episodeName, teacher=teacher, studentID=studentID)
+	#return redirect(url_for('teacherHome', teacher=teacher))
 
 
 # The Home page is accessible to anyone
@@ -273,6 +271,8 @@ def deleteEpisode(username):
         newEpisodeArray = getTeacherEpisodes(current_user.username)
 
         return json.dumps({'success': True, 'episodeArray' : newEpisodeArray}, 200, {'ContentType': 'application.json'})
+
+@app.route('/teacher/public/')
 
 @app.route('/<username>/getEpisodes', methods=['POST'])
 def getEpisodes(username):

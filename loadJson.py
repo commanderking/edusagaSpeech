@@ -1,26 +1,20 @@
 import json, os
 from glob import glob
 
+# To get All Public Episode Data, look through the "public JSON list"
+# Get all the needed information
 
-def getAllEpisodeData(teacherName):
+def getAllPublicEpisodeData(teacherName):
 	sceneMenuDataStructure = {}
 	sceneMenuData = []
 	json_dir_name = "static/data/" + teacherName
 
-	# Pull all episodes that a teacher has from the database
-	# iterate through them, for each one look in the public folder and find the scenes
-	# return the data that was built
-
 	json_pattern = os.path.join(json_dir_name, '*.json')
 	file_list = glob(json_pattern)
 	for file in file_list:
-		#allPublicJSONs.append(json)
-
 		# Add episode's data to the sceneMenuData
-		sceneMenuData.append(buildEpisodeData(file, teacherName))
+		sceneMenuData.append(buildPublicEpisodeData(file, teacherName))
 
-	#sceneMenuData = json.dumps(sceneMenuData, ensure_ascii=False).encode('utf8')
-	# print sceneMenuData
 	sceneMenuDataStructure["scenes"] = sceneMenuData
 
 	sceneMenuDataStructure = json.dumps(sceneMenuDataStructure, ensure_ascii=False).encode('utf8')
@@ -31,7 +25,7 @@ def getAllEpisodeData(teacherName):
 	print sceneMenuDataStructure
 	return sceneMenuData
 
-def buildEpisodeData(jsonPath, teacherName): 
+def buildPublicEpisodeData(jsonPath, teacherName): 
 	with open(jsonPath) as episodeJSON:
 		episodeContent = {}
 		d = json.load(episodeJSON)
@@ -40,7 +34,7 @@ def buildEpisodeData(jsonPath, teacherName):
 		episodeContent['id'] = jsonPath.replace('static/data/public/', '').replace('.json', '')
 		episodeContent['name'] = d['activityName']
 		episodeContent['scenario'] = d['scenario'][0]['text']
-		episodeContent['link'] = jsonPath.replace('static/data/' + teacherName, '..').replace('.json', '')
+		episodeContent['link'] = jsonPath.replace('static/data/' + teacherName, '/teacher/public/episode').replace('.json', '')
 		episodeContent['tags'] = d['tags']
 		episodeContent['objectives'] = d['objectives']
 		episodeContent['characterImage'] = d['currentImage']
@@ -53,4 +47,4 @@ def buildEpisodeData(jsonPath, teacherName):
 		#print(episodeContent)
 		return episodeContent
 
-getAllEpisodeData("public")
+getAllPublicEpisodeData("public")

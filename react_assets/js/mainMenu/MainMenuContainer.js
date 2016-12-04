@@ -63,6 +63,7 @@ var MainMenuContainer = React.createClass({
 						// Create newEpisodeData data structure to set as teacherEpisodeData
 						var newEpisodeData = {};
 						newEpisodeData.scenes = filteredEpisodes;
+						console.log(filteredEpisodes);
 						that.setState({teacherEpisodeData: newEpisodeData});
 					};
 					
@@ -79,7 +80,7 @@ var MainMenuContainer = React.createClass({
 	addEpisode: function(episodeName, episodeArrayIndex) {
 		var that = this;
 		var username = this.props.teacherUsername;
-		var postURL = username + "/addEpisode";
+		var postURL = "/" + username + "/addEpisode";
 		$.ajax({
 			url: postURL,
 			type: "POST",
@@ -138,11 +139,11 @@ var MainMenuContainer = React.createClass({
 		}
 
 		var episodeListToReturn = episodeArray.map(function(scene, i) {
-			// We are passed a sorted array based on topic;
+			// Convered indexes from each topic to absolute index
 			// I.e. Introduction: [0,1,2], Family: [0,1,2,3,4] --> [0,1,2,3,4,5,6,7]
-			// But in render function, we store the originalArrayIndex and store it in object
+			// scene.originalArrayIndex is created in the render function
 			var originalIndex = scene.originalArrayIndex;
-
+			console.log(scene.link);
 			var link = scene.link + "?" + studentID;
 			var className = "episodeBlock activeScene-" + scene.assigned;
 			var characterImage = Constants.IMAGE_PATH + scene.characterImage;
