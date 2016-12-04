@@ -1,4 +1,5 @@
 import json, os
+from models import *
 from glob import glob
 
 # To get All Public Episode Data, look through the "public JSON list"
@@ -22,7 +23,6 @@ def getAllPublicEpisodeData(teacherName):
 	newFile = open("static/data/teacherScenes/" + teacherName +  ".json", "w")
 	newFile.write("%s\n" % sceneMenuDataStructure)
 	newFile.close()
-	print sceneMenuDataStructure
 	return sceneMenuData
 
 def buildPublicEpisodeData(jsonPath, teacherName): 
@@ -44,7 +44,46 @@ def buildPublicEpisodeData(jsonPath, teacherName):
 		except:
 			episodeContent['sequence'] = 0
 
-		#print(episodeContent)
 		return episodeContent
 
-getAllPublicEpisodeData("public")
+def getTeacherEpisodes(username):
+	sceneMenuDataStructure = {}
+	sceneMenuData = []
+	episodesArray = []
+	json_dir_name = "static/data/public/"
+
+	# Grab teacher
+	teacher = Teacher.query.filter_by(username=username).first()
+
+	for episode in teacher.episodes:
+		episodeName = Episode.query.filter_by(id=episode.id).first().episodeJSONFileName
+		episodeName = str(json_dir_name + episodeName + ".json")
+		episodesArray.append(episodeName)
+
+	for fileName in episodesArray:
+		sceneMenuData.append(buildEpisodeData(fileName, username))
+
+	sceneMenuDataStructure["scenes"] = json.dumps(sceneMenuData, ensure_ascii=False).encode('utf8')
+	return sceneMenuDataStructure
+
+def buildEpisodeData(jsonPath, teacherName): 
+	with open(jsonPath) as episodeJSON:
+		episodeContent = {}
+		d = json.load(episodeJSON)
+
+		episodeContent['id'] = jsonPath.replace('static/data/public/', '').replace('.json', '')
+		episodeContent['name'] = d['activityName']
+		episodeContent['scenario'] = d['scenario'][0]['text']
+		episodeContent['link'] = jsonPath.replace('static/data/public', '/teacher/' + teacherName + '/episode').replace('.json', '')
+		episodeContent['tags'] = d['tags']
+		episodeContent['objectives'] = d['objectives']
+		episodeContent['characterImage'] = d['currentImage']
+
+		# Sequencing is optional for each episode and determines the order episodes appear
+		# under each category
+		try:
+			episodeContent['sequence'] = d['sequence']
+		except:
+			episodeContent['sequence'] = 0
+
+		return episodeContent

@@ -4,9 +4,7 @@ from flask_login import current_user
 from sqlalchemy import exc
 
 import boto3, json, simplejson, urlparse, datetime
-
-from loadJson import getAllPublicEpisodeData
-from loadJson2 import getTeacherEpisodes
+from helper_episodes import getAllPublicEpisodeData, getTeacherEpisodes
 
 #For Heroku Logging
 import sys, os, uuid
@@ -143,10 +141,7 @@ def teacherScene(teacher, episodeName):
 	trackVisitorEvent("Visited " + episodeName + " Page")
 
 	return render_template("questionAsker.html", episodeName=episodeName, teacher=teacher, studentID=studentID)
-	#return redirect(url_for('teacherHome', teacher=teacher))
 
-
-# The Home page is accessible to anyone
 @app.route('/signup')
 def signup():
     return redirect(url_for('user.register'))

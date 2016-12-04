@@ -81,7 +81,7 @@ var QuestionAsker = React.createClass({
 	},
 	loadSceneData: function() {
 		var that = this;
-		$.getJSON("/static/data/" + teacher + "/" + activity + ".json", function(data) {})
+		$.getJSON("/static/data/public/" + activity + ".json", function(data) {})
 			.success(function(data) {
 				that.resetScene();
 				console.log(data.practiceModeStart);
