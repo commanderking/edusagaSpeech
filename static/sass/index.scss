@@ -1337,7 +1337,7 @@ Practice Container
 .practiceFooter {
 	position: absolute;
 	width: 100%;
-	bottom: 5px;
+	bottom: 0.5em;
 	.micDiv {
 		text-align: center;
 		height: auto;
@@ -1400,7 +1400,7 @@ Practice Container
 		position: relative;
 	}
 	.btn-practice-done {
-		margin-right: 1.5em;
+		margin-right: 0.5em;
 		margin-top: 1em;
 		min-width: 100px;
 		&:hover {
@@ -1423,6 +1423,7 @@ Practice Container
 	height: 100px;
 	vertical-align: middle;
 	.btn-continue {
+		margin: 1.5em;
 		font-size: 1.5em;
 		margin-top: 25px;
 		.glyphicon {
