@@ -26595,6 +26595,26 @@
 	var ShowPinyinButton = __webpack_require__(/*! ./ShowPinyinButton */ 229);
 	
 	function PracticeFooter(props) {
+		// Displays mic when user has yet to answer correctly
+		// Displays "check" when user already answered vocab correctly
+		var micOrCheck = props.currentWordObject.correct ? React.createElement(
+			'div',
+			{ className: 'btn-continue-wrapper' },
+			React.createElement(
+				'button',
+				{
+					className: 'btn btn-success btn-lg btn-continue',
+					onClick: props.nextVocab },
+				React.createElement('span', {
+					className: 'glyphicon glyphicon-ok',
+					'aria-hidden': 'true' }),
+				'Next'
+			)
+		) : React.createElement(PracticeMic, {
+			micActive: props.micActive,
+			onMicActivate: props.onMicActivate,
+			onMicDeactivate: props.onMicDeactivate });
+	
 		return React.createElement(
 			'div',
 			{ className: 'practiceFooter' },
@@ -26610,10 +26630,7 @@
 					playSpeechSynth: props.playSpeechSynth,
 					currentWord: props.currentWordObject.answer,
 					speechSynthPlaying: props.speechSynthPlaying }),
-				React.createElement(PracticeMic, {
-					micActive: props.micActive,
-					onMicActivate: props.onMicActivate,
-					onMicDeactivate: props.onMicDeactivate }),
+				micOrCheck,
 				React.createElement(ShowPinyinButton, {
 					changePinyinDisplay: props.changePinyinDisplay,
 					showPinyin: props.showPinyin }),
@@ -26624,7 +26641,8 @@
 				)
 			),
 			React.createElement(PracticeDoneButton, {
-				changePracticeMode: props.changePracticeMode })
+				changePracticeMode: props.changePracticeMode,
+				currentAnswerCorrect: props.currentWordObject.correct })
 		);
 	}
 	
@@ -26664,9 +26682,7 @@
 	
 		render: function render() {
 			var className = "btn btn-info micWrap micActive-" + this.props.micActive;
-			// var micFunction = this.props.micActive ? this.props.onMicDeactivate : this.props.onMicActivate;
 			var micFunction;
-	
 			var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 			var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 			var taskIconImage;
@@ -26720,18 +26736,23 @@
 	
 	function PracticeDoneButton(props) {
 		return React.createElement(
-			"button",
-			{
-				className: "btn btn-info btn-lg btn-practice-done",
-				onClick: props.changePracticeMode },
-			"Done!"
+			"div",
+			{ className: "btn-practice-done-container" },
+			React.createElement(
+				"button",
+				{
+					className: "btn btn-danger btn-lg btn-practice-done",
+					onClick: props.changePracticeMode },
+				"End Practice"
+			)
 		);
 	}
 	
 	module.exports = PracticeDoneButton;
 	
 	PracticeDoneButton.propTypes = {
-		changePracticeMode: PropTypes.func.isRequired
+		changePracticeMode: PropTypes.func.isRequired,
+		currentAnswerCorrect: PropTypes.bool.isRequired
 	};
 
 /***/ },

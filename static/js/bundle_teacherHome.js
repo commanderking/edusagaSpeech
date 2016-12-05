@@ -21784,7 +21784,6 @@
 			// else, load all the episodes that are public
 			if (this.props.publicDisplay === false) {
 				var username = this.props.teacherUsername;
-				console.log(username);
 				var setEpisodeData = function setEpisodeData(episodeData) {
 					that.setState({ teacherEpisodeData: episodeData });
 				};
@@ -21810,7 +21809,6 @@
 						// Create newEpisodeData data structure to set as teacherEpisodeData
 						var newEpisodeData = {};
 						newEpisodeData.scenes = filteredEpisodes;
-						console.log(filteredEpisodes);
 						that.setState({ teacherEpisodeData: newEpisodeData });
 					};
 	
@@ -21887,7 +21885,6 @@
 				// I.e. Introduction: [0,1,2], Family: [0,1,2,3,4] --> [0,1,2,3,4,5,6,7]
 				// scene.originalArrayIndex is created in the render function
 				var originalIndex = scene.originalArrayIndex;
-				console.log(scene.link);
 				var link = scene.link + "?" + studentID;
 				var className = "episodeBlock activeScene-" + scene.assigned;
 				var characterImage = Constants.IMAGE_PATH + scene.characterImage;

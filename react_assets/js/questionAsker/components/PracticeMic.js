@@ -6,9 +6,7 @@ var TaskIconImage = require('./TaskIconImage');
 var PracticeMic = React.createClass({
 	render: function() {
 		var className = "btn btn-info micWrap micActive-" + this.props.micActive;
-		// var micFunction = this.props.micActive ? this.props.onMicDeactivate : this.props.onMicActivate;
 		var micFunction;
-
 		var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
 		var imgStar = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 		var taskIconImage;

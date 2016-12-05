@@ -15,7 +15,7 @@ var PracticeFlashCard = React.createClass({
 					changePinyinDisplay={this.props.changePinyinDisplay}
 					showPinyin={this.props.showPinyin} 
 					userAnswer={this.props.userAnswer}/>
-			</div>	
+			</div>
 		)
 	}
 });

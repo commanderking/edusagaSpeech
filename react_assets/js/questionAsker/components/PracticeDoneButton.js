@@ -3,16 +3,19 @@ var PropTypes = React.PropTypes;
 
 function PracticeDoneButton (props) {
 	return (
-		<button 
-			className="btn btn-info btn-lg btn-practice-done"
-			onClick={props.changePracticeMode}>
-				Done!
-		</button>
+		<div className="btn-practice-done-container">
+			<button 
+				className="btn btn-danger btn-lg btn-practice-done"
+				onClick={props.changePracticeMode}>
+					End Practice
+			</button>
+		</div>
 	)
 }
 
 module.exports = PracticeDoneButton;
 
 PracticeDoneButton.propTypes = {
-	changePracticeMode: PropTypes.func.isRequired
+	changePracticeMode: PropTypes.func.isRequired,
+	currentAnswerCorrect: PropTypes.bool.isRequired
 }

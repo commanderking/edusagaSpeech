@@ -47,13 +47,6 @@
 				"tries" : 0
 			},
 			{
-				"task" : "Say 'younger brother'",
-				"answer" : "弟弟",
-				"pinyin" : "dìdì",
-				"correct" : false,
-				"tries" : 0
-			},
-			{
 				"task" : "Say 'older sister'",
 				"answer" : "姐姐",
 				"pinyin" : "jiějiě",
@@ -64,6 +57,13 @@
 				"task" : "Say' younger sister'",
 				"answer" : "妹妹",
 				"pinyin" : "mèimei",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Say 'your younger brother'",
+				"answer" : "你的弟弟",
+				"pinyin" : "dìdì",
 				"correct" : false,
 				"tries" : 0
 			},

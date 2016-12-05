@@ -1345,7 +1345,7 @@ Practice Container
 		margin-top: 1em;
 		margin-right: 1.5em;
 		margin-left: 1.5em;
-		margin-bottom: 1.5em; //change from margin-bottom: 10px
+		margin-bottom: 0em;
 		display: inline-block;
 		#mic {
 			margin: auto;
@@ -1395,17 +1395,15 @@ Practice Container
 		    }
 		}
 	}
+	.btn-practice-done-container {
+		text-align: right;
+		position: relative;
+	}
 	.btn-practice-done {
-		margin-top: auto;
-		margin-right: auto;
-		margin-left: auto;
-		margin-bottom: 1.5em; //change from margin: auto
-		display: block;
-		padding-top: 5px;
-		padding-bottom: 5px;
+		margin-right: 1.5em;
+		margin-top: 1em;
 		min-width: 100px;
 		&:hover {
-			background-color: $headerBlue;
 			color: $themeYellow;
 			cursor: pointer;
 		}
@@ -1414,12 +1412,23 @@ Practice Container
 		background-color: $themeYellow;
 		color: $headerBlue;
 	}
-
 	.btn-practice-done-inactive {
 		background-color: $headerBlue;
 		color: white;
 	}
+}
 
+.btn-continue-wrapper {
+	display: inline-block;
+	height: 100px;
+	vertical-align: middle;
+	.btn-continue {
+		font-size: 1.5em;
+		margin-top: 25px;
+		.glyphicon {
+			margin-right: 0.5em;
+		}
+	}
 }
 
 .practiceButtonsWrapper {
@@ -1442,7 +1451,7 @@ Practice Container
 	}
 
 	}
-	.glyphicon {
+	.glyphicon-volume-up {
 		font-size: 30px;
 	}	
 }

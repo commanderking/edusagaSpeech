@@ -6,6 +6,25 @@ var PracticeAudioButton = require('./PracticeAudioButton');
 var ShowPinyinButton = require('./ShowPinyinButton');
 
 function PracticeFooter (props) {
+	// Displays mic when user has yet to answer correctly
+	// Displays "check" when user already answered vocab correctly
+	var micOrCheck = props.currentWordObject.correct ? 
+			<div className="btn-continue-wrapper">
+				<button 
+					className="btn btn-success btn-lg btn-continue"
+					onClick={props.nextVocab}>
+					<span 
+						className="glyphicon glyphicon-ok" 
+						aria-hidden="true">
+					</span> 
+					Next
+				</button>
+			</div> : 
+			<PracticeMic 
+				micActive={props.micActive}
+				onMicActivate={props.onMicActivate}
+				onMicDeactivate={props.onMicDeactivate}/> 
+
 	return (
 		<div className="practiceFooter">
 			<div className="practiceButtonsWrapper">
@@ -17,10 +36,7 @@ function PracticeFooter (props) {
 					playSpeechSynth={props.playSpeechSynth}
 					currentWord={props.currentWordObject.answer}
 					speechSynthPlaying={props.speechSynthPlaying}/>
-				<PracticeMic 
-					micActive={props.micActive}
-					onMicActivate={props.onMicActivate}
-					onMicDeactivate={props.onMicDeactivate}/>
+				{micOrCheck}
 				<ShowPinyinButton 
 					changePinyinDisplay={props.changePinyinDisplay}
 					showPinyin={props.showPinyin}/>
@@ -29,7 +45,8 @@ function PracticeFooter (props) {
 				</div>
 			</div>
 			<PracticeDoneButton 
-				changePracticeMode={props.changePracticeMode}/>
+				changePracticeMode={props.changePracticeMode}
+				currentAnswerCorrect={props.currentWordObject.correct}/>
        	</div>
 	)
 }
