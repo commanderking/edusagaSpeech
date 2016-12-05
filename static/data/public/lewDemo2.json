@@ -14,7 +14,7 @@
 		"I can ask friends about the activities that they did."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",

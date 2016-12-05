@@ -129,6 +129,18 @@ var MainMenuContainer = React.createClass({
 			return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 		})
 	},
+	iconSelector: function(characterName) {
+		switch(characterName) {
+			case "Alex":
+				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
+			case "David":
+				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
+			case "Chen Yang":
+				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
+			default:
+				return null;
+		}
+	},
 	generateDOMfromEpisodesArray: function(episodeArray) {
 		var that = this;
 		if (studentID === undefined) {
@@ -142,7 +154,8 @@ var MainMenuContainer = React.createClass({
 			var originalIndex = scene.originalArrayIndex;
 			var link = scene.link + "?" + studentID;
 			var className = "episodeBlock activeScene-" + scene.assigned;
-			var characterImage = Constants.IMAGE_PATH + scene.characterImage;
+			var characterImage = that.iconSelector(scene.characterName) === null ? 
+				Constants.IMAGE_PATH + scene.characterImage : that.iconSelector(scene.characterName);
 			var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 			var starIcon = scene.assigned ? <img src={starIconSrc} /> : null;
 

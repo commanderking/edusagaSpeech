@@ -57,6 +57,7 @@ def buildEpisodeData(jsonPath, teacherName):
 		episodeContent['tags'] = d['tags']
 		episodeContent['objectives'] = d['objectives']
 		episodeContent['characterImage'] = d['currentImage']
+		episodeContent['characterName'] = d['character']['name']
 
 		# Sequencing is optional for each episode and determines the order episodes appear
 		# under each category
