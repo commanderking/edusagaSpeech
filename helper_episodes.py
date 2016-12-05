@@ -57,6 +57,8 @@ def buildEpisodeData(jsonPath, teacherName):
 		episodeContent['tags'] = d['tags']
 		episodeContent['objectives'] = d['objectives']
 		episodeContent['characterImage'] = d['currentImage']
+
+		# Character name used later to identify the character icon on page
 		episodeContent['characterName'] = d['character']['name']
 
 		# Sequencing is optional for each episode and determines the order episodes appear

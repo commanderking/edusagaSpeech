@@ -25998,17 +25998,19 @@
 
 	'use strict';
 	
+	var _ImageHelper = __webpack_require__(/*! ../../helpers/ImageHelper */ 234);
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../../helpers/Constants */ 181);
+	
 	
 	var ResultsCharProfile = React.createClass({
 		displayName: 'ResultsCharProfile',
 	
 		render: function render() {
 			// Get default profile image source
-			var charProfilePic = Constants.IMAGE_PATH + this.props.charProfilePic;
-			// Get comment
+			var charProfilePic = (0, _ImageHelper.iconSelector)(this.props.charName) === null ? Constants.IMAGE_PATH + this.props.charProfilePic : (0, _ImageHelper.iconSelector)(this.props.charName);
 	
 			// Calculate completion decimal
 			var completionRate = this.props.coins / this.props.possible * 100;
@@ -26981,6 +26983,34 @@
 		currentWordObject: PropTypes.object.isRequired,
 		showPinyin: PropTypes.bool.isRequired,
 		userAnswer: PropTypes.string.isRequired
+	};
+
+/***/ },
+/* 233 */,
+/* 234 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/ImageHelper.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Constants = __webpack_require__(/*! ./Constants */ 181);
+	
+	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
+		switch (characterName) {
+			case "Alex":
+				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
+			case "David":
+				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
+			case "Chen Yang":
+				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
+			default:
+				return null;
+		}
 	};
 
 /***/ }

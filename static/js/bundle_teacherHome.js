@@ -21744,11 +21744,14 @@
 
 	'use strict';
 	
+	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 234);
+	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../helpers/Constants */ 181);
 	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 182);
+	
 	
 	var MainMenuContainer = React.createClass({
 		displayName: 'MainMenuContainer',
@@ -21874,18 +21877,6 @@
 				return x < y ? -1 : x > y ? 1 : 0;
 			});
 		},
-		iconSelector: function iconSelector(characterName) {
-			switch (characterName) {
-				case "Alex":
-					return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
-				case "David":
-					return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
-				case "Chen Yang":
-					return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
-				default:
-					return null;
-			}
-		},
 		generateDOMfromEpisodesArray: function generateDOMfromEpisodesArray(episodeArray) {
 			var that = this;
 			if (studentID === undefined) {
@@ -21899,7 +21890,7 @@
 				var originalIndex = scene.originalArrayIndex;
 				var link = scene.link + "?" + studentID;
 				var className = "episodeBlock activeScene-" + scene.assigned;
-				var characterImage = that.iconSelector(scene.characterName) === null ? Constants.IMAGE_PATH + scene.characterImage : that.iconSelector(scene.characterName);
+				var characterImage = (0, _ImageHelper.iconSelector)(scene.characterName) === null ? Constants.IMAGE_PATH + scene.characterImage : (0, _ImageHelper.iconSelector)(scene.characterName);
 				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
 	
@@ -22289,6 +22280,33 @@
 	NavBarButton.PropTypes = {
 		text: PropTypes.string.isRequired,
 		clickFunction: PropTypes.func.isRequred
+	};
+
+/***/ },
+/* 234 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/ImageHelper.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Constants = __webpack_require__(/*! ./Constants */ 181);
+	
+	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
+		switch (characterName) {
+			case "Alex":
+				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
+			case "David":
+				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
+			case "Chen Yang":
+				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
+			default:
+				return null;
+		}
 	};
 
 /***/ }

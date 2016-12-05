@@ -1,12 +1,15 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var Constants = require('../../helpers/Constants');
+import {iconSelector} from '../../helpers/ImageHelper';
+
 
 var ResultsCharProfile = React.createClass({
 	render: function() {
 		// Get default profile image source
-		var charProfilePic = Constants.IMAGE_PATH + this.props.charProfilePic;
-		// Get comment
+		var charProfilePic = iconSelector(this.props.charName) === null ? 
+			Constants.IMAGE_PATH + this.props.charProfilePic : 
+			iconSelector(this.props.charName);
 
 		// Calculate completion decimal
 		var completionRate = this.props.coins / this.props.possible * 100;
