@@ -10,6 +10,7 @@ episodes = db.Table('episodes',
     db.Column('episode_assigned', db.Boolean(), nullable=False, default=False),
     UniqueConstraint('episode_id', 'teacher_id', name='episode_teacher_id')
 )
+
 class Teacher(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
 
