@@ -18,6 +18,12 @@ $mobileWidth: 480px;
 $tabletWidth: 768px;
 $desktopWidth: 1024px;
 
+@keyframes scaleUp {
+  0% { transform: scale(1); }
+  80% { transform: scale(1.7); }
+  100% {transform: scale(1.5); }
+}
+
 @mixin mobilePortrait {
 	@media (max-width: #{$mobileWidth}) {
 		@content;
@@ -310,10 +316,6 @@ button {
 	}
 }
 
-.icon-mic {
-	font-size: 9vh;
-}
-
 .disabled {
 	pointer-events: none;
 	cursor: not-allowed;
@@ -458,6 +460,22 @@ CSS Related to Task List
 			height: 50%;
 			top: 25%;
 			left: 5px;
+		}
+		.icon-mic {
+			position: absolute;
+			display: block;
+			top: 10px;
+			line-height: 50px;
+			margin-left: 19px;
+			color: $darkBlue;
+		}
+		.icon-mic-rest {
+			font-size: 40px;
+
+		}
+		.icon-mic-large {
+			font-size: 40px;
+			-webkit-animation: 500ms scaleUp forwards alternate ease-in-out;
 		}
 	}
 	.taskText {
@@ -1494,14 +1512,14 @@ Practice Container
 			color: $themeYellow;
 			cursor: pointer;
 		}
-	//adding active state for arrow buttons on click
-	.arrow-true {
-		background-color: $themeYellow;
-		color: $headerBlue;
-	}
-	.arrow-false {
-		color: $headerBlue;
-	}
+		//adding active state for arrow buttons on click
+		.arrow-true {
+			background-color: $themeYellow;
+			color: $headerBlue;
+		}
+		.arrow-false {
+			color: $headerBlue;
+		}
 	}
 
 }

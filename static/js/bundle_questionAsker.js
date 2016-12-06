@@ -24886,6 +24886,7 @@
 	var TaskIcon = React.createClass({
 		displayName: 'TaskIcon',
 	
+		// Reference to old mic if needed
 		render: function render() {
 			var _this = this;
 	
@@ -24917,12 +24918,7 @@
 					var taskIconImage = React.createElement(
 						'div',
 						{ className: 'taskIconDiv' },
-						React.createElement(TaskIconImage, {
-							ref: function ref(_ref2) {
-								return _this.mic = _ref2;
-							},
-							keyToAttach: 'firstMic',
-							imageSrc: imgMic })
+						React.createElement('span', { className: 'icon-mic icon-mic-rest' })
 					);
 				}
 	
@@ -24936,10 +24932,7 @@
 							keyToAttach: 'iconStar',
 							imageSrc: imgStar,
 							transition: 'activateTaskStar' }),
-						React.createElement(TaskIconImage, {
-							keyToAttach: 'iconMic',
-							imageSrc: imgMic,
-							transition: 'activateTaskMic' })
+						React.createElement('span', { className: 'icon-mic icon-mic-large' })
 					);
 				} else if (this.props.correctAnswerState) {
 					return React.createElement(

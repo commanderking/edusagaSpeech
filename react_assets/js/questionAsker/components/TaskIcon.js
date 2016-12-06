@@ -3,6 +3,7 @@ var TaskIconImage = require('./TaskIconImage');
 var Constants = require('../../helpers/Constants.js');
 
 var TaskIcon = React.createClass({
+	// Reference to old mic if needed
 	render: function() {
 		// Default TaskIcon image when nothing is being recorded or answered
 		var imgMic = Constants.IMAGE_PATH + "UI/Icon_Mic-01.png";
@@ -26,11 +27,8 @@ var TaskIcon = React.createClass({
 		else {
 
 			var taskIconImage = <div className="taskIconDiv">
-									<TaskIconImage 
-										ref={(ref) => this.mic = ref}
-										keyToAttach="firstMic"
-										imageSrc={imgMic} />
-								</div>;
+					<span className="icon-mic icon-mic-rest"></span>
+					</div>;
 		}
 
 		// Sets to true if this task is the active task
@@ -42,10 +40,7 @@ var TaskIcon = React.createClass({
 							keyToAttach="iconStar" 
 							imageSrc={imgStar}
 							transition = "activateTaskStar"/>
-						<TaskIconImage 
-							keyToAttach="iconMic" 
-							imageSrc={imgMic}
-							transition ="activateTaskMic"/>
+						<span className="icon-mic icon-mic-large"></span>
 					</div>
 				)			
 			} else if (this.props.correctAnswerState) {
