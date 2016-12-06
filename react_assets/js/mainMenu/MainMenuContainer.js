@@ -13,7 +13,7 @@ var MainMenuContainer = React.createClass({
 	},
 	getTeacherEpisodes: function(teacherUsername, doneCallback) {
 		$.ajax({
-			url: "/" + teacherUsername + "/getEpisodes",
+			url: "/teacher/" + teacherUsername + "/episode/getEpisodes",
 			type: "POST",
 			data: teacherUsername,
 			dataType: "json"
@@ -80,7 +80,7 @@ var MainMenuContainer = React.createClass({
 	addEpisode: function(episodeName, episodeArrayIndex) {
 		var that = this;
 		var username = this.props.teacherUsername;
-		var postURL = "/" + username + "/addEpisode";
+		var postURL = "/teacher/" + username + "/episode/addEpisode";
 		$.ajax({
 			url: postURL,
 			type: "POST",
@@ -105,7 +105,7 @@ var MainMenuContainer = React.createClass({
 	removeEpisode: function(episodeName, episodeArrayIndex) {
 		var that = this;
 		var username = this.props.teacherUsername;
-		var postURL = "/" + username + "/removeEpisode";
+		var postURL = "/teacher/" + username + "/episode/removeEpisode";
 		$.ajax({
 			url: postURL,
 			type: "POST",

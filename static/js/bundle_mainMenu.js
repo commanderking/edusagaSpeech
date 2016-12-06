@@ -21655,7 +21655,7 @@
 		},
 		getTeacherEpisodes: function getTeacherEpisodes(teacherUsername, doneCallback) {
 			$.ajax({
-				url: "/" + teacherUsername + "/getEpisodes",
+				url: "/teacher/" + teacherUsername + "/episode/getEpisodes",
 				type: "POST",
 				data: teacherUsername,
 				dataType: "json"
@@ -21721,7 +21721,7 @@
 		addEpisode: function addEpisode(episodeName, episodeArrayIndex) {
 			var that = this;
 			var username = this.props.teacherUsername;
-			var postURL = "/" + username + "/addEpisode";
+			var postURL = "/teacher/" + username + "/episode/addEpisode";
 			$.ajax({
 				url: postURL,
 				type: "POST",
@@ -21745,7 +21745,7 @@
 		removeEpisode: function removeEpisode(episodeName, episodeArrayIndex) {
 			var that = this;
 			var username = this.props.teacherUsername;
-			var postURL = "/" + username + "/removeEpisode";
+			var postURL = "/teacher/" + username + "/episode/removeEpisode";
 			$.ajax({
 				url: postURL,
 				type: "POST",

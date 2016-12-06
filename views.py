@@ -225,11 +225,9 @@ def logSpeechResponse():
 	return 'Success'
 
 
-@app.route('/<username>/addEpisode', methods=['POST'])
+@app.route('/teacher/<username>/episode/addEpisode', methods=['POST'])
 def postAddEpisode(username):
-	print username
-	print current_user.username
-	if (current_user.is_authenticated):
+	if (username == current_user.username):
 		# Gets the string name of file from ajax in MainMeunContainer.js
 		episodeName = request.get_data()
 
@@ -250,9 +248,9 @@ def postAddEpisode(username):
 		newEpisodeArray = getTeacherEpisodes(current_user.username)		
 		return json.dumps({'success': True, 'episodeArray': newEpisodeArray}, 200, {'ContentType': 'application/json'})
 
-@app.route('/<username>/removeEpisode', methods=['POST'])
+@app.route('/teacher/<username>/episode/removeEpisode', methods=['POST'])
 def deleteEpisode(username):
-	if (current_user.is_authenticated):
+	if (username == current_user.username):
 		episodeName = request.get_data()
 
 		teacher = Teacher.query.filter_by(username=current_user.username).first()
@@ -267,9 +265,10 @@ def deleteEpisode(username):
 
         return json.dumps({'success': True, 'episodeArray' : newEpisodeArray}, 200, {'ContentType': 'application.json'})
 
-@app.route('/<username>/getEpisodes', methods=['POST'])
+@app.route('/teacher/<username>/episode/getEpisodes', methods=['POST'])
 def getEpisodes(username):
 	# TODO - Only the teacher and students should be able to access this page in future
+	# Currently publicly accessible to anyone visiting this page
 	try:
 		teacherEpisodeData = getTeacherEpisodes(username)
 		return json.dumps({'success': True, 'teacherEpisodeData' : teacherEpisodeData}, 200, {'ContentType': 'application.json'})
