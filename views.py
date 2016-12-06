@@ -15,7 +15,6 @@ from models import *
 db_adapter = SQLAlchemyAdapter(db, Teacher)        # Register the User model
 user_manager = UserManager(db_adapter, app)     # Initialize Flask-User
 
-
 def trackVisitorWithText(textMessage): 
 	current_url = request.url
 	parsed = urlparse.urlparse(current_url)
@@ -190,7 +189,6 @@ def logVisitorEvents():
 	print(response.get('MessageId'))
 	print(response.get('MD5OfMessageBody'))
 	return 'Success'
-
 
 #-----------------------------------------------
 #Game related posts/data
