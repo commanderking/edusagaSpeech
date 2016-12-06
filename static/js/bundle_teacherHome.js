@@ -21854,7 +21854,7 @@
 		removeEpisode: function removeEpisode(episodeName, episodeArrayIndex) {
 			var that = this;
 			var username = this.props.teacherUsername;
-			var postURL = username + "/removeEpisode";
+			var postURL = "/" + username + "/removeEpisode";
 			$.ajax({
 				url: postURL,
 				type: "POST",
