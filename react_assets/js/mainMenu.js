@@ -4,11 +4,14 @@ var MainMenuContainer = require('./mainMenu/MainMenuContainer');
 
 var MainMenu = React.createClass({
 
-	// This page is generally only called when accessed from a public page (loads mainMenu.html)
-	// As a result, it should display the public version of the site
+	// teacherUsername={username}, username is defined in mainMenu.html and pulled from url
+	// General case is when students visit a teacher page and need to load the teacher's data
 	render: function() {
+		console.log(username);
 		if (username !== "public") {
-			return <MainMenuContainer publicDisplay={false} />
+			return <MainMenuContainer 
+				publicDisplay={false}
+				teacherUsername={username} />
 		} else {
 			return (
 				<MainMenuContainer 

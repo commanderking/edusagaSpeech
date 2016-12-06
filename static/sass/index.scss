@@ -18,7 +18,7 @@ $mobileWidth: 480px;
 $tabletWidth: 768px;
 $desktopWidth: 1024px;
 
-@keyframes scaleUp {
+@keyframes micScale {
   0% { transform: scale(1); }
   80% { transform: scale(1.7); }
   100% {transform: scale(1.5); }
@@ -475,7 +475,7 @@ CSS Related to Task List
 		}
 		.icon-mic-large {
 			font-size: 40px;
-			-webkit-animation: 500ms scaleUp forwards alternate ease-in-out;
+			-webkit-animation: 500ms micScale forwards alternate ease-in-out;
 		}
 	}
 	.taskText {

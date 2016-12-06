@@ -86,6 +86,7 @@
 			});
 		},
 		render: function render() {
+			console.log("Username in teacherHome.js is " + username);
 			var content;
 			switch (this.state.currentContent) {
 				case "Assigned Episodes":
@@ -21776,6 +21777,7 @@
 					} catch (err) {
 						result.teacherEpisodeData.scenes = [];
 					}
+					console.log(result.teacherEpisodeData);
 					doneCallback(result.teacherEpisodeData);
 				}
 			});
@@ -21787,18 +21789,18 @@
 			// else, load all the episodes that are public
 			if (this.props.publicDisplay === false) {
 				var username = this.props.teacherUsername;
+				console.log(username);
 				var setEpisodeData = function setEpisodeData(episodeData) {
-					that.setState({ teacherEpisodeData: episodeData });
+					that.setState({ teacherEpisodeData: episodeData }, console.log(episodeData));
 				};
 				that.getTeacherEpisodes(username, setEpisodeData);
 			} else {
 				$.getJSON("/static/data/teacherScenes/public.json", function (data) {}).success(function (data) {
-					// Function to feed into getTeacherEpisode callback (only relevant for teacher's page)
-					// This is different in that the episodeData fed in is not important, it should be set to public
 	
+					// Function to feed into getTeacherEpisode callback (only relevant for teacher's page)
 					var setEpisodeData = function setEpisodeData(episodeData) {
 	
-						// filteredEpisodes includes public episodes the teacher does not already have
+						// filteredEpisodes includes only remaining public episodes the teacher does not already have
 						var filteredEpisodes = data.scenes.filter(function (episodePublic, i) {
 							var episodeFound = false;
 							episodeData.scenes.forEach(function (episodeDataEpisode, j) {
@@ -21987,6 +21989,7 @@
 		render: function render() {
 			var _this = this;
 	
+			console.log(this.props.publicDisplay);
 			var scenes;
 	
 			// Create link for each scene that should be available to student

@@ -33,6 +33,7 @@ var TeacherHome = React.createClass({
 		})
 	},
 	render: function() {
+		console.log("Username in teacherHome.js is " + username)
 		var content;
 		switch(this.state.currentContent) {
 			case "Assigned Episodes": 

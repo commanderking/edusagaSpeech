@@ -69,7 +69,6 @@ def index(name="Index"):
 		userID = session['userID']
 	except:
 		userID = uuid.uuid4()
-
 	if current_user.is_authenticated:
 		return redirect(url_for("teacherHome", teacher=current_user.username))
 	else: 
@@ -103,8 +102,11 @@ def teacherHome(teacher):
 	if teacher == "public": 
 		studentID = request.args.get('studentID')
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
-	else:
+	elif teacher == current_user.username:
+		print "rendering teacher_home"
 		return render_template('teacherHome.html', teacher=teacher, studentID=studentID)
+	else:
+		return redirect(url_for('teacherHome', teacher=current_user.username))
 
 @app.route('/public/home/')
 def publicHome2():
@@ -115,7 +117,8 @@ def studentHome(teacher):
 	print teacher
 	# Pull episodes from database for teacher
 	# Add authentication for student and that student belongs to teacher page
-	teacherEpisodeData = json.dumps(getTeacherEpisodes(teacher), ensure_ascii=False).encode('utf8')
+	teacherEpisodeData = getTeacherEpisodes(teacher)
+	teacherEpisodeData = json.dumps(getTeacherEpisodes(teacher), ensure_ascii=False)
 	print teacherEpisodeData
 	return render_template('mainMenu.html', teacher=teacher, episodeData=teacherEpisodeData)
 
@@ -246,8 +249,7 @@ def postAddEpisode(username):
 		newEpisode.teachers.append(teacher)
 		db.session.commit()
 
-		newEpisodeArray = getTeacherEpisodes(current_user.username)
-		
+		newEpisodeArray = getTeacherEpisodes(current_user.username)		
 		return json.dumps({'success': True, 'episodeArray': newEpisodeArray}, 200, {'ContentType': 'application/json'})
 
 @app.route('/<username>/removeEpisode', methods=['POST'])
@@ -267,15 +269,13 @@ def deleteEpisode(username):
 
         return json.dumps({'success': True, 'episodeArray' : newEpisodeArray}, 200, {'ContentType': 'application.json'})
 
-@app.route('/teacher/public/')
-
 @app.route('/<username>/getEpisodes', methods=['POST'])
 def getEpisodes(username):
-	if (current_user.is_authenticated):
-		#episodeArray = getTeacherEpisodes(username)
-		teacherEpisodeData = getTeacherEpisodes(current_user.username)
+	# TODO - Only the teacher and students should be able to access this page in future
+	try:
+		teacherEpisodeData = getTeacherEpisodes(username)
 		return json.dumps({'success': True, 'teacherEpisodeData' : teacherEpisodeData}, 200, {'ContentType': 'application.json'})
-	else: 
+	except: 
 		return json.dumps({'success': True, 'teacherEpisodeData' : []}, 200, {'ContentType': 'application.json'})
 
 if __name__ == '__main__':
