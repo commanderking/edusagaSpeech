@@ -3,7 +3,6 @@ from flask_mail import Mail
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_sslify import SSLify
 
-
 import boto3, json, urlparse
 
 #For Heroku Logging

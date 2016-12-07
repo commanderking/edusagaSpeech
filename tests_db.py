@@ -12,20 +12,19 @@ class TestSetup(TestCase, FixturesMixin):
     TESTING = True
 
     def create_app(self):
-
         app = Flask(__name__)
         app.config['TESTING'] = True
-
         return app
     def setUp(self):
-        pass
+        db.create_all()
     def tearDown(self):
         db.session.remove()
+        db.drop_all()
 
 class AddUser(TestSetup): 
 
     def test_adding_user(self):
-        newTeacher = Teacher(username="cooldude", password="mypassword", email="myemail@gmail.com")
+        newTeacher = User(username="cooldude", password="mypassword", email="cooldudeemail@gmail.com")
 
         db.session.add(newTeacher)
         db.session.commit()
@@ -37,6 +36,29 @@ class AddUser(TestSetup):
 
         assert newTeacher not in db.session
 
+class AddStudentsToTeachers(TestSetup):
+    def test_student_having_teacher(self):
+        t1 = User(username="coolteacher", password="mypassword", email="coolteacher@gmail.com")
+        s1 = User(username="coolstudent", password="mypassword", email="coolstudent@gmail.com")
+        db.session.add(t1)
+        db.session.add(s1)
+        db.session.commit()
+
+        assert s1.removeTeacher(t1) is None
+
+        st = s1.addTeacher(t1)
+        db.session.commit()
+        assert not t1.has_teacher(s1)
+        assert s1.has_teacher(t1)
+        assert t1.students.count() == 1
+        assert t1.students.first().username == "coolstudent"
+        assert s1.teachers.count() == 1
+        assert s1.teachers.first().username == "coolteacher"
+        s1.removeTeacher(t1)
+        assert not s1.has_teacher(t1)
+        assert s1.teachers.count() == 0
+        assert t1.students.count() == 0
+
 class AddRoles(TestSetup):
     def test_adding_role(self):
         newRole = Role(name="teacher")
@@ -45,13 +67,13 @@ class AddRoles(TestSetup):
 
         assert newRole in db.session
 
-        newTeacher = Teacher(username="coolteacher", password="mypassword", email="myemail2@gmail.com")
+        newTeacher = User(username="coolteacher", password="mypassword", email="myemail2@gmail.com")
         db.session.add(newTeacher)
         db.session.commit()
 
 
         newTeacher.roles.append(newRole)
-        testTeacher = Teacher.query.filter(Teacher.roles.any(name="teacher")).first()
+        testTeacher = User.query.filter(User.roles.any(name="teacher")).first()
         self.assertEqual(testTeacher.username, "coolteacher")
 
         db.session.delete(newRole)
@@ -63,7 +85,7 @@ class AddRoles(TestSetup):
         # Check adding the student role
         newRole2 = Role(name="student")
         db.session.add(newRole2)
-        newTeacher = Teacher(username="coolstudent", password="studentpassword", email="coolstudent@gmail.com")
+        newTeacher = User(username="coolstudent", password="studentpassword", email="coolstudent@gmail.com")
         newTeacher.roles.append(newRole2)
         db.session.add(newTeacher)
         db.session.commit()
@@ -71,12 +93,8 @@ class AddRoles(TestSetup):
         for role in newTeacher.roles:
             self.assertEqual(role.name, "student")
 
-        testTeacher = Teacher.query.filter_by(username="coolstudent").first()
+        testTeacher = User.query.filter_by(username="coolstudent").first()
         self.assertEqual(testTeacher.roles[0].name, "student")
-
-        db.session.delete(newRole2)
-        db.session.delete(newTeacher)
-        db.session.commit()
 
 class AddEpisodes(TestSetup):
     def test_add_episode(self):
@@ -95,11 +113,10 @@ class AddEpisodes(TestSetup):
         assert newEpisode not in db.session
 
     def test_episode_teacher_Relationship(self):
-        newTeacher = Teacher(username="teacher1", password="mypassword", email="teacheremail@gmail.com")
-        newTeacher2 = Teacher(username="teacher2", password="mypassword", email="teacher2email@gmail.com")
+        newTeacher = User(username="teacher1", password="mypassword", email="teacheremail@gmail.com")
+        newTeacher2 = User(username="teacher2", password="mypassword", email="teacher2email@gmail.com")
         newEpisode = Episode('testEpisode')
         newEpisode2 = Episode('testEpisode2')
-
 
         db.session.add(newTeacher)
         db.session.add(newTeacher2)
@@ -111,14 +128,11 @@ class AddEpisodes(TestSetup):
         assert newEpisode in db.session
         assert newEpisode2 in db.session
 
-        newEpisode.teachers.append(newTeacher)
-        newEpisode.teachers.append(newTeacher2)
-        newEpisode2.teachers.append(newTeacher)
+        newEpisode.users.append(newTeacher)
+        newEpisode.users.append(newTeacher2)
+        newEpisode2.users.append(newTeacher)
 
-        print "episode2 teachers"
-        print newEpisode2.teachers
-
-        testTeacher = Teacher.query.filter_by(username="teacher1").first()
+        testTeacher = User.query.filter_by(username="teacher1").first()
         self.assertEqual(testTeacher.username, "teacher1")
 
         episodesLength = 0;
@@ -127,34 +141,15 @@ class AddEpisodes(TestSetup):
         self.assertEqual(episodesLength, 2)
 
         teacherLength = 0;
-        for teacher in newEpisode.teachers:
+        for teacher in newEpisode.users:
             teacherLength += 1
         self.assertEqual(teacherLength, 2)
 
-
-        ### Test removing specific episode and link from teacher
-        for episode in newTeacher.episodes:
-            print episode.episodeJSONFileName
-            print episode.id
-
         episodesSharedAmongTeachers = Episode.query.filter_by(episodeJSONFileName='testEpisode').all()
-        print "Episodes Shared" + str(episodesSharedAmongTeachers)
 
         self.assertEqual(len(newTeacher2.episodes), 1)
-
         newTeacher2.episodes.remove(newEpisode)
-
         self.assertEqual(len(newTeacher2.episodes), 0)
-        print newTeacher2.episodes
-
-        #testTeacher.episodes.remove(newEpisode)
-
-
-        db.session.delete(newTeacher)
-        db.session.delete(newTeacher2)
-        db.session.delete(newEpisode)
-        db.session.delete(newEpisode2)
-
 
 if __name__ == '__main__':
     unittest.main()

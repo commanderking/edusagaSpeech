@@ -6,12 +6,17 @@ from flask_user import UserMixin
 
 episodes = db.Table('episodes',
     db.Column('episode_id', db.Integer, db.ForeignKey('episode.id')),
-    db.Column('teacher_id', db.Integer, db.ForeignKey('teacher.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('episode_assigned', db.Boolean(), nullable=False, default=False),
-    UniqueConstraint('episode_id', 'teacher_id', name='episode_teacher_id')
+    UniqueConstraint('episode_id', 'user_id', name='episode_user_id')
 )
 
-class Teacher(db.Model, UserMixin):
+teachers = db.Table('teachers',
+    db.Column('student_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('teacher_id', db.Integer, db.ForeignKey('user.id'))
+)
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
 
     # User authentication information
@@ -31,9 +36,28 @@ class Teacher(db.Model, UserMixin):
     # user_type = db.Column(db.String(100), nullable=False,server_default='general')
 
     roles = db.relationship('Role', secondary='user_roles',
-        backref=db.backref('teachers', lazy='dynamic'))
+        backref=db.backref('users', lazy='dynamic'))
     episodes = db.relationship('Episode', secondary=episodes,
-        backref=db.backref('teachers', lazy='dynamic'))
+        backref=db.backref('users', lazy='dynamic'))
+    teachers = db.relationship('User',
+                                secondary=teachers,
+                                primaryjoin=(teachers.c.student_id == id),
+                                secondaryjoin=(teachers.c.teacher_id == id),
+                                backref=db.backref('students', lazy="dynamic"),
+                                lazy="dynamic")
+
+    def addTeacher(self, teacher):
+        if not self.has_teacher(teacher):
+            self.teachers.append(teacher)
+            return self
+
+    def removeTeacher(self, teacher):
+        if self.has_teacher(teacher):
+            self.teachers.remove(teacher)
+            return self
+
+    def has_teacher(self, teacher):
+        return self.teachers.filter(teachers.c.teacher_id == teacher.id).count() > 0
 
 class Role(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
@@ -41,7 +65,7 @@ class Role(db.Model):
 
 class UserRoles(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
-    teacher_id = db.Column(db.Integer(), db.ForeignKey('teacher.id', ondelete='CASCADE'))
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
     role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 
 class Episode(db.Model):

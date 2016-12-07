@@ -12,7 +12,7 @@ import sys, os, uuid
 from web import app
 from models import *
 
-db_adapter = SQLAlchemyAdapter(db, Teacher)        # Register the User model
+db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
 user_manager = UserManager(db_adapter, app)     # Initialize Flask-User
 
 def trackVisitorWithText(textMessage): 
@@ -89,7 +89,7 @@ def teacherPage(username):
 	if current_user.username != username:
 		return redirect(url_for('index'))
 	else:
-		user = Teacher.query.filter_by(username=username).first()
+		user = User.query.filter_by(username=username).first()
 
 		episodeArray = getTeacherEpisodes(username)
 		print episodeArray
@@ -101,11 +101,14 @@ def teacherHome(teacher):
 	if teacher == "public": 
 		studentID = request.args.get('studentID')
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
-	elif teacher == current_user.username:
-		print "rendering teacher_home"
-		return render_template('teacherHome.html', teacher=teacher, studentID=studentID)
+	elif current_user.is_authenticated:
+		if teacher == current_user.username:
+			print "rendering teacher_home"
+			return render_template('teacherHome.html', teacher=teacher, studentID=studentID)
+		else: 
+			return redirect(url_for('teacherHome', teacher=current_user.username))
 	else:
-		return redirect(url_for('teacherHome', teacher=current_user.username))
+		return redirect(url_for('user.login'))
 
 @app.route('/public/home/')
 def publicHome2():
@@ -241,8 +244,8 @@ def postAddEpisode(username):
 			db.session.add(newEpisode)
 			db.session.commit()
 
-		teacher = Teacher.query.filter_by(username=current_user.username).first()
-		newEpisode.teachers.append(teacher)
+		teacher = User.query.filter_by(username=current_user.username).first()
+		newEpisode.users.append(teacher)
 		db.session.commit()
 
 		newEpisodeArray = getTeacherEpisodes(current_user.username)		
@@ -253,7 +256,7 @@ def deleteEpisode(username):
 	if (username == current_user.username):
 		episodeName = request.get_data()
 
-		teacher = Teacher.query.filter_by(username=current_user.username).first()
+		teacher = User.query.filter_by(username=current_user.username).first()
 		print teacher
 		episodeToDelete = Episode.query.filter_by(episodeJSONFileName=episodeName).first()
 		print episodeToDelete

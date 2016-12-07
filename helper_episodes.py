@@ -32,7 +32,7 @@ def getTeacherEpisodes(username):
 	json_dir_name = "static/data/public/"
 
 	# Grab teacher
-	teacher = Teacher.query.filter_by(username=username).first()
+	teacher = User.query.filter_by(username=username).first()
 
 	for episode in teacher.episodes:
 		episodeName = Episode.query.filter_by(id=episode.id).first().episodeJSONFileName
