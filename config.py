@@ -36,6 +36,9 @@ class ProductionConfig(Config):
 class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
+    print "in staging config"
+    print MAIL_USERNAME
+    print MAIL_PASSWORD
 
 
 class DevelopmentConfig(Config):
