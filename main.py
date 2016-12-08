@@ -2,6 +2,7 @@ from web import app, db
 from models import *
 from views import *
 from startup import create_users
+db.drop_all()
 db.create_all()
 
 if __name__ == '__main__':
