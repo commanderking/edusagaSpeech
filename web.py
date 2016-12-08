@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 sslify = SSLify(app)
 
 db = SQLAlchemy(app)
+
 mail = Mail(app)
 
 #app.config.from_envvar('GOOGLE_APPLICATION_CREDENTIALS')
