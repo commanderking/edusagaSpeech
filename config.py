@@ -37,16 +37,13 @@ class StagingConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
 
+    # For some reason on Heroku, won't inherit this from the Config class
     MAIL_SERVER='smtp.gmail.com'
     MAIL_PORT=465
     MAIL_USE_SSL=True
     MAIL_USERNAME = 'edusaga.games@gmail.com'
     MAIL_PASSWORD = os.environ['MAIL_PASSWORD']
     MAIL_DEFAULT_SENDER = 'EduSaga'
-
-    print "in staging config"
-    print MAIL_USERNAME
-    print MAIL_PASSWORD
 
 
 class DevelopmentConfig(Config):
