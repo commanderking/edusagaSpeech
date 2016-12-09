@@ -1,0 +1,294 @@
+{
+	"activityID": "introWangChao",
+	"activityName": "Introduction - Wang Chao",
+	"tags" : ["greetings", "introductions"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/wangchao/wangchaoDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can say hello and goodbye to someone my age or younger.", 
+		"I can introduce myself and provide basic personal information."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "It's the first day of your summer program in Shanghai. There's a guy with a ping pong paddle hanging around alone. Why don't you greet him?",
+			"next" : "end"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'I'm good' (method 1)",
+				"answer" : "很好",
+				"pinyin" : "Hěn hǎo",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'I'm good' (method 2)",
+				"answer" : "我非常好",
+				"pinyin" : "Wǒ fēicháng hǎo",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'I'm good' (method 3)",
+				"answer" : "我不错",
+				"pinyin" : "Wǒ bùcuò",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'I am doing ok' (Method 1)",
+				"answer" : "我还可以",
+				"pinyin" : "Wǒ hái kěyǐ",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 'I am doing ok' (Method 2)",
+				"answer" : "我马马虎虎",
+				"pinyin" : "Wǒ mǎmǎhǔhǔ",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Introduce your name",
+				"answer" : "我叫",
+				"pinyin" : "wǒ jiào",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for someone's name",
+				"answer" : "你叫什么名字",
+				"pinyin" : "nǐ jiào shénme míngzì",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for someone's surname/last name",
+				"answer" : "你贵姓",
+				"pinyin" : "nǐ guìxìng",
+				"correct" : false,
+				"tries" : 0
+			},
+			{
+				"task" : "Ask for someone's surname/last name (polite)",
+				"answer" : "请问您贵姓",
+				"pinyin" : "qǐngwèn nín guìxìng",
+				"correct" : false,
+				"tries" : 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Restaurant",
+				"nameChinese" : "餐厅", 
+				"bg" : "bg/restaurant.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/wangchao/wangchaoDefault.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "haikeyi",
+					"soundPath" : "david/haikeyi.ogg"
+				},
+				{
+					"soundID" : "surname-zhang-you",
+					"soundPath" : "david/surname-zhang-you.ogg"
+				},
+				{
+					"soundID" : "oh2",
+					"soundPath" : "david/oh2.ogg"
+				},
+				{
+					"soundID" : "intro-david-your-name",
+					"soundPath" : "david/intro-david-your-name.ogg"
+				},
+				{
+					"soundID" : "intro-oh-nice-to-meet-you",
+					"soundPath" : "david/intro-oh-nice-to-meet-you.ogg"
+				}			
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Greet him.",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 11,
+					"task" : "Ask him how he's doing",
+					"taskType" : "choice",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+							"response" : "很好啊! 你呢？",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [15, 16],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 15,
+					"task" : "Tell him you're doing great",
+					"taskLink" : "feelings",
+					"taskType" : "choice",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我很好", "非常好", "不错"],
+							"response" : "真棒！",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 16,
+					"task" : "Tell him you're doing ok",
+					"taskLink" : "feelings",
+					"taskType" : "choice",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["还可以", "马马虎虎"],
+							"response" : "哦。",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 20,
+					"task" : "Ask him for his last name / surname",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["请问你贵姓", "请问您贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
+							"response" : "我姓王! ",
+							"soundID" : "surname-zhang-you"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [22],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 22,
+					"task" : "Ask him what's his name / first name",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你叫什么名字","你的名字是什么", "你叫什么"],
+							"response" : "我叫王超。你呢?",
+							"soundID" : "intro-david-your-name"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidDefault.png",
+					"tasksToQueue" : [23],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 23,
+					"task" : "Respond to: 我叫王超。 你呢?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我叫", "我是", "我的名字叫", "我的名字是"],
+							"response" : "哦。 好的。我要去打乒乓球了。 再见!",
+							"soundID" : "intro-oh-nice-to-meet-you"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}		
+			],
+			"completedTasks" : []
+		}
+}

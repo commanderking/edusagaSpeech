@@ -1,0 +1,398 @@
+{
+	"activityID": "familyDavid",
+	"activityName": "Talking about your Family with Wang Chao",
+	"tags" : ["family", "nationality", "careers"],
+	"sequence" : [],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/david/davidDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives": 
+	[
+		"I can answer questions about my nationality.", 
+		"I can answer questions about which family members I have."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Hey! Here comes that ping pong player. He seems to want to get to know a little bit more about you.",
+			"next" : "end"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Ask for someone's nationality",
+				"answer" : "你是哪国人",
+				"pinyin" : "Nǐ shì nǎ guórén",
+				"correct" : false,
+				"tries": 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "David",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "University Gym",
+				"nameChinese" : "大学体育馆", 
+				"bg" : "bg/jiaoTongGym.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/david/davidDefault.png",
+				"uncertain" : "characters/david/davidUncertain.png",
+				"laughing" : "characters/david/davidLaughing.png",
+				"confused" : "characters/david/davidConfused.png",
+				"silhouette" : "characters/david/davidSilhouette.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Greet Wang Chao.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好! 啊，你是不是英国人？",
+							"soundID" : "nihao",
+							"exactMatch": true
+						},
+						{
+							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+							"response": "非常好！啊， 你是不是英国人？",
+							"soundID": "feichanghao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidLaughing.png",
+					"tasksToQueue" : [20, 21],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Respond that you are.",
+					"taskType" : "choice",
+					"taskLink" : "british",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我是英国人"],
+							"response" : "哦! 真好。 我爸也是英国人。",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["是", "是的", "我是", "我是的"],
+							"response" : "哦! 真好。 我爸也是英国人。",
+							"soundID" : "",
+							"exactMatch" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [45],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 21,
+					"task" : "Respond that you are not.",
+					"taskType": "choice",
+					"taskLink": "british",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我不是英国人"],
+							"response" : "那你是不是法国人？",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["不是", "不是的", "我不是", "我不是的"],
+							"response" : "那你是不是法国人？",
+							"soundID" : "",
+							"exactMatch" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [31, 32],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"task" : "Respond that you are.",
+					"taskType": "choice",
+					"taskLink": "french",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我是法国人."],
+							"response" : "哦! 真好! 我妈也是法国人。 ",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["是", "是的", "我是", "我是的"],
+							"response" : "那你是不是法国人？",
+							"soundID" : "",
+							"exactMatch" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [45],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 32,
+					"task" : "Respond that you are not.",
+					"taskType": "choice",
+					"taskLink": "french",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我不是法国人", "我也不是法国人"],
+							"response" : "那你是哪国人?",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["不是", "不是的", "我不是", "我不是的", "也不是", "我也不是", "也不是的", "我也不是的"],
+							"response" : "那你是哪国人?",
+							"soundID" : "",
+							"exactMatch" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [40],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 40,
+					"task" : "Respond to his question: 你是哪国人?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我是。。。人。"],
+							"response" : "哦。。。你有姐姐吗？",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我是"],
+								["人"]
+							],
+							"response" : "哦。。。你有姐姐吗？",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [45],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 45,
+					"task" : "Respond to his question: 你有姐姐吗？",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我有姐姐"],
+							"response" : "我也有一个姐姐! 那你有没有哥哥？",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我有"],
+								["个", "一个", "两个", "三个", "四个", "五个"],
+								["姐姐"]
+							],
+							"response" : "啊。 我也有一个姐姐。那你有没有哥哥？",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["我有", "有", "有啊"],
+							"response" : "啊。 我也有一个姐姐。那你有没有哥哥？",
+							"soundID" : "",
+							"exactMatch" : true
+						},
+						{
+							"answers" : ["我没有姐姐", "我没哥哥"],
+							"response" : "那你有没有哥哥？",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["没有", "我没有"],
+							"response" : "那你有没有哥哥？",
+							"soundID" : "",
+							"exactMatch" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 50,
+					"task" : "Respond to his question: 你有没有哥哥?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我有哥哥", "我有一个哥哥"],
+							"response" : "哦。真好。 我也有一个哥哥。 他很会打乒乓球！",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我有"],
+								["个", "一个", "两个", "三个", "四个", "五个"],
+								["哥哥"]
+							],
+							"response" : "哦。真好。 我也有一个哥哥。他很会打乒乓球！",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["我有", "有", "有啊"],
+							"response" : "哦。真好。 我也有一个哥哥。他很会打乒乓球！",
+							"soundID" : "",
+							"exactMatch" : true
+						},
+						{
+							"answers" : ["我没有哥哥", "我没哥哥"],
+							"response" : "哦。 是吗？我有一个哥哥。他很会打乒乓球！",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["没有", "我没有"],
+							"response" : "哦。 是吗？ 我有一个哥哥。他很会打乒乓球！",
+							"soundID" : "",
+							"exactMatch" : true
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [60],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 60,
+					"task" : "Ask him how many people are in his family",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["你家有几口人"],
+							"response" : "我家有五口人，我爸妈，哥哥，姐姐，和我。",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["你家有", "你的家有", "你家里有"],
+								["几口人", "几个人", "多少人"]
+							],
+							"response" : "我家有五口人，我爸妈，哥哥，姐姐，和我。",
+							"soundID" : ""
+						},
+						{
+							"answers": [
+								["你有"],
+								["几个家人", "几口家人"]
+							],
+							"response" : "我家有五口人，我爸妈，哥哥，姐姐，和我。",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [61],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 61,
+					"task" : "Ask him for his nationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你是哪里来的", "你从哪里来", "你从哪里来的"],
+							"response" : "我是中国人，可是我在英国出生的。哇！已经四点了啊。我得跟我哥哥打乒乓球。再见!",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 61,
+					"task" : "Say bye!",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["再见", "明天见", "慢走", "拜拜"],
+							"response" : "",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/david/davidUncertain.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}
