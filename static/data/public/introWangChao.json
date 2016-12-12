@@ -3,6 +3,7 @@
 	"activityName": "Introduction - Wang Chao",
 	"tags" : ["greetings", "introductions"],
 	"score" : 0,
+	"sequence" : 200,
 	"currentCharName" : "",
 	"currentImage" : "characters/wang/wangConfidentDefault.png",
 	"currentLanguage" : "zh-CN",

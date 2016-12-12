@@ -3,6 +3,7 @@
 	"activityName": "Introduction - David",
 	"tags" : ["greetings", "introductions"],
 	"score" : 0,
+	"sequence" : 100,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidUncertain.png",
 	"currentLanguage" : "zh-CN",

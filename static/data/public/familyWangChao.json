@@ -1,5 +1,5 @@
 {
-	"activityID": "familyDavid",
+	"activityID": "familyWangChao",
 	"activityName": "Talking about your Family with Wang Chao",
 	"tags" : ["family", "nationality", "careers"],
 	"sequence" : [],
@@ -113,7 +113,7 @@
 	},
 	"character" : 
 		{
-			"name" : "David",
+			"name" : "Wang Chao",
 			"language" : "zh-CN",
 			"location" : 
 			{

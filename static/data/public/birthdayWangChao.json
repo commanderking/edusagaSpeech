@@ -1,8 +1,9 @@
 {
-	"activityID": "introWangChao",
+	"activityID": "birthdayWangChao",
 	"activityName": "Wang Chao's Age and Birthday",
 	"tags" : ["date", "birthday", "age"],
 	"score" : 0,
+	"sequence" : 200,
 	"currentCharName" : "",
 	"currentImage" : "characters/wang/wangConfidentDefault.png",
 	"currentLanguage" : "zh-CN",
@@ -36,9 +37,65 @@
 		"list" :
 		[
 			{
-				"task" : "Say 'I'm good' (method 1)",
-				"answer" : "很好",
-				"pinyin" : "Hěn hǎo",
+				"task" : "Say 9 years old",
+				"answer" : "九岁",
+				"pinyin" : "jiǔ suì",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 18 years old",
+				"answer" : "十八岁",
+				"pinyin" : "shíbā suì",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 23 years old",
+				"answer" : "二十三岁",
+				"pinyin" : "èrshísān suì",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 100 years old",
+				"answer" : "一百岁",
+				"pinyin" : "yībǎi suì",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say February",
+				"answer" : "二月",
+				"pinyin" : "èr yuè",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say July",
+				"answer" : "七月",
+				"pinyin" : "qī yuè",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say October",
+				"answer" : "十月",
+				"pinyin" : "shí yuè",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say October 6th",
+				"answer" : "十月六号",
+				"pinyin" : "shí yuè liù hào",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say October 12th",
+				"answer" : "十月十二号",
+				"pinyin" : "Shí yuè shí èr hào",
 				"correct" : false,
 				"tries": 0
 			}

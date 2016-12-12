@@ -3,6 +3,7 @@
 	"activityName": "Learning about Chen Yang's Family",
 	"tags" : ["family", "nationality", "careers"],
 	"score" : 0,
+	"sequence" : 100,
 	"currentCharName" : "",
 	"currentImage" : "characters/chenguang/chengDefault.png",
 	"currentLanguage" : "zh-CN",

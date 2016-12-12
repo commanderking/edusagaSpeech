@@ -4,6 +4,7 @@
 	"tags" : ["family", "nationality", "careers"],
 	"sequence" : [],
 	"score" : 0,
+	"sequence" : 100,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
 	"currentLanguage" : "zh-CN",
