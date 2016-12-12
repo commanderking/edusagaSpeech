@@ -1,6 +1,6 @@
 {
 	"activityID": "introWangChao",
-	"activityName": "Introduction - Wang Chao",
+	"activityName": "Wang Chao's Age and Birthday",
 	"tags" : ["date", "birthday", "age"],
 	"score" : 0,
 	"currentCharName" : "",
@@ -19,7 +19,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Who's that guy with a ping pong paddle hanging around alone. Why don't you greet him?"
+			"text" : "Wang Chao seems to be eager for you to figure out his age and birthday. Why don't you take a guess?"
 		},
 		{
 			"name" : "Wang Chao",
@@ -107,7 +107,7 @@
 							"answers" : ["九岁", "9岁"],
 							"exceptions" : ["1", "2", "3", "4", "5", "6", "7", "8", "10", 
 											"一", "二", "三", "四", "五", "六", "七", "八", "十"],
-							"response" : "你好!",
+							"response" : "九岁！？ 我看起来像一个baby吗！？",
 							"soundID" : "nihao"
 						}
 					],
@@ -120,7 +120,6 @@
 				{
 					"taskID" : 11,
 					"task" : "Guess that he's 18",
-					"taskType" : "choice",
 					"taskLink" : "greeting",
 					"possibleAnswers" : 
 					[
@@ -155,7 +154,7 @@
 						},
 						{
 							"answers" : ["二十二岁", "22岁"],
-							"response" : "没错！ 我二十二岁！那猜一猜我的生日几月",
+							"response" : "没错！ 我二十二岁！那。。。再猜一猜我的生日几月!",
 							"soundID" : ""
 						}
 					],
@@ -168,7 +167,6 @@
 				{
 					"taskID" : 13,
 					"task" : "Guess that he's 100.",
-					"taskType" : "choice",
 					"taskLink" : "greeting",
 					"possibleAnswers" : 
 					[
@@ -194,13 +192,13 @@
 			[
 				{
 					"taskID" : 20,
-					"task" : "Guess that it's in January",
+					"task" : "Guess that it's in February",
 					"taskLink" : "month",
 					"taskType" : "choice",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["一月", "1月"],
+							"answers" : ["二月", "2月"],
 							"response" : "不是! 是七月！猜一猜七月几号？",
 							"exceptions": ["十"],
 							"soundID" : ""
@@ -208,7 +206,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/wang/wangConfidentDefault.png",
-					"tasksToQueue" : [30],
+					"tasksToQueue" : [30, 31, 32, 33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
@@ -228,7 +226,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/wang/wangConfidentDefault.png",
-					"tasksToQueue" : [30],
+					"tasksToQueue" : [30, 31, 32, 33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
@@ -248,7 +246,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/wang/wangConfidentDefault.png",
-					"tasksToQueue" : [30],
+					"tasksToQueue" : [30, 31, 32, 33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
@@ -269,7 +267,7 @@
 					],
 					"correct" : false,
 					"emotion" : "characters/wang/wangConfidentDefault.png",
-					"tasksToQueue" : [30],
+					"tasksToQueue" : [30, 31, 32, 33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
@@ -280,12 +278,12 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["七月四号", "七月四日"],
+							"answers" : ["七月四号", "七月四日", "7月4号", "7月4日"],
 							"response" : "不是！再猜吧！",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["四号", "四日"],
+							"answers" : ["四号", "四日", "4号", "4日"],
 							"exceptions" : ["1", "2", "3", "5", "6", "7", "8", "9", "10", 
 											"一", "二", "三", "五", "六", "七", "八", "九", "十"],
 							"response" : "不是！再猜吧！",
@@ -305,12 +303,12 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["七月八号", "七月八日"],
+							"answers" : ["七月八号", "七月八日", "7月8号", "7月8日"],
 							"response" : "不是！再猜吧！",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["八号", "八日"],
+							"answers" : ["八号", "八日", "8号", "8日"],
 							"exceptions" : ["1", "2", "3","4", "5", "6", "7", "9", "10", 
 											"一", "二", "三", "四", "五", "六", "七", "九", "十"],
 							"response" : "不是！再猜吧！",
@@ -330,12 +328,12 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["七月十二号", "七月十二日"],
+							"answers" : ["七月十二号", "七月十二日", "7月12号", "7月12日"],
 							"response" : "不是！再猜吧！",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["十二号", "十二日"],
+							"answers" : ["十二号", "十二日", "12号", "12日"],
 							"exceptions" : ["二十", "三十", "四十", "五十", "六十", "七十", "八十", "九十",
 											10, 20, 30, 40, 50 ,60 ,70, 80, 90],
 							"response" : "不是！再猜吧！",
@@ -356,15 +354,15 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["七月十六号", "七月十六日"],
+							"answers" : ["七月十六号", "七月十六日", "7月16号", "7月16日"],
 							"response" : "没错！ 我的生日是七月十六号！ 好好记住哦！ 我现在要去打乒乓球了！ 再见！",
 							"soundID" : ""
 						},
 						{
-							"answers" : ["十二号", "十二日"],
+							"answers" : ["十二号", "十二日", "16号", "16日"],
 							"exceptions" : ["二十", "三十", "四十", "五十", "六十", "七十", "八十", "九十",
 											10, 20, 30, 40, 50 ,60 ,70, 80, 90],
-							"response" : "不是！再猜吧！",
+							"response" : "没错！ 我的生日是七月十六号！ 好好记住哦！ 我现在要去打乒乓球了！ 再见！",
 							"soundID" : ""
 						}
 					],
