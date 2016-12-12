@@ -52,7 +52,7 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var MainMenuContainer = __webpack_require__(/*! ./mainMenu/MainMenuContainer */ 180);
-	var NavBarButton = __webpack_require__(/*! ./teacherHome/NavBarButton */ 233);
+	var NavBarButton = __webpack_require__(/*! ./teacherHome/NavBarButton */ 234);
 	
 	var TeacherHome = React.createClass({
 		displayName: 'TeacherHome',
@@ -21745,13 +21745,13 @@
 
 	'use strict';
 	
-	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 234);
+	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 181);
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var PropTypes = React.PropTypes;
-	var Constants = __webpack_require__(/*! ../helpers/Constants */ 181);
-	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 182);
+	var Constants = __webpack_require__(/*! ../helpers/Constants */ 182);
+	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 183);
 	
 	
 	var MainMenuContainer = React.createClass({
@@ -22122,6 +22122,33 @@
 
 /***/ },
 /* 181 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/ImageHelper.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Constants = __webpack_require__(/*! ./Constants */ 182);
+	
+	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
+		switch (characterName) {
+			case "Alex":
+				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
+			case "David":
+				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
+			case "Chen Yang":
+				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
+			default:
+				return null;
+		}
+	};
+
+/***/ },
+/* 182 */
 /*!**********************************************!*\
   !*** ./react_assets/js/helpers/Constants.js ***!
   \**********************************************/
@@ -22138,7 +22165,7 @@
 	};
 
 /***/ },
-/* 182 */
+/* 183 */
 /*!*****************************************************!*\
   !*** ./react_assets/js/mainMenu/EpisodeTagLists.js ***!
   \*****************************************************/
@@ -22207,7 +22234,6 @@
 	module.exports = EpisodeTagList;
 
 /***/ },
-/* 183 */,
 /* 184 */,
 /* 185 */,
 /* 186 */,
@@ -22257,7 +22283,8 @@
 /* 230 */,
 /* 231 */,
 /* 232 */,
-/* 233 */
+/* 233 */,
+/* 234 */
 /*!*****************************************************!*\
   !*** ./react_assets/js/teacherHome/NavBarButton.js ***!
   \*****************************************************/
@@ -22283,33 +22310,6 @@
 	NavBarButton.PropTypes = {
 		text: PropTypes.string.isRequired,
 		clickFunction: PropTypes.func.isRequred
-	};
-
-/***/ },
-/* 234 */
-/*!************************************************!*\
-  !*** ./react_assets/js/helpers/ImageHelper.js ***!
-  \************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var Constants = __webpack_require__(/*! ./Constants */ 181);
-	
-	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
-		switch (characterName) {
-			case "Alex":
-				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
-			case "David":
-				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
-			case "Chen Yang":
-				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
-			default:
-				return null;
-		}
 	};
 
 /***/ }

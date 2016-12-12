@@ -21636,13 +21636,13 @@
 
 	'use strict';
 	
-	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 234);
+	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 181);
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var PropTypes = React.PropTypes;
-	var Constants = __webpack_require__(/*! ../helpers/Constants */ 181);
-	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 182);
+	var Constants = __webpack_require__(/*! ../helpers/Constants */ 182);
+	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 183);
 	
 	
 	var MainMenuContainer = React.createClass({
@@ -22013,6 +22013,33 @@
 
 /***/ },
 /* 181 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/ImageHelper.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Constants = __webpack_require__(/*! ./Constants */ 182);
+	
+	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
+		switch (characterName) {
+			case "Alex":
+				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
+			case "David":
+				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
+			case "Chen Yang":
+				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
+			default:
+				return null;
+		}
+	};
+
+/***/ },
+/* 182 */
 /*!**********************************************!*\
   !*** ./react_assets/js/helpers/Constants.js ***!
   \**********************************************/
@@ -22029,7 +22056,7 @@
 	};
 
 /***/ },
-/* 182 */
+/* 183 */
 /*!*****************************************************!*\
   !*** ./react_assets/js/mainMenu/EpisodeTagLists.js ***!
   \*****************************************************/
@@ -22096,84 +22123,6 @@
 	});
 	
 	module.exports = EpisodeTagList;
-
-/***/ },
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */
-/*!************************************************!*\
-  !*** ./react_assets/js/helpers/ImageHelper.js ***!
-  \************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var Constants = __webpack_require__(/*! ./Constants */ 181);
-	
-	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
-		switch (characterName) {
-			case "Alex":
-				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
-			case "David":
-				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
-			case "Chen Yang":
-				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
-			default:
-				return null;
-		}
-	};
 
 /***/ }
 /******/ ]);

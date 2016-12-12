@@ -4,7 +4,7 @@
 	"tags" : ["greetings", "introductions"],
 	"score" : 0,
 	"currentCharName" : "",
-	"currentImage" : "characters/wangchao/wangchaoDefault.png",
+	"currentImage" : "characters/wang/wangConfidentDefault.png",
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
 	"currentSoundID": "",
@@ -20,7 +20,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "It's the first day of your summer program in Shanghai. There's a guy with a ping pong paddle hanging around alone. Why don't you greet him?",
+			"text" : "Who's that guy with a ping pong paddle hanging around alone. Why don't you greet him?",
 			"next" : "end"
 		}
 	],
@@ -98,7 +98,7 @@
 	},
 	"character" : 
 		{
-			"name" : "David",
+			"name" : "Wang Chao",
 			"language" : "zh-CN",
 			"location" : 
 			{
@@ -108,7 +108,12 @@
 			},
 			"emotions" : 
 			{
-				"default": "characters/wangchao/wangchaoDefault.png"
+				"default": "characters/wang/wangConfidentDefault.png",
+				"confident": "characters/wang/wangConfidentSpeaking.png",
+				"disgust": "characters/wang/wangDisgust.png",
+				"dramatic": "characters/wang/wangDramaticEvasive.png",
+				"surprised": "characters/wang/wangSurprised.png",
+				"thoughtful": "characters/wang/wangThoughtful.png"
 			},
 			"successPhrases" : {
 
@@ -172,7 +177,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "characters/wang/wangConfidentSpeaking.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -191,7 +196,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "characters/wang/wangConfidentSpeaking.png",
 					"tasksToQueue" : [15, 16],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -213,7 +218,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "characters/wang/wangConfidentDefault.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -232,7 +237,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "characters/wang/wangThoughtful.png",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -249,7 +254,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/wang/wangConfidentSpeaking.png",
 					"tasksToQueue" : [22],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -266,7 +271,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "characters/wang/wangConfidentDefault.png",
 					"tasksToQueue" : [23],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -279,11 +284,11 @@
 						{
 							"answers" : ["我叫", "我是", "我的名字叫", "我的名字是"],
 							"response" : "哦。 好的。我要去打乒乓球了。 再见!",
-							"soundID" : "intro-oh-nice-to-meet-you"
+							"soundID" : ""
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "characters/wang/wangDramaticEvasive.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
