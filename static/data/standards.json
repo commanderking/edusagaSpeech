@@ -1,20 +1,23 @@
 [
 	{
 		"taskID" : 0,
+		"task" : "Say goodbye",
+		"possibleAnswers" : 
+		[
+			{
+				"answers": 	["再见", "拜拜", "明天见", "慢走"]
+			}
+		]
+	},
+	{
+		"taskID" : 0,
 		"task" : "Ask him for his nationality",
 		"possibleAnswers" : 
 		[
 			{
-				"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你是哪里来的", "你从哪里来", "你从哪里来的"],
-				"response" : "哦。。。你有姐姐吗？",
-				"soundID" : ""
+				"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你是哪里来的", "你从哪里来", "你从哪里来的"]
 			}
-		],
-		"correct" : false,
-		"emotion" : "characters/david/davidUncertain.png",
-		"tasksToQueue" : [40],
-		"attemptedAnswers" : [],
-		"hintUsed" : false
+		]
 	},
 	{
 		"taskID" : 0,
@@ -22,31 +25,20 @@
 		"possibleAnswers" : 
 		[
 			{
-				"answers": 	["你家有几口人"],
-				"response" : "哦。。。你有姐姐吗？",
-				"soundID" : ""
+				"answers": 	["你家有几口人"]
 			},
 			{
 				"answers" : [
 					["你家有", "你的家有", "你家里有"],
 					["几口人", "几个人", "多少人"]
-				],
-				"response" : "哦。。。你有姐姐吗？",
-				"soundID" : ""
+				]
 			},
 			{
 				"answers": [
 					["你有"],
 					["几个家人"]
-				],
-				"response" : "哦。。。你有姐姐吗？",
-				"soundID" : ""
+				]
 			}
-		],
-		"correct" : false,
-		"emotion" : "characters/david/davidUncertain.png",
-		"tasksToQueue" : [],
-		"attemptedAnswers" : [],
-		"hintUsed" : false
+		]
 	}
 ]
