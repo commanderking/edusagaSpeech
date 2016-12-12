@@ -1,0 +1,397 @@
+{
+	"activityID": "introWangChao",
+	"activityName": "Introduction - Wang Chao",
+	"tags" : ["date", "birthday", "age"],
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/wang/wangConfidentDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can ask about the age and birthdays of other people."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Who's that guy with a ping pong paddle hanging around alone. Why don't you greet him?"
+		},
+		{
+			"name" : "Wang Chao",
+			"image": "characters/wang/wangConfidentDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "猜一猜我几岁!"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'I'm good' (method 1)",
+				"answer" : "很好",
+				"pinyin" : "Hěn hǎo",
+				"correct" : false,
+				"tries": 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "Wang Chao",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Restaurant",
+				"nameChinese" : "餐厅", 
+				"bg" : "bg/restaurant.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/wang/wangConfidentDefault.png",
+				"confident": "characters/wang/wangConfidentSpeaking.png",
+				"disgust": "characters/wang/wangDisgust.png",
+				"dramatic": "characters/wang/wangDramaticEvasive.png",
+				"surprised": "characters/wang/wangSurprised.png",
+				"thoughtful": "characters/wang/wangThoughtful.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				}	
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Guess that he's 9.",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我猜你九岁", "你九岁了吗"],
+							"response" : "九岁！？ 我看起来像一个baby吗！？",
+							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["九岁", "9岁"],
+							"exceptions" : ["1", "2", "3", "4", "5", "6", "7", "8", "10", 
+											"一", "二", "三", "四", "五", "六", "七", "八", "十"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangDisgust.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 11,
+					"task" : "Guess that he's 18",
+					"taskType" : "choice",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你猜你十八岁", "你十八岁了吗"],
+							"response" : "不是! 再猜吧!",
+							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["十八岁", "18岁"],
+							"response" : "不是! 再猜吧!",
+							"soundID" : "nihao"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 12,
+					"task" : "Guess that he's 22",
+					"taskType" : "choice",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我猜你二十二岁", "你二十二岁了吗"],
+							"response" : "没错！ 我二十二岁！那猜一猜我的生日几月",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["二十二岁", "22岁"],
+							"response" : "没错！ 我二十二岁！那猜一猜我的生日几月",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [20, 21, 22, 23],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 13,
+					"task" : "Guess that he's 100.",
+					"taskType" : "choice",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你一百岁了吗", "我猜你一百岁"],
+							"response" : "一八岁！ 我又不是老头子！！！",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["一百岁", "100岁"],
+							"response" : "一八岁！ 我又不是老头子！！！",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangDisgust.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Guess that it's in January",
+					"taskLink" : "month",
+					"taskType" : "choice",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["一月", "1月"],
+							"response" : "不是! 是七月！猜一猜七月几号？",
+							"exceptions": ["十"],
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 21,
+					"task" : "Guess that it's in April",
+					"taskLink" : "month",
+					"taskType" : "choice",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["四月", "4月"],
+							"response" : "不是! 是七月！猜一猜七月几号？",
+							"exceptions": ["十"],
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 22,
+					"task" : "Guess that it's in July",
+					"taskLink" : "month",
+					"taskType" : "choice",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["七月", "7月"],
+							"response" : "不错哦! 猜对了。是七月！ 猜一猜七月几号？",
+							"exceptions": ["十"],
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 23,
+					"task" : "Guess that it's in October",
+					"taskLink" : "month",
+					"taskType" : "choice",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["十月", "10月"],
+							"response" : "不是! 是七月！猜一猜七月几号？",
+							"exceptions" : ["二十", "三十", "四十", "五十", "六十", "七十", "八十", "九十",
+											10, 20, 30, 40, 50 ,60 ,70, 80, 90],
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Guess it's July 4th",
+					"taskLink" : "day",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["七月四号", "七月四日"],
+							"response" : "不是！再猜吧！",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["四号", "四日"],
+							"exceptions" : ["1", "2", "3", "5", "6", "7", "8", "9", "10", 
+											"一", "二", "三", "五", "六", "七", "八", "九", "十"],
+							"response" : "不是！再猜吧！",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangThoughtful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"task" : "Guess it's July 8th",
+					"taskLink" : "day",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["七月八号", "七月八日"],
+							"response" : "不是！再猜吧！",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["八号", "八日"],
+							"exceptions" : ["1", "2", "3","4", "5", "6", "7", "9", "10", 
+											"一", "二", "三", "四", "五", "六", "七", "九", "十"],
+							"response" : "不是！再猜吧！",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangThoughtful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 32,
+					"task" : "Guess it's July 12th",
+					"taskLink" : "day",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["七月十二号", "七月十二日"],
+							"response" : "不是！再猜吧！",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["十二号", "十二日"],
+							"exceptions" : ["二十", "三十", "四十", "五十", "六十", "七十", "八十", "九十",
+											10, 20, 30, 40, 50 ,60 ,70, 80, 90],
+							"response" : "不是！再猜吧！",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangThoughtful.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 33,
+					"task" : "Guess it's July 16th",
+					"taskType" : "choice",
+					"taskLink" : "day",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["七月十六号", "七月十六日"],
+							"response" : "没错！ 我的生日是七月十六号！ 好好记住哦！ 我现在要去打乒乓球了！ 再见！",
+							"soundID" : ""
+						},
+						{
+							"answers" : ["十二号", "十二日"],
+							"exceptions" : ["二十", "三十", "四十", "五十", "六十", "七十", "八十", "九十",
+											10, 20, 30, 40, 50 ,60 ,70, 80, 90],
+							"response" : "不是！再猜吧！",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"tasksToQueue" : [40],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 40,
+					"task" : "Say bye",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["再见", "拜拜", "明天见", "慢走"],
+							"response" : "",
+							"soundID" : ""
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}		
+			],
+			"completedTasks" : []
+		}
+}
