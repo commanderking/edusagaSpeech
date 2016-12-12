@@ -103,9 +103,9 @@
 			"language" : "zh-CN",
 			"location" : 
 			{
-				"nameEnglish" : "Restaurant",
-				"nameChinese" : "餐厅", 
-				"bg" : "bg/restaurant.jpg"
+				"nameEnglish" : "University Juice Bar",
+				"nameChinese" : "大学果汁吧", 
+				"bg" : "bg/jiaoTongJuiceBar.jpg"
 			},
 			"emotions" : 
 			{

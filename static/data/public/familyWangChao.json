@@ -117,9 +117,9 @@
 			"language" : "zh-CN",
 			"location" : 
 			{
-				"nameEnglish" : "University Gym",
-				"nameChinese" : "大学体育馆", 
-				"bg" : "bg/jiaoTongGym.jpg"
+				"nameEnglish" : "University Juice Bar",
+				"nameChinese" : "大学果汁吧", 
+				"bg" : "bg/jiaoTongJuiceBar.jpg"
 			},
 			"emotions" : 
 			{
