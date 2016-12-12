@@ -26,7 +26,6 @@ var MainMenuContainer = React.createClass({
 				} catch(err) {
 					result.teacherEpisodeData.scenes = [];
 				}
-				console.log(result.teacherEpisodeData);
 				doneCallback(result.teacherEpisodeData);
 			}
 		});
@@ -46,7 +45,7 @@ var MainMenuContainer = React.createClass({
 		} else {
 			$.getJSON("/static/data/teacherScenes/public.json", function(data) {})
 				.success(function(data) {
-
+					console.log(data);
 					// Function to feed into getTeacherEpisode callback (only relevant for teacher's page)
 					var setEpisodeData = function(episodeData) {
 
@@ -234,6 +233,7 @@ var MainMenuContainer = React.createClass({
 						dateTimeEpisodes.push(episode);
 						break;
 					case "hobbies":
+						likesDislikesEpisodes.push(episode);
 						break;
 					case "food": 
 						likesDislikesEpisodes.push(episode);
@@ -256,7 +256,6 @@ var MainMenuContainer = React.createClass({
 			var likesDislikesEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(likesDislikesEpisodes));
 			var reviewEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(reviewEpisodes));
 			var otherEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(otherEpisodes));
-
 		} else { scenes = "Nothing!"; }
 
 		// Check for title text passed through as props

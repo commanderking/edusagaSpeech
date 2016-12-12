@@ -21668,7 +21668,6 @@
 					} catch (err) {
 						result.teacherEpisodeData.scenes = [];
 					}
-					console.log(result.teacherEpisodeData);
 					doneCallback(result.teacherEpisodeData);
 				}
 			});
@@ -21687,7 +21686,7 @@
 				that.getTeacherEpisodes(username, setEpisodeData);
 			} else {
 				$.getJSON("/static/data/teacherScenes/public.json", function (data) {}).success(function (data) {
-	
+					console.log(data);
 					// Function to feed into getTeacherEpisode callback (only relevant for teacher's page)
 					var setEpisodeData = function setEpisodeData(episodeData) {
 	
@@ -21916,6 +21915,7 @@
 							dateTimeEpisodes.push(episode);
 							break;
 						case "hobbies":
+							likesDislikesEpisodes.push(episode);
 							break;
 						case "food":
 							likesDislikesEpisodes.push(episode);
