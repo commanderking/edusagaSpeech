@@ -207,7 +207,8 @@
 					"correct" : false,
 					"emotion" : "characters/tina/tinaDefault.png",
 					"tasksToQueue" : [3],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 3,
@@ -241,7 +242,8 @@
 					"correct" : false,
 					"emotion" : "characters/tina/tinaDefault.png",
 					"tasksToQueue" : [4,5],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 4,
@@ -266,7 +268,8 @@
 					"correct" : false,
 					"emotion" : "characters/tina/tinaOrdering.png",
 					"tasksToQueue" : [5],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}, 
 				{
 					"taskID" : 5,
@@ -291,7 +294,8 @@
 					"correct" : false,
 					"emotion" : "characters/tina/tinaOrdering.png",
 					"tasksToQueue" : [6],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 6,
@@ -307,7 +311,8 @@
 					"correct" : false,
 					"emotion" : "characters/tina/tinaDefault.png",
 					"tasksToQueue" : [7],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 7,
@@ -323,7 +328,8 @@
 					"correct" : false,
 					"emotion" : "characters/tina/tinaDefault.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}
 			],
 			"completedTasks" : []

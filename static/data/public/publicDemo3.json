@@ -192,7 +192,8 @@
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [6],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}
 			],
 			"queuedTasks" : 
@@ -219,7 +220,8 @@
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [7,8,9],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 7,
@@ -254,7 +256,8 @@
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [10],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 8,
@@ -288,7 +291,8 @@
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [10],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 9,
@@ -314,7 +318,8 @@
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [10],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},
 				{
 					"taskID" : 10,
@@ -340,7 +345,8 @@
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [11, 12],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},			
 				{
 					"taskID" : 11,
@@ -364,7 +370,8 @@
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				},	
 				{
 					"taskID" : 12,
@@ -388,7 +395,8 @@
 					"correct" : false,
 					"emotion" : "characters/alex/alexDefault.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed" : false
 				}
 			],
 			"completedTasks" : []
