@@ -348,16 +348,14 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我们周末去打羽毛球, 怎么样"],
-							"soundID" : "hobbies-badminton-when"
+							"answers" : ["我们周末去打羽毛球, 怎么样"]
 						},
 						{
 							"answers" : [
 								["我们周末", "周末我们", "我们这周末"],
 								["打羽毛球", "玩羽毛球"],
 								["怎么样", "好吗"]
-							],
-							"soundID" : "hobbies-badminton-when"
+							]
 						},
 						{
 							"answers" : [
@@ -365,27 +363,25 @@
 								["请你", "跟你"],
 								["打羽毛球", "玩羽毛球"],
 								["怎么样", "好吗"]
-							],
-							"soundID" : "hobbies-badminton-when"
+							]
 						},
 						{
 							"answers" : [
 								["你周末", "周末你", "这周末"],
 								["要不要", "想不想"],
 								["打羽毛球", "玩羽毛球"]
-							],
-							"soundID" : "hobbies-badminton-when"
+							]
 						},
 						{
 							"answers" : [
 								["你周末", "周末你", "这周末"],
 								["要", "想"],
 								["打羽毛球", "玩羽毛球"]
-							],
-							"soundID" : "hobbies-badminton-when"
+							]
 						}
 					],
 					"correct" : false,
+					"soundID" : "hobbies-badminton-when",
 					"hintUsed" : false,
 					"response": "你会打羽毛球?! 好吧! 我们星期几打?",
 					"emotion" : "characters/chenguang/chengGreatJob.png",

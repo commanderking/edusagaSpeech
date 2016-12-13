@@ -186,7 +186,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengBored.png",
 					"tasksToQueue" : [20],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				}
 			],
 			"queuedTasks" :
@@ -213,7 +214,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
 					"tasksToQueue" : [30,31,32],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 30,
@@ -239,7 +241,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengBored.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 31,
@@ -265,7 +268,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengBored.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 32,
@@ -298,7 +302,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengBored.png",
 					"tasksToQueue" : [33],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 33,
@@ -331,7 +336,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengBored.png",
 					"tasksToQueue" : [40],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 40,
@@ -349,7 +355,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengBored.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				}
 			],
 			"completedTasks" : []

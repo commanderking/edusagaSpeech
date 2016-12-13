@@ -108,10 +108,11 @@ export var SpeechChecker = {
 
 		possibleAnswers.forEach(function(possibleAnswerObject, i) {
 			var checkResult = {};
-			var tempSoundID = possibleAnswerObject.soundID;
 
-			// If there's a specific response for the possibleAnswer, we use that one. Otherwise, use
+			// If there's a specific response/soundID for the possibleAnswer, use that one. Otherwise, use
 			// the generic response for the entire task
+			var tempSoundID = possibleAnswerObject.soundID ? possibleAnswerObject.soundID:
+				TaskController.getActiveTask(data,activeTaskIndex).soundID;
 			var responseText = possibleAnswerObject.response ? possibleAnswerObject.response : 
 				TaskController.getActiveTask(data, activeTaskIndex).response;
 			// if the first entry in answers array is an array, we will need advancedCheck
@@ -169,8 +170,7 @@ export var SpeechChecker = {
 			}
 		}
 
-
-		// Return object should contain a 4th entry, specificFeedback: true
+		// TODO: Return object should contain a 4th entry, specificFeedback: true
 		// Then in questionAsker script, if returnedObject answer is false, but contains specificFeedback: true, then enter specificFeedback phase
 
 		return objectToReturn;
@@ -224,11 +224,8 @@ export var SpeechChecker = {
 				}
 			}
 			checkListArray.push(answerPartCorrect);
-
-			// console.log(checkListArray);
 		});
 
-		// console.log(answerCorrect);
 		// Check if all the entries in checkListArray are true;
 		// if so, then the answer is correct
 		var correctCounter = 0;

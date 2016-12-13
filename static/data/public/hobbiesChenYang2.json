@@ -257,7 +257,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
 					"tasksToQueue" : [20,21,22,23],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				}
 			],
 			"queuedTasks" :
@@ -314,7 +315,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengBored.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 					{
 					"taskID" : 21,
@@ -369,7 +371,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [31, 32, 33],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 22,
@@ -423,7 +426,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengConfused.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 23,
@@ -477,7 +481,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGoodJob.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 31,
@@ -500,7 +505,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [41, 42, 43],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 32,
@@ -523,7 +529,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [41, 42, 43],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 33,
@@ -545,7 +552,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengConfused.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 41,
@@ -568,7 +576,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [74],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 42,
@@ -591,7 +600,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [75],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 43,
@@ -614,7 +624,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengConfused.png",
 					"tasksToQueue" : [53,54],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 53,
@@ -637,7 +648,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [76],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 54,
@@ -658,7 +670,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengWistful.png",
 					"tasksToQueue" : [64, 65],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 64,
@@ -681,7 +694,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [74],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 65,
@@ -704,7 +718,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [75],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 74,
@@ -727,7 +742,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengDefault.png",
 					"tasksToQueue" : [74],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 75,
@@ -750,7 +766,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [75],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				},
 				{
 					"taskID" : 76,
@@ -771,7 +788,8 @@
 					"correct" : false,
 					"emotion" : "characters/chenguang/chengGreatJob.png",
 					"tasksToQueue" : [],
-					"attemptedAnswers" : []
+					"attemptedAnswers" : [],
+					"hintUsed": false
 				}
 			],
 			"completedTasks" : []

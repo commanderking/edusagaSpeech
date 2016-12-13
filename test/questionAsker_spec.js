@@ -279,8 +279,10 @@ describe('Question Asker Logic', () => {
 		it ('if no specific response is given in possibleAnswers', () => {
 			var userAnswer = "我们周末去打羽毛球, 怎么样?"
 			var responseText = SpeechChecker.checkAnswer(userAnswer, testJSON, 7).responseText;
-			console.log(SpeechChecker.checkAnswer(userAnswer,testJSON,7).answerCorrect);
 			expect(responseText).to.equal("你会打羽毛球?! 好吧! 我们星期几打?");
+
+			var soundID = SpeechChecker.checkAnswer(userAnswer, testJSON, 7).responseSoundID;
+			expect(soundID).to.equal("hobbies-badminton-when");
 		})
 	})
 
