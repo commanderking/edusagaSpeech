@@ -1,0 +1,397 @@
+{
+	"activityID": "hobbiesWangChao",
+	"activityName": "Wang Chao's Ping Pong and Workout Routine",
+	"tags" : ["hobbies"],
+	"score" : 0,
+	"sequence" : 120,
+	"currentCharName" : "",
+	"currentImage" : "characters/wang/wangConfidentDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can ask others what they like or dislike.", 
+		"I can ask what time other people do different activities."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "We haven't seen Wang Chao in a while. I wonder what he likes to do and what he's been up to.",
+			"next" : "end"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say 'to like' ",
+				"answer" : "喜欢",
+				"pinyin" : "Xǐhuān",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone what they like to do",
+				"answer" : "你喜欢做什么?",
+				"pinyin" : "nǐ xǐhuān zuò shénme",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say everyday",
+				"answer" : "每天",
+				"pinyin" : "měitiān",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone what time",
+				"answer" : "几点",
+				"pinyin" : "jǐ diǎn",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say exercise / work out",
+				"answer" : "锻炼身体",
+				"pinyin" : "duànliàn shēntǐ",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say play ping pong",
+				"answer" : "打乒乓球",
+				"pinyin" : "dǎ pīngpāng qiú",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone what time they play ping pong everyday",
+				"answer" : "你每天几点打乒乓球?",
+				"pinyin" : "nǐ měitiān jǐ diǎn dǎ pīngpāng qiú",
+				"correct" : false,
+				"tries": 0
+			},			
+			{
+				"task" : "Say I like ping pong",
+				"answer" : "我喜欢打乒乓球",
+				"pinyin" : "wǒ xǐhuān dǎ pīngpāng qiú",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say today",
+				"answer" : "今天",
+				"pinyin" : "Jīntiān",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone if they want to play ping pong today (1)",
+				"answer" : "我们今天打乒乓球，好吗?",
+				"pinyin" : "wǒmen jīntiān dǎ pīngpāng qiú, hǎo ma",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone if they want to play ping pong today (2)",
+				"answer" : "你今天要打乒乓球吗?",
+				"pinyin" : "nǐ jīntiān yào dǎ pīngpāng qiú ma",
+				"correct" : false,
+				"tries": 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "Wang Chao",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "University Juice Bar",
+				"nameChinese" : "大学果汁吧", 
+				"bg" : "bg/jiaoTongJuiceBar.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/wang/wangConfidentDefault.png",
+				"confident": "characters/wang/wangConfidentSpeaking.png",
+				"disgust": "characters/wang/wangDisgust.png",
+				"dramatic": "characters/wang/wangDramaticEvasive.png",
+				"surprised": "characters/wang/wangSurprised.png",
+				"thoughtful": "characters/wang/wangThoughtful.png"
+			},
+			"successPhrases" : {
+
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "david/nihao.ogg"
+				}	
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "david/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "david/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "david/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 10,
+					"task" : "Greet him.",
+					"taskLink" : "greeting",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						},
+						{
+							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+							"response" : "非常好! ",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 20,
+					"task" : "Ask him what he likes to do",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你喜欢做什么", "你有什么爱好"],
+							"response" : "我每天喜欢打乒乓球和锻炼身体。",
+							"soundID" : "haikeyi"
+						},
+						{
+							"answers" : [
+								["你"],
+								["喜欢", "爱"],
+								["做什么", "做啥儿"]
+							],
+							"response" : "我每天喜欢打乒乓球和锻炼身体。",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [30,31],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask him what time he works out／goes to the gym",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你每天几点锻炼身体", "你每天什么时候锻炼身体"],
+							"response" : "我每天十三点十五分去锻炼身体。",
+							"soundID" : "haikeyi"
+						},
+						{
+							"answers" : [
+								["你"],
+								["几点", "什么时候"],
+								["锻炼身体", "健身", "去体育馆", "去健身房"]
+							],
+							"response" : "我每天十三点十五分去锻炼身体。",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 31,
+					"task" : "Ask him what time he plays ping pong",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你每天几点打乒乓球", "你什么时候打乒乓球"],
+							"response" : "我每天十一点半和六点半打乒乓球。你喜欢打乒乓球吗?",
+							"soundID" : "haikeyi"
+						},
+						{
+							"answers" : [
+								["你"],
+								["几点", "什么时候"],
+								["打乒乓球"]
+							],
+							"response" : "我每天十一点半和六点半打乒乓球。你喜欢打乒乓球吗？",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"tasksToQueue" : [40, 41],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 40,
+					"taskType": "choice",
+					"taskLink": "pingpong",
+					"task" : "Respond that you also like to play ping pong.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我也喜欢打乒乓球", "我也喜欢打乒乓球"],
+							"response" : "哇! 真好!",
+							"soundID" : ""
+						},
+						{
+							"answers" : [
+								["我"],
+								["喜欢"],
+								["打乒乓球", "玩乒乓球"]
+							],
+							"response" : "哇! 真好!",
+							"exception": "不喜欢",
+							"soundID" : ""							
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangSurprised.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 41,
+					"task" : "Respond that you don't like to play ping pong",
+					"taskType" : "choice",
+					"taskLink": "pingpong",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我不喜欢打乒乓球"],
+							"response" : "哦。 真的？ 可是锻炼身体很重要！我现在就要去锻炼了， 再见！",
+							"soundID" : "haikeyi"
+						},
+						{
+							"answers" : [
+								["你"],
+								["不喜欢"],
+								["打乒乓球", "玩乒乓球"]
+							],
+							"response" : "哦。 真的？ 可是打乒乓球很好玩！我现在就要去锻炼了， 再见！",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangDisgust.png",
+					"tasksToQueue" : [100],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 50,
+					"task" : "Ask him if he wants to play ping pong TODAY",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["我们今天打乒乓球，怎么样"],
+							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
+							"soundID" : ""
+						},
+{
+							"answers" : [
+								["我们今天", "今天我们"],
+								["打乒乓球", "玩乒乓球"],
+								["怎么样", "好吗"]
+							],
+							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
+							"soundID" : "hobbies-badminton-when"
+						},
+						{
+							"answers" : [
+								["我今天", "今天我"],
+								["请你", "跟你"],
+								["打乒乓球", "玩乒乓球"],
+								["怎么样", "好吗"]
+							],
+							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
+							"soundID" : "hobbies-badminton-when"
+						},
+						{
+							"answers" : [
+								["你今天", "今天你"],
+								["要不要", "想不想"],
+								["打乒乓球", "玩乒乓球"]
+							],
+							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
+							"soundID" : "hobbies-badminton-when"
+						},
+						{
+							"answers" : [
+								["你今天", "今天你"],
+								["要", "想"],
+								["打乒乓球吗", "玩乒乓球吗"]
+							],
+							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
+							"soundID" : "hobbies-badminton-when"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangDisgust.png",
+					"tasksToQueue" : [100],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 100,
+					"task" : "Say goodbye",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["再见", "拜拜", "明天见", "慢走"],
+							"response" : "再见",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/wang/wangDisgust.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}

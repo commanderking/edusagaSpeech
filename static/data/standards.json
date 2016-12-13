@@ -40,5 +40,99 @@
 				]
 			}
 		]
-	}
+	},
+	{
+		"taskID" : 0,
+		"task" : "Ask someone what they like to do",
+		"possibleAnswers" : 
+		[
+			{
+				"answers" : ["你喜欢做什么", "你有什么爱好"]
+			},
+			{
+				"answers" : [
+					["你"],
+					["喜欢", "爱"],
+					["做什么", "做啥儿"]
+				]
+			}
+		]
+	},
+	{
+		"task" : "Respond that you also like something...",
+		"possibleAnswers" : 
+		[
+			{
+				"answers" : ["我也喜欢锻炼身体", "我也喜欢去健身"],
+				"response" : "哇! 真好!",
+				"soundID" : "haikeyi"
+			},
+			{
+				"answers" : [
+					["我"],
+					["喜欢"],
+					["锻炼身体", "去健身", "去健身房", "去体育馆"]
+					],
+				"response" : "哇! 真好!",
+				"exceptions": "不喜欢",
+				"soundID" : "haikeyi"							
+			}
+		]
+	},
+	{
+	"taskID" : 21,
+	"task" : "Invite her to play badminton this weekend / Ask someone if they want to do something",
+	"taskType" : "choice",
+	"taskLink" :"activity",
+	"possibleAnswers" : 
+	[
+		{
+			"answers" : ["我们周末去打羽毛球, 怎么样"],
+			"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+			"soundID" : "hobbies-badminton-when"
+		},
+		{
+			"answers" : [
+				["我们周末", "周末我们", "我们这周末"],
+				["打羽毛球", "玩羽毛球"],
+				["怎么样", "好吗"]
+			],
+			"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+			"soundID" : "hobbies-badminton-when"
+		},
+		{
+			"answers" : [
+				["我周末", "周末我", "我们这周末"],
+				["请你", "跟你"],
+				["打羽毛球", "玩羽毛球"],
+				["怎么样", "好吗"]
+			],
+			"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+			"soundID" : "hobbies-badminton-when"
+		},
+		{
+			"answers" : [
+				["你周末", "周末你", "这周末"],
+				["要不要", "想不想"],
+				["打羽毛球", "玩羽毛球"]
+			],
+			"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+			"soundID" : "hobbies-badminton-when"
+		},
+		{
+			"answers" : [
+				["你周末", "周末你", "这周末"],
+				["要", "想"],
+				["打羽毛球", "玩羽毛球"]
+			],
+			"response" : "你会打羽毛球?! 好吧! 我们星期几打?",
+			"soundID" : "hobbies-badminton-when"
+		}
+	],
+	"correct" : false,
+	"emotion" : "characters/chenguang/chengGreatJob.png",
+	"tasksToQueue" : [31, 32, 33],
+	"attemptedAnswers" : []
+},
+
 ]
