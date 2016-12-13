@@ -38,6 +38,76 @@
 				"pinyin" : "",
 				"correct" : false,
 				"tries": 0
+			},
+			{
+				"task" : "Say - France",
+				"answer" : "法国",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say - French Person",
+				"answer" : "法国人",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say - I'm French",
+				"answer" : "我是法国人",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say - I'm not French",
+				"answer" : "我不是法国人",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone for their nationality",
+				"answer" : "你是哪国人?",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say - Older sister",
+				"answer" : "姐姐",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say - Older brother",
+				"answer" : "哥哥",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say - I have an older brother",
+				"answer" : "我有一个哥哥",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone how many people are in their family (Method 1)",
+				"answer" : "你家有几口人?",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone how many people are in their family (Method 2)",
+				"answer" : "你家有几个人?",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
 			}
 		]
 	},
