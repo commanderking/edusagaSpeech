@@ -151,17 +151,17 @@
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
+					"soundPath" : ""
 				}, 
 				{ 
-					"response": "我听不懂.",
+					"response": "我没听懂。",
 					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
+					"soundPath" : ""
 				}, 
 				{ 
-					"response": "不好意思, 我没听懂.",
+					"response": "你刚说了什么?",
 					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
+					"soundPath" : ""
 				}
 			],
 			"currentTasks" : [
