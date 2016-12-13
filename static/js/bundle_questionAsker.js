@@ -23107,6 +23107,7 @@
 			possibleAnswers.forEach(function (possibleAnswerObject, i) {
 				var checkResult = {};
 				var tempSoundID = possibleAnswerObject.soundID;
+	
 				// If there's a specific response for the possibleAnswer, we use that one. Otherwise, use
 				// the generic response for the entire task
 				var responseText = possibleAnswerObject.response ? possibleAnswerObject.response : TaskController.getActiveTask(data, activeTaskIndex).response;
@@ -23132,24 +23133,15 @@
 				}
 	
 				if (exceptionFound === false) {
+	
 					// If the answers are an array of arrays, then we must use an advanced check
-					if (possibleAnswerObject.answers[0].constructor === Array) {
-						checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
-						// Only set object to return if the result is true
-						if (checkResult === true) {
-							objectToReturn.answerCorrect = true;
-							objectToReturn.possibleAnswersIndex = i;
-							objectToReturn.responseSoundID = tempSoundID;
-							objectToReturn.responseText = responseText;
-						}
-					} else {
-						checkResult = that.typicalCheck(userAnswer, possibleAnswerObject);
-						if (checkResult === true) {
-							objectToReturn.answerCorrect = true;
-							objectToReturn.possibleAnswersIndex = i;
-							objectToReturn.responseSoundID = tempSoundID;
-							objectToReturn.responseText = responseText;
-						}
+					checkResult = possibleAnswerObject.answers[0].constructor === Array ? that.advancedCheck(userAnswer, possibleAnswerObject) : that.typicalCheck(userAnswer, possibleAnswerObject);
+	
+					if (checkResult === true) {
+						objectToReturn.answerCorrect = true;
+						objectToReturn.possibleAnswersIndex = i;
+						objectToReturn.responseSoundID = tempSoundID;
+						objectToReturn.responseText = responseText;
 					}
 				}
 			});
