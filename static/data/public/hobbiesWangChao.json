@@ -192,7 +192,6 @@
 					[
 						{
 							"answers" : ["你喜欢做什么", "你有什么爱好"],
-							"response" : "我每天喜欢打乒乓球和锻炼身体。",
 							"soundID" : "haikeyi"
 						},
 						{
@@ -201,11 +200,11 @@
 								["喜欢", "爱"],
 								["做什么", "做啥儿"]
 							],
-							"response" : "我每天喜欢打乒乓球和锻炼身体。",
 							"soundID" : "haikeyi"
 						}
 					],
 					"correct" : false,
+					"response" : "我每天喜欢打乒乓球和锻炼身体。",
 					"emotion" : "characters/wang/wangConfidentDefault.png",
 					"tasksToQueue" : [30,31],
 					"attemptedAnswers" : [],
@@ -327,16 +326,14 @@
 					[
 						{
 							"answers": 	["我们今天打乒乓球，怎么样"],
-							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
 							"soundID" : ""
 						},
-{
+						{
 							"answers" : [
 								["我们今天", "今天我们"],
 								["打乒乓球", "玩乒乓球"],
 								["怎么样", "好吗"]
 							],
-							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
 							"soundID" : "hobbies-badminton-when"
 						},
 						{
@@ -346,7 +343,6 @@
 								["打乒乓球", "玩乒乓球"],
 								["怎么样", "好吗"]
 							],
-							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
 							"soundID" : "hobbies-badminton-when"
 						},
 						{
@@ -355,7 +351,6 @@
 								["要不要", "想不想"],
 								["打乒乓球", "玩乒乓球"]
 							],
-							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
 							"soundID" : "hobbies-badminton-when"
 						},
 						{
@@ -364,12 +359,12 @@
 								["要", "想"],
 								["打乒乓球吗", "玩乒乓球吗"]
 							],
-							"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
 							"soundID" : "hobbies-badminton-when"
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/wang/wangDisgust.png",
+					"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
 					"tasksToQueue" : [100],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

@@ -1,4 +1,3 @@
-
 var chai = require('chai');
 var expect = chai.expect;
 var assert = chai.assert;
@@ -15,7 +14,7 @@ describe('Question Asker Logic', () => {
 			// Doesn't actually deep compare data structure, just some key elements
 			var lengthCurrentTasks = TaskController.getCurrentTasks(testJSON).length;
 			var task1text = TaskController.getCurrentTasks(testJSON)[0].task;
-			expect(lengthCurrentTasks).to.equal(7);
+			expect(lengthCurrentTasks).to.equal(8);
 			expect(task1text).to.equal("Greet him");
 		});
 
@@ -76,7 +75,8 @@ describe('Question Asker Logic', () => {
 			var expectedOutput = {
 				"answerCorrect" : true,
 				"responseSoundID" : "feichanghao",
-				"possibleAnswersIndex" : 0
+				"possibleAnswersIndex" : 0,
+				"responseText" : "非常好"
 			}
 
 			var actualOutput = SpeechChecker.checkAnswer(userAnswer, testJSON, 1);
@@ -112,7 +112,8 @@ describe('Question Asker Logic', () => {
 			var expectedOutput = {
 				"answerCorrect" : true,
 				"responseSoundID" : "feichanghao",
-				"possibleAnswersIndex" : 0	
+				"possibleAnswersIndex" : 0,
+				"responseText" : "非常好"
 			}
 			var actualOutput = SpeechChecker.checkAnswer(userAnswer, testJSON, 1);
 			assert.deepEqual(actualOutput, expectedOutput);
@@ -254,19 +255,6 @@ describe('Question Asker Logic', () => {
 		})
 	})
 
-/*
-	describe('If answer is wrong, but specific feedback should be given', () => {
-		it ('returned object is correct', () => {
-			var userAnswer = "我吃";
-			var answerCorrectObject = SpeechChecker.checkAnswer(userAnswer, testJSON, 4);
-			expect(answerCorrectObject.answerCorrect).to.equal(false);
-			expect(answerCorrectObject.specificFeedback).to.equal(true);
-
-		})
-	}) 
-*/
-
-
 	describe('Updating current, queued, and completed tasks', () => {
 		it ('add queued tasks to current tasks', () => {
 			var expectedResult = exepectedOutputaddQueuedTasksToCurrentTasks;
@@ -287,20 +275,14 @@ describe('Question Asker Logic', () => {
 		}) 
 	})
 
-
-
-	describe ('Skipping Tasks', () => {
-		// Grab the IDs of tasks To be queued on current tasks
-
-		// Remove current tasks and add them to completed tasks 
-
-		// Add them to current Tasks, check they have been removed from currentTasks
-
-		// Return arrays in completed list without correct label
-
-		var completedTasks = [];
-		// expect(completedTasks[0].correctAnswer).to.equal(false);
-
+	describe('check generic response', () => {
+		it ('if no specific response is given in possibleAnswers', () => {
+			var userAnswer = "我们周末去打羽毛球, 怎么样?"
+			var responseText = SpeechChecker.checkAnswer(userAnswer, testJSON, 7).responseText;
+			console.log(SpeechChecker.checkAnswer(userAnswer,testJSON,7).answerCorrect);
+			expect(responseText).to.equal("你会打羽毛球?! 好吧! 我们星期几打?");
+		})
 	})
+
 })
 

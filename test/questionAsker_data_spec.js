@@ -9,7 +9,6 @@ describe('Check data structure of question asker tests', () => {
 		var currentTasks = testJSON.character.currentTasks;
 		var queuedTasks = testJSON.character.queuedTasks;
 		var allTasks = currentTasks.concat(queuedTasks);
-		console.log(allTasks);
 
 		var hintUsedAbsentArray = [];
 		allTasks.forEach(function(task) {

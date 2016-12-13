@@ -209,6 +209,7 @@
 				var correctAnswer = returnedObject.answerCorrect;
 				var responseSoundID = returnedObject.responseSoundID;
 				var possibleAnswerIndex = returnedObject.possibleAnswersIndex;
+				var responseText = returnedObject.responseText;
 	
 				if (correctAnswer) {
 	
@@ -226,7 +227,7 @@
 					newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
 	
 					// Show response text
-					var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
+					var newCurrentDialog = responseText;
 	
 					// Mark question as corrrect
 					newSceneData.character.currentTasks[taskIndex].correct = true;
@@ -23071,7 +23072,6 @@
 	
 	var ScenarioController = exports.ScenarioController = {
 		nextScenario: function nextScenario(scenarioIndex) {
-			// Move to the next index 
 			return scenarioIndex + 1;
 		}
 	};
@@ -23099,10 +23099,7 @@
 						exceptionMatch = true;
 					}
 				});
-	
-				// console.log("Exception loop done");	
 				if (exceptionMatch === true) {
-					// console.log(objectToReturn);
 					return objectToReturn;
 				}
 			}
@@ -23110,6 +23107,9 @@
 			possibleAnswers.forEach(function (possibleAnswerObject, i) {
 				var checkResult = {};
 				var tempSoundID = possibleAnswerObject.soundID;
+				// If there's a specific response for the possibleAnswer, we use that one. Otherwise, use
+				// the generic response for the entire task
+				var responseText = possibleAnswerObject.response ? possibleAnswerObject.response : TaskController.getActiveTask(data, activeTaskIndex).response;
 				// if the first entry in answers array is an array, we will need advancedCheck
 	
 				/* possibleAnswerObject is something like
@@ -23123,7 +23123,6 @@
 	
 				// check if user answer contains an exception word for this answerObject
 				var exceptionFound = false;
-	
 				if (possibleAnswerObject.exceptions !== undefined) {
 					possibleAnswerObject.exceptions.forEach(function (exception) {
 						if (userAnswer.indexOf(exception) >= 0) {
@@ -23135,22 +23134,21 @@
 				if (exceptionFound === false) {
 					// If the answers are an array of arrays, then we must use an advanced check
 					if (possibleAnswerObject.answers[0].constructor === Array) {
-						// console.log("using advanced check");
 						checkResult = that.advancedCheck(userAnswer, possibleAnswerObject);
 						// Only set object to return if the result is true
-						// console.log(possibleAnswerObject.answers);
 						if (checkResult === true) {
 							objectToReturn.answerCorrect = true;
 							objectToReturn.possibleAnswersIndex = i;
 							objectToReturn.responseSoundID = tempSoundID;
+							objectToReturn.responseText = responseText;
 						}
 					} else {
-						// console.log("using typical check");
 						checkResult = that.typicalCheck(userAnswer, possibleAnswerObject);
 						if (checkResult === true) {
 							objectToReturn.answerCorrect = true;
 							objectToReturn.possibleAnswersIndex = i;
 							objectToReturn.responseSoundID = tempSoundID;
+							objectToReturn.responseText = responseText;
 						}
 					}
 				}
@@ -23245,8 +23243,6 @@
 			if (correctCounter === checkListArray.length) {
 				answerCorrect = true;
 			} else {}
-			// console.log(answerCorrect);
-	
 			return answerCorrect;
 		},
 		addUserAnswerToAttemptedAnswers: function addUserAnswerToAttemptedAnswers(userAnswer, data, activeTaskIndex) {

@@ -157,6 +157,7 @@ var QuestionAsker = React.createClass({
 			var correctAnswer = returnedObject.answerCorrect;
 			var responseSoundID = returnedObject.responseSoundID;
 			var possibleAnswerIndex = returnedObject.possibleAnswersIndex;
+			var responseText = returnedObject.responseText;
 
 			if (correctAnswer) {
 
@@ -174,7 +175,7 @@ var QuestionAsker = React.createClass({
 				newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
 
 				// Show response text
-				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].response;
+				var newCurrentDialog = responseText;
 
 				// Mark question as corrrect
 				newSceneData.character.currentTasks[taskIndex].correct = true;
