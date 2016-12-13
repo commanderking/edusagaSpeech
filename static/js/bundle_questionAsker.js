@@ -22932,7 +22932,37 @@
 
 /***/ },
 /* 180 */,
-/* 181 */,
+/* 181 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/ImageHelper.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Constants = __webpack_require__(/*! ./Constants */ 182);
+	
+	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
+		switch (characterName) {
+			case "Alex":
+				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
+			case "David":
+				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
+			case "Chen Yang":
+				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
+			case "Tina":
+				return Constants.IMAGE_PATH + "characters/icons/tinaBlankRound.png";
+			case "Max":
+				return Constants.IMAGE_PATH + "characters/icons/maxBlankRound.png";
+			default:
+				return null;
+		}
+	};
+
+/***/ },
 /* 182 */
 /*!**********************************************!*\
   !*** ./react_assets/js/helpers/Constants.js ***!
@@ -25992,7 +26022,7 @@
 
 	'use strict';
 	
-	var _ImageHelper = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../helpers/ImageHelper\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _ImageHelper = __webpack_require__(/*! ../../helpers/ImageHelper */ 181);
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var PropTypes = React.PropTypes;
