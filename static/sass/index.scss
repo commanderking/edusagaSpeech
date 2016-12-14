@@ -885,9 +885,9 @@ CSS Related to Task List
 .menuContainer {
 	position: absolute;
 	width: 90%;
-	height: 90%;  // Hackey rigth now, referencing wrong parent container
+	height: 90%;  // Hackey right now, referencing wrong parent container
 	left: 5%;
-	z-index: 10;
+	z-index: 100;
 	bottom: 0;
 	.menuHeader {
 		position: absolute;
@@ -1003,6 +1003,23 @@ CSS Related to Task List
 				font-size: 1.5em;
 				font-weight: 500;
 				margin-bottom: 1em;
+			}
+		}
+		.practiceStartButton {
+			.fa-bolt {
+				padding-right: 0.5em;
+			}
+			display: block;
+			margin: auto;
+			font-size: 1.3em;
+			min-width: 4em;
+			padding: 0.5em;
+			border : 0px;
+			border-radius: 0.5em;
+			background-color: $darkPink;
+			color: $themeYellow;
+			&:hover {
+				background-color: $darkerBlue;
 			}
 		}
 		.completedTasks {
@@ -1198,7 +1215,7 @@ Practice Container
 	top: 10%;
 	height: 90%;
 	left: 10%;
-	z-index: 100;
+	z-index: 200;
 	border-radius: 25px 25px 0px 0px;
 	background: -webkit-linear-gradient(bottom, $headerBlue, $greenBlue, $lightBlue); /* For Safari 5.1 to 6.0 */
 	background-image: -o-linear-gradient(bottom, $headerBlue, $greenBlue, $lightBlue);

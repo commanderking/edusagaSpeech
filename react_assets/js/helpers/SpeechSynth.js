@@ -31,7 +31,7 @@ var speechSynth = {
 	play : function(textToSay, voicePack) {
 		var utterThis = new SpeechSynthesisUtterance(textToSay);
 		utterThis.voice = voicePack;
-		utterThis.rate = 0.8;
+		utterThis.rate = 0.65;
 		// NOTE: console.log is CRITICAL here. Otherwise, sometimes the 
 		// onend for the utterance will not trigger
 		// See: http://stackoverflow.com/questions/21947730/chrome-speech-synthesis-with-longer-texts

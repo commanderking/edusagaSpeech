@@ -4,7 +4,6 @@ var ResultsHeader = require('./ResultsHeader');
 var ResultsSideBar = require('./ResultsSideBar');
 var ResultsTasks= require('./ResultsTasks');
 
-
 var ResultsBase = React.createClass({
 	render: function() {
 		return (
@@ -23,7 +22,8 @@ var ResultsBase = React.createClass({
 						locationChinese = {this.props.locationChinese}
 						showResultTaskAnswerIndex = {this.props.showResultTaskAnswerIndex}
 						playSpeechSynth = {this.props.playSpeechSynth}
-						speechSynthPlaying = {this.props.speechSynthPlaying} />
+						speechSynthPlaying = {this.props.speechSynthPlaying}
+						changePracticeMode = {this.props.changePracticeMode} />
 					<ResultsSideBar 
 						loadSceneData = {this.props.loadSceneData} 
 						coins = {this.props.coins} 

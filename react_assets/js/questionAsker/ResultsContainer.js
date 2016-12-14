@@ -5,7 +5,7 @@ var ResultsBase = require('./components/ResultsBase');
 
 var ResultsContainer = React.createClass({
 	render: function() {
-		if (this.props.sceneComplete === false) {
+		if (this.props.sceneComplete === false || this.props.practiceMode === true) {
 			return null
 		} else {
 			return (

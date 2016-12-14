@@ -1016,9 +1016,7 @@
 						, tasks: this.state.sceneData.character.currentTasks,
 						currentTaskIndex: this.state.currentTaskIndex,
 						setCurrentTaskIndex: this.setCurrentTaskIndex,
-	
 						currentScenarioData: currentScenarioData,
-	
 						practiceMode: this.state.practiceMode }),
 					React.createElement(ResultsContainer, {
 						sceneComplete: this.state.sceneComplete,
@@ -1035,7 +1033,10 @@
 						charName: sceneData.character.name,
 						charProfilePic: sceneData.character.emotions.default,
 						locationEnglish: sceneData.character.location.nameEnglish,
-						locationChinese: sceneData.character.location.nameChinese }),
+						locationChinese: sceneData.character.location.nameChinese,
+	
+						practiceMode: this.state.practiceMode,
+						changePracticeMode: this.changePracticeMode }),
 					timer
 				);
 			}
@@ -25918,7 +25919,7 @@
 		displayName: 'ResultsContainer',
 	
 		render: function render() {
-			if (this.props.sceneComplete === false) {
+			if (this.props.sceneComplete === false || this.props.practiceMode === true) {
 				return null;
 			} else {
 				return React.createElement(
@@ -25984,7 +25985,8 @@
 						locationChinese: this.props.locationChinese,
 						showResultTaskAnswerIndex: this.props.showResultTaskAnswerIndex,
 						playSpeechSynth: this.props.playSpeechSynth,
-						speechSynthPlaying: this.props.speechSynthPlaying }),
+						speechSynthPlaying: this.props.speechSynthPlaying,
+						changePracticeMode: this.props.changePracticeMode }),
 					React.createElement(ResultsSideBar, {
 						loadSceneData: this.props.loadSceneData,
 						coins: this.props.coins,
@@ -26254,6 +26256,18 @@
 					)
 				),
 				React.createElement(
+					'button',
+					{
+						className: 'button practiceStartButton',
+						onClick: this.props.changePracticeMode },
+					React.createElement('i', { className: 'fa fa-bolt', 'aria-hidden': 'true' }),
+					React.createElement(
+						'span',
+						null,
+						'Review Missed Tasks'
+					)
+				),
+				React.createElement(
 					'div',
 					{ className: 'completedTasks' },
 					tasks
@@ -26377,7 +26391,7 @@
 		play: function play(textToSay, voicePack) {
 			var utterThis = new SpeechSynthesisUtterance(textToSay);
 			utterThis.voice = voicePack;
-			utterThis.rate = 0.8;
+			utterThis.rate = 0.65;
 			// NOTE: console.log is CRITICAL here. Otherwise, sometimes the 
 			// onend for the utterance will not trigger
 			// See: http://stackoverflow.com/questions/21947730/chrome-speech-synthesis-with-longer-texts

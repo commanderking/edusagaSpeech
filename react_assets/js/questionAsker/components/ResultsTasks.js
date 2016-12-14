@@ -33,6 +33,12 @@ var ResultsTasks = React.createClass({
 					<h3>{locationEnglish} ({this.props.locationChinese})</h3>
 					<p>{date}</p>
 				</div>
+				<button 
+					className="button practiceStartButton"
+					onClick={this.props.changePracticeMode}>
+					<i className="fa fa-bolt" aria-hidden="true"></i>
+					<span>Review Missed Tasks</span>
+				</button>
 				<div className="completedTasks">
 					{tasks}
 				</div>

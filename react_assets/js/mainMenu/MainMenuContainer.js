@@ -248,7 +248,6 @@ var MainMenuContainer = React.createClass({
 						break;
 				}
 			})
-
 			// Sort array by sequence and then generate DOM elements to display
 			var introEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(introEpisodes));
 			var familyNationalityEpisodeList = this.generateDOMfromEpisodesArray(this.sortEpisodeArraybySequence(familyNationalityEpisodes));

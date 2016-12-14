@@ -958,9 +958,7 @@ var QuestionAsker = React.createClass({
 						tasks = {this.state.sceneData.character.currentTasks}
 						currentTaskIndex = {this.state.currentTaskIndex} 
 						setCurrentTaskIndex = {this.setCurrentTaskIndex} 
-
 						currentScenarioData = {currentScenarioData} 
-
 						practiceMode = {this.state.practiceMode}/>
 					<ResultsContainer 
 						sceneComplete = {this.state.sceneComplete} 
@@ -977,7 +975,10 @@ var QuestionAsker = React.createClass({
 						charName = {sceneData.character.name}
 						charProfilePic = {sceneData.character.emotions.default}
 						locationEnglish = {sceneData.character.location.nameEnglish}
-						locationChinese = {sceneData.character.location.nameChinese}/>
+						locationChinese = {sceneData.character.location.nameChinese}
+
+						practiceMode = {this.state.practiceMode}
+						changePracticeMode = {this.changePracticeMode}/>
 					{timer}
 				</div>
 			)
