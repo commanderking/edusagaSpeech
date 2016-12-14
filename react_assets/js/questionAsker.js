@@ -517,10 +517,8 @@ var QuestionAsker = React.createClass({
 					vocabWord.correct = false;
 					vocabWord.tries = 0;
 					reviewVocabList.list.push(vocabWord);
-					console.log(reviewVocabList.list);
 				}
 			});
-			console.log(reviewVocabList);
 
 			studentCompletedProgress.score = this.state.coins/10;
 			studentCompletedProgress.possibleScore = this.state.possibleCoins/10;

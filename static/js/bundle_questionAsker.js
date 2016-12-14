@@ -572,10 +572,8 @@
 							vocabWord.correct = false;
 							vocabWord.tries = 0;
 							reviewVocabList.list.push(vocabWord);
-							console.log(reviewVocabList.list);
 						}
 					});
-					console.log(reviewVocabList);
 	
 					studentCompletedProgress.score = _this.state.coins / 10;
 					studentCompletedProgress.possibleScore = _this.state.possibleCoins / 10;
@@ -26303,7 +26301,6 @@
 		render: function render() {
 			var _this = this;
 	
-			console.log(this.props.showResultTaskAnswer);
 			var icon = this.props.taskCorrect ? React.createElement('span', { className: 'glyphicon glyphicon-star', 'aria-hidden': 'true' }) : React.createElement('span', { className: 'glyphicon glyphicon-question-sign', 'aria-hidden': 'true' });
 			var showAnswersSpan = this.props.taskCorrect ? null : React.createElement('span', {
 				className: 'glyphicon glyphicon-menu-down',

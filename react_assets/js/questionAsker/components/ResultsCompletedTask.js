@@ -5,7 +5,6 @@ var SpeechableSpan = require('./SpeechableSpan');
 
 var ResultsCompletedTask = React.createClass({
 	render: function() {
-		console.log(this.props.showResultTaskAnswer);
 		var icon = this.props.taskCorrect ? <span className="glyphicon glyphicon-star" aria-hidden="true"></span> :
 			<span className="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
 		var showAnswersSpan = this.props.taskCorrect ? 
