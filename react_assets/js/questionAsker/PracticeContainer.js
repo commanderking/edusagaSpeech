@@ -14,16 +14,19 @@ var PracticeContainer = React.createClass({
 			vocabData: {},
 			micActive: false,
 			userAnswer: "",
-			showPinyin: false
+			showPinyin: false,
+			updateVocabForReview: true
 		}
 	},
 	componentWillMount: function() {
+		console.log("componentmounted");
 		this.setState({vocabData: this.props.vocabList}, console.log(this.state.vocabData));
 	},
 	componentWillUpdate: function() {
 		console.log("update!");
-		if (this.props.sceneComplete) {
-			
+		console.log(this.props.vocabPracticeData);
+		if (this.props.sceneComplete && this.state.updateVocabForReview) {
+			this.setState({vocabData: this.props.vocabPracticeData, updateVocabForReview: false});
 		}
 	},
 	handleImageChange: function(newIndex) {

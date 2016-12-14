@@ -76,7 +76,8 @@ var QuestionAsker = React.createClass({
 			repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
 			speechSynthPlaying: false,
 			showResultTaskAnswer: false, 
-			showResultTaskAnswerIndex: null
+			showResultTaskAnswerIndex: null,
+			vocabPracticeData: null
 		}
 	},
 	loadSceneData: function() {
@@ -84,8 +85,6 @@ var QuestionAsker = React.createClass({
 		$.getJSON("/static/data/public/" + activity + ".json", function(data) {})
 			.success(function(data) {
 				that.resetScene();
-				console.log(data.practiceModeStart);
-
 				var practiceAvailable = data.practice !== undefined ? true : false;
 				that.setState({
 					sceneData: data,
@@ -212,7 +211,6 @@ var QuestionAsker = React.createClass({
 
 						// If task is an "end" task, then end the scene by removing all other current tasks. 
 						if (currentTaskData.taskType === "end") {
-							console.log("scene should be over");
 							newSceneData.character.currentTasks = [];
 						}
 
@@ -369,7 +367,6 @@ var QuestionAsker = React.createClass({
 				newSceneData.character.currentTasks[taskIndex].correct = true;
 
 				// Add coins 
-				console.log(currentChoiceData.coins);
 				if (currentChoiceData.coins !== undefined) {
 					this.addCoins(currentChoiceData.coins);
 				} else {
@@ -403,12 +400,10 @@ var QuestionAsker = React.createClass({
 
 						// If task is an "end" task, then end the scene by removing all other current tasks. 
 						if (currentTaskData.taskType === "end") {
-							console.log("scene should be over");
 							newSceneData.character.currentTasks = [];
 						} else if (currentTaskData.taskType === "multipleChoice") {
 							// Add task to completed tasks and then delete it from currentTasks
 							newSceneData.character.currentTasks.splice(taskIndex, 1);	
-							console.log(newSceneData.character.currentTasks);						
 						}
 					} else {
 					}
@@ -492,7 +487,6 @@ var QuestionAsker = React.createClass({
 
 
 			var allTaskData = [];
-			console.log("review Vocab list reset");
 			let reviewVocabList = {
 				"currentWordIndex" : 0,
 				"lastAnswer" : "",
@@ -518,14 +512,11 @@ var QuestionAsker = React.createClass({
 					vocabWord.pinyin = "";
 					vocabWord.correct = false;
 					vocabWord.tries = 0;
-					// console.log(vocabWord);
-					console.log("vocabword pushed");
 					reviewVocabList.list.push(vocabWord);
 					console.log(reviewVocabList.list);
 				}
-			}.bind(this));
+			});
 			console.log(reviewVocabList);
-			// console.log(allTaskData);
 
 
 			studentCompletedProgress.score = this.state.coins/10;
@@ -550,7 +541,7 @@ var QuestionAsker = React.createClass({
 			}
 
 			setTimeout(function(){
-				that.setState({sceneComplete: true})
+				that.setState({sceneComplete: true, vocabPracticeData: reviewVocabList})
 			}, 700)
 		}		
 	},
@@ -685,6 +676,7 @@ var QuestionAsker = React.createClass({
 		this.setState({askingForRepeat: true});
 	},
 	deactivateRepeatMode: function() {
+		console.log("repeat mode deactivated");
 		this.setState({askingForRepeat: false});
 	},
 	// Function triggers when user correct says/asks for repeat
@@ -697,10 +689,7 @@ var QuestionAsker = React.createClass({
 		this.turnMicStateOff();
 
 		if (userAnswer === "Cancel Speech") {
-			// Do nothing
-			console.log("Repeat speech canceled");
 			this.deactivateRepeatMode();
-
 		} else {
 			var that = this;
 
@@ -832,8 +821,6 @@ var QuestionAsker = React.createClass({
 	},
 	changeResultsTaskAnswers: function(index) {
 		// if index is same as currentResultsTaskAnswer, they want to close current hint
-		console.log(index);
-		console.log(this.state.showResultTaskAnswerIndex);
 		if (index === this.state.showResultTaskAnswerIndex && this.state.showResultTaskAnswer === true) {
 			this.setState({
 				showResultTaskAnswer: false
@@ -849,7 +836,6 @@ var QuestionAsker = React.createClass({
 	},
 	render: function() {
 		var sceneData = this.state.sceneData;
-
 		if (!this.state.sceneData) {
 			return <div>Loading Scene</div>
 		} else {
@@ -873,7 +859,8 @@ var QuestionAsker = React.createClass({
 						changePracticeMode = {this.changePracticeMode}
 						playSpeechSynth = {this.playSpeechSynth}
 						speechSynthPlaying = {this.state.speechSynthPlaying}
-						sceneComplete = {this.state.sceneComplete}/>
+						sceneComplete = {this.state.sceneComplete}
+						vocabPracticeData = {this.state.vocabPracticeData}/>
 					<DialogContainer
 						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}

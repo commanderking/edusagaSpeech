@@ -130,15 +130,14 @@
 				repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
 				speechSynthPlaying: false,
 				showResultTaskAnswer: false,
-				showResultTaskAnswerIndex: null
+				showResultTaskAnswerIndex: null,
+				vocabPracticeData: null
 			};
 		},
 		loadSceneData: function loadSceneData() {
 			var that = this;
 			$.getJSON("/static/data/public/" + activity + ".json", function (data) {}).success(function (data) {
 				that.resetScene();
-				console.log(data.practiceModeStart);
-	
 				var practiceAvailable = data.practice !== undefined ? true : false;
 				that.setState({
 					sceneData: data,
@@ -263,7 +262,6 @@
 	
 							// If task is an "end" task, then end the scene by removing all other current tasks. 
 							if (currentTaskData.taskType === "end") {
-								console.log("scene should be over");
 								newSceneData.character.currentTasks = [];
 							}
 	
@@ -416,7 +414,6 @@
 				newSceneData.character.currentTasks[taskIndex].correct = true;
 	
 				// Add coins 
-				console.log(currentChoiceData.coins);
 				if (currentChoiceData.coins !== undefined) {
 					this.addCoins(currentChoiceData.coins);
 				} else {
@@ -449,12 +446,10 @@
 	
 						// If task is an "end" task, then end the scene by removing all other current tasks. 
 						if (currentTaskData.taskType === "end") {
-							console.log("scene should be over");
 							newSceneData.character.currentTasks = [];
 						} else if (currentTaskData.taskType === "multipleChoice") {
 							// Add task to completed tasks and then delete it from currentTasks
 							newSceneData.character.currentTasks.splice(taskIndex, 1);
-							console.log(newSceneData.character.currentTasks);
 						}
 					} else {}
 	
@@ -547,7 +542,6 @@
 	
 					allTaskData = [];
 	
-					console.log("review Vocab list reset");
 					var reviewVocabList = {
 						"currentWordIndex": 0,
 						"lastAnswer": "",
@@ -573,15 +567,11 @@
 							vocabWord.pinyin = "";
 							vocabWord.correct = false;
 							vocabWord.tries = 0;
-							// console.log(vocabWord);
-							console.log("vocabword pushed");
 							reviewVocabList.list.push(vocabWord);
 							console.log(reviewVocabList.list);
 						}
-					}.bind(_this));
+					});
 					console.log(reviewVocabList);
-					// console.log(allTaskData);
-	
 	
 					studentCompletedProgress.score = _this.state.coins / 10;
 					studentCompletedProgress.possibleScore = _this.state.possibleCoins / 10;
@@ -607,7 +597,7 @@
 					}
 	
 					setTimeout(function () {
-						that.setState({ sceneComplete: true });
+						that.setState({ sceneComplete: true, vocabPracticeData: reviewVocabList });
 					}, 700);
 				})();
 			}
@@ -741,6 +731,7 @@
 			this.setState({ askingForRepeat: true });
 		},
 		deactivateRepeatMode: function deactivateRepeatMode() {
+			console.log("repeat mode deactivated");
 			this.setState({ askingForRepeat: false });
 		},
 		// Function triggers when user correct says/asks for repeat
@@ -753,8 +744,6 @@
 			this.turnMicStateOff();
 	
 			if (userAnswer === "Cancel Speech") {
-				// Do nothing
-				console.log("Repeat speech canceled");
 				this.deactivateRepeatMode();
 			} else {
 				var that = this;
@@ -884,8 +873,6 @@
 		},
 		changeResultsTaskAnswers: function changeResultsTaskAnswers(index) {
 			// if index is same as currentResultsTaskAnswer, they want to close current hint
-			console.log(index);
-			console.log(this.state.showResultTaskAnswerIndex);
 			if (index === this.state.showResultTaskAnswerIndex && this.state.showResultTaskAnswer === true) {
 				this.setState({
 					showResultTaskAnswer: false
@@ -901,7 +888,6 @@
 		},
 		render: function render() {
 			var sceneData = this.state.sceneData;
-	
 			if (!this.state.sceneData) {
 				return React.createElement(
 					'div',
@@ -930,7 +916,8 @@
 						changePracticeMode: this.changePracticeMode,
 						playSpeechSynth: this.playSpeechSynth,
 						speechSynthPlaying: this.state.speechSynthPlaying,
-						sceneComplete: this.state.sceneComplete }),
+						sceneComplete: this.state.sceneComplete,
+						vocabPracticeData: this.state.vocabPracticeData }),
 					React.createElement(DialogContainer
 					// Variables related to display scenario text and playing sounds
 					, { scenarioOn: this.state.scenarioOn,
@@ -26465,15 +26452,20 @@
 				vocabData: {},
 				micActive: false,
 				userAnswer: "",
-				showPinyin: false
+				showPinyin: false,
+				updateVocabForReview: true
 			};
 		},
 		componentWillMount: function componentWillMount() {
+			console.log("componentmounted");
 			this.setState({ vocabData: this.props.vocabList }, console.log(this.state.vocabData));
 		},
 		componentWillUpdate: function componentWillUpdate() {
 			console.log("update!");
-			if (this.props.sceneComplete) {}
+			console.log(this.props.vocabPracticeData);
+			if (this.props.sceneComplete && this.state.updateVocabForReview) {
+				this.setState({ vocabData: this.props.vocabPracticeData, updateVocabForReview: false });
+			}
 		},
 		handleImageChange: function handleImageChange(newIndex) {
 			var newVocabData = this.state.vocabData;
