@@ -151,8 +151,6 @@ var PracticeContainer = React.createClass({
     	} else {
     		return null;
     	}
-
-
    }
 })
 

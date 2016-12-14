@@ -518,7 +518,6 @@ var QuestionAsker = React.createClass({
 			});
 			console.log(reviewVocabList);
 
-
 			studentCompletedProgress.score = this.state.coins/10;
 			studentCompletedProgress.possibleScore = this.state.possibleCoins/10;
 			var timeInSeconds = Math.floor((new Date().getTime() - initialLogData.startTime) / 1000);
