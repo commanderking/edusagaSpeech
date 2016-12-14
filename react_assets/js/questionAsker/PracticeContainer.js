@@ -20,6 +20,12 @@ var PracticeContainer = React.createClass({
 	componentWillMount: function() {
 		this.setState({vocabData: this.props.vocabList}, console.log(this.state.vocabData));
 	},
+	componentWillUpdate: function() {
+		console.log("update!");
+		if (this.props.sceneComplete) {
+			
+		}
+	},
 	handleImageChange: function(newIndex) {
 		var newVocabData = this.state.vocabData;
 		newVocabData.currentWordIndex = newIndex;
@@ -159,5 +165,6 @@ PracticeContainer.propTypes = {
 	practiceMode: PropTypes.bool.isRequired,
 	changePracticeMode: PropTypes.func.isRequired,
 	playSpeechSynth: PropTypes.func.isRequired,
-	speechSynthPlaying: PropTypes.bool.isRequired
+	speechSynthPlaying: PropTypes.bool.isRequired,
+	sceneComplete: PropTypes.bool.isRequired
 }

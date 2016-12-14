@@ -140,7 +140,6 @@
 				console.log(data.practiceModeStart);
 	
 				var practiceAvailable = data.practice !== undefined ? true : false;
-				console.log("Practice available " + practiceAvailable);
 				that.setState({
 					sceneData: data,
 					currentDialog: data.initialTaskDialog,
@@ -512,62 +511,105 @@
 			}
 		},
 		checkSceneOver: function checkSceneOver() {
+			var _this = this;
+	
 			// Logic for when scene is over
 			if (this.state.sceneData.character.currentTasks.length === 0 && this.state.sceneComplete === false) {
-				var that = this;
+				var that;
+				var totalCoins;
+				var studentCompletedProgress;
+				var allTaskData;
+				var timeInSeconds;
+				var logEvent;
 	
-				// Calculate number of coins possible
-				var totalCoins = 10 * this.state.sceneData.character.completedTasks.length;
-				this.setState({
-					possibleCoins: totalCoins
-				});
+				(function () {
+					that = _this;
 	
-				// Post completed progress results
-				var studentCompletedProgress = {};
-				// Pull teacher variable set in html page if possible
-				try {
-					studentCompletedProgress.teacherID = teacher;
-				} catch (err) {
-					studentCompletedProgress.teacherID = "Unknown teacher";
-				}
+					// Calculate number of coins possible
 	
-				studentCompletedProgress.studentID = initialLogData.studentID;
-				var allTaskData = [];
+					totalCoins = 10 * _this.state.sceneData.character.completedTasks.length;
 	
-				var timeInSeconds = Math.floor((new Date().getTime() - initialLogData.startTime) / 1000);
+					_this.setState({
+						possibleCoins: totalCoins
+					});
 	
-				// Only add needed pieces of information //
-				this.state.sceneData.character.completedTasks.forEach(function (task, i) {
-					var taskData = {};
-					taskData.taskID = task.taskID;
-					taskData.task = task.task;
-					taskData.correct = task.correct;
-					taskData.attemptedAnswers = task.attemptedAnswers;
-					allTaskData.push(taskData);
-				});
-				studentCompletedProgress.score = this.state.coins / 10;
-				studentCompletedProgress.possibleScore = this.state.possibleCoins / 10;
-				studentCompletedProgress.time = timeInSeconds;
-				studentCompletedProgress.allTaskData = allTaskData;
-				studentCompletedProgress.activityID = this.state.sceneData.activityID;
-				studentCompletedProgress.activityName = this.state.sceneData.activityName;
+					// Post completed progress results
+					studentCompletedProgress = {};
+					// Pull teacher variable set in html page if possible
 	
-				var logEvent = JSON.stringify(studentCompletedProgress);
-				$.ajax({
-					url: "/logStudent",
-					type: "POST",
-					data: logEvent,
-					dataType: "json"
-				});
+					try {
+						studentCompletedProgress.teacherID = teacher;
+					} catch (err) {
+						studentCompletedProgress.teacherID = "Unknown teacher";
+					}
 	
-				// If time mode active, clear the timer countdown
-				if (this.state.sceneData.APTimeMode) {
-					clearInterval(this.timerInterval);
-				}
+					studentCompletedProgress.studentID = initialLogData.studentID;
 	
-				setTimeout(function () {
-					that.setState({ sceneComplete: true });
-				}, 700);
+					allTaskData = [];
+	
+					console.log("review Vocab list reset");
+					var reviewVocabList = {
+						"currentWordIndex": 0,
+						"lastAnswer": "",
+						"score": 0,
+						"lang": "zh-CN",
+						"list": []
+					};
+					// Only add needed pieces of information //
+					_this.state.sceneData.character.completedTasks.forEach(function (task, i) {
+						// Related to taskData to push for studentData
+						var taskData = {};
+						taskData.taskID = task.taskID;
+						taskData.task = task.task;
+						taskData.correct = task.correct;
+						taskData.attemptedAnswers = task.attemptedAnswers;
+						allTaskData.push(taskData);
+	
+						// Related to compiling vocabulary to review
+						var vocabWord = {};
+						if (!task.correct) {
+							vocabWord.task = task.task;
+							vocabWord.answer = task.possibleAnswers[0].answers[0];
+							vocabWord.pinyin = "";
+							vocabWord.correct = false;
+							vocabWord.tries = 0;
+							// console.log(vocabWord);
+							console.log("vocabword pushed");
+							reviewVocabList.list.push(vocabWord);
+							console.log(reviewVocabList.list);
+						}
+					}.bind(_this));
+					console.log(reviewVocabList);
+					// console.log(allTaskData);
+	
+	
+					studentCompletedProgress.score = _this.state.coins / 10;
+					studentCompletedProgress.possibleScore = _this.state.possibleCoins / 10;
+					timeInSeconds = Math.floor((new Date().getTime() - initialLogData.startTime) / 1000);
+	
+					studentCompletedProgress.time = timeInSeconds;
+					studentCompletedProgress.allTaskData = allTaskData;
+					studentCompletedProgress.activityID = _this.state.sceneData.activityID;
+					studentCompletedProgress.activityName = _this.state.sceneData.activityName;
+	
+					logEvent = JSON.stringify(studentCompletedProgress);
+	
+					$.ajax({
+						url: "/logStudent",
+						type: "POST",
+						data: logEvent,
+						dataType: "json"
+					});
+	
+					// If time mode active, clear the timer countdown
+					if (_this.state.sceneData.APTimeMode) {
+						clearInterval(_this.timerInterval);
+					}
+	
+					setTimeout(function () {
+						that.setState({ sceneComplete: true });
+					}, 700);
+				})();
 			}
 		},
 		initializeSounds: function initializeSounds() {
@@ -887,7 +929,8 @@
 						practiceMode: this.state.practiceMode,
 						changePracticeMode: this.changePracticeMode,
 						playSpeechSynth: this.playSpeechSynth,
-						speechSynthPlaying: this.state.speechSynthPlaying }),
+						speechSynthPlaying: this.state.speechSynthPlaying,
+						sceneComplete: this.state.sceneComplete }),
 					React.createElement(DialogContainer
 					// Variables related to display scenario text and playing sounds
 					, { scenarioOn: this.state.scenarioOn,
@@ -22977,7 +23020,21 @@
 	
 	module.exports = {
 		IMAGE_PATH: IMAGE_PATH,
-		SOUND_PATH: SOUND_PATH
+		SOUND_PATH: SOUND_PATH,
+		VOCAB_LIST_TEMPLATE: {
+			"currentWordIndex": 0,
+			"lastAnswer": "",
+			"score": 0,
+			"lang": "zh-CN",
+			"list": []
+		},
+		VOCAB_WORD_TEMPLATE: {
+			"task": "",
+			"answer": "",
+			"pinyin": "",
+			"correct": false,
+			"tries": 0
+		}
 	};
 
 /***/ },
@@ -26414,6 +26471,10 @@
 		componentWillMount: function componentWillMount() {
 			this.setState({ vocabData: this.props.vocabList }, console.log(this.state.vocabData));
 		},
+		componentWillUpdate: function componentWillUpdate() {
+			console.log("update!");
+			if (this.props.sceneComplete) {}
+		},
 		handleImageChange: function handleImageChange(newIndex) {
 			var newVocabData = this.state.vocabData;
 			newVocabData.currentWordIndex = newIndex;
@@ -26547,7 +26608,8 @@
 		practiceMode: PropTypes.bool.isRequired,
 		changePracticeMode: PropTypes.func.isRequired,
 		playSpeechSynth: PropTypes.func.isRequired,
-		speechSynthPlaying: PropTypes.bool.isRequired
+		speechSynthPlaying: PropTypes.bool.isRequired,
+		sceneComplete: PropTypes.bool.isRequired
 	};
 
 /***/ },

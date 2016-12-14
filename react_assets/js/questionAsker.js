@@ -87,7 +87,6 @@ var QuestionAsker = React.createClass({
 				console.log(data.practiceModeStart);
 
 				var practiceAvailable = data.practice !== undefined ? true : false;
-				console.log("Practice available " + practiceAvailable);
 				that.setState({
 					sceneData: data,
 					currentDialog: data.initialTaskDialog,
@@ -490,12 +489,20 @@ var QuestionAsker = React.createClass({
 			}
 
 			studentCompletedProgress.studentID = initialLogData.studentID;
+
+
 			var allTaskData = [];
-
-			var timeInSeconds = Math.floor((new Date().getTime() - initialLogData.startTime) / 1000);
-
+			console.log("review Vocab list reset");
+			let reviewVocabList = {
+				"currentWordIndex" : 0,
+				"lastAnswer" : "",
+				"score" : 0,
+				"lang" : "zh-CN",
+				"list" : []
+			};
 			// Only add needed pieces of information //
 			this.state.sceneData.character.completedTasks.forEach(function(task, i){
+				// Related to taskData to push for studentData
 				var taskData = {}
 				taskData.taskID = task.taskID;
 				taskData.task = task.task;
@@ -503,9 +510,27 @@ var QuestionAsker = React.createClass({
 				taskData.attemptedAnswers = task.attemptedAnswers;
 				allTaskData.push(taskData);
 
-			})
+				// Related to compiling vocabulary to review
+				let vocabWord = {};
+				if (!task.correct) {
+					vocabWord.task = task.task;
+					vocabWord.answer = task.possibleAnswers[0].answers[0];
+					vocabWord.pinyin = "";
+					vocabWord.correct = false;
+					vocabWord.tries = 0;
+					// console.log(vocabWord);
+					console.log("vocabword pushed");
+					reviewVocabList.list.push(vocabWord);
+					console.log(reviewVocabList.list);
+				}
+			}.bind(this));
+			console.log(reviewVocabList);
+			// console.log(allTaskData);
+
+
 			studentCompletedProgress.score = this.state.coins/10;
 			studentCompletedProgress.possibleScore = this.state.possibleCoins/10;
+			var timeInSeconds = Math.floor((new Date().getTime() - initialLogData.startTime) / 1000);
 			studentCompletedProgress.time = timeInSeconds;
 			studentCompletedProgress.allTaskData = allTaskData;
 			studentCompletedProgress.activityID = this.state.sceneData.activityID;
@@ -847,7 +872,8 @@ var QuestionAsker = React.createClass({
 						practiceMode = {this.state.practiceMode} 
 						changePracticeMode = {this.changePracticeMode}
 						playSpeechSynth = {this.playSpeechSynth}
-						speechSynthPlaying = {this.state.speechSynthPlaying}/>
+						speechSynthPlaying = {this.state.speechSynthPlaying}
+						sceneComplete = {this.state.sceneComplete}/>
 					<DialogContainer
 						// Variables related to display scenario text and playing sounds
 						scenarioOn = {this.state.scenarioOn}
