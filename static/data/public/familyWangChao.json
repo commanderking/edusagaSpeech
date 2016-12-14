@@ -4,6 +4,7 @@
 	"tags" : ["family", "nationality", "careers"],
 	"sequence" : [],
 	"score" : 0,
+	"sequence": 200,
 	"currentCharName" : "",
 	"currentImage" : "characters/wang/wangConfidentDefault.png",
 	"currentLanguage" : "zh-CN",
