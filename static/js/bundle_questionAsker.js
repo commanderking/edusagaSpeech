@@ -680,6 +680,11 @@
 				that.setState({ speechSynthPlaying: true });
 				var utterance = SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 				utterance.onend = function (event) {
+					console.log("ended");
+					that.setState({ speechSynthPlaying: false });
+				};
+				utterance.onerror = function (event) {
+					console.log("error");
 					that.setState({ speechSynthPlaying: false });
 				};
 			}
@@ -26369,7 +26374,10 @@
 			var utterThis = new SpeechSynthesisUtterance(textToSay);
 			utterThis.voice = voicePack;
 			utterThis.rate = 0.8;
-			// console.log(utterThis.voice);
+			// NOTE: console.log is CRITICAL here. Otherwise, sometimes the 
+			// onend for the utterance will not trigger
+			// See: http://stackoverflow.com/questions/21947730/chrome-speech-synthesis-with-longer-texts
+			console.log(utterThis);
 			window.speechSynthesis.speak(utterThis);
 			return utterThis;
 		}

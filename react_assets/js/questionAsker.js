@@ -624,6 +624,11 @@ var QuestionAsker = React.createClass({
 			that.setState({speechSynthPlaying: true});
 			var utterance = SpeechSynth.play(hintAudioToPlay, this.state.voicePack);
 			utterance.onend = function(event) {
+				console.log("ended");
+				that.setState({speechSynthPlaying: false});
+			}
+			utterance.onerror = function(event) {
+				console.log("error");
 				that.setState({speechSynthPlaying: false});
 			}
 		}
