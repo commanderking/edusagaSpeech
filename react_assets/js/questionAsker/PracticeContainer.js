@@ -19,12 +19,9 @@ var PracticeContainer = React.createClass({
 		}
 	},
 	componentWillMount: function() {
-		console.log("componentmounted");
 		this.setState({vocabData: this.props.vocabList}, console.log(this.state.vocabData));
 	},
 	componentWillUpdate: function() {
-		console.log("update!");
-		console.log(this.props.vocabPracticeData);
 		if (this.props.sceneComplete && this.state.updateVocabForReview) {
 			this.setState({vocabData: this.props.vocabPracticeData, updateVocabForReview: false});
 		}
@@ -50,8 +47,6 @@ var PracticeContainer = React.createClass({
 	},
 	handleUserAnswer: function() {
 		var that = this;
-		console.log(this.state.vocabData);
-
 		var possibleAnswers = this.state.vocabData.list[this.state.vocabData.currentWordIndex].answer;
 
 		SpeechRecognition.activateSpeech(possibleAnswers, this.state.vocabData.lang)
@@ -59,7 +54,6 @@ var PracticeContainer = React.createClass({
 				// Need to set var here, otherwise loses it in setState
 				console.log(userAnswer);
 				var answer = userAnswer;
-				console.log("User Ansewr is:" + userAnswer)
 
 				// Case where user cancels their answer, SpeechRecognition.js gives back "Cancel Speech", don't save that if that's the case
 				if (userAnswer === "Cancel Speech") {
