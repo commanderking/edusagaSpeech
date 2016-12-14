@@ -199,6 +199,10 @@ var QuestionAsker = React.createClass({
 				/*----------------------------------------------
 				These actions happen on delay
 				----------------------------------------------*/
+				var delayTime = 2000;
+				if (newSceneData.character.currentTasks[taskIndex].jumpToScenarioIndex) {
+					delayTime = 0;
+				}
 				setTimeout(function(){
 					// Turn off correct answer state
 					that.setState({correctAnswerState: false});
@@ -264,7 +268,7 @@ var QuestionAsker = React.createClass({
 						that.setState({scenarioIndex: currentTaskData.jumpToScenarioIndex})
 						that.changeScenarioMode();
 					}
-				}, 2000)
+				}, delayTime)
 				
 			/*--------------------------------------------
 			When user answers incorrectly

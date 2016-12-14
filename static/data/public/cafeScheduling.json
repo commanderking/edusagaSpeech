@@ -3,6 +3,7 @@
 	"activityName": "Scheduling everyone to go to the cafe",
 	"tags" : ["date", "time"],
 	"score" : 0,
+	"sequence": 300,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidUncertain.png",
 	"currentLanguage" : "zh-CN",
@@ -52,15 +53,16 @@
 		},
 		{
 			"name" : "David",
-			"image" : "characters/alex/davidUncertain.png",
+			"image" : "characters/david/davidUncertain.png",
 			"imageLayer" : "blank.png",
 			"text" : "星期几?",
 			"soundID" : "",
-			"jumpTotasks" : true
+			"jumpToTasks" : true,
+			"index": 5
 		},
 		{
 			"name" : "Chen Yang",
-			"image" : "characters/chenyang/chengDefault.png",
+			"image" : "characters/chenguang/chengDefault.png",
 			"imageLayer" : "blank.png",
 			"text" : "星期天, 没问题。",
 			"soundID" : ""
@@ -78,9 +80,125 @@
 			"imageLayer" : "blank.png",
 			"text" : "太好了! 星期天几点?",
 			"soundID" : "",
-			"jumptoTasks" : true
+			"jumpToTasks" : true
+		},
+		{
+			"name" : "Alex",
+			"image" : "characters/alex/alexLaughing.png",
+			"imageLayer" : "blank.png",
+			"text" : "两点半，没问题！",
+			"soundID" : ""
+		},
+		{
+			"name" : "David",
+			"image" : "characters/david/davidLaughing.png",
+			"imageLayer" : "blank.png",
+			"text" : "那我们星期六见！",
+			"soundID" : "",
+			"index" : 10
+		},	
+		{
+			"name" : "Chen Yang",
+			"image" : "characters/chenguang/chengDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "再见！",
+			"soundID" : "",
+			"jumpToTasks": true
 		}
 	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Say hey you all",
+				"answer" : "你们好",
+				"pinyin" : "Nǐmen hǎo",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say drink coffee",
+				"answer" : "周末",
+				"pinyin" : "zhōumò",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say drink coffee",
+				"answer" : "喝咖啡",
+				"pinyin" : "hē kāfēi",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask a group if they want to go drink coffee",
+				"answer" : "你们周末想去喝咖啡吗？",
+				"pinyin" : "nǐmen zhōumò xiǎng qù hē kāfēi ma",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say Saturday",
+				"answer" : "星期六",
+				"pinyin" : "xīngqíliù",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say Sunday",
+				"answer" : "星期天",
+				"pinyin" : "xīngqítiān",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say Morning",
+				"answer" : "早上",
+				"pinyin" : "zǎoshang",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say Afternoon",
+				"answer" : "下午",
+				"pinyin" : "xiàwǔ",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say At Night/Evening",
+				"answer" : "晚上",
+				"pinyin" : "wǎnshàng",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 8:30",
+				"answer" : "八点半",
+				"pinyin" : "bā diǎn bàn",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 8:30 in the morning",
+				"answer" : "早上八点半",
+				"pinyin" : "zǎoshang bā diǎn bàn",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say 8:30 at night",
+				"answer" : "晚上八点半",
+				"pinyin" : "wǎnshàng bā diǎn bàn",
+				"correct" : false,
+				"tries": 0
+			}
+		]
+	},
 	"character" : 
 		{
 			"name" : "David",
@@ -136,7 +254,7 @@
 						{
 							"answers" : ["你们好"],
 							"response" : "",
-							"soundID" : ""
+							"soundID" : "ee"
 						}
 					],
 					"correct" : false,
@@ -150,7 +268,7 @@
 			[
 				{
 					"taskID" : 20,
-					"task" : "Ask them if they want to go drink/grab coffee this weekend",
+					"task" : "Ask if they want to go drink coffee this weekend",
 					"possibleAnswers" : 
 					[
 						{
@@ -162,19 +280,19 @@
 							"answers" : [
 								["你们周末", "周末你们"],
 								["要不要", "想不想"],
-								["去喝咖啡", "去咖啡馆", "去茶馆", "去喝茶"]
+								["喝咖啡", "去咖啡馆", "去茶馆", "去喝茶"]
 							],
-							"response" : "星期几?",
-							"soundID" : ""
+							"response" : "",
+							"soundID" : "ee"
 						},
 						{
 							"answers" : [
 								["你们周末", "周末你们"],
 								["想", "要"],
-								["去喝咖啡吗", "去咖啡馆吗", "去茶馆吗", "去喝茶吗"]
+								["喝咖啡吗", "去咖啡馆吗", "去茶馆吗", "去喝茶吗"]
 							],
-							"response" : "星期几?",
-							"soundID" : ""
+							"response" : "",
+							"soundID" : "ee"
 						}
 					],
 					"correct" : false,
@@ -187,12 +305,13 @@
 				{
 					"taskID" : 30,
 					"task" : "Suggest Saturday",
+					"taskLink" : "day",
 					"possibleAnswers" : 
 					[
 						{
 							"answers" : ["星期六"],
 							"response" : "哎呀。 我星期六有事。",
-							"soundID" : ""
+							"soundID" : "ee"
 						}
 					],
 					"correct" : false,
@@ -204,12 +323,14 @@
 				{
 					"taskID" : 31,
 					"task" : "Suggest Sunday",
+					"taskType" : "choice",
+					"taskLink" : "day",
 					"possibleAnswers" : 
 					[
 						{
 							"answers" : ["星期天", "星期日", "礼拜天", "周日"],
 							"response" : "",
-							"soundID" : ""
+							"soundID" : "ee"
 						}
 					],
 					"correct" : false,
@@ -217,22 +338,23 @@
 					"tasksToQueue" : [40, 41, 42],
 					"attemptedAnswers" : [],
 					"hintUsed" : false,
-					"jumpToScenarioIndex" : 5
+					"jumpToScenarioIndex" : 6
 
 				},
 				{
 					"taskID" : 40,
 					"task" : "Tell them 9:30 in the morning",
+					"taskLink" : "time",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["早上九点半"],
-							"response" : "",
-							"soundID" : ""
+							"answers" : ["早上九点半", "早上9点半"],
+							"response" : "早上九点半，我有事。",
+							"soundID" : "ee"
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "characters/david/davidUncertain.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -240,33 +362,55 @@
 				{
 					"taskID" : 41,
 					"task" : "Tell them 2:30 in the afternoon",
+					"taskType" : "choice",
+					"taskLink" : "time",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["下午两点半", "两点半"],
+							"answers" : ["下午两点半", "两点半", "下午2点半"],
 							"response" : "",
-							"soundID" : ""
+							"soundID" : "ee"
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "blank.png",
+					"tasksToQueue" : [50],
+					"attemptedAnswers" : [],
+					"hintUsed" : false,
+					"jumpToScenarioIndex" : 9
+				},
+				{
+					"taskID" : 42,
+					"task" : "Tell them 7:30 in the evening",
+					"taskLink" : "time",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["晚上七点半", "晚上7点半"],
+							"response" : "晚上我要打羽毛球。",
+							"soundID" : "ee"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengConfused.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
-					"taskID" : 42,
-					"task" : "Tell them 7:30 in the evening",
+					"taskID" : 50,
+					"task" : "Say bye",
+					"taskLink" : "day",
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["晚上七点半"],
+							"answers" : ["星期六见", "再见", "拜拜", "慢走"],
 							"response" : "",
-							"soundID" : ""
+							"soundID" : "ee"
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "blank.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
