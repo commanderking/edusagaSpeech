@@ -36,63 +36,63 @@
 			{
 				"task" : "Say 'Friday'",
 				"answer" : "你好",
-				"pinyin" : "nǐ hǎo",
+				"pinyin" : "Xīngqíwǔ",
 				"correct" : false,
 				"tries": 0
 			},
 			{
 				"task" : "Say 'Saturday'",
-				"answer" : "我叫",
-				"pinyin" : "wǒ jiào",
+				"answer" : "星期六",
+				"pinyin" : "xīngqíliù",
 				"correct" : false,
 				"tries" : 0
 			},
 			{
 				"task" : "Say 'Sunday'",
-				"answer" : "你叫什么名字",
-				"pinyin" : "nǐ jiào shénme míngzì",
+				"answer" : "星期天",
+				"pinyin" : "xīngqítiān",
 				"correct" : false,
 				"tries" : 0
 			},
 			{
 				"task" : "Say 'weekend'",
-				"answer" : "你贵姓",
-				"pinyin" : "nǐ guìxìng",
+				"answer" : "周末",
+				"pinyin" : "zhōumò",
 				"correct" : false,
 				"tries" : 0
 			},
 			{
 				"task" : "Ask if someone is busy on the weekend",
-				"answer" : "请问您贵姓",
-				"pinyin" : "qǐngwèn nín guìxìng",
+				"answer" : "你周末忙不忙？",
+				"pinyin" : "nǐ zhōumò máng bù máng",
 				"correct" : false,
 				"tries" : 0
 			},
 			{
 				"task" : "Ask if someone is busy on Sunday",
 				"answer" : "你星期天忙不忙?",
-				"pinyin" : "nǐ hǎo",
+				"pinyin" : "nǐ xīngqítiān máng bù máng",
 				"correct" : false,
 				"tries": 0
 			},
 			{
 				"task" : "Invite someone to eat with you on Sunday",
 				"answer" : "我星期天请你吃饭，怎么样？",
-				"pinyin" : "wǒ jiào",
+				"pinyin" : "wǒ xīngqítiān qǐng nǐ chīfàn, zěnme yàng",
 				"correct" : false,
 				"tries" : 0
 			},
 			{
 				"task" : "Ask someone if they want to eat Chinese food (method 1)",
 				"answer" : "我们吃中国菜，好吗？",
-				"pinyin" : "nǐ jiào shénme míngzì",
+				"pinyin" : "wǒmen chī zhōngguó cài, hǎo ma",
 				"correct" : false,
 				"tries" : 0
 			},
 			{
 				"task" : "Ask someone if they want to eat Chinese food (method 2)",
 				"answer" : "你想不想吃中国菜?",
-				"pinyin" : "nǐ guìxìng",
+				"pinyin" : "nǐ xiǎng bùxiǎng chī zhōngguó cài",
 				"correct" : false,
 				"tries" : 0
 			}
