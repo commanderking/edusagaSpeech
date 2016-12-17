@@ -47,7 +47,7 @@
 				"tries": 0
 			},
 			{
-				"task" : "Say 'I'm good' (method 3)",
+				"task" : "Say 'I'm not bad",
 				"answer" : "我不错",
 				"pinyin" : "Wǒ bùcuò",
 				"correct" : false,
@@ -233,7 +233,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["还可以", "马马虎虎"],
+							"answers" : ["还可以", "马马虎虎", "不错"],
 							"response" : "哦。",
 							"soundID" : "haikeyi"
 						}

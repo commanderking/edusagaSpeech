@@ -35,7 +35,7 @@
 		[
 			{
 				"task" : "Say 'Friday'",
-				"answer" : "你好",
+				"answer" : "星期五",
 				"pinyin" : "Xīngqíwǔ",
 				"correct" : false,
 				"tries": 0
