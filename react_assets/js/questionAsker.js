@@ -131,8 +131,6 @@ var QuestionAsker = React.createClass({
 	componentWillReceiveProps: function() {
 		this.loadSceneData();
 	},
-	componentDidUpdate: function() {
-	},
 	checkAnswer: function(userAnswer, taskIndex) {
 		// Case where there's an error due to user canceling
 		if (userAnswer === "Cancel Speech") {
@@ -167,7 +165,7 @@ var QuestionAsker = React.createClass({
 				this.playSound(responseSoundID);
 
 				// Store sound ID in current Sound ID if player wnats to repeat
-				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].soundID;
+				newSceneData.currentSoundID = responseSoundID;
 
 				// Adjust character image
 				newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;

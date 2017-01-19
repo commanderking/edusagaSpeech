@@ -138,8 +138,56 @@
 			"sounds" : 
 			[
 				{
-					"soundID" : "nihao",
-					"soundPath" : "david/nihao.ogg"
+					"soundID" : "ah-you-from-england",
+					"soundPath" : "wangchao/ah-you-from-england.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "wangchao/feichanghao.ogg"
+				},
+				{
+					"soundID" : "nationality-zhenhao-dad-english-also",
+					"soundPath" : "wangchao/nationality-zhenhao-dad-english-also.ogg"
+				},
+				{
+					"soundID" : "nationality-are-you-french",
+					"soundPath" : "wangchao/nationality-are-you-french.ogg"
+				},
+				{
+					"soundID" : "nationality-mom-also-french",
+					"soundPath" : "wangchao/nationality-mom-also-french.ogg"
+				},
+				{
+					"soundID" : "nationality-whats-your-nationality",
+					"soundPath" : "wangchao/nationality-whats-your-nationality.ogg"
+				},
+				{
+					"soundID" : "family-have-sister",
+					"soundPath" : "wangchao/family-have-sister.ogg"
+				},				
+				{
+					"soundID" : "family-have-older-sister-do-you-have-older-brother",
+					"soundPath" : "wangchao/family-have-older-sister-do-you-have-older-brother.ogg"
+				},
+				{
+					"soundID" : "family-do-you-have-older-brother",
+					"soundPath" : "wangchao/family-do-you-have-older-brother.ogg"
+				},	
+				{
+					"soundID" : "family-i-also-have-older-brother-pingpong",
+					"soundPath" : "wangchao/family-i-also-have-older-brother-pingpong.ogg"
+				},
+				{
+					"soundID" : "family-oh-thatso-i-have-olderbrother-pingpong",
+					"soundPath" : "wangchao/family-oh-thatso-i-have-olderbrother-pingpong.ogg"
+				},
+				{
+					"soundID" : "family-five-people-list",
+					"soundPath" : "wangchao/family-five-people-list.ogg"
+				},
+				{
+					"soundID" : "nationality-im-chinese-off-to-pingpong",
+					"soundPath" : "wangchao/nationality-im-chinese-off-to-pingpong.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -147,17 +195,17 @@
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
+					"soundPath" : "wangchao/shenme.ogg"
 				}, 
 				{ 
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
+					"soundPath" : "wangchao/tingbudong.ogg"
 				}, 
 				{
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
+					"response": "你刚才说了什么？",
+					"soundID" : "shuoleshenme",
+					"soundPath" : "wangchao/shuoleshenme.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -169,7 +217,7 @@
 						{
 							"answers" : ["你好"],
 							"response" : "你好! 啊，你是不是英国人？",
-							"soundID" : "nihao",
+							"soundID" : "ah-you-from-england",
 							"exactMatch": true
 						},
 						{
@@ -196,13 +244,13 @@
 					[
 						{
 							"answers" : ["我是英国人"],
-							"response" : "哦! 真好。 我爸也是英国人。",
-							"soundID" : ""
+							"response" : "哦! 真好。 我爸也是英国人。你有姐姐吗？",
+							"soundID" : "nationality-zhenhao-dad-english-also"
 						},
 						{
 							"answers" : ["是", "是的", "我是", "我是的"],
-							"response" : "哦! 真好。 我爸也是英国人。",
-							"soundID" : "",
+							"response" : "哦! 真好。 我爸也是英国人。你有姐姐吗？",
+							"soundID" : "nationality-zhenhao-dad-english-also",
 							"exactMatch" : true
 						}
 					],
@@ -222,12 +270,12 @@
 						{
 							"answers" : ["我不是英国人"],
 							"response" : "那你是不是法国人？",
-							"soundID" : ""
+							"soundID" : "nationality-are-you-french"
 						},
 						{
 							"answers" : ["不是", "不是的", "我不是", "我不是的"],
 							"response" : "那你是不是法国人？",
-							"soundID" : "",
+							"soundID" : "nationality-are-you-french",
 							"exactMatch" : true
 						}
 					],
@@ -246,13 +294,13 @@
 					[
 						{
 							"answers" : ["我是法国人."],
-							"response" : "哦! 真好! 我妈也是法国人。 ",
-							"soundID" : ""
+							"response" : "哦! 真好! 我妈也是法国人。你有姐姐吗？ ",
+							"soundID" : "nationality-mom-also-french"
 						},
 						{
 							"answers" : ["是", "是的", "我是", "我是的"],
-							"response" : "哦! 真好! 我妈也是法国人。",
-							"soundID" : "",
+							"response" : "哦! 真好! 我妈也是法国人。你有姐姐吗？",
+							"soundID" : "nationality-mom-also-french",
 							"exactMatch" : true
 						}
 					],
@@ -272,12 +320,12 @@
 						{
 							"answers" : ["我不是法国人", "我也不是法国人"],
 							"response" : "那你是哪国人?",
-							"soundID" : ""
+							"soundID" : "nationality-whats-your-nationality"
 						},
 						{
 							"answers" : ["不是", "不是的", "我不是", "我不是的", "也不是", "我也不是", "也不是的", "我也不是的"],
 							"response" : "那你是哪国人?",
-							"soundID" : "",
+							"soundID" : "nationality-whats-your-nationality",
 							"exactMatch" : true
 						}
 					],
@@ -295,7 +343,7 @@
 						{
 							"answers" : ["我是。。。人。"],
 							"response" : "哦。。。你有姐姐吗？",
-							"soundID" : ""
+							"soundID" : "family-have-sister"
 						},
 						{
 							"answers" : [
@@ -303,7 +351,7 @@
 								["人"]
 							],
 							"response" : "哦。。。你有姐姐吗？",
-							"soundID" : ""
+							"soundID" : "family-have-sister"
 						}
 					],
 					"correct" : false,
@@ -320,7 +368,7 @@
 						{
 							"answers" : ["我有姐姐"],
 							"response" : "我也有个姐姐! 那你有哥哥吗？",
-							"soundID" : ""
+							"soundID" : "family-have-older-sister-do-you-have-older-brother"
 						},
 						{
 							"answers" : [
@@ -329,23 +377,23 @@
 								["姐姐"]
 							],
 							"response" : "我也有一个姐姐。那你有哥哥吗？",
-							"soundID" : ""
+							"soundID" : "family-have-older-sister-do-you-have-older-brother"
 						},
 						{
 							"answers" : ["我有", "有", "有啊"],
 							"response" : "我也有一个姐姐。那你有哥哥吗？",
-							"soundID" : "",
+							"soundID" : "family-have-older-sister-do-you-have-older-brother",
 							"exactMatch" : true
 						},
 						{
-							"answers" : ["我没有姐姐", "我没哥哥"],
-							"response" : "那你有哥哥吗",
-							"soundID" : ""
+							"answers" : ["我没有姐姐", "我没姐姐"],
+							"response" : "那你有哥哥吗？",
+							"soundID" : "family-do-you-have-older-brother"
 						},
 						{
 							"answers" : ["没有", "我没有"],
-							"response" : "那你有哥哥吗",
-							"soundID" : "",
+							"response" : "那你有哥哥吗？",
+							"soundID" : "family-do-you-have-older-brother",
 							"exactMatch" : true
 						}
 					],
@@ -363,7 +411,7 @@
 						{
 							"answers" : ["我有哥哥", "我有一个哥哥"],
 							"response" : " 我也有个哥哥。 他很会打乒乓球！",
-							"soundID" : ""
+							"soundID" : "family-i-also-have-older-brother-pingpong"
 						},
 						{
 							"answers" : [
@@ -372,23 +420,23 @@
 								["哥哥"]
 							],
 							"response" : "我也有个哥哥。他很会打乒乓球！",
-							"soundID" : ""
+							"soundID" : "family-i-also-have-older-brother-pingpong"
 						},
 						{
 							"answers" : ["我有", "有", "有啊"],
 							"response" : "我也有一个哥哥。他很会打乒乓球！",
-							"soundID" : "",
+							"soundID" : "family-i-also-have-older-brother-pingpong",
 							"exactMatch" : true
 						},
 						{
 							"answers" : ["我没有哥哥", "我没哥哥"],
 							"response" : "哦。 是吗？我有一个哥哥。他很会打乒乓球！",
-							"soundID" : ""
+							"soundID" : "family-oh-thatso-i-have-olderbrother-pingpong"
 						},
 						{
 							"answers" : ["没有", "我没有"],
 							"response" : "哦。 是吗？ 我有一个哥哥。他很会打乒乓球！",
-							"soundID" : "",
+							"soundID" : "family-oh-thatso-i-have-olderbrother-pingpong",
 							"exactMatch" : true
 						}
 					],
@@ -405,24 +453,24 @@
 					[
 						{
 							"answers": 	["你家有几口人"],
-							"response" : "我家有五口人，我爸妈，哥哥，姐姐，和我。",
-							"soundID" : ""
+							"response" : "我家有五个人，我爸，妈，哥哥，姐姐，和我。",
+							"soundID" : "family-five-people-list"
 						},
 						{
 							"answers" : [
 								["你家有", "你的家有", "你家里有"],
 								["几口人", "几个人", "多少人"]
 							],
-							"response" : "我家有五口人，我爸妈，哥哥，姐姐，和我。",
-							"soundID" : ""
+							"response" : "我家有五个人，我爸，妈，哥哥，姐姐，和我。",
+							"soundID" : "family-five-people-list"
 						},
 						{
 							"answers": [
 								["你有"],
 								["几个家人", "几口家人"]
 							],
-							"response" : "我家有五口人，我爸妈，哥哥，姐姐，和我。",
-							"soundID" : ""
+							"response" : "我家有五个人，我爸，妈，哥哥，姐姐，和我。",
+							"soundID" : "family-five-people-list"
 						}
 					],
 					"correct" : false,
@@ -439,17 +487,17 @@
 						{
 							"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你是哪里来的", "你从哪里来", "你从哪里来的"],
 							"response" : "我是中国人。哇！已经四点了啊。我得跟我哥哥打乒乓球。再见!",
-							"soundID" : ""
+							"soundID" : "nationality-im-chinese-off-to-pingpong"
 						}
 					],
 					"correct" : false,
 					"emotion" : "characters/wang/wangDramaticEvasive.png",
-					"tasksToQueue" : [],
+					"tasksToQueue" : [62],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
-					"taskID" : 61,
+					"taskID" : 62,
 					"task" : "Say bye!",
 					"possibleAnswers" : 
 					[

@@ -184,7 +184,6 @@
 		componentWillReceiveProps: function componentWillReceiveProps() {
 			this.loadSceneData();
 		},
-		componentDidUpdate: function componentDidUpdate() {},
 		checkAnswer: function checkAnswer(userAnswer, taskIndex) {
 			// Case where there's an error due to user canceling
 			if (userAnswer === "Cancel Speech") {
@@ -219,7 +218,7 @@
 					this.playSound(responseSoundID);
 	
 					// Store sound ID in current Sound ID if player wnats to repeat
-					newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[possibleAnswerIndex].soundID;
+					newSceneData.currentSoundID = responseSoundID;
 	
 					// Adjust character image
 					newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
@@ -23129,10 +23128,8 @@
 			// If the userAnswer contains a global exception, immediately mark it as wrong
 			if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
 				var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
-				// console.log(exceptions);
 				var exceptionMatch = false;
 				exceptions.forEach(function (exception) {
-					// console.log(exception);
 					if (userAnswer.indexOf(exception) >= 0) {
 						exceptionMatch = true;
 					}
@@ -23214,11 +23211,7 @@
 			possibleAnswerObject.answers.forEach(function (possibleAnswer, i) {
 				// Case for exact match
 				if (possibleAnswerObject.exactMatch === true) {
-					// console.log('in exact match');
-					// console.log(possibleAnswer);
-					// console.log(objectToReturn.answerCorrect);
 					if (userAnswer === possibleAnswer) {
-						// console.log("exact answer correct");
 						answerCorrect = true;
 					}
 				} else {

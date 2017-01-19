@@ -115,7 +115,8 @@
 				"dramatic": "characters/wang/wangDramaticEvasive.png",
 				"surprised": "characters/wang/wangSurprised.png",
 				"thoughtful": "characters/wang/wangThoughtful.png",
-				"silhouette": "characters/wang/wangSilhouette.png"
+				"silhouette": "characters/wang/wangSilhouette.png",
+				"surprised": "characters/wang/wangSurprised.png"
 			},
 			"successPhrases" : {
 
@@ -124,45 +125,53 @@
 			[
 				{
 					"soundID" : "nihao",
-					"soundPath" : "david/nihao.ogg"
+					"soundPath" : "wangchao/nihao.ogg"
 				},
 				{
-					"soundID" : "haikeyi",
-					"soundPath" : "david/haikeyi.ogg"
+					"soundID" : "henhao-nine",
+					"soundPath" : "wangchao/henhao-nine.ogg"
 				},
 				{
-					"soundID" : "surname-zhang-you",
-					"soundPath" : "david/surname-zhang-you.ogg"
+					"soundID" : "zhenbang",
+					"soundPath" : "wangchao/zhenbang.ogg"
 				},
 				{
-					"soundID" : "oh2",
-					"soundPath" : "david/oh2.ogg"
+					"soundID" : "oh",
+					"soundPath" : "wangchao/oh.ogg"
 				},
 				{
-					"soundID" : "intro-david-your-name",
-					"soundPath" : "david/intro-david-your-name.ogg"
+					"soundID" : "woxingwang",
+					"soundPath" : "wangchao/woxingwang.ogg"
 				},
 				{
-					"soundID" : "intro-oh-nice-to-meet-you",
-					"soundPath" : "david/intro-oh-nice-to-meet-you.ogg"
-				}			
+					"soundID" : "wojiao-nine",
+					"soundPath" : "wangchao/wojiao-nine.ogg"
+				},
+				{
+					"soundID" : "haode",
+					"soundPath" : "wangchao/haode.ogg"
+				},
+				{
+					"soundID" : "bye-pingpong",
+					"soundPath" : "wangchao/bye-pingpong.ogg"
+				}
 			],
 			"confusedPhrases" : 
 			[
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : ""
+					"soundPath" : "wangchao/shenme.ogg"
 				}, 
 				{ 
-					"response": "我没听懂。",
+					"response": "我听不懂.",
 					"soundID" : "tingbudong",
-					"soundPath" : ""
+					"soundPath" : "wangchao/tingbudong.ogg"
 				}, 
-				{ 
-					"response": "你刚说了什么?",
-					"soundID" : "buhaoyisi",
-					"soundPath" : ""
+				{
+					"response": "你刚才说了什么？",
+					"soundID" : "shuoleshenme",
+					"soundPath" : "wangchao/shuoleshenme.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -194,7 +203,7 @@
 						{
 							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
 							"response" : "很好啊! 你呢？",
-							"soundID" : "haikeyi"
+							"soundID" : "henhao-nine"
 						}
 					],
 					"correct" : false,
@@ -216,7 +225,7 @@
 						{
 							"answers" : ["我很好", "非常好", "不错"],
 							"response" : "真棒！",
-							"soundID" : "haikeyi"
+							"soundID" : "zhenbang"
 						}
 					],
 					"correct" : false,
@@ -235,7 +244,7 @@
 						{
 							"answers" : ["还可以", "马马虎虎", "不错"],
 							"response" : "哦。",
-							"soundID" : "haikeyi"
+							"soundID" : "oh"
 						}
 					],
 					"correct" : false,
@@ -252,7 +261,7 @@
 						{
 							"answers" : ["请问你贵姓", "请问您贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
 							"response" : "我姓王! ",
-							"soundID" : "surname-zhang-you"
+							"soundID" : "woxingwang"
 						}
 					],
 					"correct" : false,
@@ -269,7 +278,7 @@
 						{
 							"answers" : ["你叫什么名字","你的名字是什么", "你叫什么"],
 							"response" : "我叫王超。你呢?",
-							"soundID" : "intro-david-your-name"
+							"soundID" : "wojiao-nine"
 						}
 					],
 					"correct" : false,
@@ -285,8 +294,8 @@
 					[
 						{
 							"answers" : ["我叫", "我是", "我的名字叫", "我的名字是"],
-							"response" : "哦。 好的。我要去打乒乓球了。 再见!",
-							"soundID" : ""
+							"response" : "不好意思。我要去打乒乓球了。 再见!",
+							"soundID" : "bye-pingpong"
 						}
 					],
 					"correct" : false,

@@ -138,25 +138,57 @@
 			[
 				{
 					"soundID" : "nihao",
-					"soundPath" : "david/nihao.ogg"
-				}	
+					"soundPath" : "wangchao/nihao.ogg"
+				},
+				{
+					"soundID" : "feichanghao",
+					"soundPath" : "wangchao/feichanghao.ogg"
+				},
+				{
+					"soundID" : "likes-pingpong-exercise",
+					"soundPath" : "wangchao/likes-pingpong-exercise.ogg"
+				},
+				{
+					"soundID" : "likes-exercise-three-fifteen",
+					"soundPath" : "wangchao/likes-exercise-three-fifteen.ogg"
+				},
+				{
+					"soundID" : "likes-pingpong-times-do-you-like",
+					"soundPath" : "wangchao/likes-pingpong-times-do-you-like.ogg"
+				},
+				{
+					"soundID" : "wa-zhenhao",
+					"soundPath" : "wangchao/wa-zhenhao.ogg"
+				},
+				{
+					"soundID" : "oh-really",
+					"soundPath" : "wangchao/oh-really.ogg"
+				},
+				{
+					"soundID" : "likes-oh-really-but-pingpong-sofun",
+					"soundPath" : "wangchao/likes-oh-really-but-pingpong-sofun.ogg"
+				},
+				{
+					"soundID" : "likes-cant-play-today-so-late-bye",
+					"soundPath" : "wangchao/likes-cant-play-today-so-late-bye.ogg"
+				}
 			],
 			"confusedPhrases" : 
 			[
 				{ 
 					"response": "什么?",
 					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
+					"soundPath" : "wangchao/shenme.ogg"
 				}, 
 				{ 
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
+					"soundPath" : "wangchao/tingbudong.ogg"
 				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
+				{
+					"response": "你刚才说了什么？",
+					"soundID" : "shuoleshenme",
+					"soundPath" : "wangchao/shuoleshenme.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -174,7 +206,7 @@
 						{
 							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
 							"response" : "非常好! ",
-							"soundID" : "haikeyi"
+							"soundID" : "feichanghao"
 						}
 					],
 					"correct" : false,
@@ -193,7 +225,7 @@
 					[
 						{
 							"answers" : ["你喜欢做什么", "你有什么爱好"],
-							"soundID" : "haikeyi"
+							"soundID" : "likes-pingpong-exercise"
 						},
 						{
 							"answers" : [
@@ -201,7 +233,7 @@
 								["喜欢", "爱"],
 								["做什么", "做啥儿"]
 							],
-							"soundID" : "haikeyi"
+							"soundID" : "likes-pingpong-exercise"
 						}
 					],
 					"correct" : false,
@@ -214,12 +246,13 @@
 				{
 					"taskID" : 30,
 					"task" : "Ask him what time he works out／goes to the gym",
+					"taskLink": "timesForActivities",
 					"possibleAnswers" : 
 					[
 						{
 							"answers" : ["你每天几点锻炼身体", "你每天什么时候锻炼身体"],
 							"response" : "我每天三点十五分去锻炼身体。",
-							"soundID" : "haikeyi"
+							"soundID" : "likes-exercise-three-fifteen"
 						},
 						{
 							"answers" : [
@@ -228,7 +261,7 @@
 								["锻炼身体", "健身", "去体育馆", "去健身房"]
 							],
 							"response" : "我每天十三点十五分去锻炼身体。",
-							"soundID" : "haikeyi"
+							"soundID" : "likes-exercise-three-fifteen"
 						}
 					],
 					"correct" : false,
@@ -240,12 +273,14 @@
 				{
 					"taskID" : 31,
 					"task" : "Ask him what time he plays ping pong",
+					"taskType": "choice",
+					"taskLink": "timesForActivities",
 					"possibleAnswers" : 
 					[
 						{
 							"answers" : ["你每天几点打乒乓球", "你什么时候打乒乓球"],
 							"response" : "我每天十一点半和六点半打乒乓球。你喜欢打乒乓球吗?",
-							"soundID" : "haikeyi"
+							"soundID" : "likes-pingpong-times-do-you-like"
 						},
 						{
 							"answers" : [
@@ -254,7 +289,7 @@
 								["打乒乓球"]
 							],
 							"response" : "我每天十一点半和六点半打乒乓球。你喜欢打乒乓球吗？",
-							"soundID" : "haikeyi"
+							"soundID" : "likes-pingpong-times-do-you-like"
 						}
 					],
 					"correct" : false,
@@ -271,9 +306,7 @@
 					"possibleAnswers" : 
 					[
 						{
-							"answers" : ["我也喜欢打乒乓球", "我也喜欢打乒乓球"],
-							"response" : "哇! 真好!",
-							"soundID" : ""
+							"answers" : ["我也喜欢打乒乓球", "我也喜欢打乒乓球"]
 						},
 						{
 							"answers" : [
@@ -281,12 +314,16 @@
 								["喜欢"],
 								["打乒乓球", "玩乒乓球"]
 							],
-							"response" : "哇! 真好!",
-							"exception": "不喜欢",
-							"soundID" : ""							
+							"exceptions": ["不喜欢"]
+						},
+						{
+							"answers" : ["喜欢"],
+							"exceptions" : ["不"]
 						}
 					],
 					"correct" : false,
+					"response" : "哇！真好！",
+					"soundID" : "wa-zhenhao",
 					"emotion" : "characters/wang/wangSurprised.png",
 					"tasksToQueue" : [50],
 					"attemptedAnswers" : [],
@@ -299,22 +336,20 @@
 					"taskLink": "pingpong",
 					"possibleAnswers" : 
 					[
-						{
-							"answers" : ["我不喜欢打乒乓球"],
-							"response" : "哦。 真的？ 可是打乒乓球很好玩！我现在就要去打了， 再见！",
-							"soundID" : "haikeyi"
-						},
+						{"answers" : ["我不喜欢打乒乓球", "不喜欢"]},
 						{
 							"answers" : [
 								["你"],
 								["不喜欢"],
 								["打乒乓球", "玩乒乓球"]
-							],
-							"response" : "哦。 真的？ 可是打乒乓球很好玩！我现在就要去打了， 再见！",
-							"soundID" : "haikeyi"
-						}
+							]
+						},
+						{"answers": ["不喜欢"]}
 					],
 					"correct" : false,
+					"response" : "哦。 真的？ 可是打乒乓球很好玩！我现在就要去打了， 再见！",
+
+					"soundID" : "likes-oh-really-but-pingpong-sofun",
 					"emotion" : "characters/wang/wangDisgust.png",
 					"tasksToQueue" : [100],
 					"attemptedAnswers" : [],
@@ -335,7 +370,7 @@
 								["打乒乓球", "玩乒乓球"],
 								["怎么样", "好吗"]
 							],
-							"soundID" : "hobbies-badminton-when"
+							"soundID" : "likes-cant-play-today-so-late-bye"
 						},
 						{
 							"answers" : [
@@ -344,7 +379,7 @@
 								["打乒乓球", "玩乒乓球"],
 								["怎么样", "好吗"]
 							],
-							"soundID" : "hobbies-badminton-when"
+							"soundID" : "likes-cant-play-today-so-late-bye"
 						},
 						{
 							"answers" : [
@@ -352,7 +387,7 @@
 								["要不要", "想不想"],
 								["打乒乓球", "玩乒乓球"]
 							],
-							"soundID" : "hobbies-badminton-when"
+							"soundID" : "likes-cant-play-today-so-late-bye"
 						},
 						{
 							"answers" : [
@@ -360,7 +395,7 @@
 								["要", "想"],
 								["打乒乓球吗", "玩乒乓球吗"]
 							],
-							"soundID" : "hobbies-badminton-when"
+							"soundID" : "likes-cant-play-today-so-late-bye"
 						}
 					],
 					"correct" : false,
@@ -377,8 +412,8 @@
 					[
 						{
 							"answers": 	["再见", "拜拜", "明天见", "慢走"],
-							"response" : "再见",
-							"soundID" : ""
+							"response" : "",
+							"soundID" : " "
 						}
 					],
 					"correct" : false,

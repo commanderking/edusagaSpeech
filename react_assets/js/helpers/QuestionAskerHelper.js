@@ -93,10 +93,8 @@ export var SpeechChecker = {
 		// If the userAnswer contains a global exception, immediately mark it as wrong
 		if (TaskController.getActiveTask(data, activeTaskIndex).exceptions !== undefined) {
 			var exceptions = TaskController.getActiveTask(data, activeTaskIndex).exceptions;
-			// console.log(exceptions);
 			var exceptionMatch = false;
 			exceptions.forEach(function(exception){
-				// console.log(exception);
 				if (userAnswer.indexOf(exception) >= 0) {
 					exceptionMatch = true;
 				}
@@ -182,13 +180,9 @@ export var SpeechChecker = {
 		possibleAnswerObject.answers.forEach(function(possibleAnswer, i) {
 			// Case for exact match
 			if (possibleAnswerObject.exactMatch === true) {
-				// console.log('in exact match');
-					// console.log(possibleAnswer);
-					// console.log(objectToReturn.answerCorrect);
-					if (userAnswer === possibleAnswer) {
-						// console.log("exact answer correct");
-						answerCorrect = true;
-					}
+				if (userAnswer === possibleAnswer) {
+					answerCorrect = true;
+				}
 			} else {
 				if (userAnswer.indexOf(possibleAnswer) >= 0) {
 					answerCorrect = true;
