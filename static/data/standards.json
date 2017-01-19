@@ -1,6 +1,18 @@
 [
 	{
 		"taskID" : 0,
+		"task" : "Ask him how he's doing",
+		"possibleAnswers" : 
+		[
+			{
+				"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+				"response" : "很好啊! 你呢？",
+				"soundID" : "henhao-nine"
+			}
+		]
+	},
+	{
+		"taskID" : 0,
 		"task" : "Say goodbye",
 		"possibleAnswers" : 
 		[

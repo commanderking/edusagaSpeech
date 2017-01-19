@@ -22,8 +22,21 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Try to get to know Chen Yang a little better by learning about her family.",
-			"next" : "end"
+			"text" : "Looks like David and his friend whom you haven't met are hanging out. Let's see what they're up to."
+		},
+		{
+			"name" : "David",
+			"image" : "characters/david/davidDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "你好! 这是我的朋友，陈阳。"
+		},
+		{
+			"name" : "Chen Yang",
+			"image" : "characters/chenguang/chengDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "你好!",
+			"jumpToTasks" : true,
+			"soundID" : ""
 		}
 	],
 	"practice" : {
@@ -118,6 +131,10 @@
 			"sounds" : 
 			[
 				{ 
+					"soundID" : "haikeyi",
+					"soundPath" : "chenyang/haikeyi.ogg"
+				}, 
+				{ 
 					"soundID" : "family-take-a-guess",
 					"soundPath" : "chenyang/family-take-a-guess.ogg"
 				}, 
@@ -195,6 +212,26 @@
 			"currentTasks" : [
 				{
 					"taskID" : 1,
+					"task" : "Ask her how she's doing.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
+							"response" : "还可以。",
+							"soundID" : "haikeyi"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"tasksToQueue" : [10],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 10,
 					"task" : "Ask her for her nationality.",
 					"possibleAnswers" : 
 					[
@@ -209,10 +246,7 @@
 					"tasksToQueue" : [20, 21, 22, 23],
 					"attemptedAnswers" : [],
 					"hintUsed": false
-				}
-			],
-			"queuedTasks" :
-			[
+				},
 				{
 					"taskID" : 20,
 					"task" : "Ask if she is American",
