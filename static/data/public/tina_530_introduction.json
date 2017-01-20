@@ -1,6 +1,6 @@
 {
 	"activityID": "orderingFood",
-	"activityName": "Ordering Food at a Fast Food Restaurant",
+	"activityName": "Familiar Face on School Campus",
 	"tags" : ["food"],
 	"sequence" : 310,
 	"score" : 0,
@@ -13,7 +13,7 @@
 	"assessmentMode": false,
 	"objectives" : 
 	[
-		"I can order a meal."
+		"I can ask for basic information about another person (age, nationality, birthday)."
 	],
 	"scenario" :
 	[	
@@ -33,12 +33,54 @@
 		"list" :
 		[
 			{
-				"task" : "Fried Rice",
-				"answer" : "炒饭",
-				"pinyin" : "chǎofàn",
+				"task" : "Say student",
+				"answer" : "学生",
+				"pinyin" : "",
 				"correct" : false,
 				"tries": 0
-			}
+			},
+			{
+				"task" : "Ask someone if they are a student",
+				"answer" : "你是学生吗?",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone what they do for work",
+				"answer" : "你做什么工作?",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone how old they are this year",
+				"answer" : "你今年多大?",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Say birthday",
+				"answer" : "生日",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone when their birthday is",
+				"answer" : "你的生日几月几号",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			},
+			{
+				"task" : "Ask someone for their nationality",
+				"answer" : "你是哪国人?",
+				"pinyin" : "",
+				"correct" : false,
+				"tries": 0
+			}	
 		]
 	},
 	"character" : 
