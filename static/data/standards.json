@@ -1,5 +1,44 @@
 [
 	{
+		"taskID" : 1,
+		"task" : "Greet her.",
+		"possibleAnswers" : 
+		[
+			{
+				"answers" : ["你好"],
+				"response" : "你好!",
+				"soundID" : "nihao"
+			},
+			{
+				"answers" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "今天怎么样", "今天好吗", "今天过得怎么样"],
+				"response" : "不错!",
+				"soundID" : "bucuo"
+			}
+		]
+	},
+	{
+		"taskID" : 20,
+		"task" : "Ask him for his last name",
+		"possibleAnswers" : 
+		[
+			{
+				"answers" : ["请问你贵姓", "请问您贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
+				"response" : "我姓张。你呢?",
+				"soundID" : "surname-zhang-you"
+			},
+			{
+				"answers" : ["你叫什么名字","你的名字是什么", "你叫什么"],
+				"response" : "我叫 David。你叫什么?",
+				"soundID" : "intro-david-your-name"
+			}
+		],
+		"correct" : false,
+		"emotion" : "characters/david/davidLaughing.png",
+		"tasksToQueue" : [21],
+		"attemptedAnswers" : [],
+		"hintUsed" : false
+	},
+	{
 		"taskID" : 0,
 		"task" : "Ask him how he's doing",
 		"possibleAnswers" : 
@@ -28,6 +67,40 @@
 		[
 			{
 				"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你是哪里来的", "你从哪里来", "你从哪里来的"]
+			}
+		]
+	},
+	{
+		"taskID" : 11,
+		"task" : "Ask for someone's age",
+		"possibleAnswers" : 
+		[
+			{
+				"answers" : ["你今年多大了", "今年你多大", "今年几岁"]
+			},
+			{
+				"answers" : ["你多大", "你几岁", "多大年纪", "多大岁数"]
+			}		
+		],
+		"correct" : false,
+		"emotion" : "characters/alex/alexDefault.png",
+		"tasksToQueue" : [20, 21],
+		"attemptedAnswers" : [],
+		"hintUsed" : false
+	},
+	{
+		"taskID" : 20,
+		"task" : "Ask someone for thier birthday",
+		"possibleAnswers" : 
+		[
+			{
+				"answers" : ["你妹妹的生日几月几号"]
+			},
+			{
+				"answers" : [
+					["你妹妹生日", "你妹妹的生日",  "你的妹妹生日"],
+					["几月几号", "是什么时候", "是什么日期", "是哪一天"]
+				]
 			}
 		]
 	},

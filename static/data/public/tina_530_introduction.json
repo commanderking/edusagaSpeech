@@ -1,0 +1,351 @@
+{
+	"activityID": "orderingFood",
+	"activityName": "Ordering Food at a Fast Food Restaurant",
+	"tags" : ["food"],
+	"sequence" : 10,
+	"score" : 0,
+	"currentCharName" : "",
+	"currentImage" : "characters/tina/tinaDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"scenarioIndex": 0,
+	"assessmentMode": false,
+	"objectives" : 
+	[
+		"I can order a meal."
+	],
+	"scenario" :
+	[	
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Doesn't that look like the girl working at the fast food restaurant? Is she also a student?",
+			"next" : "end"
+		}
+	],
+	"practice" : {
+		"currentWordIndex" : 0,
+		"lastAnswer" : "",
+		"score" : 0,
+		"lang" : "zh-CN",
+		"list" :
+		[
+			{
+				"task" : "Fried Rice",
+				"answer" : "炒饭",
+				"pinyin" : "chǎofàn",
+				"correct" : false,
+				"tries": 0
+			}
+		]
+	},
+	"character" : 
+		{
+			"name" : "Tina",
+			"language" : "zh-CN",
+			"location" : 
+			{
+				"nameEnglish" : "Fast Food Restaurant",
+				"nameChinese" : "快餐店", 
+				"bg" : "bg/fastfoodRestaurant.jpg"
+			},
+			"emotions" : 
+			{
+				"default": "characters/tina/tinaDefault.png",
+				"ordering" : "characters/tina/tinaOrdering.png",
+				"confused" : "characters/tina/tinaConfused.png",
+				"silhouette" : "characters/tina/tinaSilhouette1.png"
+			},
+			"sounds" : 
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "tina/nihao.ogg"
+				}
+			],
+			"confusedPhrases" : 
+			[
+				{ 
+					"response": "什么?",
+					"soundID" : "shenme",
+					"soundPath" : "tina/shenme.ogg"
+				}, 
+				{ 
+					"response": "我听不懂.",
+					"soundID" : "tingbudong",
+					"soundPath" : "tina/tingbudong.ogg"
+				}, 
+				{ 
+					"response": "不好意思, 我没听懂.",
+					"soundID" : "buhaoyisi",
+					"soundPath" : "tina/buhaoyisi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet her.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你好"],
+							"response" : "你好!",
+							"soundID" : "nihao"
+						},
+						{
+							"answers" : ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "今天怎么样", "今天好吗", "今天过得怎么样"],
+							"response" : "不错!",
+							"soundID" : "bucuo"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [10],
+					"attemptedAnswers" : []
+				}
+			],
+			"queuedTasks" : 
+			[
+				{
+					"taskID" : 10,
+					"task" : "Ask her for her name.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["请问你贵姓", "请问您贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
+							"response" : "我姓林。",
+							"soundID" : "surname-zhang-you"
+						},
+						{
+							"answers" : ["你叫什么名字","你的名字是什么", "你叫什么"],
+							"response" : "我叫林娜。我英文名字是 Tina。",
+							"soundID" : "intro-david-your-name"
+						}
+					],
+					"correct" : false,
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [20, 21],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 20,
+					"task" : "Ask if she's a student",
+					"taskType" : "choice",
+					"taskLink" : "studentOrJob",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你是学生吗?"]
+						},
+						{
+							"answers" : [
+								["你"],
+								["是不是"],
+								["学生", "同学"]
+							]
+						},
+						{
+							"answers" : [
+								["你是"],
+								["学生吗"]
+							]
+						}				
+					],
+					"correct" : false,
+					"response" : "我是个学生啊！你呢？",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [30, 31],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 21,
+					"task" : "Ask what she does for work",
+					"taskLink" : "studentOrJob",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你做什么工作?"]
+						},
+						{
+							"answers" : [
+								["你"],
+								["做什么"],
+								["工作", "事"]
+							]
+						}				
+					],
+					"correct" : false,
+					"response" : "我在一个快餐餐厅做事。",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 30,
+					"task" : "Tell her you are a student.",
+					"taskType": "choice",
+					"taskLink" : "studentOrNot",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我也是个学生"]
+						},
+						{
+							"answers" : [
+								["我"],
+								["是"],
+								["学生"]
+							]
+						},
+						{
+							"answers": ["是的", "我也是","我也是的"],
+							"exactMatch" : true,
+							"exceptions" : ["不是"]
+						}				
+					],
+					"correct" : false,
+					"response" : "哦。 原来我们两个都是学生！你今年多大?",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [35],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 31,
+					"task" : "Tell her you are not a student.",
+					"taskType": "choice",
+					"taskLink" : "studentOrNot",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我不是个学生。"]
+						},
+						{
+							"answers" : [
+								["我"],
+								["不是"],
+								["学生"]
+							]
+						},
+						{
+							"answers": ["不是"]
+						}				
+					],
+					"correct" : false,
+					"response" : "真的吗？你看起来像个学生。 你今年多大?",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [35],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 35,
+					"task" : "Answer her question 你今年多大?",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["我___岁。"]
+						},
+						{
+							"answers" : [
+								["一", "二", "三", "四", "五", "六", "七", "八", "九", "十",
+									"1", "2", "3", "4", "5", "6", "7", "8", "9" , "10"],
+								["岁"]
+							]
+						}			
+					],
+					"correct" : false,
+					"response" : "哦。。。是吗？",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [40, 41, 42, 43],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 40,
+					"task" : "Ask her how old she is.",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你今年多大"]
+						},
+						{
+							"answers" : [
+								["今年"],
+								["多大", "几岁", "多大年纪", "年纪多大", "多大岁数"]
+							]
+						},
+						{
+							"answers" : ["你多大", "你几岁", "多大年纪", "多大岁数"]
+						}			
+					],
+					"correct" : false,
+					"response" : "我今年二十二岁。",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : []
+				},
+				{
+					"taskID" : 41,
+					"task" : "Ask her for her birthday",
+					"possibleAnswers" : 
+					[
+						{ "answers" : ["你的生日几月几号"] },
+						{
+							"answers" : [
+								["你生日", "你的生日"],
+								["几月几号", "是什么时候", "是什么日期", "是哪一天"]
+							]
+						}
+					],
+					"correct" : false,
+					"response" : "我的生日啊？ 是十一月七号。",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 42,
+					"task" : "Ask her for her nationality",
+					"possibleAnswers" : 
+					[
+						{
+							"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你是哪里来的", "你从哪里来", "你从哪里来的"]
+						}
+					],
+					"correct" : false,
+					"response" : "我是韩国人。我爸也是韩国人. 我妈是中国人。",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				},
+				{
+					"taskID" : 43,
+					"task" : "Say bye",
+					"possibleAnswers" : 
+					[
+						{
+							"answers": 	["再见", "拜拜", "明天见", "慢走"]
+						}
+					],
+					"correct" : false,
+					"response" : "再见!",
+					"soundID" : "",
+					"emotion" : "characters/tina/tinaDefault.png",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed" : false
+				}
+			],
+			"completedTasks" : []
+		}
+}
