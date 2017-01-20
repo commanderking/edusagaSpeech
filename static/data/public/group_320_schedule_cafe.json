@@ -56,7 +56,7 @@
 			"image" : "characters/david/davidUncertain.png",
 			"imageLayer" : "blank.png",
 			"text" : "星期几?",
-			"soundID" : "",
+			"soundID" : "cafe-which-day",
 			"jumpToTasks" : true,
 			"index": 5
 		},
@@ -78,8 +78,8 @@
 			"name" : "David",
 			"image" : "characters/david/davidLaughing.png",
 			"imageLayer" : "blank.png",
-			"text" : "太好了! 星期天几点?",
-			"soundID" : "",
+			"text" : "好啊! 星期天几点?",
+			"soundID" : "cafe-ok-what-time-sunday",
 			"jumpToTasks" : true
 		},
 		{
@@ -93,8 +93,8 @@
 			"name" : "David",
 			"image" : "characters/david/davidLaughing.png",
 			"imageLayer" : "blank.png",
-			"text" : "那我们星期六见！",
-			"soundID" : "",
+			"text" : "那我们就星期天见！",
+			"soundID" : "cafe-then-lets-meet-sunday",
 			"index" : 10
 		},	
 		{
@@ -225,6 +225,30 @@
 				{
 					"soundID" : "nihaoDavid",
 					"soundPath" : "david/nihao.ogg"
+				},
+				{
+					"soundID" : "cafe-which-day",
+					"soundPath" : "david/cafe-which-day.ogg"
+				},
+				{
+					"soundID" : "cafe-ok-what-time-sunday",
+					"soundPath" : "david/cafe-ok-what-time-sunday.ogg"
+				},
+				{
+					"soundID" : "cafe-aiya-saturday-busy",
+					"soundPath" : "david/cafe-aiya-saturday-busy.ogg"
+				},
+				{
+					"soundID" : "cafe-ai-saturday-morning-busy",
+					"soundPath" : "david/cafe-ai-saturday-morning-busy.ogg"
+				},
+				{
+					"soundID" : "cafe-then-lets-meet-sunday",
+					"soundPath" : "david/cafe-then-lets-meet-sunday.ogg"
+				},
+				{
+					"soundID" : "zaijianDavid",
+					"soundPath" : "david/zaijian.ogg"
 				}
 			],
 			"confusedPhrases" : 
@@ -311,7 +335,7 @@
 						{
 							"answers" : ["星期六"],
 							"response" : "哎呀。 我星期六有事。",
-							"soundID" : "ee"
+							"soundID" : "cafe-aiya-saturday-busy"
 						}
 					],
 					"correct" : false,
@@ -349,8 +373,8 @@
 					[
 						{
 							"answers" : ["早上九点半", "早上9点半"],
-							"response" : "早上九点半，我有事。",
-							"soundID" : "ee"
+							"response" : "哎! 早上九点半，我有事。",
+							"soundID" : "cafe-ai-saturday-morning-busy"
 						}
 					],
 					"correct" : false,
@@ -405,12 +429,12 @@
 					[
 						{
 							"answers" : ["星期六见", "再见", "拜拜", "慢走"],
-							"response" : "",
-							"soundID" : "ee"
+							"response" : "再见!",
+							"soundID" : "zaijianDavid"
 						}
 					],
 					"correct" : false,
-					"emotion" : "blank.png",
+					"emotion" : "characters/david/davidLaughing.png",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
