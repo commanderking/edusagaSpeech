@@ -129,7 +129,8 @@
 				"dramatic": "characters/wang/wangDramaticEvasive.png",
 				"surprised": "characters/wang/wangSurprised.png",
 				"thoughtful": "characters/wang/wangThoughtful.png",
-				"silhouette": "characters/wang/wangSilhouette.png"
+				"silhouette": "characters/wang/wangSilhouette.png",
+				"confused": "characters/wang/wangSurprised.png"
 			},
 			"successPhrases" : {
 
