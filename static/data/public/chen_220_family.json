@@ -28,7 +28,8 @@
 			"name" : "David",
 			"image" : "characters/david/davidDefault.png",
 			"imageLayer" : "blank.png",
-			"text" : "你好! 这是我的朋友，陈阳。"
+			"text" : "嘿! 你好! 这是我的朋友，陈阳。",
+			"soundID": "greeting-this-is-my-friend-chenyang"
 		},
 		{
 			"name" : "Chen Yang",
@@ -36,7 +37,7 @@
 			"imageLayer" : "blank.png",
 			"text" : "你好!",
 			"jumpToTasks" : true,
-			"soundID" : ""
+			"soundID" : "hi"
 		}
 	],
 	"practice" : {
@@ -130,6 +131,15 @@
 			},
 			"sounds" :
 			[
+
+				{
+					"soundID" : "greeting-this-is-my-friend-chenyang",
+					"soundPath" : "david/greeting-this-is-my-friend-chenyang.ogg"
+				},
+				{
+					"soundID" : "hi",
+					"soundPath" : "chenyang/hi.ogg"
+				},
 				{
 					"soundID" : "haikeyi",
 					"soundPath" : "chenyang/haikeyi.ogg"
