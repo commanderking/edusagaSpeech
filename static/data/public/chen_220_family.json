@@ -10,14 +10,14 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives": 
+	"objectives":
 	[
-		"I can ask for someone's nationality", 
+		"I can ask for someone's nationality",
 		"I can ask about someone's family.",
 		"I can ask about other people's professions."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -104,17 +104,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "Chen Yang",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Library",
-				"nameChinese" : "大学图书馆", 
+				"nameChinese" : "大学图书馆",
 				"bg" : "bg/jiaoTongLibrary.jpg"
 			},
-			"emotions" : 
+			"emotions" :
 			{
 				"default": "characters/chenguang/chengDefault.png",
 				"uncertain" : "characters/chenguang/chengGoodJob.png",
@@ -128,82 +128,82 @@
 			"successPhrases" : {
 
 			},
-			"sounds" : 
+			"sounds" :
 			[
-				{ 
+				{
 					"soundID" : "haikeyi",
 					"soundPath" : "chenyang/haikeyi.ogg"
-				}, 
-				{ 
+				},
+				{
 					"soundID" : "family-take-a-guess",
 					"soundPath" : "chenyang/family-take-a-guess.ogg"
-				}, 
-				{ 
+				},
+				{
 					"soundID" : "family-nope-try-again",
 					"soundPath" : "chenyang/family-nope-try-again.ogg"
-				}, 
-				{ 
+				},
+				{
 					"soundID" : "family-guessed-right",
 					"soundPath" : "chenyang/family-guessed-right.ogg"
 				},
-				{ 
+				{
 					"soundID" : "nationality-guess-right-dad-is-chinese-mom-not",
 					"soundPath" : "chenyang/nationality-guess-right-dad-is-chinese-mom-not.ogg"
 				},
-				{ 
+				{
 					"soundID" : "family-im-chinese",
 					"soundPath" : "chenyang/family-im-chinese.ogg"
-				}, 
-				{ 
+				},
+				{
 					"soundID" : "family-dad-chinese",
 					"soundPath" : "chenyang/family-dad-chinese.ogg"
-				}, 
-				{ 
+				},
+				{
 					"soundID" : "family-dad-chinese-mom-not",
 					"soundPath" : "chenyang/family-dad-chinese-mom-not.ogg"
 				},
-				{ 
+				{
 					"soundID" : "family-wont-tell-you-guess",
 					"soundPath" : "chenyang/family-wont-tell-you-guess.ogg"
-				}, 
-				{ 
+				},
+				{
 					"soundID" : "family-nope-guess-again",
 					"soundPath" : "chenyang/family-nope-guess-again.ogg"
-				}, 
-				{ 
+				},
+				{
 					"soundID" : "family-guess-right-canadian",
 					"soundPath" : "chenyang/family-guess-right-canadian.ogg"
 				},
-				{ 
+				{
 					"soundID" : "family-no-guess-no-tell",
 					"soundPath" : "chenyang/family-no-guess-no-tell.ogg"
-				}, 
-				{ 
+				},
+				{
 					"soundID" : "family-mom-doctor",
 					"soundPath" : "chenyang/family-mom-doctor.ogg"
 				},
-				{ 
+				{
 					"soundID" : "family-dad-teacher-bzz-got-to-go",
 					"soundPath" : "chenyang/family-dad-teacher-bzz-got-to-go.ogg"
 				},
-				{ 
+				{
 					"soundID" : "en",
 					"soundPath" : "chenyang/en.ogg"
 				}
 			],
-			"confusedPhrases" : 
+			"confusedPhrases" :
 			[
-				{ 
+				{
 					"response": "什么?",
 					"soundID" : "shenme",
 					"soundPath" : "chenyang/shenme.ogg"
-				}, 
-				{ 
+				},
+				{
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
 					"soundPath" : "chenyang/tingbudong.ogg"
-				}, 
-				{ 
+				},
+				{
 					"response": "不好意思, 我没听懂.",
 					"soundID" : "buhaoyisi",
 					"soundPath" : "chenyang/buhaoyisi.ogg"
@@ -213,7 +213,7 @@
 				{
 					"taskID" : 1,
 					"task" : "Ask her how she's doing.",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
@@ -233,7 +233,7 @@
 				{
 					"taskID" : 10,
 					"task" : "Ask her for her nationality.",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你是哪国人", "你是哪里人"],
@@ -251,7 +251,7 @@
 					"taskID" : 20,
 					"task" : "Ask if she is American",
 					"taskLink" : "choiceChenYangNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你是不是美国人", "你是美国人吗"],
@@ -270,7 +270,7 @@
 					"task" : "Ask if she's Chinese",
 					"taskType" : "choice",
 					"taskLink" : "choiceChenYangNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你是不是中国人", "你是中国人吗"],
@@ -288,7 +288,7 @@
 					"taskID" : 22,
 					"task" : "Ask if she's Japanese",
 					"taskLink" : "choiceChenYangNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你是不是日本人", "你是日本人吗"],
@@ -306,7 +306,7 @@
 					"taskID" : 23,
 					"task" : "Ask if she's Canadian",
 					"taskLink" : "choiceChenYangNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你是不是加拿大人", "你是加拿大人吗"],
@@ -323,7 +323,7 @@
 				{
 					"taskID" : 30,
 					"task" : "Ask for her mom's nationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你妈妈是哪国人", "你妈妈是哪里人"],
@@ -349,7 +349,7 @@
 					"taskID" : 40,
 					"task" : "Ask if she's American",
 					"taskLink" : "choiceChenYangMomNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你妈妈是不是美国人"],
@@ -388,7 +388,7 @@
 					"task" : "Ask if she's Canadian",
 					"taskType" : "choice",
 					"taskLink" : "choiceChenYangMomNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你妈妈是不是加拿大人"],
@@ -426,7 +426,7 @@
 					"taskID" : 42,
 					"task" : "Ask if she's Japanese",
 					"taskLink" : "choiceChenYangMomNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你妈妈是不是日本人"],
@@ -464,7 +464,7 @@
 					"taskID" : 44,
 					"task" : "Ask if she's British",
 					"taskLink" : "choiceChenYangMomNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你妈妈是不是英国人"],
@@ -502,7 +502,7 @@
 					"taskID" : 45,
 					"task" : "Ask if she's French",
 					"taskLink" : "choiceChenYangMomNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你妈妈是不是法国人"],
@@ -540,7 +540,7 @@
 					"taskID" : 46,
 					"task" : "Say you won't guess (我不猜 - Wǒ bù cāi)",
 					"taskLink" : "choiceChenYangMomNationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["我不猜"],
@@ -557,7 +557,7 @@
 				{
 					"taskID" : 50,
 					"task" : "Ask what her mom does for work",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你的妈妈做什么工作"],
@@ -566,7 +566,7 @@
 						},
 						{
 							"answers": [
-								["你妈妈", "你的妈妈", "他", "她"],
+								["你妈", "你的妈", "他", "她"],
 								["做什么"],
 								["工作", "事"]
 							],
@@ -593,7 +593,7 @@
 				{
 					"taskID" : 51,
 					"task" : "Ask what her dad does for work",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你的爸爸做什么工作"],
@@ -634,7 +634,7 @@
 				{
 					"taskID" : 60,
 					"task" : "Respond appropriately.",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["再见", "明天见"],
