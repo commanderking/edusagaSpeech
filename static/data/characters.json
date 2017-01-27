@@ -1,0 +1,28 @@
+{
+  "david" : {
+    "emotions" : {
+      "default": "characters/david/davidDefault.png",
+      "uncertain" : "characters/david/davidUncertain.png",
+      "laughing" : "characters/david/davidLaughing.png",
+      "confused" : "characters/david/davidConfused.png",
+      "silhouette" : "characters/david/davidSilhouette.png"
+    },
+    "confusedPhrases" :[
+      {
+        "response": "什么?",
+        "soundID" : "shenme",
+        "soundPath" : "david/shenme.ogg"
+      },
+      {
+        "response": "我听不懂.",
+        "soundID" : "tingbudong",
+        "soundPath" : "david/tingbudong.ogg"
+      },
+      {
+        "response": "不好意思, 我没听懂.",
+        "soundID" : "buhaoyisi",
+        "soundPath" : "david/buhaoyisi.ogg"
+      }
+    ]
+  }
+}
