@@ -15,7 +15,7 @@ from models import *
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
 user_manager = UserManager(db_adapter, app)     # Initialize Flask-User
 
-def trackVisitorWithText(textMessage): 
+def trackVisitorWithText(textMessage):
 	current_url = request.url
 	parsed = urlparse.urlparse(current_url)
 
@@ -23,11 +23,11 @@ def trackVisitorWithText(textMessage):
 	try:
 		print "tracking user"
 		userID = textMessage + str(urlparse.parse_qs(parsed.query)['p'][0])
-		# Ensure it's a set 
+		# Ensure it's a set
 		print len(userID)
 		if len(userID) < 10:
 			client = boto3.client('sns', region_name ='us-east-1')
-			response = client.publish( 
+			response = client.publish(
 				TopicArn='arn:aws:sns:us-east-1:513786056711:svc-edusaga-events-logging',
 				Message= userID,
 				MessageStructure='string'
@@ -58,20 +58,20 @@ def trackVisitorEvent(eventText):
 		queue = sqs.get_queue_by_name(QueueName='svc-edusaga-visitor-events')
 		response = queue.send_message(MessageBody=content)
 		return userID
-	except: 
+	except:
 		pass
 
 @app.route('/')
 def index(name="Index"):
 	# If no user ID generate a random one
-	try: 
+	try:
 		userID = session['userID']
 	except:
 		userID = uuid.uuid4()
 	if current_user.is_authenticated:
 		return redirect(url_for("teacherHome", teacher=current_user.username))
-	else: 
-		return render_template('index3.html', name=name, userID=userID)
+	else:
+		return render_template('index.html', name=name, userID=userID)
 
 #--------------------------------------------
 # E-mail this link and redirect to homepage to track with text
@@ -98,14 +98,14 @@ def teacherPage(username):
 @app.route('/teacher/<teacher>/home/')
 def teacherHome(teacher):
 	studentID = request.args.get('studentID')
-	if teacher == "public": 
+	if teacher == "public":
 		studentID = request.args.get('studentID')
 		return render_template('mainMenu.html', teacher=teacher, studentID=studentID)
 	elif current_user.is_authenticated:
 		if teacher == current_user.username:
 			print "rendering teacher_home"
 			return render_template('teacherHome.html', teacher=teacher, studentID=studentID)
-		else: 
+		else:
 			return redirect(url_for('teacherHome', teacher=current_user.username))
 	else:
 		return redirect(url_for('user.login'))
@@ -129,7 +129,7 @@ def login(teacher):
 	if request.method == 'POST':
 		studentID = request.form.get("studentID")
 		return redirect(url_for('teacherHome', studentID=studentID, teacher=teacher))
-	else: 
+	else:
 		return render_template("login.html")
 
 @app.route('/teacher/<teacher>/dashboard')
@@ -140,7 +140,7 @@ def teacherDashboard(teacher):
 def teacherScene(teacher, episodeName):
 	try:
 		studentID = request.args['studentID']
-	except: 
+	except:
 		studentID = ""
 	textToTrack = "Visited " + episodeName + " "
 	trackVisitorEvent("Visited " + episodeName + " Page")
@@ -177,13 +177,13 @@ def videoRedirect(name="Video Redirect"):
 
 
 #-----------------------------------------------
-#POST requests 
+#POST requests
 #-----------------------------------------------
 
 #-----------------------------------------------
 #Business/Engagement Logic
 @app.route('/logVisitorEvents', methods=['POST'])
-def logVisitorEvents(): 
+def logVisitorEvents():
 	content = request.get_data()
 	sqs = boto3.resource('sqs', region_name = 'us-east-1')
 	queue = sqs.get_queue_by_name(QueueName='svc-edusaga-visitor-events')
@@ -239,7 +239,7 @@ def postAddEpisode(username):
 		if Episode.query.filter_by(episodeJSONFileName=episodeName).first():
 			print "Episode already in database"
 			newEpisode=Episode.query.filter_by(episodeJSONFileName=episodeName).first()
-		else: 
+		else:
 			newEpisode = Episode(episodeName)
 			db.session.add(newEpisode)
 			db.session.commit()
@@ -248,7 +248,7 @@ def postAddEpisode(username):
 		newEpisode.users.append(teacher)
 		db.session.commit()
 
-		newEpisodeArray = getTeacherEpisodes(current_user.username)		
+		newEpisodeArray = getTeacherEpisodes(current_user.username)
 		return json.dumps({'success': True, 'episodeArray': newEpisodeArray}, 200, {'ContentType': 'application/json'})
 
 @app.route('/teacher/<username>/episode/removeEpisode', methods=['POST'])
@@ -275,7 +275,7 @@ def getEpisodes(username):
 	try:
 		teacherEpisodeData = getTeacherEpisodes(username)
 		return json.dumps({'success': True, 'teacherEpisodeData' : teacherEpisodeData}, 200, {'ContentType': 'application.json'})
-	except: 
+	except:
 		return json.dumps({'success': True, 'teacherEpisodeData' : []}, 200, {'ContentType': 'application.json'})
 
 if __name__ == '__main__':

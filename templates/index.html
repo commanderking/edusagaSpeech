@@ -1,281 +1,391 @@
 {% extends "base.html" %}
 
 {% block header %}
-    <link rel="stylesheet" href="/static/css/landingPage.css">
-    <script>
-		var userID = "{{ userID }}"
-	</script>
-
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <!--[if lte IE 8]><script src="static/js/ie/html5shiv.js"></script><![endif]-->
+      <link rel="stylesheet" href="static/css/index3.css" />
+      <!--[if lte IE 8]><link rel="stylesheet" href="static/css/ie8.css" /><![endif]-->
+      <!--[if lte IE 9]><link rel="stylesheet" href="static/css/ie9.css" /><![endif]-->
+  </head>
 {% endblock %}
+
 {% block content %}
-<body>
-	<div class="landingScreen verticalCenterIndex col-xs-12 col-sm-12 col-lg-12">
-		<!-- <button class="btn btn-login">LOGIN</button> !-->
-		<div class="tryDemo">
-			<p>Try Demos</p>
-			<span class="glyphicon glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-		</div>
-		<div class="landingScreenContainer">
-			<h2>EduSaga</h2>
-			<p>Providing interactive speaking activities and immediate feedback to learners through speech recognition</p>
-			<a data-scroll href="#signup"><button class="btn btn-signup">SIGN UP</button></a>
-		</div>
-		<div class="landingScreenVideo">
-			<div id="player">
-			<!--
-			<iframe class="videoTrailer" width="100%" height="315" src="https://www.youtube.com/embed/nQeKi-2JOnA" frameborder="0" allowfullscreen></iframe>
-			!-->
-		</div>
-		</div>
-	</div>
 
-	<!-- Demo Div !-->
-	<!--
-	<div class="demoScreen verticalCenterIndex col-xs-12 col-sm-12 col-lg-12">
-		<div id="app" class=" demoContainer col-xs-12 col-sm-12 col-lg-12"></div>
-		 <script>
-	    	var activity = "{{ activityName }}"
-	    	var teacher = "{{ teacher }}"
-    	</script>
+  <body class="index">
+    <div id="page-wrapper">
 
-			<div class="scenarioWindow hidden">
-				<div class="roboWrapper">
-				</div>
-				<div class="scenarioTextWrapper">
-					<h3 class="scenarioHeader"></h3>
-					<p class="scenarioText"></p>
-					<button class="btn btn-success btn-confirm">Got it!</button>
-				</div>
-			</div>
-	</div>
-	!-->
+      <!-- Header -->
+        <header id="header" class="alt">
+          <h1 id="logo"><img src="https://s3.amazonaws.com/edusaga/assets/images/index/logoBlue.png" alt="..."></a></h1>
+          <nav id="nav">
+            <ul>
+              <!--
+              <li class="current"><a href="index.html">Welcome</a></li>
+              <li class="submenu">
+                <a href="#">Layouts</a>
+                <ul>
+                  <li><a href="left-sidebar.html">Left Sidebar</a></li>
+                  <li><a href="right-sidebar.html">Right Sidebar</a></li>
+                  <li><a href="no-sidebar.html">No Sidebar</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li class="submenu">
+                    <a href="#">Submenu</a>
+                    <ul>
+                      <li><a href="#">Dolore Sed</a></li>
+                      <li><a href="#">Consequat</a></li>
+                      <li><a href="#">Lorem Magna</a></li>
+                      <li><a href="#">Sed Magna</a></li>
+                      <li><a href="#">Ipsum Nisl</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              !-->
+              <li><a href="#cta" class="button fit scrolly special">Sign Up</a></li>
+            </ul>
+          </nav>
+        </header>
+
+      <!-- Banner -->
+        <section id="banner">
+          <!--
+            ".inner" is set up as an inline-block so it automatically expands
+            in both directions to fit whatever's inside it. This means it won't
+            automatically wrap lines, so be sure to use line breaks where
+            appropriate (<br />).
+          -->
+          <div class="inner">
+
+            <header id="main-logo">
+                <img src="https://s3.amazonaws.com/edusaga/assets/images/index/logoBackdrop.png" alt="...">
+{#              <h2>EDUSAGA</h2>#}
+            <br>
+            </header>
+            <p>Assess the oral proficiency <br />
+                of <strong>every</strong> student - <br/>
+            <strong>simultaneously, simply</strong>
+            <br >
+            even at home.
+            <footer>
+              <br >
+              <ul class="buttons vertical">
+                <li><a href="teacher/public/episode/david_220_family" class="button fit scrolly">Play the Demo</a></li>
+              </ul>
+            </footer>
+
+          </div>
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+              </ol>
+
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner" role="listbox">
+                <div class="item active">
+{#                  <div class="main-image">#}
+                    <div class ="inner-item">
+                      <img class="center-block" src="https://s3.amazonaws.com/edusaga/assets/images/index/carouselComputerHappy.jpeg" alt="First slide">
+                    </div>
+{#                    <img src="https://s3.amazonaws.com/edusaga/assets/images/index/girlsComputerLearningHappy.jpeg" alt="...">#}
+{#                  </div>#}
+                  <div class="carousel-caption">
+                    ...
+                  </div>
+                </div>
+                <div class="item">
+                  <div class ="inner-item">
+                  <img src="https://s3.amazonaws.com/edusaga/assets/images/index/carouselColorful.jpeg" alt="...">
+                  </div>
+                  <div class="carousel-caption">
+                    ...
+                  </div>
+                </div>
+                <div class="item">
+                  <div class ="inner-item">
+                  <img src="https://s3.amazonaws.com/edusaga/assets/images/index/carouselHelping.jpeg" alt="...">
+                  <div class="carousel-caption">
+                  </div>
+                    ...
+                  </div>
+                </div>
+              </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </section>
+
+      <!-- Main -->
+        <article id="main">
+
+        <section class="wrapper style1 container special-alt">
+              <div class="row 50%">
+          <div>
+          <header>
+            <h2>Practice speaking Mandarin anytime, anywhere.
+            </h2>
+            <p> <strong>EduSaga</strong> allows students to practice speaking with real time feedback all on their own.
+            <br />
+            It is playable through your browser - <strong>no download required. </strong>
+            </p>
+          </header>
+              </div>
+                    </div>
+
+            </section>
+
+          <!-- One -->
+            <section class="wrapper style2 container special-alt">
+              <div class="row 50%">
+{#                <div class="8u 12u(narrower)">#}
+                  <div>
+                    <header>
+                        <h2>A wide cast of characters keeps students engaged with <strong>speaking</strong> - not with their nerves.</h2>
+                    </header>
+                  </div>
+                  <blockquote class="blocknarrow">
+                      <p>Even the boldest students can be intimidated by speaking another language out loud. When they're tempted to give up, colorful characters and game rewards keep them going.
+                  </p>
+                  </blockquote>
+
+                  <div class="8u 12u(narrower)">
+                      <div class="8u 12u(narrower)" id="charImage">
+                        <img class="major-image" src="https://s3.amazonaws.com/edusaga/assets/images/index/webPortraitCheng.png" alt="...">
+                      </div>
+                      <div class="8u 12u(narrower)" id="charImage">
+                        <img class="major-image" src="https://s3.amazonaws.com/edusaga/assets/images/index/webPortraitDavid.png" alt="...">
+                      </div>
+                      <div class="8u 12u(narrower)" id="charImage">
+                        <img class="major-image" src="https://s3.amazonaws.com/edusaga/assets/images/index/webPortraitAlex.png" alt="...">
+                      </div>
+                  </div>
+
+                  <footer>
+                    <ul class="buttons">
+                      <li><a target="_blank" href="teacher/public/episode/david_220_family" class="button">Try the Demo</a></li>
+                    </ul>
+                  </footer>
+
+                </div>
+
+            </section>
 
 
-	<!-- Features Div !-->
+            <!-- One POINT FIVE!-->
+            <section class="wrapper style5 container special-alt">
+              <div class="row 50%">
+{#                <div class="8u 12u(narrower)">#}
+                 <div>
+                    <header>
+                        <h2>Tasks aligned with <strong>ACTFL Can-Do standards.</strong></h2>
+                    </header>
+                  </div>
 
-	<div class="featuresScreen col-xs-12 col-sm-12 col-lg-12">
-		<h3>Speaking Episodes!</h3>
-		<div class ="feature">
-			<div class="featureImage">
-				<a href="public/publicDemo2" target="_blank"><img src="https://s3.amazonaws.com/edusaga/assets/images/index/demoTina.png"></a>
-			</div>
-			<div class="featureText">
-				<div class="textWrapper">
-					<h3>Ordering at a Fast Food Restaurant</h3>
-					<p><span>Scenario:</span> Ask about what the restaurant has, the price of different foods, and finally order something at this fast food restaurant scenario.</p>
-					<p><span>Key Phrases:</span> 你有没有...? 几块钱?, 来一个／我要一个</p>
-				</div>
-				<div class="buttonWrapper">
-					<a href="public/publicDemo2?p={{ userID }}" target="_blank" class="btn btn-tryDemo">Start</a>
-				</div>
-			</div>
-		</div>
-		<div class ="feature">
-			<div class="featureImage">
-				<a href="public/publicDemo" target="_blank"><img src="https://s3.amazonaws.com/edusaga/assets/images/index/demoDavid.png"></a>
-			</div>
-			<div class="featureText">
-				<div class="textWrapper">
-					<h3>Meeting a New Friend</h3>
-					<p><span>Scenario:</span> In this scene, you meet David, someone who you met at the airport and who will be attending a Chinese langauge program with you. You want to learn as much about him as possible.</p>
-					<p><span>Key Phrases:</span> 你是哪里人, 你几岁, 你属什么, 你喜欢...? </p>
-				</div>
-				<div class="buttonWrapper">
-					<a href="public/publicDemo?p={{ userID }}" target="_blank" class="btn btn-tryDemo">Start</a>
-				</div>
-			</diV>
-		</div>
-		<div class ="feature">
-			<div class="featureImage">
-				<a href="public/publicDemo3" target="_blank"><img src="https://s3.amazonaws.com/edusaga/assets/images/index/demoLinda.png"></a>
-			</div>
-			<div class="featureText">
-				<div class="textWrapper">
-					<h3>Asking about Family Members</h3>
-					<p><span>Scenario:</span> You and Linda have just met and you're curious to learn more about her family.</p>
-					<p><span>Key Phrases:</span> 你家有几口人?, 你的妈妈是哪里人?, 你的爸爸几岁?</p>
-				</div>
-				<div class="buttonWrapper">
-					<a href="public/publicDemo3?p={{ userID }}" target="_blank" class="btn btn-tryDemo">Start</a>
-				</div>
-			</div>
-		</div>
+                  <div class="8u 12u(narrower)" id="charImage">
+                        <img class="major-image" src="https://s3.amazonaws.com/edusaga/assets/images/index/girlListening.png" alt="...">
+                  </div>
+                      <blockquote class="blocknarrow">
+                        <p>Scaffoled lessons provide achievable goals as students build relationships with characters. Meanwhile, you can see their progress while they play.</p>
+                  <footer>
+                    <ul class="buttons">
+                      <li><a target="_blank" href="https://youtu.be/198UZsder5Q" class="button">Watch the Video</a></li>
+                    </ul>
+                  </footer>
 
-		<a href="/public/home?p={{ userID }}"><button class="btn btn-signup-lg">SEE MORE EPISODES</button></a>
-	</div>
+{#                </div>#}
 
-	<!-- Activities Div linking to specific demo examples !-->
-	<!--
-	<div class="activityScreen col-xs-12 col-sm-12 col-lg-12">
-		<div class="activityWrapper">
-			<h2>Ordering at a Restaurant</h2>
-			<div class="activityContent">
-				<div class="textButtonWrapper">
-					<p>Ordering food at a restaurant might require asking </p>
-					<button class="btn btn-info">Click to Open</button>
-				</div>
-			</div>
-			<div class="activityImageWrapper">
-				<img src="static/images/davidDefault.png">
-			</div>
-		</div>
-	</div>
-	!-->
+              </div>
+            </section>
 
-	<!-- Testimonials !-->
-	<!--
-	<div class="testimonyScreen verticalCenter col-xs-12 col-sm-12 col-lg-12">
-		<div class="testimonyWrapper">
-			<h2>Teacher Testimonials</h2>
-			<div class="testimony testimonyLeft">
-				<div class="portrait"></div>
-				<p class="comment">EduSaga is so much better than sliced bread that I don't even buy sliced bread anyomre. Now I only eat bagels</p>
-				<div class="author">
-					<p class="name">Who knows</p>
-					<p class="location">Cherry Hill High School East</p>
-				</div>
-			</div>
-			<div class="testimony testimonyRight">
-				<div class="portrait"></div>
-				<p class="comment">I'm too lazy to wrap this text around the ellipse headshot right now btu that is what should happen in CSS</p>
-				<p class="author">Cool Teacher 123</p>
-			</div>
-		</div>
-	</div>
-	!-->
+          <!-- Two -->
+            <section class="wrapper style2 container special">
+              <div class="row">
+                  <div>
+                    <header>
+                        <h2>Different modes of play. Variable levels of difficulty.</h2>
+                    </header>
+                  </div>
+                    <div class="4u 12u(narrower)">
 
-	<!-- Sign up Page !-->
-	<div class="signupScreen col-xs-12 col-sm-12 col-lg-12">
-		<div class="signupWrapper">
-			<h3>SIGN UP <span> TO HEAR MORE. </span></h3>
-			<div class="signupText">
-				<p>We're not quite ready yet, but we'll be launching in late September 2016. If you're interested in becoming an early beta user of EduSaga or staying updated on our progress, please subscribe.</p>
-			</div>
-			<form class="form-inline" action="//edusaga.us12.list-manage.com/subscribe/post?u=c9886f4cfd614ff3de96ca574&amp;id=b0c654a125" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate> 
-				<div class="form-group" id="mc_embed_signup_scroll">  
-					<input type="email" class="form-control" id="signup" placeholder="learnlanguages@example.com" value="" name="EMAIL" class="email" id="mce-EMAIL" required>  
-				    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_c9886f4cfd614ff3de96ca574_b0c654a125" tabindex="-1" value=""></div>
-				</div>
-				<button type="submit" class="btn btn-default" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">Subscribe</button>
-            </form>
-            <div class="contact">
-            	<p>Or contact us at: <a href="mailto:info@edusaga.com"><u>info@edusaga.com</u></a> for more info!</p>
+                      <section>
+    {#                    <span class="icon featured fa-check"></span>#}
+                          <span class="minor-image"><img src="https://s3.amazonaws.com/edusaga/assets/images/index/screenQuestion.png"></span>
+                        <header>
+                          <h3>Converse with Characters</h3>
+                        </header>
+                        <p>Students can speak Mandarin with a variety of characters who respond realistically and keep the conversation going.</p>
+                      </section>
+                    </div>
+
+                    <div class="4u 12u(narrower)">
+
+                  <section>
+                    <span class="minor-image"><img src="https://s3.amazonaws.com/edusaga/assets/images/index/screenListen.png"></span>
+                    <header>
+                      <h3>Listen and Respond</h3>
+                    </header>
+                    <p>Students can listen, think, and respond critically to material presented in Mandarin by helping other characters learn too.</p>
+                  </section>
+                </div>
+
+                <div class="4u 12u(narrower)">
+
+                  <section>
+                    <span class="minor-image"><img src="https://s3.amazonaws.com/edusaga/assets/images/index/screenIncorrect.png"></span>
+                    <header>
+                      <h3>Scaffoled Learning</h3>
+                    </header>
+                    <p>Characters respond realistically with encouragement and constructive criticism. Character expressions, context cues, and a supporting cast assist when a student struggles.</p>
+                  </section>
+                </div>
+                <footer>
+                  <ul class="buttons">
+                    <li><a target="_blank" class="button moreEpisodes" href="public/home" class="button">See More Episodes</a></li>
+                  </ul>
+                </footer>
+              </div>
+            </section>
+
+          <!-- Three -->
+            <section class="wrapper style3 container special">
+
+              <header class="major">
+                <h2>Fast feedback you can<strong> count on</strong></h2>
+              </header>
+
+              <div class="row">
+                <div class="6u 12u(narrower)">
+
+                  <section>
+                     <ul class="icons">
+                        <li><i class="fa fa-exchange fa-4x"></i></li>
+                    </ul>
+                    <header>
+                      <h3>Assign Speaking Homework with Ease</h3>
+                    </header>
+                    <p>Ensure that students "partner up" with a supportive, skilled speaker by assigning Edusaga. Practice and assess in the classroom, or remotely.</p>
+                  </section>
+
+                </div>
+                <div class="6u 12u(narrower)">
+                  <section>
+                     <ul class="icons">
+                        <li><i class="fa fa-cubes fa-4x"></i></li>
+                    </ul>
+                    <header>
+                      <h3>ACTFL Can Do Statements Aligned</h3>
+                    </header>
+                    <p>All our episodes were created with specific Can Do statements in mind.</p>
+                  </section>
+                </div>
+              </div>
+              <div class="row">
+                <div class="6u 12u(narrower)">
+
+                  <section>
+                     <ul class="icons">
+                        <li><i class="fa fa-group fa-4x"></i></li>
+                    </ul>
+                    <header>
+                      <h3>See in Real Time Where Students Struggle</h3>
+                    </header>
+                    <p>See current and past performance with Edusaga's visual feedback. Track classes, groups, and individuals - and push topics and tasks to each.</p>
+                  </section>
+                </div>
+                <div class="6u 12u(narrower)">
+                  <section>
+
+                    <ul class="icons">
+                        <li><i class="fa fa-line-chart fa-4x"></i></li>
+                    </ul>
+
+                    <header>
+                      <h3>Track Long Term Engagement with Feedback You Can Use</h3>
+                    </header>
+                    <p>See performance over weeks, semester, even years to help direct and customize Edusaga engagement.</p>
+                  </section>
+
+                </div>
+              </div>
+
+              <footer class="major">
+                <ul class="buttons">
+                  <li><a href="#cta" class="button fit scrolly">Sign Up to Learn More</a></li>
+                  <li><italic>We're here to support you!</italic></li>
+                </ul>
+              </footer>
+
+
+            </section>
+
+        </article>
+
+      <!-- CTA -->
+        <section id="cta">
+
+          <header>
+            <h2>Are you a teacher?</h2>
+            <div class="signupText">
+              <p>Interested in trying EduSaga in your classroom? We already have a few teachers using EduSaga in thier classroom and are looking for a few more passionate teachers to pilot the tool in their classes. Enter your email below, subscribe to the newsletter, and we'll get in touch with you by the next day!</p>
             </div>
-		</div>
-	</div>
-	<div class="footer">
-	</div>
+            <form class="form-inline" action="//edusaga.us12.list-manage.com/subscribe/post?u=c9886f4cfd614ff3de96ca574&amp;id=b0c654a125" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <div class="form-group" id="mc_embed_signup_scroll">
+                <input type="email" class="form-control" id="signup" placeholder="learnlanguages@example.com" value="" name="EMAIL" class="email" id="mce-EMAIL" required>
+                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_c9886f4cfd614ff3de96ca574_b0c654a125" tabindex="-1" value=""></div>
+              </div>
+              <button type="submit" class="btn btn-default" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">Subscribe</button>
+                  </form>
+                  <div class="contact">
+                    <p>Or contact us at: <a href="mailto:info@edusaga.com"><u>info@edusaga.com</u></a> for more info!</p>
+                  </div>
+          </header>
+        </section>
 
-	<!-- Tracking and YouTube API scripts !--> 
-	<script>
-		smoothScroll.init();
-		console.log(userID);
-		// Track user visited page
-		var formatDateForLog = function() {
-			var d = new Date();
-			var dateToLog = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
-			return dateToLog;
-		}
+      <!-- Footer -->
+      <!--
+        <footer id="footer">
 
-		console.log(formatDateForLog());
+          <ul class="icons">
+            <li><a href="#" class="icon circle fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon circle fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon circle fa-google-plus"><span class="label">Google+</span></a></li>
+            <li><a href="#" class="icon circle fa-github"><span class="label">Github</span></a></li>
+            <li><a href="#" class="icon circle fa-dribbble"><span class="label">Dribbble</span></a></li>
+          </ul>
 
-		var currentLogData = {
-			"userID" : userID
-		}
+          <ul class="copyright">
+            <li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+          </ul>
 
-		currentLogData.time = formatDateForLog();
-		currentLogData.eventType = "Visited Page";
-        var logEvent = JSON.stringify(currentLogData);
+        </footer>
+      !-->
 
-		$.ajax({
-			url: "/logVisitorEvents",
-			type: "POST",
-			data: logEvent, 
-			dataType: "json"
-		});	
+    </div>
 
-      // 2. This code loads the IFrame Player API code asynchronously.
-      var tag = document.createElement('script');
-
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      // 3. This function creates an <iframe> (and YouTube player)
-      //    after the API code downloads.
-      var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          videoId: 'nQeKi-2JOnA',
-          events: {
-            'onStateChange': onPlayerStateChange
-          }
-        });
-      }
-
-      // 4. The API will call this function when the video player is ready.
-      /*
-      function onPlayerReady(event) {
-      }
-      */
-
-      // 5. The API calls this function when the player's state changes.
-      var playedAlready = false;
-      var playedTime = 0;
-
-      function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !playedAlready) {
-        	currentLogData.eventType = "Played Video";
-        	var logEvent = JSON.stringify(currentLogData);
-			$.ajax({
-				url: "/logVisitorEvents",
-				type: "POST",
-				data: logEvent, 
-				dataType: "json"
-			});
-          console.log("Played video for first time");
-          playedAlready = true;
-        }
-        if (event.data == YT.PlayerState.PAUSED || YT.PlayerState.ENDED) {
-        	currentLogData.eventType = "Stopped video at " + player.getCurrentTime();
-			var logEvent = JSON.stringify(currentLogData);
-			$.ajax({
-				url: "/logVisitorEvents",
-				type: "POST",
-				data: logEvent, 
-				dataType: "json"
-			});
-          console.log(player.getCurrentTime());
-        }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
-
-	</script>
-
-	<script src="static/js/viewHelper.js"></script>
-    <script src="/static/js/bundle_questionAsker.js"></script>
-	<!-- What to do if opened in safari or firefox !-->
-	<!--
-	<script>
-		try {
-			var SpeechRecognition = webkitSpeechRecognition;
-			var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-			var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-		} catch(err) {
-			var scenarioWindow = $(".scenarioWindow");
-			var roboWrapper = $(".roboWrapper");
-			scenarioTextWrapper = $(".scenarioTextWrapper");
-			scenarioWindow.removeClass("hidden");
-			// roboWrapper.html('<img src="' + IMAGE_BASE_PATH + 'robo/roboDefault.png">');
-			scenarioTextWrapper.children(".scenarioHeader").html("Sorry!");
-			scenarioTextWrapper.children(".scenarioText").html("Sorry, EduSaga currently only supports Google Chrome on desktop or laptops (no mobile). Please switch over to Google Chrome for speech recognition access and to try the demo!");
-			scenarioTextWrapper.children(".btn-confirm").hide();
-		}
-	</script>
-	!-->
+    <!-- Scripts -->
+      <script src="static/js/landingPage/jquery.min.js"></script>
+      <script src="static/js/landingPage/jquery.dropotron.min.js"></script>
+      <script src="static/js/landingPage/jquery.scrolly.min.js"></script>
+      <script src="static/js/landingPage/jquery.scrollgress.min.js"></script>
+      <script src="static/js/landingPage/skel.min.js"></script>
+      <script src="static/js/landingPage/util.js"></script>
+      <!--[if lte IE 8]><script src="static/js/ie/respond.min.js"></script><![endif]-->
+      <script src="static/js/landingPage/main.js"></script>
+      <script src="static/js/bootstrap.min.js"></script>
 
 
-</body>
+  </body>
 {% endblock %}
