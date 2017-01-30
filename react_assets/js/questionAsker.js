@@ -346,6 +346,8 @@ var QuestionAsker = React.createClass({
 		var currentTaskData = TaskController.getActiveTask(newSceneData, taskIndex);
 		var currentChoiceData = allCurrentTasks[taskIndex].possibleAnswers[choiceIndex];
 
+		var characterName = currentTaskData.character || this.state.charactersData[0].name;
+
 		// If choice is correct,
 			// 1) Show text response
 			if (currentChoiceData.correctAnswer === true) {
@@ -360,7 +362,7 @@ var QuestionAsker = React.createClass({
 				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
 
 				// Adjust character image
-				newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
+				newSceneData.currentImage = this.getEmotionImagePath(characterName, currentTaskData.emotion);
 
 				// Show response text
 				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;

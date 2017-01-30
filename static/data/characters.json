@@ -168,5 +168,21 @@
         "soundPath" : "wangchao/shuoleshenme.ogg"
       }
     ]
+  },
+  {
+    "name" : "max",
+    "emotions" : {
+      "default": "characters/maxwell/maxDefault.png",
+      "confused" : "characters/maxwell/maxConfused.png",
+      "goodJob" : "characters/maxwell/maxDefaultSpeakingGoodJob.png",
+      "thumbsUpGoodJob" : "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
+      "distraught": "characters/maxwell/maxDistraught.png",
+      "excited" : "characters/maxwell/maxExcitedGreatJob.png",
+      "panic" : "characters/maxwell/maxPanic.png",
+      "maxSad" : "characters/maxwell/maxSad.png",
+      "maxSilhouette" : "characters/maxwell/maxSilhouette.png",
+      "maxWistfulGoodJob" : "characters/maxwell/maxWistfulGoodJob.png"
+    },
+    "confusedPhrases" : []
   }
 ]

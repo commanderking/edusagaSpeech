@@ -395,6 +395,8 @@
 			var currentTaskData = _QuestionAskerHelper.TaskController.getActiveTask(newSceneData, taskIndex);
 			var currentChoiceData = allCurrentTasks[taskIndex].possibleAnswers[choiceIndex];
 	
+			var characterName = currentTaskData.character || this.state.charactersData[0].name;
+	
 			// If choice is correct,
 			// 1) Show text response
 			if (currentChoiceData.correctAnswer === true) {
@@ -409,7 +411,7 @@
 				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
 	
 				// Adjust character image
-				newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
+				newSceneData.currentImage = this.getEmotionImagePath(characterName, currentTaskData.emotion);
 	
 				// Show response text
 				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;
@@ -27269,6 +27271,22 @@
 					"soundPath": "wangchao/shuoleshenme.ogg"
 				}
 			]
+		},
+		{
+			"name": "max",
+			"emotions": {
+				"default": "characters/maxwell/maxDefault.png",
+				"confused": "characters/maxwell/maxConfused.png",
+				"goodJob": "characters/maxwell/maxDefaultSpeakingGoodJob.png",
+				"thumbsUpGoodJob": "characters/maxwell/maxDefaultSpeakingThumbsupGoodJob.png",
+				"distraught": "characters/maxwell/maxDistraught.png",
+				"excited": "characters/maxwell/maxExcitedGreatJob.png",
+				"panic": "characters/maxwell/maxPanic.png",
+				"maxSad": "characters/maxwell/maxSad.png",
+				"maxSilhouette": "characters/maxwell/maxSilhouette.png",
+				"maxWistfulGoodJob": "characters/maxwell/maxWistfulGoodJob.png"
+			},
+			"confusedPhrases": []
 		}
 	];
 
