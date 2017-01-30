@@ -2,6 +2,7 @@
 	"activityID": "W1",
 	"activityName": "Asking about David's Schedule",
 	"tags": ["date", "time"],
+	"characters" : ["david"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -9,12 +10,12 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
 		"I can ask about what time my friends do different activities."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -81,28 +82,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "David",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "大学走道",
-				"nameChinese" : "University Walkway", 
+				"nameChinese" : "University Walkway",
 				"bg" : "bg/jiaoTongUniversity2.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/david/davidDefault.png",
-				"uncertain" : "characters/david/davidUncertain.png",
-				"laughing" : "characters/david/davidLaughing.png",
-				"confused" : "characters/david/davidConfused.png",
-				"silhouette" : "characters/david/davidSilhouette.png"
-			},
-			"successPhrases" : {
-
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "nihao",
@@ -111,7 +101,7 @@
 				{
 					"soundID" : "time-wakeup-seven-thirty",
 					"soundPath" : "david/time-wakeup-seven-thirty.ogg"
-				},	
+				},
 				{
 					"soundID" : "time-threethirty-gottogo",
 					"soundPath" : "david/time-threethirty-gottogo.ogg"
@@ -119,31 +109,13 @@
 				{
 					"soundID" : "time-sleep-eleven",
 					"soundPath" : "david/time-sleep-eleven.ogg"
-				}	
-			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
 				}
 			],
 			"currentTasks" : [
 				{
 					"taskID" : 10,
 					"task" : "Greet David.",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -152,18 +124,18 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 20,
 					"task" : "Ask him what time he gets up in the morning",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你早上几点起床"],
@@ -181,7 +153,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "uncertain",
 					"tasksToQueue" : [21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -189,7 +161,7 @@
 				{
 					"taskID" : 21,
 					"task" : "Ask him what time he sleeps at night",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你晚上几点睡觉?", "你几点睡觉"],
@@ -207,7 +179,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -215,7 +187,7 @@
 				{
 					"taskID" : 40,
 					"task" : "Ask him what time it is now",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["现在几点", "几点了"],
@@ -224,7 +196,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "uncertain",
 					"tasksToQueue" : [41],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -232,7 +204,7 @@
 				{
 					"taskID" : 41,
 					"task" : "Say goodbye!",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["再见", "拜拜", "明天见"],
@@ -241,7 +213,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

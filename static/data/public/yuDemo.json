@@ -2,6 +2,7 @@
 	"activityID": "Y1",
 	"activityName": "Review of Basic Questions",
 	"tags" : ["review", "nationality", "location", "family"],
+	"characters": ["david"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -9,14 +10,14 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
 		"I can say or write something about the members of my family and ask about someone’s family.",
 		"I can ask and say a home address and e-mail address.",
 		"I can ask and say someone’s nationality."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -25,29 +26,18 @@
 			"next" : "end"
 		}
 	],
-	"character" : 
+	"character" :
 		{
 			"name" : "David",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "School Cafeteria",
-				"nameChinese" : "学校食堂", 
+				"nameChinese" : "学校食堂",
 				"bg" : "bg/shitang.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/david/davidDefault.png",
-				"uncertain" : "characters/david/davidUncertain.png",
-				"laughing" : "characters/david/davidLaughing.png",
-				"confused" : "characters/david/davidConfused.png",
-				"silhouette" : "characters/david/davidSilhouette.png"
-			},
-			"successPhrases" : {
-
-			},
 			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "hi-yourName",
@@ -79,7 +69,7 @@
 				},
 				{
 					"soundID" : "bornAmerica-andYou",
-					"soundPath" : "david/bornAmerica-andYou.ogg"		
+					"soundPath" : "david/bornAmerica-andYou.ogg"
 				},
 				{
 					"soundID" : "familyList-andyou",
@@ -87,7 +77,7 @@
 				},
 				{
 					"soundID" : "talkAgainNextTime",
-					"soundPath" : "david/talkAgainNextTime.ogg"			
+					"soundPath" : "david/talkAgainNextTime.ogg"
 				},
 				{
 					"soundID" : "zhenHao-soLate-gotToGo",
@@ -118,29 +108,11 @@
 					"soundPath" : "david/liveInShanghai.ogg"
 				}
 			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
-				}
-			],
 			"currentTasks" : [
 				{
 					"taskID" : 1,
 					"task" : "Greet him",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -149,19 +121,19 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [2],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 2,
 					"task" : "Answer his question",
 					"resultsTaskText" : "Answer question about name",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["我叫", "我是", "我姓"],
@@ -170,7 +142,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [3,4],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -178,7 +150,7 @@
 				{
 					"taskID" : 3,
 					"task" : "Ask for his family name / surname",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你贵姓", "贵姓", "你姓什么"],
@@ -187,7 +159,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -195,7 +167,7 @@
 				{
 					"taskID" : 4,
 					"task" : "Ask for his name",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你叫什么", "你是谁", "介绍"],
@@ -204,7 +176,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [5,6],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -212,7 +184,7 @@
 				{
 					"taskID" : 5,
 					"task" : "Ask for his nationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你是哪国人", "你是哪里人"],
@@ -222,11 +194,11 @@
 						{
 							"answers": 	["你来自哪", "从哪里来"],
 							"response": "我来自美国纽约市! 你是哪国人?",
-							"soundID" : "fromNewYork-yourNationality"						
+							"soundID" : "fromNewYork-yourNationality"
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [15],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -234,11 +206,11 @@
 				{
 					"taskID" : 15,
 					"task" : "Tell him your nationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	[
-								["我是"], 
+								["我是"],
 								["人"]
 							],
 							"response": "哦。。。",
@@ -246,7 +218,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -254,7 +226,7 @@
 				{
 					"taskID" : 6,
 					"task" : "Ask where he was born",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你在哪儿出生", "你在哪出生", "在哪里出生", "在那出生", "出生地在"],
@@ -263,7 +235,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [16, 7],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -271,7 +243,7 @@
 				{
 					"taskID" : 16,
 					"task" : "Tell him where you were born / grew up",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["我在...出生的。", "出生", "长大"],
@@ -280,7 +252,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -288,7 +260,7 @@
 				{
 					"taskID" : 7,
 					"task" : "Ask where he lives",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你现在住在哪儿", "住在哪", "在那里住", "家在哪", "你住哪", "住在什么地方"],
@@ -297,7 +269,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [8, 11],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -305,7 +277,7 @@
 				{
 					"taskID" : 8,
 					"task" : "Ask for his specific address",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你家的地址是什么", "你家的地址在哪里", "家的地址", "家地址", "你的地址"],
@@ -314,7 +286,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [9, 10],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -322,7 +294,7 @@
 				{
 					"taskID" : 9,
 					"task" : "Ask for his phone number (home or mobile)",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你的电话号码几号", "电话号码", "电话几号", "手机号码", "家的电话"],
@@ -340,7 +312,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -348,7 +320,7 @@
 				{
 					"taskID" : 10,
 					"task" : "Ask if he has an email address",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你有没有电子邮件", "你有电子邮件吗", "有电子邮件"],
@@ -356,7 +328,7 @@
 							"soundID" : "haveEmail-email"
 						},
 						{
-							"answers": 	[	
+							"answers": 	[
 								["你"],
 								["有没有"],
 								["电子邮件"]
@@ -372,10 +344,10 @@
 							],
 							"response": "我有啊! 是dawei@qqz.com",
 							"soundID" : "haveEmail-email"
-						}		
+						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -383,7 +355,7 @@
 				{
 					"taskID" : 11,
 					"task" : "Ask how many family members he has",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你家有几口人", "你家有几个人", "几个家人", "几个人", "几口人"],
@@ -407,10 +379,10 @@
 							],
 							"response": "我家有四口人。",
 							"soundID" : "familyFour"
-						}		
+						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [12],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -418,7 +390,7 @@
 				{
 					"taskID" : 12,
 					"task" : "Ask him who are the family members",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["他们是谁", "什么家人", "那些家人", "家人是谁"],
@@ -427,7 +399,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [13],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -435,7 +407,7 @@
 				{
 					"taskID" : 13,
 					"task" : "Tell him how many family members you have",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["我家有____口人"],
@@ -444,7 +416,7 @@
 						},
 						{
 							"answers": 	[
-								["我家", "我的家"], 
+								["我家", "我的家"],
 								["有"],
 								["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"],
 								["个人", "口人", "个家人", "口家人"]
@@ -454,7 +426,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "uncertain",
 					"tasksToQueue" : [14],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -462,7 +434,7 @@
 				{
 					"taskID" : 14,
 					"task" : "Say goodbye",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["再见", "待会见", "待会儿见", "拜拜", "明天见"],
@@ -471,7 +443,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

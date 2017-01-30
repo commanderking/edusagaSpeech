@@ -2,6 +2,7 @@
 	"activityID": "familyWangChao",
 	"activityName": "Talking about your Family with Wang Chao",
 	"tags" : ["family", "nationality", "careers"],
+	"characters": ["wangchao"],
 	"sequence" : [],
 	"score" : 0,
 	"sequence": 200,
@@ -11,13 +12,13 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives": 
+	"objectives":
 	[
-		"I can answer questions about my nationality.", 
+		"I can answer questions about my nationality.",
 		"I can answer questions about which family members I have."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -112,32 +113,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "Wang Chao",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Juice Bar",
-				"nameChinese" : "大学果汁吧", 
+				"nameChinese" : "大学果汁吧",
 				"bg" : "bg/jiaoTongJuiceBar.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/wang/wangConfidentDefault.png",
-				"confident": "characters/wang/wangConfidentSpeaking.png",
-				"disgust": "characters/wang/wangDisgust.png",
-				"dramatic": "characters/wang/wangDramaticEvasive.png",
-				"surprised": "characters/wang/wangSurprised.png",
-				"thoughtful": "characters/wang/wangThoughtful.png",
-				"silhouette": "characters/wang/wangSilhouette.png",
-				"confused": "characters/wang/wangSurprised.png"
-
-			},
-			"successPhrases" : {
-
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "ah-you-from-england",
@@ -166,7 +152,7 @@
 				{
 					"soundID" : "family-have-sister",
 					"soundPath" : "wangchao/family-have-sister.ogg"
-				},				
+				},
 				{
 					"soundID" : "family-have-older-sister-do-you-have-older-brother",
 					"soundPath" : "wangchao/family-have-older-sister-do-you-have-older-brother.ogg"
@@ -174,7 +160,7 @@
 				{
 					"soundID" : "family-do-you-have-older-brother",
 					"soundPath" : "wangchao/family-do-you-have-older-brother.ogg"
-				},	
+				},
 				{
 					"soundID" : "family-i-also-have-older-brother-pingpong",
 					"soundPath" : "wangchao/family-i-also-have-older-brother-pingpong.ogg"
@@ -192,29 +178,11 @@
 					"soundPath" : "wangchao/nationality-im-chinese-off-to-pingpong.ogg"
 				}
 			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "wangchao/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "wangchao/tingbudong.ogg"
-				}, 
-				{
-					"response": "你刚才说了什么？",
-					"soundID" : "shuoleshenme",
-					"soundPath" : "wangchao/shuoleshenme.ogg"
-				}
-			],
 			"currentTasks" : [
 				{
 					"taskID" : 10,
 					"task" : "Greet Wang Chao.",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -229,20 +197,20 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangThoughtful.png",
+					"emotion" : "thoughtful",
 					"tasksToQueue" : [20, 21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 20,
 					"task" : "Respond that you are.",
 					"taskType" : "choice",
 					"taskLink" : "british",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我是英国人"],
@@ -257,7 +225,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [45],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -267,7 +235,7 @@
 					"task" : "Respond that you are not.",
 					"taskType": "choice",
 					"taskLink": "british",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我不是英国人"],
@@ -282,7 +250,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangSurprised.png",
+					"emotion" : "surprised",
 					"tasksToQueue" : [31, 32],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -292,7 +260,7 @@
 					"task" : "Respond that you are.",
 					"taskType": "choice",
 					"taskLink": "french",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我是法国人."],
@@ -307,7 +275,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [45],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -317,7 +285,7 @@
 					"task" : "Respond that you are not.",
 					"taskType": "choice",
 					"taskLink": "french",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我不是法国人", "我也不是法国人"],
@@ -332,7 +300,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangSurprised.png",
+					"emotion" : "surprised",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -340,7 +308,7 @@
 				{
 					"taskID" : 40,
 					"task" : "Respond to his question: 你是哪国人?",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我是。。。人。"],
@@ -357,7 +325,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangThoughtful.png",
+					"emotion" : "thoughtful",
 					"tasksToQueue" : [45],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -365,7 +333,7 @@
 				{
 					"taskID" : 45,
 					"task" : "Respond to his question: 你有姐姐吗？",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我有姐姐"],
@@ -400,7 +368,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangSurprised.png",
+					"emotion" : "surprised",
 					"tasksToQueue" : [50],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -408,7 +376,7 @@
 				{
 					"taskID" : 50,
 					"task" : "Respond to his question: 你有没有哥哥?",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我有哥哥", "我有一个哥哥"],
@@ -443,7 +411,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [60],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -451,7 +419,7 @@
 				{
 					"taskID" : 60,
 					"task" : "Ask him how many people are in his family",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你家有几口人"],
@@ -476,7 +444,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [61],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -484,7 +452,7 @@
 				{
 					"taskID" : 61,
 					"task" : "Ask him for his nationality",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你是哪国人", "你是哪里人", "你来自哪里?", "你是从哪里来的", "你是哪里来的", "你从哪里来", "你从哪里来的"],
@@ -493,7 +461,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangDramaticEvasive.png",
+					"emotion" : "dramatic",
 					"tasksToQueue" : [62],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -501,7 +469,7 @@
 				{
 					"taskID" : 62,
 					"task" : "Say bye!",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["再见", "明天见", "慢走", "拜拜"],
@@ -510,7 +478,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

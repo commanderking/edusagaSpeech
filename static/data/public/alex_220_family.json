@@ -1,6 +1,7 @@
 {
 	"activityID": "familyAlex",
 	"activityName": "Learning about Alex's Family!",
+	"characters" : ["alex"],
 	"tags" : ["family", "nationality"],
 	"score" : 0,
 	"currentCharName" : "",
@@ -10,14 +11,14 @@
 	"currentSoundID": "",
 	"scenarioIndex": 0,
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
 		"I can ask and say someone’s nationality.",
 		"I can introduce myself and provide basic personal information.",
 		"I can say ask about someone’s family."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -105,25 +106,17 @@
 
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "Alex",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Park",
-				"nameChinese" : "大学公园", 
+				"nameChinese" : "大学公园",
 				"bg" : "bg/jiaoTongStatue.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/alex/alexDefault.png",
-				"confused" : "characters/alex/alexConfused.png",
-				"sass" : "characters/alex/alexSass.png",
-				"laughing" : "characters/alex/alexLaughing.png",
-				"silhouette" : "characters/alex/alexSilhouette.png"
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "hi",
@@ -154,29 +147,11 @@
 					"soundPath" : "alex/family-mom-singaporean.ogg"
 				}
 			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "alex/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "alex/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "alex/buhaoyisi.ogg"
-				}
-			],
 			"currentTasks" : [
 				{
 					"taskID" : 1,
 					"task" : "Greet her or ask how she's doing",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -190,18 +165,18 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [6],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 6,
 					"task" : "Ask how many family members she has",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你的家有幾口人"],
@@ -218,7 +193,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [7,8,9],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -228,7 +203,7 @@
 					"task" : "Ask if she has an older brother",
 					"taskType" : "choice",
 					"taskLink" : "siblings",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你有没有哥哥"],
@@ -250,21 +225,21 @@
 							],
 							"response" : "我有一个哥哥和一个妹妹!",
 							"soundID" : "family-one-brother-one-sister"
-						}			
+						}
 					],
 					"exceptions" : ["我", "他"],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [10],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
 					"taskID" : 8,
-					"task" : "Ask whether she has a younger sister",	
+					"task" : "Ask whether she has a younger sister",
 					"taskType" : "choice",
-					"taskLink" : "siblings",				
-					"possibleAnswers" : 
+					"taskLink" : "siblings",
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你有没有妹妹"],
@@ -286,20 +261,20 @@
 							],
 							"response" : "我有一个哥哥和一个妹妹!",
 							"soundID" : "family-one-brother-one-sister"
-						}	
+						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [10],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
 					"taskID" : 9,
-					"task" : "Ask whether she has any siblings",	
+					"task" : "Ask whether she has any siblings",
 					"taskType" : "choice",
-					"taskLink" : "siblings",				
-					"possibleAnswers" : 
+					"taskLink" : "siblings",
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你有没有兄弟姐妹", "你有兄弟姐妹吗"],
@@ -316,17 +291,17 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [10],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				},
 				{
 					"taskID" : 10,
-					"task" : "Ask Alex for her nationality",	
+					"task" : "Ask Alex for her nationality",
 					"taskType" : "choice",
-					"taskLink" : "siblings",				
-					"possibleAnswers" : 
+					"taskLink" : "siblings",
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你是哪国人"],
@@ -343,15 +318,15 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [11, 12],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
-				},			
+				},
 				{
 					"taskID" : 11,
-					"task" : "Ask her for her dad's nationality",					
-					"possibleAnswers" : 
+					"task" : "Ask her for her dad's nationality",
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你的爸爸是哪国人"],
@@ -368,15 +343,15 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
-				},	
+				},
 				{
 					"taskID" : 12,
-					"task" : "Ask her for her mom's nationality",					
-					"possibleAnswers" : 
+					"task" : "Ask her for her mom's nationality",
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你的妈妈是哪国人"],
@@ -393,7 +368,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

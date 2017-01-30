@@ -2,6 +2,7 @@
 	"activityID": "introWangChao",
 	"activityName": "Introduction - Wang Chao",
 	"tags" : ["greetings", "introductions"],
+	"characters" : ["wangchao"],
 	"score" : 0,
 	"sequence" : 200,
 	"currentCharName" : "",
@@ -10,13 +11,13 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
-		"I can say hello and goodbye to someone my age or younger.", 
+		"I can say hello and goodbye to someone my age or younger.",
 		"I can introduce myself and provide basic personal information."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -97,31 +98,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "Wang Chao",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Juice Bar",
-				"nameChinese" : "大学果汁吧", 
+				"nameChinese" : "大学果汁吧",
 				"bg" : "bg/jiaoTongJuiceBar.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/wang/wangConfidentDefault.png",
-				"confident": "characters/wang/wangConfidentSpeaking.png",
-				"disgust": "characters/wang/wangDisgust.png",
-				"dramatic": "characters/wang/wangDramaticEvasive.png",
-				"surprised": "characters/wang/wangSurprised.png",
-				"thoughtful": "characters/wang/wangThoughtful.png",
-				"silhouette": "characters/wang/wangSilhouette.png",
-				"confused": "characters/wang/wangSurprised.png"
-			},
-			"successPhrases" : {
-
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "nihao",
@@ -156,30 +143,12 @@
 					"soundPath" : "wangchao/bye-pingpong.ogg"
 				}
 			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "wangchao/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "wangchao/tingbudong.ogg"
-				}, 
-				{
-					"response": "你刚才说了什么？",
-					"soundID" : "shuoleshenme",
-					"soundPath" : "wangchao/shuoleshenme.ogg"
-				}
-			],
 			"currentTasks" : [
 				{
 					"taskID" : 10,
 					"task" : "Greet him.",
 					"taskLink" : "greeting",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -188,7 +157,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -198,7 +167,7 @@
 					"task" : "Ask him how he's doing",
 					"taskType" : "choice",
 					"taskLink" : "greeting",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": ["你好吗", "你怎么样", "怎么样", "吃饭了吗", "你最近怎么样", "你今天怎么样", "你今天好吗", "你今天过得怎么样"],
@@ -207,20 +176,20 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [15, 16],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 15,
 					"task" : "Tell him you're doing great",
 					"taskLink" : "feelings",
 					"taskType" : "choice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我很好", "非常好", "不错"],
@@ -229,7 +198,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -239,7 +208,7 @@
 					"task" : "Tell him you're doing ok",
 					"taskLink" : "feelings",
 					"taskType" : "choice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["还可以", "马马虎虎", "不错"],
@@ -248,7 +217,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangThoughtful.png",
+					"emotion" : "thoughtful",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -256,7 +225,7 @@
 				{
 					"taskID" : 20,
 					"task" : "Ask him for his last name / surname",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["请问你贵姓", "请问您贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
@@ -265,7 +234,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [22],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -273,7 +242,7 @@
 				{
 					"taskID" : 22,
 					"task" : "Ask him what's his name / first name",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你叫什么名字","你的名字是什么", "你叫什么"],
@@ -282,7 +251,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [23],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -290,7 +259,7 @@
 				{
 					"taskID" : 23,
 					"task" : "Respond to: 我叫王超。 你呢?",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我叫", "我是", "我的名字叫", "我的名字是"],
@@ -299,11 +268,11 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangDramaticEvasive.png",
+					"emotion" : "dramatic",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
-				}		
+				}
 			],
 			"completedTasks" : []
 		}

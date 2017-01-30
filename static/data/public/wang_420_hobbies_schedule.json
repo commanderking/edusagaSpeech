@@ -2,6 +2,7 @@
 	"activityID": "hobbiesWangChao",
 	"activityName": "Wang Chao's Ping Pong and Workout Routine",
 	"tags" : ["hobbies"],
+	"characters" : ["wangchao"],
 	"score" : 0,
 	"sequence" : 120,
 	"currentCharName" : "",
@@ -10,13 +11,13 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
-		"I can ask others what they like or dislike.", 
+		"I can ask others what they like or dislike.",
 		"I can ask what time other people do different activities."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -80,7 +81,7 @@
 				"pinyin" : "nǐ měitiān jǐ diǎn dǎ pīngpāng qiú",
 				"correct" : false,
 				"tries": 0
-			},			
+			},
 			{
 				"task" : "Say I like ping pong",
 				"answer" : "我喜欢打乒乓球",
@@ -111,31 +112,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "Wang Chao",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Juice Bar",
-				"nameChinese" : "大学果汁吧", 
+				"nameChinese" : "大学果汁吧",
 				"bg" : "bg/jiaoTongJuiceBar.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/wang/wangConfidentDefault.png",
-				"confident": "characters/wang/wangConfidentSpeaking.png",
-				"disgust": "characters/wang/wangDisgust.png",
-				"dramatic": "characters/wang/wangDramaticEvasive.png",
-				"surprised": "characters/wang/wangSurprised.png",
-				"thoughtful": "characters/wang/wangThoughtful.png",
-				"silhouette": "characters/wang/wangSilhouette.png",
-				"confused": "characters/wang/wangSurprised.png"
-			},
-			"successPhrases" : {
-
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "nihao",
@@ -174,18 +161,18 @@
 					"soundPath" : "wangchao/likes-cant-play-today-so-late-bye.ogg"
 				}
 			],
-			"confusedPhrases" : 
+			"confusedPhrases" :
 			[
-				{ 
+				{
 					"response": "什么?",
 					"soundID" : "shenme",
 					"soundPath" : "wangchao/shenme.ogg"
-				}, 
-				{ 
+				},
+				{
 					"response": "我听不懂.",
 					"soundID" : "tingbudong",
 					"soundPath" : "wangchao/tingbudong.ogg"
-				}, 
+				},
 				{
 					"response": "你刚才说了什么？",
 					"soundID" : "shuoleshenme",
@@ -197,7 +184,7 @@
 					"taskID" : 10,
 					"task" : "Greet him.",
 					"taskLink" : "greeting",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -211,18 +198,18 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 20,
 					"task" : "Ask him what he likes to do",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你喜欢做什么", "你有什么爱好"],
@@ -239,7 +226,7 @@
 					],
 					"correct" : false,
 					"response" : "我每天喜欢打乒乓球和锻炼身体。",
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [30,31],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -248,7 +235,7 @@
 					"taskID" : 30,
 					"task" : "Ask him what time he works out／goes to the gym",
 					"taskLink": "timesForActivities",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你每天几点锻炼身体", "你每天什么时候锻炼身体"],
@@ -266,7 +253,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -276,7 +263,7 @@
 					"task" : "Ask him what time he plays ping pong",
 					"taskType": "choice",
 					"taskLink": "timesForActivities",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你每天几点打乒乓球", "你什么时候打乒乓球"],
@@ -294,7 +281,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [40, 41],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -304,7 +291,7 @@
 					"taskType": "choice",
 					"taskLink": "pingpong",
 					"task" : "Respond that you also like to play ping pong.",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我也喜欢打乒乓球", "我也喜欢打乒乓球"]
@@ -325,7 +312,7 @@
 					"correct" : false,
 					"response" : "哇！真好！",
 					"soundID" : "wa-zhenhao",
-					"emotion" : "characters/wang/wangSurprised.png",
+					"emotion" : "surprised",
 					"tasksToQueue" : [50],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -335,7 +322,7 @@
 					"task" : "Respond that you don't like to play ping pong",
 					"taskType" : "choice",
 					"taskLink": "pingpong",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{"answers" : ["我不喜欢打乒乓球", "不喜欢"]},
 						{
@@ -351,7 +338,7 @@
 					"response" : "哦。 真的？ 可是打乒乓球很好玩！我现在就要去打了， 再见！",
 
 					"soundID" : "likes-oh-really-but-pingpong-sofun",
-					"emotion" : "characters/wang/wangDisgust.png",
+					"emotion" : "disgust",
 					"tasksToQueue" : [100],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -359,7 +346,7 @@
 				{
 					"taskID" : 50,
 					"task" : "Ask him if he wants to play ping pong TODAY",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["我们今天打乒乓球，怎么样"],
@@ -400,7 +387,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangDisgust.png",
+					"emotion" : "disgust",
 					"response" : "哦。。。 我今天不能打。 啊。 已经那么晚了啊！ 再见！",
 					"tasksToQueue" : [100],
 					"attemptedAnswers" : [],
@@ -409,7 +396,7 @@
 				{
 					"taskID" : 100,
 					"task" : "Say goodbye",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["再见", "拜拜", "明天见", "慢走"],
@@ -418,7 +405,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangDisgust.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

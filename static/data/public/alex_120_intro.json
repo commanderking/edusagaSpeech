@@ -2,6 +2,7 @@
 	"activityID": "introAlex",
 	"activityName": "Introduction - Alex",
 	"tags" : ["greetings", "introductions"],
+	"characters" : ["alex"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/alex/alexDefault.png",
@@ -11,13 +12,13 @@
 	"currentSoundID": "",
 	"scenarioIndex": 0,
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
-		"I can say hello and goodbye to someone my age or younger.", 
+		"I can say hello and goodbye to someone my age or younger.",
 		"I can respond to an introduction."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -62,25 +63,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "Alex",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Park",
-				"nameChinese" : "大学公园", 
+				"nameChinese" : "大学公园",
 				"bg" : "bg/jiaoTongStatue.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/alex/alexDefault.png",
-				"confused" : "characters/alex/alexConfused.png",
-				"sass" : "characters/alex/alexSass.png",
-				"laughing" : "characters/alex/alexLaughing.png",
-				"silhouette" : "characters/alex/alexSilhouette.png"
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "nihao",
@@ -104,30 +97,12 @@
 				}
 
 			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "alex/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "alex/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "alex/buhaoyisi.ogg"
-				}
-			],
 			"currentTasks" : [
 				{
 					"taskID" : 10,
 					"task" : "Respond to her saying: 你好 ",
 					"taskLink" : "greeting",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -136,18 +111,18 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 20,
 					"task" : "Answer her question: 你叫什么名字?",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我叫", "我是"],
@@ -156,7 +131,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -164,7 +139,7 @@
 				{
 					"taskID" : 21,
 					"task" : "Respond to: 我姓白 请问你贵姓?",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我姓"],
@@ -173,11 +148,11 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [22],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
-				}	
+				}
 			],
 			"completedTasks" : []
 		}

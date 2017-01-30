@@ -1,6 +1,7 @@
 {
 	"activityID": "introDavid",
 	"activityName": "Introduction - David",
+	"characters" : ["david"],
 	"tags" : ["greetings", "introductions"],
 	"score" : 0,
 	"sequence" : 100,
@@ -10,13 +11,13 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
-		"I can say hello and goodbye to someone my age or younger.", 
+		"I can say hello and goodbye to someone my age or younger.",
 		"I can introduce myself and provide basic personal information."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -73,24 +74,13 @@
 		{
 			"name" : "David",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Gym",
-				"nameChinese" : "大学体育馆", 
+				"nameChinese" : "大学体育馆",
 				"bg" : "bg/jiaoTongGym.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/david/davidDefault.png",
-				"uncertain" : "characters/david/davidUncertain.png",
-				"laughing" : "characters/david/davidLaughing.png",
-				"confused" : "characters/david/davidConfused.png",
-				"silhouette" : "characters/david/davidSilhouette.png"
-			},
-			"successPhrases" : {
-
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "nihao",
@@ -115,24 +105,6 @@
 				{
 					"soundID" : "intro-oh-nice-to-meet-you",
 					"soundPath" : "david/intro-oh-nice-to-meet-you.ogg"
-				}			
-			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -140,7 +112,7 @@
 					"taskID" : 10,
 					"task" : "Greet him.",
 					"taskLink" : "greeting",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -149,7 +121,8 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"character" : "david",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -159,7 +132,7 @@
 					"task" : "Ask him how he's doing",
 					"taskType" : "choice",
 					"taskLink" : "greeting",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好吗", "怎么样"],
@@ -168,18 +141,18 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidUncertain.png",
+					"emotion" : "uncertain",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 20,
 					"task" : "Ask him for his last name / surname",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["请问你贵姓", "请问您贵姓", "你姓什么", "您贵姓", "你贵姓", "你的贵姓是什么"],
@@ -188,7 +161,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -196,7 +169,7 @@
 				{
 					"taskID" : 21,
 					"task" : "Respond to: 我姓张 你呢?",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我姓"],
@@ -205,7 +178,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [22],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -213,7 +186,7 @@
 				{
 					"taskID" : 22,
 					"task" : "Ask him what's his name ",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你叫什么名字","你的名字是什么", "你叫什么"],
@@ -222,7 +195,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [23],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -230,7 +203,7 @@
 				{
 					"taskID" : 23,
 					"task" : "Respond to his question: 你叫什么?",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["我叫", "我是", "我的名字叫", "我的名字是"],
@@ -239,11 +212,11 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
-				}		
+				}
 			],
 			"completedTasks" : []
 		}

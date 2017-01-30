@@ -10,12 +10,12 @@ var CharacterContainer = React.createClass({
 		var scenarioIndex = this.props.scenarioIndex;
 		var charImageDiv;
 		var charImgSrc = Constants.IMAGE_PATH + this.props.charImage;
-		var silhouetteSrc = Constants.IMAGE_PATH + this.props.silhouette;
-		var scenarioImage = Constants.IMAGE_PATH + scenarioData[scenarioIndex].image; 
+		var silhouetteSrc = Constants.IMAGE_PATH + this.props.getEmotionImagePath(this.props.currentCharName, "silhouette");
+		var scenarioImage = Constants.IMAGE_PATH + scenarioData[scenarioIndex].image;
 		var scenarioImageLayer = Constants.IMAGE_PATH + scenarioData[scenarioIndex].imageLayer;
 		if (this.props.practiceMode) {return null;}
 
-		if (this.props.sceneComplete === true) {return null;} 
+		if (this.props.sceneComplete === true) {return null;}
 
 		if (this.props.scenarioOn === true) {
 			charImageDiv =
@@ -26,7 +26,7 @@ var CharacterContainer = React.createClass({
 				</div>
 			)
 		} else if (this.props.hintActive === true) {
-			charImageDiv = 
+			charImageDiv =
 			(
 				<div className="characterImageDiv">
 					<img className="charImage" src={silhouetteSrc} />
@@ -34,12 +34,12 @@ var CharacterContainer = React.createClass({
 			)
 		}
 			else {
-			charImageDiv = 
+			charImageDiv =
 			(
 				<div className="characterImageDiv">
-					<CharacterImage 
+					<CharacterImage
 						src={charImgSrc}
-						correctAnswerState={this.props.correctAnswerState} 
+						correctAnswerState={this.props.correctAnswerState}
 						wrongAnswerState = {this.props.wrongAnswerState} />
 				</div>
 			)

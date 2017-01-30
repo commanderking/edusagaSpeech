@@ -1,6 +1,7 @@
 {
 	"activityID": "birthdayAlex",
 	"activityName": "Alex's Birthday",
+	"characters" : ["david"],
 	"tags" : ["date", "time"],
 	"score" : 0,
 	"currentCharName" : "",
@@ -10,12 +11,12 @@
 	"currentSoundID": "",
 	"scenarioIndex": 0,
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
 		"I can ask for soemone's birthday."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -95,25 +96,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "Alex",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Park",
-				"nameChinese" : "大学公园", 
+				"nameChinese" : "大学公园",
 				"bg" : "bg/jiaoTongStatue.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/alex/alexDefault.png",
-				"confused" : "characters/alex/alexConfused.png",
-				"sass" : "characters/alex/alexSass.png",
-				"laughing" : "characters/alex/alexLaughing.png",
-				"silhouette" : "characters/alex/alexSilhouette.png"
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "birthday-august-seventeen",
@@ -140,29 +133,11 @@
 					"soundPath" : "alex/birthday-brother-twentyfour-no-twentythree.ogg"
 				}
 			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "alex/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "alex/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "alex/buhaoyisi.ogg"
-				}
-			],
 			"currentTasks" : [
 				{
 					"taskID" : 10,
 					"task" : "Ask Alex when her birthday is",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你的生日是几月几号"],
@@ -179,18 +154,18 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [11],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 11,
 					"task" : "Ask Alex how old she is this year",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你今年多大了", "今年你多大", "今年几岁"],
@@ -204,7 +179,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [20, 21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -212,7 +187,7 @@
 				{
 					"taskID" : 20,
 					"task" : "Ask her when her younger sister's birthday is",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你妹妹的生日几月几号"],
@@ -229,7 +204,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -237,7 +212,7 @@
 				{
 					"taskID" : 21,
 					"task" : "Ask her when her older brother's birthday is",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你哥哥的生日是几月几号"],
@@ -254,7 +229,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [31],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -262,7 +237,7 @@
 				{
 					"taskID" : 30,
 					"task" : "Ask Alex how old her younger sister is this year",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你的妹妹多大"],
@@ -279,7 +254,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -287,7 +262,7 @@
 				{
 					"taskID" : 31,
 					"task" : "Ask Alex how old her older brother is this year",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你的哥哥多大"],
@@ -304,7 +279,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/alex/alexDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

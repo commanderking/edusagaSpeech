@@ -10,12 +10,12 @@
 	"currentSoundID": "",
 	"scenarioIndex": 0,
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
 		"I can understand when people introduce themselves."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -204,17 +204,17 @@
 			"jumpToTasks" : true
 		}
 	],
-	"character" : 
+	"character" :
 		{
 			"name" : "Max",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Dorm",
-				"nameChinese" : "大学宿舍", 
+				"nameChinese" : "大学宿舍",
 				"bg" : "bg/jiaoTongDorm.jpg"
 			},
-			"emotions" : 
+			"emotions" :
 			{
 				"default": "characters/maxwell/maxDefault.png",
 				"confused" : "characters/maxwell/maxConfused.png",
@@ -227,7 +227,7 @@
 				"maxSilhouette" : "characters/maxwell/maxSilhouette.png",
 				"maxWistfulGoodJob" : "characters/maxwell/maxWistfulGoodJob.png"
 			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "my-name-is-chen-zi-tong",
@@ -254,14 +254,14 @@
 					"soundPath" : "lian/halin-your-age.ogg"
 				}
 			],
-			"confusedPhrases" : 
+			"confusedPhrases" :
 			[],
 			"currentTasks" : [
 				{
 					"taskID" : 10,
 					"task" : "Can you help?",
 					"taskType" : "multipleChoice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"choiceText" : "Sure thing!",
@@ -292,13 +292,13 @@
 					"jumpToScenarioIndex" : 2
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 20,
 					"task" : "What did she just say?",
 					"taskType" : "multipleChoice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"choiceText" : "She asked the audience how they were",
@@ -331,7 +331,7 @@
 					"taskID" : 30,
 					"task" : "What's her name",
 					"taskType" : "multipleChoice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"choiceText" : "Her name is  Míng zìjiào。",
@@ -370,7 +370,7 @@
 					"taskID" : 40,
 					"task" : "What's her age",
 					"taskType" : "multipleChoice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"choiceText" : "She's 27 years old.",
@@ -409,7 +409,7 @@
 					"taskID" : 50,
 					"task" : "What's his Chinese name?",
 					"taskType" : "multipleChoice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"choiceText" : "He's called Lǐ Ān",
@@ -448,7 +448,7 @@
 					"taskID" : 60,
 					"task" : "What did the judge ask",
 					"taskType" : "multipleChoice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"choiceText" : "He asked him for his nationality.",
@@ -487,7 +487,7 @@
 					"taskID" : 70,
 					"task" : "How old is he?",
 					"taskType" : "multipleChoice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"choiceText" : "He's 27",
@@ -526,7 +526,7 @@
 					"taskID" : 100,
 					"task" : "Saying bye",
 					"taskType" : "multipleChoice",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"choiceText" : "Bye!",

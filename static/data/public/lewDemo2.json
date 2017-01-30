@@ -1,7 +1,8 @@
 {
 	"activityID": "lewDemo2",
 	"activityName": "David's Return from Taiwan",
-	"tags" : ["activities", "past"], 
+	"tags" : ["activities", "past"],
+	"characters" : ["david"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/david/davidDefault.png",
@@ -9,7 +10,7 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives" : 
+	"objectives" :
 	[
 		"I can ask friends about the activities that they did."
 	],
@@ -74,29 +75,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "David",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "Shanghai Subway",
-				"nameChinese" : "上海地铁", 
+				"nameChinese" : "上海地铁",
 				"bg" : "bg/subway.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/david/davidDefault.png",
-				"uncertain" : "characters/david/davidUncertain.png",
-				"laughing" : "characters/david/davidLaughing.png",
-				"confused" : "characters/david/davidConfused.png",
-				"silhouette" : "characters/david/davidSilhouette.png"
-			},
-			"successPhrases" : {
-
-			},
-			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "taiwan-goodTime",
@@ -127,29 +116,11 @@
 					"soundPath" : "david/taiwan-moviesOnPlane.ogg"
 				}
 			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "david/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "david/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "david/buhaoyisi.ogg"
-				}
-			],
 			"currentTasks" : [
 				{
 					"taskID" : 1,
 					"task" : "Ask him how Taiwan was",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["台湾怎么样", "你对台湾的观感如何", "你喜欢台湾吗", "你喜不喜欢台湾", "你觉得台湾怎么样"],
@@ -183,22 +154,22 @@
 								["如何", "怎么样"]
 							],
 							"response" : "哇! 台湾超棒的! 我玩的很开心! ",
-							"soundID" : "taiwan-goodTime"							
+							"soundID" : "taiwan-goodTime"
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [2,3,4,5],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
 				}
 			],
-			"queuedTasks" : 
+			"queuedTasks" :
 			[
 				{
 					"taskID" : 2,
 					"task" : "Ask what he ate",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你在台湾吃了什么"],
@@ -216,7 +187,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -224,7 +195,7 @@
 				{
 					"taskID" : 20,
 					"task" : "Ask if he ate beef noodles",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你吃了牛肉面吗", "有没有吃牛肉面", "吃了牛肉面没有"],
@@ -233,7 +204,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -241,7 +212,7 @@
 				{
 					"taskID" : 3,
 					"task" : "Ask where he went",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你去了哪里"],
@@ -259,7 +230,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -267,7 +238,7 @@
 				{
 					"taskID" : 30,
 					"task" : "Ask if he went to Taipei 101 (台北一零一)",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你去了台北101吗", "你有去台北101吗"],
@@ -283,10 +254,10 @@
 							"answers": 	["你有没有去看台北101", "你去看了台北101没有", "你去看台北101了没有"],
 							"response": "我去了啊! 风景非常美。",
 							"soundID" : "taiwan-went-beautifulScenery"
-						}						
+						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -294,7 +265,7 @@
 				{
 					"taskID" : 4,
 					"task" : "Ask if he saw his friends",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你去看了你的朋友吗"],
@@ -339,7 +310,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -347,7 +318,7 @@
 				{
 					"taskID" : 5,
 					"task" : "Ask him if he watched movies",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers": 	["你看了电影吗"],
@@ -383,7 +354,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/david/davidLaughing.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

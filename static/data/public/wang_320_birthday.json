@@ -2,6 +2,7 @@
 	"activityID": "birthdayWangChao",
 	"activityName": "Wang Chao's Age and Birthday",
 	"tags" : ["date", "birthday", "age"],
+	"characters" : ["wangchao"],
 	"score" : 0,
 	"sequence" : 200,
 	"currentCharName" : "",
@@ -111,20 +112,6 @@
 				"nameChinese" : "大学果汁吧",
 				"bg" : "bg/jiaoTongJuiceBar.jpg"
 			},
-			"emotions" :
-			{
-				"default": "characters/wang/wangConfidentDefault.png",
-				"confident": "characters/wang/wangConfidentSpeaking.png",
-				"disgust": "characters/wang/wangDisgust.png",
-				"dramatic": "characters/wang/wangDramaticEvasive.png",
-				"surprised": "characters/wang/wangSurprised.png",
-				"thoughtful": "characters/wang/wangThoughtful.png",
-				"silhouette": "characters/wang/wangSilhouette.png",
-				"confused": "characters/wang/wangSurprised.png"
-			},
-			"successPhrases" : {
-
-			},
 			"sounds" :
 			[
 				{
@@ -198,7 +185,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangDisgust.png",
+					"emotion" : "disgust",
 					"soundID" : "age-9-do-i-look-like-baby",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
@@ -222,7 +209,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -246,7 +233,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [20, 21, 22, 23],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -269,7 +256,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangDisgust.png",
+					"emotion" : "disgust",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -292,7 +279,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [30, 31, 32, 33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -312,7 +299,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [30, 31, 32, 33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -332,7 +319,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [30, 31, 32, 33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -353,7 +340,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [30, 31, 32, 33],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -378,7 +365,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangThoughtful.png",
+					"emotion" : "thoughtful",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -403,7 +390,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangThoughtful.png",
+					"emotion" : "thoughtful",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -428,7 +415,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangThoughtful.png",
+					"emotion" : "thoughtful",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -454,7 +441,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentSpeaking.png",
+					"emotion" : "confident",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -471,7 +458,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/wang/wangConfidentDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

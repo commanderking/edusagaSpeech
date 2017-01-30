@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+
 var CharacterContainer = require('./questionAsker/CharacterContainer');
 var DialogContainer = require('./questionAsker/DialogContainer');
 var TaskContainer = require('./questionAsker/TaskContainer');
@@ -9,7 +10,9 @@ var ResultsContainer = require('./questionAsker/ResultsContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TimerContainer = require('./questionAsker/TimerContainer');
 var PracticeContainer = require('./questionAsker/PracticeContainer.js');
+
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
+var characterEmotionsSounds = require('json!../../static/data/characters.json');
 const Constants = require('./helpers/Constants.js');
 
 
@@ -38,17 +41,17 @@ var initializeLogData = {
 
 var QuestionAsker = React.createClass({
 	// feedbackText can be hintText from clicking hint or feedback on what user said
-	// lastDialogText is what the character last said. Important when asking for repeat to be able to reference this 
+	// lastDialogText is what the character last said. Important when asking for repeat to be able to reference this
 	getInitialState: function() {
 		return {
-			sceneData: undefined,
+			sceneData: null,
+			characterData: null,
+			currentCharName: null,
 			scenarioOn: true,
 			practiceMode: false,
 			practiceAvailable: false,
 			scenarioIndex: 0,
 			hintActive: false,
-
-			// When true, user is trying to ask for repeat
 			askingForRepeat: false,
 			currentHintIndex: -1,
 			// Current Task Index affects which tasks are highlighted when the user is answering question
@@ -57,7 +60,6 @@ var QuestionAsker = React.createClass({
 			currentTaskIndex: -1,
 			currentDialog: "",
 			currentRewindSoundID: "",
-			rewindSoundIScenarioIndex: "",
 			lastDialogText: "",
 			voicePack: {},
 			coins: 0,
@@ -75,23 +77,48 @@ var QuestionAsker = React.createClass({
 			timeRemaining: 20,
 			repeatPhrases: ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下", "对不起"],
 			speechSynthPlaying: false,
-			showResultTaskAnswer: false, 
+			showResultTaskAnswer: false,
 			showResultTaskAnswerIndex: null,
 			vocabPracticeData: null
 		}
 	},
 	loadSceneData: function() {
 		var that = this;
-		$.getJSON("/static/data/public/" + activity + ".json", function(data) {})
-			.success(function(data) {
+		var sceneData, charactersData = null;
+		$.when(
+			$.getJSON("/static/data/public/" + activity + ".json", function(data) {
+				sceneData = data;
+			}),
+			$.getJSON("/static/data/characters.json", function(data){
+				charactersData = data;
+			})
+		).then(function() {
 				that.resetScene();
-				var practiceAvailable = data.practice !== undefined ? true : false;
+				var practiceAvailable = sceneData.practice !== undefined ? true : false;
+
+				// Load correct emotions based on character
+				var allCharacterStaticData = that.getAllCharacterStaticData(sceneData.characters, charactersData);
+				console.log(allCharacterStaticData);
 				that.setState({
-					sceneData: data,
-					currentDialog: data.initialTaskDialog,
-					practiceAvailable: practiceAvailable
+					sceneData: sceneData,
+					currentDialog: sceneData.initialTaskDialog,
+					currentCharName: sceneData.characters[0],
+					practiceAvailable: practiceAvailable,
+					charactersData: allCharacterStaticData
 				});
 
+				that.initializeSounds(allCharacterStaticData);
+
+				// Load voice pack
+				// voice list in browser loaded asynchornously, so can't be grabbed on page load
+				// http://stackoverflow.com/questions/21513706/getting-the-list-of-voices-in-speechsynthesis-of-chrome-web-speech-api
+				// Wait until the voiceslist changes and then initialize speechSynth
+				// CARE: Will not work correctly if called on "render"
+				window.speechSynthesis.onvoiceschanged = function() {
+					that.setState({
+						voicePack: SpeechSynth.init(that.state.sceneData.currentLanguage)
+					});
+				};
 			/*----------------------------------
 			 One time setting of initial log Data
 			 ----------------------------------*/
@@ -103,18 +130,6 @@ var QuestionAsker = React.createClass({
 			}
 			initializeLogData.setTeacherID(teacher);
 
-			// Load all the sounds that are in the scene
-			that.initializeSounds();
-			// Load voice pack
-			// voice list in browser loaded asynchornously, so can't be grabbed on page load
-			// http://stackoverflow.com/questions/21513706/getting-the-list-of-voices-in-speechsynthesis-of-chrome-web-speech-api
-			// Wait until the voiceslist changes and then initialize speechSynth
-			// CARE: Will not work correctly if called on "render"
-			window.speechSynthesis.onvoiceschanged = function() {
-				that.setState({
-					voicePack: SpeechSynth.init(that.state.sceneData.currentLanguage)
-				});
-			};
 		})
 	},
 	resetScene: function() {
@@ -141,7 +156,7 @@ var QuestionAsker = React.createClass({
 
 			// Trick to get new instance of sceneData, to not alter the origial state
 			var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
-			var allCurrentTasks = TaskController.getCurrentTasks(newSceneData); 
+			var allCurrentTasks = TaskController.getCurrentTasks(newSceneData);
 			var currentTaskData = TaskController.getActiveTask(newSceneData, taskIndex);
 			var possibleCorrectAnswers = TaskController.getPossibleCorrectAnswers(newSceneData, taskIndex);
 
@@ -155,6 +170,13 @@ var QuestionAsker = React.createClass({
 			var possibleAnswerIndex = returnedObject.possibleAnswersIndex;
 			var responseText = returnedObject.responseText;
 
+			/*
+			* Get character name of who's talking from the current task object
+			* OR if not defined, then it's assumed to be the main character of
+			* the current scenario
+			*/
+			var characterName = currentTaskData.character || this.state.charactersData[0].name;
+
 			if (correctAnswer) {
 
 				/*----------------------------------------------
@@ -164,28 +186,23 @@ var QuestionAsker = React.createClass({
 				// Play response voice
 				this.playSound(responseSoundID);
 
-				// Store sound ID in current Sound ID if player wnats to repeat
+				// Store sound ID in current Sound ID if player wants to repeat at future time
 				newSceneData.currentSoundID = responseSoundID;
-
-				// Adjust character image
-				newSceneData.currentImage = newSceneData.character.currentTasks[taskIndex].emotion;
-
-				// Show response text
-				var newCurrentDialog = responseText;
+				newSceneData.currentImage = this.getEmotionImagePath(characterName, currentTaskData.emotion);
 
 				// Mark question as corrrect
 				newSceneData.character.currentTasks[taskIndex].correct = true;
-
-				// Add coins 
 				this.addCoins(10);
 
-				this.setState({sceneData: newSceneData});
-
 				// Add point to correct answers and set state to correctAnswerState
-				this.setState({correctAnswerState: true, 
-								correctAnswers: this.state.correctAnswers +1,
-								currentDialog: newCurrentDialog,
-								lastDialogText: newCurrentDialog});
+				this.setState({
+					sceneData: newSceneData,
+					correctAnswerState: true,
+					correctAnswers: this.state.correctAnswers +1,
+					currentDialog: responseText,
+					currentCharName: characterName,
+					lastDialogText: newCurrentDialog
+				});
 
 				// If time mode active, clear the timer countdown
 				if (this.state.sceneData.APTimeMode) {
@@ -210,8 +227,7 @@ var QuestionAsker = React.createClass({
 					// Remove the task from the tasks array
 					if (currentTaskData.taskType !== undefined) {
 
-
-						// If task is an "end" task, then end the scene by removing all other current tasks. 
+						// If task is an "end" task, then end the scene by removing all other current tasks.
 						if (currentTaskData.taskType === "end") {
 							newSceneData.character.currentTasks = [];
 						}
@@ -246,8 +262,8 @@ var QuestionAsker = React.createClass({
 						var queuedTasks = newSceneData.character.queuedTasks;
 
 						// Add tasks from the queue list to the current list
-						newSceneData.character.currentTasks = TaskController.addQueuedTasksToCurrentTasks(currentTasks, tasksToQueueIDs, queuedTasks) 
-						
+						newSceneData.character.currentTasks = TaskController.addQueuedTasksToCurrentTasks(currentTasks, tasksToQueueIDs, queuedTasks)
+
 						// Get indexes of tasks from queue to remove
 						var indexesToRemove = TaskController.getIndexesToSpliceQueuedTasks(tasksToQueueIDs, queuedTasks)
 
@@ -267,59 +283,43 @@ var QuestionAsker = React.createClass({
 						that.changeScenarioMode();
 					}
 				}, delayTime)
-				
+
 			/*--------------------------------------------
 			When user answers incorrectly
 			--------------------------------------------*/
 
 			} else {
-				// Turn off Mic recording state
 				this.turnMicStateOff();
 
-				// set image to confused
-				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
-				
-				// Grab random confused phrase
-				var confusedPhrasesArray = newSceneData.character.confusedPhrases;
-				
-				// Randomly pick a confused response
-				var randomVar = Math.random();
-
-				// Set text for confusion
-				newCurrentDialog = confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].response;
-
-				// Play confused sound
-				this.playSound(confusedPhrasesArray[Math.floor(randomVar*confusedPhrasesArray.length)].soundID);
-
-				// Activate Feedback Mode
-				this.setState({
-					feedbackText: userAnswer
-				})
+				// Confused character image, sound, and text to display
+				newSceneData.currentImage = this.getEmotionImagePath(characterName, "confused");
+				var confusedPhraseObject = this.getConfusedPhraseOfChar(characterName);
+				var newCurrentDialog = confusedPhraseObject.response;
+				this.playSound(confusedPhraseObject.soundID);
 
 				// Turns on feedback mode to reveal what user said
 				this.activateFeedbackMode();
 
 				// Set new variables in sceneData
-				this.setState({sceneData: newSceneData, 
+				this.setState({
+								feedbackText: userAnswer,
+								sceneData: newSceneData,
 								wrongAnswerState: true,
 								currentDialog: newCurrentDialog
 				});
-
 
 				if (this.state.sceneData.APTimeMode) {
 					clearInterval(this.timerInterval);
 				}
 				setTimeout(function() {
-					// Reset character image to default 
-					newSceneData.currentImage = that.state.sceneData.character.emotions.default;
+					// Reset character image to default
+					newSceneData.currentImage = that.getEmotionImagePath(characterName, "default");
 					that.setState({wrongAnswerState: false, sceneData: newSceneData});
 
 					if (that.state.sceneData.APTimeMode) {
 						that.startTimer();
 					}
-					
 				}, 3000);
-
 			}
 
 			// Log data wheter correct or incorrect
@@ -334,7 +334,7 @@ var QuestionAsker = React.createClass({
 			$.ajax({
 				url: "/logSpeechResponse",
 				type: "POST",
-				data: logEvent, 
+				data: logEvent,
 				dataType: "json"
 			});
 		}
@@ -351,7 +351,7 @@ var QuestionAsker = React.createClass({
 			if (currentChoiceData.correctAnswer === true) {
 
 				/*---------------------------------------------------------------
-				TODO: REFACTOR THIS WITH checkANSWER part 
+				TODO: REFACTOR THIS WITH checkANSWER part
 				---------------------------------------------------------------*/
 				// Play response voice
 				this.playSound(currentChoiceData.soundID);
@@ -368,26 +368,23 @@ var QuestionAsker = React.createClass({
 				// Mark question as corrrect
 				newSceneData.character.currentTasks[taskIndex].correct = true;
 
-				// Add coins 
+				// Add coins
 				if (currentChoiceData.coins !== undefined) {
 					this.addCoins(currentChoiceData.coins);
 				} else {
 					this.addCoins(10);
 				}
 
-				// this.setState({sceneData: newSceneData});
-
 				// Add point to correct answers and set state to correctAnswerState
 				this.setState({
 					sceneData: newSceneData,
-					correctAnswerState: true, 
+					correctAnswerState: true,
 					correctAnswers: this.state.correctAnswers +1,
 					currentDialog: newCurrentDialog,
 					lastDialogText: newCurrentDialog
 				});
 
 				// 3) Remove task from currentTasks
-
 				setTimeout(function(){
 					// Turn off correct answer state
 					that.setState({correctAnswerState: false});
@@ -400,12 +397,12 @@ var QuestionAsker = React.createClass({
 					if (currentTaskData.taskType !== undefined) {
 
 
-						// If task is an "end" task, then end the scene by removing all other current tasks. 
+						// If task is an "end" task, then end the scene by removing all other current tasks.
 						if (currentTaskData.taskType === "end") {
 							newSceneData.character.currentTasks = [];
 						} else if (currentTaskData.taskType === "multipleChoice") {
 							// Add task to completed tasks and then delete it from currentTasks
-							newSceneData.character.currentTasks.splice(taskIndex, 1);	
+							newSceneData.character.currentTasks.splice(taskIndex, 1);
 						}
 					} else {
 					}
@@ -419,8 +416,8 @@ var QuestionAsker = React.createClass({
 						var queuedTasks = newSceneData.character.queuedTasks;
 
 						// Add tasks from the queue list to the current list
-						newSceneData.character.currentTasks = TaskController.addQueuedTasksToCurrentTasks(currentTasks, tasksToQueueIDs, queuedTasks) 
-						
+						newSceneData.character.currentTasks = TaskController.addQueuedTasksToCurrentTasks(currentTasks, tasksToQueueIDs, queuedTasks)
+
 						// Get indexes of tasks from queue to remove
 						var indexesToRemove = TaskController.getIndexesToSpliceQueuedTasks(tasksToQueueIDs, queuedTasks)
 
@@ -441,7 +438,7 @@ var QuestionAsker = React.createClass({
 					}
 				}, 10)
 
-			} else {				
+			} else {
 				// set image to confused
 				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
 
@@ -461,9 +458,7 @@ var QuestionAsker = React.createClass({
 					currentDialog: newCurrentDialog,
 					lastDialogText: newCurrentDialog
 				});
-
 			}
-
 	},
 	checkSceneOver: function() {
 		// Logic for when scene is over
@@ -480,13 +475,12 @@ var QuestionAsker = React.createClass({
 			var studentCompletedProgress = {};
 			// Pull teacher variable set in html page if possible
 			try {
-				studentCompletedProgress.teacherID = teacher;			
+				studentCompletedProgress.teacherID = teacher;
 			} catch(err) {
 				studentCompletedProgress.teacherID = "Unknown teacher";
 			}
 
 			studentCompletedProgress.studentID = initialLogData.studentID;
-
 
 			var allTaskData = [];
 			let reviewVocabList = {
@@ -496,7 +490,7 @@ var QuestionAsker = React.createClass({
 				"lang" : "zh-CN",
 				"list" : []
 			};
-			// Only add needed pieces of information //
+			// Add relevant student data to be saved
 			this.state.sceneData.character.completedTasks.forEach(function(task, i){
 				// Related to taskData to push for studentData
 				var taskData = {}
@@ -530,7 +524,7 @@ var QuestionAsker = React.createClass({
 			$.ajax({
 				url: "/logStudent",
 				type: "POST",
-				data: logEvent, 
+				data: logEvent,
 				dataType: "json"
 			});
 
@@ -542,15 +536,34 @@ var QuestionAsker = React.createClass({
 			setTimeout(function(){
 				that.setState({sceneComplete: true, vocabPracticeData: reviewVocabList})
 			}, 700)
-		}		
+		}
 	},
-	initializeSounds: function() {
+
+	/*------------------------------------
+	* Character image related functions
+	*-------------------------------------*/
+
+	// charactersInScene Ex. ["alex", "david"]
+	// charactersLibrary contains all static information about character
+	// i.e Confused phrases, emotions images
+	getAllCharacterStaticData(charactersInScene, charactersLibrary) {
+		var charactersInSceneInfo = charactersLibrary.filter(function(characterInfo){
+			var characterFound = false;
+			charactersInScene.forEach(function(charName){
+				characterFound = charName === characterInfo.name ? true: false;
+			});
+			return characterFound;
+		});
+		return charactersInSceneInfo;
+	},
+	/*---------------------------------
+	* Sound related functions
+	-----------------------------------*/
+	initializeSounds: function(charactersData) {
 		var SOUND_BASE_PATH = Constants.SOUND_PATH;
 		var soundArray = [];
 		var sounds = this.state.sceneData.character.sounds;
-		var confusedPhrases = this.state.sceneData.character.confusedPhrases;
-		
-		// Create sound objects for character recordings
+
 		sounds.forEach(function(task, i) {
 			var soundObject = {
 				"soundID" : task.soundID,
@@ -559,18 +572,42 @@ var QuestionAsker = React.createClass({
 			soundArray.push(soundObject);
 		});
 
-		// Push sounds related to confused responses
-		confusedPhrases.forEach(function(phrase, i){
-			var soundObject = {
-				"soundID" : phrase.soundID,
-				"soundPath" : SOUND_BASE_PATH + phrase.soundPath
-			};
-			soundArray.push(soundObject);
-		});
+		charactersData.forEach(function(character){
+			character.confusedPhrases.forEach(function(phrase){
+				var soundObject = {
+					"soundPath" : SOUND_BASE_PATH + phrase.soundPath,
+					"soundID" : phrase.soundID
+				}
+				soundArray.push(soundObject);
+			});
+		})
 
 		soundArray.forEach(function(soundFile, i) {
 			createjs.Sound.registerSound(soundFile.soundPath, soundFile.soundID);
 		});
+	},
+	getConfusedPhraseOfChar: function(characterName) {
+		var confusedPhraseObject;
+		this.state.charactersData.forEach(function(character){
+			if (characterName === character.name) {
+				var randomIndex = Math.floor(Math.random()*character.confusedPhrases.length);
+				confusedPhraseObject = character.confusedPhrases[randomIndex];
+			}
+		})
+		console.log(confusedPhraseObject);
+		return(confusedPhraseObject);
+	},
+	getEmotionImagePath: function(characterName, emotion) {
+		if (emotion === "blank") {
+			return "blank.png";
+		}
+		var emotionPath;
+		this.state.charactersData.forEach(function(character){
+			if (characterName === character.name) {
+				emotionPath = character.emotions[emotion];
+			}
+		});
+		return emotionPath;
 	},
 	playSound: function(soundID) {
 		createjs.Sound.play(soundID);
@@ -728,8 +765,8 @@ var QuestionAsker = React.createClass({
 				this.setState({wrongAnswerState: true, sceneData: newSceneData, currentDialog: newCurrentDialog});
 
 				setTimeout(function() {
-					// Reset character image to default 
-					newSceneData.currentImage = that.state.sceneData.character.emotions.default;
+					// Reset character image to default
+					newSceneData.currentImage = that.getEmotionImagePath(characterName, "default");
 					that.setState({wrongAnswerState: false, sceneData: newSceneData });
 				}, 2000);
 			}
@@ -740,13 +777,13 @@ var QuestionAsker = React.createClass({
 	skipTasks: function() {
 		var that = this;
 		// Grab relevant data from sceneData
-		var allCurrentTasks = TaskController.getCurrentTasks(this.state.sceneData); 
+		var allCurrentTasks = TaskController.getCurrentTasks(this.state.sceneData);
 		var taskIDsToQueue = TaskController.getTaskIDsToQueueOfCurrentTasks(this.state.sceneData);
 		var allQueuedTasks = TaskController.getQueuedTasks(this.state.sceneData);
 
 		var newSceneData = JSON.parse(JSON.stringify(this.state.sceneData));
 
-		// Set completed tasks to current tasks 
+		// Set completed tasks to current tasks
 		newSceneData.character.completedTasks = newSceneData.character.completedTasks.concat(allCurrentTasks);
 
 		// Remove all completed tasks
@@ -756,7 +793,7 @@ var QuestionAsker = React.createClass({
 		newSceneData.character.currentTasks = TaskController.addQueuedTasksToCurrentTasks(allCurrentTasks, taskIDsToQueue, allQueuedTasks);
 
 		// Remove appropriate queued tasks
-		var spliceIndexes = TaskController.getIndexesToSpliceQueuedTasks(taskIDsToQueue, allQueuedTasks) 
+		var spliceIndexes = TaskController.getIndexesToSpliceQueuedTasks(taskIDsToQueue, allQueuedTasks)
 		newSceneData.character.queuedTasks = TaskController.removeTasksfromQueue(spliceIndexes, allQueuedTasks);
 
 		// Check if no more tasks remaining
@@ -775,7 +812,6 @@ var QuestionAsker = React.createClass({
 	startTimer: function() {
 		this.timerInterval = setInterval(this.updateTime, 1000);
 		// this.updateTime();
-
 	},
 	updateTime: function() {
 		// !this.state.micActive allows student to finish last response before moving to delay screen
@@ -801,7 +837,7 @@ var QuestionAsker = React.createClass({
 		} else {
 			var newScenarioIndex = this.state.scenarioIndex + 1;
 			this.setState({scenarioIndex: newScenarioIndex}, storeRewindSound);
-		
+
 		}
 	},
 	getCurrentScenarioObject: function() {
@@ -829,12 +865,13 @@ var QuestionAsker = React.createClass({
 			this.setState({
 				showResultTaskAnswer: false
 			})
-		} 
+		}
+
 		// Case where they're clicking the show answer for another task or clicking help for first time
 		else {
 			this.setState({
 				showResultTaskAnswer: true,
-				showResultTaskAnswerIndex: index		
+				showResultTaskAnswerIndex: index
 			})
 		}
 	},
@@ -846,7 +883,7 @@ var QuestionAsker = React.createClass({
 
 			var currentScenarioData = this.getCurrentScenarioObject();
 			// Timer appears if APTimeMode is on in sceneData
-			var timer = this.state.sceneData.APTimeMode === true ? <TimerContainer 
+			var timer = this.state.sceneData.APTimeMode === true ? <TimerContainer
 																		taskPause = {this.state.taskPause}
 																		timeRemaining = {this.state.timeRemaining}
 																		scenarioOn = {this.state.scenarioOn} /> : null;
@@ -857,9 +894,9 @@ var QuestionAsker = React.createClass({
 						scenarioOn = {this.state.scenarioOn}
 						bgImage = {this.state.sceneData.character.location.bg}
 						hintActive = {this.state.hintActive} />
-					<PracticeContainer 
+					<PracticeContainer
 						vocabList = {this.state.sceneData.practice}
-						practiceMode = {this.state.practiceMode} 
+						practiceMode = {this.state.practiceMode}
 						changePracticeMode = {this.changePracticeMode}
 						playSpeechSynth = {this.playSpeechSynth}
 						speechSynthPlaying = {this.state.speechSynthPlaying}
@@ -873,35 +910,36 @@ var QuestionAsker = React.createClass({
 						currentScenarioData = {currentScenarioData}
 						playSound = {this.playSound}
 						charName={this.state.sceneData.character.name}
-						currentDialog = {this.state.currentDialog} 
-						hintActive = {this.state.hintActive} 
-						onRepeat = {this.handleRepeat} 
+						currentDialog = {this.state.currentDialog}
+						hintActive = {this.state.hintActive}
+						onRepeat = {this.handleRepeat}
 						nextScenario = {this.nextScenario}
 						setRewindScenarioSound = {this.setRewindScenarioSound}
 						playRewindScenarioSound = {this.playRewindScenarioSound}
 						assessmentMode = {sceneData.assessmentMode}
 						sceneComplete = {this.state.sceneComplete}
 						currentRewindSoundID = {this.state.currentRewindSoundID}
-						practiceMode = {this.state.practiceMode} 
+						practiceMode = {this.state.practiceMode}
 						changePracticeMode = {this.changePracticeMode}
 						practiceAvailable = {this.state.practiceAvailable}
 						turnOffPracticeOption={this.turnOffPracticeOption}/>
-					<CharacterContainer 
+					<CharacterContainer
 						scenarioOn = {this.state.scenarioOn}
 						scenarioData = {this.state.sceneData.scenario}
-						scenarioIndex = {this.state.scenarioIndex} 
-						charImage = {sceneData.currentImage} 
-						silhouette = {sceneData.character.emotions.silhouette}
-						hintActive = {this.state.hintActive} 
-						correctAnswerState = {this.state.correctAnswerState} 
-						wrongAnswerState = {this.state.wrongAnswerState} 
+						scenarioIndex = {this.state.scenarioIndex}
+						charImage = {sceneData.currentImage}
+						currentCharName = {this.state.currentCharName}
+						getEmotionImagePath = {this.getEmotionImagePath}
+						hintActive = {this.state.hintActive}
+						correctAnswerState = {this.state.correctAnswerState}
+						wrongAnswerState = {this.state.wrongAnswerState}
 						sceneComplete = {this.state.sceneComplete}
 						practiceMode = {this.state.practiceMode} />
 					<TaskContainer
 						scenarioOn = {this.state.scenarioOn}
 						tasks = {this.state.sceneData.character.currentTasks}
-						taskLang = {sceneData.currentLanguage} 
-						checkAnswer = {this.checkAnswer} 
+						taskLang = {sceneData.currentLanguage}
+						checkAnswer = {this.checkAnswer}
 						checkAnswerMC = {this.checkAnswerMC}
 						hintActive = {this.state.hintActive}
 						currentHintIndex = {this.state.currentHintIndex}
@@ -911,56 +949,56 @@ var QuestionAsker = React.createClass({
 						deactivateFeedbackMode = {this.deactivateFeedbackMode}
 						turnMicStateOn = {this.turnMicStateOn}
 						turnMicStateOff = {this.turnMicStateOff}
-						micActive = {this.state.micActive} 
+						micActive = {this.state.micActive}
 						correctAnswerState = {this.state.correctAnswerState}
 						wrongAnswerState = {this.state.wrongAnswerState}
 						assessmentMode = {sceneData.assessmentMode}
-						onHandleAskRepeat = {this.handleAskRepeat} 
+						onHandleAskRepeat = {this.handleAskRepeat}
 						skipTasks = {this.skipTasks}
 						taskPause = {this.state.taskPause}
-						resumeTasks = {this.resumeTasks} 
+						resumeTasks = {this.resumeTasks}
 
 						// Give component ability to manipulate currentTaskIndex
-						currentTaskIndex = {this.state.currentTaskIndex} 
+						currentTaskIndex = {this.state.currentTaskIndex}
 						setCurrentTaskIndex = {this.setCurrentTaskIndex} />
-					<FeedbackContainer 
+					<FeedbackContainer
 						scenarioOn = {this.state.scenarioOn}
 						locationTextEnglish = {this.state.sceneData.character.location.nameEnglish}
 						locationTextChinese = {this.state.sceneData.character.location.nameChinese}
-						hintActive = {this.state.hintActive} 
+						hintActive = {this.state.hintActive}
 						onHintAudio = {this.playSpeechSynth}
-						coins = {this.state.coins} 
+						coins = {this.state.coins}
 						answerFeedbackActive = {this.state.answerFeedbackActive}
-						feedbackText = {this.state.feedbackText} 
-						miriIconSrc = {this.state.miriIconSrc} 
+						feedbackText = {this.state.feedbackText}
+						miriIconSrc = {this.state.miriIconSrc}
 						repeatActive = {this.state.repeatActive}
-						correctAnswerState = {this.state.correctAnswerState} 
-						micActive = {this.state.micActive} 
-						wrongAnswerState = {this.state.wrongAnswerState} 
-						skipTasks = {this.skipTasks} 
+						correctAnswerState = {this.state.correctAnswerState}
+						micActive = {this.state.micActive}
+						wrongAnswerState = {this.state.wrongAnswerState}
+						skipTasks = {this.skipTasks}
 						handleAskRepeat = {this.handleAskRepeat}
 						onDisableHint = {this.handleDisableHint}
 						deactivateFeedbackMode = {this.deactivateFeedbackMode}
 						turnMicStateOn = {this.turnMicStateOn}
 
-						// Repeat mode related 
+						// Repeat mode related
 						repeatPhrases = {this.state.repeatPhrases}
 						askingForRepeat = {this.state.askingForRepeat}
 						deactivateRepeatMode = {this.deactivateRepeatMode}
 						activateRepeatMode = {this.activateRepeatMode}
-						taskLang = {sceneData.currentLanguage} 
+						taskLang = {sceneData.currentLanguage}
 
 						// Give component ability to manipulate setCurrentTaskIndex
 						tasks = {this.state.sceneData.character.currentTasks}
-						currentTaskIndex = {this.state.currentTaskIndex} 
-						setCurrentTaskIndex = {this.setCurrentTaskIndex} 
-						currentScenarioData = {currentScenarioData} 
+						currentTaskIndex = {this.state.currentTaskIndex}
+						setCurrentTaskIndex = {this.setCurrentTaskIndex}
+						currentScenarioData = {currentScenarioData}
 						practiceMode = {this.state.practiceMode}/>
-					<ResultsContainer 
-						sceneComplete = {this.state.sceneComplete} 
+					<ResultsContainer
+						sceneComplete = {this.state.sceneComplete}
 						coins = {this.state.coins}
 						possibleCoins = {this.state.possibleCoins}
-						loadSceneData = {this.loadSceneData} 
+						loadSceneData = {this.loadSceneData}
 						completedTasks = {sceneData.character.completedTasks}
 						showResultTaskAnswer = {this.state.showResultTaskAnswer}
 						changeResultsTaskAnswers = {this.changeResultsTaskAnswers}
@@ -969,7 +1007,8 @@ var QuestionAsker = React.createClass({
 						speechSynthPlaying = {this.state.speechSynthPlaying}
 
 						charName = {sceneData.character.name}
-						charProfilePic = {sceneData.character.emotions.default}
+						getEmotionImagePath = {this.getEmotionImagePath}
+						sceneMainChar = {this.state.charactersData[0].name}
 						locationEnglish = {sceneData.character.location.nameEnglish}
 						locationChinese = {sceneData.character.location.nameChinese}
 

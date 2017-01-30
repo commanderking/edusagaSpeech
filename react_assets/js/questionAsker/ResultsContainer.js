@@ -21,7 +21,8 @@ ResultsContainer.propTypes = {
 	sceneComplete: PropTypes.bool.isRequired,
 	loadSceneData: PropTypes.func.isRequired,
 	completedTasks: PropTypes.array.isRequired,
-	charProfilePic: PropTypes.string.isRequired,
+	getEmotionImagePath: PropTypes.func.isRequired,
+	sceneMainChar: PropTypes.string.isRequired,
 	showResultTaskAnswer: PropTypes.bool.isRequired,
 	changeResultsTaskAnswers: PropTypes.func.isRequired
 }
