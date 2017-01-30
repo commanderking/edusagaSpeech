@@ -80,6 +80,66 @@
     ]
   },
   {
+    "name" : "tina2",
+    "emotions" : {
+      "default": "characters/tina/tina2Default.png",
+      "laughing" : "characters/tina/tina2Laughing.png",
+      "smiling" : "characters/tina/tina2Smiling.png",
+      "thinking" : "characters/tina/tina2Thinking.png",
+      "tired" : "characters/tina/tina2Tired.png",
+      "uncertain" : "characters/tina/tina2Uncertain1.png",
+      "confused" : "characters/tina/tina2Uncertain2.png",
+      "silhouette" : "characters/tina/tinaSilhouette3.png"
+    },
+    "confusedPhrases" : [
+      {
+        "response": "什么?",
+        "soundID" : "tina-shenme",
+        "soundPath" : "tina/shenme.ogg"
+      },
+      {
+        "response": "我听不懂.",
+        "soundID" : "tina-tingbudong",
+        "soundPath" : "tina/tingbudong.ogg"
+      },
+      {
+        "response": "不好意思, 我没听懂.",
+        "soundID" : "tina-buhaoyisi",
+        "soundPath" : "tina/buhaoyisi.ogg"
+      }
+    ]
+  },
+  {
+    "name" : "chenyang",
+    "emotions" : {
+			"default": "characters/chenyang/chenDefault.png",
+			"smiling" : "characters/chenyang/chenGoodJob.png",
+			"laughing" : "characters/chenyang/chenGreatJob.png",
+			"laughing2" : "characters/chenyang/chenSpeaking.png",
+			"confused" : "characters/chenyang/chenConfused.png",
+			"wistful" : "characters/chenyang/chenWistful.png",
+      "bored" : "characters/chenyang/chenWistful.png",
+			"silhouette" : "characters/chenyang/chenSilhouette.png"
+		},
+    "confusedPhrases" : [
+      {
+        "response": "什么?",
+        "soundID" : "shenme",
+        "soundPath" : "chenyang/shenme.ogg"
+      },
+      {
+        "response": "我听不懂.",
+        "soundID" : "tingbudong",
+        "soundPath" : "chenyang/tingbudong.ogg"
+      },
+      {
+        "response": "不好意思, 我没听懂.",
+        "soundID" : "buhaoyisi",
+        "soundPath" : "chenyang/buhaoyisi.ogg"
+      }
+    ]
+  },
+  {
     "name" : "wangchao",
     "emotions" : {
 			"default": "characters/wang/wangConfidentDefault.png",

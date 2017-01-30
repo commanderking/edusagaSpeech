@@ -2,11 +2,11 @@
 	"activityID": "orderingFood",
 	"activityName": "Familiar Face on School Campus",
 	"tags" : ["food"],
-	"characters" : ["tina"],
+	"characters" : ["tina2"],
 	"sequence" : 310,
 	"score" : 0,
 	"currentCharName" : "",
-	"currentImage" : "characters/tina/tinaDefault.png",
+	"currentImage" : "characters/tina/tina2Default.png",
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
 	"currentSoundID": "",
@@ -94,36 +94,11 @@
 				"nameChinese" : "快餐店",
 				"bg" : "bg/fastfoodRestaurant.jpg"
 			},
-			"emotions" :
-			{
-				"default": "characters/tina/tinaDefault.png",
-				"ordering" : "characters/tina/tinaOrdering.png",
-				"confused" : "characters/tina/tinaConfused.png",
-				"silhouette" : "characters/tina/tinaSilhouette1.png"
-			},
 			"sounds" :
 			[
 				{
 					"soundID" : "nihao",
 					"soundPath" : "tina/nihao.ogg"
-				}
-			],
-			"confusedPhrases" :
-			[
-				{
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "tina/shenme.ogg"
-				},
-				{
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "tina/tingbudong.ogg"
-				},
-				{
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "tina/buhaoyisi.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -144,7 +119,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [10],
 					"attemptedAnswers" : []
 				}
@@ -168,7 +143,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [20, 21],
 					"attemptedAnswers" : []
 				},
@@ -199,7 +174,7 @@
 					"correct" : false,
 					"response" : "我是个学生啊！你呢？",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [30, 31],
 					"attemptedAnswers" : []
 				},
@@ -223,7 +198,7 @@
 					"correct" : false,
 					"response" : "我在一个快餐餐厅做事。",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				},
@@ -253,7 +228,7 @@
 					"correct" : false,
 					"response" : "哦。 原来我们两个都是学生！你今年多大?",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "thinking",
 					"tasksToQueue" : [35],
 					"attemptedAnswers" : []
 				},
@@ -281,7 +256,7 @@
 					"correct" : false,
 					"response" : "真的吗？你看起来像个学生。 你今年多大?",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "uncertain",
 					"tasksToQueue" : [35],
 					"attemptedAnswers" : []
 				},
@@ -304,7 +279,7 @@
 					"correct" : false,
 					"response" : "哦。。。是吗？",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [40, 41, 42, 43],
 					"attemptedAnswers" : []
 				},
@@ -329,7 +304,7 @@
 					"correct" : false,
 					"response" : "我今年二十二岁。",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : []
 				},
@@ -349,7 +324,7 @@
 					"correct" : false,
 					"response" : "我的生日啊？ 是十一月七号。",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "thinking",
 					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -366,7 +341,7 @@
 					"correct" : false,
 					"response" : "我是韩国人。我爸也是韩国人. 我妈是中国人。",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -383,7 +358,7 @@
 					"correct" : false,
 					"response" : "再见!",
 					"soundID" : "",
-					"emotion" : "characters/tina/tinaDefault.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

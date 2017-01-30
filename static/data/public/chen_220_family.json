@@ -2,6 +2,7 @@
 	"activityID": "familyChenYang",
 	"activityName": "Learning about Chen Yang's Family",
 	"tags" : ["family", "nationality", "careers"],
+	"characters" : ["chenyang"],
 	"score" : 0,
 	"sequence" : 100,
 	"currentCharName" : "",
@@ -115,20 +116,6 @@
 				"nameChinese" : "大学图书馆",
 				"bg" : "bg/jiaoTongLibrary.jpg"
 			},
-			"emotions" :
-			{
-				"default": "characters/chenguang/chengDefault.png",
-				"uncertain" : "characters/chenguang/chengGoodJob.png",
-				"laughing" : "characters/chenguang/chengGreatJob.png",
-				"laughing2" : "characters/chenguang/chengSpeaking.png",
-				"smiling" : "characters/chenguang/chengGoodJob.png",
-				"confused" : "characters/chenguang/chengConfused.png",
-				"wistful" : "characters/chenguang/chengWistful.png",
-				"silhouette" : "characters/chenguang/chengSilhouette.png"
-			},
-			"successPhrases" : {
-
-			},
 			"sounds" :
 			[
 
@@ -232,7 +219,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [10],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -252,7 +239,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [20, 21, 22, 23],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -270,7 +257,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -289,7 +276,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -307,7 +294,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -325,7 +312,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -350,7 +337,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [40, 42, 44, 46],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -388,7 +375,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [41],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -427,7 +414,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "characters/chenguang/laughing",
 					"tasksToQueue" : [50],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -465,7 +452,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -503,7 +490,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [45],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -541,7 +528,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -559,7 +546,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -595,7 +582,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [51],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -636,7 +623,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [60],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -653,7 +640,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false

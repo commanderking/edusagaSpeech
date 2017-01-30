@@ -2,7 +2,7 @@
 	"activityID": "cafeScheduling",
 	"activityName": "Scheduling everyone to go to the cafe",
 	"tags" : ["date", "time"],
-	"characters" : ["david", "alex"],
+	"characters" : ["david", "alex", "chenyang"],
 	"score" : 0,
 	"sequence": 300,
 	"currentCharName" : "",
@@ -390,7 +390,8 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengConfused.png",
+					"character" : "chenyang",
+					"emotion" : "confused",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

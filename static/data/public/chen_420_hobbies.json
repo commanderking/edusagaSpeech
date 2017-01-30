@@ -2,6 +2,7 @@
 	"activityID": "hobbiesChenYang",
 	"activityName": "Asking about Chen Yang's Hobbies (Part 1)",
 	"tags" : ["hobbies"],
+	"characters" : ["chenyang"],
 	"sequence" : 110,
 	"score" : 0,
 	"currentCharName" : "",
@@ -10,12 +11,12 @@
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
-	"objectives": 
+	"objectives":
 	[
 		"I can ask others what they like or dislike."
 	],
 	"scenario" :
-	[	
+	[
 		{
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
@@ -89,31 +90,17 @@
 			}
 		]
 	},
-	"character" : 
+	"character" :
 		{
 			"name" : "Chen Yang",
 			"language" : "zh-CN",
-			"location" : 
+			"location" :
 			{
 				"nameEnglish" : "University Library",
-				"nameChinese" : "大学图书馆", 
+				"nameChinese" : "大学图书馆",
 				"bg" : "bg/jiaoTongLibrary.jpg"
 			},
-			"emotions" : 
-			{
-				"default": "characters/chenguang/chengDefault.png",
-				"uncertain" : "characters/chenguang/chengGoodJob.png",
-				"laughing" : "characters/chenguang/chengGreatJob.png",
-				"laughing2" : "characters/chenguang/chengSpeaking.png",
-				"smiling" : "characters/chenguang/chengGoodJob.png",
-				"confused" : "characters/chenguang/chengConfused.png",
-				"wistful" : "characters/chenguang/chengWistful.png",
-				"silhouette" : "characters/chenguang/chengSilhouette.png"
-			},
-			"successPhrases" : {
-
-			},
-			"sounds" : 
+			"sounds" :
 			[
 				{
 					"soundID" : "nihao",
@@ -148,29 +135,11 @@
 					"soundPath" : "chenyang/zaijian(sad).ogg"
 				}
 			],
-			"confusedPhrases" : 
-			[
-				{ 
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "chenyang/shenme.ogg"
-				}, 
-				{ 
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "chenyang/tingbudong.ogg"
-				}, 
-				{ 
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "chenyang/buhaoyisi.ogg"
-				}
-			],
 			"currentTasks" : [
 				{
 					"taskID" : 1,
 					"task" : "Greet her.",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你好"],
@@ -184,7 +153,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengBored.png",
+					"emotion" : "bored",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -195,7 +164,7 @@
 				{
 					"taskID" : 20,
 					"task" : "Ask what she likes to do on the weekend.",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你周末喜欢做什么"],
@@ -212,7 +181,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [30,31,32],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -221,7 +190,7 @@
 					"taskID" : 30,
 					"task" : "Ask if she likes to sing",
 					"taskLink" : "goodbye",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你喜不喜欢唱歌", "你爱不爱唱歌"],
@@ -239,7 +208,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengBored.png",
+					"emotion" : "bored",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -248,7 +217,7 @@
 					"taskID" : 31,
 					"task" : "Ask if she likes to dance",
 					"taskLink" : "goodbye",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你喜不喜欢跳舞", "你爱不爱跳舞"],
@@ -266,7 +235,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengBored.png",
+					"emotion" : "bored",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -274,7 +243,7 @@
 				{
 					"taskID" : 32,
 					"task" : "Ask if she likes to play sports or exercise",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你喜不喜欢运动"],
@@ -300,7 +269,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengBored.png",
+					"emotion" : "bored",
 					"tasksToQueue" : [33],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -308,7 +277,7 @@
 				{
 					"taskID" : 33,
 					"task" : "Ask if she likes to watch TV",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["你喜不喜欢看电视"],
@@ -334,7 +303,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengBored.png",
+					"emotion" : "bored",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed": false
@@ -344,7 +313,7 @@
 					"task" : "Say goodbye (she seems uninterested).",
 					"taskType" : "choice",
 					"taskLink" : "goodbye",
-					"possibleAnswers" : 
+					"possibleAnswers" :
 					[
 						{
 							"answers" : ["再见", "明天见"],
@@ -353,7 +322,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengBored.png",
+					"emotion" : "bored",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false

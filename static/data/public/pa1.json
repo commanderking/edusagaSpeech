@@ -2,6 +2,7 @@
 	"activityID": "A1",
 	"activityName": "Pre-assessment - Chinese 1",
 	"tags" : ["review", "time", "hobbies", "introduction", "pre-assessment"],
+	"characters" : ["chenyang"],
 	"score" : 0,
 	"currentCharName" : "",
 	"currentImage" : "characters/chenguang/chengDefault.png",
@@ -41,18 +42,6 @@
 				"nameChinese" : "学校食堂",
 				"bg" : "bg/shitang.jpg"
 			},
-			"emotions" :
-			{
-				"default": "characters/chenguang/chengDefault.png",
-				"uncertain" : "characters/chenguang/chengGoodJob.png",
-				"laughing" : "characters/chenguang/chengGreatJob.png",
-				"laughing2" : "characters/chenguang/chengSpeaking.png",
-				"smiling" : "characters/chenguang/chengGoodJob.png",
-				"confused" : "characters/chenguang/chengConfused.png",
-				"wistful" : "characters/chenguang/chengWistful.png",
-				"silhouette" : "characters/chenguang/chengSilhouette.png"
-			},
-			"repeatPhrases": ["请再说一次", "再说一次", "再说一遍", "什么", "你说什么", "重复一次", "重复一下"],
 			"sounds" :
 			[
 				{
@@ -144,24 +133,6 @@
 					"soundPath" : "chenyang/pingpong.ogg"
 				}
 			],
-			"confusedPhrases" :
-			[
-				{
-					"response": "什么?",
-					"soundID" : "shenme",
-					"soundPath" : "chenyang/shenme.ogg"
-				},
-				{
-					"response": "我听不懂.",
-					"soundID" : "tingbudong",
-					"soundPath" : "chenyang/tingbudong.ogg"
-				},
-				{
-					"response": "不好意思, 我没听懂.",
-					"soundID" : "buhaoyisi",
-					"soundPath" : "chenyang/buhaoyisi.ogg"
-				}
-			],
 			"currentTasks": [
 				{
 					"taskID" : 1,
@@ -187,7 +158,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing2",
 					"attemptedAnswers" : [],
 					"hintUsed" : false,
 					"tasksToQueue" : [2]
@@ -203,7 +174,7 @@
 						{
 							"answers" : ["我叫", "我是", "我姓"],
 							"response" : "",
-							"soundID" : ""
+							"soundID" : " "
 						}
 					],
 					"hints" :
@@ -216,7 +187,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing2",
 					"tasksToQueue" : [3],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -248,7 +219,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [23],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -284,7 +255,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [4],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -320,7 +291,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing2",
 					"tasksToQueue" : [5],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -346,7 +317,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [6],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -381,7 +352,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [8],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -419,7 +390,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing2",
 					"tasksToQueue" : [9],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -444,7 +415,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengDefault.png",
+					"emotion" : "default",
 					"tasksToQueue" : [10],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -474,7 +445,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing2",
 					"tasksToQueue" : [11],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -513,7 +484,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [24],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -555,7 +526,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengSpeaking.png",
+					"emotion" : "laughing2",
 					"tasksToQueue" : [12],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -595,7 +566,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [13],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -639,7 +610,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [14],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -681,7 +652,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengSpeaking.png",
+					"emotion" : "laughing2",
 					"tasksToQueue" : [15],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -711,7 +682,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGreatJob.png",
+					"emotion" : "laughing",
 					"tasksToQueue" : [16],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -746,7 +717,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [17],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -795,7 +766,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengSpeaking.png",
+					"emotion" : "laughing2",
 					"tasksToQueue" : [18],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -836,7 +807,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengWistful.png",
+					"emotion" : "wistful",
 					"tasksToQueue" : [19],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -861,7 +832,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -935,7 +906,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengSpeaking.png",
+					"emotion" : "laughing2",
 					"tasksToQueue" : [21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -965,7 +936,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [22],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
@@ -990,7 +961,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "characters/chenguang/chengGoodJob.png",
+					"emotion" : "smiling",
 					"tasksToQueue" : [23],
 					"attemptedAnswers" : [],
 					"hintUsed" : false
