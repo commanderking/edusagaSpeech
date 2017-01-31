@@ -1,7 +1,7 @@
 {
 	"activityID": "birthdayAlex",
 	"activityName": "Alex's Birthday",
-	"characters" : ["david"],
+	"characters" : ["alex"],
 	"tags" : ["date", "time"],
 	"score" : 0,
 	"currentCharName" : "",

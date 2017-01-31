@@ -192,7 +192,7 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["我很好", "非常好", "不错"],
+							"answers" : ["很好", "非常好", "不错"],
 							"response" : "真棒！",
 							"soundID" : "zhenbang"
 						}

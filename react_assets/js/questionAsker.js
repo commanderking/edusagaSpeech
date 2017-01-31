@@ -98,7 +98,6 @@ var QuestionAsker = React.createClass({
 
 				// Load correct emotions based on character
 				var allCharacterStaticData = that.getAllCharacterStaticData(sceneData.characters, charactersData);
-				console.log(allCharacterStaticData);
 				that.setState({
 					sceneData: sceneData,
 					currentDialog: sceneData.initialTaskDialog,
@@ -442,8 +441,7 @@ var QuestionAsker = React.createClass({
 
 			} else {
 				// set image to confused
-				newSceneData.currentImage = this.state.sceneData.character.emotions.confused;
-
+				newSceneData.currentImage = this.getEmotionImagePath(characterName, "confused");
 				newSceneData.currentSoundID = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].soundID;
 
 				var newCurrentDialog = newSceneData.character.currentTasks[taskIndex].possibleAnswers[choiceIndex].response;
@@ -552,7 +550,9 @@ var QuestionAsker = React.createClass({
 		var charactersInSceneInfo = charactersLibrary.filter(function(characterInfo){
 			var characterFound = false;
 			charactersInScene.forEach(function(charName){
-				characterFound = charName === characterInfo.name ? true: false;
+				if (charName === characterInfo.name) {
+					characterFound = true;
+				}
 			});
 			return characterFound;
 		});

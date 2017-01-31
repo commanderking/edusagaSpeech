@@ -164,22 +164,20 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers": 	["你晚上几点睡觉?", "你几点睡觉"],
-							"response": "我平常十一点睡觉。",
-							"soundID" : ""
+							"answers": 	["你晚上几点睡觉?", "你几点睡觉"]
 						},
 						{
 							"answers": 	[
 								["晚上"],
 								["几点"],
 								["睡觉"]
-							],
-							"response": "我平常十一点睡觉。",
-							"soundID" : "time-sleep-eleven"
+							]
 						}
 					],
 					"correct" : false,
-					"emotion" : "default",
+					"emotion" : "uncertain",
+					"response": "我平常十一点睡觉。",
+					"soundID" : "time-sleep-eleven",
 					"tasksToQueue" : [40],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

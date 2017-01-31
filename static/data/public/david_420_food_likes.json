@@ -184,28 +184,20 @@
 					"task" : "Ask him if he likes American food",
 					"possibleAnswers" :
 					[
-						{
-							"answers" : ["你喜欢吃美国菜吗", "你喜欢美国菜吗", "美国菜呢"],
-							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
-							"soundID" : "likes-american-food"
-						},
+						{ "answers" : ["你喜欢吃美国菜吗", "你喜欢美国菜吗", "美国菜呢"] },
 						{
 							"answers" : [
 								["你"],
-								["喜不喜欢吃", "爱不爱吃", "想不想吃", "要不要吃"],
+								["喜不喜欢", "爱不爱", "想不想吃", "要不要吃"],
 								["美国菜", "美国饭", "美国料理"]
-							],
-							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
-							"soundID" : "likes-american-food"
+							]
 						},
-						{
-							"answers" : ["喜欢吃美国菜吗", "爱吃美国菜吗"],
-							"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
-							"soundID" : "likes-american-food"
-						}
+						{ "answers" : ["喜欢吃美国菜吗", "爱吃美国菜吗"] }
 					],
 					"correct" : false,
 					"emotion" : "laughing",
+					"response" : "我喜欢吃美国菜! 汉堡包, 薯条... Mmm",
+					"soundID" : "likes-american-food",
 					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

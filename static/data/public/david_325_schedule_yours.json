@@ -186,7 +186,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "laughing",
+					"emotion" : "uncertain",
 					"tasksToQueue" : [21],
 					"attemptedAnswers" : [],
 					"hintUsed" : false

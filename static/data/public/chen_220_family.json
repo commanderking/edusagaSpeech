@@ -219,7 +219,7 @@
 						}
 					],
 					"correct" : false,
-					"emotion" : "laughing",
+					"emotion" : "bored",
 					"tasksToQueue" : [10],
 					"attemptedAnswers" : [],
 					"hintUsed": false
