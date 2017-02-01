@@ -10,8 +10,10 @@ export var iconSelector = function(characterName) {
 			return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
 		case "Tina":
 			return Constants.IMAGE_PATH + "characters/icons/tinaBlankRound.png";
-		case "Max": 
+		case "Max":
 			return Constants.IMAGE_PATH + "characters/icons/maxBlankRound.png";
+		case "Wang Chao":
+			return Constants.IMAGE_PATH + "characters/icons/wangBlankRound.png";
 		default:
 			return null;
 	}

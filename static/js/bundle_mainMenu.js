@@ -21643,6 +21643,7 @@
 	var PropTypes = React.PropTypes;
 	var Constants = __webpack_require__(/*! ../helpers/Constants */ 182);
 	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 183);
+	var EpisodeSelectSidebar = __webpack_require__(/*! ./EpisodeSelectSidebar */ 184);
 	
 	
 	var MainMenuContainer = React.createClass({
@@ -21650,7 +21651,8 @@
 	
 		getInitialState: function getInitialState() {
 			return {
-				teacherEpisodeData: null
+				teacherEpisodeData: null,
+				sidebarActive: false
 			};
 		},
 		getTeacherEpisodes: function getTeacherEpisodes(teacherUsername, doneCallback) {
@@ -21675,7 +21677,7 @@
 		loadSceneData: function loadSceneData() {
 			var that = this;
 	
-			// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
+			// if props for teacherEpisodes are received that means we should display a special set of episodes based on props
 			// else, load all the episodes that are public
 			if (this.props.publicDisplay === false) {
 				var username = this.props.teacherUsername;
@@ -21716,6 +21718,21 @@
 					}
 				});
 			}
+		},
+		componentDidUpdate: function componentDidUpdate() {},
+		showSidebar: function showSidebar(episodeName, characterImage, canDoStatements, description) {
+			this.setState({
+				sidebarActive: true,
+				episodeName: episodeName,
+				episodeCharacterImage: characterImage,
+				episodeCanDoStatements: canDoStatements,
+				episodeDescription: description
+			});
+		},
+		hideSidebar: function hideSidebar() {
+			this.setState({
+				sidebarActive: false
+			});
 		},
 		addEpisode: function addEpisode(episodeName, episodeArrayIndex) {
 			var that = this;
@@ -21818,56 +21835,47 @@
 					' Unassign'
 				) : null;
 	
-				return React.createElement(
-					'div',
-					{ key: originalIndex, className: 'episodeBlockWrapper' },
-					React.createElement(
-						'li',
-						{ className: className },
-						starIcon,
-						React.createElement(
-							'h3',
-							null,
-							scene.name
-						),
-						React.createElement('img', { className: 'characterImage', src: characterImage }),
-						React.createElement(
-							'p',
-							null,
-							React.createElement(
-								'b',
-								null,
-								'Scenario:'
-							),
-							' ',
-							scene.scenario
-						),
-						React.createElement(
-							'div',
-							null,
-							React.createElement(
-								'b',
-								null,
-								'Can Do Statements:'
-							),
-							' ',
-							React.createElement('br', null),
-							' ',
-							canDoStatements
-						)
-					),
+				return (
+					/*
+	    *
+	    * Previous menu with more data
+	    *
+	    <div key={originalIndex} className="episodeBlockWrapper">
+	    	<li className={className}>
+	    		{starIcon}
+	    		<h3>{scene.name}</h3>
+	    		<img className="characterImage" src={characterImage} />
+	    			<p><b>Scenario:</b> {scene.scenario}</p>
+	    		<div><b>Can Do Statements:</b> <br /> {canDoStatements}</div>
+	    	</li>
+	    	<div className="buttonLine">
+	    		<a href={link} className="btn btn-info"
+	    			id={scene.id} key={originalIndex} data-index={originalIndex}>
+	    			<span className="glyphicon glyphicon-play" aria-hidden="true"></span>
+	    			Play
+	    		</a>
+	    		{addButton}
+	    		{removeButton}
+	    	</div>
+	    </div>)
+	    *
+	    *
+	    *
+	    */
 					React.createElement(
 						'div',
-						{ className: 'buttonLine' },
+						{ className: 'iconWrapper' },
 						React.createElement(
 							'a',
-							{ href: link, className: 'btn btn-info',
-								id: scene.id, key: originalIndex, 'data-index': originalIndex },
-							React.createElement('span', { className: 'glyphicon glyphicon-play', 'aria-hidden': 'true' }),
-							'Play'
-						),
-						addButton,
-						removeButton
+							{ href: link },
+							React.createElement('img', {
+								className: 'characterImage',
+								src: characterImage,
+								onMouseOver: function onMouseOver() {
+									return that.showSidebar(scene.name, characterImage, scene.canDoStatements, scene.scenario);
+								},
+								onMouseOut: that.hideSidebar })
+						)
 					)
 				);
 			});
@@ -21947,6 +21955,13 @@
 				title = this.props.title;
 			}
 	
+			var episodeSideBar = this.state.sidebarActive === true ? React.createElement(EpisodeSelectSidebar, {
+				sidebarActive: this.state.sidebarActive,
+				episodeName: this.state.episodeName,
+				episodeCharacterImage: this.state.episodeCharacterImage,
+				episodeCanDoStatements: this.state.episodeCanDoStatements,
+				episodeDescription: this.state.episodeDescription }) : null;
+	
 			if (!this.state.teacherEpisodeData) {
 				return React.createElement(
 					'div',
@@ -21976,16 +21991,17 @@
 				return React.createElement(
 					'div',
 					{ className: 'container-fluid' },
+					episodeSideBar,
 					React.createElement(
 						'h2',
 						{ className: 'menuTitle' },
 						title
 					),
 					React.createElement(EpisodeTagList, {
-						header: 'Introduction/Greetings',
+						header: 'Introduction / Greetings',
 						episodeList: introEpisodeList }),
 					React.createElement(EpisodeTagList, {
-						header: 'Family/Nationality',
+						header: 'Family / Nationality',
 						episodeList: familyNationalityEpisodeList }),
 					React.createElement(EpisodeTagList, {
 						header: 'Dates and Times',
@@ -22036,6 +22052,8 @@
 				return Constants.IMAGE_PATH + "characters/icons/tinaBlankRound.png";
 			case "Max":
 				return Constants.IMAGE_PATH + "characters/icons/maxBlankRound.png";
+			case "Wang Chao":
+				return Constants.IMAGE_PATH + "characters/icons/wangBlankRound.png";
 			default:
 				return null;
 		}
@@ -22106,11 +22124,15 @@
 			if (this.props.episodeList.length > 0) {
 				return React.createElement(
 					"div",
-					null,
+					{ className: "episodeTopicWrapper" },
 					React.createElement(
-						"h2",
-						null,
-						this.props.header
+						"div",
+						{ className: "headerWrapper" },
+						React.createElement(
+							"h2",
+							null,
+							this.props.header
+						)
 					),
 					React.createElement(
 						"ul",
@@ -22126,6 +22148,59 @@
 	});
 	
 	module.exports = EpisodeTagList;
+
+/***/ },
+/* 184 */
+/*!**********************************************************!*\
+  !*** ./react_assets/js/mainMenu/EpisodeSelectSidebar.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function EpisodeSelectSidebar(props) {
+		return React.createElement(
+			"div",
+			{ className: "sidebarWrapper" },
+			React.createElement(
+				"h1",
+				null,
+				props.episodeName
+			),
+			React.createElement("img", { className: "characterImage", src: props.episodeCharacterImage }),
+			React.createElement(
+				"p",
+				null,
+				React.createElement(
+					"b",
+					null,
+					"Scenario:"
+				),
+				" ",
+				props.episodeDescription
+			),
+			React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"b",
+					null,
+					"Can Do Statements:"
+				),
+				" ",
+				React.createElement("br", null),
+				" ",
+				props.episodeCanDoStatements
+			)
+		);
+	}
+	
+	module.exports = EpisodeSelectSidebar;
+	
+	EpisodeSelectSidebar.propTypes = {};
 
 /***/ }
 /******/ ]);

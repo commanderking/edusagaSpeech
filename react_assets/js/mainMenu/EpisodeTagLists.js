@@ -21,7 +21,7 @@ var EpisodeTagList = React.createClass({
 		}
 
 		// Show See More button only if a category has more than three episodes and the see more episode button has not already been clicked
-		var seeMoreButton = this.props.episodeList.length > 3 && this.state.showMoreEpisodes === false ? 
+		var seeMoreButton = this.props.episodeList.length > 3 && this.state.showMoreEpisodes === false ?
 				<button className="buttonSeeMore"
 					onClick={this.displayMoreEpisodes}>See More Episodes</button> : null;
 
@@ -31,14 +31,16 @@ var EpisodeTagList = React.createClass({
 		// Only display the category if there are more than one episode present
 		if (this.props.episodeList.length > 0) {
 			return (
-				<div>
-					<h2>{this.props.header}</h2>
+				<div className="episodeTopicWrapper">
+					<div className="headerWrapper">
+						<h2>{this.props.header}</h2>
+					</div>
 					<ul className="scenarioList">
 						{episodesToDisplay}
 					</ul>
 					{seeMoreButton}
 				</div>
-			)	
+			)
 		} else {
 			return null;
 		}

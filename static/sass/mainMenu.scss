@@ -28,13 +28,50 @@
     background-size: 100% 100%;
 }
 
+.episodeTopicWrapper {
+	border-bottom: 1px solid lightblue;
+	min-height: 300px;
+	padding: 1em;
+}
+
+.headerWrapper {
+	width: 30%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.sideBarWrapper {
+	width: 30%;
+	background-color: #3D6673;
+	color: white;
+	border-right: 1px solid lightblue;
+	height: 100%;
+	position: absolute;
+}
+
 .scenarioList {
-	width: 100%;
+	width: 70%;
+	display: inline-block;
 	text-align: center;
 	.activeScene-true {
 		background-color: yellow;
 	}
-	
+
+	.iconWrapper {
+		width: 100px;
+		height: 100px;
+		display: inline-block;
+		margin: 2em;
+		.characterImage {
+			width: 100%;
+			border: 5px solid lightblue;
+			border-radius: 50px;
+			&:hover {
+				background-color: lightblue;
+			}
+		}
+	}
+
 	.episodeBlockWrapper {
 		display: inline-block;
 		position: relative;
@@ -55,20 +92,11 @@
 		border-radius: 20px;
 		background-color: lightBlue;
 
-		// Position for Active Star when needed
-		/*
-		img {
-			position: absolute;
-			width: 75px;
-			height: 75px;
-			left: -25px;
-			top: -25px;
-		}
-		*/
 		h3 {
 			text-align: left;
 			margin-right: 15px;
 		}
+		/*
 		.characterImage {
 			position: absolute;
 			width: 60px;
@@ -79,7 +107,7 @@
 			border-radius: 75px;
 			border-right: 2px solid black;
 			border-top: 2px solid black;
-		}
+		}*/
 
 		&:hover {
 			opacity: 1.0;
