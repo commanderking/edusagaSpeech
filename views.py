@@ -82,6 +82,10 @@ def home(name="Home"):
 	print session['userID']
 	return redirect(url_for('index'))
 
+@app.route('/nyu')
+def nyu(name="NYU"):
+	return redirect("https://goo.gl/forms/xaLfs7Txu0FZSYI83")
+
 @app.route('/teacher/<username>')
 @login_required
 def teacherPage(username):
