@@ -3,12 +3,14 @@ var ReactDOM = require('react-dom');
 var PropTypes = React.PropTypes;
 var Constants = require('../helpers/Constants');
 var EpisodeTagList = require('./EpisodeTagLists');
+var EpisodeSelectSidebar = require('./EpisodeSelectSidebar');
 import {iconSelector} from '../helpers/ImageHelper';
 
 var MainMenuContainer = React.createClass({
 	getInitialState: function() {
 		return {
-			teacherEpisodeData: null
+			teacherEpisodeData: null,
+			sidebarActive: false
 		}
 	},
 	getTeacherEpisodes: function(teacherUsername, doneCallback) {
@@ -33,7 +35,7 @@ var MainMenuContainer = React.createClass({
 	loadSceneData: function() {
 		var that = this;
 
-		// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
+		// if props for teacherEpisodes are received that means we should display a special set of episodes based on props
 		// else, load all the episodes that are public
 		if (this.props.publicDisplay === false) {
 			var username = this.props.teacherUsername;
@@ -65,7 +67,7 @@ var MainMenuContainer = React.createClass({
 						newEpisodeData.scenes = filteredEpisodes;
 						that.setState({teacherEpisodeData: newEpisodeData});
 					};
-					
+
 					// teacherUsername undefined if coming from public version of site
 					// lets viewers see all publicly available episodes
 					if (that.props.teacherUsername === undefined) {
@@ -76,6 +78,22 @@ var MainMenuContainer = React.createClass({
 				});
 		}
 	},
+	componentDidUpdate: function() {
+	},
+	showSidebar: function(episodeName, characterImage, canDoStatements, description) {
+		this.setState({
+			sidebarActive: true,
+			episodeName: episodeName,
+			episodeCharacterImage: characterImage,
+			episodeCanDoStatements: canDoStatements,
+			episodeDescription: description
+		})
+	},
+	hideSidebar: function() {
+		this.setState({
+			sidebarActive: false
+		})
+	},
 	addEpisode: function(episodeName, episodeArrayIndex) {
 		var that = this;
 		var username = this.props.teacherUsername;
@@ -83,12 +101,12 @@ var MainMenuContainer = React.createClass({
 		$.ajax({
 			url: postURL,
 			type: "POST",
-			data: episodeName, 
+			data: episodeName,
 			dataType: "json",
 		})
 			.done(function(result){
 				if (result["success"] === true) {
-					var parsedEpisodeArray = JSON.parse(result.episodeArray["scenes"]);	
+					var parsedEpisodeArray = JSON.parse(result.episodeArray["scenes"]);
 					var newTeacherEpisodeData = {"scenes": parsedEpisodeArray};
 
 					// Remove the episode from public display
@@ -108,7 +126,7 @@ var MainMenuContainer = React.createClass({
 		$.ajax({
 			url: postURL,
 			type: "POST",
-			data: episodeName, 
+			data: episodeName,
 			dataType: "json"
 		}).done(function(result){
 			if (result["success"] = true) {
@@ -120,7 +138,7 @@ var MainMenuContainer = React.createClass({
 				that.props.activateFlashMessage("Episode removed!");
 			}
 
-		});	
+		});
 	},
 	// Sort episodes based on the sequence number in the JSON file
 	sortEpisodeArraybySequence: function(episodeArray) {
@@ -143,8 +161,10 @@ var MainMenuContainer = React.createClass({
 			var originalIndex = scene.originalArrayIndex;
 			var link = scene.link + "?" + studentID;
 			var className = "episodeBlock activeScene-" + scene.assigned;
-			var characterImage = iconSelector(scene.characterName) === null ? 
-				Constants.IMAGE_PATH + scene.characterImage : iconSelector(scene.characterName);
+			var characterImage = Constants.IMAGE_PATH + scene.characterImage;
+
+			var characterIcon = iconSelector(scene.characterName) === null ?
+				characterImage : iconSelector(scene.characterName);
 			var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 			var starIcon = scene.assigned ? <img src={starIconSrc} /> : null;
 
@@ -154,11 +174,11 @@ var MainMenuContainer = React.createClass({
 				return (
 					<li key={reactKey}>{objective}</li>
 				)
-			})
+			});
 
 			// If it's the publicDisplay and the user is loggedin, allow user to add the episode to their library
 			// Otherwise, it's the public display, and add functionality should not be there
-			var addButton = that.props.publicDisplay && that.props.teacherUsername !== undefined ? 
+			var addButton = that.props.publicDisplay && that.props.teacherUsername !== undefined ?
 				<button onClick={() => that.addEpisode(scene.id, originalIndex)} className="btn btn-info">
 					<span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Assign
 				</button> : null;
@@ -168,28 +188,22 @@ var MainMenuContainer = React.createClass({
 			var removeButton = !that.props.publicDisplay ?
 				<button onClick={() => that.removeEpisode(scene.id, originalIndex)} className="btn btn-info" data-index={originalIndex}>
 					<span className="glyphicon glyphicon-remove" aria-hidden="true"></span> Unassign
-				</button> : null;	
+				</button> : null;
 
 			return (
-					<div key={originalIndex} className="episodeBlockWrapper">
-						<li className={className}>
-							{starIcon}
-							<h3>{scene.name}</h3>
-							<img className="characterImage" src={characterImage} />
-
-							<p><b>Scenario:</b> {scene.scenario}</p>
-							<div><b>Can Do Statements:</b> <br /> {canDoStatements}</div>
-						</li>
-						<div className="buttonLine">
-							<a href={link} className="btn btn-info"
-								id={scene.id} key={originalIndex} data-index={originalIndex}>
-								<span className="glyphicon glyphicon-play" aria-hidden="true"></span>
-								Play
-							</a>
-							{addButton}
-							{removeButton}
-						</div>
-					</div>)
+					<div className="iconWrapper">
+						<a href={link}>
+							<div
+								onMouseOver={() => that.showSidebar(scene.name, characterImage, canDoStatements, scene.scenario)}
+								onMouseOut= {that.hideSidebar}>
+								<img
+									className="characterImage"
+									src={characterIcon} />
+								<p>{scene.name}</p>
+							</div>
+						</a>
+					</div>
+				)
 		});
 		return episodeListToReturn;
 	},
@@ -221,7 +235,7 @@ var MainMenuContainer = React.createClass({
 
 				switch(episode.tags[0]) {
 					case "introduction":
-					case "greetings": 
+					case "greetings":
 						introEpisodes.push(episode);
 						break;
 					case "family":
@@ -229,13 +243,13 @@ var MainMenuContainer = React.createClass({
 						familyNationalityEpisodes.push(episode);
 						break;
 					case "date":
-					case "time": 
+					case "time":
 						dateTimeEpisodes.push(episode);
 						break;
 					case "hobbies":
 						likesDislikesEpisodes.push(episode);
 						break;
-					case "food": 
+					case "food":
 						likesDislikesEpisodes.push(episode);
 						break;
 					case "review":
@@ -260,15 +274,22 @@ var MainMenuContainer = React.createClass({
 		// Check for title text passed through as props
 		var title = "Episodes Available"
 		if (this.props.title) {
-			title = this.props.title 
+			title = this.props.title
 		}
+
+		var episodeSideBar = this.state.sidebarActive === true ? <EpisodeSelectSidebar
+									sidebarActive = {this.state.sidebarActive}
+									episodeName = {this.state.episodeName}
+									episodeCharacterImage = {this.state.episodeCharacterImage}
+									episodeCanDoStatements = {this.state.episodeCanDoStatements}
+									episodeDescription = {this.state.episodeDescription} /> : null
 
 		if (!this.state.teacherEpisodeData) {
 			return <div>Loading</div>
 		} else if (this.state.teacherEpisodeData.scenes.length === 0) {
 			return (<div className="container-fluid">
 						<h2 className="menuTitle">No Episodes Added Yet</h2>
-							<button 
+							<button
 								className="btn btn-info btn-add-episodes"
 								onClick={() => this.props.changeContent("Public Episodes")}>
 								Add New Episodes
@@ -277,13 +298,14 @@ var MainMenuContainer = React.createClass({
 		} else {
 			return (
 					<div className="container-fluid">
+						{episodeSideBar}
 						<h2 className="menuTitle">{title}</h2>
 						<EpisodeTagList
-							header = "Introduction/Greetings"
+							header = "Introduction / Greetings"
 							episodeList = {introEpisodeList} />
 
 						<EpisodeTagList
-							header = "Family/Nationality"
+							header = "Family / Nationality"
 							episodeList = {familyNationalityEpisodeList} />
 
 						<EpisodeTagList

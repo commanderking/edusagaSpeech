@@ -21636,13 +21636,14 @@
 
 	'use strict';
 	
-	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 181);
+	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 217);
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var PropTypes = React.PropTypes;
-	var Constants = __webpack_require__(/*! ../helpers/Constants */ 182);
-	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 183);
+	var Constants = __webpack_require__(/*! ../helpers/Constants */ 183);
+	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 235);
+	var EpisodeSelectSidebar = __webpack_require__(/*! ./EpisodeSelectSidebar */ 236);
 	
 	
 	var MainMenuContainer = React.createClass({
@@ -21650,7 +21651,8 @@
 	
 		getInitialState: function getInitialState() {
 			return {
-				teacherEpisodeData: null
+				teacherEpisodeData: null,
+				sidebarActive: false
 			};
 		},
 		getTeacherEpisodes: function getTeacherEpisodes(teacherUsername, doneCallback) {
@@ -21675,7 +21677,7 @@
 		loadSceneData: function loadSceneData() {
 			var that = this;
 	
-			// if props for teacherEpisodes are received that means we should display a special set of episodes based on props 
+			// if props for teacherEpisodes are received that means we should display a special set of episodes based on props
 			// else, load all the episodes that are public
 			if (this.props.publicDisplay === false) {
 				var username = this.props.teacherUsername;
@@ -21716,6 +21718,21 @@
 					}
 				});
 			}
+		},
+		componentDidUpdate: function componentDidUpdate() {},
+		showSidebar: function showSidebar(episodeName, characterImage, canDoStatements, description) {
+			this.setState({
+				sidebarActive: true,
+				episodeName: episodeName,
+				episodeCharacterImage: characterImage,
+				episodeCanDoStatements: canDoStatements,
+				episodeDescription: description
+			});
+		},
+		hideSidebar: function hideSidebar() {
+			this.setState({
+				sidebarActive: false
+			});
 		},
 		addEpisode: function addEpisode(episodeName, episodeArrayIndex) {
 			var that = this;
@@ -21782,7 +21799,9 @@
 				var originalIndex = scene.originalArrayIndex;
 				var link = scene.link + "?" + studentID;
 				var className = "episodeBlock activeScene-" + scene.assigned;
-				var characterImage = (0, _ImageHelper.iconSelector)(scene.characterName) === null ? Constants.IMAGE_PATH + scene.characterImage : (0, _ImageHelper.iconSelector)(scene.characterName);
+				var characterImage = Constants.IMAGE_PATH + scene.characterImage;
+	
+				var characterIcon = (0, _ImageHelper.iconSelector)(scene.characterName) === null ? characterImage : (0, _ImageHelper.iconSelector)(scene.characterName);
 				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
 	
@@ -21820,54 +21839,26 @@
 	
 				return React.createElement(
 					'div',
-					{ key: originalIndex, className: 'episodeBlockWrapper' },
+					{ className: 'iconWrapper' },
 					React.createElement(
-						'li',
-						{ className: className },
-						starIcon,
-						React.createElement(
-							'h3',
-							null,
-							scene.name
-						),
-						React.createElement('img', { className: 'characterImage', src: characterImage }),
-						React.createElement(
-							'p',
-							null,
-							React.createElement(
-								'b',
-								null,
-								'Scenario:'
-							),
-							' ',
-							scene.scenario
-						),
+						'a',
+						{ href: link },
 						React.createElement(
 							'div',
-							null,
+							{
+								onMouseOver: function onMouseOver() {
+									return that.showSidebar(scene.name, characterImage, canDoStatements, scene.scenario);
+								},
+								onMouseOut: that.hideSidebar },
+							React.createElement('img', {
+								className: 'characterImage',
+								src: characterIcon }),
 							React.createElement(
-								'b',
+								'p',
 								null,
-								'Can Do Statements:'
-							),
-							' ',
-							React.createElement('br', null),
-							' ',
-							canDoStatements
+								scene.name
+							)
 						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'buttonLine' },
-						React.createElement(
-							'a',
-							{ href: link, className: 'btn btn-info',
-								id: scene.id, key: originalIndex, 'data-index': originalIndex },
-							React.createElement('span', { className: 'glyphicon glyphicon-play', 'aria-hidden': 'true' }),
-							'Play'
-						),
-						addButton,
-						removeButton
 					)
 				);
 			});
@@ -21947,6 +21938,13 @@
 				title = this.props.title;
 			}
 	
+			var episodeSideBar = this.state.sidebarActive === true ? React.createElement(EpisodeSelectSidebar, {
+				sidebarActive: this.state.sidebarActive,
+				episodeName: this.state.episodeName,
+				episodeCharacterImage: this.state.episodeCharacterImage,
+				episodeCanDoStatements: this.state.episodeCanDoStatements,
+				episodeDescription: this.state.episodeDescription }) : null;
+	
 			if (!this.state.teacherEpisodeData) {
 				return React.createElement(
 					'div',
@@ -21976,16 +21974,17 @@
 				return React.createElement(
 					'div',
 					{ className: 'container-fluid' },
+					episodeSideBar,
 					React.createElement(
 						'h2',
 						{ className: 'menuTitle' },
 						title
 					),
 					React.createElement(EpisodeTagList, {
-						header: 'Introduction/Greetings',
+						header: 'Introduction / Greetings',
 						episodeList: introEpisodeList }),
 					React.createElement(EpisodeTagList, {
-						header: 'Family/Nationality',
+						header: 'Family / Nationality',
 						episodeList: familyNationalityEpisodeList }),
 					React.createElement(EpisodeTagList, {
 						header: 'Dates and Times',
@@ -22011,38 +22010,9 @@
 	};
 
 /***/ },
-/* 181 */
-/*!************************************************!*\
-  !*** ./react_assets/js/helpers/ImageHelper.js ***!
-  \************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var Constants = __webpack_require__(/*! ./Constants */ 182);
-	
-	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
-		switch (characterName) {
-			case "Alex":
-				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
-			case "David":
-				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
-			case "Chen Yang":
-				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
-			case "Tina":
-				return Constants.IMAGE_PATH + "characters/icons/tinaBlankRound.png";
-			case "Max":
-				return Constants.IMAGE_PATH + "characters/icons/maxBlankRound.png";
-			default:
-				return null;
-		}
-	};
-
-/***/ },
-/* 182 */
+/* 181 */,
+/* 182 */,
+/* 183 */
 /*!**********************************************!*\
   !*** ./react_assets/js/helpers/Constants.js ***!
   \**********************************************/
@@ -22059,7 +22029,90 @@
 	};
 
 /***/ },
-/* 183 */
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/ImageHelper.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Constants = __webpack_require__(/*! ./Constants */ 183);
+	
+	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
+		switch (characterName) {
+			case "Alex":
+				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
+			case "David":
+				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
+			case "Chen Yang":
+				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
+			case "Tina":
+				return Constants.IMAGE_PATH + "characters/icons/tinaBlankRound.png";
+			case "Max":
+				return Constants.IMAGE_PATH + "characters/icons/maxBlankRound.png";
+			case "Wang Chao":
+				return Constants.IMAGE_PATH + "characters/icons/wangBlankRound.png";
+			default:
+				return null;
+		}
+	};
+
+/***/ },
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */
 /*!*****************************************************!*\
   !*** ./react_assets/js/mainMenu/EpisodeTagLists.js ***!
   \*****************************************************/
@@ -22078,46 +22131,26 @@
 				showMoreEpisodes: false
 			};
 		},
-		displayMoreEpisodes: function displayMoreEpisodes() {
-			this.setState({ showMoreEpisodes: true });
-			console.log(this.state.showMoreEpisodes);
-		},
 		render: function render() {
-			// Grab first three episodes of each topic
-			var firstThreeEpisodes = [];
-			for (var i = 0; i < 3; i++) {
-				if (this.props.episodeList[i]) {
-					firstThreeEpisodes.push(this.props.episodeList[i]);
-				}
-			}
-	
-			// Show See More button only if a category has more than three episodes and the see more episode button has not already been clicked
-			var seeMoreButton = this.props.episodeList.length > 3 && this.state.showMoreEpisodes === false ? React.createElement(
-				"button",
-				{ className: "buttonSeeMore",
-					onClick: this.displayMoreEpisodes },
-				"See More Episodes"
-			) : null;
-	
-			// Display 3 episodes or more episodes depending on showMoreEpisodes state
-			var episodesToDisplay = this.state.showMoreEpisodes ? this.props.episodeList : firstThreeEpisodes;
-	
 			// Only display the category if there are more than one episode present
 			if (this.props.episodeList.length > 0) {
 				return React.createElement(
 					"div",
-					null,
+					{ className: "episodeTopicWrapper" },
 					React.createElement(
-						"h2",
-						null,
-						this.props.header
+						"div",
+						{ className: "headerWrapper" },
+						React.createElement(
+							"h2",
+							null,
+							this.props.header
+						)
 					),
 					React.createElement(
 						"ul",
 						{ className: "scenarioList" },
-						episodesToDisplay
-					),
-					seeMoreButton
+						this.props.episodeList
+					)
 				);
 			} else {
 				return null;
@@ -22126,6 +22159,74 @@
 	});
 	
 	module.exports = EpisodeTagList;
+
+/***/ },
+/* 236 */
+/*!**********************************************************!*\
+  !*** ./react_assets/js/mainMenu/EpisodeSelectSidebar.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function EpisodeSelectSidebar(props) {
+		console.log(props.episodeCanDoStatements);
+		return React.createElement(
+			"div",
+			{ className: "sidebarWrapper" },
+			React.createElement(
+				"h1",
+				null,
+				props.episodeName
+			),
+			React.createElement("img", { className: "characterImage", src: props.episodeCharacterImage }),
+			React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"p",
+					null,
+					React.createElement(
+						"b",
+						null,
+						"Scenario:"
+					)
+				),
+				React.createElement(
+					"p",
+					null,
+					props.episodeDescription
+				)
+			),
+			React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"b",
+					null,
+					"Can Do Statements:"
+				),
+				React.createElement(
+					"ul",
+					null,
+					props.episodeCanDoStatements
+				)
+			)
+		);
+	}
+	
+	module.exports = EpisodeSelectSidebar;
+	
+	EpisodeSelectSidebar.propTypes = {
+		episodeCanDoStatements: PropTypes.array.isRequired,
+		episodeName: PropTypes.string.isRequired,
+		episodeCharacterImage: PropTypes.string.isRequired,
+		episodeDescription: PropTypes.string.isRequired
+	
+	};
 
 /***/ }
 /******/ ]);
