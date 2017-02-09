@@ -1,3 +1,8 @@
+@keyframes slideFromLeft {
+	0% {left :-20em}
+	100% {left: 0em}
+}
+
 .container-fluid {
 	height: 100%;
 	min-height: 500px;
@@ -30,7 +35,7 @@
 
 .episodeTopicWrapper {
 	border-bottom: 1px solid lightblue;
-	min-height: 300px;
+	min-height: 400px;
 	padding: 1em;
 }
 
@@ -41,34 +46,65 @@
 }
 
 .sideBarWrapper {
-	width: 30%;
+	line-height: 1.2em;
+	width: 35%;
 	background-color: #3D6673;
 	color: white;
-	border-right: 1px solid lightblue;
+	border: 3px solid lightblue;
 	height: 100%;
+	padding: 1em;
 	position: absolute;
+	left : 0em;
+	animation-name: slideFromLeft;
+	animation-duration: 0.7s;
+
+	.characterImage {
+		max-width: 60%;
+		max-height: 40%;
+		border-radius: 100px;
+		margin: auto;
+		display: block;
+	}
+	div {
+		margin-bottom: 1em;
+	}
+	p {
+		font-size: 1em;
+	}
+	ul {
+		list-style-type: circle;
+		padding-left: 1em;
+	}
 }
 
 .scenarioList {
 	width: 70%;
 	display: inline-block;
 	text-align: center;
+	margin-bottom: 5em;
 	.activeScene-true {
 		background-color: yellow;
 	}
 
 	.iconWrapper {
-		width: 100px;
-		height: 100px;
+		width: 150px;
+		vertical-align: top;
 		display: inline-block;
-		margin: 2em;
+		margin: 1.5em;
 		.characterImage {
 			width: 100%;
 			border: 5px solid lightblue;
-			border-radius: 50px;
+			border-radius: 100px;
+			margin-bottom: 1em;
 			&:hover {
 				background-color: lightblue;
 			}
+		}
+		p {
+			line-height: 1em;
+			text-decoration: none;
+			color: white;
+			text-align: center;
 		}
 	}
 
@@ -96,18 +132,6 @@
 			text-align: left;
 			margin-right: 15px;
 		}
-		/*
-		.characterImage {
-			position: absolute;
-			width: 60px;
-			height: 60px;
-			right: -30px;
-			top: -25px;
-			background-color: lightBlue;
-			border-radius: 75px;
-			border-right: 2px solid black;
-			border-top: 2px solid black;
-		}*/
 
 		&:hover {
 			opacity: 1.0;
@@ -121,7 +145,6 @@
 			text-align: left;
 			font-size: 14px;
 			line-height: 21px;
-
 		}
 
 		li {

@@ -52,7 +52,7 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var MainMenuContainer = __webpack_require__(/*! ./mainMenu/MainMenuContainer */ 180);
-	var NavBarButton = __webpack_require__(/*! ./teacherHome/NavBarButton */ 236);
+	var NavBarButton = __webpack_require__(/*! ./teacherHome/NavBarButton */ 234);
 	
 	var TeacherHome = React.createClass({
 		displayName: 'TeacherHome',
@@ -21745,14 +21745,14 @@
 
 	'use strict';
 	
-	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 181);
+	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 217);
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var PropTypes = React.PropTypes;
-	var Constants = __webpack_require__(/*! ../helpers/Constants */ 182);
-	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 183);
-	var EpisodeSelectSidebar = __webpack_require__(/*! ./EpisodeSelectSidebar */ 184);
+	var Constants = __webpack_require__(/*! ../helpers/Constants */ 183);
+	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 235);
+	var EpisodeSelectSidebar = __webpack_require__(/*! ./EpisodeSelectSidebar */ 236);
 	
 	
 	var MainMenuContainer = React.createClass({
@@ -21908,7 +21908,9 @@
 				var originalIndex = scene.originalArrayIndex;
 				var link = scene.link + "?" + studentID;
 				var className = "episodeBlock activeScene-" + scene.assigned;
-				var characterImage = (0, _ImageHelper.iconSelector)(scene.characterName) === null ? Constants.IMAGE_PATH + scene.characterImage : (0, _ImageHelper.iconSelector)(scene.characterName);
+				var characterImage = Constants.IMAGE_PATH + scene.characterImage;
+	
+				var characterIcon = (0, _ImageHelper.iconSelector)(scene.characterName) === null ? characterImage : (0, _ImageHelper.iconSelector)(scene.characterName);
 				var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 				var starIcon = scene.assigned ? React.createElement('img', { src: starIconSrc }) : null;
 	
@@ -21944,46 +21946,27 @@
 					' Unassign'
 				) : null;
 	
-				return (
-					/*
-	    *
-	    * Previous menu with more data
-	    *
-	    <div key={originalIndex} className="episodeBlockWrapper">
-	    	<li className={className}>
-	    		{starIcon}
-	    		<h3>{scene.name}</h3>
-	    		<img className="characterImage" src={characterImage} />
-	    			<p><b>Scenario:</b> {scene.scenario}</p>
-	    		<div><b>Can Do Statements:</b> <br /> {canDoStatements}</div>
-	    	</li>
-	    	<div className="buttonLine">
-	    		<a href={link} className="btn btn-info"
-	    			id={scene.id} key={originalIndex} data-index={originalIndex}>
-	    			<span className="glyphicon glyphicon-play" aria-hidden="true"></span>
-	    			Play
-	    		</a>
-	    		{addButton}
-	    		{removeButton}
-	    	</div>
-	    </div>)
-	    *
-	    *
-	    *
-	    */
+				return React.createElement(
+					'div',
+					{ className: 'iconWrapper' },
 					React.createElement(
-						'div',
-						{ className: 'iconWrapper' },
+						'a',
+						{ href: link },
 						React.createElement(
-							'a',
-							{ href: link },
+							'div',
+							{
+								onMouseOver: function onMouseOver() {
+									return that.showSidebar(scene.name, characterImage, canDoStatements, scene.scenario);
+								},
+								onMouseOut: that.hideSidebar },
 							React.createElement('img', {
 								className: 'characterImage',
-								src: characterImage,
-								onMouseOver: function onMouseOver() {
-									return that.showSidebar(scene.name, characterImage, scene.canDoStatements, scene.scenario);
-								},
-								onMouseOut: that.hideSidebar })
+								src: characterIcon }),
+							React.createElement(
+								'p',
+								null,
+								scene.name
+							)
 						)
 					)
 				);
@@ -22136,40 +22119,9 @@
 	};
 
 /***/ },
-/* 181 */
-/*!************************************************!*\
-  !*** ./react_assets/js/helpers/ImageHelper.js ***!
-  \************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var Constants = __webpack_require__(/*! ./Constants */ 182);
-	
-	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
-		switch (characterName) {
-			case "Alex":
-				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
-			case "David":
-				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
-			case "Chen Yang":
-				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
-			case "Tina":
-				return Constants.IMAGE_PATH + "characters/icons/tinaBlankRound.png";
-			case "Max":
-				return Constants.IMAGE_PATH + "characters/icons/maxBlankRound.png";
-			case "Wang Chao":
-				return Constants.IMAGE_PATH + "characters/icons/wangBlankRound.png";
-			default:
-				return null;
-		}
-	};
-
-/***/ },
-/* 182 */
+/* 181 */,
+/* 182 */,
+/* 183 */
 /*!**********************************************!*\
   !*** ./react_assets/js/helpers/Constants.js ***!
   \**********************************************/
@@ -22186,132 +22138,7 @@
 	};
 
 /***/ },
-/* 183 */
-/*!*****************************************************!*\
-  !*** ./react_assets/js/mainMenu/EpisodeTagLists.js ***!
-  \*****************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	
-	var EpisodeTagList = React.createClass({
-		displayName: "EpisodeTagList",
-	
-		getInitialState: function getInitialState() {
-			return {
-				showMoreEpisodes: false
-			};
-		},
-		displayMoreEpisodes: function displayMoreEpisodes() {
-			this.setState({ showMoreEpisodes: true });
-			console.log(this.state.showMoreEpisodes);
-		},
-		render: function render() {
-			// Grab first three episodes of each topic
-			var firstThreeEpisodes = [];
-			for (var i = 0; i < 3; i++) {
-				if (this.props.episodeList[i]) {
-					firstThreeEpisodes.push(this.props.episodeList[i]);
-				}
-			}
-	
-			// Show See More button only if a category has more than three episodes and the see more episode button has not already been clicked
-			var seeMoreButton = this.props.episodeList.length > 3 && this.state.showMoreEpisodes === false ? React.createElement(
-				"button",
-				{ className: "buttonSeeMore",
-					onClick: this.displayMoreEpisodes },
-				"See More Episodes"
-			) : null;
-	
-			// Display 3 episodes or more episodes depending on showMoreEpisodes state
-			var episodesToDisplay = this.state.showMoreEpisodes ? this.props.episodeList : firstThreeEpisodes;
-	
-			// Only display the category if there are more than one episode present
-			if (this.props.episodeList.length > 0) {
-				return React.createElement(
-					"div",
-					{ className: "episodeTopicWrapper" },
-					React.createElement(
-						"div",
-						{ className: "headerWrapper" },
-						React.createElement(
-							"h2",
-							null,
-							this.props.header
-						)
-					),
-					React.createElement(
-						"ul",
-						{ className: "scenarioList" },
-						episodesToDisplay
-					),
-					seeMoreButton
-				);
-			} else {
-				return null;
-			}
-		}
-	});
-	
-	module.exports = EpisodeTagList;
-
-/***/ },
-/* 184 */
-/*!**********************************************************!*\
-  !*** ./react_assets/js/mainMenu/EpisodeSelectSidebar.js ***!
-  \**********************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
-	
-	function EpisodeSelectSidebar(props) {
-		return React.createElement(
-			"div",
-			{ className: "sidebarWrapper" },
-			React.createElement(
-				"h1",
-				null,
-				props.episodeName
-			),
-			React.createElement("img", { className: "characterImage", src: props.episodeCharacterImage }),
-			React.createElement(
-				"p",
-				null,
-				React.createElement(
-					"b",
-					null,
-					"Scenario:"
-				),
-				" ",
-				props.episodeDescription
-			),
-			React.createElement(
-				"div",
-				null,
-				React.createElement(
-					"b",
-					null,
-					"Can Do Statements:"
-				),
-				" ",
-				React.createElement("br", null),
-				" ",
-				props.episodeCanDoStatements
-			)
-		);
-	}
-	
-	module.exports = EpisodeSelectSidebar;
-	
-	EpisodeSelectSidebar.propTypes = {};
-
-/***/ },
+/* 184 */,
 /* 185 */,
 /* 186 */,
 /* 187 */,
@@ -22344,7 +22171,39 @@
 /* 214 */,
 /* 215 */,
 /* 216 */,
-/* 217 */,
+/* 217 */
+/*!************************************************!*\
+  !*** ./react_assets/js/helpers/ImageHelper.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Constants = __webpack_require__(/*! ./Constants */ 183);
+	
+	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
+		switch (characterName) {
+			case "Alex":
+				return Constants.IMAGE_PATH + "characters/icons/alexBlankRound.png";
+			case "David":
+				return Constants.IMAGE_PATH + "characters/icons/davidBlankRound.png";
+			case "Chen Yang":
+				return Constants.IMAGE_PATH + "characters/icons/chengBlankRound.png";
+			case "Tina":
+				return Constants.IMAGE_PATH + "characters/icons/tinaBlankRound.png";
+			case "Max":
+				return Constants.IMAGE_PATH + "characters/icons/maxBlankRound.png";
+			case "Wang Chao":
+				return Constants.IMAGE_PATH + "characters/icons/wangBlankRound.png";
+			default:
+				return null;
+		}
+	};
+
+/***/ },
 /* 218 */,
 /* 219 */,
 /* 220 */,
@@ -22361,9 +22220,7 @@
 /* 231 */,
 /* 232 */,
 /* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */
+/* 234 */
 /*!*****************************************************!*\
   !*** ./react_assets/js/teacherHome/NavBarButton.js ***!
   \*****************************************************/
@@ -22389,6 +22246,123 @@
 	NavBarButton.PropTypes = {
 		text: PropTypes.string.isRequired,
 		clickFunction: PropTypes.func.isRequred
+	};
+
+/***/ },
+/* 235 */
+/*!*****************************************************!*\
+  !*** ./react_assets/js/mainMenu/EpisodeTagLists.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	var EpisodeTagList = React.createClass({
+		displayName: "EpisodeTagList",
+	
+		getInitialState: function getInitialState() {
+			return {
+				showMoreEpisodes: false
+			};
+		},
+		render: function render() {
+			// Only display the category if there are more than one episode present
+			if (this.props.episodeList.length > 0) {
+				return React.createElement(
+					"div",
+					{ className: "episodeTopicWrapper" },
+					React.createElement(
+						"div",
+						{ className: "headerWrapper" },
+						React.createElement(
+							"h2",
+							null,
+							this.props.header
+						)
+					),
+					React.createElement(
+						"ul",
+						{ className: "scenarioList" },
+						this.props.episodeList
+					)
+				);
+			} else {
+				return null;
+			}
+		}
+	});
+	
+	module.exports = EpisodeTagList;
+
+/***/ },
+/* 236 */
+/*!**********************************************************!*\
+  !*** ./react_assets/js/mainMenu/EpisodeSelectSidebar.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function EpisodeSelectSidebar(props) {
+		console.log(props.episodeCanDoStatements);
+		return React.createElement(
+			"div",
+			{ className: "sidebarWrapper" },
+			React.createElement(
+				"h1",
+				null,
+				props.episodeName
+			),
+			React.createElement("img", { className: "characterImage", src: props.episodeCharacterImage }),
+			React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"p",
+					null,
+					React.createElement(
+						"b",
+						null,
+						"Scenario:"
+					)
+				),
+				React.createElement(
+					"p",
+					null,
+					props.episodeDescription
+				)
+			),
+			React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"b",
+					null,
+					"Can Do Statements:"
+				),
+				React.createElement(
+					"ul",
+					null,
+					props.episodeCanDoStatements
+				)
+			)
+		);
+	}
+	
+	module.exports = EpisodeSelectSidebar;
+	
+	EpisodeSelectSidebar.propTypes = {
+		episodeCanDoStatements: PropTypes.array.isRequired,
+		episodeName: PropTypes.string.isRequired,
+		episodeCharacterImage: PropTypes.string.isRequired,
+		episodeDescription: PropTypes.string.isRequired
+	
 	};
 
 /***/ }

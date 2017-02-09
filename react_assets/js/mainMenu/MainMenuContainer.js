@@ -161,8 +161,10 @@ var MainMenuContainer = React.createClass({
 			var originalIndex = scene.originalArrayIndex;
 			var link = scene.link + "?" + studentID;
 			var className = "episodeBlock activeScene-" + scene.assigned;
-			var characterImage = iconSelector(scene.characterName) === null ?
-				Constants.IMAGE_PATH + scene.characterImage : iconSelector(scene.characterName);
+			var characterImage = Constants.IMAGE_PATH + scene.characterImage;
+
+			var characterIcon = iconSelector(scene.characterName) === null ?
+				characterImage : iconSelector(scene.characterName);
 			var starIconSrc = Constants.IMAGE_PATH + "UI/Icon_Star-01.png";
 			var starIcon = scene.assigned ? <img src={starIconSrc} /> : null;
 
@@ -189,44 +191,19 @@ var MainMenuContainer = React.createClass({
 				</button> : null;
 
 			return (
-					/*
-					*
-					* Previous menu with more data
-					*
-					<div key={originalIndex} className="episodeBlockWrapper">
-						<li className={className}>
-							{starIcon}
-							<h3>{scene.name}</h3>
-							<img className="characterImage" src={characterImage} />
-
-							<p><b>Scenario:</b> {scene.scenario}</p>
-							<div><b>Can Do Statements:</b> <br /> {canDoStatements}</div>
-						</li>
-						<div className="buttonLine">
-							<a href={link} className="btn btn-info"
-								id={scene.id} key={originalIndex} data-index={originalIndex}>
-								<span className="glyphicon glyphicon-play" aria-hidden="true"></span>
-								Play
-							</a>
-							{addButton}
-							{removeButton}
-						</div>
-					</div>)
-					*
-					*
-					*
-					*/
 					<div className="iconWrapper">
 						<a href={link}>
-							<img
-							className="characterImage"
-							src={characterImage}
-							onMouseOver={() => that.showSidebar(scene.name, characterImage, scene.canDoStatements, scene.scenario)}
-							onMouseOut= {that.hideSidebar} />
+							<div
+								onMouseOver={() => that.showSidebar(scene.name, characterImage, canDoStatements, scene.scenario)}
+								onMouseOut= {that.hideSidebar}>
+								<img
+									className="characterImage"
+									src={characterIcon} />
+								<p>{scene.name}</p>
+							</div>
 						</a>
 					</div>
 				)
-
 		});
 		return episodeListToReturn;
 	},
@@ -299,7 +276,6 @@ var MainMenuContainer = React.createClass({
 		if (this.props.title) {
 			title = this.props.title
 		}
-
 
 		var episodeSideBar = this.state.sidebarActive === true ? <EpisodeSelectSidebar
 									sidebarActive = {this.state.sidebarActive}
