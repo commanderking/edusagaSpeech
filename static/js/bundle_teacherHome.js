@@ -21948,17 +21948,17 @@
 	
 				return React.createElement(
 					'div',
-					{ className: 'iconWrapper' },
+					{ className: 'iconWrapper',
+						onMouseEnter: function onMouseEnter() {
+							return that.showSidebar(scene.name, characterImage, canDoStatements, scene.scenario);
+						},
+						onMouseLeave: that.hideSidebar },
 					React.createElement(
 						'a',
 						{ href: link },
 						React.createElement(
 							'div',
-							{
-								onMouseOver: function onMouseOver() {
-									return that.showSidebar(scene.name, characterImage, canDoStatements, scene.scenario);
-								},
-								onMouseOut: that.hideSidebar },
+							null,
 							React.createElement('img', {
 								className: 'characterImage',
 								src: characterIcon }),

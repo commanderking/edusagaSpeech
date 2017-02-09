@@ -191,11 +191,11 @@ var MainMenuContainer = React.createClass({
 				</button> : null;
 
 			return (
-					<div className="iconWrapper">
+					<div className="iconWrapper"
+						onMouseEnter={() => that.showSidebar(scene.name, characterImage, canDoStatements, scene.scenario)}
+						onMouseLeave= {that.hideSidebar}>
 						<a href={link}>
-							<div
-								onMouseOver={() => that.showSidebar(scene.name, characterImage, canDoStatements, scene.scenario)}
-								onMouseOut= {that.hideSidebar}>
+							<div>
 								<img
 									className="characterImage"
 									src={characterIcon} />
