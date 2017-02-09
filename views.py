@@ -9,7 +9,7 @@ from helper_episodes import getAllPublicEpisodeData, getTeacherEpisodes
 #For Heroku Logging
 import sys, os, uuid
 
-from web import app
+from web import app, stripe_keys, stripe
 from models import *
 
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
@@ -185,7 +185,7 @@ def videoRedirect(name="Video Redirect"):
 #-----------------------------------------------
 
 #-----------------------------------------------
-#Business/Engagement Logic
+#Engagement Logic
 @app.route('/logVisitorEvents', methods=['POST'])
 def logVisitorEvents():
 	content = request.get_data()
@@ -198,7 +198,7 @@ def logVisitorEvents():
 	return 'Success'
 
 #-----------------------------------------------
-#Game related posts/data
+#Episode related posts/data
 
 @app.route('/log', methods=['POST'])
 def log():
@@ -281,6 +281,33 @@ def getEpisodes(username):
 		return json.dumps({'success': True, 'teacherEpisodeData' : teacherEpisodeData}, 200, {'ContentType': 'application.json'})
 	except:
 		return json.dumps({'success': True, 'teacherEpisodeData' : []}, 200, {'ContentType': 'application.json'})
+
+#--------------------------------------
+# Business Stripe Payment Related Logic
+#--------------------------------------
+
+@app.route('/payment')
+def paymentPage():
+	return render_template('paymentPage.html', key=stripe_keys['publishable_key'])
+
+@app.route('/charge', methods=['POST'])
+def charge():
+	# amount in cents
+	amount = 500
+
+	customer = stripe.Customer.create(
+		email='customer@example.com',
+		source=request.form['stripeToken']
+	)
+
+	charge = stripe.Charge.create(
+		customer=customer.id,
+		amount=amount,
+		currency='usd',
+		description='Flask Charge'
+	)
+
+	return render_template('charge.html;, amount=amount')
 
 if __name__ == '__main__':
 	app.run(debug=True)
