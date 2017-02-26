@@ -309,5 +309,16 @@ def charge():
 
 	return render_template('charge.html', amount=amount)
 
+# Certbots
+
+@app.route('/.well-known/acme-challenge/54Rs4Lkj08kv0OmcDzXbW_xYBSRst3p8SIbjTlrbiEE')
+def certbot():
+	return '54Rs4Lkj08kv0OmcDzXbW_xYBSRst3p8SIbjTlrbiEE.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+
+@app.route('/.well-known/acme-challenge/JwaWxPcnY9TN0dAA6ewtuEaE8bQhmRn1Q4vLq7fpQUo')
+def certbot2():
+	return 'JwaWxPcnY9TN0dAA6ewtuEaE8bQhmRn1Q4vLq7fpQUo.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+'''
+
 if __name__ == '__main__':
 	app.run(debug=True)
