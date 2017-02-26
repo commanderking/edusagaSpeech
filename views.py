@@ -311,13 +311,13 @@ def charge():
 
 # Certbots
 
-@app.route('/.well-known/acme-challenge/54Rs4Lkj08kv0OmcDzXbW_xYBSRst3p8SIbjTlrbiEE')
+@app.route('/.well-known/acme-challenge/xylUzB-ciOm6Rdh6n4ERTcX4N3Kj87L5H0yiDRDWRx8')
 def certbot():
-	return '54Rs4Lkj08kv0OmcDzXbW_xYBSRst3p8SIbjTlrbiEE.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+	return 'xylUzB-ciOm6Rdh6n4ERTcX4N3Kj87L5H0yiDRDWRx8.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
 
-@app.route('/.well-known/acme-challenge/JwaWxPcnY9TN0dAA6ewtuEaE8bQhmRn1Q4vLq7fpQUo')
+@app.route('/.well-known/acme-challenge/4o8btfr3H_zTYcRYvHc8sKBTpnCE5U7MPy2rAqn2pOU')
 def certbot2():
-	return 'JwaWxPcnY9TN0dAA6ewtuEaE8bQhmRn1Q4vLq7fpQUo.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
+	return '4o8btfr3H_zTYcRYvHc8sKBTpnCE5U7MPy2rAqn2pOU.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
 
 if __name__ == '__main__':
 	app.run(debug=True)
