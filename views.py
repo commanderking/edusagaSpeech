@@ -318,7 +318,6 @@ def certbot():
 @app.route('/.well-known/acme-challenge/JwaWxPcnY9TN0dAA6ewtuEaE8bQhmRn1Q4vLq7fpQUo')
 def certbot2():
 	return 'JwaWxPcnY9TN0dAA6ewtuEaE8bQhmRn1Q4vLq7fpQUo.3LKS5JLsoFTNUAP0BJFtqfW4sEzZ9wUfYgFKWJaL79Q'
-'''
 
 if __name__ == '__main__':
 	app.run(debug=True)
