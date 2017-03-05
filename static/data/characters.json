@@ -184,5 +184,31 @@
       "maxWistfulGoodJob" : "characters/maxwell/maxWistfulGoodJob.png"
     },
     "confusedPhrases" : []
+  },
+  {
+    "name" : "ruby",
+    "emotions" : {
+      "smile" : "characters/ruby/rubySmile.png",
+      "default" : "characters/ruby/rubyDefault.png",
+      "confused" : "characters/ruby/rubyConfused.png",
+      "silhouette" : "characters/ruby/rubySilhouette.png"
+    },
+    "confusedPhrases" : [
+      {
+        "response": "什么?",
+        "soundID" : "shenme",
+        "soundPath" : "chenyang/shenme.ogg"
+      },
+      {
+        "response": "我听不懂.",
+        "soundID" : "tingbudong",
+        "soundPath" : "chenyang/tingbudong.ogg"
+      },
+      {
+        "response": "不好意思, 我没听懂.",
+        "soundID" : "buhaoyisi",
+        "soundPath" : "chenyang/buhaoyisi.ogg"
+      }
+    ]
   }
 ]

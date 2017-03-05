@@ -52,7 +52,7 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var MainMenuContainer = __webpack_require__(/*! ./mainMenu/MainMenuContainer */ 180);
-	var NavBarButton = __webpack_require__(/*! ./teacherHome/NavBarButton */ 234);
+	var NavBarButton = __webpack_require__(/*! ./teacherHome/NavBarButton */ 185);
 	
 	var TeacherHome = React.createClass({
 		displayName: 'TeacherHome',
@@ -21745,14 +21745,14 @@
 
 	'use strict';
 	
-	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 217);
+	var _ImageHelper = __webpack_require__(/*! ../helpers/ImageHelper */ 181);
 	
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 33);
 	var PropTypes = React.PropTypes;
-	var Constants = __webpack_require__(/*! ../helpers/Constants */ 183);
-	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 235);
-	var EpisodeSelectSidebar = __webpack_require__(/*! ./EpisodeSelectSidebar */ 236);
+	var Constants = __webpack_require__(/*! ../helpers/Constants */ 182);
+	var EpisodeTagList = __webpack_require__(/*! ./EpisodeTagLists */ 183);
+	var EpisodeSelectSidebar = __webpack_require__(/*! ./EpisodeSelectSidebar */ 184);
 	
 	
 	var MainMenuContainer = React.createClass({
@@ -22119,59 +22119,7 @@
 	};
 
 /***/ },
-/* 181 */,
-/* 182 */,
-/* 183 */
-/*!**********************************************!*\
-  !*** ./react_assets/js/helpers/Constants.js ***!
-  \**********************************************/
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	var IMAGE_PATH = "https://s3.amazonaws.com/edusaga/assets/images/";
-	var SOUND_PATH = "https://s3.amazonaws.com/edusaga/assets/audio/";
-	
-	module.exports = {
-		IMAGE_PATH: IMAGE_PATH,
-		SOUND_PATH: SOUND_PATH
-	};
-
-/***/ },
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */
+/* 181 */
 /*!************************************************!*\
   !*** ./react_assets/js/helpers/ImageHelper.js ***!
   \************************************************/
@@ -22182,7 +22130,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	var Constants = __webpack_require__(/*! ./Constants */ 183);
+	var Constants = __webpack_require__(/*! ./Constants */ 182);
 	
 	var iconSelector = exports.iconSelector = function iconSelector(characterName) {
 		switch (characterName) {
@@ -22204,52 +22152,24 @@
 	};
 
 /***/ },
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */
-/*!*****************************************************!*\
-  !*** ./react_assets/js/teacherHome/NavBarButton.js ***!
-  \*****************************************************/
-/***/ function(module, exports, __webpack_require__) {
+/* 182 */
+/*!**********************************************!*\
+  !*** ./react_assets/js/helpers/Constants.js ***!
+  \**********************************************/
+/***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
-	var React = __webpack_require__(/*! react */ 1);
-	var PropTypes = React.PropTypes;
+	var IMAGE_PATH = "https://s3.amazonaws.com/edusaga/assets/images/";
+	var SOUND_PATH = "https://s3.amazonaws.com/edusaga/assets/audio/";
 	
-	function NavBarButton(props) {
-		return React.createElement(
-			'li',
-			{ onClick: function onClick() {
-					return props.clickFunction(props.text);
-				} },
-			props.text
-		);
-	}
-	
-	module.exports = NavBarButton;
-	
-	NavBarButton.PropTypes = {
-		text: PropTypes.string.isRequired,
-		clickFunction: PropTypes.func.isRequred
+	module.exports = {
+		IMAGE_PATH: IMAGE_PATH,
+		SOUND_PATH: SOUND_PATH
 	};
 
 /***/ },
-/* 235 */
+/* 183 */
 /*!*****************************************************!*\
   !*** ./react_assets/js/mainMenu/EpisodeTagLists.js ***!
   \*****************************************************/
@@ -22298,7 +22218,7 @@
 	module.exports = EpisodeTagList;
 
 /***/ },
-/* 236 */
+/* 184 */
 /*!**********************************************************!*\
   !*** ./react_assets/js/mainMenu/EpisodeSelectSidebar.js ***!
   \**********************************************************/
@@ -22363,6 +22283,35 @@
 		episodeCharacterImage: PropTypes.string.isRequired,
 		episodeDescription: PropTypes.string.isRequired
 	
+	};
+
+/***/ },
+/* 185 */
+/*!*****************************************************!*\
+  !*** ./react_assets/js/teacherHome/NavBarButton.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(/*! react */ 1);
+	var PropTypes = React.PropTypes;
+	
+	function NavBarButton(props) {
+		return React.createElement(
+			'li',
+			{ onClick: function onClick() {
+					return props.clickFunction(props.text);
+				} },
+			props.text
+		);
+	}
+	
+	module.exports = NavBarButton;
+	
+	NavBarButton.PropTypes = {
+		text: PropTypes.string.isRequired,
+		clickFunction: PropTypes.func.isRequred
 	};
 
 /***/ }

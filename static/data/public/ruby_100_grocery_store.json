@@ -1,0 +1,86 @@
+{
+	"activityID": "liling",
+	"activityName": "Chance Meeting with Ruby at the Supermarket",
+	"tags" : ["special"],
+	"characters" : ["ruby"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Ruby",
+	"currentImage" : "characters/ruby/rubyDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can greet others at the supermarket."
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "You are shopping in Whole Foods. You bump into your friend Ruby.",
+			"next" : "end"
+		}
+	],
+	"character" :
+		{
+			"name" : "Ruby",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Whole Foods",
+				"nameChinese" : "全食超市",
+				"bg" : "bg/wholefoods.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "chenyang/hi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet Ruby.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["你在买东西啊", "你在买东西"],
+							"response" : "我买东西呢！你也来买东西啊？",
+							"soundID" : "ss"
+						}
+					],
+					"correct" : false,
+					"emotion" : "smile",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Respond and say goodbye",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["对再见", "对啊再见", "對呀再見"],
+							"response" : "再见",
+							"soundID" : "hobbies-weekend-doing-not-much"
+						}
+					],
+					"correct" : false,
+					"emotion" : "default",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"completedTasks" : []
+		}
+}

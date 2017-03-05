@@ -1024,5 +1024,3 @@ var QuestionAsker = React.createClass({
 });
 
 ReactDOM.render(<QuestionAsker />, document.getElementById('app'));
-
-export QuestionAsker;

@@ -1,0 +1,103 @@
+{
+	"activityID": "liling",
+	"activityName": "Greeting a neighbor after work",
+	"tags" : ["special"],
+	"characters" : ["ruby"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Ruby",
+	"currentImage" : "characters/ruby/rubyDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can greet others at the supermarket"
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "It'a busy day. You are back from school. Your neighbor is back from work. You are both in the elevator. ",
+			"next" : "end"
+		}
+	],
+	"character" :
+		{
+			"name" : "Ruby",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Apartment Elevator",
+				"nameChinese" : "公寓电梯",
+				"bg" : "bg/apartmentElevator.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "nihao",
+					"soundPath" : "chenyang/hi.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet Ruby.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["下班了啊", "下班了"],
+							"response" : "恩。你刚从学校回来吗？",
+							"soundID" : "ss"
+						}
+					],
+					"correct" : false,
+					"emotion" : "default",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Respond.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["对, 刚从学校回来", "刚从学校回来", "是刚从学校回来"],
+							"response" : "今天怎么样？",
+							"soundID" : "ss"
+						}
+					],
+					"correct" : false,
+					"emotion" : "default",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				},
+        {
+					"taskID" : 30,
+					"task" : "Respond and ask them how they're doing.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["很忙你今天怎么样", "很忙你呢"],
+							"response" : "还不错!",
+							"soundID" : "ss"
+						}
+					],
+					"correct" : false,
+					"emotion" : "smile",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"completedTasks" : []
+		}
+}
