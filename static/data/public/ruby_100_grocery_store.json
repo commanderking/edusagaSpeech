@@ -38,8 +38,8 @@
 			"sounds" :
 			[
 				{
-					"soundID" : "nihao",
-					"soundPath" : "chenyang/hi.ogg"
+					"soundID" : "wholefoods-you-buy-food-too",
+					"soundPath" : "ruby/wholefoods-you-buy-food-too.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -50,8 +50,8 @@
 					[
 						{
 							"answers" : ["你在买东西啊", "你在买东西"],
-							"response" : "我买东西呢！你也来买东西啊？",
-							"soundID" : "ss"
+							"response" : "你好！你也来买东西啊？",
+							"soundID" : "wholefoods-you-buy-food-too"
 						}
 					],
 					"correct" : false,
@@ -69,9 +69,9 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["对再见", "对啊再见", "對呀再見"],
-							"response" : "再见",
-							"soundID" : "hobbies-weekend-doing-not-much"
+							"answers" : ["对再见", "对啊再见", "對呀再見", "說再見"],
+							"response" : "",
+							"soundID" : "none"
 						}
 					],
 					"correct" : false,

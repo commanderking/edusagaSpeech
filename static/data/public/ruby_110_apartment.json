@@ -38,8 +38,16 @@
 			"sounds" :
 			[
 				{
-					"soundID" : "nihao",
-					"soundPath" : "chenyang/hi.ogg"
+					"soundID" : "apartment-back-from-school",
+					"soundPath" : "ruby/apartment-back-from-school.ogg"
+				},
+        {
+					"soundID" : "apartment-how-are-you-today",
+					"soundPath" : "ruby/apartment-how-are-you-today.ogg"
+				},
+        {
+					"soundID" : "apartment-not-bad",
+					"soundPath" : "ruby/apartment-not-bad.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -51,7 +59,7 @@
 						{
 							"answers" : ["下班了啊", "下班了"],
 							"response" : "恩。你刚从学校回来吗？",
-							"soundID" : "ss"
+							"soundID" : "apartment-back-from-school"
 						}
 					],
 					"correct" : false,
@@ -70,8 +78,8 @@
 					[
 						{
 							"answers" : ["对, 刚从学校回来", "刚从学校回来", "是刚从学校回来"],
-							"response" : "今天怎么样？",
-							"soundID" : "ss"
+							"response" : "你今天怎么样？",
+							"soundID" : "apartment-how-are-you-today"
 						}
 					],
 					"correct" : false,
@@ -88,7 +96,7 @@
 						{
 							"answers" : ["很忙你今天怎么样", "很忙你呢"],
 							"response" : "还不错!",
-							"soundID" : "ss"
+							"soundID" : "apartment-not-bad"
 						}
 					],
 					"correct" : false,
