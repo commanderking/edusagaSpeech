@@ -57,7 +57,7 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["下班了啊", "下班了"],
+							"answers" : ["下班了啊", "下班了吗", "下班了"],
 							"response" : "恩。你刚从学校回来吗？",
 							"soundID" : "apartment-back-from-school"
 						}
@@ -78,7 +78,7 @@
 					[
 						{
 							"answers" : ["对, 刚从学校回来", "刚从学校回来", "是刚从学校回来"],
-							"response" : "你今天怎么样？",
+							"response" : "你今天怎么样？ (You are really busy today)",
 							"soundID" : "apartment-how-are-you-today"
 						}
 					],
@@ -94,7 +94,7 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["很忙你今天怎么样", "很忙你呢"],
+							"answers" : ["很忙你今天怎么样", "很忙你呢", "很忙你怎么样"],
 							"response" : "还不错!",
 							"soundID" : "apartment-not-bad"
 						}

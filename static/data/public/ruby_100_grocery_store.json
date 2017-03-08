@@ -49,7 +49,7 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["你在买东西啊", "你在买东西"],
+							"answers" : ["你在买东西啊", "你在买东西", "买东西啊", "买东西呢"],
 							"response" : "你好！你也来买东西啊？",
 							"soundID" : "wholefoods-you-buy-food-too"
 						}
@@ -69,7 +69,7 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["对再见", "对啊再见", "對呀再見", "說再見"],
+							"answers" : ["对再见", "对啊再见", "對呀再見", "說再見", "是啊再见", "是再见"],
 							"response" : "",
 							"soundID" : "none"
 						}
