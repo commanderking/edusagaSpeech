@@ -1,5 +1,6 @@
 {
 	"activityID": "liling",
+	"accessCode" : "liling",
 	"activityName": "Greeting a neighbor after work",
 	"tags" : ["special"],
 	"characters" : ["ruby"],

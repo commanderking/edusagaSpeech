@@ -10,8 +10,10 @@ var ResultsContainer = require('./questionAsker/ResultsContainer');
 var SpeechSynth = require('./helpers/SpeechSynth');
 var TimerContainer = require('./questionAsker/TimerContainer');
 var PracticeContainer = require('./questionAsker/PracticeContainer.js');
+import AccessCodeForm from './questionAsker/components/AccessCodeForm';
 
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
+import checkAccessCode from './helpers/CheckAccessCode';
 var characterEmotionsSounds = require('json!../../static/data/characters.json');
 const Constants = require('./helpers/Constants.js');
 
@@ -46,6 +48,7 @@ var QuestionAsker = React.createClass({
 		return {
 			sceneData: null,
 			characterData: null,
+			requireAccessCode: null,
 			currentCharName: null,
 			scenarioOn: true,
 			practiceMode: false,
@@ -105,6 +108,13 @@ var QuestionAsker = React.createClass({
 					practiceAvailable: practiceAvailable,
 					charactersData: allCharacterStaticData
 				});
+				console.log(sceneData);
+				console.log(sceneData.accessCodeRequired);
+				if (sceneData.accessCodeRequired) {
+					that.setState({
+						requireAccessCode: true
+					})
+				}
 
 				that.initializeSounds(allCharacterStaticData);
 
@@ -877,10 +887,22 @@ var QuestionAsker = React.createClass({
 			})
 		}
 	},
+	checkCode: function(code) {
+		if (checkAccessCode(this.state.sceneData.instructor, code)) {
+			this.setState({
+				requireAccessCode: false
+			});
+		} else {
+			return false;
+		}
+	},
 	render: function() {
 		var sceneData = this.state.sceneData;
 		if (!this.state.sceneData) {
 			return <div>Loading Scene</div>
+		} else if (this.state.requireAccessCode === true) {
+			return <AccessCodeForm
+								checkCode = {this.checkCode}/>
 		} else {
 
 			var currentScenarioData = this.getCurrentScenarioObject();

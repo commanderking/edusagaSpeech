@@ -59,7 +59,7 @@ html, body {
 }
 
 /*--------------------------------------------------------
-Shared elements 
+Shared elements
 --------------------------------------------------------*/
 
 .verticalCenter {
@@ -305,7 +305,7 @@ button {
 	}
 	.sceneBG-fade {
 		-webkit-filter: blur(3px);
-		filter: blur (3px);	
+		filter: blur (3px);
 	}
 	.bgFadeOverlay {
 		position: absolute;
@@ -363,7 +363,7 @@ button {
 			}
 			p {
 				font-size: 18px;
-			}		
+			}
 		}
 }
 
@@ -408,7 +408,7 @@ button {
 }
 
 /*----------------------------------
-CSS Related to Task List 
+CSS Related to Task List
 ----------------------------------*/
 
 .combinedTaskList {
@@ -525,7 +525,7 @@ CSS Related to Task List
 	border-bottom: 3px solid $borderBlue;
 	border-top: 3px solid $lightBlue;
 	border-left: 1px solid $borderBlue;
-	border-right: 1px solid $borderBlue;	
+	border-right: 1px solid $borderBlue;
 	.taskText {
 		&:hover {
 			background: #38C6F3;
@@ -564,7 +564,7 @@ CSS Related to Task List
 	&:hover {
 		background: #214f79;
 		color: #316086;
-	}	
+	}
 }
 
 /* When user clicks task and is recording */
@@ -660,8 +660,8 @@ CSS Related to Task List
 	padding: 0;
 	.row-fluid {
 		background-color: none;
-		height: 100%; 
-		display:table-cell; 
+		height: 100%;
+		display:table-cell;
 		vertical-align: middle;
 		position: relative;
 
@@ -673,7 +673,7 @@ CSS Related to Task List
 			&::before {
 				z-index: -1;
 				opacity: 0.5;
-				position: absolute;	
+				position: absolute;
 			}
 
 			button {
@@ -713,7 +713,7 @@ CSS Related to Task List
 				margin-left: 80px;
 				width: 50%;
 				text-align: center;
-				font-size: 25px;				
+				font-size: 25px;
 			}
 
 			.locationText {
@@ -729,8 +729,8 @@ CSS Related to Task List
 				position: absolute;
 				top: 0px;
 				height: 100%;
-				z-index: 6;	
-				cursor: pointer;		
+				z-index: 6;
+				cursor: pointer;
 			}
 			.repeatButton {
 				//display: inline-block;
@@ -811,14 +811,14 @@ CSS Related to Task List
 					height: 50px;
 					width: 50px;
 					top: -5px;
-					position: absolute; 
+					position: absolute;
 					text-align: center;
 					border-radius: 15px;
 					cursor: pointer;
 					.glyphicon {
 						line-height: 50px;
 						font-size: 30px;
-					}			
+					}
 				}
 
 				.promptSuggestNewPhraseButton {
@@ -1181,7 +1181,7 @@ CSS Related to Task List
 }
 
 /*------------------------------------------
-Timer Container 
+Timer Container
 ------------------------------------------*/
 
 .timerContainer {
@@ -1205,7 +1205,7 @@ Timer Container
 }
 
 /*--------------------------------------------
-Practice Container 
+Practice Container
 --------------------------------------------*/
 
 
@@ -1418,7 +1418,7 @@ Practice Container
 			#mic {
 				span {
 					font-size: 8em;
-				}				
+				}
 			}
 
 		}
@@ -1488,7 +1488,7 @@ Practice Container
 	}
 	.glyphicon-volume-up {
 		font-size: 30px;
-	}	
+	}
 }
 
 //adding active state for pinyin and speaking buttons. Stay active for entire phrase for the listen button, till unclicked for Pinyin.
@@ -1539,4 +1539,14 @@ Practice Container
 		}
 	}
 
+}
+
+.access-code-form {
+  width: 30%;
+  margin: auto;
+  margin-top: 5em;
+  text-align: center;
+  input {
+    text-align:center;
+  }
 }

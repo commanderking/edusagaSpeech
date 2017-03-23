@@ -1,5 +1,7 @@
 {
 	"activityID": "liling",
+	"accessCodeRequired" : true,
+	"instructor" : "liling",
 	"activityName": "Chance Meeting with Ruby at the Supermarket",
 	"tags" : ["special"],
 	"characters" : ["ruby"],
