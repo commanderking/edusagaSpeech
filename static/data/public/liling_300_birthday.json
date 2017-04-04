@@ -2,20 +2,20 @@
 	"activityID": "liling",
 	"accessCodeRequired" : true,
 	"instructor" : "liling",
-	"activityName": "Greeting a neighbor after work",
+	"activityName": "Birthday Party",
 	"tags" : ["special"],
-	"characters" : ["ruby"],
+	"characters" : ["boss"],
 	"sequence" : 110,
 	"score" : 0,
-	"currentCharName" : "Ruby",
-	"currentImage" : "characters/ruby/rubyDefault.png",
+	"currentCharName" : "Boss",
+	"currentImage" : "characters/boss/bossDefault.png",
 	"currentLanguage" : "zh-CN",
 	"currentDialog" : "",
 	"currentSoundID": "",
 	"assessmentMode": false,
 	"objectives":
 	[
-		"I can greet others at the supermarket"
+		"I can invite someone to dinner."
 	],
 	"scenario" :
 	[
@@ -23,19 +23,19 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "It'a busy day. You are back from school. Your neighbor is back from work. You are both in the elevator. ",
+			"text" : "You are going to have a birthday party in your house tomorrow. Invite your boss to your house.",
 			"next" : "end"
 		}
 	],
 	"character" :
 		{
-			"name" : "Ruby",
+			"name" : "Boss",
 			"language" : "zh-CN",
 			"location" :
 			{
-				"nameEnglish" : "Apartment Elevator",
-				"nameChinese" : "公寓电梯",
-				"bg" : "bg/apartmentElevator.jpg"
+				"nameEnglish" : "Office",
+				"nameChinese" : "公司",
+				"bg" : "bg/office.jpg"
 			},
 			"sounds" :
 			[
@@ -55,16 +55,26 @@
 			"currentTasks" : [
 				{
 					"taskID" : 1,
-					"task" : "Greet Ruby.",
+					"task" : "Ask whether she's free tomorrow.",
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["下班了啊", "下班了吗", "下班了"],
-							"response" : "恩。你刚从学校回来吗？",
-							"soundID" : "apartment-back-from-school"
+							"answers" : [
+								["请问"],
+								["您明天", "明天您", "你明天", "明天你"],
+								["忙不忙", "忙吗"]
+							]
+						},
+						{
+							"answers" : [
+								["您明天", "明天您", "你明天", "明天你"],
+								["忙不忙", "忙吗"]
+							]
 						}
 					],
 					"correct" : false,
+					"response" : "明天？哦， 我不忙！ 有事吗？",
+					"soundID" : "a",
 					"emotion" : "default",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
@@ -75,35 +85,42 @@
 			[
 				{
 					"taskID" : 20,
-					"task" : "Respond.",
+					"task" : "Tell her that it is your birthday tomorrow.",
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["对, 刚从学校回来", "刚从学校回来", "是刚从学校回来"],
-							"response" : "你今天怎么样？ (You are really busy today)",
-							"soundID" : "apartment-how-are-you-today"
+							"answers" : ["明天是我的生日"],
+							"response" : "是吗？生日快乐！",
+							"soundID" : "a"
 						}
 					],
 					"correct" : false,
-					"emotion" : "default",
+					"emotion" : "thumbsUp",
 					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed": false
 				},
-        {
+				{
 					"taskID" : 30,
-					"task" : "Respond and ask them how they're doing.",
+					"task" : "Invite her to your house for dinner.",
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["很忙你今天怎么样", "很忙你呢", "很忙你怎么样"],
-							"response" : "还不错!",
-							"soundID" : "apartment-not-bad"
+							"answers" : ["明天我想请您来我家吃晚饭", "明天我想请你来我家吃晚饭"]
+						},
+						{
+							"answers" : [
+								["明天"],
+								["我请您来我家吃晚饭","我请你来我家吃晚饭", "来我家吃晚饭"],
+								["好吗", "怎么样"]
+							]
 						}
 					],
 					"correct" : false,
-					"emotion" : "smile",
-					"tasksToQueue" : [],
+					"response" : "好啊，谢谢你的邀请！",
+					"soundID" : "",
+					"emotion" : "default",
+					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
 					"hintUsed": false
 				}

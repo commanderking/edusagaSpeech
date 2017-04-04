@@ -1,0 +1,76 @@
+{
+	"activityID": "liling",
+	"accessCodeRequired" : true,
+	"instructor" : "liling",
+	"activityName": "Meeting Kevin in the Hallway",
+	"tags" : ["special"],
+	"characters" : ["kevin"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Kevin",
+	"currentImage" : "characters/kevin/kevinThumbsUp.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can respond to compliments."
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "You had a new haircut yesterday. Your classmate Kevin meets you in the hallway. "
+		},
+		{
+			"name" : "Kevin",
+			"image" : "characters/kevin/kevinThumbsUp.png",
+			"imageLayer" : "blank.png",
+			"text" : "你的鞋好时髦",
+			"next" : "end"
+		}
+	],
+	"character" :
+		{
+			"name" : "Kevin",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Apartment Hallway",
+				"nameChinese" : "公寓电梯",
+				"bg" : "bg/apartmentElevator.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "apartment-back-from-school",
+					"soundPath" : "ruby/apartment-back-from-school.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Respond.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["哪里哪里", "谢谢", "谢谢你"],
+							"response" : "",
+							"soundID" : "a"
+						}
+					],
+					"correct" : false,
+					"emotion" : "default",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[],
+			"completedTasks" : []
+		}
+}

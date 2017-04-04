@@ -13,7 +13,7 @@ var PracticeContainer = require('./questionAsker/PracticeContainer.js');
 import AccessCodeForm from './questionAsker/components/AccessCodeForm';
 
 import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
-import checkAccessCode from './helpers/CheckAccessCode';
+import AccessCode from './helpers/CheckAccessCode';
 var characterEmotionsSounds = require('json!../../static/data/characters.json');
 const Constants = require('./helpers/Constants.js');
 
@@ -108,9 +108,9 @@ var QuestionAsker = React.createClass({
 					practiceAvailable: practiceAvailable,
 					charactersData: allCharacterStaticData
 				});
-				console.log(sceneData);
-				console.log(sceneData.accessCodeRequired);
-				if (sceneData.accessCodeRequired) {
+
+				// TODO: Check if access code is requried to start episode
+				if (sceneData.accessCodeRequired && !AccessCode.checkLocalStorage(sceneData.instructor)) {
 					that.setState({
 						requireAccessCode: true
 					})
@@ -888,10 +888,12 @@ var QuestionAsker = React.createClass({
 		}
 	},
 	checkCode: function(code) {
-		if (checkAccessCode(this.state.sceneData.instructor, code)) {
+		// If code correct, no longer require code, store code in session storage
+		if (AccessCode.checkInput(this.state.sceneData.instructor, code)) {
 			this.setState({
 				requireAccessCode: false
 			});
+			localStorage.setItem('edusagaAccessKey', code);
 		} else {
 			return false;
 		}

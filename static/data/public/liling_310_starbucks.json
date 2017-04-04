@@ -1,0 +1,100 @@
+{
+	"activityID": "liling",
+	"accessCodeRequired" : true,
+	"instructor" : "liling",
+	"activityName": "Starbucks",
+	"tags" : ["special"],
+	"characters" : ["kevin"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Kevin",
+	"currentImage" : "characters/kevin/kevinDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can accept invitations."
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "You and your Chinese friend are chatting in Starbucks."
+		},
+		{
+			"name" : "Miri",
+			"image" : "characters/kevin/kevinDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "谢谢你帮我复习英文！我请你吃饭吧！",
+			"next" : "end"
+		}
+	],
+	"character" :
+		{
+			"name" : "Kevin",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Starbucks",
+				"nameChinese" : "星巴克",
+				"bg" : "bg/starbucks.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "apartment-back-from-school",
+					"soundPath" : "ruby/apartment-back-from-school.ogg"
+				},
+        {
+					"soundID" : "apartment-how-are-you-today",
+					"soundPath" : "ruby/apartment-how-are-you-today.ogg"
+				},
+        {
+					"soundID" : "apartment-not-bad",
+					"soundPath" : "ruby/apartment-not-bad.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Respond.",
+					"possibleAnswers" :
+					[
+						{ "answers" : ["不用不用"]}
+					],
+					"correct" : false,
+					"response" : "没关系，我们去吃日本菜吧，这旁边新开了一家日本饭馆，我们去尝尝。",
+					"soundID" : "",
+					"emotion" : "default",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Accept the Invitation",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["好谢谢你", "太好了谢谢你", "好啊", "好我不客气了"],
+							"response" : "",
+							"soundID" : "a"
+						}
+					],
+					"correct" : false,
+					"emotion" : "thumbsUp",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"completedTasks" : []
+		}
+}

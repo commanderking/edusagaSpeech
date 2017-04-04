@@ -1,0 +1,76 @@
+{
+	"activityID": "liling",
+	"accessCodeRequired" : true,
+	"instructor" : "liling",
+	"activityName": "Great Chinese",
+	"tags" : ["special"],
+	"characters" : ["kevin"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Kevin",
+	"currentImage" : "characters/kevin/kevinDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can respond to compliments."
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Your parent’s Chinese friend visits your house and chat with you in Chinese."
+		},
+		{
+			"name" : "Uncle",
+			"image" : "characters/kevin/kevinDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "你很有语言天赋，中文说得真好。",
+			"next" : "end"
+		}
+	],
+	"character" :
+		{
+			"name" : "Uncle",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Apartment Room",
+				"nameChinese" : "公寓房",
+				"bg" : "bg/apartmentRoom.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "apartment-back-from-school",
+					"soundPath" : "ruby/apartment-back-from-school.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Respond.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["哪里哪里", "谢谢叔叔", "你过奖了"],
+							"response" : "",
+							"soundID" : "a"
+						}
+					],
+					"correct" : false,
+					"emotion" : "default",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[],
+			"completedTasks" : []
+		}
+}
