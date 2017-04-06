@@ -23,7 +23,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Your parent’s Chinese friend visits your house and chat with you in Chinese."
+			"text" : "Your father's friend is at your house. He is chatting with you in Chinese."
 		},
 		{
 			"name" : "Uncle",

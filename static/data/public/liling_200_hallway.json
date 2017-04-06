@@ -23,7 +23,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "You had a new haircut yesterday. Your classmate Kevin meets you in the hallway. "
+			"text" : "You are wearing a new pair of shoes. Your classmate Kevin meets you in the hallway. "
 		},
 		{
 			"name" : "Kevin",
