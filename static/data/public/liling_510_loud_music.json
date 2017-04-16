@@ -1,0 +1,159 @@
+{
+	"activityID": "liling",
+	"accessCodeRequired" : true,
+	"instructor" : "liling",
+	"activityName": "Loud Music",
+	"tags" : ["special"],
+	"characters" : ["ruby"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Ruby",
+	"currentImage" : "characters/ruby/rubyDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can ask someone to quiet down"
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Your neighbor is practicing violin at home at 9 pm. The music is too loud and you cannot fall asleep. You are talking to your neighbor outside her apartment."
+		},
+		{
+			"name" : "Ruby",
+			"image" : "characters/ruby/rubyDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "您好!",
+			"soundID" : "ep5-ni-hao",
+			"jumpToTasks" : true,
+			"next" : "end"
+		},
+		{
+			"name" : "Miri",
+			"image" : "characters/ruby/rubyDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "没关系，有事吗?"
+		},
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Make sure to tell her that you have to go to bed early because you have an exam tomorrow, but the music is too loud that you cannot fall asleep.",
+			"jumpToTasks": true
+		}
+	],
+	"character" :
+		{
+			"name" : "Ruby",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Apartment",
+				"nameChinese" : "公寓",
+				"bg" : "bg/apartmentElevator.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "ep5-ni-hao",
+					"soundPath" : "ruby/ep5-ni-hao.ogg"
+				},
+				{
+					"soundID" : "ep5-no-prob-issue",
+					"soundPath" : "ruby/ep5-no-prob-issue.ogg"
+				},
+				{
+					"soundID" : "ep5-ok-sorry",
+					"soundPath" : "ruby/ep5-ok-sorry.ogg"
+				},
+				{
+					"soundID" : "ep5-violin-sorry",
+					"soundPath" : "ruby/ep5-violin-sorry.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Tell her that you're sorry to bother her.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["不好意思打扰了","抱歉打扰了", "对不起打扰了"]
+						}
+					],
+					"correct" : false,
+					"response" : "",
+					"soundID" : "ep5-no-prob-issue",
+					"emotion" : "default",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false,
+					"jumpToScenarioIndex": 2
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Complain politely (mention exam, loud music, sleep early).",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["我得早点睡因为明天我有一个考试可是音乐太大声了我睡不着"]
+						},
+						{
+							"answers" : [
+								["早点睡", "考试"],
+								["考试", "早点睡"],
+								["太大声"],
+								["睡不着"]
+							]
+						}
+					],
+					"correct" : false,
+					"emotion" : "confused",
+					"response" : "啊？您说的是小提琴的声音吗？不好意思，不好意思，吵到您了。",
+					"soundID" : "ep5-violin-sorry",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask whether she can practice in the daytime.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["您能不能白天练习?"]
+						},
+						{
+							"answers" : [
+								["你能", "您能", "你可以"],
+								["白天练习吗"]
+							]
+						},
+						{
+							"answers" : [
+								["你白天练习"],
+								["可以吗", "好吗", "好不好"]
+							]
+						}
+					],
+					"correct" : false,
+					"response" : "好的，好的，不好意思啊。",
+					"soundID" : "ep5-ok-sorry",
+					"emotion" : "default",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"completedTasks" : []
+		}
+}

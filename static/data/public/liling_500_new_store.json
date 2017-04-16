@@ -1,0 +1,133 @@
+{
+	"activityID": "liling",
+	"accessCodeRequired" : true,
+	"instructor" : "liling",
+	"activityName": "New Store",
+	"tags" : ["special"],
+	"characters" : ["colleague"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Colleague",
+	"currentImage" : "characters/colleague/colleagueDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can disagree with someone"
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "You are having a meeting with your Chinese colleague. You are discussing about the best location for your company’s new store. You have a different opinion than him. "
+		},
+		{
+			"name" : "Colleague",
+			"image" : "characters/colleague/colleagueDefault.png",
+			"imageLayer" : "blank.png",
+			"soundID" : "ep5-new-store-city-center",
+			"text" : "新店应该开在市中心，人流量大，生意好。"
+		},
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "You disagree, right? Tell him that what he said is right, however, the rent is very expensive in downtown.",
+			"next" : "end"
+		}
+
+	],
+	"character" :
+		{
+			"name" : "Colleague",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Office",
+				"nameChinese" : "办公室",
+				"bg" : "bg/office.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "ep5-new-store-city-center",
+					"soundPath" : "colleague/ep5-new-store-city-center.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Express disagreement politely.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["你说的有道理，可是市中心的租金很贵。"]
+						},
+						{
+							"answers" : [
+								["你说的有道理", "你说得对"],
+								["可是", "但是"],
+								["市中心的租金很贵"]
+							]
+						}
+					],
+					"correct" : false,
+					"response" : "Hmm...",
+					"soundID" : "",
+					"emotion" : "confused",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Tell her you have a job interview tomorrow.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : [
+								["明天我", "我明天"],
+								["有一个"],
+								["工作面试"]
+							],
+							"response" : "哦，祝贺你！",
+							"soundID" : "a"
+						}
+					],
+					"correct" : false,
+					"emotion" : "thumbsUp",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask whether you can take a day off.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : [
+								["我想请假", "我想请个假"],
+								["好吗", "可以吗"]
+							]
+						}
+					],
+					"correct" : false,
+					"response" : "恩，可以，祝你面试成功。",
+					"soundID" : "a",
+					"emotion" : "default",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"completedTasks" : []
+		}
+}

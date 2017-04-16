@@ -1,0 +1,114 @@
+{
+	"activityID": "liling",
+	"accessCodeRequired" : true,
+	"instructor" : "liling",
+	"activityName": "Starbucks",
+	"tags" : ["special"],
+	"characters" : ["ruby"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Ruby",
+	"currentImage" : "characters/ruby/rubyDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can ask to leave."
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "Your classmate is talking with you in the classroom. She wants to borrow 200 dollar from you. "
+		},
+		{
+			"name" : "Miri",
+			"image" : "characters/ruby/rubyDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "下个星期是我男朋友生日，可是我这个月的钱快花完了，没办法给他买礼物。你可以借我200块钱吗 ",
+			"soundID" : "ep4-borrow-money"
+		},
+		{
+			"name" : "Miri",
+			"image" : "characters/ruby/rubyDefault.png",
+			"imageLayer" : "blank.png",
+			"text" : "Yikes! Tell her that you want to help her but you have to pay tuition.",
+			"next" : "end"
+		}
+	],
+	"character" :
+		{
+			"name" : "Ruby",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Teacher's Office",
+				"nameChinese" : "老师的办公室",
+				"bg" : "bg/starbucks.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "ep4-borrow-money",
+					"soundPath" : "ruby/ep4-borrow-money.ogg"
+				},
+				{
+					"soundID" : "ep4-fine",
+					"soundPath" : "ruby/ep4-fine.ogg"
+				},
+				{
+					"soundID" : "ep4-no-problem",
+					"soundPath" : "ruby/ep4-no-problem.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Decline politely (want to help, but tuition)",
+					"possibleAnswers" :
+					[
+						{ "answers" : ["我想帮你可是我得交学费"]},
+						{
+							"answers" : [
+								["我想帮你", "我想帮忙", "虽然我想帮你", "我也想帮你"],
+								["可是","但是"],
+								["我得交学费"]
+							]
+						}
+					],
+					"correct" : false,
+					"response" : "好吧",
+					"soundID" : "ep4-fine",
+					"emotion" : "default",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Say sorry.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : ["对不起", "不好意思", "抱歉"],
+							"response" : "没事",
+							"soundID" : "ep4-no-problem"
+						}
+					],
+					"correct" : false,
+					"emotion" : "default",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"completedTasks" : []
+		}
+}

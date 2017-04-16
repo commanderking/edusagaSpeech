@@ -30,6 +30,7 @@
 			"image" : "characters/kevin/kevinThumbsUp.png",
 			"imageLayer" : "blank.png",
 			"text" : "你的鞋好时髦",
+			"soundID" : "ep2-nice-shoes",
 			"next" : "end"
 		}
 	],
@@ -46,8 +47,8 @@
 			"sounds" :
 			[
 				{
-					"soundID" : "apartment-back-from-school",
-					"soundPath" : "ruby/apartment-back-from-school.ogg"
+					"soundID" : "ep2-nice-shoes",
+					"soundPath" : "kevin/ep2-nice-shoes.ogg"
 				}
 			],
 			"currentTasks" : [

@@ -30,6 +30,7 @@
 			"image" : "characters/kevin/kevinDefault.png",
 			"imageLayer" : "blank.png",
 			"text" : "谢谢你帮我复习英文！我请你吃饭吧！",
+			"soundID" : "ep3-thanks-for-english",
 			"next" : "end"
 		}
 	],
@@ -46,16 +47,12 @@
 			"sounds" :
 			[
 				{
-					"soundID" : "apartment-back-from-school",
-					"soundPath" : "ruby/apartment-back-from-school.ogg"
+					"soundID" : "ep3-thanks-for-english",
+					"soundPath" : "kevin/ep3-thanks-for-english.ogg"
 				},
         {
-					"soundID" : "apartment-how-are-you-today",
-					"soundPath" : "ruby/apartment-how-are-you-today.ogg"
-				},
-        {
-					"soundID" : "apartment-not-bad",
-					"soundPath" : "ruby/apartment-not-bad.ogg"
+					"soundID" : "ep3-no-worries-new-japanese-restaurant",
+					"soundPath" : "kevin/ep3-no-worries-new-japanese-restaurant.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -68,7 +65,7 @@
 					],
 					"correct" : false,
 					"response" : "没关系，我们去吃日本菜吧，这旁边新开了一家日本饭馆，我们去尝尝。",
-					"soundID" : "",
+					"soundID" : "ep3-no-worries-new-japanese-restaurant",
 					"emotion" : "default",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],

@@ -262,5 +262,57 @@
         "soundPath" : "chenyang/buhaoyisi.ogg"
       }
     ]
+  },
+  {
+    "name" : "teacher",
+    "emotions" : {
+      "default" : "characters/teacher/teacherDefault.png",
+      "confused" : "characters/teacher/teacherConfused.png",
+      "thumbsUp" : "characters/teacher/teacherThumbsUp.png",
+      "silhouette" : "characters/teacher/teacherDefault.png"
+    },
+    "confusedPhrases" : [
+      {
+        "response": "什么?",
+        "soundID" : "shenme",
+        "soundPath" : "chenyang/shenme.ogg"
+      },
+      {
+        "response": "我听不懂.",
+        "soundID" : "tingbudong",
+        "soundPath" : "chenyang/tingbudong.ogg"
+      },
+      {
+        "response": "不好意思, 我没听懂.",
+        "soundID" : "buhaoyisi",
+        "soundPath" : "chenyang/buhaoyisi.ogg"
+      }
+    ]
+  },
+  {
+    "name" : "Colleague",
+    "emotions" : {
+      "default" : "characters/colleague/colleagueDefault.png",
+      "confused" : "characters/colleague/colleagueConfused.png",
+      "thumbsUp" : "characters/colleague/colleagueThumbsUp.png",
+      "silhouette" : "characters/colleague/colleagueDefault.png"
+    },
+    "confusedPhrases" : [
+      {
+        "response": "什么?",
+        "soundID" : "shenme",
+        "soundPath" : "david/shenme.ogg"
+      },
+      {
+        "response": "我听不懂.",
+        "soundID" : "tingbudong",
+        "soundPath" : "david/tingbudong.ogg"
+      },
+      {
+        "response": "不好意思, 我没听懂.",
+        "soundID" : "buhaoyisi",
+        "soundPath" : "david/buhaoyisi.ogg"
+      }
+    ]
   }
 ]

@@ -1,0 +1,119 @@
+{
+	"activityID": "liling",
+	"accessCodeRequired" : true,
+	"instructor" : "liling",
+	"activityName": "Starbucks",
+	"tags" : ["special"],
+	"characters" : ["teacher"],
+	"sequence" : 110,
+	"score" : 0,
+	"currentCharName" : "Teacher",
+	"currentImage" : "characters/teacher/teacherDefault.png",
+	"currentLanguage" : "zh-CN",
+	"currentDialog" : "",
+	"currentSoundID": "",
+	"assessmentMode": false,
+	"objectives":
+	[
+		"I can ask to leave."
+	],
+	"scenario" :
+	[
+		{
+			"name" : "Miri",
+			"image" : "miri/MIRI_body_constant-01.png",
+			"imageLayer" : "miri/faces/Miri_Default-01.png",
+			"text" : "You have a job interview tomorrow. You can't attend tomorrow’s class. Now you are in your teacher’s office to ask to miss tomorrow's class.",
+			"next" : "end"
+		}
+
+	],
+	"character" :
+		{
+			"name" : "Teacher",
+			"language" : "zh-CN",
+			"location" :
+			{
+				"nameEnglish" : "Teacher's Office",
+				"nameChinese" : "老师的办公室",
+				"bg" : "bg/starbucks.jpg"
+			},
+			"sounds" :
+			[
+				{
+					"soundID" : "ep4-issues",
+					"soundPath" : "teacher/ep4-issues.ogg"
+				},
+				{
+					"soundID" : "ep4-good-luck",
+					"soundPath" : "teacher/ep4-good-luck.ogg"
+				},
+				{
+					"soundID" : "ep4-good-luck-interview",
+					"soundPath" : "teacher/ep4-good-luck-interview.ogg"
+				}
+			],
+			"currentTasks" : [
+				{
+					"taskID" : 1,
+					"task" : "Greet your teacher.",
+					"possibleAnswers" :
+					[
+						{ "answers" : ["您好", "老师好", "老师你好", "老师您好", "你好"]}
+					],
+					"correct" : false,
+					"response" : "你好！有什么事吗？",
+					"soundID" : "ep4-issues",
+					"emotion" : "default",
+					"tasksToQueue" : [20],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"queuedTasks" :
+			[
+				{
+					"taskID" : 20,
+					"task" : "Tell her you have a job interview tomorrow.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : [
+								["明天我", "我明天"],
+								["有一个"],
+								["工作面试"]
+							],
+							"response" : "哦，祝贺你！",
+							"soundID" : "ep4-good-luck"
+						}
+					],
+					"correct" : false,
+					"emotion" : "thumbsUp",
+					"tasksToQueue" : [30],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				},
+				{
+					"taskID" : 30,
+					"task" : "Ask whether you can take a day off.",
+					"possibleAnswers" :
+					[
+						{
+							"answers" : [
+								["我想请假", "我想请个假"],
+								["好吗", "可以吗"]
+							]
+						}
+					],
+					"correct" : false,
+					"response" : "恩，可以，祝你面试成功。",
+					"soundID" : "ep4-good-luck-interview",
+					"emotion" : "default",
+					"tasksToQueue" : [],
+					"attemptedAnswers" : [],
+					"hintUsed": false
+				}
+			],
+			"completedTasks" : []
+		}
+}

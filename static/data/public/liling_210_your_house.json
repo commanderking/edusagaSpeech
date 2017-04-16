@@ -30,6 +30,7 @@
 			"image" : "characters/kevin/kevinDefault.png",
 			"imageLayer" : "blank.png",
 			"text" : "你很有语言天赋，中文说得真好。",
+			"soundID" : "ep2-good-langauge",
 			"next" : "end"
 		}
 	],
@@ -46,8 +47,8 @@
 			"sounds" :
 			[
 				{
-					"soundID" : "apartment-back-from-school",
-					"soundPath" : "ruby/apartment-back-from-school.ogg"
+					"soundID" : "ep2-good-langauge",
+					"soundPath" : "kevin/ep2-good-langauge.ogg"
 				}
 			],
 			"currentTasks" : [

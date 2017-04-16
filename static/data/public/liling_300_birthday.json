@@ -40,16 +40,16 @@
 			"sounds" :
 			[
 				{
-					"soundID" : "apartment-back-from-school",
-					"soundPath" : "ruby/apartment-back-from-school.ogg"
+					"soundID" : "ep3-not-busy",
+					"soundPath" : "boss/ep3-not-busy.ogg"
 				},
         {
-					"soundID" : "apartment-how-are-you-today",
-					"soundPath" : "ruby/apartment-how-are-you-today.ogg"
+					"soundID" : "ep3-happy-birthday",
+					"soundPath" : "boss/ep3-happy-birthday.ogg"
 				},
         {
-					"soundID" : "apartment-not-bad",
-					"soundPath" : "ruby/apartment-not-bad.ogg"
+					"soundID" : "ep3-thanks-for-invite",
+					"soundPath" : "boss/ep3-thanks-for-invite.ogg"
 				}
 			],
 			"currentTasks" : [
@@ -77,7 +77,7 @@
 					],
 					"correct" : false,
 					"response" : "明天？哦， 我不忙！ 有事吗？",
-					"soundID" : "a",
+					"soundID" : "ep3-not-busy",
 					"emotion" : "default",
 					"tasksToQueue" : [20],
 					"attemptedAnswers" : [],
@@ -94,7 +94,7 @@
 						{
 							"answers" : ["明天是我的生日"],
 							"response" : "是吗？生日快乐！",
-							"soundID" : "a"
+							"soundID" : "ep3-happy-birthday"
 						}
 					],
 					"correct" : false,
@@ -125,7 +125,7 @@
 					],
 					"correct" : false,
 					"response" : "好啊，谢谢你的邀请！",
-					"soundID" : "",
+					"soundID" : "ep3-thanks-for-invite",
 					"emotion" : "default",
 					"tasksToQueue" : [30],
 					"attemptedAnswers" : [],
