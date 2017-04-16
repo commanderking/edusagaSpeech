@@ -79,55 +79,13 @@
 					"response" : "Hmm...",
 					"soundID" : "",
 					"emotion" : "confused",
-					"tasksToQueue" : [20],
-					"attemptedAnswers" : [],
-					"hintUsed": false
-				}
-			],
-			"queuedTasks" :
-			[
-				{
-					"taskID" : 20,
-					"task" : "Tell her you have a job interview tomorrow.",
-					"possibleAnswers" :
-					[
-						{
-							"answers" : [
-								["明天我", "我明天"],
-								["有一个"],
-								["工作面试"]
-							],
-							"response" : "哦，祝贺你！",
-							"soundID" : "a"
-						}
-					],
-					"correct" : false,
-					"emotion" : "thumbsUp",
-					"tasksToQueue" : [30],
-					"attemptedAnswers" : [],
-					"hintUsed": false
-				},
-				{
-					"taskID" : 30,
-					"task" : "Ask whether you can take a day off.",
-					"possibleAnswers" :
-					[
-						{
-							"answers" : [
-								["我想请假", "我想请个假"],
-								["好吗", "可以吗"]
-							]
-						}
-					],
-					"correct" : false,
-					"response" : "恩，可以，祝你面试成功。",
-					"soundID" : "a",
-					"emotion" : "default",
 					"tasksToQueue" : [],
 					"attemptedAnswers" : [],
 					"hintUsed": false
 				}
 			],
+			"queuedTasks" :
+			[],
 			"completedTasks" : []
 		}
 }

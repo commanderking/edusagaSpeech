@@ -27576,7 +27576,7 @@
 			]
 		},
 		{
-			"name": "Colleague",
+			"name": "colleague",
 			"emotions": {
 				"default": "characters/colleague/colleagueDefault.png",
 				"confused": "characters/colleague/colleagueConfused.png",
