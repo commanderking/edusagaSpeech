@@ -36,7 +36,7 @@
 			{
 				"nameEnglish" : "Teacher's Office",
 				"nameChinese" : "老师的办公室",
-				"bg" : "bg/starbucks.jpg"
+				"bg" : "bg/officeFaculty.jpg"
 			},
 			"sounds" :
 			[
@@ -102,6 +102,18 @@
 							"answers" : [
 								["我想请假", "我想请个假"],
 								["好吗", "可以吗"]
+							]
+						},
+						{
+							"answers": [
+								["明天我", "我明天"],
+								["可以请假吗", "能不能请假", "能请假吗"]
+							]
+						},
+						{
+							"answers": [
+								["我能", "我能不能", "我可以"],
+								["请假", "请假吗"]
 							]
 						}
 					],

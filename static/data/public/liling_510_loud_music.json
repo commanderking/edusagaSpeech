@@ -56,7 +56,7 @@
 			{
 				"nameEnglish" : "Apartment",
 				"nameChinese" : "公寓",
-				"bg" : "bg/apartmentElevator.jpg"
+				"bg" : "bg/dormitoryDoor.jpg"
 			},
 			"sounds" :
 			[
@@ -130,18 +130,25 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["您能不能白天练习?"]
+							"answers" : ["您能不能白天练习"]
 						},
 						{
 							"answers" : [
 								["你能", "您能", "你可以"],
-								["白天练习吗"]
+								["白天练习吗", "白天联系吗"]
 							]
 						},
 						{
 							"answers" : [
 								["你白天练习"],
 								["可以吗", "好吗", "好不好"]
+							]
+						},
+						{
+							"answers" : [
+								["你", "您"],
+								["能不能", "可不可以"],
+								["白天练习", "白天联系"]
 							]
 						}
 					],

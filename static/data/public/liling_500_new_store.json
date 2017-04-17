@@ -23,7 +23,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "You are having a meeting with your Chinese colleague. You are discussing about the best location for your company’s new store. You have a different opinion than him. "
+			"text" : "You are having a meeting with your Chinese colleague. You are discussing about the best location for your company’s new store. You have a different opinion from him. "
 		},
 		{
 			"name" : "Colleague",
@@ -65,7 +65,7 @@
 					"possibleAnswers" :
 					[
 						{
-							"answers" : ["你说的有道理，可是市中心的租金很贵。"]
+							"answers" : ["你说的有道理可是市中心的租金很贵"]
 						},
 						{
 							"answers" : [
