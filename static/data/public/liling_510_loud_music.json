@@ -101,7 +101,7 @@
 			[
 				{
 					"taskID" : 20,
-					"task" : "Complain politely (mention exam, loud music, sleep early).",
+					"task" : "Complain politely (mention go to bed early, exam, loud music).",
 					"possibleAnswers" :
 					[
 						{
@@ -149,6 +149,13 @@
 								["你", "您"],
 								["能不能", "可不可以"],
 								["白天练习", "白天联系"]
+							]
+						},
+						{
+							"answers" : [
+								["你", "您"],
+								["可以", "能"],
+								["白天练习吗", "白天联系吗"]
 							]
 						}
 					],
