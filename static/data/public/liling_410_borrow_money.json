@@ -23,7 +23,7 @@
 			"name" : "Miri",
 			"image" : "miri/MIRI_body_constant-01.png",
 			"imageLayer" : "miri/faces/Miri_Default-01.png",
-			"text" : "Your classmate is talking with you in the cafe. She wants to borrow 200 dollar from you. "
+			"text" : "Your classmate is talking with you in the classroom. She wants to borrow 200 dollar from you. "
 		},
 		{
 			"name" : "Miri",
@@ -46,9 +46,9 @@
 			"language" : "zh-CN",
 			"location" :
 			{
-				"nameEnglish" : "Teacher's Office",
-				"nameChinese" : "老师的办公室",
-				"bg" : "bg/starbucks.jpg"
+				"nameEnglish" : "Classroom",
+				"nameChinese" : "教室",
+				"bg" : "bg/classroom.jpg"
 			},
 			"sounds" :
 			[
