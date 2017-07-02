@@ -6,11 +6,11 @@ module.exports = {
   context: __dirname,
   // entry point of our app. assets/js/index.js should require other js modules and dependencies it needs
   entry: {
-    "index": './react_assets/js/index',
-    "questionAsker": './react_assets/js/questionAsker',
-    "mainMenu": './react_assets/js/mainMenu',
-    "dashboard": './react_assets/js/dashboard.js',
-    "teacherHome": './react_assets/js/teacherHome.js'
+    "index": './src/js/index',
+    "questionAsker": './src/js/questionAsker',
+    "mainMenu": './src/js/mainMenu',
+    "dashboard": './src/js/dashboard.js',
+    "teacherHome": './src/js/teacherHome.js'
   },
   output: {
       path: path.resolve('./static/js/'),

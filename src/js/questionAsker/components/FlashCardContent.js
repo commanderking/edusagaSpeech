@@ -3,7 +3,7 @@ var PropTypes = React.PropTypes;
 
 function FlashCardContent (props) {
 	// Control over whether to display pinyin or not
-	var pinyinDisplay = props.showPinyin ? <p className="pinyinPrompt">{props.currentWordObject.pinyin}</p> : null;
+	const pinyinDisplay = props.showPinyin ? <p className="pinyinPrompt">{props.currentWordObject.pinyin}</p> : null;
 
 	// If answer already correct, display a match
 	var userAnswerDisplay = props.currentWordObject.correct ? props.currentWordObject.answer : props.userAnswer !== "" ? props.userAnswer : "...";
