@@ -34,6 +34,10 @@ module.exports = {
 
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      questionAsker: path.resolve(__dirname, 'src/js/questionAsker'),
+      helpers: path.resolve(__dirname, 'src/js/helpers')
+    }
   },
 }

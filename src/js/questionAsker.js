@@ -1,31 +1,31 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-var CharacterContainer = require('./questionAsker/CharacterContainer');
-var DialogContainer = require('./questionAsker/DialogContainer');
-var TaskContainer = require('./questionAsker/TaskContainer');
-var BackgroundImageContainer = require('./questionAsker/BackgroundImageContainer');
-var FeedbackContainer = require('./questionAsker/FeedbackContainer');
-var ResultsContainer = require('./questionAsker/ResultsContainer');
-var SpeechSynth = require('./helpers/SpeechSynth');
-var TimerContainer = require('./questionAsker/TimerContainer');
-var PracticeContainer = require('./questionAsker/PracticeContainer.js');
-import AccessCodeForm from './questionAsker/components/AccessCodeForm';
+import CharacterContainer from 'questionAsker/CharacterContainer';
+import DialogContainer from 'questionAsker/DialogContainer';
+import TaskContainer from 'questionAsker/TaskContainer';
+import BackgroundImageContainer from 'questionAsker/BackgroundImageContainer';
+import FeedbackContainer from 'questionAsker/FeedbackContainer';
+import ResultsContainer from 'questionAsker/ResultsContainer';
+import SpeechSynth from 'helpers/SpeechSynth';
+import TimeContainer from 'questionAsker/TimerContainer';
+import PracticeContainer from 'questionAsker/PracticeContainer';
+import AccessCodeForm from 'questionAsker/components/AccessCodeForm';
 
-import {TaskController, SpeechChecker} from './helpers/QuestionAskerHelper';
-import AccessCode from './helpers/CheckAccessCode';
-var characterEmotionsSounds = require('json!../../static/data/characters.json');
-const Constants = require('./helpers/Constants.js');
+import {TaskController, SpeechChecker} from 'helpers/QuestionAskerHelper';
+import AccessCode from 'helpers/CheckAccessCode';
 
+import characterEmotionsSounds from '../../static/data/characters.json';
+import Constants from 'helpers/Constants';
 
-var initialLogData = {
+const initialLogData = {
 	"startTime" : 0,
 	"studentID" : "",
 	"teacherID" : "",
 	"currentTime" : ""
 }
 
-var initializeLogData = {
+const initializeLogData = {
 	setStartTime: function() {
 		initialLogData.startTime = new Date().getTime();
 	},
@@ -41,7 +41,7 @@ var initializeLogData = {
 	}
 }
 
-var QuestionAsker = React.createClass({
+const QuestionAsker = React.createClass({
 	// feedbackText can be hintText from clicking hint or feedback on what user said
 	// lastDialogText is what the character last said. Important when asking for repeat to be able to reference this
 	getInitialState: function() {
