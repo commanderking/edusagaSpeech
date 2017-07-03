@@ -48,7 +48,7 @@
     "gulp": "gulp",
     "bundle": "./node_modules/.bin/webpack -d --watch",
     "syncS3": "aws s3 sync s3 s3://edusaga",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+    "heroku-postbuild": ".node_modules/_bin/webpack -p --config ./webpack.config.js --progress"
   },
   "babel": {
     "presets": [
