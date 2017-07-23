@@ -1,0 +1,81 @@
+{
+  "activityID": "liling",
+  "accessCodeRequired" : true,
+  "instructor" : "liling",
+  "activityName": "Friend Commencement",
+  "tags" : ["special"],
+  "characters" : ["kevin"],
+  "sequence" : 110,
+  "score" : 0,
+  "currentCharName" : "kevin",
+  "currentImage" : "characters/kevin/kevinDefault.png",
+  "currentLanguage" : "zh-CN",
+  "currentDialog" : "",
+  "currentSoundID": "",
+  "assessmentMode": false,
+  "objectives":
+  [
+    "Congratulate friends on their commencement"
+  ],
+  "scenario" :
+  [
+    {
+      "name" : "Miri",
+      "image" : "miri/MIRI_body_constant-01.png",
+      "imageLayer" : "miri/faces/Miri_Default-01.png",
+      "text" : "You are attending your friend’s commencement."
+    },
+    {
+      "name" : "Kevin",
+      "image" : "characters/kevin/kevinDefault.png",
+      "imageLayer" : "blank.png",
+      "text" : "谢谢你来参加我的毕业典礼。",
+      "soundID": "ep7-ty-for-coming"
+    }
+  ],
+  "character" :
+    {
+      "name" : "Kevin",
+      "language" : "zh-CN",
+      "location" :
+      {
+        "nameEnglish" : "Commencement",
+        "nameChinese" : "毕业典礼",
+        "bg" : "bg/jiaoTongStatue.jpg"
+      },
+      "sounds" : [
+        {
+          "soundID" : "ep7-ty-for-coming",
+          "soundPath" : "kevin/ep7-ty-for-coming.ogg"
+        },
+        {
+          "soundID" : "ep7-ty-ty",
+          "soundPath" : "kevin/ep7-ty-ty.ogg"
+        }
+      ],
+      "currentTasks" : [
+        {
+          "taskID" : 1,
+          "task" : "Congratulate him for his graduation.",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : ["毕业快乐"]
+            },
+            {
+              "answers" : ["祝你毕业快乐", "恭喜你毕业了", "恭喜顺利毕业"]
+            }
+          ],
+          "correct" : false,
+          "response" : "谢谢谢谢!",
+          "soundID" : "ep7-ty-ty",
+          "emotion" : "default",
+          "tasksToQueue" : [],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "queuedTasks" : [],
+      "completedTasks" : []
+    }
+}

@@ -1,0 +1,68 @@
+{
+  "activityID": "liling",
+  "accessCodeRequired" : true,
+  "instructor" : "liling",
+  "activityName": "Borrow Money",
+  "tags" : ["special"],
+  "characters" : ["kevin"],
+  "sequence" : 110,
+  "score" : 0,
+  "currentCharName" : "Kevin",
+  "currentImage" : "characters/kevin/kevinDefault.png",
+  "currentLanguage" : "zh-CN",
+  "currentDialog" : "",
+  "currentSoundID": "",
+  "assessmentMode": false,
+  "objectives":
+  [
+    "Politely ask to use the restroom"
+  ],
+  "scenario" :
+  [
+    {
+      "name" : "Miri",
+      "image" : "miri/MIRI_body_constant-01.png",
+      "imageLayer" : "miri/faces/Miri_Default-01.png",
+      "text" : "You are having a meeting with your colleagues. Suddenly, you feel an urge to go to the restroom. What will you say?"
+    }
+  ],
+  "character" :
+    {
+      "name" : "Kevin",
+      "language" : "zh-CN",
+      "location" :
+      {
+        "nameEnglish" : "Office",
+        "nameChinese" : "公司",
+        "bg" : "bg/office.jpg"
+      },
+      "sounds" : [],
+      "currentTasks" : [
+        {
+          "taskID" : 1,
+          "task" : "Respond.",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : ["我去方便一下"]
+            },
+            {
+              "answers" : [
+                ["不好意思"],
+                ["我去方便一下", "我去一下厕所", "我去下厕所"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "",
+          "soundID" : "",
+          "emotion" : "default",
+          "tasksToQueue" : [],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "queuedTasks" : [],
+      "completedTasks" : []
+    }
+}

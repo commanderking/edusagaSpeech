@@ -1,0 +1,79 @@
+{
+  "activityID": "liling",
+  "accessCodeRequired" : true,
+  "instructor" : "liling",
+  "activityName": "Loud Music",
+  "tags" : ["special"],
+  "characters" : ["kevin"],
+  "sequence" : 110,
+  "score" : 0,
+  "currentCharName" : "Kevin",
+  "currentImage" : "characters/kevin/kevinDefault.png",
+  "currentLanguage" : "zh-CN",
+  "currentDialog" : "",
+  "currentSoundID": "",
+  "assessmentMode": false,
+  "objectives":
+  [
+    "I can tell someone to stop drinking."
+  ],
+  "scenario" :
+  [
+    {
+      "name" : "Miri",
+      "image" : "miri/MIRI_body_constant-01.png",
+      "imageLayer" : "miri/faces/Miri_Default-01.png",
+      "text" : "You are having dinner with your friend in a restaurant and your friend has drunk a lot of alcohol. Now you want to ask your friend to stop drinking."
+    },
+    {
+      "name" : "Kevin",
+      "image" : "characters/kevin/kevinThumbsUp.png",
+      "imageLayer" : "blank.png",
+      "soundID" : "ep6-too-happy-drink", 
+      "text" : "今天我太高兴了！我们多喝几杯！来，干了！"
+    }
+  ],
+  "character" :
+    {
+      "name" : "Kevin",
+      "language" : "zh-CN",
+      "location" :
+      {
+        "nameEnglish" : "Bar",
+        "nameChinese" : "酒吧",
+        "bg" : "bg/bar.jpg"
+      },
+      "sounds" :
+      [
+        {
+          "soundID" : "ep6-ok-ill-listen",
+          "soundPath" : "kevin/ep6-ok-ill-listen.ogg"
+        },
+        {
+          "soundID" : "ep6-too-happy-drink",
+          "soundPath" : "kevin/ep6-too-happy-drink.ogg"
+        }
+      ],
+      "currentTasks" : [
+        {
+          "taskID" : 1,
+          "task" : "Ask your friend to stop drinking.",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : ["别贪杯"]
+            }
+          ],
+          "correct" : false,
+          "response" : "",
+          "soundID" : "ep6-ok-ill-listen",
+          "emotion" : "default",
+          "tasksToQueue" : [],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "queuedTasks" : [],
+      "completedTasks" : []
+    }
+}

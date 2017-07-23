@@ -314,5 +314,29 @@
         "soundPath" : "david/buhaoyisi.ogg"
       }
     ]
+  },
+  {
+    "name" : "grandpa",
+    "emotions" : {
+      "default" : "characters/grandpa/grandpaDefault.png",
+      "silhouette" : "characters/grandpa/grandpaDefault.png"
+    },
+    "confusedPhrases" : [
+      {
+        "response": "什么?",
+        "soundID" : "shenme",
+        "soundPath" : "david/shenme.ogg"
+      },
+      {
+        "response": "我听不懂.",
+        "soundID" : "tingbudong",
+        "soundPath" : "david/tingbudong.ogg"
+      },
+      {
+        "response": "不好意思, 我没听懂.",
+        "soundID" : "buhaoyisi",
+        "soundPath" : "david/buhaoyisi.ogg"
+      }
+    ]
   }
 ]
