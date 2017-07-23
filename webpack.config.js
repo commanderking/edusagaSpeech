@@ -8,11 +8,11 @@ module.exports = {
   context: __dirname,
   // entry point of our app. assets/js/index.js should require other js modules and dependencies it needs
   entry: {
-    "index": './src/js/index',
-    "questionAsker": './src/js/questionAsker',
-    "mainMenu": './src/js/mainMenu',
-    "dashboard": './src/js/dashboard.js',
-    "teacherHome": './src/js/teacherHome.js'
+    "index": path.resolve('./src/js/index'),
+    "questionAsker": path.resolve('./src/js/questionAsker'),
+    "mainMenu": path.resolve('./src/js/mainMenu'),
+    "dashboard": path.resolve('./src/js/dashboard.js'),
+    "teacherHome": path.resolve('./src/js/teacherHome.js')
   },
   output: {
       path: path.resolve('./static/js/'),
