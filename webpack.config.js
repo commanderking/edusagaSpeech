@@ -34,7 +34,7 @@ module.exports = {
 
   resolveLoader: {
     root: path.join(__dirname, 'node_modules')
-  }
+  },
 
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
