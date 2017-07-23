@@ -2,8 +2,6 @@ var path = require("path")
 var webpack = require('webpack')
 var BundleTracker = require('webpack-bundle-tracker')
 
-console.log('dirname', __dirname);
-
 module.exports = {
   context: __dirname,
   // entry point of our app. assets/js/index.js should require other js modules and dependencies it needs
