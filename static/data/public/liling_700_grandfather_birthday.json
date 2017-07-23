@@ -1,0 +1,84 @@
+{
+  "activityID": "liling",
+  "accessCodeRequired" : true,
+  "instructor" : "liling",
+  "activityName": "Grandpa's Birthday",
+  "tags" : ["special"],
+  "characters" : ["grandpa"],
+  "sequence" : 110,
+  "score" : 0,
+  "currentCharName" : "Grandfather",
+  "currentImage" : "characters/grandpa/grandpaDefault.png",
+  "currentLanguage" : "zh-CN",
+  "currentDialog" : "",
+  "currentSoundID": "",
+  "assessmentMode": false,
+  "objectives":
+  [
+    "Congratulate elders on their birthday!"
+  ],
+  "scenario" :
+  [
+    {
+      "name" : "Miri",
+      "image" : "miri/MIRI_body_constant-01.png",
+      "imageLayer" : "miri/faces/Miri_Default-01.png",
+      "text" : "Your grandfather is having his 70th birthday party. You want to wish him happy birthday."
+    },
+    {
+      "name" : "Grandfather",
+      "image" : "characters/grandpa/grandpaDefault.png",
+      "imageLayer" : "blank.png",
+      "text" : "今天你来了，爷爷很高兴。",
+      "soundID": "ep7-happy-to-see-you"
+    }
+  ],
+  "character" :
+    {
+      "name" : "Grandfather",
+      "language" : "zh-CN",
+      "location" :
+      {
+        "nameEnglish" : "Grandfather's Home",
+        "nameChinese" : "外公家",
+        "bg" : "bg/apartmentRoom.jpg"
+      },
+      "sounds" : [
+        {
+          "soundID" : "ep7-happy-to-see-you",
+          "soundPath" : "grandpa/ep7-happy-to-see-you.ogg"
+        },
+        {
+          "soundID" : "ep7-tyty",
+          "soundPath" : "grandpa/ep7-tyty.ogg"
+        }
+      ],
+      "currentTasks" : [
+        {
+          "taskID" : 1,
+          "task" : "Give him wishes about health and longevity .",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : ["祝您福如东海, 寿比南山"]
+            },
+            {
+              "answers" : [
+                ["祝你", "祝您"],
+                ["福如东海寿比南山", "身体健康", "健康长寿"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "谢谢, 谢谢!",
+          "soundID" : "ep7-tyty",
+          "emotion" : "default",
+          "tasksToQueue" : [],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "queuedTasks" : [],
+      "completedTasks" : []
+    }
+}

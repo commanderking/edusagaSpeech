@@ -1,0 +1,85 @@
+{
+  "activityID": "liling",
+  "accessCodeRequired" : true,
+  "instructor" : "liling",
+  "activityName": "Borrow Money",
+  "tags" : ["special"],
+  "characters" : ["kevin"],
+  "sequence" : 110,
+  "score" : 0,
+  "currentCharName" : "Kevin",
+  "currentImage" : "characters/kevin/kevinDefault.png",
+  "currentLanguage" : "zh-CN",
+  "currentDialog" : "",
+  "currentSoundID": "",
+  "assessmentMode": false,
+  "objectives":
+  [
+    "Decline requests politely."
+  ],
+  "scenario" :
+  [
+    {
+      "name" : "Miri",
+      "image" : "miri/MIRI_body_constant-01.png",
+      "imageLayer" : "miri/faces/Miri_Default-01.png",
+      "text" : "Your friend wants to borrow money from you. You are short on cash too. Turn down his request indirectly."
+    },
+    {
+      "name" : "Kevin",
+      "image" : "characters/kevin/kevinConfused.png",
+      "imageLayer" : "blank.png",
+      "soundID" : "ep6-moving-need-money", 
+      "text" : "这个月我搬家，急需用钱。能借我点钱吗？"
+    }
+  ],
+  "character" :
+    {
+      "name" : "Kevin",
+      "language" : "zh-CN",
+      "location" :
+      {
+        "nameEnglish" : "Restaurant",
+        "nameChinese" : "餐厅",
+        "bg" : "bg/restaurant.jpg"
+      },
+      "sounds" :
+      [
+        {
+          "soundID" : "ep6-moving-need-money",
+          "soundPath" : "kevin/ep6-moving-need-money.ogg"
+        },
+        {
+          "soundID" : "ep6-no-prob-find-other",
+          "soundPath" : "kevin/ep6-no-prob-find-other.ogg"
+        }
+      ],
+      "currentTasks" : [
+        {
+          "taskID" : 1,
+          "task" : "Apologize and tell him you are short on cash.",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : ["对不起我手头有点紧"]
+            },
+            {
+              "answers" : [
+                ["对不起", "不好意思", "抱歉"],
+                ["我手头紧", "我手头有点紧", "我手头有一点紧", "我手头不宽裕"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "没关系，我再找别人吧。",
+          "soundID" : "ep6-no-prob-find-other",
+          "emotion" : "default",
+          "tasksToQueue" : [],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "queuedTasks" : [],
+      "completedTasks" : []
+    }
+}
