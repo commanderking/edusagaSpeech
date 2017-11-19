@@ -1,0 +1,146 @@
+{
+  "activityID": "liling",
+  "instructor" : "liling",
+  "activityName": "Friend Commencement",
+  "tags" : ["special"],
+  "characters" : ["boss"],
+  "sequence" : 110,
+  "score" : 0,
+  "currentCharName" : "boss",
+  "currentImage" : "characters/boss/bossDefault.png",
+  "currentLanguage" : "zh-CN",
+  "currentDialog" : "",
+  "currentSoundID": "",
+  "assessmentMode": false,
+  "objectives":
+  [
+    "Apologize to someone"
+  ],
+  "scenario" :
+  [
+    {
+      "name" : "Miri",
+      "image" : "miri/MIRI_body_constant-01.png",
+      "imageLayer" : "miri/faces/Miri_Default-01.png",
+      "text" : "You bumped into a lady when shopping in the supermarket. The lady had a box of eggs in her hand which were crushed due to your negligence. You need to apologize to her."
+    },
+    {
+      "name" : "boss",
+      "image" : "characters/boss/bossDefault.png",
+      "imageLayer" : "blank.png",
+      "text" : "哎呀!",
+      "soundID": "liling-801-aiya"
+    }
+  ],
+  "character" :
+    {
+      "name" : "boss",
+      "language" : "zh-CN",
+      "location" :
+      {
+        "nameEnglish" : "Supermarket",
+        "nameChinese" : "超级市场",
+        "bg" : "bg/wholefoods.jpg"
+      },
+      "sounds" : [
+        {
+          "soundID" : "liling-801-aiya",
+          "soundPath" : "boss/liling-801-aiya.mp3"
+        },
+        {
+          "soundID" : "liling-801-all-right",
+          "soundPath" : "boss/liling-801-all-right.mp3"
+        },
+        {
+          "soundID" : "liling-801-eggs-broken",
+          "soundPath" : "boss/liling-801-eggs-broken.mp3"
+        }
+      ],
+      "currentTasks" : [
+        {
+          "taskID" : 1,
+          "task" : "Apologize immedately to her",
+          "possibleAnswers" :
+          [
+            {
+              "answers": ["真是对不起"]
+            },
+            {
+              "answers" : [
+                ["真是", "实在", "太"],
+                ["对不起"]
+              ]
+            },
+            {
+              "answers": [
+                ["真", "很"],
+                ["抱歉"]
+              ]
+            },
+            {
+              "answers": [
+                ["真", "太"],
+                ["不好意思"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "完了!我的鸡蛋都碎了！",
+          "soundID" : "liling-801-eggs-broken",
+          "emotion" : "confused",
+          "tasksToQueue" : [2],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "queuedTasks" : [
+        {
+          "taskID" : 2,
+          "task" : "Tell her you will buy her another box of eggs",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : [
+                ["我买一盒", "我再买一盒"],
+                ["新鸡蛋"],
+                ["给您", "给你", "来补偿您", "来补偿你", "补偿您", "补偿你"]
+              ]
+            },
+            {
+              "answers": [
+                ["我赔您", "我帮您买", "我帮你买"],
+                ["一盒鸡蛋", "一盒新鸡蛋"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "哎，不用了！看在你即使道歉的份儿上， 我就不和你计较了。",
+          "soundID" : "liling-801-all-right",
+          "emotion" : "default",
+          "tasksToQueue" : [3],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        },
+        {
+          "taskID" : 3,
+          "task" : "Thank the lady",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : [
+                ["谢谢您", "谢谢", "太谢谢您了"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "",
+          "soundID" : "ep7-ty-ty",
+          "emotion" : "default",
+          "tasksToQueue" : [],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "completedTasks" : []
+    }
+}

@@ -1,0 +1,134 @@
+{
+  "activityID": "liling",
+  "instructor" : "liling",
+  "activityName": "Friend Commencement",
+  "tags" : ["special"],
+  "characters" : ["teacher"],
+  "sequence" : 110,
+  "score" : 0,
+  "currentCharName" : "teacher",
+  "currentImage" : "characters/teacher/teacherDefault.png",
+  "currentLanguage" : "zh-CN",
+  "currentDialog" : "",
+  "currentSoundID": "",
+  "assessmentMode": false,
+  "objectives":
+  [
+    "Persuade someone to purchase online."
+  ],
+  "scenario" :
+  [
+    {
+      "name" : "Miri",
+      "image" : "miri/MIRI_body_constant-01.png",
+      "imageLayer" : "miri/faces/Miri_Default-01.png",
+      "text" : "Your friend Harriet has been waiting outside of the Apple Store for hours to purchase the latest iPhone. You want to persuade her to order it online."
+    },
+    {
+      "name" : "Harriet",
+      "image" : "characters/teacher/teacherConfused.png",
+      "imageLayer" : "blank.png",
+      "text" : "哎呀，我都等了好几个小时了，什么时候才能买到最新的iPhone呀？",
+      "soundID": "liling-801-wait-so-long"
+    }
+  ],
+  "character" :
+    {
+      "name" : "Harriet",
+      "language" : "zh-CN",
+      "location" :
+      {
+        "nameEnglish" : "Apple Store",
+        "nameChinese" : "苹果商店",
+        "bg" : "bg/appleStore.jpg"
+      },
+      "sounds" : [
+        {
+          "soundID" : "liling-801-better-store",
+          "soundPath" : "teacher/liling-801-better-store.mp3"
+        },
+        {
+          "soundID" : "liling-801-ok-online",
+          "soundPath" : "teacher/liling-801-ok-online.mp3"
+        },
+        {
+          "soundID" : "liling-801-wait-so-long",
+          "soundPath" : "teacher/liling-801-wait-so-long.mp3"
+        }
+      ],
+      "currentTasks" : [
+        {
+          "taskID" : 1,
+          "task" : "Tell her to order online",
+          "possibleAnswers" :
+          [
+            {
+              "answers": ["去网上买吧"]
+            },
+            {
+              "answers" : [
+                ["去", "在"],
+                ["网上"],
+                ["买", "预定", "订购", "买更好", "预定更好", "订购更好"]
+              ]
+            },
+            {
+              "answers": [
+                ["为什么"],
+                ["不去网上"],
+                ["买", "预定", "订购"]
+              ]
+            },
+            {
+              "answers": [
+                ["你可以在网上"],
+                ["买", "预定", "订购"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "咦？为什么呢？我听说在现场买更好的",
+          "soundID" : "liling-801-better-store",
+          "emotion" : "confused",
+          "tasksToQueue" : [2],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "queuedTasks" : [
+        {
+          "taskID" : 2,
+          "task" : "Tell her she doesn’t need to wait in line if she shops online",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : [
+                ["在网上买的话你就不用排队"]
+              ]
+            },
+            {
+              "answers": [
+                ["如果你在网上买", "在网上买", "如果你上网买", "上网买的话", "上网买"],
+                ["不用排队"]
+              ]
+            },
+            {
+              "answers": [
+                ["要是"],
+                ["你在网上买", "上网买", "上网买的话"], 
+                ["就不用排队"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "好吧。 那我去网上订购吧",
+          "soundID" : "liling-801-ok-online",
+          "emotion" : "default",
+          "tasksToQueue" : [],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "completedTasks" : []
+    }
+}
