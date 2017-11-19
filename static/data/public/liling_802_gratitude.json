@@ -1,0 +1,156 @@
+{
+  "activityID": "liling",
+  "instructor" : "liling",
+  "activityName": "Friend Commencement",
+  "tags" : ["special"],
+  "characters" : ["ruby"],
+  "sequence" : 110,
+  "score" : 0,
+  "currentCharName" : "ruby",
+  "currentImage" : "characters/ruby/rubyDefault.png",
+  "currentLanguage" : "zh-CN",
+  "currentDialog" : "",
+  "currentSoundID": "",
+  "assessmentMode": false,
+  "objectives":
+  [
+    "Apologize to someone"
+  ],
+  "scenario" :
+  [
+    {
+      "name" : "Miri",
+      "image" : "miri/MIRI_body_constant-01.png",
+      "imageLayer" : "miri/faces/Miri_Default-01.png",
+      "text" : "You have missed the final exam, but your professor agreed to give you another chance. You want to express your gratitude."
+    }
+  ],
+  "character" :
+    {
+      "name" : "Professor",
+      "language" : "zh-CN",
+      "location" :
+      {
+        "nameEnglish" : "Professor Office",
+        "nameChinese" : "办公室",
+        "bg" : "bg/officeFaculty.jpg"
+      },
+      "sounds" : [
+        {
+          "soundID" : "liling-802-why-you-miss",
+          "soundPath" : "ruby/liling-802-why-you-miss.mp3"
+        },
+        {
+          "soundID" : "liling-802-ok-makeup",
+          "soundPath" : "ruby/liling-802-ok-makeup.mp3"
+        },
+        {
+          "soundID" : "liling-802-youre-welcome",
+          "soundPath" : "ruby/liling-802-youre-welcome.mp3"
+        }
+      ],
+      "currentTasks" : [
+        {
+          "taskID" : 1,
+          "task" : "Tell your professor you have missed the exam",
+          "possibleAnswers" :
+          [
+            {
+              "answers": ["老师错过了考试"]
+            },
+            {
+              "answers" : [
+                ["老师"],
+                ["我没参加考试", "错过了考试"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "你为什么没有考试?",
+          "soundID" : "liling-802-why-you-miss",
+          "emotion" : "confused",
+          "tasksToQueue" : [2],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "queuedTasks" : [
+        {
+          "taskID" : 2,
+          "task" : "Tell the professor you were sick",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : ["我生病了"]
+            },
+            {
+              "answers": [
+                ["我生病了", "我病了", "因为我生病了", "因为我病了"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "",
+          "soundID" : "none",
+          "emotion" : "default",
+          "tasksToQueue" : [3],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        },
+        {
+          "taskID" : 3,
+          "task" : "Ask her whether you could make up the exam",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : ["我可以补考吗", "我想补考可以吗", "我能补考吗"]
+            },
+            {
+              "answers" : [
+                ["我可以", "我能"],
+                ["补考吗"]
+              ],
+              "answers": [
+                ["我可不可以", "可以让我", "能不能让我", "我能不能"],
+                ["补考"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "既然你是因为生病才错过考试，你可以下周再考一次。",
+          "soundID" : "liling-802-ok-makeup",
+          "emotion" : "default",
+          "tasksToQueue" : [4],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        },
+        {
+          "taskID" : 4,
+          "task" : "Thank your professor.",
+          "possibleAnswers" :
+          [
+            {
+              "answers" : ["谢谢您", "太感谢了", "无比感激", "非常感谢", "真的很感谢", "谢谢老师", "谢谢"]
+            },
+            {
+              "answers" : [
+                ["太谢谢", "真是太感谢", "太谢谢", "太感谢", "非常感谢", "真是太感谢"],
+                ["老师了", "您了", "你了"]
+              ],
+              "answers": [
+                ["非常感谢老师"]
+              ]
+            }
+          ],
+          "correct" : false,
+          "response" : "不客气。",
+          "soundID" : "liling-802-youre-welcome",
+          "emotion" : "smile",
+          "tasksToQueue" : [],
+          "attemptedAnswers" : [],
+          "hintUsed": false
+        }
+      ],
+      "completedTasks" : []
+    }
+}
