@@ -7,7 +7,7 @@
   "sequence" : 110,
   "score" : 0,
   "currentCharName" : "teacher",
-  "currentImage" : "characters/teacher/teacherDefault.png",
+  "currentImage" : "characters/teacher/teacherConfused.png",
   "currentLanguage" : "zh-CN",
   "currentDialog" : "",
   "currentSoundID": "",
@@ -83,6 +83,11 @@
               "answers": [
                 ["你可以在网上"],
                 ["买", "预定", "订购"]
+              ]
+            },
+            {
+              "answers": [
+                ["你上网买吧", "你去网上买吧"]
               ]
             }
           ],
